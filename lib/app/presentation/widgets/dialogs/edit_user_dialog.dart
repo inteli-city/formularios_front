@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
-import 'package:flutter_clean_architecture_template/app/injector.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/controllers/edit_user_controller.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/stores/providers/user_provider.dart';
+import 'package:formularios_front/app/domain/entities/user_entity.dart';
+import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/presentation/controllers/edit_user_controller.dart';
+import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 
 class EditUserDialog extends StatefulWidget {
   final UserEntity user;

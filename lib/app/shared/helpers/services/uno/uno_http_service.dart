@@ -1,6 +1,6 @@
-import 'package:flutter_clean_architecture_template/app/shared/helpers/environments/environment_config.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/services/http_service.dart';
-import 'package:flutter_clean_architecture_template/routes.dart';
+import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
+import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
+import 'package:formularios_front/routes.dart';
 import 'package:uno/uno.dart';
 
 class UnoHttpService extends IHttpService {

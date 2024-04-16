@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
-import 'package:flutter_clean_architecture_template/app/domain/enum/state_enum.dart';
-import 'package:flutter_clean_architecture_template/app/domain/repositories/user_repository.dart';
-import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
+import 'package:formularios_front/app/domain/entities/user_entity.dart';
+import 'package:formularios_front/app/domain/enum/state_enum.dart';
+import 'package:formularios_front/app/domain/repositories/user_repository.dart';
+import 'package:formularios_front/app/domain/failures/failures.dart';
 
 class MockUserRepository implements UserRepository {
   List<UserEntity> users = [

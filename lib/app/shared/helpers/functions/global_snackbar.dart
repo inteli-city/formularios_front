@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture_template/app/shared/themes/app_colors.dart';
-import 'package:flutter_clean_architecture_template/app/shared/themes/app_text_styles.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
+import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 
 final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();

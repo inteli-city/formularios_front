@@ -1,4 +1,4 @@
-package com.example.flutter_clean_architecture_template
+package com.example.formularios_front
 
 import io.flutter.embedding.android.FlutterActivity
 

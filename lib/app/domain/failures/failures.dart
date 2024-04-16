@@ -1,5 +1,5 @@
-import 'package:flutter_clean_architecture_template/app/injector.dart';
-import 'package:flutter_clean_architecture_template/generated/l10n.dart';
+import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:logger/logger.dart';
 
 class Failure implements Exception {

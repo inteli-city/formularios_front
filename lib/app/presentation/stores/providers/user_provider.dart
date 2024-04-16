@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
-import 'package:flutter_clean_architecture_template/app/domain/usecases/create_user_usecase.dart';
-import 'package:flutter_clean_architecture_template/app/domain/usecases/delete_user_usecase.dart';
-import 'package:flutter_clean_architecture_template/app/domain/usecases/fetch_users_usecase.dart';
-import 'package:flutter_clean_architecture_template/app/domain/usecases/update_user_usecase.dart';
-import 'package:flutter_clean_architecture_template/app/injector.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/states/user_state.dart';
-import 'package:flutter_clean_architecture_template/app/shared/helpers/functions/global_snackbar.dart';
+import 'package:formularios_front/app/domain/entities/user_entity.dart';
+import 'package:formularios_front/app/domain/usecases/create_user_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/delete_user_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/fetch_users_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/update_user_usecase.dart';
+import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/presentation/states/user_state.dart';
+import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
 
 class UserProvider with ChangeNotifier {

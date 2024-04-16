@@ -1,5 +1,5 @@
-import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
-import 'package:flutter_clean_architecture_template/app/domain/failures/failures.dart';
+import 'package:formularios_front/app/domain/entities/user_entity.dart';
+import 'package:formularios_front/app/domain/failures/failures.dart';
 
 abstract class UserState {
   const UserState();

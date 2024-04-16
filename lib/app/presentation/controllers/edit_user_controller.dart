@@ -1,4 +1,4 @@
-import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
+import 'package:formularios_front/app/domain/entities/user_entity.dart';
 
 class EditUserController {
   final UserEntity _user;

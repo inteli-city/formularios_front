@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture_template/app/injector.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/states/user_state.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/stores/providers/user_provider.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/widgets/dialogs/create_user_dialog.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/widgets/dialogs/edit_user_dialog.dart';
+import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/presentation/states/user_state.dart';
+import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
+import 'package:formularios_front/app/presentation/widgets/dialogs/create_user_dialog.dart';
+import 'package:formularios_front/app/presentation/widgets/dialogs/edit_user_dialog.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

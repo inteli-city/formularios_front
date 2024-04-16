@@ -1,4 +1,4 @@
-import 'package:flutter_clean_architecture_template/app/domain/enum/state_enum.dart';
+import 'package:formularios_front/app/domain/enum/state_enum.dart';
 
 class UserEntity {
   final int id;

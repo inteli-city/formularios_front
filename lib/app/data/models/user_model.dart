@@ -1,5 +1,5 @@
-import 'package:flutter_clean_architecture_template/app/domain/entities/user_entity.dart';
-import 'package:flutter_clean_architecture_template/app/domain/enum/state_enum.dart';
+import 'package:formularios_front/app/domain/entities/user_entity.dart';
+import 'package:formularios_front/app/domain/enum/state_enum.dart';
 
 class UserModel extends UserEntity {
   UserModel({required super.id, required super.name, required super.state});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture_template/app/injector.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/controllers/create_user_controller.dart';
-import 'package:flutter_clean_architecture_template/app/presentation/stores/providers/user_provider.dart';
+import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/presentation/controllers/create_user_controller.dart';
+import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 
 class CreateUserDialog extends StatefulWidget {
   const CreateUserDialog({super.key});

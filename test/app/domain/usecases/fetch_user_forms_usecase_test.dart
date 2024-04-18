@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
@@ -41,14 +43,15 @@ void main() {
                   long: 1.0,
                   region: 'region',
                   generalDescription: 'generalDescription',
-                  priority: 'priority',
-                  status: 'status',
+                  priority: PriorityEnum.HIGH,
+                  status: FormStatusEnum.EM_ANDAMENTO,
                   expiration: 1,
                   dateCreation: 1,
                   dateStart: 1,
                   dateEnd: 1,
                   justification: 'justification',
                   comment: 'comment',
+                  sections: [],
                 ),
                 FormEntity(
                   idExternForm: 'idExternForm',
@@ -67,14 +70,15 @@ void main() {
                   long: 1.0,
                   region: 'region',
                   generalDescription: 'generalDescription',
-                  priority: 'priority',
-                  status: 'status',
+                  priority: PriorityEnum.HIGH,
+                  status: FormStatusEnum.EM_ANDAMENTO,
                   expiration: 1,
                   dateCreation: 1,
                   dateStart: 1,
                   dateEnd: 1,
                   justification: 'justification',
                   comment: 'comment',
+                  sections: [],
                 ),
               ]));
       var result = await usecase(userId: '1');

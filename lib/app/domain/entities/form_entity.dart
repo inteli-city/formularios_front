@@ -1,3 +1,7 @@
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+import 'package:formularios_front/app/domain/enum/priority_enum.dart';
+
 class FormEntity {
   final String idExternForm;
   final String idInternForm;
@@ -15,14 +19,15 @@ class FormEntity {
   final double long;
   final String region;
   final String? generalDescription;
-  final String priority;
-  final String status;
+  final PriorityEnum priority;
+  final FormStatusEnum status;
   final int expiration;
   final int dateCreation;
   final int? dateStart;
   final int? dateEnd;
   final String? justification;
   final String? comment;
+  final List<SectionEntity> sections;
 
   FormEntity({
     required this.idExternForm,
@@ -49,5 +54,6 @@ class FormEntity {
     this.dateEnd,
     this.justification,
     this.comment,
+    required this.sections,
   });
 }

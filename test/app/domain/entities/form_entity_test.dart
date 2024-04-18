@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 void main() {
   test('Form Entity Test', () {
@@ -20,14 +22,15 @@ void main() {
       long: 1.0,
       region: 'region',
       generalDescription: 'generalDescription',
-      priority: 'priority',
-      status: 'status',
+      priority: PriorityEnum.HIGH,
+      status: FormStatusEnum.EM_ANDAMENTO,
       expiration: 1,
       dateCreation: 1,
       dateStart: 1,
       dateEnd: 1,
       justification: 'justification',
       comment: 'comment',
+      sections: [],
     );
 
     expect(form.idExternForm, 'idExternForm');
@@ -46,8 +49,8 @@ void main() {
     expect(form.long, 1.0);
     expect(form.region, 'region');
     expect(form.generalDescription, 'generalDescription');
-    expect(form.priority, 'priority');
-    expect(form.status, 'status');
+    expect(form.priority, PriorityEnum.HIGH);
+    expect(form.status, FormStatusEnum.EM_ANDAMENTO);
     expect(form.expiration, 1);
     expect(form.dateCreation, 1);
     expect(form.dateStart, 1);

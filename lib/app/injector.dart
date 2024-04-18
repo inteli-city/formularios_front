@@ -27,4 +27,5 @@ void registerInstances() {
       () => EnvironmentConfig.getFormRepository());
   injector.addLazySingleton<IFetchUserFormsUsecase>(
       () => FetchUserFormsUsecase(repository: injector.get<IFormRepository>()));
+  injector.commit();
 }

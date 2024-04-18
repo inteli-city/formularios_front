@@ -1,10 +1,149 @@
-class FormMockRepository extends FormRepository {
+import 'package:dartz/dartz.dart';
+import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:formularios_front/app/domain/repositories/form_repository.dart';
+
+class FormMockRepository extends IFormRepository {
+  List<FormEntity> formList = [
+    FormEntity(
+      idExternForm: '1',
+      idInternForm: '1',
+      idCreatorUser: '1',
+      userId: '1',
+      idCoordinator: ['idCoordinator'],
+      idFormVinculation: null,
+      templateName: 'templateName',
+      area: 'area',
+      system: 'system',
+      street: 'street',
+      city: 'city',
+      number: 1,
+      lat: 1.0,
+      long: 1.0,
+      region: 'region',
+      generalDescription: 'generalDescription',
+      priority: 'priority',
+      status: 'status',
+      expiration: 1,
+      dateCreation: 1,
+      dateStart: 1,
+      dateEnd: 1,
+      justification: 'justification',
+      comment: 'comment',
+    ),
+    FormEntity(
+      idExternForm: '2',
+      idInternForm: '2',
+      idCreatorUser: '2',
+      userId: '1',
+      idCoordinator: ['idCoordinator'],
+      idFormVinculation: null,
+      templateName: 'templateName',
+      area: 'area',
+      system: 'system',
+      street: 'street',
+      city: 'city',
+      number: 1,
+      lat: 1.0,
+      long: 1.0,
+      region: 'region',
+      generalDescription: 'generalDescription',
+      priority: 'priority',
+      status: 'status',
+      expiration: 1,
+      dateCreation: 1,
+      dateStart: 1,
+      dateEnd: 1,
+      justification: 'justification',
+      comment: 'comment',
+    ),
+    FormEntity(
+      idExternForm: '3',
+      idInternForm: '3',
+      idCreatorUser: '2',
+      userId: '1',
+      idCoordinator: ['idCoordinator'],
+      idFormVinculation: null,
+      templateName: 'templateName',
+      area: 'area',
+      system: 'system',
+      street: 'street',
+      city: 'city',
+      number: 1,
+      lat: 1.0,
+      long: 1.0,
+      region: 'region',
+      generalDescription: 'generalDescription',
+      priority: 'priority',
+      status: 'status',
+      expiration: 1,
+      dateCreation: 1,
+      dateStart: 1,
+      dateEnd: 1,
+      justification: 'justification',
+      comment: 'comment',
+    ),
+    FormEntity(
+      idExternForm: '4',
+      idInternForm: '4',
+      idCreatorUser: '4',
+      userId: '2',
+      idCoordinator: ['idCoordinator'],
+      idFormVinculation: null,
+      templateName: 'templateName',
+      area: 'area',
+      system: 'system',
+      street: 'street',
+      city: 'city',
+      number: 1,
+      lat: 1.0,
+      long: 1.0,
+      region: 'region',
+      generalDescription: 'generalDescription',
+      priority: 'priority',
+      status: 'status',
+      expiration: 1,
+      dateCreation: 1,
+      dateStart: 1,
+      dateEnd: 1,
+      justification: 'justification',
+      comment: 'comment',
+    ),
+    FormEntity(
+      idExternForm: '5',
+      idInternForm: '5',
+      idCreatorUser: '5',
+      userId: '2',
+      idCoordinator: ['idCoordinator'],
+      idFormVinculation: null,
+      templateName: 'templateName',
+      area: 'area',
+      system: 'system',
+      street: 'street',
+      city: 'city',
+      number: 1,
+      lat: 1.0,
+      long: 1.0,
+      region: 'region',
+      generalDescription: 'generalDescription',
+      priority: 'priority',
+      status: 'status',
+      expiration: 1,
+      dateCreation: 1,
+      dateStart: 1,
+      dateEnd: 1,
+      justification: 'justification',
+      comment: 'comment',
+    ),
+  ];
+
   @override
-  Future<List<FormEnti>> fetchForms() async {
-    await Future.delayed(Duration(seconds: 1));
-    return [
-      
-      
-    ];
+  Future<Either<Failure, List<FormEntity>>> getUserForms(
+      {required String userId}) async {
+    Future.delayed(const Duration(seconds: 1));
+
+    return right(
+      formList.where((element) => element.userId == userId).toList(),
+    );
   }
 }

@@ -1,12 +1,9 @@
 import 'package:auto_injector/auto_injector.dart';
 import 'package:dio/dio.dart';
+import 'package:formularios_front/app/domain/repositories/form_repository.dart';
+import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:logger/logger.dart';
-import 'package:formularios_front/app/domain/repositories/user_repository.dart';
-import 'package:formularios_front/app/domain/usecases/create_user_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/delete_user_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/fetch_users_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/update_user_usecase.dart';
-import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
@@ -17,7 +14,7 @@ final injector = AutoInjector();
 void registerInstances() {
   injector.addLazySingleton(Logger.new);
   injector.add<IHttpService>(DioHttpService.new);
-  injector.addLazySingleton(UserProvider.new);
+  injector.addLazySingleton(FormUserProvider.new);
   injector.addLazySingleton<Dio>(
     () => Dio(BaseOptions(baseUrl: EnvironmentConfig.MSS_BASE_URL))
       ..interceptors.addAll(
@@ -26,15 +23,8 @@ void registerInstances() {
         ],
       ),
   );
-  injector
-      .addLazySingleton<UserRepository>(() => EnvironmentConfig.getUserRepo());
-  injector.addLazySingleton<IFetchUsersUsecase>(
-      () => FetchUsersUsecase(repository: injector.get<UserRepository>()));
-  injector.addLazySingleton<ICreateUserUsecase>(
-      () => CreateUserUsecase(repository: injector.get<UserRepository>()));
-  injector.addLazySingleton<IDeleteUserUsecase>(
-      () => DeleteUserUsecase(repository: injector.get<UserRepository>()));
-  injector.addLazySingleton<IUpdateUserUsecase>(
-      () => UpdateUserUsecase(repository: injector.get<UserRepository>()));
-  injector.commit();
+  injector.addLazySingleton<IFormRepository>(
+      () => EnvironmentConfig.getFormRepository());
+  injector.addLazySingleton<IFetchUserFormsUsecase>(
+      () => FetchUserFormsUsecase(repository: injector.get<IFormRepository>()));
 }

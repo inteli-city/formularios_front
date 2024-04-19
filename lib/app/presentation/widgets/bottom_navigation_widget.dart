@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
-import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   const BottomNavigationWidget({super.key});
@@ -21,29 +21,36 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      height: ScreenHelper.height(context) * 0.09,
       notchMargin: 6.0,
       child: Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _buildBottomNavigationBarItem(
               icon: const Icon(
-                Icons.abc,
-                size: AppDimensions.iconLarge,
+                Icons.home,
               ),
               index: 0),
           _buildBottomNavigationBarItem(
-              icon: const Icon(
-                Icons.abc,
-                size: AppDimensions.iconLarge,
+              icon: Icon(
+                Icons.public,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               index: 1),
           const SizedBox(width: 48),
           _buildBottomNavigationBarItem(
-              icon: const Icon(Icons.abc, size: AppDimensions.iconLarge),
+              icon: Icon(
+                Icons.add,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               index: 2),
           _buildBottomNavigationBarItem(
-              icon: const Icon(Icons.abc, size: AppDimensions.iconLarge),
+              icon: Icon(
+                Icons.settings,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               index: 3),
         ],
       ),
@@ -53,6 +60,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   IconButton _buildBottomNavigationBarItem(
       {required Icon icon, required int index}) {
     return IconButton(
+      alignment: Alignment.center,
       icon: icon,
       color: _selectedIndex == index ? AppColors.black : AppColors.gray,
       onPressed: () => _onItemTapped(index),

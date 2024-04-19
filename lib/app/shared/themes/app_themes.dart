@@ -4,12 +4,14 @@ import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
-      iconTheme: IconThemeData(color: AppColors.white),
+      iconTheme: const IconThemeData(size: AppDimensions.iconExtraLarge),
       scaffoldBackgroundColor: AppColors.white,
+      shadowColor: AppColors.primaryBlue,
       cardTheme: CardTheme(
-        color: AppColors.primaryBlue,
+        color: AppColors.white,
+        elevation: 8,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.cornerLarge),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
             side: BorderSide(
                 color: AppColors.primaryBlue,
                 width: AppDimensions.thin,
@@ -17,7 +19,9 @@ class AppThemes {
       ),
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
-              iconColor: MaterialStateProperty.all(AppColors.white))),
+        iconSize: MaterialStateProperty.all(AppDimensions.iconExtraLarge),
+        iconColor: MaterialStateProperty.all(AppColors.white),
+      )),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: AppColors.primaryBlue,
       ),
@@ -28,8 +32,8 @@ class AppThemes {
         brightness: Brightness.light,
         primary: AppColors.primaryBlue,
         onPrimary: AppColors.primaryBlue,
-        secondary: AppColors.primaryBlue,
-        onSecondary: AppColors.primaryBlue,
+        secondary: AppColors.white,
+        onSecondary: AppColors.white,
         error: AppColors.red,
         shadow: AppColors.primaryBlue,
         onError: AppColors.red,
@@ -38,7 +42,36 @@ class AppThemes {
       ));
 
   static final darkTheme = ThemeData(
-    primaryColor: AppColors.black,
-    brightness: Brightness.dark,
-  );
+      iconTheme: IconThemeData(color: AppColors.primaryBlue),
+      scaffoldBackgroundColor: AppColors.primaryBlue,
+      cardTheme: CardTheme(
+        color: AppColors.white,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+            side: BorderSide(
+                color: AppColors.white,
+                width: AppDimensions.thin,
+                style: BorderStyle.solid)),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+          style: ButtonStyle(
+              iconColor: MaterialStateProperty.all(AppColors.primaryBlue))),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColors.white,
+      ),
+      bottomAppBarTheme: BottomAppBarTheme(color: AppColors.white),
+      colorScheme: ColorScheme(
+        background: AppColors.primaryBlue,
+        onBackground: AppColors.primaryBlue,
+        brightness: Brightness.dark,
+        primary: AppColors.white,
+        onPrimary: AppColors.primaryBlue,
+        secondary: AppColors.primaryBlue,
+        onSecondary: AppColors.primaryBlue,
+        error: AppColors.red,
+        shadow: AppColors.primaryBlue,
+        onError: AppColors.red,
+        surface: AppColors.white,
+        onSurface: AppColors.white,
+      ));
 }

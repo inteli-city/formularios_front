@@ -27,6 +27,7 @@ class OrderTabSection extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return DefaultOrderWidget(
+                    keyValue: filterValueList[index],
                     defaultOrderTitle: filterValueList[index],
                     count: 0,
                   );

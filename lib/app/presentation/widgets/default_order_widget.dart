@@ -5,13 +5,14 @@ import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 
 class DefaultOrderWidget extends StatefulWidget {
   final String defaultOrderTitle;
+  final String keyValue;
   final int count;
 
-  const DefaultOrderWidget({
-    super.key,
-    required this.defaultOrderTitle,
-    required this.count,
-  });
+  const DefaultOrderWidget(
+      {super.key,
+      required this.defaultOrderTitle,
+      required this.count,
+      required this.keyValue});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -22,6 +23,8 @@ class _DefaultOrderWidgetState extends State<DefaultOrderWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
+
+  String get keyValue => widget.keyValue;
 
   @override
   void initState() {
@@ -50,6 +53,7 @@ class _DefaultOrderWidgetState extends State<DefaultOrderWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: Key(keyValue),
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
       onTap: () {},

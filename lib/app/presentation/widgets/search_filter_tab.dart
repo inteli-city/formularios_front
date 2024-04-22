@@ -16,7 +16,7 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
       _buildSearchField(context),
       Icon(
         Icons.menu,
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.secondary,
       )
     ]);
   }
@@ -31,20 +31,20 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
               enabledBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(
                       Radius.circular(AppDimensions.radiusMedium)),
-                  borderSide:
-                      BorderSide(color: Theme.of(context).primaryColor)),
+                  borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.secondary)),
               contentPadding: const EdgeInsets.symmetric(
                   vertical: AppDimensions.paddingSmall,
                   horizontal: AppDimensions.paddingSmall),
               prefixIcon: Icon(
                 Icons.search_rounded,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               suffixIcon: IconButton(
                   onPressed: () {},
                   icon: Icon(
                     Icons.filter_alt_sharp,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.secondary,
                   ))),
         ));
   }

@@ -60,16 +60,16 @@ class _FormCardState extends State<FormCard>
               children: [
                 Text(widget.form.templateName,
                     style: AppTextStyles.bodyText1.copyWith(
-                        color: Theme.of(context).colorScheme.primary)),
+                        color: Theme.of(context).colorScheme.secondary)),
                 const SizedBox(height: AppDimensions.verticalSpaceSmall),
                 Text(widget.form.street,
                     style: AppTextStyles.bodyText1.copyWith(
-                        color: Theme.of(context).colorScheme.primary)),
+                        color: Theme.of(context).colorScheme.secondary)),
                 const SizedBox(height: AppDimensions.verticalSpaceSmall),
                 Text(
                   widget.form.expiration.toString(),
                   style: AppTextStyles.bodyText1
-                      .copyWith(color: Theme.of(context).colorScheme.primary),
+                      .copyWith(color: Theme.of(context).colorScheme.secondary),
                 ),
               ],
             ),

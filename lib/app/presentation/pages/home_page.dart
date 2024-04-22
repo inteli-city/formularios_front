@@ -41,28 +41,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget successBuild(List<FormEntity> forms) {
-    return Padding(
-      padding: const EdgeInsets.all(AppDimensions.paddingSmall),
-      child: Column(
-        children: [
-          OrderTabSection(),
-          const SizedBox(
-            height: AppDimensions.verticalSpaceExtraLarge,
-          ),
-          Expanded(
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemCount: forms.length,
-              itemBuilder: (context, index) => FormCard(
-                form: forms[index],
-              ),
-              separatorBuilder: (context, index) => const Divider(
-                thickness: 0,
-              ),
-            ),
-          )
-        ],
-      ),
+    return Column(
+      children: [
+        OrderTabSection(),
+        const SizedBox(
+          height: AppDimensions.verticalSpaceExtraLarge,
+        ),
+        Expanded(
+            child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.paddingSmall),
+                child: ScrollConfiguration(
+                  behavior: const ScrollBehavior().copyWith(scrollbars: false),
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: forms.length,
+                    itemBuilder: (context, index) => FormCard(
+                      form: forms[index],
+                    ),
+                    separatorBuilder: (context, index) => const Divider(
+                      thickness: 0,
+                    ),
+                  ),
+                )))
+      ],
     );
   }
 

@@ -22,7 +22,6 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   Widget build(BuildContext context) {
     return BottomAppBar(
       height: ScreenHelper.height(context) * 0.09,
-      notchMargin: 6.0,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,8 +29,9 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         children: [
           _buildBottomNavigationBarItem(
               key: 'HomeIconButton',
-              icon: const Icon(
+              icon: Icon(
                 Icons.home,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               index: 0),
           _buildBottomNavigationBarItem(

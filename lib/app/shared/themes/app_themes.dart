@@ -9,13 +9,15 @@ class AppThemes {
       shadowColor: AppColors.primaryBlue,
       cardTheme: CardTheme(
         color: AppColors.white,
-        elevation: 8,
+        elevation: 4,
+        shadowColor: AppColors.primaryBlue,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
-            side: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.thin,
-                style: BorderStyle.solid)),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+          side: BorderSide(
+              color: AppColors.primaryBlue,
+              width: AppDimensions.thin,
+              style: BorderStyle.solid),
+        ),
       ),
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
@@ -25,15 +27,15 @@ class AppThemes {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: AppColors.primaryBlue,
       ),
-      bottomAppBarTheme: BottomAppBarTheme(color: AppColors.primaryBlue),
+      bottomAppBarTheme: BottomAppBarTheme(color: AppColors.white),
       colorScheme: ColorScheme(
         background: AppColors.white,
         onBackground: AppColors.white,
         brightness: Brightness.light,
-        primary: AppColors.primaryBlue,
-        onPrimary: AppColors.primaryBlue,
-        secondary: AppColors.white,
-        onSecondary: AppColors.white,
+        primary: AppColors.white,
+        onPrimary: AppColors.white,
+        secondary: AppColors.primaryBlue,
+        onSecondary: AppColors.primaryBlue,
         error: AppColors.red,
         shadow: AppColors.primaryBlue,
         onError: AppColors.red,
@@ -45,13 +47,16 @@ class AppThemes {
       iconTheme: IconThemeData(color: AppColors.primaryBlue),
       scaffoldBackgroundColor: AppColors.primaryBlue,
       cardTheme: CardTheme(
-        color: AppColors.white,
+        color: AppColors.primaryBlue,
+        elevation: 4,
+        shadowColor: AppColors.white,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
-            side: BorderSide(
-                color: AppColors.white,
-                width: AppDimensions.thin,
-                style: BorderStyle.solid)),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+          side: BorderSide(
+              color: AppColors.white,
+              width: AppDimensions.thin,
+              style: BorderStyle.solid),
+        ),
       ),
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
@@ -59,15 +64,15 @@ class AppThemes {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: AppColors.white,
       ),
-      bottomAppBarTheme: BottomAppBarTheme(color: AppColors.white),
+      bottomAppBarTheme: BottomAppBarTheme(color: AppColors.primaryBlue),
       colorScheme: ColorScheme(
         background: AppColors.primaryBlue,
         onBackground: AppColors.primaryBlue,
         brightness: Brightness.dark,
-        primary: AppColors.white,
+        primary: AppColors.primaryBlue,
         onPrimary: AppColors.primaryBlue,
-        secondary: AppColors.primaryBlue,
-        onSecondary: AppColors.primaryBlue,
+        secondary: AppColors.white,
+        onSecondary: AppColors.white,
         error: AppColors.red,
         shadow: AppColors.primaryBlue,
         onError: AppColors.red,

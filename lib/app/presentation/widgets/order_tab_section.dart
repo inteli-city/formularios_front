@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/presentation/widgets/default_order_widget.dart';
 import 'package:formularios_front/app/presentation/widgets/search_filter_tab.dart';
-import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
 
 class OrderTabSection extends StatelessWidget {
   OrderTabSection({super.key});
@@ -13,6 +13,8 @@ class OrderTabSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double responsiveVerticalSpaceLarge =
+        ResponsiveDimensions.getResponsiveVerticalSpace(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -36,8 +38,8 @@ class OrderTabSection extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(
-          height: AppDimensions.verticalSpaceExtraLarge,
+        SizedBox(
+          height: responsiveVerticalSpaceLarge,
         ),
         const SearchFilterTab(),
       ],

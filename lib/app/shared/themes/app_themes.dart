@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
-import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
-      iconTheme: const IconThemeData(size: AppDimensions.iconExtraLarge),
       scaffoldBackgroundColor: AppColors.white,
       shadowColor: AppColors.primaryBlue,
       cardTheme: CardTheme(
         color: AppColors.white,
         elevation: 4,
         shadowColor: AppColors.primaryBlue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
-          side: BorderSide(
-              color: AppColors.primaryBlue,
-              width: AppDimensions.thin,
-              style: BorderStyle.solid),
-        ),
       ),
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
-        iconSize: MaterialStateProperty.all(AppDimensions.iconExtraLarge),
         iconColor: MaterialStateProperty.all(AppColors.white),
       )),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -45,17 +35,14 @@ class AppThemes {
 
   static final darkTheme = ThemeData(
       iconTheme: IconThemeData(color: AppColors.primaryBlue),
+      shadowColor: AppColors.primaryBlue,
       scaffoldBackgroundColor: AppColors.primaryBlue,
       cardTheme: CardTheme(
         color: AppColors.primaryBlue,
         elevation: 4,
         shadowColor: AppColors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
-          side: BorderSide(
-              color: AppColors.white,
-              width: AppDimensions.thin,
-              style: BorderStyle.solid),
+          side: BorderSide(color: AppColors.white, style: BorderStyle.solid),
         ),
       ),
       iconButtonTheme: IconButtonThemeData(

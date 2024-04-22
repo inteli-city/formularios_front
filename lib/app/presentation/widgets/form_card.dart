@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 
 class FormCard extends StatefulWidget {
@@ -44,6 +44,14 @@ class _FormCardState extends State<FormCard>
 
   @override
   Widget build(BuildContext context) {
+    double responsivePadding =
+        ResponsiveDimensions.getResponsivePadding(context);
+    double responsiveRadius = ResponsiveDimensions.getResponsiveRadius(context);
+    double responsiveBorderThickness =
+        ResponsiveDimensions.getResponsiveBorderThickness(context);
+    double responsiveVerticalSpace =
+        ResponsiveDimensions.getResponsiveVerticalSpace(context);
+
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -51,25 +59,32 @@ class _FormCardState extends State<FormCard>
         scale: _scaleAnimation,
         child: Card(
           color: Theme.of(context).cardTheme.color,
-          shape: Theme.of(context).cardTheme.shape,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(responsiveRadius),
+            side: BorderSide(
+                color: Theme.of(context).colorScheme.secondary,
+                style: BorderStyle.solid,
+                width: responsiveBorderThickness),
+          ),
           elevation: Theme.of(context).cardTheme.elevation,
           child: Padding(
-            padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+            padding: EdgeInsets.all(responsivePadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.form.templateName,
-                    style: AppTextStyles.bodyText1.copyWith(
+                    style: AppTextStyles.headline1.copyWith(
                         color: Theme.of(context).colorScheme.secondary)),
-                const SizedBox(height: AppDimensions.verticalSpaceSmall),
+                SizedBox(height: responsiveVerticalSpace),
                 Text(widget.form.street,
                     style: AppTextStyles.bodyText1.copyWith(
                         color: Theme.of(context).colorScheme.secondary)),
-                const SizedBox(height: AppDimensions.verticalSpaceSmall),
+                SizedBox(height: responsiveVerticalSpace),
                 Text(
                   widget.form.expiration.toString(),
-                  style: AppTextStyles.bodyText1
-                      .copyWith(color: Theme.of(context).colorScheme.secondary),
+                  style: AppTextStyles.bodyText1.copyWith(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
               ],
             ),

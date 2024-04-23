@@ -68,21 +68,31 @@ class _FormCardState extends State<FormCard>
           ),
           elevation: Theme.of(context).cardTheme.elevation,
           child: Padding(
-            padding: EdgeInsets.all(responsivePadding),
+            padding: EdgeInsets.symmetric(
+                horizontal: responsivePadding * 1.5,
+                vertical: responsivePadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.form.templateName,
                     style: AppTextStyles.headline1.copyWith(
+                        fontSize:
+                            ResponsiveDimensions.getResponsiveFontSize(context),
                         color: Theme.of(context).colorScheme.secondary)),
                 SizedBox(height: responsiveVerticalSpace),
                 Text(widget.form.street,
                     style: AppTextStyles.bodyText1.copyWith(
+                        fontSize: ResponsiveDimensions.getResponsiveFontSize(
+                                context) *
+                            0.8,
                         color: Theme.of(context).colorScheme.secondary)),
                 SizedBox(height: responsiveVerticalSpace),
                 Text(
                   widget.form.expiration.toString(),
                   style: AppTextStyles.bodyText1.copyWith(
+                    fontSize:
+                        ResponsiveDimensions.getResponsiveFontSize(context) *
+                            0.8,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),

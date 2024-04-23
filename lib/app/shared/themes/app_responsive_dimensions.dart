@@ -28,7 +28,7 @@ class ResponsiveDimensions {
   static double getResponsiveFontSize(BuildContext context) {
     var screenWidth = ScreenHelper.width(context);
     if (screenWidth > AppDimensions.screenLarge) {
-      return AppDimensions.fontLarge;
+      return AppDimensions.fontExtraLarge;
     } else {
       return AppDimensions.fontMedium;
     }

@@ -14,7 +14,7 @@ class AppDimensions {
   static const double marginExtraLarge = 32.0;
 
   // fontes
-  static const double fontSmall = 8.0;
+  static const double fontSmall = 12.0;
   static const double fontMedium = 16.0;
   static const double fontLarge = 24.0;
   static const double fontExtraLarge = 32.0;
@@ -31,14 +31,14 @@ class AppDimensions {
   static const double screenLarge = 600.0;
 
   // arredondamento
-  static const double radiusSmall = 4.0;
-  static const double radiusMedium = 8.0;
-  static const double radiusLarge = 12.0;
-  static const double radiusExtraLarge = 16.0;
+  static const double radiusSmall = 8.0;
+  static const double radiusMedium = 12.0;
+  static const double radiusLarge = 16.0;
+  static const double radiusExtraLarge = 24.0;
   static const double fullyRounded = 50.0;
 
   // espessura de borda
-  static const double borderThin = 1.2;
+  static const double borderThin = 1.5;
   static const double borderMedium = 2.0;
   static const double borderThick = 4.0;
   static const double borderFrame = 3.0;

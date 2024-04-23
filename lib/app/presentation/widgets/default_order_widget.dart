@@ -6,13 +6,14 @@ import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 class DefaultOrderWidget extends StatefulWidget {
   final String defaultOrderTitle;
   final String keyValue;
+  final Function()? onTap;
   final int count;
 
   const DefaultOrderWidget(
       {super.key,
       required this.defaultOrderTitle,
       required this.count,
-      required this.keyValue});
+      required this.keyValue, this.onTap});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -65,7 +66,7 @@ class _DefaultOrderWidgetState extends State<DefaultOrderWidget>
       key: Key(keyValue),
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
-      onTap: () {},
+      onTap: widget.onTap,
       child: SizedBox(
         height: 80,
         width: ScreenHelper.width(context) * 0.4,

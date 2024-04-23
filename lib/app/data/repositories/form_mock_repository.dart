@@ -25,7 +25,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       generalDescription: 'generalDescription',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.CONCLUIDO,
       expiration: 1,
       dateCreation: 1,
       dateStart: 1,
@@ -214,7 +214,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       generalDescription: 'generalDescription',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.CONCLUICO,
+      status: FormStatusEnum.CONCLUIDO,
       expiration: 1,
       dateCreation: 1,
       dateStart: 1,
@@ -232,6 +232,45 @@ class FormMockRepository extends IFormRepository {
 
     return right(
       formList.where((element) => element.userId == userId).toList(),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<FormEntity>>> getFinishedUserForms(
+      {required String userId}) async {
+    Future.delayed(const Duration(seconds: 1));
+    final userFormsList = formList.where((element) => element.userId == userId);
+    final finishedUserFormsList = userFormsList
+        .where((element) => element.status == FormStatusEnum.CONCLUIDO);
+
+    return right(
+      finishedUserFormsList.toList(),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<FormEntity>>> getNotInitalizedUserForms(
+      {required String userId}) async {
+    Future.delayed(const Duration(seconds: 1));
+    final userFormsList = formList.where((element) => element.userId == userId);
+    final notInitializedUserFormsList = userFormsList
+        .where((element) => element.status == FormStatusEnum.NAO_INICIADO);
+
+    return right(
+      notInitializedUserFormsList.toList(),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<FormEntity>>> getInProgressUserForms(
+      {required String userId}) async {
+    Future.delayed(const Duration(seconds: 1));
+    final userFormsList = formList.where((element) => element.userId == userId);
+    final inProgressUserFormsList = userFormsList
+        .where((element) => element.status == FormStatusEnum.EM_ANDAMENTO);
+
+    return right(
+      inProgressUserFormsList.toList(),
     );
   }
 }

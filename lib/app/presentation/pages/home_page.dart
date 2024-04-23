@@ -5,7 +5,7 @@ import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/bottom_navigation_widget.dart';
 import 'package:formularios_front/app/presentation/widgets/form_card.dart';
-import 'package:formularios_front/app/presentation/widgets/order_tab_section.dart';
+import 'package:formularios_front/app/presentation/widgets/order_tab_section_chips.dart';
 import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
 import 'package:provider/provider.dart';
 
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
         ResponsiveDimensions.getResponsiveVerticalSpace(context);
     return Column(
       children: [
-        OrderTabSection(),
+        const OrderTabSectionChips(),
         SizedBox(height: responsiveVerticalSpace),
         Expanded(
             child: Padding(

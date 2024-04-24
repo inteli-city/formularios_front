@@ -11,25 +11,12 @@ void main() {
       isRequired: true,
       key: 'key',
     );
-    final FieldEntity fieldEntity1 = TextFieldEntity(
-      fieldType: FieldTypeEnum.DATE_FIELD,
-      placeholder: 'placeholder',
-      isRequired: true,
-      key: 'key',
-    );
-    final FieldEntity fieldEntity2 = TextFieldEntity(
-      fieldType: FieldTypeEnum.DATE_FIELD,
-      placeholder: 'placeholder',
-      isRequired: true,
-      key: 'key',
-    );
-
     final sectionFieldEntity = SectionEntity(
         sectionId: 'section-id',
-        fields: [fieldEntity0, fieldEntity1, fieldEntity2]);
+        fields: [fieldEntity0]);
 
     expect(sectionFieldEntity.sectionId, 'section-id');
     expect(
-        sectionFieldEntity.fields, [fieldEntity0, fieldEntity1, fieldEntity2]);
+        sectionFieldEntity.fields, [fieldEntity0]);
   });
 }

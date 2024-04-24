@@ -3,7 +3,7 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 
 void main() {
-  test('TextFieldEntity Test', () {
+  test('should return text field entity', () {
     final textFieldEntity = TextFieldEntity(
       fieldType: FieldTypeEnum.TEXT_FIELD,
       placeholder: 'Placeholder Campo',

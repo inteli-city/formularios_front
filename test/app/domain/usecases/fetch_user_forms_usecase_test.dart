@@ -16,11 +16,8 @@ import 'fetch_user_forms_usecase_test.mocks.dart';
 void main() {
   IFormRepository formRepository = MockIFormRepository();
   late IFetchUserFormsUsecase usecase;
-
-  setUp(() {
     registerInstances();
     usecase = FetchUserFormsUsecase(repository: formRepository);
-  });
 
   group('FetchUserFormsUsecase', () {
     test('should return a list of FormEntity', () async {

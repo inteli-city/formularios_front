@@ -74,7 +74,7 @@ class _FormCardState extends State<FormCard>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.form.templateName,
+                Text(widget.form.template,
                     style: AppTextStyles.headline1.copyWith(
                         fontSize:
                             ResponsiveDimensions.getResponsiveFontSize(context),
@@ -88,7 +88,7 @@ class _FormCardState extends State<FormCard>
                         color: Theme.of(context).colorScheme.secondary)),
                 SizedBox(height: responsiveVerticalSpace),
                 Text(
-                  widget.form.expiration.toString(),
+                  widget.form.expirationDate.toString(),
                   style: AppTextStyles.bodyText1.copyWith(
                     fontSize:
                         ResponsiveDimensions.getResponsiveFontSize(context) *

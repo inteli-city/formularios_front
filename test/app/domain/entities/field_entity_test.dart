@@ -1,14 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 
 void main() {
-  test('Field Entity Test', () {
-    final FieldEntity fieldEntity0 = FieldEntity(
-        name: 'field', placeholder: 'placeholder', isRequired: true);
+  test('TextFieldEntity Test', () {
+    final textFieldEntity = TextFieldEntity(
+      fieldType: FieldTypeEnum.TEXT_FIELD,
+      placeholder: 'Placeholder Campo',
+      isRequired: true,
+      regex: 'regex',
+      formatting: 'formatting',
+      key: 'key',
+    );
 
-    expect(fieldEntity0.name, 'field');
-    expect(fieldEntity0.placeholder, 'placeholder');
-    expect(fieldEntity0.isRequired, true);
-   
+    expect(textFieldEntity.fieldType, FieldTypeEnum.TEXT_FIELD);
+    expect(textFieldEntity.placeholder, 'Placeholder Campo');
+    expect(textFieldEntity.regex, 'regex');
+    expect(textFieldEntity.formatting, 'formatting');
+    expect(textFieldEntity.isRequired, true);
+    expect(textFieldEntity.key, 'key');
   });
 }

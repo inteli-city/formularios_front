@@ -33,29 +33,29 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   }
 
   @override
-  String get idExternForm => (super.noSuchMethod(
-        Invocation.getter(#idExternForm),
+  String get externFormId => (super.noSuchMethod(
+        Invocation.getter(#externFormId),
         returnValue: _i3.dummyValue<String>(
           this,
-          Invocation.getter(#idExternForm),
+          Invocation.getter(#externFormId),
         ),
       ) as String);
 
   @override
-  String get idInternForm => (super.noSuchMethod(
-        Invocation.getter(#idInternForm),
+  String get internFormId => (super.noSuchMethod(
+        Invocation.getter(#internFormId),
         returnValue: _i3.dummyValue<String>(
           this,
-          Invocation.getter(#idInternForm),
+          Invocation.getter(#internFormId),
         ),
       ) as String);
 
   @override
-  String get idCreatorUser => (super.noSuchMethod(
-        Invocation.getter(#idCreatorUser),
+  String get creatorUserId => (super.noSuchMethod(
+        Invocation.getter(#creatorUserId),
         returnValue: _i3.dummyValue<String>(
           this,
-          Invocation.getter(#idCreatorUser),
+          Invocation.getter(#creatorUserId),
         ),
       ) as String);
 
@@ -69,17 +69,17 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
       ) as String);
 
   @override
-  List<String> get idCoordinator => (super.noSuchMethod(
-        Invocation.getter(#idCoordinator),
+  List<String> get coordinatorsId => (super.noSuchMethod(
+        Invocation.getter(#coordinatorsId),
         returnValue: <String>[],
       ) as List<String>);
 
   @override
-  String get templateName => (super.noSuchMethod(
-        Invocation.getter(#templateName),
+  String get template => (super.noSuchMethod(
+        Invocation.getter(#template),
         returnValue: _i3.dummyValue<String>(
           this,
-          Invocation.getter(#templateName),
+          Invocation.getter(#template),
         ),
       ) as String);
 
@@ -126,14 +126,14 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
       ) as int);
 
   @override
-  double get lat => (super.noSuchMethod(
-        Invocation.getter(#lat),
+  double get latitude => (super.noSuchMethod(
+        Invocation.getter(#latitude),
         returnValue: 0.0,
       ) as double);
 
   @override
-  double get long => (super.noSuchMethod(
-        Invocation.getter(#long),
+  double get longitude => (super.noSuchMethod(
+        Invocation.getter(#longitude),
         returnValue: 0.0,
       ) as double);
 
@@ -159,14 +159,14 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
       ) as _i5.FormStatusEnum);
 
   @override
-  int get expiration => (super.noSuchMethod(
-        Invocation.getter(#expiration),
+  int get expirationDate => (super.noSuchMethod(
+        Invocation.getter(#expirationDate),
         returnValue: 0,
       ) as int);
 
   @override
-  int get dateCreation => (super.noSuchMethod(
-        Invocation.getter(#dateCreation),
+  int get creationDate => (super.noSuchMethod(
+        Invocation.getter(#creationDate),
         returnValue: 0,
       ) as int);
 

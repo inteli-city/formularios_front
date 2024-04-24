@@ -1,0 +1,14 @@
+// ignore_for_file: constant_identifier_names
+
+enum FieldTypeEnum {
+  TEXT_FIELD,
+  NUMBER_FIELD,
+  DROPDOWN_FIELD,
+  TYPEAHEAD_FIELD,
+  RADIO_GROUP_FIELD,
+  DATE_FIELD,
+  CHECKBOX_FIELD,
+  CHECKBOX_GROUP_FIELD,
+  SWITCH_BUTTON_FIELD,
+  FILE_FIELD,
+}

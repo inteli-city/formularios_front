@@ -14,9 +14,9 @@ void main() {
 
     setUp(() {
       form = MockFormEntity();
-      when(form.templateName).thenReturn('Nome Template');
+      when(form.template).thenReturn('Nome Template');
       when(form.street).thenReturn('Rua Samuel Morse');
-      when(form.expiration).thenReturn(1);
+      when(form.expirationDate).thenReturn(1);
     });
 
     testWidgets('FormCard builds correctly with given FormEntity',

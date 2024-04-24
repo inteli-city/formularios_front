@@ -59,6 +59,7 @@ class _HomePageState extends State<HomePage> {
     double responsiveVerticalSpace =
         ResponsiveDimensions.getResponsiveVerticalSpace(context);
     return Column(
+      key: const Key('success-build'),
       children: [
         SizedBox(height: responsiveVerticalSpace),
         const OrderTabSectionChips(),
@@ -86,6 +87,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget errorBuild(Failure error) {
     return Center(
+      key: const Key('error-build'),
       child: Text(error.toString()),
     );
   }

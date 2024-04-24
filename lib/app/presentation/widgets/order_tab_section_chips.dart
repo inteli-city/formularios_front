@@ -23,6 +23,7 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
     'Concluído',
   ];
   final List<bool> _isSelectedList = [false, false, false];
+
   @override
   Widget build(BuildContext context) {
     

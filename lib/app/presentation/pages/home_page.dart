@@ -25,11 +25,13 @@ class _HomePageState extends State<HomePage> {
     double responsiveFabSize =
         ResponsiveDimensions.getResponsiveFabSize(context);
     return Scaffold(
-      body: state is FormUserErrorState
-          ? errorBuild(state.error)
-          : state is FormUserSuccessState
-              ? successBuild(state.forms)
-              : const CircularProgressIndicator(),
+      body: SafeArea(
+        child: state is FormUserErrorState
+            ? errorBuild(state.error)
+            : state is FormUserSuccessState
+                ? successBuild(state.forms)
+                : const CircularProgressIndicator(),
+      ),
       bottomNavigationBar: const BottomNavigationWidget(),
       floatingActionButton: SizedBox(
         width: responsiveFabSize,
@@ -58,6 +60,7 @@ class _HomePageState extends State<HomePage> {
         ResponsiveDimensions.getResponsiveVerticalSpace(context);
     return Column(
       children: [
+        SizedBox(height: responsiveVerticalSpace),
         const OrderTabSectionChips(),
         SizedBox(height: responsiveVerticalSpace),
         Expanded(

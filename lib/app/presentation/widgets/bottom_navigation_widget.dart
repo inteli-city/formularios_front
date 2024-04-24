@@ -86,7 +86,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         ResponsiveDimensions.getResponsiveIconSize(context);
     return IconButton(
       alignment: Alignment.center,
-      iconSize: responsiveIconSize * 1.5,
+      iconSize: responsiveIconSize * 1.3,
       key: Key(key),
       icon: icon,
       color: _selectedIndex == index ? AppColors.black : AppColors.gray,

@@ -25,7 +25,7 @@ class AppWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routerConfig: router,
         theme: AppThemes.lightTheme,
-        darkTheme: AppThemes.darkTheme,
+        // darkTheme: AppThemes.darkTheme,
         themeMode: ThemeMode.system,
         localizationsDelegates: const [
           S.delegate,

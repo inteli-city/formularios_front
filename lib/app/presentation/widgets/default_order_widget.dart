@@ -13,11 +13,11 @@ class DefaultOrderWidget extends StatefulWidget {
       {super.key,
       required this.defaultOrderTitle,
       required this.count,
-      required this.keyValue, this.onTap});
+      required this.keyValue,
+      this.onTap});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _DefaultOrderWidgetState createState() => _DefaultOrderWidgetState();
+  State<DefaultOrderWidget> createState() => _DefaultOrderWidgetState();
 }
 
 class _DefaultOrderWidgetState extends State<DefaultOrderWidget>

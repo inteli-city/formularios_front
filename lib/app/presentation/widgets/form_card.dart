@@ -9,8 +9,7 @@ class FormCard extends StatefulWidget {
   const FormCard({super.key, required this.form});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _FormCardState createState() => _FormCardState();
+  State<FormCard> createState() => _FormCardState();
 }
 
 class _FormCardState extends State<FormCard>

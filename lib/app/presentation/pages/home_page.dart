@@ -36,16 +36,14 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: SizedBox(
         width: responsiveFabSize,
         height: responsiveFabSize,
-        child: FittedBox(
-          child: FloatingActionButton(
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            hoverColor: Theme.of(context).colorScheme.secondary,
-            shape: const CircleBorder(),
-            onPressed: () {},
-            child: Icon(
-              Icons.rotate_right,
-              size: responsiveIconSize,
-            ),
+        child: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          hoverColor: Theme.of(context).colorScheme.secondary,
+          shape: const CircleBorder(),
+          onPressed: () {},
+          child: Icon(
+            Icons.rotate_right,
+            size: responsiveIconSize,
           ),
         ),
       ),

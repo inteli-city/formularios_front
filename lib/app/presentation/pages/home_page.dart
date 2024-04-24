@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                       form: forms[index],
                     ),
                     separatorBuilder: (context, index) => const Divider(
+                      height: 5,
                       thickness: 0,
                     ),
                   ),

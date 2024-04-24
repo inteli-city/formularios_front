@@ -40,7 +40,6 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
         child: TextField(
             style: TextStyle(
               fontSize: responsiveFontSize,
-              
               color: Theme.of(context).colorScheme.secondary,
             ),
             textAlign: TextAlign.left,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/injector.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/search_filter_tab.dart';
+import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 
@@ -17,19 +18,21 @@ class OrderTabSectionChips extends StatefulWidget {
 
 class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
   final List<String> filterValueList = [
-    'Não Iniciado\n(0)',
-    'Em andamento\n(0)',
-    'Concluído\n(200)',
+    'Não Iniciado',
+    'Em andamento',
+    'Concluído',
   ];
   final List<bool> _isSelectedList = [false, false, false];
   @override
   Widget build(BuildContext context) {
+    
     double responsiveVerticalSpace =
         ResponsiveDimensions.getResponsiveVerticalSpace(context);
     double responsiveHorizontalSpace =
         ResponsiveDimensions.getResponsiveHorizontalSpace(context);
     double responsivePadding =
         ResponsiveDimensions.getResponsivePadding(context);
+    double screenHeight = ScreenHelper.height(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +40,7 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: 60,
+          height: screenHeight * 0.1,
           child: ListView(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
@@ -76,6 +79,7 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
     double responsiveRadius = ResponsiveDimensions.getResponsiveRadius(context);
 
     return ChoiceChip(
+      labelPadding: EdgeInsets.zero,
       label: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -91,13 +95,13 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
               labelValue,
             ),
             Text(
-              style: AppTextStyles.bodyText1.copyWith(
+              style: AppTextStyles.subtitle1.copyWith(
                   fontSize: responsiveFontSize * 0.8,
                   color: _isSelectedList[index]
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.secondary),
               textAlign: TextAlign.center,
-              '0',
+              '(0)',
             ),
           ]),
       selected: _isSelectedList[index],
@@ -118,7 +122,8 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
       showCheckmark: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
       padding: EdgeInsets.symmetric(
-          horizontal: responsivePadding * 2, vertical: responsivePadding * 2),
+          horizontal: responsivePadding * 2,
+          vertical: AppDimensions.paddingMedium),
       elevation: 3,
       pressElevation: 3,
       shadowColor: Theme.of(context).colorScheme.secondary,

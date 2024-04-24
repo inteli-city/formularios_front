@@ -31,7 +31,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
                     color: Theme.of(context).colorScheme.secondary,
                     width: 2.0))),
         child: BottomAppBar(
-          shape: const CircularNotchedRectangle(), 
+          shape: const CircularNotchedRectangle(),
           notchMargin: 2,
           elevation: 3,
           shadowColor: Theme.of(context).shadowColor,
@@ -86,7 +86,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         ResponsiveDimensions.getResponsiveIconSize(context);
     return IconButton(
       alignment: Alignment.center,
-      iconSize: responsiveIconSize,
+      iconSize: responsiveIconSize * 1.5,
       key: Key(key),
       icon: icon,
       color: _selectedIndex == index ? AppColors.black : AppColors.gray,

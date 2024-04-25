@@ -10,14 +10,6 @@ class BottomNavigationWidget extends StatefulWidget {
 }
 
 class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -66,7 +58,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
         size: responsiveIconSize * 1.3,
       ),
       color: AppColors.black,
-      onPressed: () => _onItemTapped(index),
+      onPressed: () => {},
     );
   }
 }

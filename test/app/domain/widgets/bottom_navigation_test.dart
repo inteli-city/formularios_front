@@ -4,7 +4,7 @@ import 'package:formularios_front/app/presentation/widgets/bottom_navigation_wid
 
 void main() {
   testWidgets('BottomNavigationWidget loads widgets correctly', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: Scaffold(body: BottomNavigationWidget())));
+    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: BottomNavigationWidget())));
 
     final homeIconButtonFinder = find.byKey(const Key('HomeIconButton'));
     final publicIconButtonFinder = find.byKey(const Key('PublicIconButton'));

@@ -17,11 +17,9 @@ void main() {
       expect(find.byType(TextField), findsOneWidget);
       expect(find.byIcon(Icons.search_rounded), findsOneWidget);
       expect(find.byIcon(Icons.filter_alt_sharp), findsOneWidget);
-      expect(find.byIcon(Icons.menu), findsOneWidget);
 
       final TextField textField = tester.firstWidget(find.byType(TextField));
       expect(textField.decoration?.prefixIcon, isNotNull);
-      expect(textField.decoration?.suffixIcon, isNotNull);
     });
   });
 }

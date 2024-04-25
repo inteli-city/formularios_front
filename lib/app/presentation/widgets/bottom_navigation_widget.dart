@@ -10,7 +10,13 @@ class BottomNavigationWidget extends StatefulWidget {
 }
 
 class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
-  void _onItemTapped(int index) {}
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +60,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
     return IconButton(
       alignment: Alignment.center,
       key: Key(key),
+     
       icon: Icon(
         icon,
         size: responsiveIconSize * 1.3,

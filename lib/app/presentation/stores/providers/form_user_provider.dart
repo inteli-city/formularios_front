@@ -43,13 +43,12 @@ class FormUserProvider extends ChangeNotifier {
   }
 
   void filterFormsByStatus(FormStatusEnum? enumStatus) {
-    var userFormStatelist = _allForms;
-    var filteredFormList =
-        _allForms.where((form) => form.status == enumStatus).toList();
+    if (enumStatus == null) {
+      setState(FormUserSuccessState(forms: _allForms));
+      return;
+    }
 
-    userFormStatelist =
-        enumStatus == null ? userFormStatelist : filteredFormList;
-
-    setState(FormUserSuccessState(forms: userFormStatelist));
+    setState(FormUserSuccessState(
+        forms: _allForms.where((form) => form.status == enumStatus).toList()));
   }
 }

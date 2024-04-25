@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 
 class FormCard extends StatefulWidget {
@@ -43,14 +43,6 @@ class _FormCardState extends State<FormCard>
 
   @override
   Widget build(BuildContext context) {
-    double responsivePadding =
-        ResponsiveDimensions.getResponsivePadding(context);
-    double responsiveRadius = ResponsiveDimensions.getResponsiveRadius(context);
-    double responsiveBorderThickness =
-        ResponsiveDimensions.getResponsiveBorderThickness(context);
-    double responsiveVerticalSpace =
-        ResponsiveDimensions.getResponsiveVerticalSpace(context);
-
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -59,39 +51,45 @@ class _FormCardState extends State<FormCard>
         child: Card(
           color: Theme.of(context).cardTheme.color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(responsiveRadius),
+            borderRadius: BorderRadius.circular(
+              AppDimensions.radiusLarge,
+            ),
             side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-                style: BorderStyle.solid,
-                width: responsiveBorderThickness),
+              color: Theme.of(context).colorScheme.primary,
+              style: BorderStyle.solid,
+              width: AppDimensions.borderMedium,
+            ),
           ),
           elevation: Theme.of(context).cardTheme.elevation,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: responsivePadding * 1.5,
-                vertical: responsivePadding),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.paddingMedium,
+              vertical: AppDimensions.paddingMedium,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.form.template,
-                    style: AppTextStyles.headline1.copyWith(
-                        fontSize:
-                            ResponsiveDimensions.getResponsiveFontSize(context),
-                        color: Theme.of(context).colorScheme.primary)),
-                SizedBox(height: responsiveVerticalSpace),
-                Text(widget.form.street,
-                    style: AppTextStyles.bodyText1.copyWith(
-                        fontSize: ResponsiveDimensions.getResponsiveFontSize(
-                                context) *
-                            0.8,
-                        color: Theme.of(context).colorScheme.primary)),
-                SizedBox(height: responsiveVerticalSpace),
+                Text(
+                  widget.form.template,
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      // color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+                const SizedBox(
+                  height: AppDimensions.verticalSpaceMedium,
+                ),
+                Text(
+                  widget.form.street,
+                  style: AppTextStyles.bodyText1.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(
+                  height: AppDimensions.verticalSpaceMedium,
+                ),
                 Text(
                   widget.form.expirationDate.toString(),
                   style: AppTextStyles.bodyText1.copyWith(
-                    fontSize:
-                        ResponsiveDimensions.getResponsiveFontSize(context) *
-                            0.8,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),

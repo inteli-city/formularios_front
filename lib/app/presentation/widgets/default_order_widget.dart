@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
-import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 
 class DefaultOrderWidget extends StatefulWidget {
@@ -53,15 +53,6 @@ class _DefaultOrderWidgetState extends State<DefaultOrderWidget>
 
   @override
   Widget build(BuildContext context) {
-    double responsivePadding =
-        ResponsiveDimensions.getResponsivePadding(context);
-    double responsiveMargin = ResponsiveDimensions.getResponsiveMargin(context);
-    double responsiveFontSize =
-        ResponsiveDimensions.getResponsiveFontSize(context);
-    double responsiveBorderThickness =
-        ResponsiveDimensions.getResponsiveBorderThickness(context);
-    double responsiveRadius = ResponsiveDimensions.getResponsiveRadius(context);
-
     return GestureDetector(
       key: Key(keyValue),
       onTapDown: _onTapDown,
@@ -73,26 +64,28 @@ class _DefaultOrderWidgetState extends State<DefaultOrderWidget>
         child: ScaleTransition(
           scale: _scaleAnimation,
           child: Card(
-            margin:
-                EdgeInsets.symmetric(horizontal: responsiveMargin, vertical: 0),
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.paddingMedium,
+              vertical: 0,
+            ),
             elevation: 3,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(responsiveRadius),
+              borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
               side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  style: BorderStyle.solid,
-                  width: responsiveBorderThickness),
+                color: Theme.of(context).colorScheme.primary,
+                style: BorderStyle.solid,
+                width: AppDimensions.borderHeavy,
+              ),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: responsivePadding, vertical: 0),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimensions.verticalSpaceMedium, vertical: 0),
               child: Center(
                 child: Text(
                   '${widget.defaultOrderTitle}\n(${widget.count})',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.bodyText1.copyWith(
                     color: Theme.of(context).colorScheme.primary,
-                    fontSize: responsiveFontSize,
                   ),
                 ),
               ),

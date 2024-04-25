@@ -1,42 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
+import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
-      scaffoldBackgroundColor: AppColors.white,
+    scaffoldBackgroundColor: AppColors.white,
+    shadowColor: AppColors.primaryBlue,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    textTheme: TextTheme(
+      displayLarge: AppTextStyles.display,
+      headlineLarge: AppTextStyles.headline,
+      titleMedium: AppTextStyles.titleMedium,
+      bodyLarge: AppTextStyles.bodyText1,
+    ),
+    cardTheme: CardTheme(
+      color: AppColors.white,
+      elevation: 4,
       shadowColor: AppColors.primaryBlue,
-      cardTheme: CardTheme(
-        color: AppColors.white,
-        elevation: 4,
-        shadowColor: AppColors.primaryBlue,
-        surfaceTintColor: AppColors.white,
-      ),
-      iconTheme: IconThemeData(color: AppColors.primaryBlue),
-      iconButtonTheme: IconButtonThemeData(
-          style: ButtonStyle(
+      surfaceTintColor: AppColors.white,
+    ),
+    iconTheme: IconThemeData(color: AppColors.primaryBlue),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
         iconColor: MaterialStateProperty.all(AppColors.primaryBlue),
-      )),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: AppColors.primaryBlue,
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
-        color: AppColors.white,
-        surfaceTintColor: AppColors.white,
-      ),
-      colorScheme: ColorScheme(
-        background: AppColors.white,
-        onBackground: AppColors.white,
-        brightness: Brightness.light,
-        primary: AppColors.primaryBlue,
-        onPrimary: AppColors.primaryBlue,
-        secondary: AppColors.white,
-        onSecondary: AppColors.white,
-        error: AppColors.red,
-        shadow: AppColors.primaryBlue,
-        onError: AppColors.red,
-        surface: AppColors.white,
-        onSurface: AppColors.white,
-      ));
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryBlue,
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: AppColors.white,
+      surfaceTintColor: AppColors.white,
+    ),
+    colorScheme: ColorScheme(
+      background: AppColors.white,
+      onBackground: AppColors.white,
+      brightness: Brightness.light,
+      primary: AppColors.primaryBlue,
+      onPrimary: AppColors.primaryBlue,
+      secondary: AppColors.white,
+      onSecondary: AppColors.white,
+      error: AppColors.red,
+      shadow: AppColors.primaryBlue,
+      onError: AppColors.red,
+      surface: AppColors.white,
+      onSurface: AppColors.white,
+    ),
+  );
 
   static final darkTheme = ThemeData(
       iconTheme: IconThemeData(color: AppColors.primaryBlue),

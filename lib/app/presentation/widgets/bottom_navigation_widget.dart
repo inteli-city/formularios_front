@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
-import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   const BottomNavigationWidget({super.key});
@@ -55,16 +55,15 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
 
   Widget _buildBottomNavigationBarItem(
       {required String key, required IconData icon, required int index}) {
-    double responsiveIconSize =
-        ResponsiveDimensions.getResponsiveIconSize(context);
     return IconButton(
       alignment: Alignment.center,
       key: Key(key),
       icon: Icon(
         icon,
-        size: responsiveIconSize * 1.3,
+        size: AppDimensions.iconLarge,
       ),
       color: AppColors.black,
+      isSelected: _selectedIndex == index,
       onPressed: () => _onItemTapped(index),
     );
   }

@@ -21,8 +21,8 @@ class AppDimensions {
 
   // icons
   static const double iconSmall = 12.0;
-  static const double iconMedium = 16.0;
-  static const double iconLarge = 24.0;
+  static const double iconMedium = 24.0;
+  static const double iconLarge = 36.0;
   static const double iconExtraLarge = 48.0;
 
   // largura da tela

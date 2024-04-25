@@ -5,7 +5,8 @@ import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/form_card.dart';
 import 'package:formularios_front/app/presentation/widgets/order_tab_section_chips.dart';
-import 'package:formularios_front/app/shared/themes/app_responsive_dimensions.dart';
+import 'package:formularios_front/app/presentation/widgets/search_filter_tab.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,22 +28,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget successBuild(List<FormEntity> forms) {
-    double responsivePadding =
-        ResponsiveDimensions.getResponsivePadding(context);
-    double responsiveVerticalSpace =
-        ResponsiveDimensions.getResponsiveVerticalSpace(context);
     return Column(
       key: const Key('success-build'),
       children: [
-        SizedBox(height: responsiveVerticalSpace),
+        const SizedBox(height: AppDimensions.verticalSpaceMedium),
         const OrderTabSectionChips(),
-        SizedBox(height: responsiveVerticalSpace),
+        const SizedBox(height: AppDimensions.verticalSpaceMedium),
+        const SearchFilterTab(),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(
-              top: responsivePadding,
-              left: responsivePadding,
-              right: responsivePadding,
+            padding: const EdgeInsets.only(
+              top: AppDimensions.paddingMedium,
+              left: AppDimensions.paddingMedium,
+              right: AppDimensions.paddingMedium,
             ),
             child: ScrollConfiguration(
               behavior: const ScrollBehavior().copyWith(scrollbars: false),

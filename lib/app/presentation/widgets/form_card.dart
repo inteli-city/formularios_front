@@ -61,7 +61,7 @@ class _FormCardState extends State<FormCard>
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(responsiveRadius),
             side: BorderSide(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.primary,
                 style: BorderStyle.solid,
                 width: responsiveBorderThickness),
           ),
@@ -77,14 +77,14 @@ class _FormCardState extends State<FormCard>
                     style: AppTextStyles.headline1.copyWith(
                         fontSize:
                             ResponsiveDimensions.getResponsiveFontSize(context),
-                        color: Theme.of(context).colorScheme.secondary)),
+                        color: Theme.of(context).colorScheme.primary)),
                 SizedBox(height: responsiveVerticalSpace),
                 Text(widget.form.street,
                     style: AppTextStyles.bodyText1.copyWith(
                         fontSize: ResponsiveDimensions.getResponsiveFontSize(
                                 context) *
                             0.8,
-                        color: Theme.of(context).colorScheme.secondary)),
+                        color: Theme.of(context).colorScheme.primary)),
                 SizedBox(height: responsiveVerticalSpace),
                 Text(
                   widget.form.expirationDate.toString(),
@@ -92,7 +92,7 @@ class _FormCardState extends State<FormCard>
                     fontSize:
                         ResponsiveDimensions.getResponsiveFontSize(context) *
                             0.8,
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ],

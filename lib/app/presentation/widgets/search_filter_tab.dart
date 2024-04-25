@@ -19,7 +19,7 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
       Icon(
         Icons.menu,
         size: responsiveIconSize,
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.primary,
       )
     ]);
   }
@@ -40,7 +40,7 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
         child: TextField(
             style: TextStyle(
               fontSize: responsiveFontSize,
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.primary,
             ),
             textAlign: TextAlign.left,
             decoration: InputDecoration(
@@ -50,20 +50,20 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
                       BorderRadius.all(Radius.circular(responsiveRadius)),
                   borderSide: BorderSide(
                       width: responsiveBorderThickness,
-                      color: Theme.of(context).colorScheme.secondary)),
+                      color: Theme.of(context).colorScheme.primary)),
               contentPadding: EdgeInsets.symmetric(
                   vertical: responsivePadding, horizontal: responsivePadding),
               prefixIcon: Icon(
                 Icons.search_rounded,
                 size: responsiveIconSize,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.primary,
               ),
               suffixIcon: IconButton(
                   onPressed: () {},
                   iconSize: responsiveIconSize,
                   icon: Icon(
                     Icons.filter_alt_sharp,
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.primary,
                   )),
             )));
   }

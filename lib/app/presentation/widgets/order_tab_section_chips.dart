@@ -26,7 +26,6 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
 
   @override
   Widget build(BuildContext context) {
-    
     double responsiveVerticalSpace =
         ResponsiveDimensions.getResponsiveVerticalSpace(context);
     double responsiveHorizontalSpace =
@@ -87,20 +86,22 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
           children: [
             Text(
               style: AppTextStyles.bodyText1.copyWith(
-                  fontSize: responsiveFontSize,
-                  fontWeight: FontWeight.bold,
-                  color: _isSelectedList[index]
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary),
+                fontSize: responsiveFontSize,
+                fontWeight: FontWeight.bold,
+                color: _isSelectedList[index]
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.primary,
+              ),
               textAlign: TextAlign.center,
               labelValue,
             ),
             Text(
               style: AppTextStyles.subtitle1.copyWith(
-                  fontSize: responsiveFontSize * 0.8,
-                  color: _isSelectedList[index]
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary),
+                fontSize: responsiveFontSize * 0.8,
+                color: _isSelectedList[index]
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.primary,
+              ),
               textAlign: TextAlign.center,
               '(0)',
             ),
@@ -118,10 +119,10 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
           }
         });
       },
-      selectedColor: Theme.of(context).colorScheme.secondary,
+      selectedColor: Theme.of(context).colorScheme.primary,
       checkmarkColor: AppColors.green,
       showCheckmark: false,
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       padding: EdgeInsets.symmetric(
           horizontal: responsivePadding * 2,
           vertical: AppDimensions.paddingMedium),
@@ -130,10 +131,9 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
       shadowColor: Theme.of(context).colorScheme.secondary,
       shape: RoundedRectangleBorder(
           side: BorderSide(
-              width: responsiveBorderThickness,
-              color: _isSelectedList[index]
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary),
+            width: responsiveBorderThickness,
+            color: Theme.of(context).colorScheme.primary,
+          ),
           borderRadius: BorderRadius.circular(responsiveRadius)),
     );
   }

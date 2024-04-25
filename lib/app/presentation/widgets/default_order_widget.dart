@@ -79,7 +79,7 @@ class _DefaultOrderWidgetState extends State<DefaultOrderWidget>
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(responsiveRadius),
               side: BorderSide(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.primary,
                   style: BorderStyle.solid,
                   width: responsiveBorderThickness),
             ),
@@ -91,7 +91,7 @@ class _DefaultOrderWidgetState extends State<DefaultOrderWidget>
                   '${widget.defaultOrderTitle}\n(${widget.count})',
                   textAlign: TextAlign.center,
                   style: AppTextStyles.bodyText1.copyWith(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.primary,
                     fontSize: responsiveFontSize,
                   ),
                 ),

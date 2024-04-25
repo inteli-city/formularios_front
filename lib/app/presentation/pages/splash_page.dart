@@ -12,16 +12,16 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      context.go('/home');
-    });
+    Future.delayed(const Duration(seconds: 2)).then(
+      (_) => context.go('/home'),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Material(
-      child: Center(
-        child: Text('Splash Page'),
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

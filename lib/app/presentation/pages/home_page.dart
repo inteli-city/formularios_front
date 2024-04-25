@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:formularios_front/app/injector.dart';
-import 'package:formularios_front/app/presentation/states/user_state.dart';
-import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
-import 'package:formularios_front/app/presentation/widgets/dialogs/create_user_dialog.dart';
-import 'package:formularios_front/app/presentation/widgets/dialogs/edit_user_dialog.dart';
+import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:formularios_front/app/presentation/states/form_user_state.dart';
+import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/widgets/form_card.dart';
+import 'package:formularios_front/app/presentation/widgets/order_tab_section_chips.dart';
+import 'package:formularios_front/app/presentation/widgets/search_filter_tab.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,87 +19,53 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => injector.get<UserProvider>()..fetchUsers(),
-        ),
-      ],
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          title: const Text(
-            'Users',
-            style: TextStyle(
-              color: Colors.deepPurpleAccent,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
+    var state = context.watch<FormUserProvider>().state;
+    return state is FormUserErrorState
+        ? errorBuild(state.error)
+        : state is FormUserSuccessState
+            ? successBuild(state.forms)
+            : const CircularProgressIndicator();
+  }
+
+  Widget successBuild(List<FormEntity> forms) {
+    return Column(
+      key: const Key('success-build'),
+      children: [
+        const SizedBox(height: AppDimensions.verticalSpaceMedium),
+        const OrderTabSectionChips(),
+        const SizedBox(height: AppDimensions.verticalSpaceMedium),
+        const SearchFilterTab(),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: AppDimensions.paddingMedium,
+              left: AppDimensions.paddingMedium,
+              right: AppDimensions.paddingMedium,
+            ),
+            child: ScrollConfiguration(
+              behavior: const ScrollBehavior().copyWith(scrollbars: false),
+              child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                itemCount: forms.length,
+                itemBuilder: (context, index) => FormCard(
+                  form: forms[index],
+                ),
+                separatorBuilder: (context, index) => const Divider(
+                  height: 5,
+                  thickness: 0,
+                ),
+              ),
             ),
           ),
-          backgroundColor: Colors.black,
-        ),
-        body: Consumer<UserProvider>(builder: (context, todoNotifier, child) {
-          var state = todoNotifier.state;
-          return state is UserSuccessState
-              ? buildSuccess(state)
-              : state is UserErrorState
-                  ? buildError(state)
-                  : const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.deepPurpleAccent,
-                      ),
-                    );
-        }),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) => const CreateUserDialog(),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
-      ),
+        )
+      ],
     );
   }
 
-  Widget buildSuccess(UserSuccessState successState) {
-    return ListView.builder(
-      itemCount: successState.users.length,
-      itemBuilder: (context, index) {
-        final user = successState.users[index];
-        return ListTile(
-          leading: const Icon(Icons.person, color: Colors.deepPurpleAccent),
-          title: Text(
-            user.name,
-            style: const TextStyle(color: Colors.deepPurpleAccent),
-          ),
-          subtitle: Text(
-            '${user.id}',
-            style: const TextStyle(color: Colors.deepPurpleAccent),
-          ),
-          trailing: IconButton(
-            icon: const Icon(Icons.edit, color: Colors.deepPurpleAccent),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => EditUserDialog(user: user),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  Widget buildError(UserErrorState errorState) {
+  Widget errorBuild(Failure error) {
     return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          injector.get<UserProvider>().fetchUsers();
-        },
-        child: const Text('Try again'),
-      ),
+      key: const Key('error-build'),
+      child: Text(error.toString()),
     );
   }
 }

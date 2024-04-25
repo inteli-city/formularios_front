@@ -1,1 +1,5 @@
-enum StateEnum { approved, pending, rejected }
+enum StateEnum {
+  approved,
+  pending,
+  rejected;
+}

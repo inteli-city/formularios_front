@@ -79,6 +79,22 @@ class S {
       args: [placeholders, message],
     );
   }
+
+  /// `{schema, select, NAO_INICIADO{Not started} EM_ANDAMENTO{In progress} CONCLUIDO{Concluded} other{}}`
+  String formStatusEnumSchema(Object schema) {
+    return Intl.select(
+      schema,
+      {
+        'NAO_INICIADO': 'Not started',
+        'EM_ANDAMENTO': 'In progress',
+        'CONCLUIDO': 'Concluded',
+        'other': '',
+      },
+      name: 'formStatusEnumSchema',
+      desc: '',
+      args: [schema],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

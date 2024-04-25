@@ -23,14 +23,22 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(placeholders, entityErrorMessage) =>
       "Field ${entityErrorMessage} is not valid";
 
-  static String m1(placeholders, message) => "No items found for ${message}";
+  static String m1(schema) => "${Intl.select(schema, {
+            'NAO_INICIADO': 'Not started',
+            'EM_ANDAMENTO': 'In progress',
+            'CONCLUIDO': 'Concluded',
+            'other': '',
+          })}";
 
-  static String m2(placeholders, message) => "${message}";
+  static String m2(placeholders, message) => "No items found for ${message}";
+
+  static String m3(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "entityErrorMessage": m0,
-        "noItemsFoundErrorMessage": m1,
-        "requestErrorMessage": m2
+        "formStatusEnumSchema": m1,
+        "noItemsFoundErrorMessage": m2,
+        "requestErrorMessage": m3
       };
 }

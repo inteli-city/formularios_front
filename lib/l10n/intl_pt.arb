@@ -24,5 +24,7 @@
                 "restaurantName": {}
             }
         }
-    }
+    },
+
+    "formStatusEnumSchema": "{schema, select, NAO_INICIADO{Não iniciado} EM_ANDAMENTO{Em andamento} CONCLUIDO{Concluído} other{}}"
 }

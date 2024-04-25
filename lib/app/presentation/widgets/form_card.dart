@@ -71,9 +71,7 @@ class _FormCardState extends State<FormCard>
               children: [
                 Text(
                   widget.form.template,
-                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                      // color: Theme.of(context).colorScheme.primary,
-                      ),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(
                   height: AppDimensions.verticalSpaceMedium,

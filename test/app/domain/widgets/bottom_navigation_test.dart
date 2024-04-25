@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/presentation/widgets/bottom_navigation_widget.dart';
+import 'package:formularios_front/generated/l10n.dart';
 
 void main() {
-  testWidgets('BottomNavigationWidget loads widgets correctly', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: BottomNavigationWidget())));
+  setUpAll(() async {
+    await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+  });
+  testWidgets('BottomNavigationWidget loads widgets correctly',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: BottomNavigationWidget())));
 
     final homeIconButtonFinder = find.byKey(const Key('HomeIconButton'));
     final publicIconButtonFinder = find.byKey(const Key('PublicIconButton'));
     final addIconButtonFinder = find.byKey(const Key('AddIconButton'));
-    final settingsIconButtonFinder = find.byKey(const Key('SettingsIconButton'));
+    final settingsIconButtonFinder =
+        find.byKey(const Key('SettingsIconButton'));
 
     expect(homeIconButtonFinder, findsOneWidget);
     expect(publicIconButtonFinder, findsOneWidget);

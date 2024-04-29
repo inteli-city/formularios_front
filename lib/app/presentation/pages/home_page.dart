@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
+import 'package:formularios_front/app/presentation/stores/providers/filtered_data_provider.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/form_card.dart';
 import 'package:formularios_front/app/presentation/widgets/order_tab_section_chips.dart';
 import 'package:formularios_front/app/presentation/widgets/search_filter_tab.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,15 +21,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    var state = context.watch<FormUserProvider>().state;
+    final formUserProvider = context.watch<FormUserProvider>();
+    final filteredDataProvider = context.watch<FilteredDataProvider>();
+
+    var state = formUserProvider.state;
+    List<FormEntity> filteredForms = filteredDataProvider.filteredForms;
+
     return state is FormUserErrorState
         ? errorBuild(state.error)
         : state is FormUserSuccessState
-            ? successBuild(state.forms)
+            ? successBuild(filteredForms)
             : const CircularProgressIndicator();
   }
 
-  Widget successBuild(List<FormEntity> forms) {
+  Widget successBuild(List<FormEntity> filteredForms) {
     return Column(
       key: const Key('success-build'),
       children: [
@@ -35,29 +42,36 @@ class _HomePageState extends State<HomePage> {
         const OrderTabSectionChips(),
         const SizedBox(height: AppDimensions.verticalSpaceMedium),
         const SearchFilterTab(),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: AppDimensions.paddingMedium,
-              left: AppDimensions.paddingMedium,
-              right: AppDimensions.paddingMedium,
-            ),
-            child: ScrollConfiguration(
-              behavior: const ScrollBehavior().copyWith(scrollbars: false),
-              child: ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                itemCount: forms.length,
-                itemBuilder: (context, index) => FormCard(
-                  form: forms[index],
+        (filteredForms.isNotEmpty
+            ? Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: AppDimensions.paddingMedium,
+                    left: AppDimensions.paddingMedium,
+                    right: AppDimensions.paddingMedium,
+                  ),
+                  child: ScrollConfiguration(
+                    behavior:
+                        const ScrollBehavior().copyWith(scrollbars: false),
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: filteredForms.length,
+                      itemBuilder: (context, index) => FormCard(
+                        form: filteredForms[index],
+                      ),
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 5,
+                      ),
+                    ),
+                  ),
                 ),
-                separatorBuilder: (context, index) => const Divider(
-                  height: 5,
-                  thickness: 0,
+              )
+            : Center(
+                child: Text(
+                  'Nenhum formulário encontrado!',
+                  style: AppTextStyles.display,
                 ),
-              ),
-            ),
-          ),
-        )
+              )),
       ],
     );
   }

@@ -26,5 +26,11 @@
         }
     },
 
-    "formStatusEnumSchema": "{schema, select, NAO_INICIADO{Não iniciado} EM_ANDAMENTO{Em andamento} CONCLUIDO{Concluído} other{}}"
+    "formStatusEnumSchema": "{schema, select, NAO_INICIADO{Não iniciado} EM_ANDAMENTO{Em andamento} CONCLUIDO{Concluído} other{}}",
+    
+    "priorityEnumSchema": "{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}",
+
+    "orderDateEnumSchema": "{schema, select, MAIS_RECENTE{Mais recente} MAIS_ANTIGO{Mais antigo} other{}}",
+
+    "orderPriorityEnumSchema": "{schema, select, MAIOR_PRIORIDADE{Maior Prioridade} MENOR_PRIORIDADE{Menor Prioridade} other{}}"
 }

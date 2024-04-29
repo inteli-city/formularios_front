@@ -95,6 +95,53 @@ class S {
       args: [schema],
     );
   }
+
+  /// `{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}`
+  String priorityEnumSchema(Object schema) {
+    return Intl.select(
+      schema,
+      {
+        'LOW': 'Low',
+        'MEDIUM': 'Medium',
+        'HIGH': 'High',
+        'EMERCENCY': 'Emergency',
+        'other': '',
+      },
+      name: 'priorityEnumSchema',
+      desc: '',
+      args: [schema],
+    );
+  }
+
+  /// `{schema, select, MAIS_RECENTE{Recent} MAIS_ANTIGO{Old} other{}}`
+  String orderDateEnumSchema(Object schema) {
+    return Intl.select(
+      schema,
+      {
+        'MAIS_RECENTE': 'Recent',
+        'MAIS_ANTIGO': 'Old',
+        'other': '',
+      },
+      name: 'orderDateEnumSchema',
+      desc: '',
+      args: [schema],
+    );
+  }
+
+  /// `{schema, select, MAIOR_PRIORIDADE{High Priority} MENOR_PRIORIDADE{Low Priority} other{}}`
+  String orderPriorityEnumSchema(Object schema) {
+    return Intl.select(
+      schema,
+      {
+        'MAIOR_PRIORIDADE': 'High Priority',
+        'MENOR_PRIORIDADE': 'Low Priority',
+        'other': '',
+      },
+      name: 'orderPriorityEnumSchema',
+      desc: '',
+      args: [schema],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

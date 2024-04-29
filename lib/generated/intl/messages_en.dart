@@ -32,13 +32,36 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(placeholders, message) => "No items found for ${message}";
 
-  static String m3(placeholders, message) => "${message}";
+  static String m3(schema) => "${Intl.select(schema, {
+            'MAIS_RECENTE': 'Recent',
+            'MAIS_ANTIGO': 'Old',
+            'other': '',
+          })}";
+
+  static String m4(schema) => "${Intl.select(schema, {
+            'MAIOR_PRIORIDADE': 'High Priority',
+            'MENOR_PRIORIDADE': 'Low Priority',
+            'other': '',
+          })}";
+
+  static String m5(schema) => "${Intl.select(schema, {
+            'LOW': 'Low',
+            'MEDIUM': 'Medium',
+            'HIGH': 'High',
+            'EMERCENCY': 'Emergency',
+            'other': '',
+          })}";
+
+  static String m6(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "entityErrorMessage": m0,
         "formStatusEnumSchema": m1,
         "noItemsFoundErrorMessage": m2,
-        "requestErrorMessage": m3
+        "orderDateEnumSchema": m3,
+        "orderPriorityEnumSchema": m4,
+        "priorityEnumSchema": m5,
+        "requestErrorMessage": m6
       };
 }

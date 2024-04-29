@@ -1,13 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.white,
+    splashColor: Colors.transparent,
     shadowColor: AppColors.primaryBlue,
     fontFamily: GoogleFonts.poppins().fontFamily,
+    dividerColor: AppColors.primaryBlue,
+    dividerTheme: DividerThemeData(
+      color: AppColors.primaryBlue,
+      thickness: AppDimensions.borderMedium,
+      indent: 5,
+      endIndent: 5,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+      side: MaterialStatePropertyAll(BorderSide(
+          style: BorderStyle.solid,
+          width: AppDimensions.borderThin,
+          color: AppColors.white)),
+      elevation: const MaterialStatePropertyAll(5),
+      padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingMedium,
+          horizontal: AppDimensions.paddingMedium * 2)),
+    )),
+    dialogTheme: DialogTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+        ),
+        alignment: AlignmentDirectional.center,
+        backgroundColor: AppColors.white,
+        surfaceTintColor: AppColors.white),
     textTheme: TextTheme(
       displayLarge: AppTextStyles.display,
       headlineLarge: AppTextStyles.headline,
@@ -19,6 +46,23 @@ class AppThemes {
       elevation: 4,
       shadowColor: AppColors.primaryBlue,
       surfaceTintColor: AppColors.white,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: AppTextStyles.display,
+      contentPadding: const EdgeInsets.only(
+        left: AppDimensions.paddingMedium,
+        right: AppDimensions.paddingMedium,
+        top: AppDimensions.paddingExtraLarge * 2,
+      ),
+      alignLabelWithHint: true,
+      floatingLabelStyle: AppTextStyles.display,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+        borderSide: BorderSide(
+          color: AppColors.primaryBlue,
+          width: AppDimensions.borderMedium,
+        ),
+      ),
     ),
     iconTheme: IconThemeData(color: AppColors.primaryBlue),
     iconButtonTheme: IconButtonThemeData(

@@ -2,7 +2,9 @@ import 'package:auto_injector/auto_injector.dart';
 import 'package:dio/dio.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/presentation/stores/providers/filtered_data_provider.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/stores/providers/selected_filter_data_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
@@ -15,6 +17,8 @@ void registerInstances() {
   injector.addLazySingleton(Logger.new);
   injector.add<IHttpService>(DioHttpService.new);
   injector.addLazySingleton(FormUserProvider.new);
+  injector.addLazySingleton(SelectedFilterDataProvider.new);
+  injector.addLazySingleton(FilteredDataProvider.new);
   injector.addLazySingleton<Dio>(
     () => Dio(BaseOptions(baseUrl: EnvironmentConfig.MSS_BASE_URL))
       ..interceptors.addAll(

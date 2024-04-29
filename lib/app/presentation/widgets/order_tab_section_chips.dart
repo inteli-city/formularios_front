@@ -72,10 +72,14 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
         selected: _isSelectedList[index],
         onSelected: (bool selected) {
           setState(() {
-            _isSelectedList[index] = selected;
-            injector
-                .get<FormUserProvider>()
-                .filterFormsByStatus(selected ? statusEnum : null);
+            for (int i = 0; i < _isSelectedList.length; i++) {
+              _isSelectedList[i] = (i == index && selected);
+            }
+            if (selected) {
+              injector.get<FormUserProvider>().filterFormsByStatus(statusEnum);
+            } else {
+              injector.get<FormUserProvider>().filterFormsByStatus(null);
+            }
           });
         },
         selectedColor: Theme.of(context).colorScheme.primary,

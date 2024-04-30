@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:formularios_front/app/presentation/stores/providers/filtered_data_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/filter_order_dialog_widget.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
-import 'package:provider/provider.dart';
 
 class SearchFilterTab extends StatefulWidget {
   const SearchFilterTab({super.key});
@@ -15,8 +13,6 @@ class SearchFilterTab extends StatefulWidget {
 class _SearchFilterTabState extends State<SearchFilterTab> {
   @override
   Widget build(BuildContext context) {
-    var forms = context.read<FilteredDataProvider>().filteredForms;
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -25,9 +21,7 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
           onPressed: () async {
             showDialog(
               context: context,
-              builder: (context) => FilterOrderDialogWidget(
-                forms: forms,
-              ),
+              builder: (context) => const FilterOrderDialogWidget(),
             );
           },
           icon: const Icon(Icons.filter_list_rounded),

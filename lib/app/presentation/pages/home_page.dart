@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
-import 'package:formularios_front/app/presentation/stores/providers/filtered_data_provider.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/form_card.dart';
 import 'package:formularios_front/app/presentation/widgets/order_tab_section_chips.dart';
@@ -22,15 +21,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final formUserProvider = context.watch<FormUserProvider>();
-    final filteredDataProvider = context.watch<FilteredDataProvider>();
 
     var state = formUserProvider.state;
-    List<FormEntity> filteredForms = filteredDataProvider.filteredForms;
 
     return state is FormUserErrorState
         ? errorBuild(state.error)
         : state is FormUserSuccessState
-            ? successBuild(filteredForms)
+            ? successBuild(state.forms)
             : const CircularProgressIndicator();
   }
 

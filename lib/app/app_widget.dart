@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:formularios_front/app/injector.dart';
-import 'package:formularios_front/app/presentation/stores/providers/filtered_data_provider.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_themes.dart';
@@ -18,9 +17,6 @@ class AppWidget extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => injector.get<FormUserProvider>()..fetchUserForms(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => injector.get<FilteredDataProvider>(),
         ),
       ],
       child: MaterialApp.router(

@@ -55,7 +55,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                   TextButton(
                     onPressed: () {
                       setState(() {
-                        injector.get<FilterFormController>().clearFilters();
+                        injector.get<FilterFormsController>().clearFilters();
                       });
                     },
                     child: const Text('Limpar Filtros'),
@@ -68,14 +68,15 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                   backgroundColor: MaterialStateProperty.all(AppColors.green),
                 ),
                 onPressed: () {
-                  var controller = injector.get<FilterFormController>();
+                  var controller = injector.get<FilterFormsController>();
                   context.read<FormUserProvider>().filterForms(
                         template: controller.selectedTemplate,
                         street: controller.selectedStreet,
                         city: controller.selectedCity,
                         system: controller.selectedSystem,
                       );
-                  Navigator.pop(context, controller.activeFiltersAmount);
+
+                  Navigator.pop(context);
                 },
                 child: Text(
                   'Confirmar',
@@ -139,7 +140,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
 
   Widget _buildFilterSection(BuildContext context) {
     final formUserProvider = context.watch<FormUserProvider>();
-    var controller = injector.get<FilterFormController>();
+    var controller = injector.get<FilterFormsController>();
     return Column(
       children: [
         _buildDropdownItem(

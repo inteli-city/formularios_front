@@ -1,4 +1,4 @@
-class FilterFormController {
+class FilterFormsController {
   String? selectedTemplate;
 
   String? selectedStreet;
@@ -36,5 +36,4 @@ class FilterFormController {
         selectedCity != null ? 1 : 0,
         selectedSystem != null ? 1 : 0
       ].reduce((value, element) => value + element);
-  
 }

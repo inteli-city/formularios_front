@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
+import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -13,7 +15,7 @@ class SortFormsDialog extends StatefulWidget {
 }
 
 class _SortFormsDialog extends State<SortFormsDialog> {
-  OrderEnum? selectedOrder;
+  var controller = injector.get<SortFormsController>();
   @override
   Widget build(BuildContext context) {
     var formProvider = context.watch<FormUserProvider>();
@@ -27,7 +29,7 @@ class _SortFormsDialog extends State<SortFormsDialog> {
           Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               for (OrderEnum order in OrderEnum.values)
                 RadioListTile<OrderEnum>(
                   shape: const StadiumBorder(),
@@ -37,10 +39,10 @@ class _SortFormsDialog extends State<SortFormsDialog> {
                   ),
                   activeColor: AppColors.primaryBlue,
                   value: order,
-                  groupValue: selectedOrder,
+                  groupValue: controller.selectedOrder,
                   onChanged: (OrderEnum? value) {
                     setState(() {
-                      selectedOrder = value;
+                      controller.setSelectedOrder(value);
                     });
                   },
                 ),
@@ -59,8 +61,8 @@ class _SortFormsDialog extends State<SortFormsDialog> {
                         MaterialStateProperty.all(AppColors.primaryBlue),
                   ),
                   onPressed: () {
-                    formProvider.orderForms(selectedOrder);
-                    Navigator.pop(context, selectedOrder);
+                    formProvider.orderForms(controller.selectedOrder);
+                    Navigator.pop(context);
                   },
                   child: Text(
                     'Confirmar',

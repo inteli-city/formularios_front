@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/injector.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/widgets/dialogs/filter_order_dialog.dart';
 import 'package:formularios_front/app/presentation/widgets/dialogs/sort_forms_dialog.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -14,8 +15,8 @@ class SearchFilterTab extends StatefulWidget {
 }
 
 class _SearchFilterTabState extends State<SearchFilterTab> {
-  var controller = injector.get<FilterFormController>();
-  int badgeCount = 0;
+  var filterController = injector.get<FilterFormsController>();
+  var sortController = injector.get<SortFormsController>();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,18 +33,26 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
               width: 2,
             ),
           ),
-          onPressed: () => showModalBottomSheet(
-            context: context,
-            builder: (context) => const SortFormsDialog(),
-          ),
-          child: const Row(
+          onPressed: () async {
+            await showModalBottomSheet(
+              context: context,
+              builder: (context) => const SortFormsDialog(),
+            );
+            setState(() {});
+          },
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: AppDimensions.paddingSmall),
-                child: Text('Ordenar'),
+                padding:
+                    const EdgeInsets.only(left: AppDimensions.paddingSmall),
+                child: Text(
+                  sortController.selectedOrder != null
+                      ? sortController.selectedOrder!.enumString
+                      : 'Ordenar',
+                ),
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_drop_down,
               ),
             ],
@@ -53,7 +62,7 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
           width: AppDimensions.paddingMedium,
         ),
         badges.Badge(
-          showBadge: badgeCount != 0,
+          showBadge: filterController.activeFiltersAmount != 0,
           position: badges.BadgePosition.topEnd(),
           badgeStyle: badges.BadgeStyle(
             badgeColor: Theme.of(context).colorScheme.primary,
@@ -62,7 +71,7 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
             ),
           ),
           badgeContent: Text(
-            '$badgeCount',
+            filterController.activeFiltersAmount.toString(),
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -70,16 +79,13 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
           ),
           child: IconButton(
             onPressed: () async {
-              int newCount = await showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const FilterOrderDialog();
-                    },
-                  ) ??
-                  badgeCount;
-              setState(() {
-                badgeCount = newCount;
-              });
+              await showDialog(
+                context: context,
+                builder: (context) {
+                  return const FilterOrderDialog();
+                },
+              );
+              setState(() {});
             },
             icon: const Icon(Icons.filter_alt),
           ),

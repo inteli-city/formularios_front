@@ -17,6 +17,7 @@ class FilterOrderDialog extends StatefulWidget {
 }
 
 class _FilterOrderDialogState extends State<FilterOrderDialog> {
+  var controller = injector.get<FilterFormsController>();
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -24,58 +25,43 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
         AppDimensions.paddingSmall,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 0,
-          horizontal: AppDimensions.paddingMedium,
+        padding: const EdgeInsets.all(
+          AppDimensions.paddingMedium,
         ),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    alignment: Alignment.center,
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close),
-                    iconSize: AppDimensions.iconLarge,
-                  ),
-                ],
+              Center(
+                child: Text(
+                  'Filtros',
+                  style: AppTextStyles.display
+                      .copyWith(color: Theme.of(context).colorScheme.primary),
+                ),
               ),
-              Row(
-                children: [
-                  Text(
-                    'Filtrar:',
-                    style: AppTextStyles.headline
-                        .copyWith(color: Theme.of(context).colorScheme.primary),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        injector.get<FilterFormsController>().clearFilters();
-                      });
-                    },
-                    child: const Text('Limpar Filtros'),
-                  ),
-                ],
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    controller.clearFilters();
+                  });
+                },
+                child: const Text('Limpar Filtros'),
               ),
               _buildFilterSection(context),
+              const SizedBox(height: AppDimensions.paddingMedium),
               ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(AppColors.green),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
                 onPressed: () {
-                  var controller = injector.get<FilterFormsController>();
                   context.read<FormUserProvider>().filterForms(
                         template: controller.selectedTemplate,
                         street: controller.selectedStreet,
                         city: controller.selectedCity,
                         system: controller.selectedSystem,
                       );
-
                   Navigator.pop(context);
                 },
                 child: Text(
@@ -109,15 +95,18 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
         .toList();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
       child: DropdownButtonFormField<String?>(
         value: selectedValue,
         elevation: 5,
         focusColor: AppColors.white,
         items: dropdownItems,
         onChanged: onChanged,
+        style: AppTextStyles.titleMedium,
         decoration: InputDecoration(
           labelText: hintText,
+          labelStyle:
+              AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold),
           alignLabelWithHint: true,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(

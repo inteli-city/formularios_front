@@ -57,8 +57,13 @@ class FormUserProvider extends ChangeNotifier {
     }));
   }
 
+  String getFormsCountByStatus(FormStatusEnum status) {
+    return _allForms.where((form) => form.status == status).length.toString();
+  }
+
   void filterFormsByStatus(FormStatusEnum? enumStatus) {
     if (enumStatus == null) {
+      setState(FormUserSuccessState(forms: _allForms));
       return;
     }
     List<FormEntity> filteredForms =
@@ -95,7 +100,7 @@ class FormUserProvider extends ChangeNotifier {
   }
 
   void orderForms(OrderEnum? orderEnum) {
-    List<FormEntity> orderedForms = List.from(_allForms);
+    List<FormEntity> orderedForms = _allForms;
 
     switch (orderEnum) {
       case OrderEnum.PRIORIDADE_BAIXO_ALTO:

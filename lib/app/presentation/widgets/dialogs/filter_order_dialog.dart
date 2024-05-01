@@ -7,17 +7,16 @@ import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:provider/provider.dart';
 
-class FilterOrderDialogWidget extends StatefulWidget {
-  const FilterOrderDialogWidget({
+class FilterOrderDialog extends StatefulWidget {
+  const FilterOrderDialog({
     super.key,
   });
 
   @override
-  State<FilterOrderDialogWidget> createState() =>
-      _FilterOrderDialogWidgetState();
+  State<FilterOrderDialog> createState() => _FilterOrderDialogState();
 }
 
-class _FilterOrderDialogWidgetState extends State<FilterOrderDialogWidget> {
+class _FilterOrderDialogState extends State<FilterOrderDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(

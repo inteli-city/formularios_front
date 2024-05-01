@@ -24,41 +24,37 @@ class _HomePageState extends State<HomePage> {
 
     var state = formUserProvider.state;
 
-    return state is FormUserErrorState
-        ? errorBuild(state.error)
-        : state is FormUserSuccessState
-            ? successBuild(state.forms)
-            : const CircularProgressIndicator();
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: AppDimensions.paddingMedium,
+        right: AppDimensions.paddingMedium,
+      ),
+      child: state is FormUserErrorState
+          ? errorBuild(state.error)
+          : state is FormUserSuccessState
+              ? successBuild(state.forms)
+              : const CircularProgressIndicator(),
+    );
   }
 
   Widget successBuild(List<FormEntity> filteredForms) {
     return Column(
       key: const Key('success-build'),
       children: [
-        const SizedBox(height: AppDimensions.verticalSpaceMedium),
         const OrderTabSectionChips(),
-        const SizedBox(height: AppDimensions.verticalSpaceMedium),
         const SearchFilterTab(),
         (filteredForms.isNotEmpty
             ? Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: AppDimensions.paddingMedium,
-                    left: AppDimensions.paddingMedium,
-                    right: AppDimensions.paddingMedium,
-                  ),
-                  child: ScrollConfiguration(
-                    behavior:
-                        const ScrollBehavior().copyWith(scrollbars: false),
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: filteredForms.length,
-                      itemBuilder: (context, index) => FormCard(
-                        form: filteredForms[index],
-                      ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 5,
-                      ),
+                child: ScrollConfiguration(
+                  behavior: const ScrollBehavior().copyWith(scrollbars: false),
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: filteredForms.length,
+                    itemBuilder: (context, index) => FormCard(
+                      form: filteredForms[index],
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 5,
                     ),
                   ),
                 ),

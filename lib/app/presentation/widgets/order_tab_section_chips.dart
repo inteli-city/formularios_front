@@ -23,16 +23,14 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
 
     return SizedBox(
       height: screenHeight * 0.1,
-      child: ListView(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        padding:
-            const EdgeInsets.symmetric(horizontal: AppDimensions.paddingMedium),
+      child: Row(
         children: FormStatusEnum.values
             .map(
-              (statusEnum) => _choiceChip(
-                FormStatusEnum.values.indexOf(statusEnum),
-                statusEnum,
+              (statusEnum) => Expanded(
+                child: _choiceChip(
+                  FormStatusEnum.values.indexOf(statusEnum),
+                  statusEnum,
+                ),
               ),
             )
             .toList(),
@@ -45,30 +43,33 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
       padding: const EdgeInsets.only(right: 16),
       child: ChoiceChip(
         labelPadding: EdgeInsets.zero,
-        label: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                style: AppTextStyles.bodyText1.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: _isSelectedList[index]
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.primary,
+        label: SizedBox(
+          width: double.infinity,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  style: AppTextStyles.bodyText1.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: _isSelectedList[index]
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(context).colorScheme.primary,
+                  ),
+                  textAlign: TextAlign.center,
+                  statusEnum.enumString,
                 ),
-                textAlign: TextAlign.center,
-                statusEnum.enumString,
-              ),
-              Text(
-                style: AppTextStyles.titleMedium.copyWith(
-                  color: _isSelectedList[index]
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.primary,
+                Text(
+                  style: AppTextStyles.titleMedium.copyWith(
+                    color: _isSelectedList[index]
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(context).colorScheme.primary,
+                  ),
+                  textAlign: TextAlign.center,
+                  '(${injector.get<FormUserProvider>().getFormsCountByStatus(statusEnum)})',
                 ),
-                textAlign: TextAlign.center,
-                '(0)',
-              ),
-            ]),
+              ]),
+        ),
         selected: _isSelectedList[index],
         onSelected: (bool selected) {
           setState(() {

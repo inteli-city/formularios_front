@@ -6,7 +6,7 @@ import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:provider/provider.dart';
 
 void showSortModal(BuildContext context) {
-  OrderEnum? selectedOrder; // Inicia como null, nenhuma seleção prévia
+  OrderEnum? selectedOrder;
 
   showModalBottomSheet(
     context: context,
@@ -40,7 +40,7 @@ void showSortModal(BuildContext context) {
                         onChanged: (OrderEnum? value) {
                           setState(() {
                             selectedOrder =
-                                value; // Atualiza o valor selecionado
+                                value; 
                           });
                         },
                       ),

@@ -16,27 +16,24 @@ final router = GoRouter(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         return Scaffold(
           body: child,
+          extendBody: true,
           bottomNavigationBar: const BottomNavigationWidget(),
-          floatingActionButton: Builder(builder: (context) {
-            return SizedBox(
-              child: FloatingActionButton(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                hoverColor: Theme.of(context).colorScheme.primary,
-                shape: const CircleBorder(),
-                onPressed: () {},
-                child: Icon(
-                  Icons.rotate_right,
-                  size: AppDimensions.iconLarge,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
-            );
-          }),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            hoverColor: Theme.of(context).colorScheme.primary,
+            shape: const CircleBorder(),
+            onPressed: () {},
+            child: Icon(
+              Icons.rotate_right,
+              size: AppDimensions.iconLarge,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
         );
       },
-      routes: <RouteBase>[
+      routes: [
         GoRoute(
           path: '/home',
           builder: (context, state) => const HomePage(),

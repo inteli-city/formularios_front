@@ -49,6 +49,7 @@ class _FormCardState extends State<FormCard>
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: Card(
+          elevation: 5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppDimensions.radiusLarge,

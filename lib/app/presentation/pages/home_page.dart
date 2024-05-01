@@ -24,37 +24,40 @@ class _HomePageState extends State<HomePage> {
 
     var state = formUserProvider.state;
 
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppDimensions.paddingMedium,
-        right: AppDimensions.paddingMedium,
-      ),
-      child: state is FormUserErrorState
-          ? errorBuild(state.error)
-          : state is FormUserSuccessState
-              ? successBuild(state.forms)
-              : const CircularProgressIndicator(),
-    );
+    return state is FormUserErrorState
+        ? errorBuild(state.error)
+        : state is FormUserSuccessState
+            ? successBuild(state.forms)
+            : const CircularProgressIndicator();
   }
 
   Widget successBuild(List<FormEntity> filteredForms) {
     return Column(
       key: const Key('success-build'),
       children: [
+        const SizedBox(height: AppDimensions.paddingMedium),
         const OrderTabSectionChips(),
         const SearchFilterTab(),
-        (filteredForms.isNotEmpty
+        Divider(
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+          thickness: 2,
+        ),
+        filteredForms.isNotEmpty
             ? Expanded(
-                child: ScrollConfiguration(
-                  behavior: const ScrollBehavior().copyWith(scrollbars: false),
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: filteredForms.length,
-                    itemBuilder: (context, index) => FormCard(
-                      form: filteredForms[index],
-                    ),
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: 5,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: ScrollConfiguration(
+                    behavior:
+                        const ScrollBehavior().copyWith(scrollbars: false),
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: filteredForms.length,
+                      itemBuilder: (context, index) => FormCard(
+                        form: filteredForms[index],
+                      ),
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 5,
+                      ),
                     ),
                   ),
                 ),
@@ -63,8 +66,10 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Nenhum formulário encontrado!',
                   style: AppTextStyles.display,
+                  softWrap: true,
+                  textAlign: TextAlign.center,
                 ),
-              )),
+              ),
       ],
     );
   }

@@ -19,88 +19,80 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
 
   @override
   Widget build(BuildContext context) {
-    var screenHeight = ScreenHelper.height(context);
-
     return SizedBox(
-      height: screenHeight * 0.1,
+      height: ScreenHelper.height(context) * 0.1,
       child: Row(
-        children: FormStatusEnum.values
-            .map(
-              (statusEnum) => Expanded(
-                child: _choiceChip(
-                  FormStatusEnum.values.indexOf(statusEnum),
-                  statusEnum,
-                ),
-              ),
-            )
-            .toList(),
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(
+          FormStatusEnum.values.length,
+          (index) => _choiceChip(index, FormStatusEnum.values[index]),
+        ),
       ),
     );
   }
 
   Widget _choiceChip(int index, FormStatusEnum statusEnum) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16),
-      child: ChoiceChip(
-        labelPadding: EdgeInsets.zero,
-        label: SizedBox(
-          width: double.infinity,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  style: AppTextStyles.bodyText1.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: _isSelectedList[index]
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.primary,
-                  ),
-                  textAlign: TextAlign.center,
-                  statusEnum.enumString,
-                ),
-                Text(
-                  style: AppTextStyles.titleMedium.copyWith(
-                    color: _isSelectedList[index]
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).colorScheme.primary,
-                  ),
-                  textAlign: TextAlign.center,
-                  '(${injector.get<FormUserProvider>().getFormsCountByStatus(statusEnum)})',
-                ),
-              ]),
+    return ChoiceChip(
+      labelPadding: EdgeInsets.zero,
+      label: SizedBox(
+        width: ScreenHelper.width(context) * 0.25,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              statusEnum.enumString,
+              style: AppTextStyles.bodyText1.copyWith(
+                fontWeight: FontWeight.bold,
+                color: _isSelectedList[index]
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              style: AppTextStyles.titleMedium.copyWith(
+                color: _isSelectedList[index]
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.primary,
+              ),
+              textAlign: TextAlign.center,
+              '(${injector.get<FormUserProvider>().getFormsCountByStatus(statusEnum)})',
+            ),
+          ],
         ),
-        selected: _isSelectedList[index],
-        onSelected: (bool selected) {
-          setState(() {
-            for (int i = 0; i < _isSelectedList.length; i++) {
-              _isSelectedList[i] = (i == index && selected);
-            }
-            if (selected) {
-              injector.get<FormUserProvider>().filterFormsByStatus(statusEnum);
-            } else {
-              injector.get<FormUserProvider>().filterFormsByStatus(null);
-            }
-          });
-        },
-        selectedColor: Theme.of(context).colorScheme.primary,
-        checkmarkColor: AppColors.green,
-        showCheckmark: false,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.paddingMedium,
-          vertical: AppDimensions.paddingMedium,
+      ),
+      selected: _isSelectedList[index],
+      onSelected: (bool selected) {
+        setState(() {
+          for (int i = 0; i < _isSelectedList.length; i++) {
+            _isSelectedList[i] = (i == index && selected);
+          }
+          if (selected) {
+            injector.get<FormUserProvider>().filterFormsByStatus(statusEnum);
+          } else {
+            injector.get<FormUserProvider>().filterFormsByStatus(null);
+          }
+        });
+      },
+      selectedColor: Theme.of(context).colorScheme.primary,
+      checkmarkColor: AppColors.green,
+      showCheckmark: false,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimensions.paddingSmall,
+        vertical: AppDimensions.paddingMedium,
+      ),
+      elevation: 5,
+      pressElevation: 5,
+      shadowColor: Theme.of(context).colorScheme.secondary,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          width: 2,
+          color: Theme.of(context).colorScheme.primary,
         ),
-        elevation: 3,
-        pressElevation: 3,
-        shadowColor: Theme.of(context).colorScheme.secondary,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            width: 2,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          borderRadius: BorderRadius.circular(AppDimensions.radiusExtraLarge),
-        ),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusExtraLarge),
       ),
     );
   }

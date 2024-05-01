@@ -19,78 +19,84 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
   var sortController = injector.get<SortFormsController>();
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            surfaceTintColor: Theme.of(context).colorScheme.secondary,
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.primary,
-              width: 2,
-            ),
-          ),
-          onPressed: () async {
-            await showModalBottomSheet(
-              context: context,
-              builder: (context) => const SortFormsDialog(),
-            );
-            setState(() {});
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: AppDimensions.paddingSmall),
-                child: Text(
-                  sortController.selectedOrder != null
-                      ? sortController.selectedOrder!.enumString
-                      : 'Ordenar',
-                ),
+    return Padding(
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSmall),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
               ),
-              const Icon(
-                Icons.arrow_drop_down,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          width: AppDimensions.paddingMedium,
-        ),
-        badges.Badge(
-          showBadge: filterController.activeFiltersAmount != 0,
-          position: badges.BadgePosition.topEnd(),
-          badgeStyle: badges.BadgeStyle(
-            badgeColor: Theme.of(context).colorScheme.primary,
-            padding: const EdgeInsets.all(
-              AppDimensions.paddingSmall * 0.8,
             ),
-          ),
-          badgeContent: Text(
-            filterController.activeFiltersAmount.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: Theme.of(context).colorScheme.secondary),
-          ),
-          child: IconButton(
             onPressed: () async {
-              await showDialog(
+              await showModalBottomSheet(
+                useRootNavigator: true,
                 context: context,
-                builder: (context) {
-                  return const FilterOrderDialog();
-                },
+                builder: (context) => const SortFormsDialog(),
               );
               setState(() {});
             },
-            icon: const Icon(Icons.filter_alt),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: AppDimensions.paddingSmall),
+                  child: Text(
+                    sortController.selectedOrder != null
+                        ? sortController.selectedOrder!.enumString
+                        : 'Ordenar',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ],
+            ),
           ),
-        )
-      ],
+          const SizedBox(
+            width: AppDimensions.paddingMedium,
+          ),
+          badges.Badge(
+            showBadge: filterController.activeFiltersAmount != 0,
+            position: badges.BadgePosition.topEnd(),
+            badgeStyle: badges.BadgeStyle(
+              badgeColor: Theme.of(context).colorScheme.primary,
+              padding: const EdgeInsets.all(
+                AppDimensions.paddingSmall * 0.8,
+              ),
+            ),
+            badgeContent: Text(
+              filterController.activeFiltersAmount.toString(),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Theme.of(context).colorScheme.secondary),
+            ),
+            child: IconButton(
+              onPressed: () async {
+                await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const FilterOrderDialog();
+                  },
+                );
+                setState(() {});
+              },
+              icon: const Icon(Icons.filter_list),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

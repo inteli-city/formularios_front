@@ -17,16 +17,15 @@ class AppThemes {
       indent: 5,
       endIndent: 5,
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
+    elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
-      side: MaterialStatePropertyAll(BorderSide(
-          style: BorderStyle.solid,
-          width: AppDimensions.borderThin,
-          color: AppColors.white)),
-      elevation: const MaterialStatePropertyAll(5),
-      padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(
+      elevation: MaterialStatePropertyAll(5),
+      padding: MaterialStatePropertyAll(
+        EdgeInsets.symmetric(
           vertical: AppDimensions.paddingMedium,
-          horizontal: AppDimensions.paddingMedium * 2)),
+          horizontal: AppDimensions.paddingMedium * 2,
+        ),
+      ),
     )),
     radioTheme: RadioThemeData(
       fillColor:

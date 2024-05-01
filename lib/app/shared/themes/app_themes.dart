@@ -28,6 +28,15 @@ class AppThemes {
           vertical: AppDimensions.paddingMedium,
           horizontal: AppDimensions.paddingMedium * 2)),
     )),
+    radioTheme: RadioThemeData(
+      fillColor:
+          MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.primaryBlue;
+        }
+        return Colors.grey;
+      }),
+    ),
     dialogTheme: DialogTheme(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),

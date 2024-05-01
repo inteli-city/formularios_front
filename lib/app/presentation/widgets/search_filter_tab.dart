@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/presentation/widgets/filter_order_dialog_widget.dart';
+import 'package:formularios_front/app/presentation/widgets/sort_modal_widget.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
@@ -52,23 +53,30 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
         ),
         textAlign: TextAlign.left,
         decoration: InputDecoration(
-          hintText: 'Pesquisar',
-          hintStyle: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-          ),
-          enabledBorder: border,
-          focusedBorder: border,
-          border: border,
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: AppDimensions.verticalSpaceMedium,
-            horizontal: AppDimensions.horizontalSpaceMedium,
-          ),
-          prefixIcon: Icon(
-            Icons.search_rounded,
-            size: AppDimensions.iconMedium,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
+            hintText: 'Pesquisar',
+            hintStyle: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            enabledBorder: border,
+            focusedBorder: border,
+            border: border,
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: AppDimensions.verticalSpaceMedium,
+              horizontal: AppDimensions.horizontalSpaceMedium,
+            ),
+            prefixIcon: Icon(
+              Icons.search_rounded,
+              size: AppDimensions.iconMedium,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            suffixIcon: IconButton(
+              onPressed: () => showSortModal(context),
+              icon: const Icon(
+                Icons.sort,
+                size: AppDimensions.iconMedium,
+              ),
+              color: Theme.of(context).colorScheme.primary,
+            )),
       ),
     );
   }

@@ -16,7 +16,6 @@ final router = GoRouter(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         return Scaffold(
           body: child,
-          extendBody: true,
           bottomNavigationBar: const BottomNavigationWidget(),
           floatingActionButton: Builder(builder: (context) {
             return SizedBox(

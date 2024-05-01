@@ -34,35 +34,30 @@ class MessageLookup extends MessageLookupByLibrary {
       "Itens não encontrados para: ${message}";
 
   static String m3(schema) => "${Intl.select(schema, {
-            'MAIS_RECENTE': 'Mais recente',
-            'MAIS_ANTIGO': 'Mais antigo',
+            'PRIORIDADE_BAIXO_ALTO': 'Prioridade Baixo-Alto',
+            'PRIORIDADE_ALTO_BAIXO': 'Prioridade Alto-Baixo',
+            'MAIS_RECENTE': 'Mais Recente',
+            'MAIS_ANTIGO': 'Mais Antigo',
             'other': '',
           })}";
 
   static String m4(schema) => "${Intl.select(schema, {
-            'MAIOR_PRIORIDADE': 'Maior Prioridade',
-            'MENOR_PRIORIDADE': 'Menor Prioridade',
+            'LOW': 'Baixa',
+            'MEDIUM': 'Média',
+            'HIGH': 'Alta',
+            'EMERCENCY': 'Emergencial',
             'other': '',
           })}";
 
-  static String m5(schema) => "${Intl.select(schema, {
-            'LOW': 'Low',
-            'MEDIUM': 'Medium',
-            'HIGH': 'High',
-            'EMERCENCY': 'Emergency',
-            'other': '',
-          })}";
-
-  static String m6(placeholders, message) => "${message}";
+  static String m5(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "entityErrorMessage": m0,
         "formStatusEnumSchema": m1,
         "noItemsFoundErrorMessage": m2,
-        "orderDateEnumSchema": m3,
-        "orderPriorityEnumSchema": m4,
-        "priorityEnumSchema": m5,
-        "requestErrorMessage": m6
+        "orderEnumSchema": m3,
+        "priorityEnumSchema": m4,
+        "requestErrorMessage": m5
       };
 }

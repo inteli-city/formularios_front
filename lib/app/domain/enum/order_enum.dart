@@ -9,6 +9,6 @@ enum OrderEnum {
   MAIS_ANTIGO;
 
   String get enumString {
-    return S.current.orderDateEnumSchema(this);
+    return S.current.orderEnumSchema(this);
   }
 }

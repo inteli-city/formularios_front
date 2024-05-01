@@ -80,17 +80,18 @@ class S {
     );
   }
 
-  /// `{schema, select, NAO_INICIADO{Not started} EM_ANDAMENTO{In progress} CONCLUIDO{Concluded} other{}}`
-  String formStatusEnumSchema(Object schema) {
+  /// `{schema, select, PRIORIDADE_BAIXO_ALTO{Low-High Priority} PRIORIDADE_ALTO_BAIXO{High-Low Priority} MAIS_RECENTE{Recent} MAIS_ANTIGO{Old} other{}}`
+  String orderEnumSchema(Object schema) {
     return Intl.select(
       schema,
       {
-        'NAO_INICIADO': 'Not started',
-        'EM_ANDAMENTO': 'In progress',
-        'CONCLUIDO': 'Concluded',
+        'PRIORIDADE_BAIXO_ALTO': 'Low-High Priority',
+        'PRIORIDADE_ALTO_BAIXO': 'High-Low Priority',
+        'MAIS_RECENTE': 'Recent',
+        'MAIS_ANTIGO': 'Old',
         'other': '',
       },
-      name: 'formStatusEnumSchema',
+      name: 'orderEnumSchema',
       desc: '',
       args: [schema],
     );
@@ -113,31 +114,17 @@ class S {
     );
   }
 
-  /// `{schema, select, MAIS_RECENTE{Recent} MAIS_ANTIGO{Old} other{}}`
-  String orderDateEnumSchema(Object schema) {
+  /// `{schema, select, NAO_INICIADO{Not started} EM_ANDAMENTO{In progress} CONCLUIDO{Concluded} other{}}`
+  String formStatusEnumSchema(Object schema) {
     return Intl.select(
       schema,
       {
-        'MAIS_RECENTE': 'Recent',
-        'MAIS_ANTIGO': 'Old',
+        'NAO_INICIADO': 'Not started',
+        'EM_ANDAMENTO': 'In progress',
+        'CONCLUIDO': 'Concluded',
         'other': '',
       },
-      name: 'orderDateEnumSchema',
-      desc: '',
-      args: [schema],
-    );
-  }
-
-  /// `{schema, select, MAIOR_PRIORIDADE{High Priority} MENOR_PRIORIDADE{Low Priority} other{}}`
-  String orderPriorityEnumSchema(Object schema) {
-    return Intl.select(
-      schema,
-      {
-        'MAIOR_PRIORIDADE': 'High Priority',
-        'MENOR_PRIORIDADE': 'Low Priority',
-        'other': '',
-      },
-      name: 'orderPriorityEnumSchema',
+      name: 'formStatusEnumSchema',
       desc: '',
       args: [schema],
     );

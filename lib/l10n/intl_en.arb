@@ -26,11 +26,9 @@
         }
     },
 
-    "formStatusEnumSchema": "{schema, select, NAO_INICIADO{Not started} EM_ANDAMENTO{In progress} CONCLUIDO{Concluded} other{}}",
+    "orderEnumSchema" : "{schema, select, PRIORIDADE_BAIXO_ALTO{Low-High Priority} PRIORIDADE_ALTO_BAIXO{High-Low Priority} MAIS_RECENTE{Recent} MAIS_ANTIGO{Old} other{}}",
     
     "priorityEnumSchema": "{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}",
-
-    "orderDateEnumSchema": "{schema, select, MAIS_RECENTE{Recent} MAIS_ANTIGO{Old} other{}}",
-
-    "orderPriorityEnumSchema": "{schema, select, MAIOR_PRIORIDADE{High Priority} MENOR_PRIORIDADE{Low Priority} other{}}"
+    
+    "formStatusEnumSchema": "{schema, select, NAO_INICIADO{Not started} EM_ANDAMENTO{In progress} CONCLUIDO{Concluded} other{}}"
 }

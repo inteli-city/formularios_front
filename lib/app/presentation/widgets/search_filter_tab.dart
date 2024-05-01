@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/widgets/filter_order_dialog_widget.dart';
 import 'package:formularios_front/app/presentation/widgets/sort_modal_widget.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:badges/badges.dart' as badges;
 
 class SearchFilterTab extends StatefulWidget {
   const SearchFilterTab({super.key});
@@ -12,22 +15,42 @@ class SearchFilterTab extends StatefulWidget {
 }
 
 class _SearchFilterTabState extends State<SearchFilterTab> {
+  var controller = injector.get<FilterFormController>();
+  int badgeCount = 0;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _buildSearchField(context),
-        IconButton(
-          onPressed: () async {
-            showDialog(
-              context: context,
-              builder: (context) => const FilterOrderDialogWidget(),
-            );
-          },
-          icon: const Icon(Icons.filter_list_rounded),
-          iconSize: AppDimensions.iconMedium,
-          color: Theme.of(context).colorScheme.primary,
+        badges.Badge(
+          showBadge: badgeCount != 0,
+          position: badges.BadgePosition.topEnd(),
+          badgeStyle: badges.BadgeStyle(
+              badgeColor: Theme.of(context).colorScheme.primary,
+              padding: const EdgeInsets.all(AppDimensions.paddingSmall * 0.8)),
+          badgeContent: Text(
+            '$badgeCount',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: Theme.of(context).colorScheme.secondary),
+          ),
+          child: IconButton(
+            onPressed: () async {
+              int newCount = await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const FilterOrderDialogWidget();
+                    },
+                  ) ??
+                  badgeCount;
+              setState(() {
+                badgeCount = newCount;
+              });
+            },
+            icon: const Icon(Icons.filter_list_rounded),
+          ),
         )
       ],
     );
@@ -62,20 +85,20 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
             border: border,
             contentPadding: const EdgeInsets.symmetric(
               vertical: AppDimensions.verticalSpaceMedium,
-              horizontal: AppDimensions.horizontalSpaceMedium,
+              horizontal: AppDimensions.horizontalSpaceLarge,
             ),
             prefixIcon: Icon(
               Icons.search_rounded,
-              size: AppDimensions.iconMedium,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).iconTheme.color,
+              size: Theme.of(context).iconTheme.size,
             ),
             suffixIcon: IconButton(
               onPressed: () => showSortModal(context),
-              icon: const Icon(
+              icon: Icon(
                 Icons.sort,
-                size: AppDimensions.iconMedium,
+                color: Theme.of(context).iconTheme.color,
+                size: Theme.of(context).iconTheme.size,
               ),
-              color: Theme.of(context).colorScheme.primary,
             )),
       ),
     );

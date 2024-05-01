@@ -76,7 +76,7 @@ class _FilterOrderDialogWidgetState extends State<FilterOrderDialogWidget> {
                         city: controller.selectedCity,
                         system: controller.selectedSystem,
                       );
-                  Navigator.pop(context);
+                  Navigator.pop(context, controller.activeFiltersAmount);
                 },
                 child: Text(
                   'Confirmar',

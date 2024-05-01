@@ -39,8 +39,7 @@ void showSortModal(BuildContext context) {
                         groupValue: selectedOrder,
                         onChanged: (OrderEnum? value) {
                           setState(() {
-                            selectedOrder =
-                                value; 
+                            selectedOrder = value;
                           });
                         },
                       ),

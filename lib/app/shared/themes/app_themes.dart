@@ -39,7 +39,9 @@ class AppThemes {
     ),
     dialogTheme: DialogTheme(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusLarge,
+          ),
         ),
         alignment: AlignmentDirectional.center,
         backgroundColor: AppColors.white,
@@ -66,17 +68,24 @@ class AppThemes {
       alignLabelWithHint: true,
       floatingLabelStyle: AppTextStyles.display,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusLarge,
+        ),
         borderSide: BorderSide(
           color: AppColors.primaryBlue,
           width: AppDimensions.borderMedium,
         ),
       ),
     ),
-    iconTheme: IconThemeData(color: AppColors.primaryBlue),
+    iconTheme: IconThemeData(
+      color: AppColors.primaryBlue,
+      size: AppDimensions.iconLarge,
+    ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        iconColor: MaterialStateProperty.all(AppColors.primaryBlue),
+        iconColor: MaterialStateProperty.all(
+          AppColors.primaryBlue,
+        ),
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(

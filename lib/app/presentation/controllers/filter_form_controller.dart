@@ -29,4 +29,12 @@ class FilterFormController {
     selectedCity = null;
     selectedSystem = null;
   }
+
+  int get activeFiltersAmount => [
+        selectedTemplate != null ? 1 : 0,
+        selectedStreet != null ? 1 : 0,
+        selectedCity != null ? 1 : 0,
+        selectedSystem != null ? 1 : 0
+      ].reduce((value, element) => value + element);
+  
 }

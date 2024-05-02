@@ -34,12 +34,27 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Text(
-                  'Filtros',
-                  style: AppTextStyles.display
-                      .copyWith(color: Theme.of(context).colorScheme.primary),
-                ),
+              Stack(
+                children: [
+                  Center(
+                    child: Text(
+                      'Filtros',
+                      style: AppTextStyles.display.copyWith(
+                          color: Theme.of(context).colorScheme.primary),
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.close),
+                    ),
+                  ),
+                ],
               ),
               TextButton(
                 onPressed: () {

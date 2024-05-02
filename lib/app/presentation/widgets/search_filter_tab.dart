@@ -86,6 +86,7 @@ class _SearchFilterTabState extends State<SearchFilterTab> {
               onPressed: () async {
                 await showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (context) {
                     return const FilterOrderDialog();
                   },

@@ -1,39 +1,39 @@
 class FilterFormsController {
-  String? selectedTemplate;
+  String? filteredTemplate;
 
-  String? selectedStreet;
+  String? filteredStreet;
 
-  String? selectedCity;
+  String? filteredCity;
 
-  String? selectedSystem;
+  String? filteredSystem;
 
   void setTemplate(String? value) {
-    selectedTemplate = value;
+    filteredTemplate = value;
   }
 
   void setStreet(String? value) {
-    selectedStreet = value;
+    filteredStreet = value;
   }
 
   void setCity(String? value) {
-    selectedCity = value;
+    filteredCity = value;
   }
 
   void setSystem(String? value) {
-    selectedSystem = value;
+    filteredSystem = value;
   }
 
   void clearFilters() {
-    selectedTemplate = null;
-    selectedStreet = null;
-    selectedCity = null;
-    selectedSystem = null;
+    filteredTemplate = null;
+    filteredStreet = null;
+    filteredCity = null;
+    filteredSystem = null;
   }
 
   int get activeFiltersAmount => [
-        selectedTemplate != null ? 1 : 0,
-        selectedStreet != null ? 1 : 0,
-        selectedCity != null ? 1 : 0,
-        selectedSystem != null ? 1 : 0
+        filteredTemplate != null ? 1 : 0,
+        filteredStreet != null ? 1 : 0,
+        filteredCity != null ? 1 : 0,
+        filteredSystem != null ? 1 : 0
       ].reduce((value, element) => value + element);
 }

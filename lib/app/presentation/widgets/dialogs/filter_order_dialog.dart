@@ -18,6 +18,34 @@ class FilterOrderDialog extends StatefulWidget {
 
 class _FilterOrderDialogState extends State<FilterOrderDialog> {
   var controller = injector.get<FilterFormsController>();
+  String? selectedType;
+  String? selectedStreet;
+  String? selectedCity;
+  String? selectedSystem;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedType = controller.filteredTemplate;
+    selectedStreet = controller.filteredStreet;
+    selectedCity = controller.filteredCity;
+    selectedSystem = controller.filteredSystem;
+  }
+
+  void clearSelections() {
+    selectedType = null;
+    selectedStreet = null;
+    selectedCity = null;
+    selectedSystem = null;
+  }
+
+  void setFilterValues() {
+    controller.setTemplate(selectedType);
+    controller.setStreet(selectedStreet);
+    controller.setCity(selectedCity);
+    controller.setSystem(selectedSystem);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -59,23 +87,55 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    controller.clearFilters();
+                    clearSelections();
                   });
                 },
                 child: const Text('Limpar Filtros'),
               ),
-              _buildFilterSection(context),
+              _buildDropdownItem(
+                hintText: 'Tipo',
+                selectedValue: selectedType,
+                optionValues: context.read<FormUserProvider>().templates,
+                onChanged: (value) {
+                  selectedType = value;
+                },
+              ),
+              _buildDropdownItem(
+                hintText: 'Rua',
+                selectedValue: selectedStreet,
+                optionValues: context.read<FormUserProvider>().streets,
+                onChanged: (value) {
+                  selectedStreet = value;
+                },
+              ),
+              _buildDropdownItem(
+                hintText: 'Cidade',
+                selectedValue: selectedCity,
+                optionValues: context.read<FormUserProvider>().cities,
+                onChanged: (value) {
+                  selectedCity = value;
+                },
+              ),
+              _buildDropdownItem(
+                hintText: 'Sistema de Origem',
+                selectedValue: selectedSystem,
+                optionValues: context.read<FormUserProvider>().systems,
+                onChanged: (value) {
+                  selectedSystem = value;
+                },
+              ),
               const SizedBox(height: AppDimensions.paddingMedium),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                 ),
                 onPressed: () {
+                  setFilterValues();
                   context.read<FormUserProvider>().filterForms(
-                        template: controller.selectedTemplate,
-                        street: controller.selectedStreet,
-                        city: controller.selectedCity,
-                        system: controller.selectedSystem,
+                        template: controller.filteredTemplate,
+                        street: controller.filteredStreet,
+                        city: controller.filteredCity,
+                        system: controller.filteredSystem,
                       );
                   Navigator.pop(context);
                 },
@@ -139,39 +199,6 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildFilterSection(BuildContext context) {
-    final formUserProvider = context.watch<FormUserProvider>();
-    var controller = injector.get<FilterFormsController>();
-    return Column(
-      children: [
-        _buildDropdownItem(
-          hintText: 'Tipo',
-          selectedValue: controller.selectedTemplate,
-          optionValues: formUserProvider.templates,
-          onChanged: controller.setTemplate,
-        ),
-        _buildDropdownItem(
-          hintText: 'Rua',
-          selectedValue: controller.selectedStreet,
-          optionValues: formUserProvider.streets,
-          onChanged: controller.setStreet,
-        ),
-        _buildDropdownItem(
-          hintText: 'Cidade',
-          selectedValue: controller.selectedCity,
-          optionValues: formUserProvider.cities,
-          onChanged: controller.setCity,
-        ),
-        _buildDropdownItem(
-          hintText: 'Sistema de Origem',
-          selectedValue: controller.selectedSystem,
-          optionValues: formUserProvider.systems,
-          onChanged: controller.setSystem,
-        ),
-      ],
     );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+
 class FilterFormsController {
   String? filteredTemplate;
 
@@ -6,6 +8,8 @@ class FilterFormsController {
   String? filteredCity;
 
   String? filteredSystem;
+
+  FormStatusEnum? filteredStatus;
 
   void setTemplate(String? value) {
     filteredTemplate = value;
@@ -21,6 +25,10 @@ class FilterFormsController {
 
   void setSystem(String? value) {
     filteredSystem = value;
+  }
+
+  void setStatus(FormStatusEnum? value) {
+    filteredStatus = value;
   }
 
   void clearFilters() {

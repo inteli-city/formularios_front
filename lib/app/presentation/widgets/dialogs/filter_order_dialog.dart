@@ -136,6 +136,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                         street: controller.filteredStreet,
                         city: controller.filteredCity,
                         system: controller.filteredSystem,
+                        enumStatus: controller.filteredStatus,
                       );
                   Navigator.pop(context);
                 },

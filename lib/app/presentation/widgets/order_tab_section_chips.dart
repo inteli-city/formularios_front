@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
@@ -32,6 +33,7 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
   }
 
   Widget _choiceChip(int index, FormStatusEnum statusEnum) {
+    var filterController = injector.get<FilterFormsController>();
     return ChoiceChip(
       labelPadding: EdgeInsets.zero,
       label: SizedBox(
@@ -69,11 +71,15 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
           for (int i = 0; i < _isSelectedList.length; i++) {
             _isSelectedList[i] = (i == index && selected);
           }
-          if (selected) {
-            injector.get<FormUserProvider>().filterFormsByStatus(statusEnum);
-          } else {
-            injector.get<FormUserProvider>().filterFormsByStatus(null);
-          }
+          print(statusEnum);
+          filterController.setStatus(selected ? statusEnum : null);
+          injector.get<FormUserProvider>().filterForms(
+                city: filterController.filteredCity,
+                enumStatus: filterController.filteredStatus,
+                street: filterController.filteredStreet,
+                system: filterController.filteredSystem,
+                template: filterController.filteredTemplate,
+              );
         });
       },
       selectedColor: Theme.of(context).colorScheme.primary,

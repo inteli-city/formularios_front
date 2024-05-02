@@ -61,46 +61,40 @@ class FormUserProvider extends ChangeNotifier {
     return _allForms.where((form) => form.status == status).length.toString();
   }
 
-  void filterFormsByStatus(FormStatusEnum? enumStatus) {
-    if (enumStatus == null) {
-      setState(FormUserSuccessState(forms: _allForms));
-      return;
-    }
-    List<FormEntity> filteredForms =
-        _allForms.where((form) => form.status == enumStatus).toList();
-
-    setState(FormUserSuccessState(forms: filteredForms));
-  }
-
   void filterForms({
     required String? template,
     required String? street,
     required String? city,
     required String? system,
+    required FormStatusEnum? enumStatus,
   }) {
-    List<FormEntity> filteredForms = _allForms;
+    List<FormEntity> toFilterForms = _allForms;
 
+    if (enumStatus != null) {
+      toFilterForms =
+          toFilterForms.where((form) => form.status == enumStatus).toList();
+    }
     if (template != null) {
-      filteredForms =
-          filteredForms.where((form) => form.template == template).toList();
+      toFilterForms =
+          toFilterForms.where((form) => form.template == template).toList();
     }
     if (street != null) {
-      filteredForms =
-          filteredForms.where((form) => form.street == street).toList();
+      toFilterForms =
+          toFilterForms.where((form) => form.street == street).toList();
     }
     if (city != null) {
-      filteredForms = filteredForms.where((form) => form.city == city).toList();
+      toFilterForms = toFilterForms.where((form) => form.city == city).toList();
     }
     if (system != null) {
-      filteredForms =
-          filteredForms.where((form) => form.system == system).toList();
+      toFilterForms =
+          toFilterForms.where((form) => form.system == system).toList();
     }
 
-    setState(FormUserSuccessState(forms: filteredForms));
+    setState(FormUserSuccessState(forms: toFilterForms));
   }
 
   void orderForms(OrderEnum? orderEnum) {
-    List<FormEntity> orderedForms = _allForms;
+    List<FormEntity> orderedForms = (state as FormUserSuccessState).forms;
 
     switch (orderEnum) {
       case OrderEnum.PRIORIDADE_BAIXO_ALTO:
@@ -114,7 +108,7 @@ class FormUserProvider extends ChangeNotifier {
       case OrderEnum.MAIS_ANTIGO:
         orderedForms.sort((a, b) => b.creationDate.compareTo(a.creationDate));
       default:
-        setState(FormUserSuccessState(forms: _allForms));
+        setState(FormUserSuccessState(forms: orderedForms));
     }
 
     setState(FormUserSuccessState(forms: orderedForms));

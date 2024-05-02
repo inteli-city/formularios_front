@@ -4,7 +4,6 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/injector.dart';
-import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
@@ -16,10 +15,7 @@ class FormUserProvider extends ChangeNotifier {
     this._fetchUserFormsUsecase,
   );
   FormUserState state = FormUserInitialState();
-
   List<FormEntity> _allForms = [];
-  List<FormEntity> _filteredForms = [];
-  List<FormEntity> _copyFilteredForms = [];
 
   List<String> get templates =>
       _allForms.map((form) => form.template).toSet().toList();
@@ -54,7 +50,7 @@ class FormUserProvider extends ChangeNotifier {
                 '${DateTime.now()} - Forms from user "1" fetched successfully!',
               );
           _allForms = forms;
-          _filteredForms = forms;
+
           return FormUserSuccessState(forms: forms);
         },
       );
@@ -62,31 +58,18 @@ class FormUserProvider extends ChangeNotifier {
   }
 
   String getFormsCountByStatus(FormStatusEnum status) {
-    FilterFormsController filterController =
-        injector.get<FilterFormsController>();
-
-    if (filterController.activeFiltersAmount > 0) {
-      return _copyFilteredForms
-          .where((form) => form.status == status)
-          .length
-          .toString();
-    }
-
     return _allForms.where((form) => form.status == status).length.toString();
   }
 
   void filterFormsByStatus(FormStatusEnum? enumStatus) {
     if (enumStatus == null) {
-      setState(FormUserSuccessState(
-          forms: _copyFilteredForms.isEmpty ? _allForms : _copyFilteredForms));
+      setState(FormUserSuccessState(forms: _allForms));
       return;
     }
-    _filteredForms = _copyFilteredForms.isEmpty
-        ? _allForms.where((form) => form.status == enumStatus).toList()
-        : _copyFilteredForms
-            .where((form) => form.status == enumStatus)
-            .toList();
-    setState(FormUserSuccessState(forms: _filteredForms));
+    List<FormEntity> filteredForms =
+        _allForms.where((form) => form.status == enumStatus).toList();
+
+    setState(FormUserSuccessState(forms: filteredForms));
   }
 
   void filterForms({
@@ -95,30 +78,25 @@ class FormUserProvider extends ChangeNotifier {
     required String? city,
     required String? system,
   }) {
+    List<FormEntity> filteredForms = _allForms;
+
     if (template != null) {
-      _filteredForms =
-          _filteredForms.where((form) => form.template == template).toList();
+      filteredForms =
+          filteredForms.where((form) => form.template == template).toList();
     }
     if (street != null) {
-      _filteredForms =
-          _filteredForms.where((form) => form.street == street).toList();
+      filteredForms =
+          filteredForms.where((form) => form.street == street).toList();
     }
     if (city != null) {
-      _filteredForms =
-          _filteredForms.where((form) => form.city == city).toList();
+      filteredForms = filteredForms.where((form) => form.city == city).toList();
     }
     if (system != null) {
-      _filteredForms =
-          _filteredForms.where((form) => form.system == system).toList();
+      filteredForms =
+          filteredForms.where((form) => form.system == system).toList();
     }
 
-    if (street == null && city == null && system == null && template == null) {
-      _filteredForms = _allForms;
-    }
-
-    _copyFilteredForms = _filteredForms;
-
-    setState(FormUserSuccessState(forms: _filteredForms));
+    setState(FormUserSuccessState(forms: filteredForms));
   }
 
   void orderForms(OrderEnum? orderEnum) {

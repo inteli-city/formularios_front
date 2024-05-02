@@ -71,7 +71,6 @@ class _OrderTabSectionChipsState extends State<OrderTabSectionChips> {
           for (int i = 0; i < _isSelectedList.length; i++) {
             _isSelectedList[i] = (i == index && selected);
           }
-          print(statusEnum);
           filterController.setStatus(selected ? statusEnum : null);
           injector.get<FormUserProvider>().filterForms(
                 city: filterController.filteredCity,

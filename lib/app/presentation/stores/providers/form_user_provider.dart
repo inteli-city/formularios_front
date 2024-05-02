@@ -58,7 +58,11 @@ class FormUserProvider extends ChangeNotifier {
   }
 
   String getFormsCountByStatus(FormStatusEnum status) {
-    return _allForms.where((form) => form.status == status).length.toString();
+    return (state as FormUserSuccessState)
+        .forms
+        .where((form) => form.status == status)
+        .length
+        .toString();
   }
 
   void filterForms({

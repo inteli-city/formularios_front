@@ -62,12 +62,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               )
-            : Center(
-                child: Text(
-                  'Nenhum formulário encontrado!',
-                  style: AppTextStyles.display,
-                  softWrap: true,
-                  textAlign: TextAlign.center,
+            : Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Nenhum formulário encontrado!',
+                      style: AppTextStyles.display,
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: AppDimensions.verticalSpaceMedium,
+                    ),
+                    const Icon(Icons.assignment_late,
+                        size: AppDimensions.iconExtraLarge * 1.5),
+                  ],
                 ),
               ),
       ],

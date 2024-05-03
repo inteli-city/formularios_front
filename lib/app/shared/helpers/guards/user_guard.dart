@@ -8,12 +8,13 @@ class UserGuard extends RouteGuard {
   UserGuard({String redirectTo = '/'}) : super(redirectTo: redirectTo);
   @override
   FutureOr<bool> canActivate(String path, ParallelRoute route) async {
-    if (Modular.get<UserProvider>().isLogged) {
-      log('logado, acesse o app');
-      //logica de pegar o usuário no banco e validar ele
-      return true;
+    log('passando pelo guarda');
+
+    var provider = Modular.get<UserProvider>();
+    if (provider.isLogged) {
+      await provider.loginUser();
+      return provider.isLogged;
     }
-    Modular.to.navigate('/login');
     return false;
   }
 }

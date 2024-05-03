@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
@@ -12,7 +13,7 @@ import 'package:formularios_front/app/presentation/pages/splash_page.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
-import 'package:formularios_front/app/shared/helpers/guards/test_guard.dart';
+import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
@@ -89,6 +90,7 @@ class UserModule extends Module {
   @override
   void exportedBinds(i) {
     i.addSingleton(UserProvider.new);
+    i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
     i.addSingleton<UserRepository>(() => EnvironmentConfig.getUserRepository());
   }
 }

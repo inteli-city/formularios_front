@@ -64,7 +64,7 @@ class _SortFormsDialog extends State<SortFormsDialog> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'Confirmar',
+                    S.current.confirm,
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge!

@@ -8,6 +8,15 @@
         }
     },
 
+    "noItemsFoundErrorMessage": "Itens não encontrados para: {message}",
+    "@noItemsFoundErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "restaurantName": {}
+            }
+        }
+    },
+
     "requestErrorMessage": "{message}",
     "@requestErrorMessage" : {
         "placeholders": {
@@ -17,14 +26,18 @@
         }
     },
 
-    "noItemsFoundErrorMessage": "Itens não encontrados para: {message}",
-    "@noItemsFoundErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "restaurantName": {}
-            }
-        }
-    },
+    "priorityTooltip": "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)",
+
+    "noFormsFound": "Nenhum Formulário Encontrado!",
+
+    "filters" : "Filtros",
+
+    "clearFilters" : "Limpar Filtros",
+
+    "sort": "Ordenar",
+
+    "confirm":"Confirmar",
+
     "orderEnumSchema" : "{schema, select, PRIORIDADE_BAIXO_ALTO{Prioridade Baixo-Alto} PRIORIDADE_ALTO_BAIXO{Prioridade Alto-Baixo} MAIS_RECENTE{Mais Recente} MAIS_ANTIGO{Mais Antigo} other{}}",
 
     "priorityEnumSchema": "{schema, select, LOW{Baixa} MEDIUM{Média} HIGH{Alta} EMERCENCY{Emergencial} other{}}",

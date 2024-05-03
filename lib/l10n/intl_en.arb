@@ -26,6 +26,18 @@
         }
     },
 
+    "priorityTooltip": "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)",
+
+    "noFormsFound": "No form found!",
+
+    "filters" : "Filters",
+
+    "clearFilters" : "Clear Filters",
+
+    "sort": "Sort",
+
+    "confirm":"Confirm",
+    
     "orderEnumSchema" : "{schema, select, PRIORIDADE_BAIXO_ALTO{Low-High Priority} PRIORIDADE_ALTO_BAIXO{High-Low Priority} MAIS_RECENTE{Recent} MAIS_ANTIGO{Old} other{}}",
     
     "priorityEnumSchema": "{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}",

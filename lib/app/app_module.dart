@@ -9,13 +9,19 @@ import 'package:formularios_front/app/presentation/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/pages/splash_page.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
+import 'package:formularios_front/app/shared/helpers/guards/test_guard.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
+import 'package:gates_microapp_flutter/login.dart';
 import 'package:logger/logger.dart';
 
 class AppModule extends Module {
+  @override
+  List<Module> get imports => [MicroAppAuthModule(), UserModule()];
+
   @override
   void binds(i) {
     i.addLazySingleton(Logger.new);
@@ -36,19 +42,24 @@ class AppModule extends Module {
       Modular.initialRoute,
       child: (context) => const SplashPage(),
     );
+    r.module(
+      '/login',
+      module: MicroAppLoginModule(),
+      guards: [LoginGuard()],
+    );
     r.module('/home', module: HomeModule());
   }
 }
 
 class HomeModule extends Module {
   @override
+  List<Module> get imports => [MicroAppAuthModule()];
+  @override
   void binds(i) {
-    i.addLazySingleton<FormUserProvider>(
-        () => FormUserProvider(i.get<IFetchUserFormsUsecase>()));
+    i.addLazySingleton<FormUserProvider>(FormUserProvider.new);
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
-    i.addLazySingleton<IFetchUserFormsUsecase>(
-        () => FetchUserFormsUsecase(repository: i.get<IFormRepository>()));
+    i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);
     i.addLazySingleton(SelectChipController.new);
@@ -58,6 +69,7 @@ class HomeModule extends Module {
   void routes(r) {
     r.child(
       Modular.initialRoute,
+      guards: [UserGuard()],
       child: (context) => const LandingPage(),
       children: [
         ChildRoute(
@@ -66,5 +78,15 @@ class HomeModule extends Module {
         ),
       ],
     );
+  }
+}
+
+class UserModule extends Module {
+  @override
+  List<Module> get imports => [MicroAppAuthModule()];
+
+  @override
+  void exportedBinds(i) {
+    i.addSingleton(UserProvider.new);
   }
 }

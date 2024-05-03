@@ -3,13 +3,20 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
+import 'dart:ui' as _i10;
+
+import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
-    as _i6;
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
-import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i4;
+    as _i7;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i6;
+import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i9;
+import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i5;
+import 'package:formularios_front/app/presentation/states/form_user_state.dart'
+    as _i2;
+import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart'
+    as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i3;
+import 'package:mockito/src/dummies.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,10 +31,20 @@ import 'package:mockito/src/dummies.dart' as _i3;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeFormUserState_0 extends _i1.SmartFake implements _i2.FormUserState {
+  _FakeFormUserState_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [FormEntity].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
+class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   MockFormEntity() {
     _i1.throwOnMissingStub(this);
   }
@@ -35,7 +52,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get externFormId => (super.noSuchMethod(
         Invocation.getter(#externFormId),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#externFormId),
         ),
@@ -44,7 +61,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get internFormId => (super.noSuchMethod(
         Invocation.getter(#internFormId),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#internFormId),
         ),
@@ -53,7 +70,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get creatorUserId => (super.noSuchMethod(
         Invocation.getter(#creatorUserId),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#creatorUserId),
         ),
@@ -62,7 +79,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get userId => (super.noSuchMethod(
         Invocation.getter(#userId),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#userId),
         ),
@@ -77,7 +94,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get template => (super.noSuchMethod(
         Invocation.getter(#template),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#template),
         ),
@@ -86,7 +103,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get area => (super.noSuchMethod(
         Invocation.getter(#area),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#area),
         ),
@@ -95,7 +112,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get system => (super.noSuchMethod(
         Invocation.getter(#system),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#system),
         ),
@@ -104,7 +121,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get street => (super.noSuchMethod(
         Invocation.getter(#street),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#street),
         ),
@@ -113,7 +130,7 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get city => (super.noSuchMethod(
         Invocation.getter(#city),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#city),
         ),
@@ -140,23 +157,23 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
   @override
   String get region => (super.noSuchMethod(
         Invocation.getter(#region),
-        returnValue: _i3.dummyValue<String>(
+        returnValue: _i4.dummyValue<String>(
           this,
           Invocation.getter(#region),
         ),
       ) as String);
 
   @override
-  _i4.PriorityEnum get priority => (super.noSuchMethod(
+  _i5.PriorityEnum get priority => (super.noSuchMethod(
         Invocation.getter(#priority),
-        returnValue: _i4.PriorityEnum.LOW,
-      ) as _i4.PriorityEnum);
+        returnValue: _i5.PriorityEnum.LOW,
+      ) as _i5.PriorityEnum);
 
   @override
-  _i5.FormStatusEnum get status => (super.noSuchMethod(
+  _i6.FormStatusEnum get status => (super.noSuchMethod(
         Invocation.getter(#status),
-        returnValue: _i5.FormStatusEnum.NAO_INICIADO,
-      ) as _i5.FormStatusEnum);
+        returnValue: _i6.FormStatusEnum.NAO_INICIADO,
+      ) as _i6.FormStatusEnum);
 
   @override
   int get expirationDate => (super.noSuchMethod(
@@ -171,8 +188,167 @@ class MockFormEntity extends _i1.Mock implements _i2.FormEntity {
       ) as int);
 
   @override
-  List<_i6.SectionEntity> get sections => (super.noSuchMethod(
+  List<_i7.SectionEntity> get sections => (super.noSuchMethod(
         Invocation.getter(#sections),
-        returnValue: <_i6.SectionEntity>[],
-      ) as List<_i6.SectionEntity>);
+        returnValue: <_i7.SectionEntity>[],
+      ) as List<_i7.SectionEntity>);
+}
+
+/// A class which mocks [FormUserProvider].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFormUserProvider extends _i1.Mock implements _i8.FormUserProvider {
+  MockFormUserProvider() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.FormUserState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeFormUserState_0(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i2.FormUserState);
+
+  @override
+  set state(_i2.FormUserState? _state) => super.noSuchMethod(
+        Invocation.setter(
+          #state,
+          _state,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  List<String> get templates => (super.noSuchMethod(
+        Invocation.getter(#templates),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  List<String> get streets => (super.noSuchMethod(
+        Invocation.getter(#streets),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  List<String> get systems => (super.noSuchMethod(
+        Invocation.getter(#systems),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  List<String> get cities => (super.noSuchMethod(
+        Invocation.getter(#cities),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  void setState(_i2.FormUserState? value) => super.noSuchMethod(
+        Invocation.method(
+          #setState,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void fetchUserForms() => super.noSuchMethod(
+        Invocation.method(
+          #fetchUserForms,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  String getFormsCountByStatus(_i6.FormStatusEnum? status) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getFormsCountByStatus,
+          [status],
+        ),
+        returnValue: _i4.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getFormsCountByStatus,
+            [status],
+          ),
+        ),
+      ) as String);
+
+  @override
+  void filterForms({
+    required String? template,
+    required String? street,
+    required String? city,
+    required String? system,
+    required _i6.FormStatusEnum? enumStatus,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #filterForms,
+          [],
+          {
+            #template: template,
+            #street: street,
+            #city: city,
+            #system: system,
+            #enumStatus: enumStatus,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void orderForms(_i9.OrderEnum? orderEnum) => super.noSuchMethod(
+        Invocation.method(
+          #orderForms,
+          [orderEnum],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(_i10.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

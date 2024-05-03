@@ -24,6 +24,7 @@ dependencies:
   provider: ^6.1.2
   mockito: ^5.4.4
   build_runner: ^2.4.9
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/injector.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
@@ -162,6 +163,8 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
     required Function(String?) onChanged,
     required List<String> optionValues,
   }) {
+    final TextEditingController textEditingController = TextEditingController();
+
     List<DropdownMenuItem<String?>> dropdownItems = optionValues
         .map(
           (value) => DropdownMenuItem<String?>(
@@ -173,10 +176,8 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
-      child: DropdownButtonFormField<String?>(
+      child: DropdownButtonFormField2<String?>(
         value: selectedValue,
-        elevation: 5,
-        focusColor: AppColors.white,
         items: dropdownItems,
         onChanged: onChanged,
         style: AppTextStyles.titleMedium,
@@ -200,6 +201,46 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
             borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
           ),
         ),
+        dropdownSearchData: DropdownSearchData(
+          searchController: textEditingController,
+          searchInnerWidgetHeight: 80,
+          searchInnerWidget: Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.all(AppDimensions.paddingSmall),
+            padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+            child: TextFormField(
+              maxLines: 1,
+              controller: textEditingController,
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  size: AppDimensions.iconMedium,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                isDense: true,
+                contentPadding:
+                    const EdgeInsets.all(AppDimensions.paddingMedium),
+                hintText: 'Buscar por $hintText',
+                hintStyle: Theme.of(context).textTheme.bodyLarge,
+                border: OutlineInputBorder(
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.radiusSmall),
+                ),
+              ),
+            ),
+          ),
+          searchMatchFn: (item, searchValue) {
+            return item.value
+                .toString()
+                .toLowerCase()
+                .contains(searchValue.toLowerCase());
+          },
+        ),
+        onMenuStateChange: (isOpen) {
+          if (!isOpen) {
+            textEditingController.clear();
+          }
+        },
       ),
     );
   }

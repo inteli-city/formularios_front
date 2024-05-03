@@ -5,6 +5,7 @@ import 'package:formularios_front/app/presentation/stores/providers/form_user_pr
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
 class FilterOrderDialog extends StatefulWidget {
@@ -66,7 +67,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                 children: [
                   Center(
                     child: Text(
-                      'Filtros',
+                      S.current.filters,
                       style: AppTextStyles.display.copyWith(
                           color: Theme.of(context).colorScheme.primary),
                     ),
@@ -90,7 +91,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                     clearSelections();
                   });
                 },
-                child: const Text('Limpar Filtros'),
+                child: Text(S.current.clearFilters),
               ),
               _buildDropdownItem(
                 hintText: 'Tipo',
@@ -141,7 +142,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  'Confirmar',
+                  S.current.confirm,
                   style: Theme.of(context)
                       .textTheme
                       .headlineLarge!

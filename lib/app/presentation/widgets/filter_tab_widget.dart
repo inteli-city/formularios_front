@@ -12,6 +12,7 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
+import 'package:formularios_front/generated/l10n.dart';
 
 class FilterTabWidget extends StatefulWidget {
   const FilterTabWidget({super.key});
@@ -86,7 +87,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
                   child: Text(
                     sortController.selectedOrder != null
                         ? sortController.selectedOrder!.enumString
-                        : 'Ordenar',
+                        : S.of(context).sort,
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           color: Theme.of(context).colorScheme.secondary,
                         ),
@@ -136,14 +137,12 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
           Tooltip(
             padding: const EdgeInsets.all(AppDimensions.paddingSmall),
             showDuration: const Duration(seconds: 2),
-            textAlign: TextAlign.center,     
+            textAlign: TextAlign.center,
             exitDuration: const Duration(seconds: 1),
             waitDuration: const Duration(milliseconds: 500),
-            message:
-                'Cores de Prioridade : \n->Vermelho (Emergencial)\n->Amarelo (Em andamento)\n->Verde (Concluído)',
+            message: S.of(context).priorityTooltip,
             triggerMode: TooltipTriggerMode.longPress,
             child: IconButton(
-              
               alignment: Alignment.center,
               iconSize: AppDimensions.iconSmall,
               style: ButtonStyle(

@@ -61,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noItemsFoundErrorMessage": m2,
         "orderEnumSchema": m3,
         "priorityEnumSchema": m4,
-        "requestErrorMessage": m5
+        "priorityTooltip": MessageLookupByLibrary.simpleMessage(
+            "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)"),
+        "requestErrorMessage": m5,
+        "sort": MessageLookupByLibrary.simpleMessage("Sort")
       };
 }

@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)`
+  String get priorityTooltip {
+    return Intl.message(
+      'Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)',
+      name: 'priorityTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No form found!`
   String get noFormsFound {
     return Intl.message(
@@ -105,6 +115,16 @@ class S {
     return Intl.message(
       'Clear Filters',
       name: 'clearFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort`
+  String get sort {
+    return Intl.message(
+      'Sort',
+      name: 'sort',
       desc: '',
       args: [],
     );

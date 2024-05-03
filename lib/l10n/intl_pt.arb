@@ -25,11 +25,16 @@
             }
         }
     },
+
+    "priorityTooltip": "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)",
+
     "noFormsFound": "Nenhum Formulário Encontrado!",
 
     "filters" : "Filtros",
 
     "clearFilters" : "Limpar Filtros",
+
+    "sort": "Ordenar",
 
     "confirm":"Confirmar",
 

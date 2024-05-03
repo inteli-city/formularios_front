@@ -26,11 +26,15 @@
         }
     },
 
+    "priorityTooltip": "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)",
+
     "noFormsFound": "No form found!",
 
     "filters" : "Filters",
 
     "clearFilters" : "Clear Filters",
+
+    "sort": "Sort",
 
     "confirm":"Confirm",
     

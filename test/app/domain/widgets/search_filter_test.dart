@@ -20,10 +20,8 @@ import 'search_filter_test.mocks.dart';
   FilterFormsController,
   SelectChipController,
   SortFormsController,
-  S,
   FetchUserFormsUsecase,
   FormUserProvider,
-  AutoInjector
 ])
 void main() {
   injector.addLazySingleton<FormUserProvider>(MockFormUserProvider.new);
@@ -31,17 +29,22 @@ void main() {
   injector.addLazySingleton<SortFormsController>(SortFormsController.new);
   injector.addLazySingleton<SelectChipController>(SelectChipController.new);
   injector.commit();
+
   testWidgets('FilterTabWidget builds correctly', (WidgetTester tester) async {
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
+
     final mockFormUserProvider = injector.get<FormUserProvider>(
         transform: changeParam(MockFormUserProvider()));
+
     when(mockFormUserProvider.state).thenReturn(FormUserLoadingState());
     when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.CONCLUIDO))
-        .thenReturn('oi');
-    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.NAO_INICIADO))
-        .thenReturn('oi');
-    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.EM_ANDAMENTO))
-        .thenReturn('oi');
+        .thenReturn(FormStatusEnum.CONCLUIDO.enumString);
+    when(mockFormUserProvider
+            .getFormsCountByStatus(FormStatusEnum.NAO_INICIADO))
+        .thenReturn(FormStatusEnum.NAO_INICIADO.enumString);
+    when(mockFormUserProvider
+            .getFormsCountByStatus(FormStatusEnum.EM_ANDAMENTO))
+        .thenReturn(FormStatusEnum.EM_ANDAMENTO.enumString);
 
     await tester
         .pumpWidget(const MaterialApp(home: Scaffold(body: FilterTabWidget())));

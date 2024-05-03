@@ -3,21 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i13;
-import 'dart:ui' as _i17;
+import 'dart:async' as _i11;
+import 'dart:ui' as _i16;
 
-import 'package:auto_injector/src/auto_injector_base.dart' as _i18;
-import 'package:auto_injector/src/bind.dart' as _i20;
-import 'package:auto_injector/src/param.dart' as _i19;
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i15;
+import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i13;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i6;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i9;
-import 'package:formularios_front/app/domain/failures/failures.dart' as _i14;
+import 'package:formularios_front/app/domain/failures/failures.dart' as _i12;
 import 'package:formularios_front/app/domain/repositories/form_repository.dart'
     as _i2;
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart'
-    as _i12;
+    as _i10;
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart'
     as _i5;
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart'
@@ -27,10 +24,9 @@ import 'package:formularios_front/app/presentation/controllers/sort_forms_contro
 import 'package:formularios_front/app/presentation/states/form_user_state.dart'
     as _i4;
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart'
-    as _i16;
-import 'package:formularios_front/generated/l10n.dart' as _i10;
+    as _i14;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
+import 'package:mockito/src/dummies.dart' as _i15;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -269,176 +265,11 @@ class MockSortFormsController extends _i1.Mock
       );
 }
 
-/// A class which mocks [S].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockS extends _i1.Mock implements _i10.S {
-  MockS() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  String get noFormsFound => (super.noSuchMethod(
-        Invocation.getter(#noFormsFound),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.getter(#noFormsFound),
-        ),
-      ) as String);
-
-  @override
-  String get filters => (super.noSuchMethod(
-        Invocation.getter(#filters),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.getter(#filters),
-        ),
-      ) as String);
-
-  @override
-  String get clearFilters => (super.noSuchMethod(
-        Invocation.getter(#clearFilters),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.getter(#clearFilters),
-        ),
-      ) as String);
-
-  @override
-  String get confirm => (super.noSuchMethod(
-        Invocation.getter(#confirm),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.getter(#confirm),
-        ),
-      ) as String);
-
-  @override
-  String entityErrorMessage(
-    Object? placeholders,
-    Object? entityErrorMessage,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #entityErrorMessage,
-          [
-            placeholders,
-            entityErrorMessage,
-          ],
-        ),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #entityErrorMessage,
-            [
-              placeholders,
-              entityErrorMessage,
-            ],
-          ),
-        ),
-      ) as String);
-
-  @override
-  String requestErrorMessage(
-    Object? placeholders,
-    Object? message,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #requestErrorMessage,
-          [
-            placeholders,
-            message,
-          ],
-        ),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #requestErrorMessage,
-            [
-              placeholders,
-              message,
-            ],
-          ),
-        ),
-      ) as String);
-
-  @override
-  String noItemsFoundErrorMessage(
-    Object? placeholders,
-    Object? message,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #noItemsFoundErrorMessage,
-          [
-            placeholders,
-            message,
-          ],
-        ),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #noItemsFoundErrorMessage,
-            [
-              placeholders,
-              message,
-            ],
-          ),
-        ),
-      ) as String);
-
-  @override
-  String orderEnumSchema(Object? schema) => (super.noSuchMethod(
-        Invocation.method(
-          #orderEnumSchema,
-          [schema],
-        ),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #orderEnumSchema,
-            [schema],
-          ),
-        ),
-      ) as String);
-
-  @override
-  String priorityEnumSchema(Object? schema) => (super.noSuchMethod(
-        Invocation.method(
-          #priorityEnumSchema,
-          [schema],
-        ),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #priorityEnumSchema,
-            [schema],
-          ),
-        ),
-      ) as String);
-
-  @override
-  String formStatusEnumSchema(Object? schema) => (super.noSuchMethod(
-        Invocation.method(
-          #formStatusEnumSchema,
-          [schema],
-        ),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #formStatusEnumSchema,
-            [schema],
-          ),
-        ),
-      ) as String);
-}
-
 /// A class which mocks [FetchUserFormsUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFetchUserFormsUsecase extends _i1.Mock
-    implements _i12.FetchUserFormsUsecase {
+    implements _i10.FetchUserFormsUsecase {
   MockFetchUserFormsUsecase() {
     _i1.throwOnMissingStub(this);
   }
@@ -453,7 +284,7 @@ class MockFetchUserFormsUsecase extends _i1.Mock
       ) as _i2.IFormRepository);
 
   @override
-  _i13.Future<_i3.Either<_i14.Failure, List<_i15.FormEntity>>> call(
+  _i11.Future<_i3.Either<_i12.Failure, List<_i13.FormEntity>>> call(
           {required String? userId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -462,8 +293,8 @@ class MockFetchUserFormsUsecase extends _i1.Mock
           {#userId: userId},
         ),
         returnValue:
-            _i13.Future<_i3.Either<_i14.Failure, List<_i15.FormEntity>>>.value(
-                _FakeEither_1<_i14.Failure, List<_i15.FormEntity>>(
+            _i11.Future<_i3.Either<_i12.Failure, List<_i13.FormEntity>>>.value(
+                _FakeEither_1<_i12.Failure, List<_i13.FormEntity>>(
           this,
           Invocation.method(
             #call,
@@ -471,13 +302,13 @@ class MockFetchUserFormsUsecase extends _i1.Mock
             {#userId: userId},
           ),
         )),
-      ) as _i13.Future<_i3.Either<_i14.Failure, List<_i15.FormEntity>>>);
+      ) as _i11.Future<_i3.Either<_i12.Failure, List<_i13.FormEntity>>>);
 }
 
 /// A class which mocks [FormUserProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormUserProvider extends _i1.Mock implements _i16.FormUserProvider {
+class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
   MockFormUserProvider() {
     _i1.throwOnMissingStub(this);
   }
@@ -555,7 +386,7 @@ class MockFormUserProvider extends _i1.Mock implements _i16.FormUserProvider {
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i15.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -597,7 +428,7 @@ class MockFormUserProvider extends _i1.Mock implements _i16.FormUserProvider {
       );
 
   @override
-  void addListener(_i17.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i16.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -606,7 +437,7 @@ class MockFormUserProvider extends _i1.Mock implements _i16.FormUserProvider {
       );
 
   @override
-  void removeListener(_i17.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i16.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -628,261 +459,6 @@ class MockFormUserProvider extends _i1.Mock implements _i16.FormUserProvider {
         Invocation.method(
           #notifyListeners,
           [],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
-
-/// A class which mocks [AutoInjector].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockAutoInjector extends _i1.Mock implements _i18.AutoInjector {
-  MockAutoInjector() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  int get bindLength => (super.noSuchMethod(
-        Invocation.getter(#bindLength),
-        returnValue: 0,
-      ) as int);
-
-  @override
-  void addInjector(_i18.AutoInjector? injector) => super.noSuchMethod(
-        Invocation.method(
-          #addInjector,
-          [injector],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool isAdded<T>({String? key}) => (super.noSuchMethod(
-        Invocation.method(
-          #isAdded,
-          [],
-          {#key: key},
-        ),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  bool isInstantiateSingleton<T>({String? key}) => (super.noSuchMethod(
-        Invocation.method(
-          #isInstantiateSingleton,
-          [],
-          {#key: key},
-        ),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  void replaceInstance<T>(
-    T? instance, {
-    String? key,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #replaceInstance,
-          [instance],
-          {#key: key},
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void commit() => super.noSuchMethod(
-        Invocation.method(
-          #commit,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void uncommit() => super.noSuchMethod(
-        Invocation.method(
-          #uncommit,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void dispose([void Function(dynamic)? instanceCallback]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [instanceCallback],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void disposeRecursive() => super.noSuchMethod(
-        Invocation.method(
-          #disposeRecursive,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void disposeInjectorByTag(
-    String? injectorTag, [
-    void Function(dynamic)? instanceCallback,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #disposeInjectorByTag,
-          [
-            injectorTag,
-            instanceCallback,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addDisposeListener(_i18.VoidCallback? callback) => super.noSuchMethod(
-        Invocation.method(
-          #addDisposeListener,
-          [callback],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeDisposeListener(_i18.VoidCallback? callback) => super.noSuchMethod(
-        Invocation.method(
-          #removeDisposeListener,
-          [callback],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  T get<T>({
-    _i19.ParamTransform? transform,
-    String? key,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #get,
-          [],
-          {
-            #transform: transform,
-            #key: key,
-          },
-        ),
-        returnValue: _i11.dummyValue<T>(
-          this,
-          Invocation.method(
-            #get,
-            [],
-            {
-              #transform: transform,
-              #key: key,
-            },
-          ),
-        ),
-      ) as T);
-
-  @override
-  T call<T>({
-    _i19.ParamTransform? transform,
-    String? key,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [],
-          {
-            #transform: transform,
-            #key: key,
-          },
-        ),
-        returnValue: _i11.dummyValue<T>(
-          this,
-          Invocation.method(
-            #call,
-            [],
-            {
-              #transform: transform,
-              #key: key,
-            },
-          ),
-        ),
-      ) as T);
-
-  @override
-  void add<T>(
-    Function? constructor, {
-    _i20.BindConfig<T>? config,
-    String? key,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [constructor],
-          {
-            #config: config,
-            #key: key,
-          },
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addInstance<T>(
-    T? instance, {
-    _i20.BindConfig<T>? config,
-    String? key,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addInstance,
-          [instance],
-          {
-            #config: config,
-            #key: key,
-          },
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addSingleton<T>(
-    Function? constructor, {
-    _i20.BindConfig<T>? config,
-    String? key,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addSingleton,
-          [constructor],
-          {
-            #config: config,
-            #key: key,
-          },
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addLazySingleton<T>(
-    Function? constructor, {
-    _i20.BindConfig<T>? config,
-    String? key,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addLazySingleton,
-          [constructor],
-          {
-            #config: config,
-            #key: key,
-          },
         ),
         returnValueForMissingStub: null,
       );

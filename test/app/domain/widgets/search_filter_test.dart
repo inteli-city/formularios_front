@@ -46,11 +46,13 @@ void main() {
             .getFormsCountByStatus(FormStatusEnum.EM_ANDAMENTO))
         .thenReturn(FormStatusEnum.EM_ANDAMENTO.enumString);
 
-    await tester
-        .pumpWidget(const MaterialApp(home: Scaffold(body: FilterTabWidget())));
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(body: FilterTabWidget()),
+      localizationsDelegates: [S.delegate],
+    ));
 
     expect(find.byType(ChoiceChip), findsWidgets);
-    expect(find.text('Ordenar'), findsOneWidget);
+    expect(find.text(S.current.sort), findsOneWidget);
     expect(find.byIcon(Icons.filter_list), findsOneWidget);
   });
 }

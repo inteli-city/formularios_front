@@ -30,29 +30,28 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: AppDimensions.paddingMedium),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: ScreenHelper.height(context) * 0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                  FormStatusEnum.values.length,
-                  (index) => _choiceChip(index, FormStatusEnum.values[index]),
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: ScreenHelper.height(context) * 0.1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            children: List.generate(
+              FormStatusEnum.values.length,
+              (index) => _choiceChip(
+                index,
+                FormStatusEnum.values[index],
               ),
             ),
-            _buildSearchFilterTab(),
-          ],
+          ),
         ),
-      ),
+        const SizedBox(height: AppDimensions.paddingMedium),
+        _buildSearchFilterTab(),
+      ],
     );
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/presentation/pages/home_page.dart';
 import 'package:mockito/annotations.dart';
@@ -15,6 +17,10 @@ import 'home_page_test.mocks.dart';
 void main() {
   group('HomePage Widget Tests', () {
     FormUserProvider formUserProvider = MockFormUserProvider();
+
+    Modular.bindModule(AppModule());
+    Modular.bindModule(HomeModule());
+    Modular.replaceInstance<FormUserProvider>(formUserProvider);
     testWidgets('should display CircularProgressIndicator when loading',
         (WidgetTester tester) async {
       when(formUserProvider.state).thenReturn(FormUserLoadingState());

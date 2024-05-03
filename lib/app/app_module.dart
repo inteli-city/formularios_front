@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/pages/landing_page.dart';
@@ -50,6 +51,7 @@ class HomeModule extends Module {
         () => FetchUserFormsUsecase(repository: i.get<IFormRepository>()));
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);
+    i.addLazySingleton(SelectChipController.new);
   }
 
   @override

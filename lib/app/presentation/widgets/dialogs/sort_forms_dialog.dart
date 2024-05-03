@@ -5,6 +5,7 @@ import 'package:formularios_front/app/presentation/controllers/sort_forms_contro
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/generated/l10n.dart';
 
 class SortFormsDialog extends StatefulWidget {
   const SortFormsDialog({super.key});

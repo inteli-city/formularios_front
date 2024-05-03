@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/injector.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/form_card.dart';
 import 'package:mockito/annotations.dart';
@@ -14,7 +15,7 @@ import 'form_card_test.mocks.dart';
 void main() {
   group('FormCard Widget Tests', () {
     late MockFormEntity form;
-    injector.addLazySingleton<FormUserProvider>(MockFormUserProvider.new);
+    Modular.bindModule(HomeModule());
 
     setUp(() {
       form = MockFormEntity();

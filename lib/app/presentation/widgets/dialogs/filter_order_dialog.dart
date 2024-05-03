@@ -6,6 +6,7 @@ import 'package:formularios_front/app/presentation/stores/providers/form_user_pr
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
+import 'package:formularios_front/generated/l10n.dart';
 
 class FilterOrderDialog extends StatefulWidget {
   const FilterOrderDialog({

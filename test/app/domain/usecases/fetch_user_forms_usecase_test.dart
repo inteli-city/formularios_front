@@ -6,7 +6,6 @@ import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
-import 'package:formularios_front/app/injector.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -16,8 +15,7 @@ import 'fetch_user_forms_usecase_test.mocks.dart';
 void main() {
   IFormRepository formRepository = MockIFormRepository();
   late IFetchUserFormsUsecase usecase;
-    registerInstances();
-    usecase = FetchUserFormsUsecase(repository: formRepository);
+  usecase = FetchUserFormsUsecase(repository: formRepository);
 
   group('FetchUserFormsUsecase', () {
     test('should return a list of FormEntity', () async {

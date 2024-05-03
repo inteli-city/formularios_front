@@ -58,7 +58,10 @@ class HomeModule extends Module {
       Modular.initialRoute,
       child: (context) => const LandingPage(),
       children: [
-        ChildRoute('/forms', child: (context) => const HomePage()),
+        ChildRoute(
+          '/forms',
+          child: (context) => const HomePage(),
+        ),
       ],
     );
   }

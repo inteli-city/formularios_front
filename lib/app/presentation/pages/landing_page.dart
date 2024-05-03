@@ -24,7 +24,12 @@ class _LandingPageState extends State<LandingPage> {
         ),
       ],
       child: Scaffold(
-        body: const RouterOutlet(),
+        body: const SafeArea(
+          left: false,
+          right: false,
+          bottom: false,
+          child: RouterOutlet(),
+        ),
         extendBody: true,
         bottomNavigationBar: const BottomNavigationWidget(),
         floatingActionButton: FloatingActionButton(

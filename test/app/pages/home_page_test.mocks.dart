@@ -3,14 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:ui' as _i5;
+import 'dart:ui' as _i7;
 
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i4;
+import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i6;
 import 'package:formularios_front/app/presentation/states/form_user_state.dart'
     as _i2;
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -62,6 +64,30 @@ class MockFormUserProvider extends _i1.Mock implements _i3.FormUserProvider {
       );
 
   @override
+  List<String> get templates => (super.noSuchMethod(
+        Invocation.getter(#templates),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  List<String> get streets => (super.noSuchMethod(
+        Invocation.getter(#streets),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  List<String> get systems => (super.noSuchMethod(
+        Invocation.getter(#systems),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  List<String> get cities => (super.noSuchMethod(
+        Invocation.getter(#cities),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
         returnValue: false,
@@ -86,17 +112,55 @@ class MockFormUserProvider extends _i1.Mock implements _i3.FormUserProvider {
       );
 
   @override
-  void filterFormsByStatus(_i4.FormStatusEnum? enumStatus) =>
+  String getFormsCountByStatus(_i4.FormStatusEnum? status) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getFormsCountByStatus,
+          [status],
+        ),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getFormsCountByStatus,
+            [status],
+          ),
+        ),
+      ) as String);
+
+  @override
+  void filterForms({
+    required String? template,
+    required String? street,
+    required String? city,
+    required String? system,
+    required _i4.FormStatusEnum? enumStatus,
+  }) =>
       super.noSuchMethod(
         Invocation.method(
-          #filterFormsByStatus,
-          [enumStatus],
+          #filterForms,
+          [],
+          {
+            #template: template,
+            #street: street,
+            #city: city,
+            #system: system,
+            #enumStatus: enumStatus,
+          },
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void addListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+  void orderForms(_i6.OrderEnum? orderEnum) => super.noSuchMethod(
+        Invocation.method(
+          #orderForms,
+          [orderEnum],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -105,7 +169,7 @@ class MockFormUserProvider extends _i1.Mock implements _i3.FormUserProvider {
       );
 
   @override
-  void removeListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

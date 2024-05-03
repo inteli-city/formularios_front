@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         ? errorBuild(state.error)
         : state is FormUserSuccessState
             ? successBuild(state.forms)
-            : const CircularProgressIndicator();
+            : const Center(child: CircularProgressIndicator());
   }
 
   Widget successBuild(List<FormEntity> filteredForms) {

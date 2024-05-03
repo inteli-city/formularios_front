@@ -1,7 +1,7 @@
-import 'package:auto_injector/auto_injector.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/injector.dart';
+import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/dialogs/filter_order_dialog.dart';
@@ -14,21 +14,14 @@ import 'filter_dialog_test.mocks.dart';
 
 @GenerateMocks([FormUserProvider, FilterFormsController])
 void main() {
-  injector.addLazySingleton<FormUserProvider>(MockFormUserProvider.new);
-  injector
-      .addLazySingleton<FilterFormsController>(MockFilterFormsController.new);
-  injector.commit();
-
   late FilterFormsController mockController;
   late FormUserProvider mockProvider;
-  
+
   group('FilterOrderDialog Widget Tests', () {
     setUp(() {
-       mockController = injector.get<FilterFormsController>(
-          transform: changeParam(MockFilterFormsController()));
-
-    mockProvider = injector.get<FormUserProvider>(
-          transform: changeParam(MockFormUserProvider()));
+      Modular.bindModule(HomeModule());
+      mockController = MockFilterFormsController();
+      mockProvider = MockFormUserProvider();
 
       when(mockController.filteredTemplate).thenReturn('Template1');
       when(mockController.filteredStreet).thenReturn('Street1');

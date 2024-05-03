@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/injector.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
@@ -22,11 +22,10 @@ class FilterTabWidget extends StatefulWidget {
 }
 
 class _FilterTabWidgetState extends State<FilterTabWidget> {
-  FilterFormsController filterController =
-      injector.get<FilterFormsController>();
-  SortFormsController sortController = injector.get<SortFormsController>();
+  FilterFormsController filterController = Modular.get<FilterFormsController>();
+  SortFormsController sortController = Modular.get<SortFormsController>();
   SelectChipController selectChipController =
-      injector.get<SelectChipController>();
+      Modular.get<SelectChipController>();
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +162,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
   }
 
   Widget _choiceChip(int index, FormStatusEnum statusEnum) {
-    var filterController = injector.get<FilterFormsController>();
+    var filterController = Modular.get<FilterFormsController>();
     return ChoiceChip(
       labelPadding: EdgeInsets.zero,
       label: SizedBox(
@@ -190,7 +189,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
                     : Theme.of(context).colorScheme.primary,
               ),
               textAlign: TextAlign.center,
-              '(${injector.get<FormUserProvider>().getFormsCountByStatus(statusEnum)})',
+              '(${Modular.get<FormUserProvider>().getFormsCountByStatus(statusEnum)})',
             ),
           ],
         ),
@@ -203,13 +202,13 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
             selectChipController.setChipValue(i, value);
           }
           filterController.setStatus(selected ? statusEnum : null);
-          injector.get<FormUserProvider>().filterForms(
-                city: filterController.filteredCity,
-                enumStatus: filterController.filteredStatus,
-                street: filterController.filteredStreet,
-                system: filterController.filteredSystem,
-                template: filterController.filteredTemplate,
-              );
+          Modular.get<FormUserProvider>().filterForms(
+            city: filterController.filteredCity,
+            enumStatus: filterController.filteredStatus,
+            street: filterController.filteredStreet,
+            system: filterController.filteredSystem,
+            template: filterController.filteredTemplate,
+          );
         });
       },
       selectedColor: Theme.of(context).colorScheme.primary,

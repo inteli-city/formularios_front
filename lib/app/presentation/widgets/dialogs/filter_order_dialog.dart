@@ -1,13 +1,12 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:formularios_front/app/injector.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:formularios_front/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
 class FilterOrderDialog extends StatefulWidget {
   const FilterOrderDialog({
@@ -19,7 +18,7 @@ class FilterOrderDialog extends StatefulWidget {
 }
 
 class _FilterOrderDialogState extends State<FilterOrderDialog> {
-  var controller = injector.get<FilterFormsController>();
+  var controller = Modular.get<FilterFormsController>();
   String? selectedType;
   String? selectedStreet;
   String? selectedCity;

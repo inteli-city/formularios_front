@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
-import 'package:formularios_front/app/injector.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
-import 'package:provider/provider.dart';
 
 class SortFormsDialog extends StatefulWidget {
   const SortFormsDialog({super.key});
@@ -16,7 +15,7 @@ class SortFormsDialog extends StatefulWidget {
 }
 
 class _SortFormsDialog extends State<SortFormsDialog> {
-  var controller = injector.get<SortFormsController>();
+  var controller = Modular.get<SortFormsController>();
   @override
   Widget build(BuildContext context) {
     var formProvider = context.watch<FormUserProvider>();

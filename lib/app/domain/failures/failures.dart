@@ -1,4 +1,4 @@
-import 'package:formularios_front/app/injector.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:logger/logger.dart';
 
@@ -6,11 +6,11 @@ class Failure implements Exception {
   final String message;
 
   Failure({required this.message}) {
-    injector.get<Logger>().e(
-          '${DateTime.now()} - $message',
-          error: this,
-          stackTrace: StackTrace.current,
-        );
+    Modular.get<Logger>().e(
+      '${DateTime.now()} - $message',
+      error: this,
+      stackTrace: StackTrace.current,
+    );
   }
 }
 

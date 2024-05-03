@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/app_widget.dart';
-import 'package:formularios_front/app/injector.dart';
 
 void main() {
-  registerInstances();
-  runApp(const AppWidget());
+  return runApp(ModularApp(module: AppModule(), child: const AppWidget()));
 }

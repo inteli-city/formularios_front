@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
+import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
@@ -88,5 +89,6 @@ class UserModule extends Module {
   @override
   void exportedBinds(i) {
     i.addSingleton(UserProvider.new);
+    i.addSingleton<UserRepository>(() => EnvironmentConfig.getUserRepository());
   }
 }

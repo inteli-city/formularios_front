@@ -5,7 +5,9 @@ import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.d
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/pages/home_page.dart';
+import 'package:formularios_front/app/presentation/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/pages/splash_page.dart';
+import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
@@ -40,6 +42,8 @@ class AppModule extends Module {
 class HomeModule extends Module {
   @override
   void binds(i) {
+    i.addLazySingleton<FormUserProvider>(
+        () => FormUserProvider(i.get<IFetchUserFormsUsecase>()));
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
     i.addLazySingleton<IFetchUserFormsUsecase>(
@@ -52,7 +56,10 @@ class HomeModule extends Module {
   void routes(r) {
     r.child(
       Modular.initialRoute,
-      child: (context) => const HomePage(),
+      child: (context) => const LandingPage(),
+      children: [
+        ChildRoute('/forms', child: (context) => const HomePage()),
+      ],
     );
   }
 }

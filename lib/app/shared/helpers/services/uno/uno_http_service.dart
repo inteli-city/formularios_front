@@ -1,6 +1,6 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
-import 'package:formularios_front/routes.dart';
 import 'package:uno/uno.dart';
 
 class UnoHttpService extends IHttpService {
@@ -16,7 +16,7 @@ class UnoHttpService extends IHttpService {
         return request;
       },
       onError: (error) {
-        error.response!.status == 401 ? router.push('/home') : null;
+        error.response!.status == 401 ? Modular.to.pushNamed('/home') : null;
         return error;
       },
     );

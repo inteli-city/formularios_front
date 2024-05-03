@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:formularios_front/app/injector.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/widgets/dialogs/filter_order_dialog.dart';
@@ -15,8 +15,8 @@ class SearchFilterTab extends StatefulWidget {
 }
 
 class _SearchFilterTabState extends State<SearchFilterTab> {
-  var filterController = injector.get<FilterFormsController>();
-  var sortController = injector.get<SortFormsController>();
+  var filterController = Modular.get<FilterFormsController>();
+  var sortController = Modular.get<SortFormsController>();
   @override
   Widget build(BuildContext context) {
     return Padding(

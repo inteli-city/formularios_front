@@ -2,6 +2,9 @@ import 'package:auto_injector/auto_injector.dart';
 import 'package:dio/dio.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
@@ -27,5 +30,9 @@ void registerInstances() {
       () => EnvironmentConfig.getFormRepository());
   injector.addLazySingleton<IFetchUserFormsUsecase>(
       () => FetchUserFormsUsecase(repository: injector.get<IFormRepository>()));
+  injector.addLazySingleton(FilterFormsController.new);
+  injector.addLazySingleton(SortFormsController.new);
+  injector.addLazySingleton(SelectChipController.new);
+  
   injector.commit();
 }

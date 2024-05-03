@@ -60,9 +60,12 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       key: Key(key),
       icon: Icon(
         icon,
+        color: _selectedIndex == index
+            ? Theme.of(context).colorScheme.primary
+            : AppColors.gray,
         size: AppDimensions.iconLarge,
       ),
-      color: AppColors.black,
+      color: Theme.of(context).colorScheme.primary,
       isSelected: _selectedIndex == index,
       onPressed: () => _onItemTapped(index),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 
@@ -43,13 +45,19 @@ class _FormCardState extends State<FormCard>
 
   @override
   Widget build(BuildContext context) {
+    Color iconStatusColor = widget.form.status == FormStatusEnum.NAO_INICIADO
+        ? AppColors.green
+        : widget.form.status == FormStatusEnum.EM_ANDAMENTO
+            ? AppColors.yellow
+            : AppColors.red;
+
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: Card(
-          color: Theme.of(context).cardTheme.color,
+          elevation: 5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               AppDimensions.radiusLarge,
@@ -60,35 +68,53 @@ class _FormCardState extends State<FormCard>
               width: AppDimensions.borderMedium,
             ),
           ),
-          elevation: Theme.of(context).cardTheme.elevation,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: AppDimensions.paddingMedium,
               vertical: AppDimensions.paddingMedium,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Text(
-                  widget.form.template,
-                  style: Theme.of(context).textTheme.headlineLarge,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.form.template,
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                    const SizedBox(
+                      height: AppDimensions.verticalSpaceMedium,
+                    ),
+                    Text(
+                      widget.form.street,
+                      style: AppTextStyles.bodyText1.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: AppDimensions.verticalSpaceMedium,
+                    ),
+                    Text(
+                      widget.form.expirationDate.toString(),
+                      style: AppTextStyles.bodyText1.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  height: AppDimensions.verticalSpaceMedium,
-                ),
-                Text(
-                  widget.form.street,
-                  style: AppTextStyles.bodyText1.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                const SizedBox(
-                  height: AppDimensions.verticalSpaceMedium,
-                ),
-                Text(
-                  widget.form.expirationDate.toString(),
-                  style: AppTextStyles.bodyText1.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
+                Positioned(
+                  right: -10,
+                  top: -10,
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.circle,
+                      size: AppDimensions.iconSmall * 1.6,
+                      color: iconStatusColor,
+                    ),
                   ),
                 ),
               ],

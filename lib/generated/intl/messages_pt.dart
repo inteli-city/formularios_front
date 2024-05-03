@@ -33,13 +33,39 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(placeholders, message) =>
       "Itens não encontrados para: ${message}";
 
-  static String m3(placeholders, message) => "${message}";
+  static String m3(schema) => "${Intl.select(schema, {
+            'PRIORIDADE_BAIXO_ALTO': 'Prioridade Baixo-Alto',
+            'PRIORIDADE_ALTO_BAIXO': 'Prioridade Alto-Baixo',
+            'MAIS_RECENTE': 'Mais Recente',
+            'MAIS_ANTIGO': 'Mais Antigo',
+            'other': '',
+          })}";
+
+  static String m4(schema) => "${Intl.select(schema, {
+            'LOW': 'Baixa',
+            'MEDIUM': 'Média',
+            'HIGH': 'Alta',
+            'EMERCENCY': 'Emergencial',
+            'other': '',
+          })}";
+
+  static String m5(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "clearFilters": MessageLookupByLibrary.simpleMessage("Limpar Filtros"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
         "entityErrorMessage": m0,
+        "filters": MessageLookupByLibrary.simpleMessage("Filtros"),
         "formStatusEnumSchema": m1,
+        "noFormsFound": MessageLookupByLibrary.simpleMessage(
+            "Nenhum Formulário Encontrado!"),
         "noItemsFoundErrorMessage": m2,
-        "requestErrorMessage": m3
+        "orderEnumSchema": m3,
+        "priorityEnumSchema": m4,
+        "priorityTooltip": MessageLookupByLibrary.simpleMessage(
+            "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)"),
+        "requestErrorMessage": m5,
+        "sort": MessageLookupByLibrary.simpleMessage("Ordenar")
       };
 }

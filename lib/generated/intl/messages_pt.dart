@@ -53,8 +53,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "clearFilters": MessageLookupByLibrary.simpleMessage("Limpar Filtros"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
         "entityErrorMessage": m0,
+        "filters": MessageLookupByLibrary.simpleMessage("Filtros"),
         "formStatusEnumSchema": m1,
+        "noFormsFound": MessageLookupByLibrary.simpleMessage(
+            "Nenhum Formulário Encontrado!"),
         "noItemsFoundErrorMessage": m2,
         "orderEnumSchema": m3,
         "priorityEnumSchema": m4,

@@ -80,6 +80,46 @@ class S {
     );
   }
 
+  /// `No form found!`
+  String get noFormsFound {
+    return Intl.message(
+      'No form found!',
+      name: 'noFormsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filters`
+  String get filters {
+    return Intl.message(
+      'Filters',
+      name: 'filters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear Filters`
+  String get clearFilters {
+    return Intl.message(
+      'Clear Filters',
+      name: 'clearFilters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{schema, select, PRIORIDADE_BAIXO_ALTO{Low-High Priority} PRIORIDADE_ALTO_BAIXO{High-Low Priority} MAIS_RECENTE{Recent} MAIS_ANTIGO{Old} other{}}`
   String orderEnumSchema(Object schema) {
     return Intl.select(

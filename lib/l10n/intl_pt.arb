@@ -8,15 +8,6 @@
         }
     },
 
-    "requestErrorMessage": "{message}",
-    "@requestErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "requestErrorMessage": {}
-            }
-        }
-    },
-
     "noItemsFoundErrorMessage": "Itens não encontrados para: {message}",
     "@noItemsFoundErrorMessage" : {
         "placeholders": {
@@ -25,6 +16,23 @@
             }
         }
     },
+
+    "requestErrorMessage": "{message}",
+    "@requestErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "requestErrorMessage": {}
+            }
+        }
+    },
+    "noFormsFound": "Nenhum Formulário Encontrado!",
+
+    "filters" : "Filtros",
+
+    "clearFilters" : "Limpar Filtros",
+
+    "confirm":"Confirmar",
+
     "orderEnumSchema" : "{schema, select, PRIORIDADE_BAIXO_ALTO{Prioridade Baixo-Alto} PRIORIDADE_ALTO_BAIXO{Prioridade Alto-Baixo} MAIS_RECENTE{Mais Recente} MAIS_ANTIGO{Mais Antigo} other{}}",
 
     "priorityEnumSchema": "{schema, select, LOW{Baixa} MEDIUM{Média} HIGH{Alta} EMERCENCY{Emergencial} other{}}",

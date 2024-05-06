@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
@@ -19,15 +20,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final formUserProvider = context.watch<FormUserProvider>();
-
-    var state = formUserProvider.state;
-
-    return state is FormUserErrorState
-        ? errorBuild(state.error)
-        : state is FormUserSuccessState
-            ? successBuild(state.forms)
-            : const Center(child: CircularProgressIndicator());
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => Modular.get<FormUserProvider>()..fetchUserForms(),
+        ),
+      ],
+      child: Builder(builder: (context) {
+        final formUserProvider = Provider.of<FormUserProvider>(context);
+        FormUserState state = formUserProvider.state;
+        return state is FormUserErrorState
+            ? errorBuild(state.error)
+            : state is FormUserSuccessState
+                ? successBuild(state.forms)
+                : const Center(child: CircularProgressIndicator());
+      }),
+    );
   }
 
   Widget successBuild(List<FormEntity> filteredForms) {

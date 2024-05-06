@@ -71,12 +71,12 @@ class HomeModule extends Module {
   void routes(r) {
     r.child(
       Modular.initialRoute,
-      guards: [UserGuard()],
       child: (context) => const LandingPage(),
       children: [
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
+          guards: [UserGuard()],
         ),
       ],
     );

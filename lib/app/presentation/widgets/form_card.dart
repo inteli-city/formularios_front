@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
-import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:intl/intl.dart';
 
 class FormCard extends StatefulWidget {
@@ -38,6 +37,7 @@ class _FormCardState extends State<FormCard>
   }
 
   void _onTapDown(TapDownDetails details) {
+    Modular.to.navigate('/home/forms/${widget.form.externFormId}');
     _controller.forward();
   }
 
@@ -95,8 +95,6 @@ class _FormCardState extends State<FormCard>
                                 .textTheme
                                 .bodyLarge!
                                 .copyWith(fontWeight: FontWeight.bold)),
-                        const SizedBox(
-                            width: AppDimensions.horizontalSpaceSmall),
                         Text(widget.form.template,
                             style: Theme.of(context)
                                 .textTheme

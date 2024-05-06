@@ -5,6 +5,7 @@ import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.d
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
+import 'package:formularios_front/app/presentation/pages/form_details_page.dart';
 import 'package:formularios_front/app/presentation/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/pages/splash_page.dart';
@@ -63,6 +64,12 @@ class HomeModule extends Module {
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
+        ),
+        ChildRoute(
+          '/forms/:externId',
+          child: (context) => FormDetailsPage(
+            externFormId: r.args.params['externId'],
+          ),
         ),
       ],
     );

@@ -80,6 +80,156 @@ class S {
     );
   }
 
+  /// `External ID`
+  String get externId {
+    return Intl.message(
+      'External ID',
+      name: 'externId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Internal ID`
+  String get internId {
+    return Intl.message(
+      'Internal ID',
+      name: 'internId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vinculation ID`
+  String get vinculationId {
+    return Intl.message(
+      'Vinculation ID',
+      name: 'vinculationId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Creator User ID`
+  String get creatorUserId {
+    return Intl.message(
+      'Creator User ID',
+      name: 'creatorUserId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coordinator ID`
+  String get coordinatorId {
+    return Intl.message(
+      'Coordinator ID',
+      name: 'coordinatorId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Priority`
+  String get priority {
+    return Intl.message(
+      'Priority',
+      name: 'priority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Creation Date`
+  String get creationDate {
+    return Intl.message(
+      'Creation Date',
+      name: 'creationDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expiration Date`
+  String get expirationDate {
+    return Intl.message(
+      'Expiration Date',
+      name: 'expirationDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Street`
+  String get street {
+    return Intl.message(
+      'Street',
+      name: 'street',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number`
+  String get number {
+    return Intl.message(
+      'Number',
+      name: 'number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latitude`
+  String get latitude {
+    return Intl.message(
+      'Latitude',
+      name: 'latitude',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Longitude`
+  String get longitude {
+    return Intl.message(
+      'Longitude',
+      name: 'longitude',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date`
+  String get startDate {
+    return Intl.message(
+      'Start Date',
+      name: 'startDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get endDate {
+    return Intl.message(
+      'End Date',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)`
   String get priorityTooltip {
     return Intl.message(

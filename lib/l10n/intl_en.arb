@@ -25,6 +25,22 @@
             }
         }
     },
+    
+    "externId" : "External ID",
+    "internId" : "Internal ID",
+    "vinculationId" : "Vinculation ID",
+    "creatorUserId" : "Creator User ID",
+    "coordinatorId" : "Coordinator ID",
+    "priority" : "Priority",
+    "creationDate" : "Creation Date",
+    "expirationDate" : "Expiration Date",
+    "street" : "Street",
+    "number" : "Number",
+    "latitude" : "Latitude",
+    "longitude" : "Longitude",
+    "startDate" : "Start Date",
+    "endDate" : "End Date",
+    "description" : "Description",
 
     "priorityTooltip": "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)",
 

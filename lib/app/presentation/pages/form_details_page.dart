@@ -7,6 +7,7 @@ import 'package:formularios_front/app/shared/helpers/utils/breakpoints.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:intl/intl.dart';
 
 class FormDetailsPage extends StatefulWidget {
@@ -70,7 +71,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     ),
               ),
               IconButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Modular.to.navigate('/home/forms'),
                 icon: Icon(
                   Icons.close,
                   color: Theme.of(context).colorScheme.primary,
@@ -99,48 +100,54 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildFormDetail(
-                        'ExternId',
+                        S.current.externId,
                         form.externFormId,
                       ),
-                      _buildFormDetail(
-                        'InternId',
-                        form.internFormId,
+                      const SizedBox(
+                        width: AppDimensions.horizontalSpaceExtraLarge * 2,
                       ),
                       _buildFormDetail(
-                        'VinculationId',
+                        S.current.internId,
+                        form.internFormId,
+                      ),
+                      const SizedBox(
+                        width: AppDimensions.horizontalSpaceExtraLarge * 2,
+                      ),
+                      _buildFormDetail(
+                        S.current.vinculationId,
                         form.vinculationFormId,
                       ),
                     ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildFormDetail(
-                        'CreatorUserId',
+                        S.current.creatorUserId,
                         form.creatorUserId.toString(),
                       ),
                       const SizedBox(
-                        width: AppDimensions.horizontalSpaceExtraLarge * 3,
+                        width: AppDimensions.horizontalSpaceExtraLarge * 2,
                       ),
-                      _buildFormDetail(
-                          'CoordinatorId', form.coordinatorsId.join('\n')),
+                      _buildFormDetail(S.current.coordinatorId,
+                          form.coordinatorsId.join('\n')),
                     ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildFormDetail(
-                        'Priority',
+                        S.current.priority,
                         form.priority.enumString,
                       ),
                       const SizedBox(
-                        width: AppDimensions.horizontalSpaceExtraLarge * 3,
+                        width: AppDimensions.horizontalSpaceExtraLarge * 4,
                       ),
                       _buildFormDetail(
                         'Status',
@@ -150,74 +157,74 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildFormDetail(
-                        'CreationDate',
+                        S.current.creationDate,
                         creationDate,
                       ),
                       const SizedBox(
-                        width: AppDimensions.horizontalSpaceExtraLarge * 3,
+                        width: AppDimensions.horizontalSpaceExtraLarge * 2,
                       ),
                       _buildFormDetail(
-                        'ExpirationDate',
+                        S.current.expirationDate,
                         expirationDate,
                       ),
                     ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildFormDetail(
-                        'Street',
+                        S.current.street,
                         form.street,
                       ),
                       const SizedBox(
-                        width: AppDimensions.horizontalSpaceExtraLarge * 3,
+                        width: AppDimensions.horizontalSpaceExtraLarge * 2,
                       ),
                       _buildFormDetail(
-                        'Number',
+                        S.current.number,
                         form.number.toString(),
                       ),
                     ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildFormDetail(
-                        'Lat',
+                        S.current.latitude,
                         form.latitude.toString(),
                       ),
                       const SizedBox(
-                        width: AppDimensions.horizontalSpaceExtraLarge * 3,
+                        width: AppDimensions.horizontalSpaceExtraLarge * 4,
                       ),
                       _buildFormDetail(
-                        'Long',
+                        S.current.longitude,
                         form.longitude.toString(),
                       ),
                     ],
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildFormDetail(
-                        'StartDate',
+                        S.current.startDate,
                         form.startDate.toString(),
                       ),
                       const SizedBox(
-                        width: AppDimensions.horizontalSpaceExtraLarge * 3,
+                        width: AppDimensions.horizontalSpaceExtraLarge * 4,
                       ),
                       _buildFormDetail(
-                        'EndDate',
+                        S.current.endDate,
                         form.endDate.toString(),
                       ),
                     ],
                   ),
                   _buildFormDetail(
-                    'Description',
+                    S.current.description,
                     form.description,
                   ),
                 ],
@@ -308,8 +315,8 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                  fixedSize: MaterialStatePropertyAll(Size(
-                      300, screenWidth < breakpointSmallMobile ? 15 : 40)),
+                  fixedSize: MaterialStatePropertyAll(
+                      Size(300, screenWidth < breakpointSmallMobile ? 15 : 40)),
                   surfaceTintColor: MaterialStatePropertyAll(
                       Theme.of(context).colorScheme.secondary),
                   side: MaterialStatePropertyAll(

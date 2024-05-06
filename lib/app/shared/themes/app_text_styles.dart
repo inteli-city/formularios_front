@@ -23,4 +23,9 @@ class AppTextStyles {
     color: AppColors.primaryBlue,
     fontSize: 12.0,
   );
+
+  static TextStyle bodyText2 = TextStyle(
+    color: AppColors.primaryBlue,
+    fontSize: 8.0,
+  );
 }

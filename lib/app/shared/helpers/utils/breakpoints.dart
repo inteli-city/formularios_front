@@ -6,6 +6,5 @@ var breakpointTablet = 1200;
 
 // height
 
-var breakpointMobileHeight = 600;
-var breakpointSmallMobileHeight = 400;
-var breakpointTabletHeight = 1000;
+var breakpointMobileHeight = 700;
+var breakpointTabletHeight = 1200;

@@ -19,14 +19,20 @@ class FormDetailsPage extends StatefulWidget {
 }
 
 class FormDetailsPageState extends State<FormDetailsPage> {
-  var state = Modular.get<FormUserProvider>().state;
+  late FormUserState state;
+  late FormEntity form;
+
+  @override
+  void initState() {
+    super.initState();
+    state = Modular.get<FormUserProvider>().state;
+    form = (state as FormUserSuccessState)
+        .forms
+        .firstWhere((form) => form.externFormId == widget.externFormId);
+  }
 
   @override
   Widget build(BuildContext context) {
-    FormEntity form = (state as FormUserSuccessState)
-        .forms
-        .firstWhere((form) => form.externFormId == widget.externFormId);
-
     return Container(
       constraints: BoxConstraints(
           maxHeight: ScreenHelper.height(context) * 0.8,
@@ -61,22 +67,17 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           width: double.infinity,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                '${form.system} - ${form.template}',
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                      height: 1.0,
-                    ),
-              ),
+              Text('${form.system} - ${form.template}',
+                  style: Theme.of(context).textTheme.displayLarge),
               IconButton(
                 onPressed: () => Modular.to.navigate('/home/forms'),
                 icon: Icon(
                   Icons.close,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                iconSize: AppDimensions.iconLarge,
+                iconSize: AppDimensions.iconMedium,
               ),
             ],
           ),
@@ -237,6 +238,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
   }
 
   Widget _buildFormDetail(String attribute, String? value) {
+    double screenWidth = ScreenHelper.width(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -246,11 +248,14 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           '$attribute:',
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: screenWidth <= breakpointSmallMobile ? 10 : 12,
               ),
         ),
         Text(
           value ?? '',
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
+          textAlign: TextAlign.start,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              fontSize: screenWidth <= breakpointSmallMobile ? 10 : 12),
           overflow: TextOverflow.ellipsis,
           maxLines: 5,
         ),
@@ -263,75 +268,73 @@ class FormDetailsPageState extends State<FormDetailsPage> {
     double screenHeight = ScreenHelper.height(context);
 
     return SizedBox(
-      width: screenWidth,
+      width: screenWidth * 0.8,
       height: ScreenHelper.height(context) * 0.3,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ElevatedButton(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                fixedSize: MaterialStatePropertyAll(
-                    Size(300, screenWidth < breakpointSmallMobile ? 15 : 40)),
                 backgroundColor:
                     MaterialStatePropertyAll(AppColors.primaryBlue),
-                shadowColor: MaterialStatePropertyAll(AppColors.white),
               ),
               child: Text(
                 'Iniciar',
-                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     color: AppColors.white,
                     fontSize: screenWidth < breakpointSmallMobile ? 12 : 20),
               ),
             ),
-            SizedBox(
-              height: screenWidth < breakpointSmallMobileHeight
-                  ? AppDimensions.verticalSpaceSmall
-                  : AppDimensions.verticalSpaceLarge,
-            ),
-            ElevatedButton(
+          ),
+          SizedBox(
+            height: screenHeight < breakpointMobileHeight
+                ? AppDimensions.verticalSpaceSmall
+                : AppDimensions.verticalSpaceLarge,
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                  fixedSize: MaterialStatePropertyAll(
-                      Size(300, screenWidth < breakpointSmallMobile ? 15 : 40)),
-                  backgroundColor: MaterialStatePropertyAll(AppColors.red),
-                  shadowColor: MaterialStatePropertyAll(AppColors.white)),
+                backgroundColor: MaterialStatePropertyAll(AppColors.red),
+              ),
               child: Text(
                 'Cancelar Formulário',
-                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     color: AppColors.white,
                     fontSize: screenWidth < breakpointSmallMobile ? 12 : 20),
               ),
             ),
-            SizedBox(
-              height: screenHeight < breakpointSmallMobileHeight
-                  ? AppDimensions.verticalSpaceSmall
-                  : AppDimensions.verticalSpaceLarge,
-            ),
-            ElevatedButton(
+          ),
+          SizedBox(
+            height: screenHeight < breakpointMobileHeight
+                ? AppDimensions.verticalSpaceSmall
+                : AppDimensions.verticalSpaceLarge,
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                  fixedSize: MaterialStatePropertyAll(
-                      Size(300, screenWidth < breakpointSmallMobile ? 15 : 40)),
-                  surfaceTintColor: MaterialStatePropertyAll(
-                      Theme.of(context).colorScheme.secondary),
-                  side: MaterialStatePropertyAll(
-                      BorderSide(color: AppColors.primaryBlue)),
-                  shadowColor: MaterialStatePropertyAll(AppColors.white)),
+                surfaceTintColor: MaterialStatePropertyAll(
+                    Theme.of(context).colorScheme.secondary),
+                side: MaterialStatePropertyAll(
+                  BorderSide(color: Theme.of(context).colorScheme.primary),
+                ),
+              ),
               child: Text(
                 'Vincular Formulário',
-                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: screenWidth < breakpointSmallMobile ? 12 : 20),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

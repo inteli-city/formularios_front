@@ -52,7 +52,7 @@ class _FormCardState extends State<FormCard>
         : widget.form.status == FormStatusEnum.EM_ANDAMENTO
             ? AppColors.yellow
             : AppColors.red;
-
+    FormEntity form = widget.form;
     DateTime dateTime =
         DateTime.fromMillisecondsSinceEpoch(widget.form.expirationDate);
     String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(dateTime);
@@ -85,43 +85,20 @@ class _FormCardState extends State<FormCard>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(widget.form.system,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        Text(widget.form.template,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(fontWeight: FontWeight.bold)),
-                        const SizedBox(
-                            width: AppDimensions.horizontalSpaceSmall),
-                        Text(widget.form.externFormId,
-                            style: Theme.of(context).textTheme.bodyLarge),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(widget.form.city,
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        const SizedBox(
-                            width: AppDimensions.horizontalSpaceSmall),
-                        Text('${widget.form.street}, ${widget.form.number}',
-                            style: Theme.of(context).textTheme.bodyLarge),
-                      ],
-                    ),
-                    Text(formattedDate,
+                    Text(
+                        '${form.system} - ${form.template} - ${form.externFormId} ',
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(fontWeight: FontWeight.bold)),
+                    Text('${form.city} - ${form.street}, ${form.number}',
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyLarge),
-                    Text(widget.form.description ?? '',
+                    Text(formattedDate,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyLarge),
+                    Text(form.description ?? '',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyLarge),

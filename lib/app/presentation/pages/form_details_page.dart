@@ -16,158 +16,99 @@ class FormDetailsPage extends StatefulWidget {
 }
 
 class FormDetailsPageState extends State<FormDetailsPage> {
-  var controller = Modular.get<FormDetailsController>();
+  FormDetailsController controller = Modular.get<FormDetailsController>();
+  FormEntity form = Modular.get<FormDetailsController>().form;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingExtraLarge,
+          horizontal: AppDimensions.paddingMedium),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildFormDetails(controller.form),
+          _buildFormDetailsHeader(),
+          _buildFormDetails(),
           _buildFormDetailsActions(),
         ],
       ),
     );
   }
 
-  Widget _buildFormDetails(FormEntity form) {
-    return Column(
-      children: [
-        Row(
+  Widget _buildFormDetailsHeader() {
+    return Container(
+        decoration: const BoxDecoration(
+            border: Border(
+                bottom: BorderSide(
+          width: AppDimensions.borderThin,
+        ))),
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('${form.system} - ${form.template}',
-                style: Theme.of(context).textTheme.displayLarge),
             IconButton(
               onPressed: () => Modular.to.pop(),
               icon: Icon(
-                Icons.close,
+                Icons.arrow_back_outlined,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              iconSize: AppDimensions.iconMedium,
+              iconSize: AppDimensions.iconLarge,
             ),
+            Text('${form.system} - ${form.template}',
+                style: Theme.of(context).textTheme.displayLarge),
           ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        ));
+  }
+
+  Widget _buildFormDetails() {
+    return Expanded(
+        child: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.externId,
-                    form.externFormId,
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.internId,
-                    form.internFormId,
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.vinculationId,
-                    form.vinculationFormId,
-                  ),
-                ),
+            _buildDetaislRow(
+              details: [
+                [S.current.externId, form.externFormId],
+                [S.current.internId, form.internFormId],
+                [S.current.vinculationId, form.vinculationFormId ?? ''],
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.creatorUserId,
-                    form.creatorUserId.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                      S.current.coordinatorId, form.coordinatorsId.join('\n')),
-                ),
+            _buildDetaislRow(
+              details: [
+                [S.current.creatorUserId, form.creatorUserId],
+                [S.current.coordinatorId, form.coordinatorsId.join('-')],
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.priority,
-                    form.priority.enumString,
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                    'Status',
-                    form.status.enumString,
-                  ),
-                ),
+            _buildDetaislRow(
+              details: [
+                [S.current.priority, form.priority.enumString],
+                ['Status', form.status.enumString]
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.creationDate,
-                    controller.creationDate,
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.expirationDate,
-                    controller.expirationDate,
-                  ),
-                ),
+            _buildDetaislRow(
+              details: [
+                [S.current.creationDate, controller.creationDate],
+                [S.current.expirationDate, controller.expirationDate],
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.street,
-                    form.street,
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.number,
-                    form.number.toString(),
-                  ),
-                ),
+            _buildDetaislRow(
+              details: [
+                [S.current.street, form.street],
+                [S.current.number, form.number.toString()],
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.latitude,
-                    form.latitude.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.longitude,
-                    form.longitude.toString(),
-                  ),
-                ),
+            _buildDetaislRow(
+              details: [
+                [S.current.latitude, form.latitude.toString()],
+                [S.current.longitude, form.longitude.toString()],
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.startDate,
-                    form.startDate.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: _buildFormDetail(
-                    S.current.endDate,
-                    form.endDate.toString(),
-                  ),
-                ),
+            _buildDetaislRow(
+              details: [
+                [S.current.startDate, S.current.startDate],
+                [S.current.endDate, S.current.endDate]
               ],
             ),
             _buildFormDetail(
@@ -176,12 +117,21 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             ),
           ],
         ),
-      ],
+      ),
+    ));
+  }
+
+  Widget _buildDetaislRow({required List<List<String>> details}) {
+    return Row(
+      children: details
+          .map((detail) => Expanded(
+                child: _buildFormDetail(detail[0], detail[1]),
+              ))
+          .toList(),
     );
   }
 
   Widget _buildFormDetail(String attribute, String? value) {
-    double screenWidth = ScreenHelper.width(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -189,16 +139,13 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           '$attribute:',
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: screenWidth <= breakpointSmallMobile ? 10 : 12,
               ),
         ),
         Text(
           value ?? '',
           textAlign: TextAlign.start,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontSize: screenWidth <= breakpointSmallMobile ? 10 : 12),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 5,
+          style: Theme.of(context).textTheme.bodyLarge!,
+          overflow: TextOverflow.clip,
         ),
       ],
     );
@@ -208,72 +155,77 @@ class FormDetailsPageState extends State<FormDetailsPage> {
     double screenWidth = ScreenHelper.width(context);
     double screenHeight = ScreenHelper.height(context);
 
-    return SizedBox(
-      width: screenWidth * 0.8,
-      height: ScreenHelper.height(context) * 0.3,
+    return Container(
+      height: screenHeight * 0.2,
+      decoration: const BoxDecoration(
+          border: Border(top: BorderSide(width: AppDimensions.borderThin))),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
+                elevation: const MaterialStatePropertyAll(8),
                 backgroundColor:
                     MaterialStatePropertyAll(AppColors.primaryBlue),
               ),
               child: Text(
                 'Iniciar',
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: AppColors.white,
-                    fontSize: screenWidth < breakpointSmallMobile ? 12 : 20),
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth < breakpointSmallMobile ? 12 : 16),
               ),
             ),
           ),
-          SizedBox(
-            height: screenHeight < breakpointMobileHeight
-                ? AppDimensions.verticalSpaceSmall
-                : AppDimensions.verticalSpaceLarge,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(AppColors.red),
-              ),
-              child: Text(
-                'Cancelar Formulário',
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: AppColors.white,
-                    fontSize: screenWidth < breakpointSmallMobile ? 12 : 20),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: screenHeight < breakpointMobileHeight
-                ? AppDimensions.verticalSpaceSmall
-                : AppDimensions.verticalSpaceLarge,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                surfaceTintColor: MaterialStatePropertyAll(
-                    Theme.of(context).colorScheme.secondary),
-                side: MaterialStatePropertyAll(
-                  BorderSide(color: Theme.of(context).colorScheme.primary),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    elevation: const MaterialStatePropertyAll(2),
+                    backgroundColor: MaterialStatePropertyAll(AppColors.red),
+                  ),
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'Cancelar Formulário',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize:
+                            screenWidth < breakpointSmallMobile ? 12 : 16),
+                  ),
                 ),
               ),
-              child: Text(
-                'Vincular Formulário',
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: screenWidth < breakpointSmallMobile ? 12 : 20),
+              const SizedBox(
+                width: 5,
               ),
-            ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    elevation: const MaterialStatePropertyAll(2),
+                    surfaceTintColor: MaterialStatePropertyAll(
+                        Theme.of(context).colorScheme.secondary),
+                    side: MaterialStatePropertyAll(
+                      BorderSide(color: Theme.of(context).colorScheme.primary),
+                    ),
+                  ),
+                  child: Text(
+                    'Vincular Formulário',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize:
+                            screenWidth < breakpointSmallMobile ? 12 : 10),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

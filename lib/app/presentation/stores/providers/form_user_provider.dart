@@ -19,6 +19,12 @@ class FormUserProvider extends ChangeNotifier {
   List<FormEntity> _allForms = [];
   List<FormEntity> _copyAllFilterForms = [];
 
+  FormEntity getFormByExternId(String externId) {
+    return _allForms.firstWhere(
+      (element) => element.externFormId == externId,
+    );
+  }
+
   List<String> get templates =>
       _allForms.map((form) => form.template).toSet().toList();
 

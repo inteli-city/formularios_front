@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/pages/form_details_page.dart';
@@ -48,11 +49,15 @@ class HomeModule extends Module {
         () => FormUserProvider(i.get<IFetchUserFormsUsecase>()));
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
-    i.addLazySingleton<IFetchUserFormsUsecase>(
-        () => FetchUserFormsUsecase(repository: i.get<IFormRepository>()));
+    i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);
     i.addLazySingleton(SelectChipController.new);
+    i.add(
+      () => FormDetailsController(
+        externId: i.args.params['externId'],
+      ),
+    );
   }
 
   @override
@@ -65,13 +70,11 @@ class HomeModule extends Module {
           '/forms',
           child: (context) => const HomePage(),
         ),
-        ChildRoute(
-          '/forms/:externId',
-          child: (context) => FormDetailsPage(
-            externFormId: r.args.params['externId'],
-          ),
-        ),
       ],
+    );
+    r.child(
+      '/:externId',
+      child: (context) => const FormDetailsPage(),
     );
   }
 }

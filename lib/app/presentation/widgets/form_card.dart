@@ -37,7 +37,7 @@ class _FormCardState extends State<FormCard>
   }
 
   void _onTapDown(TapDownDetails details) {
-    Modular.to.navigate('/home/forms/${widget.form.externFormId}');
+    Modular.to.pushNamed('/home/${widget.form.externFormId}');
     _controller.forward();
   }
 

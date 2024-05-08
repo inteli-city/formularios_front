@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,9 +20,14 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: AppColors.primaryBlue,
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          strokeWidth: 5,
+          
+          color: AppColors.white,
+        ),
       ),
     );
   }

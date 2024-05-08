@@ -25,7 +25,6 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: CircularProgressIndicator(
           strokeWidth: 5,
-          
           color: AppColors.white,
         ),
       ),

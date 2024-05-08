@@ -41,6 +41,16 @@ class _FakeFormUserState_0 extends _i1.SmartFake implements _i2.FormUserState {
         );
 }
 
+class _FakeFormEntity_1 extends _i1.SmartFake implements _i3.FormEntity {
+  _FakeFormEntity_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [FormEntity].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -249,6 +259,21 @@ class MockFormUserProvider extends _i1.Mock implements _i8.FormUserProvider {
         Invocation.getter(#hasListeners),
         returnValue: false,
       ) as bool);
+
+  @override
+  _i3.FormEntity getFormByExternId(String? externId) => (super.noSuchMethod(
+        Invocation.method(
+          #getFormByExternId,
+          [externId],
+        ),
+        returnValue: _FakeFormEntity_1(
+          this,
+          Invocation.method(
+            #getFormByExternId,
+            [externId],
+          ),
+        ),
+      ) as _i3.FormEntity);
 
   @override
   void setState(_i2.FormUserState? value) => super.noSuchMethod(

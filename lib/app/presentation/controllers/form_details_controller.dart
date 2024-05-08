@@ -13,7 +13,7 @@ class FormDetailsController {
   late FormEntity form;
 
   void getForm() {
-    var provider = Modular.get<FormUserProvider>();
+    FormUserProvider provider = Modular.get<FormUserProvider>();
 
     form = provider.getFormByExternId(externId);
   }

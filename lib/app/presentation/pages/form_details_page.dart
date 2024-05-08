@@ -17,7 +17,6 @@ class FormDetailsPage extends StatefulWidget {
 
 class FormDetailsPageState extends State<FormDetailsPage> {
   FormDetailsController controller = Modular.get<FormDetailsController>();
-  FormEntity form = Modular.get<FormDetailsController>().form;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +36,8 @@ class FormDetailsPageState extends State<FormDetailsPage> {
   }
 
   Widget _buildFormDetailsHeader() {
+    FormEntity form = controller.form;
+
     return Container(
         decoration: const BoxDecoration(
             border: Border(
@@ -61,6 +62,8 @@ class FormDetailsPageState extends State<FormDetailsPage> {
   }
 
   Widget _buildFormDetails() {
+    FormEntity form = controller.form;
+
     return Expanded(
         child: SingleChildScrollView(
       child: Padding(

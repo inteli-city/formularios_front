@@ -86,7 +86,7 @@ class _FormCardState extends State<FormCard>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                        '${form.system} - ${form.template} - ${form.externFormId} ',
+                        '${form.system} - ${form.template} - ${form.externFormId}',
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context)
                             .textTheme

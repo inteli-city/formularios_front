@@ -56,7 +56,8 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
 
   Widget _buildSearchFilterTab() {
     return Padding(
-      padding: const EdgeInsets.only(left: AppDimensions.paddingSmall),
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSmall),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -98,9 +99,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
               ],
             ),
           ),
-          const SizedBox(
-            width: AppDimensions.paddingMedium,
-          ),
+          const Spacer(),
           badges.Badge(
             showBadge: filterController.activeFiltersAmount != 0,
             position: badges.BadgePosition.topEnd(),
@@ -131,28 +130,26 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
               icon: const Icon(Icons.filter_list),
             ),
           ),
-          const Spacer(),
+          const SizedBox(
+            width: AppDimensions.paddingMedium,
+          ),
           Tooltip(
             padding: const EdgeInsets.all(AppDimensions.paddingSmall),
-            showDuration: const Duration(seconds: 2),
+            showDuration: const Duration(seconds: 5),
             textAlign: TextAlign.center,
-            exitDuration: const Duration(seconds: 1),
-            waitDuration: const Duration(milliseconds: 500),
             message: S.of(context).priorityTooltip,
-            triggerMode: TooltipTriggerMode.longPress,
-            child: IconButton(
-              alignment: Alignment.center,
-              iconSize: AppDimensions.iconSmall,
-              style: ButtonStyle(
-                  shape: const MaterialStatePropertyAll(CircleBorder()),
-                  backgroundColor: MaterialStatePropertyAll(
-                      Theme.of(context).colorScheme.primary)),
-              onPressed: () {},
-              color: AppColors.primaryBlue,
-              padding: const EdgeInsets.all(AppDimensions.paddingMedium),
-              icon: Icon(
+            triggerMode: TooltipTriggerMode.tap,
+            child: Container(
+              padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusExtraLarge),
+              ),
+              child: Icon(
                 Icons.question_mark,
                 color: Theme.of(context).colorScheme.secondary,
+                size: AppDimensions.iconMedium,
               ),
             ),
           )

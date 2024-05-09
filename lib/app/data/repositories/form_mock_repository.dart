@@ -53,7 +53,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.',
-      priority: PriorityEnum.HIGH,
+      priority: PriorityEnum.LOW,
       status: FormStatusEnum.EM_ANDAMENTO,
       expirationDate: 1,
       creationDate: 1,
@@ -188,7 +188,7 @@ class FormMockRepository extends IFormRepository {
       longitude: 1.0,
       region: 'region',
       description: 'description',
-      priority: PriorityEnum.HIGH,
+      priority: PriorityEnum.LOW,
       status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,

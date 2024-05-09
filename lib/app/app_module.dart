@@ -5,8 +5,10 @@ import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
+import 'package:formularios_front/app/presentation/pages/form_details_page.dart';
 import 'package:formularios_front/app/presentation/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/pages/splash_page.dart';
@@ -65,6 +67,11 @@ class HomeModule extends Module {
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);
     i.addLazySingleton(SelectChipController.new);
+    i.add(
+      () => FormDetailsController(
+        externId: i.args.params['externId'],
+      ),
+    );
   }
 
   @override
@@ -79,6 +86,10 @@ class HomeModule extends Module {
           guards: [UserGuard()],
         ),
       ],
+    );
+    r.child(
+      '/:externId',
+      child: (context) => const FormDetailsPage(),
     );
   }
 }

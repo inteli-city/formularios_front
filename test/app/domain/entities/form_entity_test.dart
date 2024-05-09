@@ -54,7 +54,6 @@ void main() {
 
     test('should return form entity with null values', () {
       final informationField = TextInformationFieldEntity(value: 'value');
-      // final informationFields =TextFieldEntity(isRequired: true,key: 'key',placeholder: 'placeholder',fieldType: FieldTypeEnum.TEXT_FIELD,formatting: 'formatting',regex:'regex' );
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
         externFormId: 'externFormId',

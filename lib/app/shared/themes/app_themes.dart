@@ -50,6 +50,7 @@ class AppThemes {
       headlineLarge: AppTextStyles.headline,
       titleMedium: AppTextStyles.titleMedium,
       bodyLarge: AppTextStyles.bodyText1,
+      bodyMedium: AppTextStyles.bodyText2,
     ),
     cardTheme: CardTheme(
       color: AppColors.white,

@@ -90,6 +90,7 @@ class HomeModule extends Module {
     r.child(
       '/:externId',
       child: (context) => const FormDetailsPage(),
+      guards: [UserGuard()],
     );
   }
 }

@@ -37,7 +37,6 @@ void main() {
       await tester.pumpWidget(MaterialApp(
         home: FormCard(form: form),
       ));
-      print(find.byType(Text).evaluate().map((e) => e.widget).toList());
 
       expect(
           find.text('${form.system} - ${form.template} - ${form.externFormId}'),

@@ -170,15 +170,22 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             child: ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                elevation: const MaterialStatePropertyAll(8),
-                backgroundColor:
-                    MaterialStatePropertyAll(AppColors.primaryBlue),
+                elevation: const MaterialStatePropertyAll(12),
+                shadowColor: MaterialStatePropertyAll(
+                    Theme.of(context).colorScheme.primary),
+                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      AppDimensions.radiusMedium), // Rounded corners
+                )),
+                backgroundColor: MaterialStatePropertyAll(
+                    Theme.of(context).colorScheme.primary),
               ),
               child: Text(
                 'Iniciar',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: AppColors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
+                    height: 1.5,
                     fontSize: screenWidth < breakpointSmallMobile ? 12 : 16),
               ),
             ),
@@ -189,6 +196,11 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ButtonStyle(
+                    padding:
+                        const MaterialStatePropertyAll(EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: AppDimensions.paddingMedium,
+                    )),
                     elevation: const MaterialStatePropertyAll(2),
                     backgroundColor: MaterialStatePropertyAll(AppColors.red),
                   ),
@@ -198,6 +210,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.w400,
+                        height: 1.2,
                         fontSize:
                             screenWidth < breakpointSmallMobile ? 12 : 16),
                   ),
@@ -210,11 +223,18 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ButtonStyle(
+                    padding:
+                        const MaterialStatePropertyAll(EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: AppDimensions.paddingMedium,
+                    )),
                     elevation: const MaterialStatePropertyAll(2),
                     surfaceTintColor: MaterialStatePropertyAll(
                         Theme.of(context).colorScheme.secondary),
                     side: MaterialStatePropertyAll(
-                      BorderSide(color: Theme.of(context).colorScheme.primary),
+                      BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
                   child: Text(
@@ -223,8 +243,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.w400,
                         color: Theme.of(context).colorScheme.primary,
+                        height: 1.2,
                         fontSize:
-                            screenWidth < breakpointSmallMobile ? 12 : 10),
+                            screenWidth < breakpointSmallMobile ? 12 : 16),
                   ),
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 import 'package:formularios_front/app/presentation/widgets/bottom_navigation_widget.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class _LandingPageState extends State<LandingPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => Modular.get<FormUserProvider>()..fetchUserForms(),
+          create: (_) => Modular.get<UserProvider>()..loginUser(),
         ),
       ],
       child: Scaffold(

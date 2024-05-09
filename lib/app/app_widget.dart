@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_themes.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart' as gates;
 import 'package:formularios_front/generated/l10n.dart';
 
 class AppWidget extends StatelessWidget {
@@ -29,6 +30,7 @@ class AppWidget extends StatelessWidget {
       themeMode: ThemeMode.system,
       localizationsDelegates: const [
         S.delegate,
+        gates.S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

@@ -4,6 +4,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
@@ -16,6 +17,13 @@ class FormUserProvider extends ChangeNotifier {
   );
   FormUserState state = FormUserInitialState();
   List<FormEntity> _allForms = [];
+  List<FormEntity> _copyAllFilterForms = [];
+
+  FormEntity getFormByExternId(String externId) {
+    return _allForms.firstWhere(
+      (element) => element.externFormId == externId,
+    );
+  }
 
   List<String> get templates =>
       _allForms.map((form) => form.template).toSet().toList();
@@ -58,11 +66,15 @@ class FormUserProvider extends ChangeNotifier {
   }
 
   String getFormsCountByStatus(FormStatusEnum status) {
-    return (state as FormUserSuccessState)
-        .forms
-        .where((form) => form.status == status)
-        .length
-        .toString();
+    var filterController = Modular.get<FilterFormsController>();
+    List<FormEntity> filterFormsByStatus =
+        filterController.activeFiltersAmount == 0
+            ? _allForms.where((form) => form.status == status).toList()
+            : _copyAllFilterForms
+                .where((form) => form.status == status)
+                .toList();
+
+    return filterFormsByStatus.length.toString();
   }
 
   void filterForms({
@@ -74,10 +86,6 @@ class FormUserProvider extends ChangeNotifier {
   }) {
     List<FormEntity> toFilterForms = _allForms;
 
-    if (enumStatus != null) {
-      toFilterForms =
-          toFilterForms.where((form) => form.status == enumStatus).toList();
-    }
     if (template != null) {
       toFilterForms =
           toFilterForms.where((form) => form.template == template).toList();
@@ -92,6 +100,11 @@ class FormUserProvider extends ChangeNotifier {
     if (system != null) {
       toFilterForms =
           toFilterForms.where((form) => form.system == system).toList();
+    }
+    _copyAllFilterForms = toFilterForms;
+    if (enumStatus != null) {
+      toFilterForms =
+          toFilterForms.where((form) => form.status == enumStatus).toList();
     }
 
     setState(FormUserSuccessState(forms: toFilterForms));

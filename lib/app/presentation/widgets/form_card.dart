@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
-import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
+import 'package:intl/intl.dart';
 
 class FormCard extends StatefulWidget {
   final FormEntity form;
@@ -36,6 +35,7 @@ class _FormCardState extends State<FormCard>
   }
 
   void _onTapDown(TapDownDetails details) {
+    Modular.to.pushNamed('/home/${widget.form.externFormId}');
     _controller.forward();
   }
 
@@ -45,11 +45,10 @@ class _FormCardState extends State<FormCard>
 
   @override
   Widget build(BuildContext context) {
-    Color iconStatusColor = widget.form.status == FormStatusEnum.NAO_INICIADO
-        ? AppColors.green
-        : widget.form.status == FormStatusEnum.EM_ANDAMENTO
-            ? AppColors.yellow
-            : AppColors.red;
+    FormEntity form = widget.form;
+    DateTime dateTime =
+        DateTime.fromMillisecondsSinceEpoch(widget.form.expirationDate);
+    String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(dateTime);
 
     return GestureDetector(
       onTapDown: _onTapDown,
@@ -68,54 +67,50 @@ class _FormCardState extends State<FormCard>
               width: AppDimensions.borderMedium,
             ),
           ),
-          child: Padding(
+          child: Container(
             padding: const EdgeInsets.symmetric(
-              horizontal: AppDimensions.paddingMedium,
-              vertical: AppDimensions.paddingMedium,
-            ),
-            child: Stack(
+                vertical: AppDimensions.paddingSmall,
+                horizontal: AppDimensions.paddingMedium),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      widget.form.template,
-                      style: Theme.of(context).textTheme.headlineLarge,
+                      '${form.system} - ${form.template} - ${form.externFormId}',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
-                      height: AppDimensions.verticalSpaceMedium,
-                    ),
-                    Text(
-                      widget.form.street,
-                      style: AppTextStyles.bodyText1.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: AppDimensions.verticalSpaceMedium,
-                    ),
-                    Text(
-                      widget.form.expirationDate.toString(),
-                      style: AppTextStyles.bodyText1.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                  ],
-                ),
-                Positioned(
-                  right: -10,
-                  top: -10,
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
+                    Icon(
                       Icons.circle,
                       size: AppDimensions.iconSmall * 1.6,
-                      color: iconStatusColor,
-                    ),
-                  ),
+                      color: form.priority.color,
+                    )
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  '${form.city} - ${form.street}, ${form.number}',
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  formattedDate,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  form.description ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
             ),

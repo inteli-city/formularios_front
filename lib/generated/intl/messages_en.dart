@@ -54,16 +54,33 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "clearFilters": MessageLookupByLibrary.simpleMessage("Clear Filters"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "coordinatorId": MessageLookupByLibrary.simpleMessage("Coordinator ID"),
+        "creationDate": MessageLookupByLibrary.simpleMessage("Creation Date"),
+        "creatorUserId":
+            MessageLookupByLibrary.simpleMessage("Creator User ID"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "entityErrorMessage": m0,
+        "expirationDate":
+            MessageLookupByLibrary.simpleMessage("Expiration Date"),
+        "externId": MessageLookupByLibrary.simpleMessage("External ID"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "formStatusEnumSchema": m1,
+        "internId": MessageLookupByLibrary.simpleMessage("Internal ID"),
+        "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
+        "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "noFormsFound": MessageLookupByLibrary.simpleMessage("No form found!"),
         "noItemsFoundErrorMessage": m2,
+        "number": MessageLookupByLibrary.simpleMessage("Number"),
         "orderEnumSchema": m3,
+        "priority": MessageLookupByLibrary.simpleMessage("Priority"),
         "priorityEnumSchema": m4,
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)"),
         "requestErrorMessage": m5,
-        "sort": MessageLookupByLibrary.simpleMessage("Sort")
+        "sort": MessageLookupByLibrary.simpleMessage("Sort"),
+        "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "street": MessageLookupByLibrary.simpleMessage("Street"),
+        "vinculationId": MessageLookupByLibrary.simpleMessage("Vinculation ID")
       };
 }

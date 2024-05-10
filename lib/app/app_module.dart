@@ -15,7 +15,7 @@ import 'package:formularios_front/app/presentation/pages/splash_page.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
-import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
+// import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
@@ -83,14 +83,14 @@ class HomeModule extends Module {
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
-          guards: [UserGuard()],
+          // guards: [UserGuard()],
         ),
       ],
     );
     r.child(
       '/:externId',
       child: (context) => const FormDetailsPage(),
-      guards: [UserGuard()],
+      // guards: [UserGuard()],
     );
   }
 }

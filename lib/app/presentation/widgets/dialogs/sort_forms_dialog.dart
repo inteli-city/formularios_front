@@ -50,16 +50,12 @@ class _SortFormsDialog extends State<SortFormsDialog> {
                 decoration: BoxDecoration(color: AppColors.primaryBlue),
                 width: double.infinity,
                 child: ElevatedButton(
-                  style: ButtonStyle(
-                    padding: const MaterialStatePropertyAll(
-                      EdgeInsets.symmetric(
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
                         vertical: AppDimensions.paddingMedium,
                       ),
-                    ),
-                    side: const MaterialStatePropertyAll(BorderSide.none),
-                    backgroundColor:
-                        MaterialStateProperty.all(AppColors.primaryBlue),
-                  ),
+                      side: BorderSide.none,
+                      backgroundColor: AppColors.primaryBlue),
                   onPressed: () {
                     formProvider.orderForms(controller.selectedOrder);
                     Navigator.pop(context);

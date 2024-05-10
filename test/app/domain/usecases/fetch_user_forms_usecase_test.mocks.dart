@@ -63,4 +63,24 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, void>> initializeForms(
+          {required String? formId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #initializeForms,
+          [],
+          {#formId: formId},
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, void>>.value(
+            _FakeEither_0<_i5.Failure, void>(
+          this,
+          Invocation.method(
+            #initializeForms,
+            [],
+            {#formId: formId},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, void>>);
 }

@@ -362,6 +362,15 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as _i5.FormStatusEnum);
 
   @override
+  set status(_i5.FormStatusEnum? _status) => super.noSuchMethod(
+        Invocation.setter(
+          #status,
+          _status,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   int get expirationDate => (super.noSuchMethod(
         Invocation.getter(#expirationDate),
         returnValue: 0,

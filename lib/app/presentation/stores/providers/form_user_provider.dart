@@ -4,6 +4,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/initialize_user_form_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
@@ -11,10 +12,11 @@ import 'package:logger/logger.dart';
 
 class FormUserProvider extends ChangeNotifier {
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
+  final IIntiliazeUserFormStatusUseCase _initializeUserFormStatusUseCase;
 
   FormUserProvider(
-    this._fetchUserFormsUsecase,
-  );
+      this._fetchUserFormsUsecase, this._initializeUserFormStatusUseCase);
+
   FormUserState state = FormUserInitialState();
   List<FormEntity> _allForms = [];
   List<FormEntity> _copyAllFilterForms = [];
@@ -60,6 +62,31 @@ class FormUserProvider extends ChangeNotifier {
           _allForms = forms;
 
           return FormUserSuccessState(forms: forms);
+        },
+      );
+    }));
+  }
+
+  void initializeUserFormStatus({required FormEntity form}) async {
+    setState(FormUserLoadingState());
+    setState(await _initializeUserFormStatusUseCase(
+      form: form,
+    ).then((value) {
+      return value.fold(
+        (error) {
+          Modular.get<Logger>().e(error.toString());
+          GlobalSnackBar.error(error.message);
+          return FormUserErrorState(error: error);
+        },
+        (initializedForm) {
+          Modular.get<Logger>().d(
+            '${DateTime.now()} - Form with ${form.externFormId} initialized successfully!',
+          );
+          int formIndex = _allForms.indexOf(form);
+      
+          _allForms[formIndex] = initializedForm;
+
+          return FormUserSuccessState(forms: _allForms);
         },
       );
     }));

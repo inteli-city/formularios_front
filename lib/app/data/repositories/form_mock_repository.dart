@@ -236,4 +236,16 @@ class FormMockRepository extends IFormRepository {
       formList.where((element) => element.userId == userId).toList(),
     );
   }
+
+  @override
+  Future<Either<Failure, FormEntity>> initializeUserFormStatus(
+      {required FormEntity form}) async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    FormEntity initializedForm = form.copyWith(
+      status: FormStatusEnum.EM_ANDAMENTO,
+    );
+
+    return right(initializedForm);
+  }
 }

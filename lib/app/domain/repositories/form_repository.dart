@@ -5,4 +5,6 @@ import 'package:formularios_front/app/domain/failures/failures.dart';
 abstract class IFormRepository {
   Future<Either<Failure, List<FormEntity>>> getUserForms(
       {required String userId});
+      
+  Future<Either<Failure, FormEntity>> initializeUserFormStatus({required FormEntity form});
 }

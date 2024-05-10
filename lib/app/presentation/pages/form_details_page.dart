@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
+import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/utils/breakpoints.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
@@ -17,6 +18,7 @@ class FormDetailsPage extends StatefulWidget {
 
 class FormDetailsPageState extends State<FormDetailsPage> {
   FormDetailsController controller = Modular.get<FormDetailsController>();
+  FormUserProvider formUserProvider = Modular.get<FormUserProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,18 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '${controller.form.system} - ${controller.form.template}',
-                style: Theme.of(context).textTheme.displayLarge,
-                overflow: TextOverflow.ellipsis,
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () => Modular.to.pop(),
+                  ),
+                  Text(
+                    '${controller.form.system} - ${controller.form.template}',
+                    style: Theme.of(context).textTheme.displayLarge,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
               const SizedBox(
                 height: AppDimensions.verticalSpaceMedium,
@@ -154,7 +164,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              formUserProvider.initializeUserFormStatus(form: controller.form);
+            },
             style: ElevatedButton.styleFrom(
               elevation: 12,
               shadowColor: Theme.of(context).colorScheme.primary,

@@ -52,10 +52,15 @@ void main() {
     });
 
     test('should return a list of FormEntity', () async {
-      when(formRepository.updateFormStatus(form: form)).thenAnswer(
+      when(formRepository.updateFormStatus(
+              status: FormStatusEnum.EM_ANDAMENTO,
+              externFormId: form.externFormId))
+          .thenAnswer(
         (_) async => Right(form),
       );
-      var result = await usecase(form: form);
+
+      var result = await usecase(
+          externFormId: form.externFormId, status: FormStatusEnum.EM_ANDAMENTO);
 
       expect(result.isRight(), true);
 
@@ -71,10 +76,13 @@ void main() {
     });
 
     test('should return a Failure', () async {
-      when(formRepository.updateFormStatus(form: form))
+      when(formRepository.updateFormStatus(
+              externFormId: form.externFormId,
+              status: FormStatusEnum.EM_ANDAMENTO))
           .thenAnswer((_) async => Left(Failure(message: '')));
 
-      var result = await usecase(form: form);
+      var result = await usecase(
+          externFormId: form.externFormId, status: FormStatusEnum.EM_ANDAMENTO);
 
       expect(result.isLeft(), true);
       expect(

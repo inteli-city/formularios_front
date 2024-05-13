@@ -244,18 +244,19 @@ class FormMockRepository extends IFormRepository {
     required String externFormId,
   }) async {
     try {
-      var index = formList.indexWhere(
+      int index = formList.indexWhere(
         (element) => element.externFormId == externFormId,
       );
 
       FormModel formModel = FormModel.entityToModel(formList[index]);
-
-      formModel.copyWith(status: status);
+      
+      FormModel copyFormModel = formModel.copyWith(status: status);
 
       formList.removeAt(index);
 
-      formList.insert(index, formModel);
-      return right(formModel);
+      formList.insert(index, copyFormModel);
+
+      return right(copyFormModel);
     } catch (e) {
       return left(NoItemsFound(message: "Formulário não encontrado."));
     }

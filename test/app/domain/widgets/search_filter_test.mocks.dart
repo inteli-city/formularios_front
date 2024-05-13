@@ -405,12 +405,12 @@ class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
       );
 
   @override
-  void initializeUserFormStatus({required _i5.FormEntity? form}) =>
+  void initializeUserFormStatus({required String? externFormId}) =>
       super.noSuchMethod(
         Invocation.method(
           #initializeUserFormStatus,
           [],
-          {#form: form},
+          {#externFormId: externFormId},
         ),
         returnValueForMissingStub: null,
       );

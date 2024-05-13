@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
@@ -135,7 +136,9 @@ void main() {
         sections: [sectionExample],
       );
       
-      final copyForm = form.copyWith();
+      FormModel formEntity = FormModel.entityToModel(form);
+
+      final copyForm = formEntity.copyWith();
 
       expect(copyForm.externFormId, 'externFormId');
       expect(copyForm.internFormId, 'internFormId');

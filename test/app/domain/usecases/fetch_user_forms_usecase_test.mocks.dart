@@ -7,6 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i6;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
 import 'package:formularios_front/app/domain/failures/failures.dart' as _i5;
 import 'package:formularios_front/app/domain/repositories/form_repository.dart'
     as _i3;
@@ -65,21 +66,29 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>> updateFormStatus(
-          {required _i6.FormEntity? form}) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>> updateFormStatus({
+    required _i7.FormStatusEnum? status,
+    required String? externFormId,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #initializeUserFormStatus,
+          #updateFormStatus,
           [],
-          {#form: form},
+          {
+            #status: status,
+            #externFormId: externFormId,
+          },
         ),
         returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>.value(
             _FakeEither_0<_i5.Failure, _i6.FormEntity>(
           this,
           Invocation.method(
-            #initializeUserFormStatus,
+            #updateFormStatus,
             [],
-            {#form: form},
+            {
+              #status: status,
+              #externFormId: externFormId,
+            },
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>);

@@ -51,7 +51,7 @@ void main() {
     when(Modular.get<FormUserProvider>().getFormByExternId(form.externFormId))
         .thenReturn(form);
     when(Modular.get<FormDetailsController>().form).thenReturn(form);
-    when(Modular.get<FormDetailsController>().externId)
+    when(Modular.get<FormDetailsController>().externFormId)
         .thenReturn(form.externFormId);
 
     when(Modular.get<FormDetailsController>().creationDate)

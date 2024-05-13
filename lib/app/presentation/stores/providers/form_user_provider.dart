@@ -12,7 +12,7 @@ import 'package:logger/logger.dart';
 
 class FormUserProvider extends ChangeNotifier {
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
-  final IIntiliazeUserFormStatusUseCase _initializeUserFormStatusUseCase;
+  final IInitiliazeUserFormStatusUseCase _initializeUserFormStatusUseCase;
 
   FormUserProvider(
       this._fetchUserFormsUsecase, this._initializeUserFormStatusUseCase);

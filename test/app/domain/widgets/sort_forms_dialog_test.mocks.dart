@@ -168,6 +168,17 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
       );
 
   @override
+  void initializeUserFormStatus({required _i3.FormEntity? form}) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #initializeUserFormStatus,
+          [],
+          {#form: form},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   String getFormsCountByStatus(_i7.FormStatusEnum? status) =>
       (super.noSuchMethod(
         Invocation.method(

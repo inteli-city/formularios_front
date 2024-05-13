@@ -6,6 +6,8 @@
 import 'dart:ui' as _i8;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
+import 'package:formularios_front/app/domain/entities/information_field_entity.dart'
+    as _i11;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i10;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
@@ -136,6 +138,17 @@ class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
         Invocation.method(
           #fetchUserForms,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void initializeUserFormStatus({required _i3.FormEntity? form}) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #initializeUserFormStatus,
+          [],
+          {#form: form},
         ),
         returnValueForMissingStub: null,
       );
@@ -360,15 +373,6 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as _i5.FormStatusEnum);
 
   @override
-  set status(_i5.FormStatusEnum? _status) => super.noSuchMethod(
-        Invocation.setter(
-          #status,
-          _status,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   int get expirationDate => (super.noSuchMethod(
         Invocation.getter(#expirationDate),
         returnValue: 0,
@@ -385,4 +389,103 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
         Invocation.getter(#sections),
         returnValue: <_i10.SectionEntity>[],
       ) as List<_i10.SectionEntity>);
+
+  @override
+  _i3.FormEntity copyWith({
+    String? externFormId,
+    String? internFormId,
+    String? creatorUserId,
+    String? userId,
+    List<String>? coordinatorsId,
+    String? vinculationFormId,
+    String? template,
+    String? area,
+    String? system,
+    String? street,
+    String? city,
+    int? number,
+    double? latitude,
+    double? longitude,
+    String? region,
+    String? description,
+    _i9.PriorityEnum? priority,
+    _i5.FormStatusEnum? status,
+    int? expirationDate,
+    int? creationDate,
+    int? startDate,
+    int? endDate,
+    String? justificative,
+    String? comments,
+    List<_i10.SectionEntity>? sections,
+    List<_i11.InformationFieldEntity>? informationFields,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #copyWith,
+          [],
+          {
+            #externFormId: externFormId,
+            #internFormId: internFormId,
+            #creatorUserId: creatorUserId,
+            #userId: userId,
+            #coordinatorsId: coordinatorsId,
+            #vinculationFormId: vinculationFormId,
+            #template: template,
+            #area: area,
+            #system: system,
+            #street: street,
+            #city: city,
+            #number: number,
+            #latitude: latitude,
+            #longitude: longitude,
+            #region: region,
+            #description: description,
+            #priority: priority,
+            #status: status,
+            #expirationDate: expirationDate,
+            #creationDate: creationDate,
+            #startDate: startDate,
+            #endDate: endDate,
+            #justificative: justificative,
+            #comments: comments,
+            #sections: sections,
+            #informationFields: informationFields,
+          },
+        ),
+        returnValue: _FakeFormEntity_1(
+          this,
+          Invocation.method(
+            #copyWith,
+            [],
+            {
+              #externFormId: externFormId,
+              #internFormId: internFormId,
+              #creatorUserId: creatorUserId,
+              #userId: userId,
+              #coordinatorsId: coordinatorsId,
+              #vinculationFormId: vinculationFormId,
+              #template: template,
+              #area: area,
+              #system: system,
+              #street: street,
+              #city: city,
+              #number: number,
+              #latitude: latitude,
+              #longitude: longitude,
+              #region: region,
+              #description: description,
+              #priority: priority,
+              #status: status,
+              #expirationDate: expirationDate,
+              #creationDate: creationDate,
+              #startDate: startDate,
+              #endDate: endDate,
+              #justificative: justificative,
+              #comments: comments,
+              #sections: sections,
+              #informationFields: informationFields,
+            },
+          ),
+        ),
+      ) as _i3.FormEntity);
 }

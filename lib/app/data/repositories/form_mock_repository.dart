@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -238,14 +239,25 @@ class FormMockRepository extends IFormRepository {
   }
 
   @override
-  Future<Either<Failure, FormEntity>> initializeUserFormStatus(
-      {required FormEntity form}) async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future<Either<Failure, FormEntity>> updateFormStatus({
+    required FormStatusEnum status,
+    required String externFormId,
+  }) async {
+    try {
+      var index = formList.indexWhere(
+        (element) => element.externFormId == externFormId,
+      );
 
-    FormEntity initializedForm = form.copyWith(
-      status: FormStatusEnum.EM_ANDAMENTO,
-    );
+      FormModel formModel = FormModel.entityToModel(formList[index]);
 
-    return right(initializedForm);
+      formModel.copyWith(status: status);
+
+      formList.removeAt(index);
+
+      formList.insert(index, formModel);
+      return right(formModel);
+    } catch (e) {
+      return left(NoItemsFound(message: "Formulário não encontrado."));
+    }
   }
 }

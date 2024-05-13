@@ -7,7 +7,7 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
-import 'package:formularios_front/app/domain/usecases/initialize_user_form_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -52,7 +52,7 @@ void main() {
     });
 
     test('should return a list of FormEntity', () async {
-      when(formRepository.initializeUserFormStatus(form: form)).thenAnswer(
+      when(formRepository.updateFormStatus(form: form)).thenAnswer(
         (_) async => Right(form),
       );
       var result = await usecase(form: form);
@@ -71,7 +71,7 @@ void main() {
     });
 
     test('should return a Failure', () async {
-      when(formRepository.initializeUserFormStatus(form: form))
+      when(formRepository.updateFormStatus(form: form))
           .thenAnswer((_) async => Left(Failure(message: '')));
 
       var result = await usecase(form: form);

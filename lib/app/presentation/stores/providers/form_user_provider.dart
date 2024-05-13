@@ -4,7 +4,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/initialize_user_form_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
@@ -12,10 +12,12 @@ import 'package:logger/logger.dart';
 
 class FormUserProvider extends ChangeNotifier {
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
-  final UpdateFormStatusUseCase _initializeUserFormStatusUseCase;
+  final UpdateFormStatusUseCase _updateFormStatusUseCase;
 
   FormUserProvider(
-      this._fetchUserFormsUsecase, this._initializeUserFormStatusUseCase);
+    this._fetchUserFormsUsecase,
+    this._updateFormStatusUseCase,
+  );
 
   FormUserState state = FormUserInitialState();
   List<FormEntity> _allForms = [];
@@ -67,29 +69,26 @@ class FormUserProvider extends ChangeNotifier {
     }));
   }
 
-  void initializeUserFormStatus({required FormEntity form}) async {
+  void initializeUserFormStatus({required String externFormId}) async {
     setState(FormUserLoadingState());
-    setState(await _initializeUserFormStatusUseCase(
-      form: form,
+    await _updateFormStatusUseCase(
+      externFormId: externFormId,
+      status: FormStatusEnum.EM_ANDAMENTO,
     ).then((value) {
       return value.fold(
         (error) {
           Modular.get<Logger>().e(error.toString());
           GlobalSnackBar.error(error.message);
-          return FormUserErrorState(error: error);
         },
-        (initializedForm) {
+        (updatedForm) {
           Modular.get<Logger>().d(
-            '${DateTime.now()} - Form with ${form.externFormId} initialized successfully!',
+            '${DateTime.now()} - Form with ${updatedForm.externFormId} initialized successfully!',
           );
-          int formIndex = _allForms.indexOf(form);
-
-          _allForms[formIndex] = initializedForm;
-
-          return FormUserSuccessState(forms: _allForms);
+          GlobalSnackBar.success('Formulário iniciado com sucesso!');
+          fetchUserForms();
         },
       );
-    }));
+    });
   }
 
   String getFormsCountByStatus(FormStatusEnum status) {

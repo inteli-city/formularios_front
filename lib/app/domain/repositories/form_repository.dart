@@ -7,7 +7,7 @@ abstract class IFormRepository {
   Future<Either<Failure, List<FormEntity>>> getUserForms(
       {required String userId});
 
-  Future<Either<Failure, FormEntity>> initializeUserFormStatus({
+  Future<Either<Failure, FormEntity>> updateFormStatus({
     required FormStatusEnum status,
     required String externFormId,
   });

@@ -165,7 +165,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              formUserProvider.initializeUserFormStatus(form: controller.form);
+              formUserProvider.initializeUserFormStatus(
+                externFormId: controller.externFormId,
+              );
             },
             style: ElevatedButton.styleFrom(
               elevation: 12,

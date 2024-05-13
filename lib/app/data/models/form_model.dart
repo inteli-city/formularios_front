@@ -34,6 +34,30 @@ class FormModel extends FormEntity {
     super.vinculationFormId,
   });
 
+  factory FormModel.entityToModel(FormEntity entity) {
+    return FormModel(
+      externFormId: entity.externFormId,
+      internFormId: entity.internFormId,
+      creatorUserId: entity.creatorUserId,
+      userId: entity.userId,
+      coordinatorsId: entity.coordinatorsId,
+      template: entity.template,
+      area: entity.area,
+      system: entity.system,
+      street: entity.street,
+      city: entity.city,
+      number: entity.number,
+      latitude: entity.latitude,
+      longitude: entity.longitude,
+      region: entity.region,
+      priority: entity.priority,
+      status: entity.status,
+      expirationDate: entity.expirationDate,
+      creationDate: entity.creationDate,
+      sections: entity.sections,
+    );
+  }
+
   FormModel copyWith({
     String? externFormId,
     String? internFormId,

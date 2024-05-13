@@ -17,7 +17,7 @@ class InitiliazeUserFormStatusUseCase implements UpdateFormStatusUseCase {
   @override
   Future<Either<Failure, FormEntity>> call(
       {required FormStatusEnum status, required String externFormId}) async {
-    return await repository.initializeUserFormStatus(
+    return await repository.updateFormStatus(
       externFormId: externFormId,
       status: status,
     );

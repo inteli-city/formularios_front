@@ -12,7 +12,7 @@ import 'package:logger/logger.dart';
 
 class FormUserProvider extends ChangeNotifier {
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
-  final IInitiliazeUserFormStatusUseCase _initializeUserFormStatusUseCase;
+  final UpdateFormStatusUseCase _initializeUserFormStatusUseCase;
 
   FormUserProvider(
       this._fetchUserFormsUsecase, this._initializeUserFormStatusUseCase);
@@ -83,7 +83,7 @@ class FormUserProvider extends ChangeNotifier {
             '${DateTime.now()} - Form with ${form.externFormId} initialized successfully!',
           );
           int formIndex = _allForms.indexOf(form);
-      
+
           _allForms[formIndex] = initializedForm;
 
           return FormUserSuccessState(forms: _allForms);

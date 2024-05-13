@@ -65,7 +65,7 @@ class HomeModule extends Module {
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
-    i.addLazySingleton<IInitiliazeUserFormStatusUseCase>(
+    i.addLazySingleton<UpdateFormStatusUseCase>(
         InitiliazeUserFormStatusUseCase.new);
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);

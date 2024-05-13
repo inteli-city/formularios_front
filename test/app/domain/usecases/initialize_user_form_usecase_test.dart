@@ -17,7 +17,7 @@ import 'fetch_user_forms_usecase_test.mocks.dart';
 void main() {
   Modular.bindModule(AppModule());
   IFormRepository formRepository = MockIFormRepository();
-  late IInitiliazeUserFormStatusUseCase usecase;
+  late UpdateFormStatusUseCase usecase;
   usecase = InitiliazeUserFormStatusUseCase(repository: formRepository);
 
   group('InitializedUserFormStatus', () {

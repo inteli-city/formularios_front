@@ -111,5 +111,51 @@ void main() {
       expect(form.sections, [sectionExample]);
       expect(form.informationFields, [informationField]);
     });
+    test('should return a copy of form entity', () {
+      final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
+      final form = FormEntity(
+        externFormId: 'externFormId',
+        internFormId: 'internFormId',
+        creatorUserId: 'creatorUserId',
+        userId: 'userId',
+        coordinatorsId: ['coordinatorsId'],
+        template: 'template',
+        area: 'area',
+        system: 'system',
+        street: 'street',
+        city: 'city',
+        number: 1,
+        latitude: 1.0,
+        longitude: 1.0,
+        region: 'region',
+        priority: PriorityEnum.HIGH,
+        status: FormStatusEnum.EM_ANDAMENTO,
+        expirationDate: 1,
+        creationDate: 1,
+        sections: [sectionExample],
+      );
+      
+      final copyForm = form.copyWith();
+
+      expect(copyForm.externFormId, 'externFormId');
+      expect(copyForm.internFormId, 'internFormId');
+      expect(copyForm.creatorUserId, 'creatorUserId');
+      expect(copyForm.userId, 'userId');
+      expect(copyForm.coordinatorsId, ['coordinatorsId']);
+      expect(copyForm.template, 'template');
+      expect(copyForm.area, 'area');
+      expect(copyForm.system, 'system');
+      expect(copyForm.street, 'street');
+      expect(copyForm.city, 'city');
+      expect(copyForm.number, 1);
+      expect(copyForm.latitude, 1.0);
+      expect(copyForm.longitude, 1.0);
+      expect(copyForm.region, 'region');
+      expect(copyForm.priority, PriorityEnum.HIGH);
+      expect(copyForm.status, FormStatusEnum.EM_ANDAMENTO);
+      expect(copyForm.expirationDate, 1);
+      expect(copyForm.creationDate, 1);
+      expect(copyForm.sections, [sectionExample]);
+    });
   });
 }

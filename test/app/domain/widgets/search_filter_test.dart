@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
@@ -20,7 +19,6 @@ import 'search_filter_test.mocks.dart';
   FilterFormsController,
   SelectChipController,
   SortFormsController,
-  FetchUserFormsUsecase,
   FormUserProvider,
 ])
 void main() {

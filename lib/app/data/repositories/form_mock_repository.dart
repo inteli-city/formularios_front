@@ -27,7 +27,7 @@ class FormMockRepository extends IFormRepository {
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing  elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.CONCLUIDO,
+      status: FormStatusEnum.EM_ANDAMENTO,
       expirationDate: 1715000631000,
       creationDate: 1704561963000,
       startDate: 1,
@@ -55,7 +55,7 @@ class FormMockRepository extends IFormRepository {
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.',
       priority: PriorityEnum.LOW,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -82,7 +82,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.CONCLUIDO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -109,7 +109,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -136,7 +136,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -163,7 +163,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -249,7 +249,7 @@ class FormMockRepository extends IFormRepository {
       );
 
       FormModel formModel = FormModel.entityToModel(formList[index]);
-      
+
       FormModel copyFormModel = formModel.copyWith(status: status);
 
       formList.removeAt(index);

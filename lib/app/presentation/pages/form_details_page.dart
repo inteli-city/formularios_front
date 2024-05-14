@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/utils/breakpoints.dart';
@@ -49,7 +50,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 height: AppDimensions.verticalSpaceMedium,
               ),
               _buildFormDetails(),
-              _buildFormDetailsActions(),
+              controller.form.status == FormStatusEnum.CONCLUIDO
+                  ? Container()
+                  : _buildFormDetailsActions(),
             ],
           ),
         ),
@@ -161,34 +164,37 @@ class FormDetailsPageState extends State<FormDetailsPage> {
 
     return Column(
       children: [
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              formUserProvider.initializeUserFormStatus(
-                externFormId: controller.externFormId,
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              elevation: 12,
-              shadowColor: Theme.of(context).colorScheme.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  AppDimensions.radiusMedium,
-                ), // Rounded corners
-              ),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-            ),
-            child: Text(
-              'Iniciar',
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: AppColors.white,
-                  fontWeight: FontWeight.w900,
-                  height: 1.5,
-                  fontSize: screenWidth < breakpointSmallMobile ? 12 : 16),
-            ),
-          ),
-        ),
+        controller.form.status == FormStatusEnum.NAO_INICIADO
+            ? SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    formUserProvider.initializeUserFormStatus(
+                      externFormId: controller.externFormId,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 12,
+                    shadowColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        AppDimensions.radiusMedium,
+                      ), // Rounded corners
+                    ),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ),
+                  child: Text(
+                    'Iniciar',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w900,
+                        height: 1.5,
+                        fontSize:
+                            screenWidth < breakpointSmallMobile ? 12 : 16),
+                  ),
+                ),
+              )
+            : _buildActionsWhenFormsAreInProcess(),
         const SizedBox(height: AppDimensions.verticalSpaceMedium),
         Row(
           children: [
@@ -200,7 +206,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     vertical: 12,
                     horizontal: AppDimensions.paddingMedium,
                   ),
-                  elevation: 2,
+                  elevation: 4,
                   backgroundColor: AppColors.red,
                 ),
                 child: Text(
@@ -226,7 +232,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     vertical: 12,
                     horizontal: AppDimensions.paddingMedium,
                   ),
-                  elevation: 2,
+                  elevation: 4,
                   surfaceTintColor: Theme.of(context).colorScheme.secondary,
                   side: BorderSide(
                     color: Theme.of(context).colorScheme.primary,
@@ -244,6 +250,66 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               ),
             ),
           ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionsWhenFormsAreInProcess() {
+    double screenWidth = ScreenHelper.width(context);
+
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: AppDimensions.paddingMedium,
+              ),
+              elevation: 4,
+              backgroundColor: AppColors.primaryBlue,
+            ),
+            child: Text(
+              textAlign: TextAlign.center,
+              'Preencher Formulário',
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w400,
+                    height: 1.2,
+                    fontSize: screenWidth < breakpointSmallMobile ? 12 : 16,
+                  ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: AppDimensions.paddingMedium,
+              ),
+              elevation: 4,
+              surfaceTintColor: Theme.of(context).colorScheme.secondary,
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            child: Text(
+              'Retroceder Formulário',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).colorScheme.primary,
+                  height: 1.2,
+                  fontSize: screenWidth < breakpointSmallMobile ? 12 : 16),
+            ),
+          ),
         ),
       ],
     );

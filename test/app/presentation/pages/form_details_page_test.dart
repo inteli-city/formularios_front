@@ -32,7 +32,6 @@ void main() {
     when(form.template).thenReturn('Nome Template');
     when(form.street).thenReturn('Rua Samuel Morse');
     when(form.number).thenReturn(1);
-    when(form.status).thenReturn(FormStatusEnum.EM_ANDAMENTO);
     when(form.priority).thenReturn(PriorityEnum.HIGH);
     when(form.description).thenReturn('description');
     when(form.longitude).thenReturn(10.0);
@@ -47,7 +46,6 @@ void main() {
     when(form.vinculationFormId).thenReturn('vinculationForm3');
     when(form.creatorUserId).thenReturn('creatorUser4');
 
-
     when(Modular.get<FormUserProvider>().getFormByExternId(form.externFormId))
         .thenReturn(form);
     when(Modular.get<FormDetailsController>().form).thenReturn(form);
@@ -60,15 +58,16 @@ void main() {
         .thenReturn(form.expirationDate.toString());
   });
 
-  testWidgets('Form Details Page displays details correctly',
+  testWidgets(
+      'Form Details Page displays details correctly when status is NAO_INICIADO',
       (WidgetTester tester) async {
-
     TestWidgetsFlutterBinding.ensureInitialized();
 
     await tester.binding.setSurfaceSize(const Size(1500, 1500));
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
     initializeDateFormatting('pt_BR', null);
 
+    when(form.status).thenReturn(FormStatusEnum.NAO_INICIADO);
 
     await tester.pumpWidget(ModularApp(
         module: AppModule(),
@@ -77,6 +76,46 @@ void main() {
         )));
     await tester.pumpAndSettle();
 
+    expect(find.text('${form.system} - ${form.template}'), findsOneWidget);
+    expect(find.text('Rua Samuel Morse'), findsOneWidget);
+    expect(find.text('1'), findsOneWidget);
+    expect(find.text('description'), findsOneWidget);
+    expect(find.text(FormStatusEnum.NAO_INICIADO.enumString), findsOneWidget);
+    expect(find.text(PriorityEnum.HIGH.enumString), findsOneWidget);
+
+    expect(find.text('1715090009'), findsExactly(2));
+
+    expect(find.text('coordinatorsId-coordinatorId1'), findsOneWidget);
+    expect(find.text('externForm1'), findsOneWidget);
+    expect(find.text('internForm2'), findsOneWidget);
+    expect(find.text('vinculationForm3'), findsOneWidget);
+    expect(find.text('creatorUser4'), findsOneWidget);
+
+    expect(find.text('10.0'), findsOneWidget);
+    expect(find.text('11.0'), findsOneWidget);
+
+    expect(find.text('Iniciar'), findsOneWidget);
+    expect(find.text('Cancelar Formulário'), findsOneWidget);
+    expect(find.text('Vincular Formulário'), findsOneWidget);
+  });
+
+  testWidgets(
+      'Form Details Page displays details correctly when status is EM_ANDAMENTO',
+      (WidgetTester tester) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    await tester.binding.setSurfaceSize(const Size(1500, 1500));
+    await S.load(const Locale.fromSubtags(languageCode: 'en'));
+    initializeDateFormatting('pt_BR', null);
+
+    when(form.status).thenReturn(FormStatusEnum.EM_ANDAMENTO);
+
+    await tester.pumpWidget(ModularApp(
+        module: AppModule(),
+        child: const MaterialApp(
+          home: FormDetailsPage(),
+        )));
+    await tester.pumpAndSettle();
 
     expect(find.text('${form.system} - ${form.template}'), findsOneWidget);
     expect(find.text('Rua Samuel Morse'), findsOneWidget);
@@ -95,5 +134,10 @@ void main() {
 
     expect(find.text('10.0'), findsOneWidget);
     expect(find.text('11.0'), findsOneWidget);
+
+    expect(find.text('Preencher Formulário'), findsOneWidget);
+    expect(find.text('Retroceder Formulário'), findsOneWidget);
+    expect(find.text('Cancelar Formulário'), findsOneWidget);
+    expect(find.text('Vincular Formulário'), findsOneWidget);
   });
 }

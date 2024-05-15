@@ -9,8 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
   cupertino_icons: ^1.0.6
   gates_microapp_flutter:
     git:
@@ -29,6 +27,8 @@ dependencies:
   flutter_modular: ^6.3.3
   dropdown_button2: ^2.3.9
   intl: 0.18.1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:

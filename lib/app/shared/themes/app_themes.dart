@@ -19,8 +19,8 @@ class AppThemes {
     ),
     elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
-      elevation: MaterialStatePropertyAll(5),
-      padding: MaterialStatePropertyAll(
+      elevation: WidgetStatePropertyAll(5),
+      padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(
           vertical: AppDimensions.paddingMedium,
           horizontal: AppDimensions.paddingMedium * 2,
@@ -29,8 +29,8 @@ class AppThemes {
     )),
     radioTheme: RadioThemeData(
       fillColor:
-          MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
+          WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
           return AppColors.primaryBlue;
         }
         return Colors.grey;
@@ -83,7 +83,7 @@ class AppThemes {
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        iconColor: MaterialStateProperty.all(
+        iconColor: WidgetStateProperty.all(
           AppColors.primaryBlue,
         ),
       ),
@@ -96,8 +96,6 @@ class AppThemes {
       surfaceTintColor: AppColors.white,
     ),
     colorScheme: ColorScheme(
-      background: AppColors.white,
-      onBackground: AppColors.white,
       brightness: Brightness.light,
       primary: AppColors.primaryBlue,
       onPrimary: AppColors.primaryBlue,
@@ -125,14 +123,12 @@ class AppThemes {
       ),
       iconButtonTheme: IconButtonThemeData(
           style: ButtonStyle(
-              iconColor: MaterialStateProperty.all(AppColors.primaryBlue))),
+              iconColor: WidgetStateProperty.all(AppColors.primaryBlue))),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: AppColors.white,
       ),
       bottomAppBarTheme: BottomAppBarTheme(color: AppColors.primaryBlue),
       colorScheme: ColorScheme(
-        background: AppColors.primaryBlue,
-        onBackground: AppColors.primaryBlue,
         brightness: Brightness.dark,
         primary: AppColors.primaryBlue,
         onPrimary: AppColors.primaryBlue,

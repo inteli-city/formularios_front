@@ -4,7 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
-import 'package:formularios_front/app/data/repositories/user_mock_repository.dart';
+import 'package:formularios_front/app/data/models/user_model.dart';
+import 'package:formularios_front/app/data/repositories/user_dio_repository.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -12,18 +13,17 @@ import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'user_mock_repository_test.mocks.dart';
+import 'user_dio_repository_test.mocks.dart';
 
-@GenerateMocks([UserMockRepository])
+@GenerateMocks([UserDioRepository])
 void main() {
-  Modular.bindModule(AppModule());
-
-  late MockUserMockRepository mockUserMockRepository;
-  late UserEntity userEntity;
+  late UserDioRepository mockUserDioRepository;
+  late UserModel userModel;
 
   setUp(() {
-    mockUserMockRepository = MockUserMockRepository();
-    userEntity = UserEntity(
+    mockUserDioRepository = MockUserDioRepository();
+
+    userModel = UserModel(
       userId: '125fb34e-aacf-4a47-9914-82ea64ff9f32',
       name: 'Gabriel Godoy',
       email: 'gabriel.godoybz@hotmail.com',
@@ -33,13 +33,16 @@ void main() {
     );
   });
 
-  test('should return user entity when user is enabled', () async {
-    when(mockUserMockRepository.loginUser())
-        .thenAnswer((_) async => Right(userEntity));
+  Modular.bindModule(AppModule());
 
-    final result = await mockUserMockRepository.loginUser();
+  test('should return a UserEntity', () async {
+    when(mockUserDioRepository.loginUser())
+        .thenAnswer((_) async => Right(userModel));
+
+    final result = await mockUserDioRepository.loginUser();
 
     expect(result.isRight(), true);
+
     expect(
       result.fold((left) => null, (user) => user),
       isA<UserEntity>(),
@@ -53,10 +56,10 @@ void main() {
   test('should return Failure when user is disabled', () async {
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-    when(mockUserMockRepository.loginUser()).thenAnswer(
-        (_) async => Left(ErrorRequest(message: 'Usuário desabilitado')));
+    when(mockUserDioRepository.loginUser()).thenAnswer(
+        (_) async => Left(ErrorRequest(message: 'Falha ao realizar login!')));
 
-    final result = await mockUserMockRepository.loginUser();
+    final result = await mockUserDioRepository.loginUser();
 
     expect(result.isLeft(), true);
     expect(
@@ -65,7 +68,7 @@ void main() {
     );
     expect(
       result.fold((failure) => failure.message, (user) => null),
-      'Usuário desabilitado',
+      'Falha ao realizar login!',
     );
   });
 }

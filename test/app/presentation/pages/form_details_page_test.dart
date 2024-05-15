@@ -16,17 +16,17 @@ import 'form_details_page_test.mocks.dart';
 
 @GenerateMocks([FormUserProvider, FormEntity, FormDetailsController])
 void main() {
-  late MockFormEntity form;
-  FormUserProvider formUserProvider = MockFormUserProvider();
-  FormDetailsController formDetailsController = MockFormDetailsController();
-
-  Modular.bindModule(AppModule());
-  Modular.bindModule(HomeModule());
-  Modular.replaceInstance<FormUserProvider>(formUserProvider);
-  Modular.replaceInstance<FormDetailsController>(formDetailsController);
+  MockFormEntity form = MockFormEntity();
+  late FormUserProvider formUserProvider = MockFormUserProvider();
+  late FormDetailsController formDetailsController =
+      MockFormDetailsController();
 
   setUp(() {
-    form = MockFormEntity();
+    Modular.bindModule(AppModule());
+    Modular.bindModule(HomeModule());
+
+    Modular.replaceInstance<FormUserProvider>(formUserProvider);
+    Modular.replaceInstance<FormDetailsController>(formDetailsController);
 
     when(form.system).thenReturn('system');
     when(form.template).thenReturn('Nome Template');
@@ -46,98 +46,99 @@ void main() {
     when(form.vinculationFormId).thenReturn('vinculationForm3');
     when(form.creatorUserId).thenReturn('creatorUser4');
 
-    when(Modular.get<FormUserProvider>().getFormByExternId(form.externFormId))
+    when(formUserProvider.getFormByExternId(form.externFormId))
         .thenReturn(form);
-    when(Modular.get<FormDetailsController>().form).thenReturn(form);
-    when(Modular.get<FormDetailsController>().externFormId)
-        .thenReturn(form.externFormId);
+    when(formDetailsController.form).thenReturn(form);
+    when(formDetailsController.externFormId).thenReturn(form.externFormId);
 
-    when(Modular.get<FormDetailsController>().creationDate)
+    when(formDetailsController.creationDate)
         .thenReturn(form.creationDate.toString());
-    when(Modular.get<FormDetailsController>().expirationDate)
+    when(formDetailsController.expirationDate)
         .thenReturn(form.expirationDate.toString());
   });
 
-  testWidgets(
-      'Form Details Page displays details correctly when status is NAO_INICIADO',
-      (WidgetTester tester) async {
-    TestWidgetsFlutterBinding.ensureInitialized();
+  group('Form Details Page', () {
+    testWidgets('Form Details Page displays details correctly',
+        (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
 
-    await tester.binding.setSurfaceSize(const Size(1500, 1500));
-    await S.load(const Locale.fromSubtags(languageCode: 'en'));
-    initializeDateFormatting('pt_BR', null);
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      initializeDateFormatting('pt_BR', null);
 
-    when(form.status).thenReturn(FormStatusEnum.NAO_INICIADO);
+      when(form.status).thenReturn(FormStatusEnum.NAO_INICIADO);
 
-    await tester.pumpWidget(ModularApp(
-        module: AppModule(),
-        child: const MaterialApp(
-          home: FormDetailsPage(),
-        )));
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(ModularApp(
+          module: AppModule(),
+          child: const MaterialApp(
+            home: FormDetailsPage(),
+          )));
+      await tester.pumpAndSettle();
 
-    expect(find.text('${form.system} - ${form.template}'), findsOneWidget);
-    expect(find.text('Rua Samuel Morse'), findsOneWidget);
-    expect(find.text('1'), findsOneWidget);
-    expect(find.text('description'), findsOneWidget);
-    expect(find.text(FormStatusEnum.NAO_INICIADO.enumString), findsOneWidget);
-    expect(find.text(PriorityEnum.HIGH.enumString), findsOneWidget);
+      expect(find.text('${form.system} - ${form.template}'), findsOneWidget);
+      expect(find.text('Rua Samuel Morse'), findsOneWidget);
+      expect(find.text('1'), findsOneWidget);
+      expect(find.text('description'), findsOneWidget);
+      expect(find.text(FormStatusEnum.NAO_INICIADO.enumString), findsOneWidget);
+      expect(find.text(PriorityEnum.HIGH.enumString), findsOneWidget);
 
-    expect(find.text('1715090009'), findsExactly(2));
+      expect(find.text('1715090009'), findsExactly(2));
 
-    expect(find.text('coordinatorsId-coordinatorId1'), findsOneWidget);
-    expect(find.text('externForm1'), findsOneWidget);
-    expect(find.text('internForm2'), findsOneWidget);
-    expect(find.text('vinculationForm3'), findsOneWidget);
-    expect(find.text('creatorUser4'), findsOneWidget);
+      expect(find.text('coordinatorsId-coordinatorId1'), findsOneWidget);
+      expect(find.text('externForm1'), findsOneWidget);
+      expect(find.text('internForm2'), findsOneWidget);
+      expect(find.text('vinculationForm3'), findsOneWidget);
+      expect(find.text('creatorUser4'), findsOneWidget);
 
-    expect(find.text('10.0'), findsOneWidget);
-    expect(find.text('11.0'), findsOneWidget);
+      expect(find.text('10.0'), findsOneWidget);
+      expect(find.text('11.0'), findsOneWidget);
+    });
 
-    expect(find.text('Iniciar'), findsOneWidget);
-    expect(find.text('Cancelar Formulário'), findsOneWidget);
-    expect(find.text('Vincular Formulário'), findsOneWidget);
-  });
+    testWidgets(
+        'Form Details Page displays details correctly when status is NAO_INICIADO',
+        (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets(
-      'Form Details Page displays details correctly when status is EM_ANDAMENTO',
-      (WidgetTester tester) async {
-    TestWidgetsFlutterBinding.ensureInitialized();
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      initializeDateFormatting('pt_BR', null);
 
-    await tester.binding.setSurfaceSize(const Size(1500, 1500));
-    await S.load(const Locale.fromSubtags(languageCode: 'en'));
-    initializeDateFormatting('pt_BR', null);
+      when(form.status).thenReturn(FormStatusEnum.NAO_INICIADO);
 
-    when(form.status).thenReturn(FormStatusEnum.EM_ANDAMENTO);
+      await tester.pumpWidget(ModularApp(
+          module: AppModule(),
+          child: const MaterialApp(
+            home: FormDetailsPage(),
+          )));
+      await tester.pumpAndSettle();
 
-    await tester.pumpWidget(ModularApp(
-        module: AppModule(),
-        child: const MaterialApp(
-          home: FormDetailsPage(),
-        )));
-    await tester.pumpAndSettle();
+      expect(find.text('Iniciar'), findsOneWidget);
+      expect(find.text('Cancelar Formulário'), findsOneWidget);
+      expect(find.text('Vincular Formulário'), findsOneWidget);
+    });
 
-    expect(find.text('${form.system} - ${form.template}'), findsOneWidget);
-    expect(find.text('Rua Samuel Morse'), findsOneWidget);
-    expect(find.text('1'), findsOneWidget);
-    expect(find.text('description'), findsOneWidget);
-    expect(find.text(FormStatusEnum.EM_ANDAMENTO.enumString), findsOneWidget);
-    expect(find.text(PriorityEnum.HIGH.enumString), findsOneWidget);
+    testWidgets(
+        'Form Details Page displays details correctly when status is EM_ANDAMENTO',
+        (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
 
-    expect(find.text('1715090009'), findsExactly(2));
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      initializeDateFormatting('pt_BR', null);
 
-    expect(find.text('coordinatorsId-coordinatorId1'), findsOneWidget);
-    expect(find.text('externForm1'), findsOneWidget);
-    expect(find.text('internForm2'), findsOneWidget);
-    expect(find.text('vinculationForm3'), findsOneWidget);
-    expect(find.text('creatorUser4'), findsOneWidget);
+      when(form.status).thenReturn(FormStatusEnum.EM_ANDAMENTO);
 
-    expect(find.text('10.0'), findsOneWidget);
-    expect(find.text('11.0'), findsOneWidget);
+      await tester.pumpWidget(ModularApp(
+          module: AppModule(),
+          child: const MaterialApp(
+            home: FormDetailsPage(),
+          )));
+      await tester.pumpAndSettle();
 
-    expect(find.text('Preencher Formulário'), findsOneWidget);
-    expect(find.text('Retroceder Formulário'), findsOneWidget);
-    expect(find.text('Cancelar Formulário'), findsOneWidget);
-    expect(find.text('Vincular Formulário'), findsOneWidget);
+      expect(find.text('Preencher Formulário'), findsOneWidget);
+      expect(find.text('Retroceder Formulário'), findsOneWidget);
+      expect(find.text('Cancelar Formulário'), findsOneWidget);
+      expect(find.text('Vincular Formulário'), findsOneWidget);
+    });
   });
 }

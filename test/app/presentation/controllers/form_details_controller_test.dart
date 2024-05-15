@@ -18,7 +18,6 @@ void main() {
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
   Modular.replaceInstance<FormUserProvider>(mockProvider);
-  
 
   group('Form Details Controller Test', () {
     setUp(() {
@@ -31,11 +30,11 @@ void main() {
     });
 
     test('Should have correct creationDate format', () {
-      expect(controller.creationDate, '01/06/2021 13:00:00');
+      expect(controller.creationDate, '01/06/2021 16:00:00');
     });
 
     test('Should have correct expirationDate format', () {
-      expect(controller.expirationDate, '02/06/2021 13:00:00');
+      expect(controller.expirationDate, '02/06/2021 16:00:00');
     });
   });
 }

@@ -18,9 +18,9 @@ class FormDetailsController {
     form = provider.getFormByExternId(externFormId);
   }
 
-  String get creationDate => DateFormat('dd/MM/yyyy HH:mm:ss')
-      .format(DateTime.fromMillisecondsSinceEpoch(form.creationDate));
+  String get creationDate => DateFormat('dd/MM/yyyy HH:mm:ss').format(
+      DateTime.fromMillisecondsSinceEpoch(form.creationDate, isUtc: true));
 
-  String get expirationDate => DateFormat('dd/MM/yyyy HH:mm:ss')
-      .format(DateTime.fromMillisecondsSinceEpoch(form.expirationDate));
+  String get expirationDate => DateFormat('dd/MM/yyyy HH:mm:ss').format(
+      DateTime.fromMillisecondsSinceEpoch(form.expirationDate, isUtc: true));
 }

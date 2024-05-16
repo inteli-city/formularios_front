@@ -100,7 +100,7 @@ void main() {
       TestWidgetsFlutterBinding.ensureInitialized();
 
       await tester.binding.setSurfaceSize(const Size(1500, 1500));
-      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting('pt_BR', null);
 
       when(form.status).thenReturn(FormStatusEnum.NAO_INICIADO);
@@ -110,10 +110,11 @@ void main() {
           child: const MaterialApp(
             home: FormDetailsPage(),
           )));
+
       await tester.pumpAndSettle();
 
       expect(find.text('Iniciar'), findsOneWidget);
-      expect(find.text('Cancelar Formulário'), findsOneWidget);
+      expect(find.text('Cancelar'), findsOneWidget);
       expect(find.text('Vincular Formulário'), findsOneWidget);
     });
 
@@ -123,7 +124,7 @@ void main() {
       TestWidgetsFlutterBinding.ensureInitialized();
 
       await tester.binding.setSurfaceSize(const Size(1500, 1500));
-      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting('pt_BR', null);
 
       when(form.status).thenReturn(FormStatusEnum.EM_ANDAMENTO);
@@ -133,11 +134,11 @@ void main() {
           child: const MaterialApp(
             home: FormDetailsPage(),
           )));
-      await tester.pumpAndSettle();
 
-      expect(find.text('Preencher Formulário'), findsOneWidget);
-      expect(find.text('Retroceder Formulário'), findsOneWidget);
-      expect(find.text('Cancelar Formulário'), findsOneWidget);
+      await tester.pumpAndSettle();
+      expect(find.text('Preencher'), findsOneWidget);
+      expect(find.text('Retroceder'), findsOneWidget);
+      expect(find.text('Cancelar'), findsOneWidget);
       expect(find.text('Vincular Formulário'), findsOneWidget);
     });
   });

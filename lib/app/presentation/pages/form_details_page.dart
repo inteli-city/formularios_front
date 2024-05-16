@@ -186,7 +186,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                   child: Text(
-                    'Iniciar',
+                    S.current.start,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.w900,
@@ -213,7 +213,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 ),
                 child: Text(
                   textAlign: TextAlign.center,
-                  'Cancelar',
+                  S.current.cancel,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.w400,
@@ -241,7 +241,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   ),
                 ),
                 child: Text(
-                  'Vincular Formulário',
+                  S.current.linkForm,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.w400,
@@ -275,7 +275,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             ),
             child: Text(
               textAlign: TextAlign.center,
-              'Preencher',
+              S.current.fillForm,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.w400,
@@ -303,7 +303,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               ),
             ),
             child: Text(
-              'Retroceder',
+              S.current.stepBack,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontWeight: FontWeight.w400,

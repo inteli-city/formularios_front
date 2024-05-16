@@ -41,15 +41,14 @@ void main() {
     when(form.creationDate).thenReturn(1715090009);
 
     when(form.coordinatorsId).thenReturn(['coordinatorsId', 'coordinatorId1']);
-    when(form.externFormId).thenReturn('externForm1');
+    when(form.formId).thenReturn('externForm1');
     when(form.internFormId).thenReturn('internForm2');
     when(form.vinculationFormId).thenReturn('vinculationForm3');
     when(form.creatorUserId).thenReturn('creatorUser4');
 
-    when(formUserProvider.getFormByExternId(form.externFormId))
-        .thenReturn(form);
+    when(formUserProvider.getFormByExternId(form.formId)).thenReturn(form);
     when(formDetailsController.form).thenReturn(form);
-    when(formDetailsController.externFormId).thenReturn(form.externFormId);
+    when(formDetailsController.formId).thenReturn(form.formId);
 
     when(formDetailsController.creationDate)
         .thenReturn(form.creationDate.toString());
@@ -66,7 +65,7 @@ void main() {
       await S.load(const Locale.fromSubtags(languageCode: 'en'));
       initializeDateFormatting('pt_BR', null);
 
-      when(form.status).thenReturn(FormStatusEnum.NAO_INICIADO);
+      when(form.status).thenReturn(FormStatusEnum.NOT_STARTED);
 
       await tester.pumpWidget(ModularApp(
           module: AppModule(),
@@ -79,7 +78,7 @@ void main() {
       expect(find.text('Rua Samuel Morse'), findsOneWidget);
       expect(find.text('1'), findsOneWidget);
       expect(find.text('description'), findsOneWidget);
-      expect(find.text(FormStatusEnum.NAO_INICIADO.enumString), findsOneWidget);
+      expect(find.text(FormStatusEnum.NOT_STARTED.enumString), findsOneWidget);
       expect(find.text(PriorityEnum.HIGH.enumString), findsOneWidget);
 
       expect(find.text('1715090009'), findsExactly(2));
@@ -95,7 +94,7 @@ void main() {
     });
 
     testWidgets(
-        'Form Details Page displays details correctly when status is NAO_INICIADO',
+        'Form Details Page displays details correctly when status is NOT_STARTED',
         (WidgetTester tester) async {
       TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -103,7 +102,7 @@ void main() {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting('pt_BR', null);
 
-      when(form.status).thenReturn(FormStatusEnum.NAO_INICIADO);
+      when(form.status).thenReturn(FormStatusEnum.NOT_STARTED);
 
       await tester.pumpWidget(ModularApp(
           module: AppModule(),
@@ -119,7 +118,7 @@ void main() {
     });
 
     testWidgets(
-        'Form Details Page displays details correctly when status is EM_ANDAMENTO',
+        'Form Details Page displays details correctly when status is IN_PROGRESS',
         (WidgetTester tester) async {
       TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -127,7 +126,7 @@ void main() {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting('pt_BR', null);
 
-      when(form.status).thenReturn(FormStatusEnum.EM_ANDAMENTO);
+      when(form.status).thenReturn(FormStatusEnum.IN_PROGRESS);
 
       await tester.pumpWidget(ModularApp(
           module: AppModule(),

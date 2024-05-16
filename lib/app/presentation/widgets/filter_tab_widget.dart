@@ -36,15 +36,12 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
       children: [
         SizedBox(
           height: ScreenHelper.height(context) * 0.1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            children: List.generate(
-              FormStatusEnum.values.length,
-              (index) => _choiceChip(
-                index,
-                FormStatusEnum.values[index],
-              ),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: FormStatusEnum.values.length,
+            itemBuilder: (context, index) => _choiceChip(
+              index,
+              FormStatusEnum.values[index],
             ),
           ),
         ),

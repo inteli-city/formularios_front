@@ -9,8 +9,7 @@ import 'package:intl/intl.dart';
 void main() {
   group('FormCard Widget Tests', () {
     FormEntity form = FormEntity(
-      externFormId: 'ID1142342524242',
-      internFormId: '1',
+      formId: 'ID1142342524242',
       creatorUserId: '1',
       userId: '1',
       coordinatorsId: ['1314312731967', '1314312731967', '1314312731967'],
@@ -27,7 +26,7 @@ void main() {
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing  elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.CONCLUIDO,
+      status: FormStatusEnum.CONCLUDED,
       expirationDate: 1715000631000,
       creationDate: 1704561963000,
       startDate: 1,
@@ -48,8 +47,7 @@ void main() {
 
       // await Future.delayed(const Duration(seconds: 1));
 
-      expect(
-          find.text('${form.system} - ${form.template} - ${form.externFormId}'),
+      expect(find.text('${form.system} - ${form.template} - ${form.formId}'),
           findsOneWidget);
       expect(find.text('${form.city} - ${form.street}, ${form.number}'),
           findsOneWidget);

@@ -25,8 +25,7 @@ void main() {
       when(formRepository.getUserForms(userId: '1'))
           .thenAnswer((_) async => Right([
                 FormEntity(
-                  externFormId: 'externFormId',
-                  internFormId: 'internFormId',
+                  formId: 'formId',
                   creatorUserId: 'creatorUserId',
                   userId: 'userId',
                   coordinatorsId: ['coordinatorsId'],
@@ -42,7 +41,7 @@ void main() {
                   region: 'region',
                   description: 'description',
                   priority: PriorityEnum.HIGH,
-                  status: FormStatusEnum.EM_ANDAMENTO,
+                  status: FormStatusEnum.IN_PROGRESS,
                   expirationDate: 1,
                   creationDate: 1,
                   startDate: 1,
@@ -52,8 +51,7 @@ void main() {
                   sections: [],
                 ),
                 FormEntity(
-                  externFormId: 'externFormId',
-                  internFormId: 'internFormId',
+                  formId: 'formId',
                   creatorUserId: 'creatorUserId',
                   userId: 'userId',
                   coordinatorsId: ['coordinatorsId'],
@@ -69,7 +67,7 @@ void main() {
                   region: 'region',
                   description: 'description',
                   priority: PriorityEnum.HIGH,
-                  status: FormStatusEnum.EM_ANDAMENTO,
+                  status: FormStatusEnum.IN_PROGRESS,
                   expirationDate: 1,
                   creationDate: 1,
                   startDate: 1,

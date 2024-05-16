@@ -84,7 +84,7 @@ class MockFormMockRepository extends _i1.Mock
   @override
   _i5.Future<_i2.Either<_i6.Failure, _i4.FormEntity>> updateFormStatus({
     required _i7.FormStatusEnum? status,
-    required String? externFormId,
+    required String? formId,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -92,7 +92,7 @@ class MockFormMockRepository extends _i1.Mock
           [],
           {
             #status: status,
-            #externFormId: externFormId,
+            #formId: formId,
           },
         ),
         returnValue: _i5.Future<_i2.Either<_i6.Failure, _i4.FormEntity>>.value(
@@ -103,7 +103,7 @@ class MockFormMockRepository extends _i1.Mock
             [],
             {
               #status: status,
-              #externFormId: externFormId,
+              #formId: formId,
             },
           ),
         )),

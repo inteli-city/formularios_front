@@ -9,6 +9,6 @@ abstract class IFormRepository {
 
   Future<Either<Failure, FormEntity>> updateFormStatus({
     required FormStatusEnum status,
-    required String externFormId,
+    required String formId,
   });
 }

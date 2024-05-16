@@ -35,7 +35,7 @@ class _FormCardState extends State<FormCard>
   }
 
   void _onTapDown(TapDownDetails details) {
-    Modular.to.pushNamed('/home/${widget.form.externFormId}');
+    Modular.to.pushNamed('/home/${widget.form.formId}');
     _controller.forward();
   }
 
@@ -79,7 +79,7 @@ class _FormCardState extends State<FormCard>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${form.system} - ${form.template} - ${form.externFormId}',
+                      '${form.system} - ${form.template} - ${form.formId}',
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
                           .textTheme

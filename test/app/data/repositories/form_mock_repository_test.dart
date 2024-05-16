@@ -14,8 +14,7 @@ import 'form_mock_repository_test.mocks.dart';
 void main() {
   FormMockRepository repository = MockFormMockRepository();
   FormEntity entity0 = FormEntity(
-    externFormId: 'ID1142342524249',
-    internFormId: '5',
+    formId: 'ID1142342524249',
     creatorUserId: '5',
     userId: '2',
     coordinatorsId: ['coordinatorsId'],
@@ -31,7 +30,7 @@ void main() {
     region: 'region',
     description: 'description',
     priority: PriorityEnum.HIGH,
-    status: FormStatusEnum.CONCLUIDO,
+    status: FormStatusEnum.CONCLUDED,
     expirationDate: 1,
     creationDate: 1,
     startDate: 1,
@@ -69,14 +68,14 @@ void main() {
     );
   });
 
-  test('should update a form status by externFormId', () async {
-    FormStatusEnum status = FormStatusEnum.EM_ANDAMENTO;
+  test('should update a form status by formId', () async {
+    FormStatusEnum status = FormStatusEnum.IN_PROGRESS;
     FormModel formModel = FormModel.entityToModel(entity0);
     FormModel copyFormModel = formModel.copyWith(status: status);
 
     when(repository.updateFormStatus(
       status: status,
-      externFormId: entity0.externFormId,
+      formId: entity0.formId,
     )).thenAnswer(
       (_) async {
         return Right(copyFormModel);
@@ -84,8 +83,8 @@ void main() {
     );
 
     var result = await repository.updateFormStatus(
-      status: FormStatusEnum.EM_ANDAMENTO,
-      externFormId: entity0.externFormId,
+      status: FormStatusEnum.IN_PROGRESS,
+      formId: entity0.formId,
     );
 
     expect(result.isRight(), true);
@@ -96,7 +95,7 @@ void main() {
     );
     expect(
       result.fold((left) => null, (form) => form.status),
-      FormStatusEnum.EM_ANDAMENTO,
+      FormStatusEnum.IN_PROGRESS,
     );
   });
 }

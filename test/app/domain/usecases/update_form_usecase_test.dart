@@ -24,8 +24,7 @@ void main() {
     late FormEntity form;
     setUp(() {
       form = FormEntity(
-          externFormId: 'externFormId',
-          internFormId: 'internFormId',
+          formId: 'formId',
           creatorUserId: 'creatorUserId',
           userId: 'userId',
           coordinatorsId: ['coordinatorsId'],
@@ -41,7 +40,7 @@ void main() {
           region: 'region',
           description: 'description',
           priority: PriorityEnum.HIGH,
-          status: FormStatusEnum.EM_ANDAMENTO,
+          status: FormStatusEnum.IN_PROGRESS,
           expirationDate: 1,
           creationDate: 1,
           startDate: 1,
@@ -53,14 +52,13 @@ void main() {
 
     test('should return a list of FormEntity', () async {
       when(formRepository.updateFormStatus(
-              status: FormStatusEnum.EM_ANDAMENTO,
-              externFormId: form.externFormId))
+              status: FormStatusEnum.IN_PROGRESS, formId: form.formId))
           .thenAnswer(
         (_) async => Right(form),
       );
 
       var result = await usecase(
-          externFormId: form.externFormId, status: FormStatusEnum.EM_ANDAMENTO);
+          formId: form.formId, status: FormStatusEnum.IN_PROGRESS);
 
       expect(result.isRight(), true);
 
@@ -71,18 +69,17 @@ void main() {
 
       expect(
         result.fold((l) => null, (form) => form.status),
-        FormStatusEnum.EM_ANDAMENTO,
+        FormStatusEnum.IN_PROGRESS,
       );
     });
 
     test('should return a Failure', () async {
       when(formRepository.updateFormStatus(
-              externFormId: form.externFormId,
-              status: FormStatusEnum.EM_ANDAMENTO))
+              formId: form.formId, status: FormStatusEnum.IN_PROGRESS))
           .thenAnswer((_) async => Left(Failure(message: '')));
 
       var result = await usecase(
-          externFormId: form.externFormId, status: FormStatusEnum.EM_ANDAMENTO);
+          formId: form.formId, status: FormStatusEnum.IN_PROGRESS);
 
       expect(result.isLeft(), true);
       expect(

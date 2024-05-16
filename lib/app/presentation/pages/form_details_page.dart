@@ -50,7 +50,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 height: AppDimensions.verticalSpaceMedium,
               ),
               _buildFormDetails(),
-              controller.form.status == FormStatusEnum.CONCLUIDO
+              controller.form.status == FormStatusEnum.CONCLUDED
                   ? Container()
                   : _buildFormDetailsActions(),
             ],
@@ -71,8 +71,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         children: [
           _buildDetaislRow(
             details: [
-              [S.current.externId, form.externFormId],
-              [S.current.internId, form.internFormId],
+              [S.current.externId, form.formId],
               [S.current.vinculationId, form.vinculationFormId ?? ''],
             ],
           ),
@@ -164,13 +163,13 @@ class FormDetailsPageState extends State<FormDetailsPage> {
 
     return Column(
       children: [
-        controller.form.status == FormStatusEnum.NAO_INICIADO
+        controller.form.status == FormStatusEnum.NOT_STARTED
             ? SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
                     await formUserProvider.updateFormStatus(
-                      externFormId: controller.externFormId,
+                      formId: controller.formId,
                     );
                     setState(() {
                       controller.getForm();

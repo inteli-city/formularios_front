@@ -23,10 +23,10 @@ void main() {
     setUp(() {
       mockEntity = MockFormEntity();
       when(mockEntity.creationDate).thenReturn(1622563200000);
-      when(mockEntity.externFormId).thenReturn('externForm1');
+      when(mockEntity.formId).thenReturn('externForm1');
       when(mockEntity.expirationDate).thenReturn(1622649600000);
       when(mockProvider.getFormByExternId(any)).thenReturn(mockEntity);
-      controller = FormDetailsController(externFormId: mockEntity.externFormId);
+      controller = FormDetailsController(formId: mockEntity.formId);
     });
 
     test('Should have correct creationDate format', () {

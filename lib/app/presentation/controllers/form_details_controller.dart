@@ -4,9 +4,9 @@ import 'package:formularios_front/app/presentation/stores/providers/form_user_pr
 import 'package:intl/intl.dart';
 
 class FormDetailsController {
-  final String externFormId;
+  final String formId;
 
-  FormDetailsController({required this.externFormId}) {
+  FormDetailsController({required this.formId}) {
     getForm();
   }
 
@@ -15,7 +15,7 @@ class FormDetailsController {
   void getForm() {
     FormUserProvider provider = Modular.get<FormUserProvider>();
 
-    form = provider.getFormByExternId(externFormId);
+    form = provider.getFormByExternId(formId);
   }
 
   String get creationDate => DateFormat('dd/MM/yyyy HH:mm:ss').format(

@@ -11,8 +11,7 @@ void main() {
     test(' should return form entity without null values', () {
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
-        externFormId: 'externFormId',
-        internFormId: 'internFormId',
+        formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
         coordinatorsId: ['coordinatorsId'],
@@ -26,14 +25,13 @@ void main() {
         longitude: 1.0,
         region: 'region',
         priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.EM_ANDAMENTO,
+        status: FormStatusEnum.IN_PROGRESS,
         expirationDate: 1,
         creationDate: 1,
         sections: [sectionExample],
       );
 
-      expect(form.externFormId, 'externFormId');
-      expect(form.internFormId, 'internFormId');
+      expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
       expect(form.coordinatorsId, ['coordinatorsId']);
@@ -47,7 +45,7 @@ void main() {
       expect(form.longitude, 1.0);
       expect(form.region, 'region');
       expect(form.priority, PriorityEnum.HIGH);
-      expect(form.status, FormStatusEnum.EM_ANDAMENTO);
+      expect(form.status, FormStatusEnum.IN_PROGRESS);
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.sections, [sectionExample]);
@@ -57,8 +55,7 @@ void main() {
       final informationField = TextInformationFieldEntity(value: 'value');
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
-        externFormId: 'externFormId',
-        internFormId: 'internFormId',
+        formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
         coordinatorsId: ['coordinatorsId'],
@@ -74,7 +71,7 @@ void main() {
         region: 'region',
         description: 'description',
         priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.EM_ANDAMENTO,
+        status: FormStatusEnum.IN_PROGRESS,
         expirationDate: 1,
         creationDate: 1,
         startDate: 1,
@@ -85,8 +82,7 @@ void main() {
         informationFields: [informationField],
       );
 
-      expect(form.externFormId, 'externFormId');
-      expect(form.internFormId, 'internFormId');
+      expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
       expect(form.coordinatorsId, ['coordinatorsId']);
@@ -102,7 +98,7 @@ void main() {
       expect(form.region, 'region');
       expect(form.description, 'description');
       expect(form.priority, PriorityEnum.HIGH);
-      expect(form.status, FormStatusEnum.EM_ANDAMENTO);
+      expect(form.status, FormStatusEnum.IN_PROGRESS);
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.startDate, 1);
@@ -115,8 +111,7 @@ void main() {
     test('should return a copy of form entity', () {
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
-        externFormId: 'externFormId',
-        internFormId: 'internFormId',
+        formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
         coordinatorsId: ['coordinatorsId'],
@@ -130,18 +125,17 @@ void main() {
         longitude: 1.0,
         region: 'region',
         priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.EM_ANDAMENTO,
+        status: FormStatusEnum.IN_PROGRESS,
         expirationDate: 1,
         creationDate: 1,
         sections: [sectionExample],
       );
-      
+
       FormModel formEntity = FormModel.entityToModel(form);
 
       final copyForm = formEntity.copyWith();
 
-      expect(copyForm.externFormId, 'externFormId');
-      expect(copyForm.internFormId, 'internFormId');
+      expect(copyForm.formId, 'formId');
       expect(copyForm.creatorUserId, 'creatorUserId');
       expect(copyForm.userId, 'userId');
       expect(copyForm.coordinatorsId, ['coordinatorsId']);
@@ -155,7 +149,7 @@ void main() {
       expect(copyForm.longitude, 1.0);
       expect(copyForm.region, 'region');
       expect(copyForm.priority, PriorityEnum.HIGH);
-      expect(copyForm.status, FormStatusEnum.EM_ANDAMENTO);
+      expect(copyForm.status, FormStatusEnum.IN_PROGRESS);
       expect(copyForm.expirationDate, 1);
       expect(copyForm.creationDate, 1);
       expect(copyForm.sections, [sectionExample]);

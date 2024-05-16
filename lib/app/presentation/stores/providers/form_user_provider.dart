@@ -25,7 +25,7 @@ class FormUserProvider extends ChangeNotifier {
 
   FormEntity getFormByExternId(String externId) {
     return _allForms.firstWhere(
-      (element) => element.externFormId == externId,
+      (element) => element.formId == externId,
     );
   }
 
@@ -69,11 +69,11 @@ class FormUserProvider extends ChangeNotifier {
     }));
   }
 
-  Future<void> updateFormStatus({required String externFormId}) async {
+  Future<void> updateFormStatus({required String formId}) async {
     setState(FormUserLoadingState());
     await _updateFormStatusUseCase(
-      externFormId: externFormId,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      formId: formId,
+      status: FormStatusEnum.IN_PROGRESS,
     ).then((value) {
       return value.fold(
         (error) {
@@ -82,7 +82,7 @@ class FormUserProvider extends ChangeNotifier {
         },
         (updatedForm) async {
           Modular.get<Logger>().d(
-            '${DateTime.now()} - Form with ${updatedForm.externFormId} initialized successfully!',
+            '${DateTime.now()} - Form with ${updatedForm.formId} initialized successfully!',
           );
           GlobalSnackBar.success('Formulário iniciado com sucesso!');
           await fetchUserForms();

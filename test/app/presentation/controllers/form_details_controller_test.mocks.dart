@@ -143,12 +143,12 @@ class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<void> updateFormStatus({required String? externFormId}) =>
+  _i5.Future<void> updateFormStatus({required String? formId}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateFormStatus,
           [],
-          {#externFormId: externFormId},
+          {#formId: formId},
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),
@@ -248,11 +248,11 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   }
 
   @override
-  String get externFormId => (super.noSuchMethod(
-        Invocation.getter(#externFormId),
+  String get formId => (super.noSuchMethod(
+        Invocation.getter(#formId),
         returnValue: _i7.dummyValue<String>(
           this,
-          Invocation.getter(#externFormId),
+          Invocation.getter(#formId),
         ),
       ) as String);
 
@@ -370,7 +370,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   _i6.FormStatusEnum get status => (super.noSuchMethod(
         Invocation.getter(#status),
-        returnValue: _i6.FormStatusEnum.NAO_INICIADO,
+        returnValue: _i6.FormStatusEnum.NOT_STARTED,
       ) as _i6.FormStatusEnum);
 
   @override

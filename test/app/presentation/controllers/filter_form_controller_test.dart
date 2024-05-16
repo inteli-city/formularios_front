@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
@@ -40,8 +39,8 @@ void main() {
     });
 
     test('setStatus should update filteredStatus', () {
-      controller.setStatus(FormStatusEnum.CONCLUIDO);
-      expect(controller.filteredStatus, FormStatusEnum.CONCLUIDO);
+      controller.setStatus(FormStatusEnum.CONCLUDED);
+      expect(controller.filteredStatus, FormStatusEnum.CONCLUDED);
     });
 
     test('clearFilters should reset all filters to default', () {
@@ -49,8 +48,8 @@ void main() {
       controller.setStreet('street');
       controller.setCity('city');
       controller.setSystem('system');
-      controller.setStatus(FormStatusEnum.NAO_INICIADO);
-      
+      controller.setStatus(FormStatusEnum.NOT_STARTED);
+
       controller.clearFilters();
 
       expect(controller.filteredTemplate, isNull);
@@ -59,7 +58,9 @@ void main() {
       expect(controller.filteredSystem, isNull);
     });
 
-    test('activeFiltersAmount should return the correct number of active filters', () {
+    test(
+        'activeFiltersAmount should return the correct number of active filters',
+        () {
       expect(controller.activeFiltersAmount, 0);
       controller.setTemplate('template');
       expect(controller.activeFiltersAmount, 1);

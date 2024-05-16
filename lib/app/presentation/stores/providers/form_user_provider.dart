@@ -46,7 +46,7 @@ class FormUserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchUserForms() async {
+  Future<void> fetchUserForms() async {
     setState(FormUserLoadingState());
     setState(await _fetchUserFormsUsecase(
       userId: '1',
@@ -69,7 +69,7 @@ class FormUserProvider extends ChangeNotifier {
     }));
   }
 
-  void initializeUserFormStatus({required String externFormId}) async {
+  Future<void> updateFormStatus({required String externFormId}) async {
     setState(FormUserLoadingState());
     await _updateFormStatusUseCase(
       externFormId: externFormId,
@@ -80,12 +80,12 @@ class FormUserProvider extends ChangeNotifier {
           Modular.get<Logger>().e(error.toString());
           GlobalSnackBar.error(error.message);
         },
-        (updatedForm) {
+        (updatedForm) async {
           Modular.get<Logger>().d(
             '${DateTime.now()} - Form with ${updatedForm.externFormId} initialized successfully!',
           );
           GlobalSnackBar.success('Formulário iniciado com sucesso!');
-          fetchUserForms();
+          await fetchUserForms();
         },
       );
     });

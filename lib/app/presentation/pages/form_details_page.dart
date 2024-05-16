@@ -168,18 +168,20 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             ? SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    formUserProvider.initializeUserFormStatus(
+                  onPressed: () async {
+                    await formUserProvider.updateFormStatus(
                       externFormId: controller.externFormId,
                     );
+                    setState(() {
+                      controller.getForm();
+                    });
                   },
                   style: ElevatedButton.styleFrom(
-                    elevation: 12,
                     shadowColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                         AppDimensions.radiusMedium,
-                      ), // Rounded corners
+                      ),
                     ),
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
@@ -202,16 +204,16 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: AppDimensions.paddingMedium,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      AppDimensions.radiusMedium,
+                    ),
                   ),
-                  elevation: 4,
                   backgroundColor: AppColors.red,
                 ),
                 child: Text(
                   textAlign: TextAlign.center,
-                  'Cancelar Formulário',
+                  'Cancelar',
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: AppColors.white,
                         fontWeight: FontWeight.w400,
@@ -228,11 +230,11 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: AppDimensions.paddingMedium,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      AppDimensions.radiusMedium,
+                    ),
                   ),
-                  elevation: 4,
                   surfaceTintColor: Theme.of(context).colorScheme.secondary,
                   side: BorderSide(
                     color: Theme.of(context).colorScheme.primary,
@@ -264,16 +266,16 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: AppDimensions.paddingMedium,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  AppDimensions.radiusMedium,
+                ),
               ),
-              elevation: 4,
               backgroundColor: AppColors.primaryBlue,
             ),
             child: Text(
               textAlign: TextAlign.center,
-              'Preencher Formulário',
+              'Preencher',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.w400,
@@ -290,18 +292,18 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: AppDimensions.paddingMedium,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  AppDimensions.radiusMedium,
+                ),
               ),
-              elevation: 4,
               surfaceTintColor: Theme.of(context).colorScheme.secondary,
               side: BorderSide(
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
             child: Text(
-              'Retroceder Formulário',
+              'Retroceder',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontWeight: FontWeight.w400,

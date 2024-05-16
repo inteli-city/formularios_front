@@ -3,7 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:ui' as _i11;
+import 'dart:async' as _i10;
+import 'dart:ui' as _i12;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
@@ -19,7 +20,7 @@ import 'package:formularios_front/app/presentation/states/form_user_state.dart'
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart'
     as _i9;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -328,24 +329,26 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       );
 
   @override
-  void fetchUserForms() => super.noSuchMethod(
+  _i10.Future<void> fetchUserForms() => (super.noSuchMethod(
         Invocation.method(
           #fetchUserForms,
           [],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  void initializeUserFormStatus({required String? externFormId}) =>
-      super.noSuchMethod(
+  _i10.Future<void> updateFormStatus({required String? externFormId}) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #initializeUserFormStatus,
+          #updateFormStatus,
           [],
           {#externFormId: externFormId},
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
   String getFormsCountByStatus(_i5.FormStatusEnum? status) =>
@@ -354,7 +357,7 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i10.dummyValue<String>(
+        returnValue: _i11.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -396,7 +399,7 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       );
 
   @override
-  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i12.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -405,7 +408,7 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       );
 
   @override
-  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i12.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

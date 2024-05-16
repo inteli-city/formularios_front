@@ -231,7 +231,7 @@ class FormMockRepository extends IFormRepository {
   @override
   Future<Either<Failure, List<FormEntity>>> getUserForms(
       {required String userId}) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     return right(
       formList.where((element) => element.userId == userId).toList(),
@@ -244,6 +244,7 @@ class FormMockRepository extends IFormRepository {
     required String externFormId,
   }) async {
     try {
+      await Future.delayed(const Duration(seconds: 1));
       int index = formList.indexWhere(
         (element) => element.externFormId == externFormId,
       );

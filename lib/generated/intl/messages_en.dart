@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "clearFilters": MessageLookupByLibrary.simpleMessage("Clear Filters"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "coordinatorId": MessageLookupByLibrary.simpleMessage("Coordinator ID"),
@@ -64,10 +65,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "expirationDate":
             MessageLookupByLibrary.simpleMessage("Expiration Date"),
         "externId": MessageLookupByLibrary.simpleMessage("External ID"),
+        "fillForm": MessageLookupByLibrary.simpleMessage("Fill Form"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "formStatusEnumSchema": m1,
         "internId": MessageLookupByLibrary.simpleMessage("Internal ID"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
+        "linkForm": MessageLookupByLibrary.simpleMessage("Link Form"),
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "noFormsFound": MessageLookupByLibrary.simpleMessage("No form found!"),
         "noItemsFoundErrorMessage": m2,
@@ -79,7 +82,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)"),
         "requestErrorMessage": m5,
         "sort": MessageLookupByLibrary.simpleMessage("Sort"),
+        "start": MessageLookupByLibrary.simpleMessage("Start"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "stepBack": MessageLookupByLibrary.simpleMessage("Step Back"),
         "street": MessageLookupByLibrary.simpleMessage("Street"),
         "vinculationId": MessageLookupByLibrary.simpleMessage("Vinculation ID")
       };

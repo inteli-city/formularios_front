@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -26,7 +27,7 @@ class FormMockRepository extends IFormRepository {
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing  elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.CONCLUIDO,
+      status: FormStatusEnum.EM_ANDAMENTO,
       expirationDate: 1715000631000,
       creationDate: 1704561963000,
       startDate: 1,
@@ -54,7 +55,7 @@ class FormMockRepository extends IFormRepository {
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.',
       priority: PriorityEnum.LOW,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -81,7 +82,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.CONCLUIDO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -108,7 +109,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -135,7 +136,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -162,7 +163,7 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.NAO_INICIADO,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
@@ -230,10 +231,35 @@ class FormMockRepository extends IFormRepository {
   @override
   Future<Either<Failure, List<FormEntity>>> getUserForms(
       {required String userId}) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     return right(
       formList.where((element) => element.userId == userId).toList(),
     );
+  }
+
+  @override
+  Future<Either<Failure, FormEntity>> updateFormStatus({
+    required FormStatusEnum status,
+    required String externFormId,
+  }) async {
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      int index = formList.indexWhere(
+        (element) => element.externFormId == externFormId,
+      );
+
+      FormModel formModel = FormModel.entityToModel(formList[index]);
+
+      FormModel copyFormModel = formModel.copyWith(status: status);
+
+      formList.removeAt(index);
+
+      formList.insert(index, copyFormModel);
+
+      return right(copyFormModel);
+    } catch (e) {
+      return left(NoItemsFound(message: "Formulário não encontrado."));
+    }
   }
 }

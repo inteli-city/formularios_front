@@ -230,6 +230,56 @@ class S {
     );
   }
 
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start`
+  String get start {
+    return Intl.message(
+      'Start',
+      name: 'start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fill Form`
+  String get fillForm {
+    return Intl.message(
+      'Fill Form',
+      name: 'fillForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link Form`
+  String get linkForm {
+    return Intl.message(
+      'Link Form',
+      name: 'linkForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step Back`
+  String get stepBack {
+    return Intl.message(
+      'Step Back',
+      name: 'stepBack',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)`
   String get priorityTooltip {
     return Intl.message(

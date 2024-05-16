@@ -59,4 +59,6 @@ class FormEntity {
     required this.sections,
     this.informationFields,
   });
+
+  
 }

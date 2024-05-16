@@ -41,6 +41,11 @@
     "startDate" : "Start Date",
     "endDate" : "End Date",
     "description" : "Description",
+    "cancel" : "Cancel",
+    "start" : "Start",
+    "fillForm" : "Fill Form",
+    "linkForm": "Link Form",
+    "stepBack": "Step Back",
 
     "priorityTooltip": "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)",
 

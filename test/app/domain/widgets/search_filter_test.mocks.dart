@@ -3,30 +3,24 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i12;
-import 'dart:ui' as _i16;
+import 'dart:async' as _i10;
+import 'dart:ui' as _i12;
 
-import 'package:dartz/dartz.dart' as _i3;
-import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i5;
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
-import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i10;
-import 'package:formularios_front/app/domain/failures/failures.dart' as _i13;
-import 'package:formularios_front/app/domain/repositories/form_repository.dart'
-    as _i2;
-import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart'
-    as _i11;
+import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
+import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i8;
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart'
-    as _i6;
-import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart'
-    as _i8;
-import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart'
-    as _i9;
-import 'package:formularios_front/app/presentation/states/form_user_state.dart'
     as _i4;
+import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart'
+    as _i6;
+import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart'
+    as _i7;
+import 'package:formularios_front/app/presentation/states/form_user_state.dart'
+    as _i2;
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart'
-    as _i14;
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i15;
+import 'package:mockito/src/dummies.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -41,9 +35,8 @@ import 'package:mockito/src/dummies.dart' as _i15;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeIFormRepository_0 extends _i1.SmartFake
-    implements _i2.IFormRepository {
-  _FakeIFormRepository_0(
+class _FakeFormUserState_0 extends _i1.SmartFake implements _i2.FormUserState {
+  _FakeFormUserState_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,28 +45,8 @@ class _FakeIFormRepository_0 extends _i1.SmartFake
         );
 }
 
-class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
-  _FakeEither_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeFormUserState_2 extends _i1.SmartFake implements _i4.FormUserState {
-  _FakeFormUserState_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeFormEntity_3 extends _i1.SmartFake implements _i5.FormEntity {
-  _FakeFormEntity_3(
+class _FakeFormEntity_1 extends _i1.SmartFake implements _i3.FormEntity {
+  _FakeFormEntity_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -86,7 +59,7 @@ class _FakeFormEntity_3 extends _i1.SmartFake implements _i5.FormEntity {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFilterFormsController extends _i1.Mock
-    implements _i6.FilterFormsController {
+    implements _i4.FilterFormsController {
   MockFilterFormsController() {
     _i1.throwOnMissingStub(this);
   }
@@ -128,7 +101,7 @@ class MockFilterFormsController extends _i1.Mock
       );
 
   @override
-  set filteredStatus(_i7.FormStatusEnum? _filteredStatus) => super.noSuchMethod(
+  set filteredStatus(_i5.FormStatusEnum? _filteredStatus) => super.noSuchMethod(
         Invocation.setter(
           #filteredStatus,
           _filteredStatus,
@@ -179,7 +152,7 @@ class MockFilterFormsController extends _i1.Mock
       );
 
   @override
-  void setStatus(_i7.FormStatusEnum? value) => super.noSuchMethod(
+  void setStatus(_i5.FormStatusEnum? value) => super.noSuchMethod(
         Invocation.method(
           #setStatus,
           [value],
@@ -201,7 +174,7 @@ class MockFilterFormsController extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSelectChipController extends _i1.Mock
-    implements _i8.SelectChipController {
+    implements _i6.SelectChipController {
   MockSelectChipController() {
     _i1.throwOnMissingStub(this);
   }
@@ -251,13 +224,13 @@ class MockSelectChipController extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSortFormsController extends _i1.Mock
-    implements _i9.SortFormsController {
+    implements _i7.SortFormsController {
   MockSortFormsController() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  set selectedOrder(_i10.OrderEnum? _selectedOrder) => super.noSuchMethod(
+  set selectedOrder(_i8.OrderEnum? _selectedOrder) => super.noSuchMethod(
         Invocation.setter(
           #selectedOrder,
           _selectedOrder,
@@ -266,7 +239,7 @@ class MockSortFormsController extends _i1.Mock
       );
 
   @override
-  void setSelectedOrder(_i10.OrderEnum? value) => super.noSuchMethod(
+  void setSelectedOrder(_i8.OrderEnum? value) => super.noSuchMethod(
         Invocation.method(
           #setSelectedOrder,
           [value],
@@ -275,65 +248,25 @@ class MockSortFormsController extends _i1.Mock
       );
 }
 
-/// A class which mocks [FetchUserFormsUsecase].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockFetchUserFormsUsecase extends _i1.Mock
-    implements _i11.FetchUserFormsUsecase {
-  MockFetchUserFormsUsecase() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i2.IFormRepository get repository => (super.noSuchMethod(
-        Invocation.getter(#repository),
-        returnValue: _FakeIFormRepository_0(
-          this,
-          Invocation.getter(#repository),
-        ),
-      ) as _i2.IFormRepository);
-
-  @override
-  _i12.Future<_i3.Either<_i13.Failure, List<_i5.FormEntity>>> call(
-          {required String? userId}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #call,
-          [],
-          {#userId: userId},
-        ),
-        returnValue:
-            _i12.Future<_i3.Either<_i13.Failure, List<_i5.FormEntity>>>.value(
-                _FakeEither_1<_i13.Failure, List<_i5.FormEntity>>(
-          this,
-          Invocation.method(
-            #call,
-            [],
-            {#userId: userId},
-          ),
-        )),
-      ) as _i12.Future<_i3.Either<_i13.Failure, List<_i5.FormEntity>>>);
-}
-
 /// A class which mocks [FormUserProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
+class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
   MockFormUserProvider() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.FormUserState get state => (super.noSuchMethod(
+  _i2.FormUserState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeFormUserState_2(
+        returnValue: _FakeFormUserState_0(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i4.FormUserState);
+      ) as _i2.FormUserState);
 
   @override
-  set state(_i4.FormUserState? _state) => super.noSuchMethod(
+  set state(_i2.FormUserState? _state) => super.noSuchMethod(
         Invocation.setter(
           #state,
           _state,
@@ -372,22 +305,22 @@ class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
       ) as bool);
 
   @override
-  _i5.FormEntity getFormByExternId(String? externId) => (super.noSuchMethod(
+  _i3.FormEntity getFormByExternId(String? externId) => (super.noSuchMethod(
         Invocation.method(
           #getFormByExternId,
           [externId],
         ),
-        returnValue: _FakeFormEntity_3(
+        returnValue: _FakeFormEntity_1(
           this,
           Invocation.method(
             #getFormByExternId,
             [externId],
           ),
         ),
-      ) as _i5.FormEntity);
+      ) as _i3.FormEntity);
 
   @override
-  void setState(_i4.FormUserState? value) => super.noSuchMethod(
+  void setState(_i2.FormUserState? value) => super.noSuchMethod(
         Invocation.method(
           #setState,
           [value],
@@ -396,22 +329,35 @@ class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
       );
 
   @override
-  void fetchUserForms() => super.noSuchMethod(
+  _i10.Future<void> fetchUserForms() => (super.noSuchMethod(
         Invocation.method(
           #fetchUserForms,
           [],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
 
   @override
-  String getFormsCountByStatus(_i7.FormStatusEnum? status) =>
+  _i10.Future<void> updateFormStatus({required String? externFormId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateFormStatus,
+          [],
+          {#externFormId: externFormId},
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+
+  @override
+  String getFormsCountByStatus(_i5.FormStatusEnum? status) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i15.dummyValue<String>(
+        returnValue: _i11.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -426,7 +372,7 @@ class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
     required String? street,
     required String? city,
     required String? system,
-    required _i7.FormStatusEnum? enumStatus,
+    required _i5.FormStatusEnum? enumStatus,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -444,7 +390,7 @@ class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
       );
 
   @override
-  void orderForms(_i10.OrderEnum? orderEnum) => super.noSuchMethod(
+  void orderForms(_i8.OrderEnum? orderEnum) => super.noSuchMethod(
         Invocation.method(
           #orderForms,
           [orderEnum],
@@ -453,7 +399,7 @@ class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
       );
 
   @override
-  void addListener(_i16.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i12.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -462,7 +408,7 @@ class MockFormUserProvider extends _i1.Mock implements _i14.FormUserProvider {
       );
 
   @override
-  void removeListener(_i16.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i12.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

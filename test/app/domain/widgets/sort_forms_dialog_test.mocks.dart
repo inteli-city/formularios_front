@@ -3,10 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:ui' as _i9;
+import 'dart:async' as _i7;
+import 'dart:ui' as _i10;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i8;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i5;
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart'
     as _i4;
@@ -15,7 +16,7 @@ import 'package:formularios_front/app/presentation/states/form_user_state.dart'
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
+import 'package:mockito/src/dummies.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -159,22 +160,35 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
       );
 
   @override
-  void fetchUserForms() => super.noSuchMethod(
+  _i7.Future<void> fetchUserForms() => (super.noSuchMethod(
         Invocation.method(
           #fetchUserForms,
           [],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  String getFormsCountByStatus(_i7.FormStatusEnum? status) =>
+  _i7.Future<void> updateFormStatus({required String? externFormId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateFormStatus,
+          [],
+          {#externFormId: externFormId},
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  String getFormsCountByStatus(_i8.FormStatusEnum? status) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i9.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -189,7 +203,7 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
     required String? street,
     required String? city,
     required String? system,
-    required _i7.FormStatusEnum? enumStatus,
+    required _i8.FormStatusEnum? enumStatus,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -216,7 +230,7 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
       );
 
   @override
-  void addListener(_i9.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -225,7 +239,7 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
       );
 
   @override
-  void removeListener(_i9.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

@@ -4,6 +4,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
@@ -11,10 +12,13 @@ import 'package:logger/logger.dart';
 
 class FormUserProvider extends ChangeNotifier {
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
+  final UpdateFormStatusUseCase _updateFormStatusUseCase;
 
   FormUserProvider(
     this._fetchUserFormsUsecase,
+    this._updateFormStatusUseCase,
   );
+
   FormUserState state = FormUserInitialState();
   List<FormEntity> _allForms = [];
   List<FormEntity> _copyAllFilterForms = [];
@@ -42,7 +46,7 @@ class FormUserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchUserForms() async {
+  Future<void> fetchUserForms() async {
     setState(FormUserLoadingState());
     setState(await _fetchUserFormsUsecase(
       userId: '1',
@@ -63,6 +67,28 @@ class FormUserProvider extends ChangeNotifier {
         },
       );
     }));
+  }
+
+  Future<void> updateFormStatus({required String externFormId}) async {
+    setState(FormUserLoadingState());
+    await _updateFormStatusUseCase(
+      externFormId: externFormId,
+      status: FormStatusEnum.EM_ANDAMENTO,
+    ).then((value) {
+      return value.fold(
+        (error) {
+          Modular.get<Logger>().e(error.toString());
+          GlobalSnackBar.error(error.message);
+        },
+        (updatedForm) async {
+          Modular.get<Logger>().d(
+            '${DateTime.now()} - Form with ${updatedForm.externFormId} initialized successfully!',
+          );
+          GlobalSnackBar.success('Formulário iniciado com sucesso!');
+          await fetchUserForms();
+        },
+      );
+    });
   }
 
   String getFormsCountByStatus(FormStatusEnum status) {

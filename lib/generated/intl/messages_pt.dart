@@ -53,19 +53,43 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "clearFilters": MessageLookupByLibrary.simpleMessage("Limpar Filtros"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+        "coordinatorId":
+            MessageLookupByLibrary.simpleMessage("ID do Coordenador"),
+        "creationDate": MessageLookupByLibrary.simpleMessage("Data de Criação"),
+        "creatorUserId":
+            MessageLookupByLibrary.simpleMessage("ID do Usuário Criador"),
+        "description": MessageLookupByLibrary.simpleMessage("Descrição"),
+        "endDate": MessageLookupByLibrary.simpleMessage("Data de Término"),
         "entityErrorMessage": m0,
+        "expirationDate":
+            MessageLookupByLibrary.simpleMessage("Data de Expiração"),
+        "externId": MessageLookupByLibrary.simpleMessage("ID Externo"),
+        "fillForm": MessageLookupByLibrary.simpleMessage("Preencher"),
         "filters": MessageLookupByLibrary.simpleMessage("Filtros"),
         "formStatusEnumSchema": m1,
+        "internId": MessageLookupByLibrary.simpleMessage("ID Interno"),
+        "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
+        "linkForm": MessageLookupByLibrary.simpleMessage("Vincular Formulário"),
+        "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "noFormsFound": MessageLookupByLibrary.simpleMessage(
             "Nenhum Formulário Encontrado!"),
         "noItemsFoundErrorMessage": m2,
+        "number": MessageLookupByLibrary.simpleMessage("Número"),
         "orderEnumSchema": m3,
+        "priority": MessageLookupByLibrary.simpleMessage("Prioridade"),
         "priorityEnumSchema": m4,
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)"),
         "requestErrorMessage": m5,
-        "sort": MessageLookupByLibrary.simpleMessage("Ordenar")
+        "sort": MessageLookupByLibrary.simpleMessage("Ordenar"),
+        "start": MessageLookupByLibrary.simpleMessage("Iniciar"),
+        "startDate": MessageLookupByLibrary.simpleMessage("Data de Início"),
+        "stepBack": MessageLookupByLibrary.simpleMessage("Retroceder"),
+        "street": MessageLookupByLibrary.simpleMessage("Rua"),
+        "vinculationId":
+            MessageLookupByLibrary.simpleMessage("ID de Vinculação")
       };
 }

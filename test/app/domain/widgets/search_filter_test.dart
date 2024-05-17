@@ -35,6 +35,8 @@ void main() {
         .thenReturn(FormStatusEnum.NOT_STARTED.enumString);
     when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.IN_PROGRESS))
         .thenReturn(FormStatusEnum.IN_PROGRESS.enumString);
+    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.CANCELED))
+        .thenReturn(FormStatusEnum.CANCELED.enumString);
 
     await tester.pumpWidget(const MaterialApp(
       home: Scaffold(body: FilterTabWidget()),

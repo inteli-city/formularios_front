@@ -2,13 +2,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 void main() {
   group('Form Entity Test', () {
-    test(' should return form entity without null values', () {
+    test(' should return form entity with non-null values', () {
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
         formId: 'formId',
@@ -29,6 +30,10 @@ void main() {
         expirationDate: 1,
         creationDate: 1,
         sections: [sectionExample],
+        formTitle: 'formTitle',
+        canVinculate: false,
+        justificative: JustificativeEntity(
+            options: [], selectedOption: null, text: 'text', image: null),
       );
 
       expect(form.formId, 'formId');
@@ -49,11 +54,15 @@ void main() {
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.sections, [sectionExample]);
+      expect(form.justificative, isA<JustificativeEntity>());
+      expect(form.formTitle, 'formTitle');
+      expect(form.canVinculate, false);
     });
 
     test('should return form entity with null values', () {
       final informationField = TextInformationFieldEntity(value: 'value');
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
+
       final form = FormEntity(
         formId: 'formId',
         creatorUserId: 'creatorUserId',
@@ -76,10 +85,13 @@ void main() {
         creationDate: 1,
         startDate: 1,
         endDate: 1,
-        justificative: 'justificative',
+        justificative: JustificativeEntity(
+            options: [], selectedOption: null, text: 'text', image: null),
         comments: 'comments',
         sections: [sectionExample],
         informationFields: [informationField],
+        formTitle: 'formTitle',
+        canVinculate: false,
       );
 
       expect(form.formId, 'formId');
@@ -103,10 +115,12 @@ void main() {
       expect(form.creationDate, 1);
       expect(form.startDate, 1);
       expect(form.endDate, 1);
-      expect(form.justificative, 'justificative');
       expect(form.comments, 'comments');
       expect(form.sections, [sectionExample]);
       expect(form.informationFields, [informationField]);
+      expect(form.justificative, isA<JustificativeEntity>());
+      expect(form.formTitle, 'formTitle');
+      expect(form.canVinculate, false);
     });
     test('should return a copy of form entity', () {
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
@@ -129,6 +143,10 @@ void main() {
         expirationDate: 1,
         creationDate: 1,
         sections: [sectionExample],
+        justificative: JustificativeEntity(
+            options: [], selectedOption: null, text: 'text', image: null),
+        formTitle: 'formTitle',
+        canVinculate: false,
       );
 
       FormModel formEntity = FormModel.entityToModel(form);
@@ -153,6 +171,9 @@ void main() {
       expect(copyForm.expirationDate, 1);
       expect(copyForm.creationDate, 1);
       expect(copyForm.sections, [sectionExample]);
+      expect(copyForm.justificative, isA<JustificativeEntity>());
+      expect(copyForm.formTitle, 'formTitle');
+      expect(copyForm.canVinculate, false);
     });
   });
 }

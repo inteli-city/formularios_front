@@ -40,6 +40,7 @@ class _SortFormsDialog extends State<SortFormsDialog> {
                   activeColor: AppColors.primaryBlue,
                   value: order,
                   groupValue: controller.selectedOrder,
+                  toggleable: true,
                   onChanged: (OrderEnum? value) {
                     setState(() {
                       controller.setSelectedOrder(value);

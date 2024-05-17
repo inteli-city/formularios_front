@@ -137,7 +137,8 @@ class FormUserProvider extends ChangeNotifier {
   }
 
   void orderForms(OrderEnum? orderEnum) {
-    List<FormEntity> orderedForms = (state as FormUserSuccessState).forms;
+    List<FormEntity> orderedForms =
+        List.from((state as FormUserSuccessState).forms);
 
     switch (orderEnum) {
       case OrderEnum.PRIORIDADE_BAIXO_ALTO:
@@ -151,9 +152,8 @@ class FormUserProvider extends ChangeNotifier {
       case OrderEnum.MAIS_ANTIGO:
         orderedForms.sort((a, b) => b.creationDate.compareTo(a.creationDate));
       default:
-        setState(FormUserSuccessState(forms: orderedForms));
+        orderedForms = _allForms;
     }
-
     setState(FormUserSuccessState(forms: orderedForms));
   }
 }

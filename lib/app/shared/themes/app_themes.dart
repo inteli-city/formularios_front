@@ -22,8 +22,7 @@ class AppThemes {
       elevation: WidgetStatePropertyAll(5),
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingMedium,
-          horizontal: AppDimensions.paddingMedium * 2,
+          vertical: AppDimensions.paddingMedium * 1.2,
         ),
       ),
     )),

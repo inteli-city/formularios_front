@@ -158,12 +158,18 @@ class MockFormUserProvider extends _i1.Mock implements _i5.FormUserProvider {
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<void> updateFormStatus({required String? formId}) =>
+  _i6.Future<void> updateFormStatus({
+    required String? formId,
+    required _i7.FormStatusEnum? status,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateFormStatus,
           [],
-          {#formId: formId},
+          {
+            #formId: formId,
+            #status: status,
+          },
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),

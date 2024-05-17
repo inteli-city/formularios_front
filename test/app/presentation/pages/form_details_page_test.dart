@@ -138,5 +138,26 @@ void main() {
       expect(find.text('Cancelar'), findsOneWidget);
       expect(find.text('Vincular Formulário'), findsOneWidget);
     });
+
+    testWidgets(
+        'Form Details Page displays details correctly when status is CONCLUDED or CANCELED',
+        (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
+
+      when(form.status).thenReturn(FormStatusEnum.IN_PROGRESS);
+
+      await tester.pumpWidget(ModularApp(
+          module: AppModule(),
+          child: const MaterialApp(
+            home: FormDetailsPage(),
+          )));
+
+      await tester.pumpAndSettle();
+      expect(find.byElementType(ElevatedButton), findsNothing);
+    });
   });
 }

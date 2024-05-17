@@ -69,11 +69,11 @@ class FormUserProvider extends ChangeNotifier {
     }));
   }
 
-  Future<void> updateFormStatus({required String formId}) async {
+  Future<void> updateFormStatus({required String formId,required FormStatusEnum status}) async {
     setState(FormUserLoadingState());
     await _updateFormStatusUseCase(
       formId: formId,
-      status: FormStatusEnum.IN_PROGRESS,
+      status: status,
     ).then((value) {
       return value.fold(
         (error) {
@@ -82,9 +82,9 @@ class FormUserProvider extends ChangeNotifier {
         },
         (updatedForm) async {
           Modular.get<Logger>().d(
-            '${DateTime.now()} - Form with ${updatedForm.formId} initialized successfully!',
+            '${DateTime.now()} - Form with ${updatedForm.formId} updated status successfully!',
           );
-          GlobalSnackBar.success('Formulário iniciado com sucesso!');
+          GlobalSnackBar.success('Formulário atualizado com sucesso!');
           await fetchUserForms();
         },
       );

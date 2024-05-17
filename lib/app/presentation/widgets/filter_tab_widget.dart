@@ -36,7 +36,10 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
       children: [
         SizedBox(
           height: ScreenHelper.height(context) * 0.1,
-          child: ListView.builder(
+          child: ListView.separated(
+            separatorBuilder: (context, index) => const SizedBox(
+              width: AppDimensions.horizontalSpaceSmall,
+            ),
             scrollDirection: Axis.horizontal,
             itemCount: FormStatusEnum.values.length,
             itemBuilder: (context, index) => _choiceChip(

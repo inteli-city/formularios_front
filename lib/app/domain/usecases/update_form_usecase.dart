@@ -6,7 +6,7 @@ import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 
 abstract class UpdateFormStatusUseCase {
   Future<Either<Failure, FormEntity>> call(
-      {required FormStatusEnum status, required String externFormId});
+      {required FormStatusEnum status, required String formId});
 }
 
 class InitiliazeUserFormStatusUseCase implements UpdateFormStatusUseCase {
@@ -16,9 +16,9 @@ class InitiliazeUserFormStatusUseCase implements UpdateFormStatusUseCase {
 
   @override
   Future<Either<Failure, FormEntity>> call(
-      {required FormStatusEnum status, required String externFormId}) async {
+      {required FormStatusEnum status, required String formId}) async {
     return await repository.updateFormStatus(
-      externFormId: externFormId,
+      formId: formId,
       status: status,
     );
   }

@@ -10,13 +10,14 @@ void main() {
     });
 
     test('initial state of isSelectedList should be all false', () {
-      expect(controller.isSelectedList, equals([false, false, false]));
+      expect(controller.isSelectedList, equals([false, false, false, false]));
     });
 
     test('getSelectedChip should return correct chip state', () {
       expect(controller.getSelectedChip(0), false);
       expect(controller.getSelectedChip(1), false);
       expect(controller.getSelectedChip(2), false);
+      expect(controller.getSelectedChip(3), false);
 
       controller.setChipValue(0, true);
       expect(controller.getSelectedChip(0), true);
@@ -31,6 +32,9 @@ void main() {
       expect(controller.isSelectedList[0], false);
 
       controller.setChipValue(2, true);
+      expect(controller.isSelectedList[2], true);
+
+      controller.setChipValue(3, true);
       expect(controller.isSelectedList[2], true);
     });
 

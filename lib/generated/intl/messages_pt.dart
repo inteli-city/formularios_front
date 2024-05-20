@@ -24,9 +24,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Campo ${entityErrorMessage} não é válido";
 
   static String m1(schema) => "${Intl.select(schema, {
-            'NAO_INICIADO': 'Não iniciado',
-            'EM_ANDAMENTO': 'Em andamento',
-            'CONCLUIDO': 'Concluído',
+            'NOT_STARTED': 'Não iniciado',
+            'IN_PROGRESS': 'Em andamento',
+            'CONCLUDED': 'Concluído',
+            'CANCELED': 'Cancelado',
             'other': '',
           })}";
 

@@ -25,7 +25,7 @@ class FormUserProvider extends ChangeNotifier {
 
   FormEntity getFormByExternId(String externId) {
     return _allForms.firstWhere(
-      (element) => element.externFormId == externId,
+      (element) => element.formId == externId,
     );
   }
 
@@ -69,11 +69,11 @@ class FormUserProvider extends ChangeNotifier {
     }));
   }
 
-  Future<void> updateFormStatus({required String externFormId}) async {
+  Future<void> updateFormStatus({required String formId,required FormStatusEnum status}) async {
     setState(FormUserLoadingState());
     await _updateFormStatusUseCase(
-      externFormId: externFormId,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      formId: formId,
+      status: status,
     ).then((value) {
       return value.fold(
         (error) {
@@ -82,9 +82,9 @@ class FormUserProvider extends ChangeNotifier {
         },
         (updatedForm) async {
           Modular.get<Logger>().d(
-            '${DateTime.now()} - Form with ${updatedForm.externFormId} initialized successfully!',
+            '${DateTime.now()} - Form with ${updatedForm.formId} updated status successfully!',
           );
-          GlobalSnackBar.success('Formulário iniciado com sucesso!');
+          GlobalSnackBar.success('Formulário atualizado com sucesso!');
           await fetchUserForms();
         },
       );
@@ -137,7 +137,8 @@ class FormUserProvider extends ChangeNotifier {
   }
 
   void orderForms(OrderEnum? orderEnum) {
-    List<FormEntity> orderedForms = (state as FormUserSuccessState).forms;
+    List<FormEntity> orderedForms =
+        List.from((state as FormUserSuccessState).forms);
 
     switch (orderEnum) {
       case OrderEnum.PRIORIDADE_BAIXO_ALTO:
@@ -151,9 +152,8 @@ class FormUserProvider extends ChangeNotifier {
       case OrderEnum.MAIS_ANTIGO:
         orderedForms.sort((a, b) => b.creationDate.compareTo(a.creationDate));
       default:
-        setState(FormUserSuccessState(forms: orderedForms));
+        orderedForms = _allForms;
     }
-
     setState(FormUserSuccessState(forms: orderedForms));
   }
 }

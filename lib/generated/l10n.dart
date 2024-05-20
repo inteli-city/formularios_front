@@ -374,14 +374,15 @@ class S {
     );
   }
 
-  /// `{schema, select, NAO_INICIADO{Not started} EM_ANDAMENTO{In progress} CONCLUIDO{Concluded} other{}}`
+  /// `{schema, select, NOT_STARTED{Not started} IN_PROGRESS{In progress} CONCLUDED{Concluded} CANCELED{Canceled} other{}}`
   String formStatusEnumSchema(Object schema) {
     return Intl.select(
       schema,
       {
-        'NAO_INICIADO': 'Not started',
-        'EM_ANDAMENTO': 'In progress',
-        'CONCLUIDO': 'Concluded',
+        'NOT_STARTED': 'Not started',
+        'IN_PROGRESS': 'In progress',
+        'CONCLUDED': 'Concluded',
+        'CANCELED': 'Canceled',
         'other': '',
       },
       name: 'formStatusEnumSchema',

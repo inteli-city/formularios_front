@@ -50,7 +50,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 height: AppDimensions.verticalSpaceMedium,
               ),
               _buildFormDetails(),
-              controller.form.status == FormStatusEnum.CONCLUIDO
+              controller.form.status == FormStatusEnum.CONCLUDED
                   ? Container()
                   : _buildFormDetailsActions(),
             ],
@@ -64,61 +64,100 @@ class FormDetailsPageState extends State<FormDetailsPage> {
     FormEntity form = controller.form;
 
     return Expanded(
-        child: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildDetaislRow(
-            details: [
-              [S.current.externId, form.externFormId],
-              [S.current.internId, form.internFormId],
-              [S.current.vinculationId, form.vinculationFormId ?? ''],
-            ],
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.creatorUserId, form.creatorUserId],
-              [S.current.coordinatorId, form.coordinatorsId.join('-')],
-            ],
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.priority, form.priority.enumString],
-              ['Status', form.status.enumString]
-            ],
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.creationDate, controller.creationDate],
-              [S.current.expirationDate, controller.expirationDate],
-            ],
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.street, form.street],
-              [S.current.number, form.number.toString()],
-            ],
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.latitude, form.latitude.toString()],
-              [S.current.longitude, form.longitude.toString()],
-            ],
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.startDate, S.current.startDate],
-              [S.current.endDate, S.current.endDate]
-            ],
-          ),
-          _buildFormDetail(
-            S.current.description,
-            form.description,
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildDetaislRow(
+              details: [
+                [
+                  S.current.externId,
+                  form.formId,
+                ],
+                [
+                  S.current.vinculationId,
+                  form.vinculationFormId ?? '',
+                ],
+              ],
+            ),
+            _buildDetaislRow(
+              details: [
+                [
+                  S.current.creatorUserId,
+                  form.creatorUserId,
+                ],
+                [
+                  S.current.coordinatorId,
+                  form.coordinatorsId.join('-'),
+                ],
+              ],
+            ),
+            _buildDetaislRow(
+              details: [
+                [
+                  S.current.priority,
+                  form.priority.enumString,
+                ],
+                [
+                  'Status',
+                  form.status.enumString,
+                ]
+              ],
+            ),
+            _buildDetaislRow(
+              details: [
+                [
+                  S.current.creationDate,
+                  controller.creationDate,
+                ],
+                [
+                  S.current.expirationDate,
+                  controller.expirationDate,
+                ],
+              ],
+            ),
+            _buildDetaislRow(
+              details: [
+                [S.current.street, form.street],
+                [
+                  S.current.number,
+                  form.number.toString(),
+                ],
+              ],
+            ),
+            _buildDetaislRow(
+              details: [
+                [
+                  S.current.latitude,
+                  form.latitude.toString(),
+                ],
+                [
+                  S.current.longitude,
+                  form.longitude.toString(),
+                ],
+              ],
+            ),
+            _buildDetaislRow(
+              details: [
+                [
+                  S.current.startDate,
+                  S.current.startDate,
+                ],
+                [
+                  S.current.endDate,
+                  S.current.endDate,
+                ]
+              ],
+            ),
+            _buildFormDetail(
+              S.current.description,
+              form.description,
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   Widget _buildDetaislRow({required List<List<String>> details}) {
@@ -160,160 +199,144 @@ class FormDetailsPageState extends State<FormDetailsPage> {
   }
 
   Widget _buildFormDetailsActions() {
-    double screenWidth = ScreenHelper.width(context);
+    List<FormStatusEnum> formStatusWithoutActions = [
+      FormStatusEnum.CANCELED,
+      FormStatusEnum.CONCLUDED
+    ];
 
     return Column(
       children: [
-        controller.form.status == FormStatusEnum.NAO_INICIADO
-            ? SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await formUserProvider.updateFormStatus(
-                      externFormId: controller.externFormId,
-                    );
-                    setState(() {
-                      controller.getForm();
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shadowColor: Theme.of(context).colorScheme.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppDimensions.radiusMedium,
-                      ),
-                    ),
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                  ),
-                  child: Text(
-                    S.current.start,
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w900,
-                        height: 1.5,
-                        fontSize:
-                            screenWidth < breakpointSmallMobile ? 12 : 16),
-                  ),
-                ),
-              )
-            : _buildActionsWhenFormsAreInProcess(),
-        const SizedBox(height: AppDimensions.verticalSpaceMedium),
-        Row(
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      AppDimensions.radiusMedium,
-                    ),
-                  ),
-                  backgroundColor: AppColors.red,
-                ),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  S.current.cancel,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.w400,
-                        height: 1.2,
-                        fontSize: screenWidth < breakpointSmallMobile ? 12 : 16,
-                      ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      AppDimensions.radiusMedium,
-                    ),
-                  ),
-                  surfaceTintColor: Theme.of(context).colorScheme.secondary,
-                  side: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
-                child: Text(
-                  S.current.linkForm,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context).colorScheme.primary,
-                      height: 1.2,
-                      fontSize: screenWidth < breakpointSmallMobile ? 12 : 16),
-                ),
-              ),
-            ),
-          ],
-        ),
+        formStatusWithoutActions.contains(controller.form.status)
+            ? const SizedBox()
+            : _buildFormStatusWithActions()
       ],
     );
   }
 
-  Widget _buildActionsWhenFormsAreInProcess() {
+  Widget buildCustomElevatedButton({
+    required VoidCallback onPressed,
+    required String text,
+    Color? backgroundColor,
+    Color? textColor,
+    bool hasBorder = false,
+  }) {
     double screenWidth = ScreenHelper.width(context);
-
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  AppDimensions.radiusMedium,
-                ),
-              ),
-              backgroundColor: AppColors.primaryBlue,
-            ),
-            child: Text(
-              textAlign: TextAlign.center,
-              S.current.fillForm,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w400,
-                    height: 1.2,
-                    fontSize: screenWidth < breakpointSmallMobile ? 12 : 16,
-                  ),
-            ),
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusMedium,
           ),
-        ),
-        const SizedBox(
-          width: 8,
-        ),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  AppDimensions.radiusMedium,
-                ),
-              ),
-              surfaceTintColor: Theme.of(context).colorScheme.secondary,
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            child: Text(
-              S.current.stepBack,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontWeight: FontWeight.w400,
+          side: hasBorder
+              ? BorderSide(
                   color: Theme.of(context).colorScheme.primary,
-                  height: 1.2,
-                  fontSize: screenWidth < breakpointSmallMobile ? 12 : 16),
+                  width: 1.5,
+                )
+              : BorderSide.none,
+        ),
+        backgroundColor:
+            backgroundColor ?? Theme.of(context).colorScheme.primary,
+      ),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: textColor ?? AppColors.white,
+              height: 1.2,
+              fontSize: (screenWidth < breakpointSmallMobile ? 12 : 16),
+            ),
+      ),
+    );
+  }
+
+  Widget _buildFormStatusWithActions() {
+    return Column(
+      children: [
+        controller.form.status == FormStatusEnum.NOT_STARTED
+            ? SizedBox(
+                width: double.infinity,
+                child: buildCustomElevatedButton(
+                  onPressed: () async {
+                    await formUserProvider.updateFormStatus(
+                      formId: controller.formId,
+                      status: FormStatusEnum.IN_PROGRESS,
+                    );
+                    setState(
+                      () {
+                        controller.getForm();
+                      },
+                    );
+                  },
+                  text: S.current.start,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  textColor: AppColors.white,
+                ),
+              )
+            : Row(
+                children: [
+                  Expanded(
+                    child: buildCustomElevatedButton(
+                      onPressed: () {},
+                      text: S.current.fillForm,
+                      backgroundColor: AppColors.primaryBlue,
+                      textColor: AppColors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: buildCustomElevatedButton(
+                      onPressed: () {},
+                      text: S.current.stepBack,
+                      textColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: AppColors.white,
+                      hasBorder: true,
+                    ),
+                  ),
+                ],
+              ),
+        _buildDefaultActions(),
+      ],
+    );
+  }
+
+  Widget _buildDefaultActions() {
+    return Padding(
+      padding: const EdgeInsets.only(top: AppDimensions.paddingMedium),
+      child: Row(
+        children: [
+          Expanded(
+            child: buildCustomElevatedButton(
+              onPressed: () async {
+                await formUserProvider.updateFormStatus(
+                  formId: controller.formId,
+                  status: FormStatusEnum.CANCELED,
+                );
+                setState(() {
+                  controller.getForm();
+                });
+              },
+              text: S.current.cancel,
+              backgroundColor: AppColors.red,
+              textColor: AppColors.white,
             ),
           ),
-        ),
-      ],
+          const SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            child: buildCustomElevatedButton(
+              onPressed: () {},
+              text: S.current.linkForm,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              textColor: Theme.of(context).colorScheme.primary,
+              hasBorder: true,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -72,7 +72,7 @@ class HomeModule extends Module {
     i.addLazySingleton(SelectChipController.new);
     i.add(
       () => FormDetailsController(
-        externFormId: i.args.params['externId'],
+        formId: i.args.params['externId'],
       ),
     );
   }

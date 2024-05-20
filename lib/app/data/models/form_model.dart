@@ -1,13 +1,13 @@
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 class FormModel extends FormEntity {
   FormModel({
-    required super.externFormId,
-    required super.internFormId,
+    required super.formId,
     required super.creatorUserId,
     required super.userId,
     required super.coordinatorsId,
@@ -29,15 +29,16 @@ class FormModel extends FormEntity {
     super.description,
     super.endDate,
     super.informationFields,
-    super.justificative,
+    required super.justificative,
     super.startDate,
     super.vinculationFormId,
+    required super.formTitle,
+    required super.canVinculate,
   });
 
   factory FormModel.entityToModel(FormEntity entity) {
     return FormModel(
-      externFormId: entity.externFormId,
-      internFormId: entity.internFormId,
+      formId: entity.formId,
       creatorUserId: entity.creatorUserId,
       userId: entity.userId,
       coordinatorsId: entity.coordinatorsId,
@@ -53,14 +54,23 @@ class FormModel extends FormEntity {
       priority: entity.priority,
       status: entity.status,
       expirationDate: entity.expirationDate,
+      justificative: entity.justificative,
       creationDate: entity.creationDate,
       sections: entity.sections,
+      formTitle: entity.formTitle,
+      canVinculate: entity.canVinculate,
+      comments: entity.comments,
+      description: entity.description,
+      endDate: entity.endDate,
+      informationFields: entity.informationFields,
+      startDate: entity.startDate,
+      vinculationFormId: entity.vinculationFormId,
     );
   }
 
   FormModel copyWith({
-    String? externFormId,
-    String? internFormId,
+    String? formTitle,
+    String? formId,
     String? creatorUserId,
     String? userId,
     List<String>? coordinatorsId,
@@ -81,14 +91,15 @@ class FormModel extends FormEntity {
     int? creationDate,
     int? startDate,
     int? endDate,
-    String? justificative,
+    JustificativeEntity? justificative,
     String? comments,
     List<SectionEntity>? sections,
     List<InformationFieldEntity>? informationFields,
+    bool? canVinculate,
   }) {
     return FormModel(
-      externFormId: externFormId ?? this.externFormId,
-      internFormId: internFormId ?? this.internFormId,
+      formTitle: formTitle ?? this.formTitle,
+      formId: formId ?? this.formId,
       creatorUserId: creatorUserId ?? this.creatorUserId,
       userId: userId ?? this.userId,
       coordinatorsId: coordinatorsId ?? this.coordinatorsId,
@@ -113,6 +124,7 @@ class FormModel extends FormEntity {
       comments: comments ?? this.comments,
       sections: sections ?? this.sections,
       informationFields: informationFields ?? this.informationFields,
+      canVinculate: canVinculate ?? this.canVinculate,
     );
   }
 }

@@ -29,14 +29,14 @@ void main() {
     Modular.replaceInstance<FormUserProvider>(mockFormUserProvider);
 
     when(mockFormUserProvider.state).thenReturn(FormUserLoadingState());
-    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.CONCLUIDO))
-        .thenReturn(FormStatusEnum.CONCLUIDO.enumString);
-    when(mockFormUserProvider
-            .getFormsCountByStatus(FormStatusEnum.NAO_INICIADO))
-        .thenReturn(FormStatusEnum.NAO_INICIADO.enumString);
-    when(mockFormUserProvider
-            .getFormsCountByStatus(FormStatusEnum.EM_ANDAMENTO))
-        .thenReturn(FormStatusEnum.EM_ANDAMENTO.enumString);
+    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.CONCLUDED))
+        .thenReturn(FormStatusEnum.CONCLUDED.enumString);
+    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.NOT_STARTED))
+        .thenReturn(FormStatusEnum.NOT_STARTED.enumString);
+    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.IN_PROGRESS))
+        .thenReturn(FormStatusEnum.IN_PROGRESS.enumString);
+    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.CANCELED))
+        .thenReturn(FormStatusEnum.CANCELED.enumString);
 
     await tester.pumpWidget(const MaterialApp(
       home: Scaffold(body: FilterTabWidget()),

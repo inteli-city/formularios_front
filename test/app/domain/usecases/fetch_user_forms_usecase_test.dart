@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -25,8 +26,7 @@ void main() {
       when(formRepository.getUserForms(userId: '1'))
           .thenAnswer((_) async => Right([
                 FormEntity(
-                  externFormId: 'externFormId',
-                  internFormId: 'internFormId',
+                  formId: 'formId',
                   creatorUserId: 'creatorUserId',
                   userId: 'userId',
                   coordinatorsId: ['coordinatorsId'],
@@ -42,18 +42,23 @@ void main() {
                   region: 'region',
                   description: 'description',
                   priority: PriorityEnum.HIGH,
-                  status: FormStatusEnum.EM_ANDAMENTO,
+                  status: FormStatusEnum.IN_PROGRESS,
                   expirationDate: 1,
                   creationDate: 1,
                   startDate: 1,
                   endDate: 1,
-                  justificative: 'justificative',
+                  justificative: JustificativeEntity(
+                      options: [],
+                      selectedOption: null,
+                      text: 'text',
+                      image: null),
                   comments: 'comments',
                   sections: [],
+                  formTitle: 'formTitle',
+                  canVinculate: false,
                 ),
                 FormEntity(
-                  externFormId: 'externFormId',
-                  internFormId: 'internFormId',
+                  formId: 'formId',
                   creatorUserId: 'creatorUserId',
                   userId: 'userId',
                   coordinatorsId: ['coordinatorsId'],
@@ -69,14 +74,20 @@ void main() {
                   region: 'region',
                   description: 'description',
                   priority: PriorityEnum.HIGH,
-                  status: FormStatusEnum.EM_ANDAMENTO,
+                  status: FormStatusEnum.IN_PROGRESS,
                   expirationDate: 1,
                   creationDate: 1,
                   startDate: 1,
                   endDate: 1,
-                  justificative: 'justificative',
+                  justificative: JustificativeEntity(
+                      options: [],
+                      selectedOption: null,
+                      text: 'text',
+                      image: null),
                   comments: 'comments',
                   sections: [],
+                  formTitle: 'formTitle',
+                  canVinculate: false,
                 ),
               ]));
       var result = await usecase(userId: '1');

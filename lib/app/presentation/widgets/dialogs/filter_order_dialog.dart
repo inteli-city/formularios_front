@@ -168,7 +168,10 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
         .map(
           (value) => DropdownMenuItem<String?>(
             value: value,
-            child: Text(value),
+            child: Text(
+              value,
+              style: AppTextStyles.titleMedium,
+            ),
           ),
         )
         .toList();
@@ -176,15 +179,13 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
       child: DropdownButtonFormField2<String?>(
+        alignment: Alignment.center,
         value: selectedValue,
+        isExpanded: true,
         items: dropdownItems,
         onChanged: onChanged,
-        style: AppTextStyles.titleMedium,
         decoration: InputDecoration(
           labelText: hintText,
-          labelStyle:
-              AppTextStyles.titleMedium.copyWith(fontWeight: FontWeight.bold),
-          alignLabelWithHint: true,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: AppColors.primaryBlue,

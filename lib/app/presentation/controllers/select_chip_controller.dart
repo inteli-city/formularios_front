@@ -1,5 +1,5 @@
 class SelectChipController {
-  List<bool> isSelectedList = [false, false, false];
+  List<bool> isSelectedList = [false, false, false, false];
 
   bool getSelectedChip(int index) => isSelectedList[index];
 

@@ -35,7 +35,7 @@ class _FormCardState extends State<FormCard>
   }
 
   void _onTapDown(TapDownDetails details) {
-    Modular.to.pushNamed('/home/${widget.form.externFormId}');
+    Modular.to.pushNamed('/home/${widget.form.formId}');
     _controller.forward();
   }
 
@@ -45,7 +45,6 @@ class _FormCardState extends State<FormCard>
 
   @override
   Widget build(BuildContext context) {
-    FormEntity form = widget.form;
     DateTime dateTime =
         DateTime.fromMillisecondsSinceEpoch(widget.form.expirationDate);
     String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(dateTime);
@@ -79,23 +78,28 @@ class _FormCardState extends State<FormCard>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${form.system} - ${form.template} - ${form.externFormId}',
+                      widget.form.formTitle,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
                           .textTheme
-                          .bodyLarge!
+                          .titleMedium!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                     Icon(
                       Icons.circle,
                       size: AppDimensions.iconSmall * 1.6,
-                      color: form.priority.color,
+                      color: widget.form.priority.color,
                     )
                   ],
                 ),
+                Text(
+                  '${widget.form.system} - ${widget.form.template} - ${widget.form.formId}',
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge!,
+                ),
                 const SizedBox(height: 4),
                 Text(
-                  '${form.city} - ${form.street}, ${form.number}',
+                  '${widget.form.city} - ${widget.form.street}, ${widget.form.number}',
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
@@ -107,7 +111,7 @@ class _FormCardState extends State<FormCard>
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  form.description ?? '',
+                  widget.form.description ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyLarge,

@@ -1,15 +1,17 @@
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 class FormEntity {
-  final String externFormId;
-  final String internFormId;
+  final String formTitle;
+  final String formId;
   final String creatorUserId;
   final String userId;
   final List<String> coordinatorsId;
   final String? vinculationFormId;
+  final bool canVinculate;
   final String template;
   final String area;
   final String system;
@@ -26,18 +28,19 @@ class FormEntity {
   final int creationDate;
   final int? startDate;
   final int? endDate;
-  final String? justificative;
+  final JustificativeEntity justificative;
   final String? comments;
   final List<SectionEntity> sections;
   final List<InformationFieldEntity>? informationFields;
 
   FormEntity({
-    required this.externFormId,
-    required this.internFormId,
+    required this.formTitle,
+    required this.formId,
     required this.creatorUserId,
     required this.userId,
     required this.coordinatorsId,
     this.vinculationFormId,
+    required this.canVinculate,
     required this.template,
     required this.area,
     required this.system,
@@ -54,11 +57,9 @@ class FormEntity {
     required this.creationDate,
     this.startDate,
     this.endDate,
-    this.justificative,
+    required this.justificative,
     this.comments,
     required this.sections,
     this.informationFields,
   });
-
-  
 }

@@ -1,16 +1,30 @@
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 
 class FormMockRepository extends IFormRepository {
+  var justificative = JustificativeEntity(
+    options: [
+      JustificativeOptionEntity(
+        option: 'option',
+        requiredImage: true,
+        requiredText: true,
+      ),
+    ],
+    selectedOption: null,
+    text: null,
+    image: null,
+  );
+
   List<FormEntity> formList = [
     FormEntity(
-      externFormId: 'ID1142342524242',
-      internFormId: '1',
+      formTitle: 'Poda de Árvore',
+      formId: 'ID1142342524242',
       creatorUserId: '1',
       userId: '1',
       coordinatorsId: ['1314312731967', '1314312731967', '1314312731967'],
@@ -27,18 +41,30 @@ class FormMockRepository extends IFormRepository {
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing  elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.EM_ANDAMENTO,
+      status: FormStatusEnum.IN_PROGRESS,
       expirationDate: 1715000631000,
       creationDate: 1704561963000,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      canVinculate: true,
     ),
     FormEntity(
-      externFormId: 'ID1142342524243',
-      internFormId: '1',
+      formTitle: 'Poda de Árvore 2',
+      formId: 'ID1142342524243',
       creatorUserId: '1',
       userId: '1',
       coordinatorsId: ['coordinatorsId'],
@@ -55,18 +81,30 @@ class FormMockRepository extends IFormRepository {
       description:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis.',
       priority: PriorityEnum.LOW,
-      status: FormStatusEnum.NAO_INICIADO,
+      status: FormStatusEnum.NOT_STARTED,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      canVinculate: false,
     ),
     FormEntity(
-      externFormId: 'ID1142342524244',
-      internFormId: '1',
+      formTitle: 'Poda de Árvore 3',
+      formId: 'ID1142342524244',
       creatorUserId: '1',
       userId: '1',
       coordinatorsId: ['coordinatorsId'],
@@ -82,18 +120,30 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.CONCLUIDO,
+      status: FormStatusEnum.CONCLUDED,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      canVinculate: true,
     ),
     FormEntity(
-      externFormId: 'ID1142342524245',
-      internFormId: '1',
+      formTitle: 'Poda de Árvore 4',
+      formId: 'ID1142342524245',
       creatorUserId: '1',
       userId: '1',
       coordinatorsId: ['coordinatorsId'],
@@ -109,18 +159,30 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.NAO_INICIADO,
+      status: FormStatusEnum.CANCELED,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      canVinculate: true,
     ),
     FormEntity(
-      externFormId: 'ID1142342524246',
-      internFormId: '2',
+      formTitle: 'Poda de Árvore 5',
+      formId: 'ID1142342524246',
       creatorUserId: '2',
       userId: '1',
       coordinatorsId: ['coordinatorsId'],
@@ -136,18 +198,30 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.NAO_INICIADO,
+      status: FormStatusEnum.NOT_STARTED,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      canVinculate: false,
     ),
     FormEntity(
-      externFormId: 'ID1142342524247',
-      internFormId: '3',
+      formTitle: 'Poda de Árvore 6',
+      formId: 'ID1142342524247',
       creatorUserId: '2',
       userId: '1',
       coordinatorsId: ['coordinatorsId'],
@@ -163,18 +237,29 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.NAO_INICIADO,
+      status: FormStatusEnum.NOT_STARTED,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      canVinculate: true,
     ),
     FormEntity(
-      externFormId: 'ID1142342524248',
-      internFormId: '4',
+      formId: 'ID1142342524248',
       creatorUserId: '4',
       userId: '2',
       coordinatorsId: ['coordinatorsId'],
@@ -190,18 +275,31 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.LOW,
-      status: FormStatusEnum.NAO_INICIADO,
+      status: FormStatusEnum.NOT_STARTED,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      formTitle: 'Potencial de Vazamento',
+      canVinculate: true,
     ),
     FormEntity(
-      externFormId: 'ID1142342524249',
-      internFormId: '5',
+      formTitle: 'Inspeção de PV 2',
+      formId: 'ID1142342524249',
       creatorUserId: '5',
       userId: '2',
       coordinatorsId: ['coordinatorsId'],
@@ -217,14 +315,26 @@ class FormMockRepository extends IFormRepository {
       region: 'region',
       description: 'description',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.CONCLUIDO,
+      status: FormStatusEnum.CONCLUDED,
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
       endDate: 1,
-      justificative: 'justificative',
+      justificative: JustificativeEntity(
+        options: [
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: true,
+            requiredText: true,
+          ),
+        ],
+        selectedOption: null,
+        text: null,
+        image: null,
+      ),
       comments: 'comments',
       sections: [],
+      canVinculate: false,
     ),
   ];
 
@@ -241,12 +351,12 @@ class FormMockRepository extends IFormRepository {
   @override
   Future<Either<Failure, FormEntity>> updateFormStatus({
     required FormStatusEnum status,
-    required String externFormId,
+    required String formId,
   }) async {
     try {
       await Future.delayed(const Duration(seconds: 1));
       int index = formList.indexWhere(
-        (element) => element.externFormId == externFormId,
+        (element) => element.formId == formId,
       );
 
       FormModel formModel = FormModel.entityToModel(formList[index]);

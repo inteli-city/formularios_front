@@ -3,14 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
-import 'package:dartz/dartz.dart' as _i2;
+import 'package:dartz/dartz.dart' as _i3;
 import 'package:formularios_front/app/data/repositories/form_mock_repository.dart'
-    as _i3;
-import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i4;
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
-import 'package:formularios_front/app/domain/failures/failures.dart' as _i6;
+    as _i4;
+import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i5;
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+    as _i2;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i8;
+import 'package:formularios_front/app/domain/failures/failures.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -26,8 +28,19 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_0(
+class _FakeJustificativeEntity_0 extends _i1.SmartFake
+    implements _i2.JustificativeEntity {
+  _FakeJustificativeEntity_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
+  _FakeEither_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -40,19 +53,38 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFormMockRepository extends _i1.Mock
-    implements _i3.FormMockRepository {
+    implements _i4.FormMockRepository {
   MockFormMockRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i4.FormEntity> get formList => (super.noSuchMethod(
-        Invocation.getter(#formList),
-        returnValue: <_i4.FormEntity>[],
-      ) as List<_i4.FormEntity>);
+  _i2.JustificativeEntity get justificative => (super.noSuchMethod(
+        Invocation.getter(#justificative),
+        returnValue: _FakeJustificativeEntity_0(
+          this,
+          Invocation.getter(#justificative),
+        ),
+      ) as _i2.JustificativeEntity);
 
   @override
-  set formList(List<_i4.FormEntity>? _formList) => super.noSuchMethod(
+  set justificative(_i2.JustificativeEntity? _justificative) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #justificative,
+          _justificative,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  List<_i5.FormEntity> get formList => (super.noSuchMethod(
+        Invocation.getter(#formList),
+        returnValue: <_i5.FormEntity>[],
+      ) as List<_i5.FormEntity>);
+
+  @override
+  set formList(List<_i5.FormEntity>? _formList) => super.noSuchMethod(
         Invocation.setter(
           #formList,
           _formList,
@@ -61,7 +93,7 @@ class MockFormMockRepository extends _i1.Mock
       );
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, List<_i4.FormEntity>>> getUserForms(
+  _i6.Future<_i3.Either<_i7.Failure, List<_i5.FormEntity>>> getUserForms(
           {required String? userId}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -70,8 +102,8 @@ class MockFormMockRepository extends _i1.Mock
           {#userId: userId},
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, List<_i4.FormEntity>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i4.FormEntity>>(
+            _i6.Future<_i3.Either<_i7.Failure, List<_i5.FormEntity>>>.value(
+                _FakeEither_1<_i7.Failure, List<_i5.FormEntity>>(
           this,
           Invocation.method(
             #getUserForms,
@@ -79,12 +111,12 @@ class MockFormMockRepository extends _i1.Mock
             {#userId: userId},
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, List<_i4.FormEntity>>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, List<_i5.FormEntity>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i4.FormEntity>> updateFormStatus({
-    required _i7.FormStatusEnum? status,
-    required String? externFormId,
+  _i6.Future<_i3.Either<_i7.Failure, _i5.FormEntity>> updateFormStatus({
+    required _i8.FormStatusEnum? status,
+    required String? formId,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -92,20 +124,20 @@ class MockFormMockRepository extends _i1.Mock
           [],
           {
             #status: status,
-            #externFormId: externFormId,
+            #formId: formId,
           },
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i4.FormEntity>>.value(
-            _FakeEither_0<_i6.Failure, _i4.FormEntity>(
+        returnValue: _i6.Future<_i3.Either<_i7.Failure, _i5.FormEntity>>.value(
+            _FakeEither_1<_i7.Failure, _i5.FormEntity>(
           this,
           Invocation.method(
             #updateFormStatus,
             [],
             {
               #status: status,
-              #externFormId: externFormId,
+              #formId: formId,
             },
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i4.FormEntity>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i5.FormEntity>>);
 }

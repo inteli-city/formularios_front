@@ -2,17 +2,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 void main() {
   group('Form Entity Test', () {
-    test(' should return form entity without null values', () {
+    test(' should return form entity with non-null values', () {
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
-        externFormId: 'externFormId',
-        internFormId: 'internFormId',
+        formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
         coordinatorsId: ['coordinatorsId'],
@@ -26,14 +26,17 @@ void main() {
         longitude: 1.0,
         region: 'region',
         priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.EM_ANDAMENTO,
+        status: FormStatusEnum.IN_PROGRESS,
         expirationDate: 1,
         creationDate: 1,
         sections: [sectionExample],
+        formTitle: 'formTitle',
+        canVinculate: false,
+        justificative: JustificativeEntity(
+            options: [], selectedOption: null, text: 'text', image: null),
       );
 
-      expect(form.externFormId, 'externFormId');
-      expect(form.internFormId, 'internFormId');
+      expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
       expect(form.coordinatorsId, ['coordinatorsId']);
@@ -47,18 +50,21 @@ void main() {
       expect(form.longitude, 1.0);
       expect(form.region, 'region');
       expect(form.priority, PriorityEnum.HIGH);
-      expect(form.status, FormStatusEnum.EM_ANDAMENTO);
+      expect(form.status, FormStatusEnum.IN_PROGRESS);
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.sections, [sectionExample]);
+      expect(form.justificative, isA<JustificativeEntity>());
+      expect(form.formTitle, 'formTitle');
+      expect(form.canVinculate, false);
     });
 
     test('should return form entity with null values', () {
       final informationField = TextInformationFieldEntity(value: 'value');
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
+
       final form = FormEntity(
-        externFormId: 'externFormId',
-        internFormId: 'internFormId',
+        formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
         coordinatorsId: ['coordinatorsId'],
@@ -74,19 +80,21 @@ void main() {
         region: 'region',
         description: 'description',
         priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.EM_ANDAMENTO,
+        status: FormStatusEnum.IN_PROGRESS,
         expirationDate: 1,
         creationDate: 1,
         startDate: 1,
         endDate: 1,
-        justificative: 'justificative',
+        justificative: JustificativeEntity(
+            options: [], selectedOption: null, text: 'text', image: null),
         comments: 'comments',
         sections: [sectionExample],
         informationFields: [informationField],
+        formTitle: 'formTitle',
+        canVinculate: false,
       );
 
-      expect(form.externFormId, 'externFormId');
-      expect(form.internFormId, 'internFormId');
+      expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
       expect(form.coordinatorsId, ['coordinatorsId']);
@@ -102,21 +110,22 @@ void main() {
       expect(form.region, 'region');
       expect(form.description, 'description');
       expect(form.priority, PriorityEnum.HIGH);
-      expect(form.status, FormStatusEnum.EM_ANDAMENTO);
+      expect(form.status, FormStatusEnum.IN_PROGRESS);
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.startDate, 1);
       expect(form.endDate, 1);
-      expect(form.justificative, 'justificative');
       expect(form.comments, 'comments');
       expect(form.sections, [sectionExample]);
       expect(form.informationFields, [informationField]);
+      expect(form.justificative, isA<JustificativeEntity>());
+      expect(form.formTitle, 'formTitle');
+      expect(form.canVinculate, false);
     });
     test('should return a copy of form entity', () {
       final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
-        externFormId: 'externFormId',
-        internFormId: 'internFormId',
+        formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
         coordinatorsId: ['coordinatorsId'],
@@ -130,18 +139,21 @@ void main() {
         longitude: 1.0,
         region: 'region',
         priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.EM_ANDAMENTO,
+        status: FormStatusEnum.IN_PROGRESS,
         expirationDate: 1,
         creationDate: 1,
         sections: [sectionExample],
+        justificative: JustificativeEntity(
+            options: [], selectedOption: null, text: 'text', image: null),
+        formTitle: 'formTitle',
+        canVinculate: false,
       );
-      
+
       FormModel formEntity = FormModel.entityToModel(form);
 
       final copyForm = formEntity.copyWith();
 
-      expect(copyForm.externFormId, 'externFormId');
-      expect(copyForm.internFormId, 'internFormId');
+      expect(copyForm.formId, 'formId');
       expect(copyForm.creatorUserId, 'creatorUserId');
       expect(copyForm.userId, 'userId');
       expect(copyForm.coordinatorsId, ['coordinatorsId']);
@@ -155,10 +167,13 @@ void main() {
       expect(copyForm.longitude, 1.0);
       expect(copyForm.region, 'region');
       expect(copyForm.priority, PriorityEnum.HIGH);
-      expect(copyForm.status, FormStatusEnum.EM_ANDAMENTO);
+      expect(copyForm.status, FormStatusEnum.IN_PROGRESS);
       expect(copyForm.expirationDate, 1);
       expect(copyForm.creationDate, 1);
       expect(copyForm.sections, [sectionExample]);
+      expect(copyForm.justificative, isA<JustificativeEntity>());
+      expect(copyForm.formTitle, 'formTitle');
+      expect(copyForm.canVinculate, false);
     });
   });
 }

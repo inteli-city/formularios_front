@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -24,8 +25,7 @@ void main() {
     late FormEntity form;
     setUp(() {
       form = FormEntity(
-          externFormId: 'externFormId',
-          internFormId: 'internFormId',
+          formId: 'formId',
           creatorUserId: 'creatorUserId',
           userId: 'userId',
           coordinatorsId: ['coordinatorsId'],
@@ -41,26 +41,28 @@ void main() {
           region: 'region',
           description: 'description',
           priority: PriorityEnum.HIGH,
-          status: FormStatusEnum.EM_ANDAMENTO,
+          status: FormStatusEnum.IN_PROGRESS,
           expirationDate: 1,
           creationDate: 1,
           startDate: 1,
           endDate: 1,
-          justificative: 'justificative',
+          justificative: JustificativeEntity(
+              options: [], selectedOption: null, text: 'text', image: null),
           comments: 'comments',
-          sections: []);
+          sections: [],
+          formTitle: 'formTitle',
+          canVinculate: false);
     });
 
     test('should return a list of FormEntity', () async {
       when(formRepository.updateFormStatus(
-              status: FormStatusEnum.EM_ANDAMENTO,
-              externFormId: form.externFormId))
+              status: FormStatusEnum.IN_PROGRESS, formId: form.formId))
           .thenAnswer(
         (_) async => Right(form),
       );
 
       var result = await usecase(
-          externFormId: form.externFormId, status: FormStatusEnum.EM_ANDAMENTO);
+          formId: form.formId, status: FormStatusEnum.IN_PROGRESS);
 
       expect(result.isRight(), true);
 
@@ -71,18 +73,17 @@ void main() {
 
       expect(
         result.fold((l) => null, (form) => form.status),
-        FormStatusEnum.EM_ANDAMENTO,
+        FormStatusEnum.IN_PROGRESS,
       );
     });
 
     test('should return a Failure', () async {
       when(formRepository.updateFormStatus(
-              externFormId: form.externFormId,
-              status: FormStatusEnum.EM_ANDAMENTO))
+              formId: form.formId, status: FormStatusEnum.IN_PROGRESS))
           .thenAnswer((_) async => Left(Failure(message: '')));
 
       var result = await usecase(
-          externFormId: form.externFormId, status: FormStatusEnum.EM_ANDAMENTO);
+          formId: form.formId, status: FormStatusEnum.IN_PROGRESS);
 
       expect(result.isLeft(), true);
       expect(

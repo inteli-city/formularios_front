@@ -63,5 +63,5 @@
     
     "priorityEnumSchema": "{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}",
     
-    "formStatusEnumSchema": "{schema, select, NAO_INICIADO{Not started} EM_ANDAMENTO{In progress} CONCLUIDO{Concluded} other{}}"
+    "formStatusEnumSchema": "{schema, select, NOT_STARTED{Not started} IN_PROGRESS{In progress} CONCLUDED{Concluded} CANCELED{Canceled} other{}}"
 }

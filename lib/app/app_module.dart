@@ -86,14 +86,14 @@ class HomeModule extends Module {
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
-          // guards: [UserGuard()],
+          guards: [UserGuard()],
         ),
       ],
     );
     r.child(
       '/:externId',
       child: (context) => const FormDetailsPage(),
-      // guards: [UserGuard()],
+      guards: [UserGuard()],
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 
-import 'use_guards.mocks.dart';
+import 'use_guards_test.mocks.dart';
 
 @GenerateMocks([UserProvider])
 void main() {

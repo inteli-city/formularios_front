@@ -16,7 +16,7 @@ class UserMockRepository implements UserRepository {
 
   @override
   Future<Either<Failure, UserEntity>> loginUser() async {
-    Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     if (user.enabled == false) {
       return Left(ErrorRequest(message: 'Usuário desabilitado'));
     }

@@ -69,7 +69,8 @@ class FormUserProvider extends ChangeNotifier {
     }));
   }
 
-  Future<void> updateFormStatus({required String formId,required FormStatusEnum status}) async {
+  Future<void> updateFormStatus(
+      {required String formId, required FormStatusEnum status}) async {
     setState(FormUserLoadingState());
     await _updateFormStatusUseCase(
       formId: formId,
@@ -79,6 +80,9 @@ class FormUserProvider extends ChangeNotifier {
         (error) {
           Modular.get<Logger>().e(error.toString());
           GlobalSnackBar.error(error.message);
+          setState(FormUserErrorState(error: error));
+          
+          return FormUserErrorState(error: error);
         },
         (updatedForm) async {
           Modular.get<Logger>().d(

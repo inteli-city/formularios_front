@@ -210,11 +210,11 @@ class S {
     );
   }
 
-  /// `End Date`
-  String get endDate {
+  /// `Conclusion Date`
+  String get conclusionDate {
     return Intl.message(
-      'End Date',
-      name: 'endDate',
+      'Conclusion Date',
+      name: 'conclusionDate',
       desc: '',
       args: [],
     );

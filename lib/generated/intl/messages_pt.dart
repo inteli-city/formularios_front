@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "clearFilters": MessageLookupByLibrary.simpleMessage("Limpar Filtros"),
+        "conclusionDate":
+            MessageLookupByLibrary.simpleMessage("Data de Conclusão"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
         "coordinatorId":
             MessageLookupByLibrary.simpleMessage("ID do Coordenador"),
@@ -63,7 +65,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "creatorUserId":
             MessageLookupByLibrary.simpleMessage("ID do Usuário Criador"),
         "description": MessageLookupByLibrary.simpleMessage("Descrição"),
-        "endDate": MessageLookupByLibrary.simpleMessage("Data de Término"),
         "entityErrorMessage": m0,
         "expirationDate":
             MessageLookupByLibrary.simpleMessage("Data de Expiração"),

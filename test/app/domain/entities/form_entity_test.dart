@@ -15,7 +15,6 @@ void main() {
         formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
-        coordinatorsId: ['coordinatorsId'],
         template: 'template',
         area: 'area',
         system: 'system',
@@ -39,7 +38,6 @@ void main() {
       expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
-      expect(form.coordinatorsId, ['coordinatorsId']);
       expect(form.template, 'template');
       expect(form.area, 'area');
       expect(form.system, 'system');
@@ -67,7 +65,6 @@ void main() {
         formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
-        coordinatorsId: ['coordinatorsId'],
         vinculationFormId: 'vinculationFormId',
         template: 'template',
         area: 'area',
@@ -84,7 +81,7 @@ void main() {
         expirationDate: 1,
         creationDate: 1,
         startDate: 1,
-        endDate: 1,
+        conclusionDate: 1,
         justificative: JustificativeEntity(
             options: [], selectedOption: null, text: 'text', image: null),
         comments: 'comments',
@@ -97,7 +94,6 @@ void main() {
       expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
-      expect(form.coordinatorsId, ['coordinatorsId']);
       expect(form.vinculationFormId, 'vinculationFormId');
       expect(form.template, 'template');
       expect(form.area, 'area');
@@ -114,7 +110,7 @@ void main() {
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.startDate, 1);
-      expect(form.endDate, 1);
+      expect(form.conclusionDate, 1);
       expect(form.comments, 'comments');
       expect(form.sections, [sectionExample]);
       expect(form.informationFields, [informationField]);
@@ -128,7 +124,6 @@ void main() {
         formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
-        coordinatorsId: ['coordinatorsId'],
         template: 'template',
         area: 'area',
         system: 'system',
@@ -156,7 +151,6 @@ void main() {
       expect(copyForm.formId, 'formId');
       expect(copyForm.creatorUserId, 'creatorUserId');
       expect(copyForm.userId, 'userId');
-      expect(copyForm.coordinatorsId, ['coordinatorsId']);
       expect(copyForm.template, 'template');
       expect(copyForm.area, 'area');
       expect(copyForm.system, 'system');

@@ -303,12 +303,6 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as String);
 
   @override
-  List<String> get coordinatorsId => (super.noSuchMethod(
-        Invocation.getter(#coordinatorsId),
-        returnValue: <String>[],
-      ) as List<String>);
-
-  @override
   bool get canVinculate => (super.noSuchMethod(
         Invocation.getter(#canVinculate),
         returnValue: false,

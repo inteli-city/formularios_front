@@ -27,7 +27,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524242',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['1314312731967', '1314312731967', '1314312731967'],
       vinculationFormId: '10',
       template: 'Poda de Árvore',
       area: 'area',
@@ -45,7 +44,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1715000631000,
       creationDate: 1704561963000,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -67,7 +66,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524243',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 2',
       area: 'area',
@@ -85,7 +83,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -107,7 +105,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524244',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 3',
       area: 'area',
@@ -124,7 +121,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -146,7 +143,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524245',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 4',
       area: 'area',
@@ -163,7 +159,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -185,7 +181,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524246',
       creatorUserId: '2',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 5',
       area: 'area',
@@ -202,7 +197,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -224,7 +219,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524247',
       creatorUserId: '2',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 6',
       area: 'area',
@@ -241,7 +235,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -262,7 +256,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524248',
       creatorUserId: '4',
       userId: '2',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Inspeção de PV',
       area: 'area',
@@ -279,7 +272,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -302,7 +295,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524249',
       creatorUserId: '5',
       userId: '2',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'PV',
       area: 'area',
@@ -319,7 +311,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(

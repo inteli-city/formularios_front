@@ -87,10 +87,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   S.current.creatorUserId,
                   form.creatorUserId,
                 ],
-                [
-                  S.current.coordinatorId,
-                  form.coordinatorsId.join('-'),
-                ],
+               
               ],
             ),
             _buildDetaislRow(
@@ -145,8 +142,8 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   S.current.startDate,
                 ],
                 [
-                  S.current.endDate,
-                  S.current.endDate,
+                  S.current.conclusionDate,
+                  S.current.conclusionDate,
                 ]
               ],
             ),

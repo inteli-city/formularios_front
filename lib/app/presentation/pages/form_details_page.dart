@@ -87,7 +87,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   S.current.creatorUserId,
                   form.creatorUserId,
                 ],
-               
               ],
             ),
             _buildDetaislRow(
@@ -264,6 +263,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                         controller.getForm();
                       },
                     );
+                    Modular.to.navigate('/home/forms');
                   },
                   text: S.current.start,
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -274,7 +274,10 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 children: [
                   Expanded(
                     child: buildCustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Modular.to
+                            .pushNamed('/home/${controller.form.formId}/fill');
+                      },
                       text: S.current.fillForm,
                       backgroundColor: AppColors.primaryBlue,
                       textColor: AppColors.white,

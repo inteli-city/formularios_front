@@ -62,18 +62,18 @@ class AppThemes {
       contentPadding: const EdgeInsets.only(
         left: AppDimensions.paddingMedium,
         right: AppDimensions.paddingMedium,
-        top: AppDimensions.paddingExtraLarge * 2,
+        top: AppDimensions.paddingExtraLarge,
       ),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium)),
       alignLabelWithHint: true,
-      floatingLabelStyle: AppTextStyles.display,
+      floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          AppDimensions.radiusLarge,
-        ),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
         borderSide: BorderSide(
-          color: AppColors.primaryBlue,
-          width: AppDimensions.borderMedium,
-        ),
+            color: AppColors.primaryBlue,
+            width: AppDimensions.borderThin,
+            style: BorderStyle.solid),
       ),
     ),
     iconTheme: IconThemeData(

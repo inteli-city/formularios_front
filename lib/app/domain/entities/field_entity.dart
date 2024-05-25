@@ -21,7 +21,7 @@ abstract class FieldEntity {
 
 class TextFieldEntity extends FieldEntity {
   final int? maxLength;
-  final String? value;
+  String? value;
 
   TextFieldEntity({
     this.maxLength,
@@ -39,7 +39,7 @@ class NumberFieldEntity extends FieldEntity {
   final int? minValue;
   final int? maxValue;
   final bool decimal;
-  final double? value;
+  double? value;
 
   NumberFieldEntity({
     this.minValue,
@@ -57,7 +57,7 @@ class NumberFieldEntity extends FieldEntity {
 
 class DropDownFieldEntity extends FieldEntity {
   final List<String> options;
-  final String? value;
+  String? value;
 
   DropDownFieldEntity({
     required this.options,
@@ -74,7 +74,7 @@ class DropDownFieldEntity extends FieldEntity {
 class TypeAheadFieldEntity extends FieldEntity {
   final List<String> options;
   final int? maxLength;
-  final String? value;
+  String? value;
 
   TypeAheadFieldEntity({
     required this.options,
@@ -91,7 +91,7 @@ class TypeAheadFieldEntity extends FieldEntity {
 
 class RadioGroupFieldEntity extends FieldEntity {
   final List<String> options;
-  final String? value;
+  String? value;
 
   RadioGroupFieldEntity({
     required this.options,
@@ -108,7 +108,7 @@ class RadioGroupFieldEntity extends FieldEntity {
 class DateFieldEntity extends FieldEntity {
   final DateTime? minDate;
   final DateTime? maxDate;
-  final DateTime? value;
+  DateTime? value;
 
   DateFieldEntity({
     this.minDate,
@@ -124,7 +124,7 @@ class DateFieldEntity extends FieldEntity {
 }
 
 class CheckBoxFieldEntity extends FieldEntity {
-  final bool? value;
+  bool? value;
 
   CheckBoxFieldEntity({
     this.value,
@@ -140,7 +140,7 @@ class CheckBoxFieldEntity extends FieldEntity {
 class CheckBoxGroupFieldEntity extends FieldEntity {
   final List<String> options;
   final int? checkLimit;
-  final List<String>? value;
+  List<String>? value;
 
   CheckBoxGroupFieldEntity({
     required this.options,
@@ -156,7 +156,7 @@ class CheckBoxGroupFieldEntity extends FieldEntity {
 }
 
 class SwitchButtonFieldEntity extends FieldEntity {
-  final bool? value;
+  bool? value;
 
   SwitchButtonFieldEntity({
     this.value,
@@ -173,7 +173,7 @@ class FileFieldEntity extends FieldEntity {
   final FileTypeEnum fileType;
   final int minQuantity;
   final int maxQuantity;
-  final List<String>? value;
+  List<String>? value;
 
   FileFieldEntity({
     required this.fileType,

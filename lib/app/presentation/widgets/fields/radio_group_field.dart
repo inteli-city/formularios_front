@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 
 //regex, formatting
 class CustomRadioGroupFormField extends StatelessWidget {
   final RadioGroupFieldEntity field;
-  final RadioGroupController controller;
+  final FormSectionController controller;
 
   const CustomRadioGroupFormField({
     super.key,
@@ -28,16 +29,17 @@ class CustomRadioGroupFormField extends StatelessWidget {
           children: [
             Text(
               field.placeholder,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
             ...field.options.map((option) {
               return RadioListTile<String>(
-                title: Text(option),
+                title:
+                    Text(option, style: Theme.of(context).textTheme.bodyLarge),
                 value: option,
-                groupValue: controller.value,
+                groupValue: controller.getFieldValue(field.key),
                 onChanged: (value) {
                   state.didChange(value);
-                  controller.value = value;
+                  controller.setFieldValue(field.key, value);
                 },
               );
             }),

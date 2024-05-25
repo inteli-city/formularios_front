@@ -16,7 +16,7 @@ class StepperProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80,
+      height: 70,
       child: Stepper(
         type: StepperType.horizontal,
         elevation: 5,

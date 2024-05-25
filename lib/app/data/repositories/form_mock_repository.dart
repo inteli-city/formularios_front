@@ -5,6 +5,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -65,109 +66,67 @@ class FormMockRepository extends IFormRepository {
         SectionEntity(
           sectionId: 'section-01',
           fields: [
+            FileFieldEntity(
+                fileType: FileTypeEnum.DOCUMENT,
+                minQuantity: 1,
+                maxQuantity: 2,
+                placeholder: 'FileField',
+                key: 'key66',
+                isRequired: true),
             TextFieldEntity(
               fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
+              placeholder: 'TextField 01',
               isRequired: true,
               key: 'key1',
             ),
             TextFieldEntity(
               fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
+              placeholder: 'TextField 02',
               isRequired: true,
               key: 'key2',
             ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
               isRequired: true,
               key: 'key3',
+              decimal: false,
             ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key11',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key22',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
               isRequired: true,
               key: 'key33',
             ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key111',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key222',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key333',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key334',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key335',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key336',
-            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key44',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key55',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            FileFieldEntity(
+                fileType: FileTypeEnum.DOCUMENT,
+                minQuantity: 1,
+                maxQuantity: 2,
+                placeholder: 'FileField',
+                key: 'key77',
+                isRequired: true),
           ],
         ),
         SectionEntity(
           sectionId: 'section-01',
           fields: [
             TextFieldEntity(
-              fieldType: FieldTypeEnum.DATE_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key4',
-            ),
-            NumberFieldEntity(
-              fieldType: FieldTypeEnum.NUMBER_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key5',
-              decimal: true,
-            ),
-            TextFieldEntity(
               fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key6',
-            ),
-          ],
-        ),
-        SectionEntity(
-          sectionId: 'section-01',
-          fields: [
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.DATE_FIELD,
               placeholder: 'placeholder',
               isRequired: true,
               key: 'key7',

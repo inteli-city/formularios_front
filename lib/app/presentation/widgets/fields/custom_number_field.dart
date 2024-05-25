@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomNumberFormField extends StatelessWidget {
   final NumberFieldEntity field;
@@ -17,7 +18,17 @@ class CustomNumberFormField extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         labelText: field.placeholder,
-        border: const OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.radiusMedium)),
+        floatingLabelStyle: Theme.of(context).textTheme.headlineLarge,
+        labelStyle: Theme.of(context).textTheme.bodyLarge,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+          borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.primary,
+              width: AppDimensions.borderThin,
+              style: BorderStyle.solid),
+        ),
       ),
       keyboardType: TextInputType.numberWithOptions(decimal: field.decimal),
       onChanged: (value) {

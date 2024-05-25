@@ -6,9 +6,13 @@ import 'package:formularios_front/app/presentation/controllers/form_controller.d
 import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/presentation/widgets/fields/check_box_field.dart';
 import 'package:formularios_front/app/presentation/widgets/fields/check_box_group_field.dart';
+import 'package:formularios_front/app/presentation/widgets/fields/custom_date_field.dart';
 import 'package:formularios_front/app/presentation/widgets/fields/custom_dropdown_field.dart';
+import 'package:formularios_front/app/presentation/widgets/fields/custom_file_picker_field.dart';
 import 'package:formularios_front/app/presentation/widgets/fields/custom_number_field.dart';
 import 'package:formularios_front/app/presentation/widgets/fields/custom_text_field.dart';
+import 'package:formularios_front/app/presentation/widgets/fields/radio_group_field.dart';
+import 'package:formularios_front/app/presentation/widgets/fields/type_ahead_field.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:gates_microapp_flutter/helpers/utils/screen_helper.dart';
@@ -75,31 +79,33 @@ class _SectionFormState extends State<SectionForm> {
         );
 
       case FieldTypeEnum.TYPEAHEAD_FIELD:
-      // return CustomTypeAheadFormField(
-      //   field: field as TypeAheadFieldEntity,
-      //   controller: widget.sectionController,
-      //   key: Key(field.key),
-      // );
+        return CustomTypeAheadFormField(
+          field: field as TypeAheadFieldEntity,
+          controller: widget.sectionController,
+          key: Key(field.key),
+        );
 
       case FieldTypeEnum.RADIO_GROUP_FIELD:
-      // return CustomRadioGroupFormField(
-      //   field: field as RadioGroupFieldEntity,
-      //   controller: widget.sectionController,
-      //   key: Key(field.key),
-      // );
+        return CustomRadioGroupFormField(
+          field: field as RadioGroupFieldEntity,
+          controller: widget.sectionController,
+          key: Key(field.key),
+        );
 
       case FieldTypeEnum.DATE_FIELD:
-      // return CustomDateFormField(
-      //   field: field as DateFieldEntity,
-      //   controller: widget.sectionController,
-      //   key: Key(field.key),
-      // );
+        return CustomDateFormField(
+          field: field as DateFieldEntity,
+          controller: widget.sectionController,
+          key: Key(field.key),
+        );
 
       case FieldTypeEnum.SWITCH_BUTTON_FIELD:
         return Container();
 
       case FieldTypeEnum.FILE_FIELD:
-        return Container();
+        return CustomFilePickerFormField(
+            field: field as FileFieldEntity,
+            controller: widget.sectionController);
 
       default:
         throw UnimplementedError();
@@ -116,30 +122,27 @@ class _SectionFormState extends State<SectionForm> {
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.only(
-            top: 0,
             bottom: AppDimensions.paddingSmall,
             right: AppDimensions.paddingLarge,
             left: AppDimensions.paddingLarge,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: AppDimensions.paddingSmall),
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: fields.length,
-                    itemBuilder: (context, index) => buildField(fields[index]),
-                    separatorBuilder: (context, index) => Divider(
-                      thickness: 1.5,
-                      color: Theme.of(context).colorScheme.primary,
-                      indent: 60,
-                      endIndent: 60,
-                      height: AppDimensions.verticalSpaceExtraLarge * 2,
-                    ),
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(top: 8),
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: fields.length,
+                  itemBuilder: (context, index) => buildField(fields[index]),
+                  separatorBuilder: (context, index) => Divider(
+                    thickness: 1.5,
+                    color: Theme.of(context).colorScheme.primary,
+                    indent: 60,
+                    endIndent: 60,
+                    height: AppDimensions.verticalSpaceExtraLarge * 2,
                   ),
                 ),
               ),

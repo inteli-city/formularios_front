@@ -6,8 +6,8 @@ import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.d
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
-import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/pages/form_details_page.dart';
@@ -70,7 +70,7 @@ class HomeModule extends Module {
         InitiliazeUserFormStatusUseCase.new);
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);
-    i.addLazySingleton(FormController.new);
+    i.addLazySingleton(FormSectionController.new);
     i.addLazySingleton(SelectChipController.new);
     i.add(
       () => FormDetailsController(

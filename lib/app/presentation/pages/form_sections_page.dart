@@ -16,9 +16,26 @@ class FormSectionsPage extends StatefulWidget {
 
 class FormSectionsPageState extends State<FormSectionsPage> {
   FormDetailsController controller = Modular.get<FormDetailsController>();
+  late FormController formController;
   final ScrollController listViewController = ScrollController();
+  final List<GlobalKey<FormState>> _formKeys = [];
+  int currentSectionIndex = 0;
 
-  void scrollToSection(int index) {
+  @override
+  void initState() {
+    super.initState();
+    _formKeys.addAll(List.generate(
+        controller.form.sections.length, (_) => GlobalKey<FormState>()));
+    formController = FormController(
+      sections: controller.form.sections,
+      sectionControllers: List.generate(
+        controller.form.sections.length,
+        (_) => FormSectionController(),
+      ),
+    );
+  }
+
+  void stepperScrollToSection(int index) {
     double screenWidth = ScreenHelper.width(context);
     double targetPosition = index * screenWidth;
     listViewController.animateTo(
@@ -28,12 +45,31 @@ class FormSectionsPageState extends State<FormSectionsPage> {
     );
   }
 
+  void nextSection({required int index}) {
+    if (index < controller.form.sections.length - 1) {
+      setState(() {
+        currentSectionIndex++;
+      });
+      stepperScrollToSection(currentSectionIndex);
+    }
+  }
+
+  void validateAndSaveSection(
+      {required int index, required bool isLastSection}) {
+    _formKeys[index].currentState!.save();
+    formController.saveSectionData(
+      sectionId: controller.form.sections[index].sectionId,
+      sectionData: formController.sectionControllers[index].fieldValues,
+    );
+    if (isLastSection) {
+      formController.sendForm();
+    }
+
+    nextSection(index: index);
+  }
+
   @override
   Widget build(BuildContext context) {
-    FormController formController = FormController(
-        sections: controller.form.sections,
-        sectionControllers: List.filled(
-            controller.form.sections.length, FormSectionController()));
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -43,9 +79,9 @@ class FormSectionsPageState extends State<FormSectionsPage> {
           children: [
             StepperProgress(
               totalSteps: controller.form.sections.length,
-              isStepDone: List.filled(controller.form.sections.length, false),
+              isStepDone: formController.areSectionsSaved,
               onStepTapped: (index) {
-                scrollToSection(index);
+                stepperScrollToSection(index);
               },
             ),
             Expanded(
@@ -58,16 +94,26 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   return SizedBox(
                     width: ScreenHelper.width(context),
                     child: SectionForm(
+                      formKey: _formKeys[index],
                       section: controller.form.sections[index],
                       sectionController:
                           formController.sectionControllers[index],
                       lastSection: index == controller.form.sections.length - 1,
                       formController: formController,
+                      onSave: () {
+                        if (_formKeys[index].currentState!.validate() ) {
+                          validateAndSaveSection(
+                            index: index,
+                            isLastSection:
+                                index == controller.form.sections.length - 1,
+                          );
+                        }
+                      },
                     ),
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -1,8 +1,6 @@
 class FormSectionController {
   final Map<String, dynamic> _fieldValues = {};
 
-  FormSectionController();
-
   void setFieldValue(String key, dynamic value) {
     _fieldValues[key] = value;
   }

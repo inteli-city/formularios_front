@@ -66,7 +66,7 @@ class FormMockRepository extends IFormRepository {
           sectionId: 'section-01',
           fields: [
             // FileFieldEntity(
-            //     fileType: FileTypeEnum.DOCUMENT,
+            //     fileType: FileTypeEnum.IMAGE,
             //     minQuantity: 1,
             //     maxQuantity: 2,
             //     placeholder: 'FileField',
@@ -112,25 +112,10 @@ class FormMockRepository extends IFormRepository {
         SectionEntity(
           sectionId: 'section-02',
           fields: [
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key-section-02-1',
-            ),
-            NumberFieldEntity(
-              fieldType: FieldTypeEnum.NUMBER_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key-section-02-2',
-              decimal: true,
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'placeholder',
-              isRequired: true,
-              key: 'key-section-02-3',
-            ),
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
           ],
         ),
       ],

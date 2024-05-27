@@ -58,7 +58,7 @@ class AppThemes {
       surfaceTintColor: AppColors.white,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      labelStyle: AppTextStyles.display,
+      labelStyle: AppTextStyles.titleMedium,
       contentPadding: const EdgeInsets.only(
         left: AppDimensions.paddingMedium,
         right: AppDimensions.paddingMedium,
@@ -70,9 +70,10 @@ class AppThemes {
       floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
             color: AppColors.primaryBlue,
-            width: AppDimensions.borderThin,
+            width: AppDimensions.borderThin * 1.5,
             style: BorderStyle.solid),
       ),
     ),

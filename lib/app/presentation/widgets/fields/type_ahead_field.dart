@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
-import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomTypeAheadFormField extends StatefulWidget {
   final TypeAheadFieldEntity field;
@@ -45,18 +44,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField> {
           autofocus: true,
           decoration: InputDecoration(
             labelText: widget.field.placeholder,
-            enabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusMedium)),
-            floatingLabelStyle: Theme.of(context).textTheme.headlineLarge,
-            labelStyle: Theme.of(context).textTheme.bodyLarge,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-              borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: AppDimensions.borderThin,
-                  style: BorderStyle.solid),
-            ),
           ),
           inputFormatters: [
             if (widget.field.maxLength != null)

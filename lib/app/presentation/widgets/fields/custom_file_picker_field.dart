@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
@@ -19,6 +20,7 @@ class CustomFilePickerFormField extends StatefulWidget {
 
 class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
   late List<String> _selectedFiles;
+  bool _showError = false;
 
   @override
   void initState() {
@@ -37,12 +39,37 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
               : null,
     );
 
-    if (result != null) {
-      setState(() {
-        _selectedFiles = result.paths.cast<String>().toList();
-        widget.controller.setFieldValue(widget.field.key, _selectedFiles);
-      });
+    if (result != null && result.files.isNotEmpty) {
+      if (widget.field.maxQuantity > 1) {
+        List<String> files = result.files.map((file) {
+          if (kIsWeb) {
+            return file.name;
+          } else {
+            return file.path!;
+          }
+        }).toList();
+        setState(() {
+          _selectedFiles.addAll(files);
+          widget.controller.setFieldValue(widget.field.key, _selectedFiles);
+        });
+      } else {
+        String file =
+            kIsWeb ? result.files.single.name : result.files.single.path!;
+        setState(() {
+          _selectedFiles.add(file);
+          widget.controller.setFieldValue(widget.field.key, _selectedFiles);
+        });
+      }
     }
+  }
+
+  bool validate() {
+    setState(() {
+      _showError = widget.field.isRequired && _selectedFiles.isEmpty ||
+          _selectedFiles.length < widget.field.minQuantity ||
+          _selectedFiles.length > widget.field.maxQuantity;
+    });
+    return !_showError;
   }
 
   @override
@@ -60,8 +87,8 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
             onPressed: _pickFiles,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.paddingLarge,
-                  vertical: AppDimensions.paddingSmall),
+                  horizontal: AppDimensions.paddingExtraLarge,
+                  vertical: AppDimensions.paddingMedium),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
                     AppDimensions.radiusMedium,
@@ -81,9 +108,9 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
                   Icons.attach_file,
                   size: AppDimensions.iconMedium,
                 ),
-                const SizedBox(width: AppDimensions.paddingSmall),
                 Text(
                   'Selecionar Arquivos',
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ],
@@ -91,11 +118,14 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
         const SizedBox(height: AppDimensions.paddingSmall),
         ..._selectedFiles.map((file) => ListTile(
               title: Text(
+                textAlign: TextAlign.center,
                 file.split('/').last,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               trailing: IconButton(
-                icon: const Icon(Icons.delete),
+                icon: Icon(Icons.delete,
+                    size: AppDimensions.iconMedium,
+                    color: Theme.of(context).colorScheme.primary),
                 onPressed: () {
                   setState(() {
                     _selectedFiles.remove(file);
@@ -105,9 +135,9 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
                 },
               ),
             )),
-        if (widget.field.isRequired && _selectedFiles.isEmpty)
+        if (_showError)
           Text(
-            'Este campo é obrigatório',
+            'Este campo é obrigatório, ou a quantidade de arquivos está fora do permitido.',
             style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
       ],

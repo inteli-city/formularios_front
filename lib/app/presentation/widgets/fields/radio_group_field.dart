@@ -19,7 +19,7 @@ class CustomRadioGroupFormField extends StatelessWidget {
       initialValue: field.value,
       validator: (value) {
         if (field.isRequired && (value == null || value.isEmpty)) {
-          return 'This field is required';
+          return 'Este campo é obrigatório';
         }
         return null;
       },
@@ -33,8 +33,8 @@ class CustomRadioGroupFormField extends StatelessWidget {
             ),
             ...field.options.map((option) {
               return RadioListTile<String>(
-                title:
-                    Text(option, style: Theme.of(context).textTheme.bodyLarge),
+                title: Text(option,
+                    style: Theme.of(context).textTheme.titleMedium),
                 value: option,
                 groupValue: controller.getFieldValue(field.key),
                 onChanged: (value) {

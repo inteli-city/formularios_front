@@ -6,6 +6,7 @@ import 'package:formularios_front/app/presentation/controllers/form_section_cont
 import 'package:formularios_front/app/presentation/widgets/section_form.dart';
 import 'package:formularios_front/app/presentation/widgets/stepper_progress.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class FormSectionsPage extends StatefulWidget {
   const FormSectionsPage({super.key});
@@ -15,7 +16,8 @@ class FormSectionsPage extends StatefulWidget {
 }
 
 class FormSectionsPageState extends State<FormSectionsPage> {
-  FormDetailsController controller = Modular.get<FormDetailsController>();
+  FormDetailsController formDetailsController =
+      Modular.get<FormDetailsController>();
   late FormController formController;
   final ScrollController listViewController = ScrollController();
   final List<GlobalKey<FormState>> _formKeys = [];
@@ -24,12 +26,12 @@ class FormSectionsPageState extends State<FormSectionsPage> {
   @override
   void initState() {
     super.initState();
-    _formKeys.addAll(List.generate(
-        controller.form.sections.length, (_) => GlobalKey<FormState>()));
+    _formKeys.addAll(List.generate(formDetailsController.form.sections.length,
+        (_) => GlobalKey<FormState>()));
     formController = FormController(
-      sections: controller.form.sections,
+      sections: formDetailsController.form.sections,
       sectionControllers: List.generate(
-        controller.form.sections.length,
+        formDetailsController.form.sections.length,
         (_) => FormSectionController(),
       ),
     );
@@ -46,7 +48,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
   }
 
   void nextSection({required int index}) {
-    if (index < controller.form.sections.length - 1) {
+    if (index < formDetailsController.form.sections.length - 1) {
       setState(() {
         currentSectionIndex++;
       });
@@ -58,7 +60,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
       {required int index, required bool isLastSection}) {
     _formKeys[index].currentState!.save();
     formController.saveSectionData(
-      sectionId: controller.form.sections[index].sectionId,
+      sectionId: formDetailsController.form.sections[index].sectionId,
       sectionData: formController.sectionControllers[index].fieldValues,
     );
     if (isLastSection) {
@@ -77,35 +79,60 @@ class FormSectionsPageState extends State<FormSectionsPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            StepperProgress(
-              totalSteps: controller.form.sections.length,
-              isStepDone: formController.areSectionsSaved,
-              onStepTapped: (index) {
-                stepperScrollToSection(index);
-              },
+            Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Modular.navigatorDelegate!.pop();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          size: AppDimensions.iconLarge,
+                        )),
+                    const SizedBox(
+                      width: AppDimensions.horizontalSpaceLarge,
+                    ),
+                    Text(
+                      '${formDetailsController.form.template} - ${formDetailsController.form.formTitle}',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                  ],
+                ),
+                StepperProgress(
+                  totalSteps: formDetailsController.form.sections.length,
+                  isStepDone: formController.areSectionsSaved,
+                  onStepTapped: (index) {
+                    stepperScrollToSection(index);
+                  },
+                ),
+              ],
             ),
             Expanded(
               child: ListView.builder(
                 controller: listViewController,
                 scrollDirection: Axis.horizontal,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.form.sections.length,
+                itemCount: formDetailsController.form.sections.length,
                 itemBuilder: (context, index) {
                   return SizedBox(
                     width: ScreenHelper.width(context),
                     child: SectionForm(
                       formKey: _formKeys[index],
-                      section: controller.form.sections[index],
+                      section: formDetailsController.form.sections[index],
                       sectionController:
                           formController.sectionControllers[index],
-                      lastSection: index == controller.form.sections.length - 1,
+                      lastSection: index ==
+                          formDetailsController.form.sections.length - 1,
                       formController: formController,
                       onSave: () {
-                        if (_formKeys[index].currentState!.validate() ) {
+                        if (_formKeys[index].currentState!.validate()) {
                           validateAndSaveSection(
                             index: index,
-                            isLastSection:
-                                index == controller.form.sections.length - 1,
+                            isLastSection: index ==
+                                formDetailsController.form.sections.length - 1,
                           );
                         }
                       },

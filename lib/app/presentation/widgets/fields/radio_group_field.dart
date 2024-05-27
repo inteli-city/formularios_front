@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 //regex, formatting
 class CustomRadioGroupFormField extends StatelessWidget {
@@ -29,7 +30,7 @@ class CustomRadioGroupFormField extends StatelessWidget {
           children: [
             Text(
               field.placeholder,
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             ...field.options.map((option) {
               return RadioListTile<String>(
@@ -46,9 +47,10 @@ class CustomRadioGroupFormField extends StatelessWidget {
             if (state.hasError)
               Text(
                 state.errorText ?? '',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.error,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: AppColors.red),
               ),
           ],
         );

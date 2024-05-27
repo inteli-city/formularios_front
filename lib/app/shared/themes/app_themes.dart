@@ -23,6 +23,7 @@ class AppThemes {
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(
           vertical: AppDimensions.paddingMedium * 1.2,
+          horizontal: AppDimensions.paddingLarge,
         ),
       ),
     )),

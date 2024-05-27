@@ -220,6 +220,10 @@ class FormDetailsPageState extends State<FormDetailsPage> {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingMedium * 1.2,
+          horizontal: 0,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             AppDimensions.radiusMedium,

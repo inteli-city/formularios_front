@@ -65,6 +65,11 @@ class FormMockRepository extends IFormRepository {
         SectionEntity(
           sectionId: 'section-01',
           fields: [
+            DropDownFieldEntity(
+                options: ['option 01', 'option 02'],
+                placeholder: 'DropDownField',
+                key: 'key-section-01-0',
+                isRequired: true),
             // FileFieldEntity(
             //     fileType: FileTypeEnum.IMAGE,
             //     minQuantity: 1,

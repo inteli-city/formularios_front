@@ -1,6 +1,9 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
+import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomDropDownFormField extends StatelessWidget {
   final DropDownFieldEntity field;
@@ -14,11 +17,28 @@ class CustomDropDownFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField2<String>(
       value: field.value,
+      isExpanded: true,
+      style: Theme.of(context).textTheme.titleMedium,
       decoration: InputDecoration(
         labelText: field.placeholder,
-        border: const OutlineInputBorder(),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryBlue,
+            width: AppDimensions.borderMedium,
+          ),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.primaryBlue,
+            width: AppDimensions.borderMedium,
+          ),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        ),
       ),
       items: field.options.map((option) {
         return DropdownMenuItem(

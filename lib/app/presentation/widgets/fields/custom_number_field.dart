@@ -18,7 +18,9 @@ class CustomNumberFormField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: field.placeholder,
       ),
-      keyboardType: TextInputType.numberWithOptions(decimal: field.decimal),
+      keyboardType: TextInputType.numberWithOptions(
+        decimal: field.decimal,
+      ),
       onChanged: (value) {
         controller.setFieldValue(field.key, value);
       },

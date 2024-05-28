@@ -32,18 +32,20 @@ class CustomRadioGroupFormField extends StatelessWidget {
               field.placeholder,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            ...field.options.map((option) {
-              return RadioListTile<String>(
-                title: Text(option,
-                    style: Theme.of(context).textTheme.titleMedium),
-                value: option,
-                groupValue: controller.getFieldValue(field.key),
-                onChanged: (value) {
-                  state.didChange(value);
-                  controller.setFieldValue(field.key, value);
-                },
-              );
-            }),
+            ...field.options.map(
+              (option) {
+                return RadioListTile<String>(
+                  title: Text(option,
+                      style: Theme.of(context).textTheme.titleMedium),
+                  value: option,
+                  groupValue: controller.getFieldValue(field.key),
+                  onChanged: (value) {
+                    state.didChange(value);
+                    controller.setFieldValue(field.key, value);
+                  },
+                );
+              },
+            ),
             if (state.hasError)
               Text(
                 state.errorText ?? '',

@@ -72,7 +72,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField> {
           initialDatePickerMode: DatePickerMode.day,
           context: context,
           initialDate: widget.field.value?.toUtc() ?? DateTime.now(),
-          firstDate: widget.field.minDate ?? DateTime(1900),
+          firstDate: widget.field.minDate ?? DateTime(1900,),
           lastDate: widget.field.maxDate ?? DateTime(2100),
           locale: const Locale('pt', 'BR'),
         );

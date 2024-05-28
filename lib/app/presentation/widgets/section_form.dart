@@ -44,10 +44,9 @@ class SectionForm extends StatelessWidget {
       child: Form(
         key: formKey,
         child: Padding(
-          padding: const EdgeInsets.only(
-            bottom: AppDimensions.paddingSmall,
-            right: AppDimensions.paddingLarge,
-            left: AppDimensions.paddingLarge,
+          padding: const EdgeInsets.symmetric(
+            vertical: AppDimensions.paddingSmall,
+            horizontal: AppDimensions.paddingLarge,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -64,8 +63,8 @@ class SectionForm extends StatelessWidget {
                   separatorBuilder: (context, index) => Divider(
                     thickness: 1.5,
                     color: Theme.of(context).colorScheme.primary,
-                    indent: 60,
-                    endIndent: 60,
+                    indent: 80,
+                    endIndent: 80,
                     height: AppDimensions.verticalSpaceExtraLarge * 2,
                   ),
                 ),

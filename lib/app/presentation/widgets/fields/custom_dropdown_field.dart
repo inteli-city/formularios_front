@@ -18,39 +18,61 @@ class CustomDropDownFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField2<String>(
+      hint: Text(
+        field.placeholder,
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
       value: field.value,
-      isExpanded: true,
       style: Theme.of(context).textTheme.titleMedium,
       decoration: InputDecoration(
+        labelStyle: TextStyle(
+          color: AppColors.black,
+          fontSize: 16,
+          textBaseline: TextBaseline.ideographic,
+        ),
         labelText: field.placeholder,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 16,
+        ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryBlue,
             width: AppDimensions.borderMedium,
           ),
-          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusMedium,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryBlue,
             width: AppDimensions.borderMedium,
           ),
-          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusMedium,
+          ),
         ),
       ),
       items: field.options.map((option) {
         return DropdownMenuItem(
           value: option,
-          child: Text(option),
+          child: Text(
+            option,
+          ),
         );
       }).toList(),
       onChanged: (newValue) {
-        controller.setFieldValue(field.key, newValue);
+        controller.setFieldValue(
+          field.key,
+          newValue,
+        );
       },
       onSaved: (newValue) {
-        controller.setFieldValue(field.key, newValue);
+        controller.setFieldValue(
+          field.key,
+          newValue,
+        );
       },
       validator: (value) {
         if (field.isRequired && (value == null || value.isEmpty)) {

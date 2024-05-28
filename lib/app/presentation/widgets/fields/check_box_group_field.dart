@@ -29,7 +29,10 @@ class CustomCheckBoxGroupFormField extends StatelessWidget {
               } else {
                 selectedOptions?.remove(option);
               }
-              controller.setFieldValue(field.key, selectedOptions?.join(','));
+              controller.setFieldValue(
+                field.key,
+                selectedOptions?.join(','),
+              );
             },
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,

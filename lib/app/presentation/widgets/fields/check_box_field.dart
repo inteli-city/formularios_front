@@ -16,14 +16,20 @@ class CustomCheckBoxFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormField<bool>(
       onSaved: (newValue) {
-        controller.setFieldValue(field.key, newValue.toString());
+        controller.setFieldValue(
+          field.key,
+          newValue.toString(),
+        );
       },
       builder: (state) {
         return CheckboxListTile(
           title: Text(field.placeholder),
           value: field.value,
           onChanged: (newValue) {
-            controller.setFieldValue(field.key, newValue.toString());
+            controller.setFieldValue(
+              field.key,
+              newValue.toString(),
+            );
           },
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,

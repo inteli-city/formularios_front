@@ -39,7 +39,7 @@
     "latitude": "Latitude",
     "longitude" : "Longitude",
     "startDate" : "Data de Início",
-    "endDate" : "Data de Término",
+    "conclusionDate" : "Data de Conclusão",
     "description": "Descrição",
     "cancel" : "Cancelar",
     "start" : "Iniciar",

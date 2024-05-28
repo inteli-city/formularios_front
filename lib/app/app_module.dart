@@ -1,22 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/pages/form_details_page.dart';
+import 'package:formularios_front/app/presentation/pages/form_sections_page.dart';
 import 'package:formularios_front/app/presentation/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/pages/splash_page.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
-import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
@@ -68,6 +71,10 @@ class HomeModule extends Module {
     i.addLazySingleton<UpdateFormStatusUseCase>(
         InitiliazeUserFormStatusUseCase.new);
     i.addLazySingleton(FilterFormsController.new);
+    i.addLazySingleton(StepperController.new);
+    i.add(
+      () => FormController(sections: i.args.data as List<SectionEntity>),
+    );
     i.addLazySingleton(SortFormsController.new);
     i.addLazySingleton(SelectChipController.new);
     i.add(
@@ -86,14 +93,19 @@ class HomeModule extends Module {
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
-          guards: [UserGuard()],
+          // guards: [UserGuard()],
         ),
       ],
     );
     r.child(
       '/:externId',
       child: (context) => const FormDetailsPage(),
-      guards: [UserGuard()],
+      // guards: [UserGuard()],
+    );
+    r.child(
+      '/:externId/fill',
+      child: (context) => const FormSectionsPage(),
+      // guards: [UserGuard()],
     );
   }
 }

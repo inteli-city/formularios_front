@@ -7,5 +7,9 @@ class SectionEntity {
   SectionEntity({
     required this.sectionId,
     required this.fields,
-  });
+  }) {
+    if (fields.isEmpty) {
+      throw Exception('Section must have at least one field');
+    }
+  }
 }

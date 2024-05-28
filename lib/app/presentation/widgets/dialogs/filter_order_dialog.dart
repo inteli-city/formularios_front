@@ -170,7 +170,6 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
             value: value,
             child: Text(
               value,
-              style: AppTextStyles.titleMedium,
             ),
           ),
         )
@@ -185,7 +184,15 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
         items: dropdownItems,
         onChanged: onChanged,
         decoration: InputDecoration(
-          labelText: hintText,
+          isDense: true,
+          label: Text(
+            hintText,
+            style: Theme.of(context)
+                .inputDecorationTheme
+                .labelStyle
+                ?.copyWith(textBaseline: TextBaseline.ideographic),
+            textAlign: TextAlign.center,
+          ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: AppColors.primaryBlue,

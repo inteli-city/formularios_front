@@ -29,7 +29,6 @@ void main() {
                   formId: 'formId',
                   creatorUserId: 'creatorUserId',
                   userId: 'userId',
-                  coordinatorsId: ['coordinatorsId'],
                   vinculationFormId: 'vinculationFormId',
                   template: 'template',
                   area: 'area',
@@ -46,7 +45,7 @@ void main() {
                   expirationDate: 1,
                   creationDate: 1,
                   startDate: 1,
-                  endDate: 1,
+                  conclusionDate: 1,
                   justificative: JustificativeEntity(
                       options: [],
                       selectedOption: null,
@@ -61,7 +60,6 @@ void main() {
                   formId: 'formId',
                   creatorUserId: 'creatorUserId',
                   userId: 'userId',
-                  coordinatorsId: ['coordinatorsId'],
                   vinculationFormId: 'vinculationFormId',
                   template: 'template',
                   area: 'area',
@@ -78,7 +76,7 @@ void main() {
                   expirationDate: 1,
                   creationDate: 1,
                   startDate: 1,
-                  endDate: 1,
+                  conclusionDate: 1,
                   justificative: JustificativeEntity(
                       options: [],
                       selectedOption: null,

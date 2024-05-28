@@ -87,10 +87,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   S.current.creatorUserId,
                   form.creatorUserId,
                 ],
-                [
-                  S.current.coordinatorId,
-                  form.coordinatorsId.join('-'),
-                ],
               ],
             ),
             _buildDetaislRow(
@@ -145,8 +141,8 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   S.current.startDate,
                 ],
                 [
-                  S.current.endDate,
-                  S.current.endDate,
+                  S.current.conclusionDate,
+                  S.current.conclusionDate,
                 ]
               ],
             ),
@@ -224,6 +220,10 @@ class FormDetailsPageState extends State<FormDetailsPage> {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.paddingMedium * 1.2,
+          horizontal: 0,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             AppDimensions.radiusMedium,
@@ -267,6 +267,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                         controller.getForm();
                       },
                     );
+                    Modular.to.navigate('/home/forms');
                   },
                   text: S.current.start,
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -277,7 +278,11 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 children: [
                   Expanded(
                     child: buildCustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Modular.to.pushNamed(
+                            '/home/${controller.form.formId}/fill',
+                            arguments: controller.form.sections);
+                      },
                       text: S.current.fillForm,
                       backgroundColor: AppColors.primaryBlue,
                       textColor: AppColors.white,

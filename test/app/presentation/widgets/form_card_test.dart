@@ -13,7 +13,6 @@ void main() {
         formId: 'ID1142342524242',
         creatorUserId: '1',
         userId: '1',
-        coordinatorsId: ['1314312731967', '1314312731967', '1314312731967'],
         vinculationFormId: '10',
         template: 'Poda de Árvore',
         area: 'area',
@@ -31,7 +30,7 @@ void main() {
         expirationDate: 1715000631000,
         creationDate: 1704561963000,
         startDate: 1,
-        endDate: 1,
+        conclusionDate: 1,
         justificative: JustificativeEntity(
             options: [], selectedOption: null, text: 'text', image: null),
         comments: 'comments',

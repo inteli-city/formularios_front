@@ -19,10 +19,11 @@ class AppThemes {
     ),
     elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
-      elevation: WidgetStatePropertyAll(5),
+      elevation: WidgetStatePropertyAll(8),
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingMedium * 1.2,
+          vertical: AppDimensions.paddingLarge,
+          horizontal: AppDimensions.paddingExtraLarge,
         ),
       ),
     )),
@@ -58,22 +59,23 @@ class AppThemes {
       surfaceTintColor: AppColors.white,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      labelStyle: AppTextStyles.display,
+      labelStyle: AppTextStyles.titleMedium,
       contentPadding: const EdgeInsets.only(
         left: AppDimensions.paddingMedium,
         right: AppDimensions.paddingMedium,
-        top: AppDimensions.paddingExtraLarge * 2,
+        top: AppDimensions.paddingExtraLarge,
       ),
+      enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium)),
       alignLabelWithHint: true,
-      floatingLabelStyle: AppTextStyles.display,
+      floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          AppDimensions.radiusLarge,
-        ),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
-          color: AppColors.primaryBlue,
-          width: AppDimensions.borderMedium,
-        ),
+            color: AppColors.primaryBlue,
+            width: AppDimensions.borderThin * 1.5,
+            style: BorderStyle.solid),
       ),
     ),
     iconTheme: IconThemeData(

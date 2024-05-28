@@ -40,7 +40,6 @@ void main() {
     when(form.expirationDate).thenReturn(1715090009);
     when(form.creationDate).thenReturn(1715090009);
 
-    when(form.coordinatorsId).thenReturn(['coordinatorsId', 'coordinatorId1']);
     when(form.formId).thenReturn('formId');
     when(form.vinculationFormId).thenReturn('vinculationForm3');
     when(form.creatorUserId).thenReturn('creatorUser4');
@@ -82,7 +81,6 @@ void main() {
 
       expect(find.text('1715090009'), findsExactly(2));
 
-      expect(find.text('coordinatorsId-coordinatorId1'), findsOneWidget);
       expect(find.text('formId'), findsOneWidget);
       expect(find.text('vinculationForm3'), findsOneWidget);
       expect(find.text('creatorUser4'), findsOneWidget);

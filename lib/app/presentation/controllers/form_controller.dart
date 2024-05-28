@@ -25,10 +25,17 @@ class FormController {
 
   void saveSectionData(
       {required String sectionId, required Map<String, dynamic> sectionData}) {
+    int sectionIndex =
+        sections.indexWhere((section) => section.sectionId == sectionId);
+    bool isLastSection = sectionIndex == sections.length - 1;
     if (formData.containsKey(sectionId)) {
       formData[sectionId] = sectionData;
     }
     setSectionAsSaved(sectionId: sectionId);
+
+    if (isLastSection) {
+      sendForm();
+    }
   }
 
   Map<String, dynamic> getFormData() {

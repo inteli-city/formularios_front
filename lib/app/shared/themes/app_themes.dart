@@ -19,11 +19,11 @@ class AppThemes {
     ),
     elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
-      elevation: WidgetStatePropertyAll(5),
+      elevation: WidgetStatePropertyAll(8),
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingMedium * 1.2,
-          horizontal: AppDimensions.paddingLarge,
+          vertical: AppDimensions.paddingLarge,
+          horizontal: AppDimensions.paddingExtraLarge,
         ),
       ),
     )),

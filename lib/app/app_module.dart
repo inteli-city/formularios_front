@@ -10,6 +10,7 @@ import 'package:formularios_front/app/presentation/controllers/form_details_cont
 import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/pages/form_details_page.dart';
 import 'package:formularios_front/app/presentation/pages/form_sections_page.dart';
 import 'package:formularios_front/app/presentation/pages/home_page.dart';
@@ -69,6 +70,7 @@ class HomeModule extends Module {
     i.addLazySingleton<UpdateFormStatusUseCase>(
         InitiliazeUserFormStatusUseCase.new);
     i.addLazySingleton(FilterFormsController.new);
+    i.addLazySingleton(StepperController.new);
     i.addLazySingleton(SortFormsController.new);
     i.addLazySingleton(FormSectionController.new);
     i.addLazySingleton(SelectChipController.new);

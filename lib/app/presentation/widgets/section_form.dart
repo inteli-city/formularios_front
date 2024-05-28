@@ -24,7 +24,7 @@ class SectionForm extends StatelessWidget {
   final FormSectionController sectionController;
   final bool lastSection;
   final FormController formController;
-  final VoidCallback onSave;
+  final VoidCallback onSaveSubmit;
 
   const SectionForm({
     super.key,
@@ -33,7 +33,7 @@ class SectionForm extends StatelessWidget {
     required this.sectionController,
     required this.lastSection,
     required this.formController,
-    required this.onSave,
+    required this.onSaveSubmit,
   });
 
   @override
@@ -57,7 +57,7 @@ class SectionForm extends StatelessWidget {
               Expanded(
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(
-                      vertical: AppDimensions.paddingMedium),
+                      vertical: AppDimensions.paddingExtraLarge),
                   physics: const BouncingScrollPhysics(),
                   itemCount: fields.length,
                   itemBuilder: (context, index) => buildField(fields[index]),
@@ -74,7 +74,16 @@ class SectionForm extends StatelessWidget {
                 width: ScreenHelper.width(context) * 0.5,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: onSave,
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      formController.saveSectionData(
+                        sectionData: sectionController.fieldValues,
+                        sectionId: section.sectionId,
+                      );
+                      onSaveSubmit();
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(

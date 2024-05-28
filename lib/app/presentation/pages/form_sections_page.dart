@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/widgets/section_form.dart';
 import 'package:formularios_front/app/presentation/widgets/stepper_progress.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
@@ -18,56 +20,31 @@ class FormSectionsPage extends StatefulWidget {
 class FormSectionsPageState extends State<FormSectionsPage> {
   FormDetailsController formDetailsController =
       Modular.get<FormDetailsController>();
+  StepperController stepperController = Modular.get<StepperController>();
   late FormController formController;
-  final ScrollController listViewController = ScrollController();
+  late List<SectionEntity> formSections;
   final List<GlobalKey<FormState>> _formKeys = [];
-  int currentSectionIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _formKeys.addAll(List.generate(formDetailsController.form.sections.length,
-        (_) => GlobalKey<FormState>()));
+    formSections = formDetailsController.form.sections;
+    _formKeys.addAll(
+        List.generate(formSections.length, (_) => GlobalKey<FormState>()));
     formController = FormController(
-      sections: formDetailsController.form.sections,
+      sections: formSections,
       sectionControllers: List.generate(
-        formDetailsController.form.sections.length,
+        formSections.length,
         (_) => FormSectionController(),
       ),
     );
   }
 
-  void stepperScrollToSection(int index) {
-    double screenWidth = ScreenHelper.width(context);
-    double targetPosition = index * screenWidth;
-    listViewController.animateTo(
-      targetPosition,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
-
   void nextSection({required int index}) {
     if (index < formDetailsController.form.sections.length - 1) {
-      setState(() {
-        currentSectionIndex++;
-      });
-      stepperScrollToSection(currentSectionIndex);
+      stepperController.setCurrentSectionIndex(index++);
+      stepperController.stepperScrollToSection(index: index, context: context);
     }
-  }
-
-  void validateAndSaveSection(
-      {required int index, required bool isLastSection}) {
-    _formKeys[index].currentState!.save();
-    formController.saveSectionData(
-      sectionId: formDetailsController.form.sections[index].sectionId,
-      sectionData: formController.sectionControllers[index].fieldValues,
-    );
-    if (isLastSection) {
-      formController.sendForm();
-    }
-
-    nextSection(index: index);
   }
 
   @override
@@ -86,7 +63,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          Modular.navigatorDelegate!.pop();
+                          Modular.to.pop();
                         },
                         icon: const Icon(
                           Icons.arrow_back,
@@ -102,39 +79,33 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   ],
                 ),
                 StepperProgress(
-                  totalSteps: formDetailsController.form.sections.length,
+                  totalSteps: formSections.length,
                   isStepDone: formController.areSectionsSaved,
                   onStepTapped: (index) {
-                    stepperScrollToSection(index);
+                    stepperController.stepperScrollToSection(
+                        index: index, context: context);
                   },
                 ),
               ],
             ),
             Expanded(
               child: ListView.builder(
-                controller: listViewController,
+                controller: stepperController.listViewController,
                 scrollDirection: Axis.horizontal,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: formDetailsController.form.sections.length,
+                itemCount: formSections.length,
                 itemBuilder: (context, index) {
                   return SizedBox(
                     width: ScreenHelper.width(context),
                     child: SectionForm(
                       formKey: _formKeys[index],
-                      section: formDetailsController.form.sections[index],
+                      section: formSections[index],
                       sectionController:
                           formController.sectionControllers[index],
-                      lastSection: index ==
-                          formDetailsController.form.sections.length - 1,
+                      lastSection: index == formSections.length - 1,
                       formController: formController,
-                      onSave: () {
-                        if (_formKeys[index].currentState!.validate()) {
-                          validateAndSaveSection(
-                            index: index,
-                            isLastSection: index ==
-                                formDetailsController.form.sections.length - 1,
-                          );
-                        }
+                      onSaveSubmit: () {
+                        nextSection(index: index);
                       },
                     ),
                   );

@@ -106,6 +106,7 @@ class UserModule extends Module {
   void exportedBinds(i) {
     i.addSingleton(UserProvider.new);
     i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
-    i.addSingleton<UserRepository>(() => EnvironmentConfig.getUserRepository());
+    i.addSingleton<IUserRepository>(
+        () => EnvironmentConfig.getUserRepository());
   }
 }

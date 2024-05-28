@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:formularios_front/app/data/repositories/form_dio_repository.dart';
 import 'package:formularios_front/app/data/repositories/form_mock_repository.dart';
 import 'package:formularios_front/app/data/repositories/user_dio_repository.dart';
 import 'package:formularios_front/app/data/repositories/user_mock_repository.dart';
@@ -12,20 +13,20 @@ class EnvironmentConfig {
   static const ENV = String.fromEnvironment('ENV');
 
   static IFormRepository getFormRepository() {
-    // EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
-    //   (element) {
-    //     return element.name.toUpperCase() == ENV.toUpperCase();
-    //   },
-    //   orElse: () => EnvironmentEnum.DEV,
-    // );
-    // if (value == EnvironmentEnum.DEV) {
-    return FormMockRepository();
-    // } else {
-    //   return DioUserRepository();
-    // }
+    EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
+      (element) {
+        return element.name.toUpperCase() == ENV.toUpperCase();
+      },
+      orElse: () => EnvironmentEnum.DEV,
+    );
+    if (value == EnvironmentEnum.DEV) {
+      return FormMockRepository();
+    } else {
+      return FormDioRepository();
+    }
   }
 
-  static UserRepository getUserRepository() {
+  static IUserRepository getUserRepository() {
     EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
       (element) {
         return element.name.toUpperCase() == ENV.toUpperCase();

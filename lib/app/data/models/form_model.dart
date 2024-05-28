@@ -36,6 +36,47 @@ class FormModel extends FormEntity {
     required super.canVinculate,
   });
 
+  static List<FormModel> fromMaps(List<dynamic> list) {
+    return list.map((e) => FormModel.fromMap(e)).toList();
+  }
+
+  factory FormModel.fromMap(Map<String, dynamic> map) {
+    return FormModel(
+      formId: map['formId'],
+      creatorUserId: map['creatorUserId'],
+      userId: map['userId'],
+      coordinatorsId: List<String>.from(map['coordinatorsId']),
+      template: map['template'],
+      area: map['area'],
+      system: map['system'],
+      street: map['street'],
+      city: map['city'],
+      number: map['number'],
+      latitude: map['latitude'],
+      longitude: map['longitude'],
+      region: map['region'],
+      priority: PriorityEnum.values[map['priority']],
+      status: FormStatusEnum.values[map['status']],
+      expirationDate: map['expirationDate'],
+      creationDate: map['creationDate'],
+      sections: [],
+      comments: map['comments'],
+      description: map['description'],
+      endDate: map['endDate'],
+      informationFields: [],
+      justificative: JustificativeEntity(
+        image: map['justificative']['image'],
+        options: [],
+        selectedOption: map['justificative']['selectedOption'],
+        text: map['justificative']['text'],
+      ),
+      startDate: map['startDate'],
+      vinculationFormId: map['vinculationFormId'],
+      formTitle: map['formTitle'],
+      canVinculate: map['canVinculate'],
+    );
+  }
+
   factory FormModel.entityToModel(FormEntity entity) {
     return FormModel(
       formId: entity.formId,

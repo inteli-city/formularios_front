@@ -12,14 +12,14 @@ import 'package:mockito/mockito.dart';
 
 import 'login_user_usecase_test.mocks.dart';
 
-@GenerateMocks([UserRepository])
+@GenerateMocks([IUserRepository])
 void main() {
   Modular.bindModule(AppModule());
-  late MockUserRepository mockUserRepository;
+  late MockIUserRepository mockUserRepository;
   late LoginUserUsecase usecase;
 
   setUp(() {
-    mockUserRepository = MockUserRepository();
+    mockUserRepository = MockIUserRepository();
     usecase = LoginUserUsecase(repository: mockUserRepository);
   });
 

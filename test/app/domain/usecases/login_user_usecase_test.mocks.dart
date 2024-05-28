@@ -35,11 +35,11 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-/// A class which mocks [UserRepository].
+/// A class which mocks [IUserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
-  MockUserRepository() {
+class MockIUserRepository extends _i1.Mock implements _i3.IUserRepository {
+  MockIUserRepository() {
     _i1.throwOnMissingStub(this);
   }
 

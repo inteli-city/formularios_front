@@ -53,9 +53,9 @@ class _FakeReactiveContext_1 extends _i1.SmartFake
         );
 }
 
-class _FakeUserRepository_2 extends _i1.SmartFake
-    implements _i4.UserRepository {
-  _FakeUserRepository_2(
+class _FakeIUserRepository_2 extends _i1.SmartFake
+    implements _i4.IUserRepository {
+  _FakeIUserRepository_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -153,13 +153,13 @@ class MockLoginUserUsecase extends _i1.Mock implements _i9.LoginUserUsecase {
   }
 
   @override
-  _i4.UserRepository get repository => (super.noSuchMethod(
+  _i4.IUserRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeUserRepository_2(
+        returnValue: _FakeIUserRepository_2(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i4.UserRepository);
+      ) as _i4.IUserRepository);
 
   @override
   _i8.Future<_i5.Either<_i10.Failure, _i11.UserEntity>> call() =>

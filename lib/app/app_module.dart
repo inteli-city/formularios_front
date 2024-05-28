@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
@@ -71,8 +72,10 @@ class HomeModule extends Module {
         InitiliazeUserFormStatusUseCase.new);
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(StepperController.new);
+    i.add(
+      () => FormController(sections: i.args.data as List<SectionEntity>),
+    );
     i.addLazySingleton(SortFormsController.new);
-    i.addLazySingleton(FormSectionController.new);
     i.addLazySingleton(SelectChipController.new);
     i.add(
       () => FormDetailsController(

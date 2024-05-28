@@ -66,17 +66,11 @@ class FormMockRepository extends IFormRepository {
           sectionId: 'section-01',
           fields: [
             DropDownFieldEntity(
-                options: ['option 01', 'option 02'],
-                placeholder: 'DropDownField',
-                key: 'key-section-01-0',
-                isRequired: true),
-            // FileFieldEntity(
-            //     fileType: FileTypeEnum.IMAGE,
-            //     minQuantity: 1,
-            //     maxQuantity: 2,
-            //     placeholder: 'FileField',
-            //     key: 'key-section-01-0',
-            //     isRequired: true),
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
             TextFieldEntity(
               fieldType: FieldTypeEnum.TEXT_FIELD,
               placeholder: 'TextField 01',
@@ -162,7 +156,63 @@ class FormMockRepository extends IFormRepository {
         image: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key-section-01-5',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key-section-01-6',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       canVinculate: false,
     ),
     FormEntity(
@@ -200,7 +250,63 @@ class FormMockRepository extends IFormRepository {
         image: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key-section-01-5',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key-section-01-6',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       canVinculate: true,
     ),
     FormEntity(
@@ -238,7 +344,63 @@ class FormMockRepository extends IFormRepository {
         image: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key-section-01-5',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key-section-01-6',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       canVinculate: true,
     ),
     FormEntity(
@@ -276,7 +438,63 @@ class FormMockRepository extends IFormRepository {
         image: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key-section-01-5',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key-section-01-6',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       canVinculate: false,
     ),
     FormEntity(
@@ -314,7 +532,63 @@ class FormMockRepository extends IFormRepository {
         image: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key-section-01-5',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key-section-01-6',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       canVinculate: true,
     ),
     FormEntity(
@@ -351,7 +625,63 @@ class FormMockRepository extends IFormRepository {
         image: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key-section-01-5',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key-section-01-6',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       formTitle: 'Potencial de Vazamento',
       canVinculate: true,
     ),
@@ -390,7 +720,63 @@ class FormMockRepository extends IFormRepository {
         image: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'Radio Group',
+                key: 'key-section-01-5',
+                isRequired: true),
+            TypeAheadFieldEntity(
+                options: ['option1', 'option2'],
+                placeholder: 'TypeAhead',
+                key: 'key-section-01-6',
+                isRequired: true),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       canVinculate: false,
     ),
   ];

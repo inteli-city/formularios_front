@@ -8,6 +8,7 @@ abstract class FieldEntity {
   final String key;
   final String? regex;
   final String? formatting;
+  dynamic value;
 
   FieldEntity({
     required this.fieldType,
@@ -16,12 +17,12 @@ abstract class FieldEntity {
     required this.key,
     this.regex,
     this.formatting,
+    this.value,
   });
 }
 
 class TextFieldEntity extends FieldEntity {
   final int? maxLength;
-  String? value;
 
   TextFieldEntity({
     this.maxLength,
@@ -31,15 +32,18 @@ class TextFieldEntity extends FieldEntity {
     super.regex,
     super.formatting,
     required super.isRequired,
-    this.value,
-  });
+    super.value,
+  }) {
+    if (value != null && value is! String) {
+      throw Exception('Value must be a string');
+    }
+  }
 }
 
 class NumberFieldEntity extends FieldEntity {
   final int? minValue;
   final int? maxValue;
   final bool decimal;
-  double? value;
 
   NumberFieldEntity({
     this.minValue,
@@ -51,13 +55,16 @@ class NumberFieldEntity extends FieldEntity {
     super.regex,
     super.formatting,
     required super.isRequired,
-    this.value,
-  });
+    super.value,
+  }) {
+    if (value != null && value is! double) {
+      throw Exception('Value must be a number');
+    }
+  }
 }
 
 class DropDownFieldEntity extends FieldEntity {
   final List<String> options;
-  String? value;
 
   DropDownFieldEntity({
     required this.options,
@@ -67,14 +74,17 @@ class DropDownFieldEntity extends FieldEntity {
     super.regex,
     super.formatting,
     required super.isRequired,
-    this.value,
-  });
+    super.value,
+  }) {
+    if (value != null && value is! String) {
+      throw Exception('Value must be a string');
+    }
+  }
 }
 
 class TypeAheadFieldEntity extends FieldEntity {
   final List<String> options;
   final int? maxLength;
-  String? value;
 
   TypeAheadFieldEntity({
     required this.options,
@@ -85,13 +95,16 @@ class TypeAheadFieldEntity extends FieldEntity {
     super.regex,
     super.formatting,
     required super.isRequired,
-    this.value,
-  });
+    super.value,
+  }) {
+    if (value != null && value is! String) {
+      throw Exception('Value must be a string');
+    }
+  }
 }
 
 class RadioGroupFieldEntity extends FieldEntity {
   final List<String> options;
-  String? value;
 
   RadioGroupFieldEntity({
     required this.options,
@@ -101,14 +114,17 @@ class RadioGroupFieldEntity extends FieldEntity {
     super.regex,
     super.formatting,
     required super.isRequired,
-    this.value,
-  });
+    super.value,
+  }) {
+    if (value != null && value is! String) {
+      throw Exception('Value must be a string');
+    }
+  }
 }
 
 class DateFieldEntity extends FieldEntity {
   final DateTime? minDate;
   final DateTime? maxDate;
-  DateTime? value;
 
   DateFieldEntity({
     this.minDate,
@@ -119,32 +135,37 @@ class DateFieldEntity extends FieldEntity {
     super.regex,
     super.formatting,
     required super.isRequired,
-    this.value,
-  });
+    super.value,
+  }) {
+    if (value != null && value is! DateTime) {
+      throw Exception('Value must be a DateTime');
+    }
+  }
 }
 
 class CheckBoxFieldEntity extends FieldEntity {
-  bool? value;
-
   CheckBoxFieldEntity({
-    this.value,
+    super.value,
     super.fieldType = FieldTypeEnum.CHECKBOX_FIELD,
     required super.placeholder,
     required super.key,
     super.regex,
     super.formatting,
     required super.isRequired,
-  });
+  }) {
+    if (value != null && value is! bool) {
+      throw Exception('Value must be a boolean');
+    }
+  }
 }
 
 class CheckBoxGroupFieldEntity extends FieldEntity {
   final List<String> options;
   final int? checkLimit;
-  List<String>? value;
 
   CheckBoxGroupFieldEntity({
     required this.options,
-    this.value,
+    super.value,
     this.checkLimit,
     super.fieldType = FieldTypeEnum.CHECKBOX_GROUP_FIELD,
     required super.placeholder,
@@ -152,39 +173,48 @@ class CheckBoxGroupFieldEntity extends FieldEntity {
     super.regex,
     super.formatting,
     required super.isRequired,
-  });
+  }) {
+    if (value != null && value is! List<String>) {
+      throw Exception('Value must be a List<String>');
+    }
+  }
 }
 
 class SwitchButtonFieldEntity extends FieldEntity {
-  bool? value;
-
   SwitchButtonFieldEntity({
-    this.value,
+    super.value,
     super.fieldType = FieldTypeEnum.SWITCH_BUTTON_FIELD,
     required super.placeholder,
     required super.key,
     super.regex,
     super.formatting,
     required super.isRequired,
-  });
+  }) {
+    if (value != null && value is! bool) {
+      throw Exception('Value must be a boolean');
+    }
+  }
 }
 
 class FileFieldEntity extends FieldEntity {
   final FileTypeEnum fileType;
   final int minQuantity;
   final int maxQuantity;
-  List<String>? value;
 
   FileFieldEntity({
     required this.fileType,
     required this.minQuantity,
     required this.maxQuantity,
-    this.value,
+    super.value,
     super.fieldType = FieldTypeEnum.FILE_FIELD,
     required super.placeholder,
     required super.key,
     super.regex,
     super.formatting,
     required super.isRequired,
-  });
+  }) {
+    if (value != null && value is! List<String>) {
+      throw Exception('Value must be a List<String>');
+    }
+  }
 }

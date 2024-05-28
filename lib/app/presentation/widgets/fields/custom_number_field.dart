@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 
 class CustomNumberFormField extends StatelessWidget {
   final NumberFieldEntity field;
-  final FormSectionController controller;
+  final Function(String) onChanged;
 
   const CustomNumberFormField({
     super.key,
     required this.field,
-    required this.controller,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         labelText: field.placeholder,
       ),
       keyboardType: TextInputType.numberWithOptions(
         decimal: field.decimal,
       ),
-      onChanged: (value) {
-        controller.setFieldValue(field.key, value);
-      },
-      onSaved: (value) {
-        controller.setFieldValue(field.key, value);
-      },
+      inputFormatters: [
+        if (field.decimal)
+          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+        else
+          FilteringTextInputFormatter.digitsOnly,
+      ],
+      onChanged: onChanged,
       validator: (value) {
-        if (field.isRequired && (value == null || value.isEmpty)) {
-          return 'Este campo é obrigatório';
-        }
-        final numValue = num.tryParse(value ?? '');
-        if (numValue == null) {
-          return 'Número inválido';
-        }
-        if (field.minValue != null && numValue < field.minValue!) {
+        var numberValue = double.tryParse(value ?? '');
+        if (field.minValue != null && numberValue! < field.minValue!) {
           return 'Valor mínimo é ${field.minValue}';
         }
-        if (field.maxValue != null && numValue > field.maxValue!) {
+        if (field.maxValue != null && numberValue! > field.maxValue!) {
           return 'Valor máximo é ${field.maxValue}';
         }
         return null;

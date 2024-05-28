@@ -59,5 +59,9 @@ class FormEntity {
     this.comments,
     required this.sections,
     this.informationFields,
-  });
+  }) {
+    if (sections.isEmpty) {
+      throw Exception('Form must have at least one section');
+    }
+  }
 }

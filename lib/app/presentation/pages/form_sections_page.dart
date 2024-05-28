@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/widgets/section_form.dart';
 import 'package:formularios_front/app/presentation/widgets/stepper_progress.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class FormSectionsPage extends StatefulWidget {
@@ -20,35 +19,12 @@ class FormSectionsPage extends StatefulWidget {
 class FormSectionsPageState extends State<FormSectionsPage> {
   FormDetailsController formDetailsController =
       Modular.get<FormDetailsController>();
+  FormController formController = Modular.get<FormController>();
   StepperController stepperController = Modular.get<StepperController>();
-  late FormController formController;
-  late List<SectionEntity> formSections;
-  final List<GlobalKey<FormState>> _formKeys = [];
-
-  @override
-  void initState() {
-    super.initState();
-    formSections = formDetailsController.form.sections;
-    _formKeys.addAll(
-        List.generate(formSections.length, (_) => GlobalKey<FormState>()));
-    formController = FormController(
-      sections: formSections,
-      sectionControllers: List.generate(
-        formSections.length,
-        (_) => FormSectionController(),
-      ),
-    );
-  }
-
-  void nextSection({required int index}) {
-    if (index < formDetailsController.form.sections.length - 1) {
-      stepperController.setCurrentSectionIndex(index++);
-      stepperController.stepperScrollToSection(index: index, context: context);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    var formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -79,39 +55,81 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   ],
                 ),
                 StepperProgress(
-                  totalSteps: formSections.length,
-                  isStepDone: formController.areSectionsSaved,
-                  onStepTapped: (index) {
-                    stepperController.stepperScrollToSection(
-                        index: index, context: context);
-                  },
+                  totalSteps: formController.sections.length,
                 ),
               ],
             ),
             Expanded(
-              child: ListView.builder(
-                controller: stepperController.listViewController,
-                scrollDirection: Axis.horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: formSections.length,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: ScreenHelper.width(context),
-                    child: SectionForm(
-                      formKey: _formKeys[index],
-                      section: formSections[index],
-                      sectionController:
-                          formController.sectionControllers[index],
-                      lastSection: index == formSections.length - 1,
-                      formController: formController,
-                      onSaveSubmit: () {
-                        nextSection(index: index);
-                      },
-                    ),
-                  );
-                },
+              child: Form(
+                key: formKey,
+                child: ListView.builder(
+                  controller: stepperController.listViewController,
+                  scrollDirection: Axis.horizontal,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: formController.sections.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: ScreenHelper.width(context),
+                      child: SectionForm(
+                        section: formController.sections[index],
+                        lastSection:
+                            index == formController.sections.length - 1,
+                        formController: formController,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formController.saveForm();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        AppDimensions.radiusMedium,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    'Salvar',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: AppColors.white,
+                        height: 1.2,
+                        fontSize: AppDimensions.fontMedium),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (formController.validateRequiredFields &&
+                        formKey.currentState!.validate()) {
+                      formController.sendForm();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        AppDimensions.radiusMedium,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    'Enviar',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: AppColors.white,
+                        height: 1.2,
+                        fontSize: AppDimensions.fontMedium),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

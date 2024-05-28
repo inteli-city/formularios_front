@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 
 class CustomTypeAheadFormField extends StatefulWidget {
   final TypeAheadFieldEntity field;
-  final FormSectionController controller;
+  final Function(String?) onChanged;
 
   const CustomTypeAheadFormField(
-      {super.key, required this.field, required this.controller});
+      {super.key, required this.field, required this.onChanged});
 
   @override
   State<CustomTypeAheadFormField> createState() => _TypeAheadFormFieldState();
@@ -70,7 +69,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField> {
       },
       onSelected: (suggestion) {
         _textController.text = suggestion;
-        widget.controller.setFieldValue(widget.field.key, suggestion);
       },
     );
   }

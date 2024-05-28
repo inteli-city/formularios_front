@@ -1,18 +1,17 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomDropDownFormField extends StatelessWidget {
   final DropDownFieldEntity field;
-  final FormSectionController controller;
+  final Function(String?) onChanged;
 
   const CustomDropDownFormField({
     super.key,
     required this.field,
-    required this.controller,
+    required this.onChanged,
   });
 
   @override
@@ -62,18 +61,7 @@ class CustomDropDownFormField extends StatelessWidget {
           ),
         );
       }).toList(),
-      onChanged: (newValue) {
-        controller.setFieldValue(
-          field.key,
-          newValue,
-        );
-      },
-      onSaved: (newValue) {
-        controller.setFieldValue(
-          field.key,
-          newValue,
-        );
-      },
+      onChanged: onChanged,
       validator: (value) {
         if (field.isRequired && (value == null || value.isEmpty)) {
           return 'Este campo é obrigatório';

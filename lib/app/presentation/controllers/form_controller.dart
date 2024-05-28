@@ -1,61 +1,39 @@
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 
 class FormController {
   List<SectionEntity> sections;
-  List<FormSectionController> sectionControllers = [];
-  List<bool> areSectionsSaved;
 
-  Map<String, dynamic> formData = {};
+  FormController({required this.sections});
 
-  FormController({required this.sections, required this.sectionControllers})
-      : areSectionsSaved = List.filled(sections.length, false) {
+  bool get validateRequiredFields {
     for (var section in sections) {
-      initializeSectionData(section: section);
+      for (var field in section.fields) {
+        if (field.isRequired && field.value == null) {
+          GlobalSnackBar.error("O campo ${field.placeholder} é obrigatório");
+          return false;
+        }
+      }
     }
+    return true;
   }
 
-  void initializeSectionData({required SectionEntity section}) {
-    formData[section.sectionId] = {};
-    for (var field in section.fields) {
-      formData[section.sectionId][field.key] = null;
-    }
+  void setFieldValue(String sectionId, String key, dynamic value) {
+    sections
+        .firstWhere((section) => section.sectionId == sectionId)
+        .fields
+        .firstWhere((field) => field.key == key)
+        .value = value;
   }
 
-  void saveSectionData(
-      {required String sectionId, required Map<String, dynamic> sectionData}) {
-    int sectionIndex =
-        sections.indexWhere((section) => section.sectionId == sectionId);
-    bool isLastSection = sectionIndex == sections.length - 1;
-    if (formData.containsKey(sectionId)) {
-      formData[sectionId] = sectionData;
-    }
-    setSectionAsSaved(sectionId: sectionId);
-
-    if (isLastSection) {
-      sendForm();
-    }
-  }
-
-  Map<String, dynamic> getFormData() {
-    return formData;
+  void saveForm() {
+    // validar se os fields preenchidos estão corretos
+    GlobalSnackBar.success("Formulário salvo com sucesso");
   }
 
   void sendForm() {
-    if (areSectionsSaved.contains(false)) {
-      GlobalSnackBar.error(
-          "Todas as secões devem ser salvas antes de enviar o formulário");
-    } else {
-      GlobalSnackBar.success("Formulário enviado com sucesso!");
-    }
-  }
-
-  void setSectionAsSaved({required String sectionId}) {
-    int sectionIndex =
-        sections.indexWhere((section) => section.sectionId == sectionId);
-    if (sectionIndex != -1) {
-      areSectionsSaved[sectionIndex] = true;
-    }
+    // validar se as sections estão corretas
+    GlobalSnackBar.error(
+        "Todas as secões devem ser salvas antes de enviar o formulário");
   }
 }

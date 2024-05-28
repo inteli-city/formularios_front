@@ -279,8 +279,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   Expanded(
                     child: buildCustomElevatedButton(
                       onPressed: () {
-                        Modular.to
-                            .pushNamed('/home/${controller.form.formId}/fill');
+                        Modular.to.pushNamed(
+                            '/home/${controller.form.formId}/fill',
+                            arguments: controller.form.sections);
                       },
                       text: S.current.fillForm,
                       backgroundColor: AppColors.primaryBlue,

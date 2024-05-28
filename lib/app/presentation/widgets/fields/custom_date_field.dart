@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:intl/intl.dart';
 
 class CustomDateFormField extends StatefulWidget {
   final DateFieldEntity field;
-  final FormSectionController controller;
+  final Function(DateTime?) onChanged;
 
   const CustomDateFormField({
     super.key,
     required this.field,
-    required this.controller,
+    required this.onChanged,
   });
 
   @override
@@ -43,12 +42,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField> {
       decoration: InputDecoration(
         labelText: widget.field.placeholder,
       ),
-      onChanged: (value) {
-        widget.controller.setFieldValue(widget.field.key, value);
-      },
-      onSaved: (value) {
-        widget.controller.setFieldValue(widget.field.key, value);
-      },
+      onChanged: (value) {},
       readOnly: true,
       onTap: () async {
         DateTime? pickedDate = await showDatePicker(
@@ -72,14 +66,17 @@ class _CustomDateFormFieldState extends State<CustomDateFormField> {
           initialDatePickerMode: DatePickerMode.day,
           context: context,
           initialDate: widget.field.value?.toUtc() ?? DateTime.now(),
-          firstDate: widget.field.minDate ?? DateTime(1900,),
+          firstDate: widget.field.minDate ??
+              DateTime(
+                1900,
+              ),
           lastDate: widget.field.maxDate ?? DateTime(2100),
           locale: const Locale('pt', 'BR'),
         );
         if (pickedDate != null) {
           String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
           _textController.text = formattedDate;
-          widget.controller.setFieldValue(widget.field.key, formattedDate);
+          // widget.controller.setFieldValue(widget.field.key, formattedDate);
         }
       },
       validator: (value) {

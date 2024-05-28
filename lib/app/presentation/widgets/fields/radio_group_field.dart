@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 //regex, formatting
 class CustomRadioGroupFormField extends StatelessWidget {
   final RadioGroupFieldEntity field;
-  final FormSectionController controller;
+  final Function(String?) onChanged;
 
   const CustomRadioGroupFormField({
     super.key,
     required this.field,
-    required this.controller,
+    required this.onChanged,
   });
 
   @override
@@ -38,11 +37,8 @@ class CustomRadioGroupFormField extends StatelessWidget {
                   title: Text(option,
                       style: Theme.of(context).textTheme.titleMedium),
                   value: option,
-                  groupValue: controller.getFieldValue(field.key),
-                  onChanged: (value) {
-                    state.didChange(value);
-                    controller.setFieldValue(field.key, value);
-                  },
+                  groupValue: field.value,
+                  onChanged: onChanged,
                 );
               },
             ),

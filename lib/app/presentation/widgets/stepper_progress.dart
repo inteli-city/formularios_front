@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
 import 'package:gates_microapp_flutter/shared/themes/app_colors.dart';
 
 class StepperProgress extends StatelessWidget {
   final int totalSteps;
-  final List<bool> isStepDone;
-  final Function(int) onStepTapped;
 
   const StepperProgress({
     super.key,
     required this.totalSteps,
-    required this.isStepDone,
-    required this.onStepTapped,
   });
 
   @override
   Widget build(BuildContext context) {
+    StepperController controller = Modular.get();
     return SizedBox(
       height: 70,
       child: Stepper(
@@ -26,11 +25,9 @@ class StepperProgress extends StatelessWidget {
         connectorThickness: 2,
         connectorColor:
             WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
-        currentStep: isStepDone.indexOf(false),
+        currentStep: controller.currentStep,
         steps: _buildSteps(context),
-        onStepTapped: (step) {
-          onStepTapped(step);
-        },
+        onStepTapped: controller.setCurrentSectionIndex,
       ),
     );
   }
@@ -42,8 +39,8 @@ class StepperProgress extends StatelessWidget {
         stepStyle: StepStyle(
           color: AppColors.primaryBlue,
         ),
-        isActive: index <= isStepDone.indexOf(false),
-        state: isStepDone[index] ? StepState.complete : StepState.indexed,
+        isActive: true,
+        state: StepState.indexed,
         content: Container(),
       );
     });

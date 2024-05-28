@@ -3,15 +3,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomFilePickerFormField extends StatefulWidget {
   final FileFieldEntity field;
-  final FormSectionController controller;
+  final Function(DateTime?) onChanged;
 
-  const CustomFilePickerFormField(
-      {super.key, required this.field, required this.controller});
+  const CustomFilePickerFormField({
+    super.key,
+    required this.field,
+    required this.onChanged,
+  });
 
   @override
   State<CustomFilePickerFormField> createState() =>
@@ -51,7 +53,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
         setState(
           () {
             _selectedFiles.addAll(files);
-            widget.controller.setFieldValue(widget.field.key, _selectedFiles);
+            // widget.controller.setFieldValue(widget.field.key, _selectedFiles);
           },
         );
       } else {
@@ -60,7 +62,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
         setState(
           () {
             _selectedFiles.add(file);
-            widget.controller.setFieldValue(widget.field.key, _selectedFiles);
+            // widget.controller.setFieldValue(widget.field.key, _selectedFiles);
           },
         );
       }
@@ -138,8 +140,8 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
                 setState(
                   () {
                     _selectedFiles.remove(file);
-                    widget.controller
-                        .setFieldValue(widget.field.key, _selectedFiles);
+                    // widget.controller
+                    //     .setFieldValue(widget.field.key, _selectedFiles);
                   },
                 );
               },

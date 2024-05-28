@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_section_controller.dart';
 
 class CustomCheckBoxGroupFormField extends StatelessWidget {
   final CheckBoxGroupFieldEntity field;
-  final FormSectionController controller;
+  final Function(String) onChanged;
 
   const CustomCheckBoxGroupFormField({
     super.key,
     required this.field,
-    required this.controller,
+    required this.onChanged,
   });
 
   @override
@@ -29,10 +28,6 @@ class CustomCheckBoxGroupFormField extends StatelessWidget {
               } else {
                 selectedOptions?.remove(option);
               }
-              controller.setFieldValue(
-                field.key,
-                selectedOptions?.join(','),
-              );
             },
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,

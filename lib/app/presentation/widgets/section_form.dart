@@ -13,6 +13,7 @@ import 'package:formularios_front/app/presentation/widgets/fields/custom_switch_
 import 'package:formularios_front/app/presentation/widgets/fields/custom_text_field.dart';
 import 'package:formularios_front/app/presentation/widgets/fields/radio_group_field.dart';
 import 'package:formularios_front/app/presentation/widgets/fields/type_ahead_field.dart';
+import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
@@ -92,14 +93,18 @@ class SectionForm extends StatelessWidget {
                     onPressed: () {
                       if (lastSection) {
                         formController.setIsSendingForm(true);
-                        if (formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          formController.sendForm();
+                        if (!formKey.currentState!.validate()) {
+                          return GlobalSnackBar.error(
+                              "Todas os campos devem ser salvos antes de enviar o formulário");
                         }
+                        formKey.currentState!.save();
+                        formController.sendForm();
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: lastSection ? Theme.of(context).colorScheme.primary : AppColors.gray,
+                      backgroundColor: lastSection
+                          ? Theme.of(context).colorScheme.primary
+                          : AppColors.gray,
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(AppDimensions.radiusMedium),
@@ -162,6 +167,8 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          sectionEntity: section,
+          formController: formController,
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:
@@ -191,6 +198,7 @@ class SectionForm extends StatelessWidget {
           },
           formController: formController,
           key: Key(field.key),
+          sectionEntity: section,
         );
 
       case FieldTypeEnum.DATE_FIELD:
@@ -209,6 +217,8 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          formController: formController,
+          sectionEntity: section,
         );
       case FieldTypeEnum.FILE_FIELD:
         return CustomFilePickerFormField(

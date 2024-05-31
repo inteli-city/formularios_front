@@ -74,6 +74,7 @@ class FormMockRepository extends IFormRepository {
             TextFieldEntity(
               fieldType: FieldTypeEnum.TEXT_FIELD,
               placeholder: 'TextField 01',
+              regex: r'^.{6,}$',
               isRequired: true,
               key: 'key-section-01-1',
             ),

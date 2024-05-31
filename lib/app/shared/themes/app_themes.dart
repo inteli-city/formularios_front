@@ -66,7 +66,13 @@ class AppThemes {
         top: AppDimensions.paddingExtraLarge,
       ),
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium)),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        gapPadding: AppDimensions.paddingSmall,
+        borderSide: BorderSide(
+            color: AppColors.primaryBlue,
+            width: AppDimensions.borderThin * 1.5,
+            style: BorderStyle.solid),
+      ),
       alignLabelWithHint: true,
       floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(

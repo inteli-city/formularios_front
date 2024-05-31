@@ -6,7 +6,6 @@ import 'package:formularios_front/app/presentation/controllers/stepper_controlle
 import 'package:formularios_front/app/presentation/widgets/section_form.dart';
 import 'package:formularios_front/app/presentation/widgets/stepper_progress.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
-import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class FormSectionsPage extends StatefulWidget {
@@ -38,13 +37,14 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                        onPressed: () {
-                          Modular.to.pop();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          size: AppDimensions.iconLarge,
-                        )),
+                      onPressed: () {
+                        Modular.to.pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: AppDimensions.iconLarge,
+                      ),
+                    ),
                     const SizedBox(
                       width: AppDimensions.horizontalSpaceLarge,
                     ),
@@ -75,61 +75,13 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                         lastSection:
                             index == formController.sections.length - 1,
                         formController: formController,
+                        formKey: formKey,
                       ),
                     );
                   },
                 ),
               ),
             ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formController.saveForm();
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppDimensions.radiusMedium,
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    'Salvar',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: AppColors.white,
-                        height: 1.2,
-                        fontSize: AppDimensions.fontMedium),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (formController.validateRequiredFields &&
-                        formKey.currentState!.validate()) {
-                      formController.sendForm();
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppDimensions.radiusMedium,
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    'Enviar',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: AppColors.white,
-                        height: 1.2,
-                        fontSize: AppDimensions.fontMedium),
-                  ),
-                ),
-              ],
-            )
           ],
         ),
       ),

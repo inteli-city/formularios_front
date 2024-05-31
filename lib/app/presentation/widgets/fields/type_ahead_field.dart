@@ -2,19 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 
 class CustomTypeAheadFormField extends StatefulWidget {
   final TypeAheadFieldEntity field;
   final Function(String?) onChanged;
+  final FormController formController;
 
-  const CustomTypeAheadFormField(
-      {super.key, required this.field, required this.onChanged});
+  const CustomTypeAheadFormField({
+    super.key,
+    required this.field,
+    required this.onChanged,
+    required this.formController,
+  });
 
   @override
   State<CustomTypeAheadFormField> createState() => _TypeAheadFormFieldState();
 }
 
-class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField> {
+class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
+    with ValidationMixin {
   late TextEditingController _textController;
 
   @override
@@ -36,7 +44,7 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField> {
     return TypeAheadField<String>(
       controller: _textController,
       builder: (context, controller, focusNode) {
-        return TextField(
+        return TextFormField(
           maxLength: widget.field.maxLength,
           controller: controller,
           focusNode: focusNode,
@@ -44,6 +52,13 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField> {
           decoration: InputDecoration(
             labelText: widget.field.placeholder,
           ),
+          onChanged: (value) => widget.onChanged(value),
+          validator: (value) => combine([
+            () => maxLength(value, widget.field.maxLength),
+            () => regex(value, widget.field.regex),
+            () => isRequired(value, widget.field.isRequired,
+                widget.formController.getIsSendingForm())
+          ]),
           inputFormatters: [
             if (widget.field.maxLength != null)
               LengthLimitingTextInputFormatter(widget.field.maxLength),

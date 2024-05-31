@@ -9,6 +9,7 @@ class StepperController {
   void setCurrentSectionIndex(int index) {
     currentSectionIndex = index;
   }
+
   void stepperScrollToSection(
       {required int index, required BuildContext context}) {
     double screenWidth = ScreenHelper.width(context);

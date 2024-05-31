@@ -1,22 +1,28 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
-class CustomDropDownFormField extends StatelessWidget {
+class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
   final DropDownFieldEntity field;
   final Function(String?) onChanged;
-
-  const CustomDropDownFormField({
+  final FormController formController;
+  CustomDropDownFormField({
     super.key,
     required this.field,
     required this.onChanged,
+    required this.formController,
   });
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField2<String>(
+      alignment: Alignment.centerLeft,
+      isDense: true,
+      isExpanded: true,
       hint: Text(
         field.placeholder,
         style: Theme.of(context).textTheme.titleMedium,
@@ -24,16 +30,6 @@ class CustomDropDownFormField extends StatelessWidget {
       value: field.value,
       style: Theme.of(context).textTheme.titleMedium,
       decoration: InputDecoration(
-        labelStyle: TextStyle(
-          color: AppColors.black,
-          fontSize: 16,
-          textBaseline: TextBaseline.ideographic,
-        ),
-        labelText: field.placeholder,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 16,
-        ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryBlue,
@@ -63,10 +59,11 @@ class CustomDropDownFormField extends StatelessWidget {
       }).toList(),
       onChanged: onChanged,
       validator: (value) {
-        if (field.isRequired && (value == null || value.isEmpty)) {
-          return 'Este campo é obrigatório';
-        }
-        return null;
+        return combine([
+          () => isRequired(
+              value, field.isRequired, formController.getIsSendingForm()),
+          () => regex(value, field.regex),
+        ]);
       },
     );
   }

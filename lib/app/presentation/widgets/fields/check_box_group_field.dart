@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 
-class CustomCheckBoxGroupFormField extends StatelessWidget {
+class CustomCheckBoxGroupFormField extends StatelessWidget
+    with ValidationMixin {
   final CheckBoxGroupFieldEntity field;
   final Function(String) onChanged;
 
-  const CustomCheckBoxGroupFormField({
+  CustomCheckBoxGroupFormField({
     super.key,
     required this.field,
     required this.onChanged,

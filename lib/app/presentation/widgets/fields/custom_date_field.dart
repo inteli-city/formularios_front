@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:intl/intl.dart';
 
-class CustomDateFormField extends StatefulWidget {
+class CustomDateFormField extends StatefulWidget with ValidationMixin {
   final DateFieldEntity field;
   final Function(DateTime?) onChanged;
-
-  const CustomDateFormField({
+  final FormController formController;
+  CustomDateFormField({
     super.key,
     required this.field,
     required this.onChanged,
+    required this.formController,
   });
 
   @override
   State<CustomDateFormField> createState() => _CustomDateFormFieldState();
 }
 
-class _CustomDateFormFieldState extends State<CustomDateFormField> {
+class _CustomDateFormFieldState extends State<CustomDateFormField>
+    with ValidationMixin {
   late TextEditingController _textController;
 
   @override
@@ -42,7 +46,6 @@ class _CustomDateFormFieldState extends State<CustomDateFormField> {
       decoration: InputDecoration(
         labelText: widget.field.placeholder,
       ),
-      onChanged: (value) {},
       readOnly: true,
       onTap: () async {
         DateTime? pickedDate = await showDatePicker(
@@ -76,14 +79,16 @@ class _CustomDateFormFieldState extends State<CustomDateFormField> {
         if (pickedDate != null) {
           String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
           _textController.text = formattedDate;
-          // widget.controller.setFieldValue(widget.field.key, formattedDate);
+          widget.onChanged(DateFormat('dd/MM/yyyy').parse(formattedDate));
         }
       },
       validator: (value) {
-        if (widget.field.isRequired && (value == null || value.isEmpty)) {
-          return 'Este campo é obrigatório';
-        }
-        return null;
+        return combine([
+          () => isRequired(value, widget.field.isRequired,widget.formController.getIsSendingForm()),
+          () => minDate(value, widget.field.minDate),
+          () => maxDate(value, widget.field.maxDate),
+          () => regex(value, widget.field.regex),
+        ]);
       },
     );
   }

@@ -13,7 +13,8 @@ class StepperProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StepperController controller = Modular.get();
+    StepperController controller = Modular.get<StepperController>();
+
     return SizedBox(
       height: 70,
       child: Stepper(
@@ -27,7 +28,10 @@ class StepperProgress extends StatelessWidget {
             WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
         currentStep: controller.currentStep,
         steps: _buildSteps(context),
-        onStepTapped: controller.setCurrentSectionIndex,
+        onStepTapped: (step) {
+          controller.setCurrentSectionIndex(step);
+          controller.stepperScrollToSection(index: step, context: context);
+        },
       ),
     );
   }

@@ -3,20 +3,14 @@ import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.d
 
 class FormController {
   List<SectionEntity> sections;
-
+  bool isSendingForm = false;
   FormController({required this.sections});
 
-  bool get validateRequiredFields {
-    for (var section in sections) {
-      for (var field in section.fields) {
-        if (field.isRequired && field.value == null) {
-          GlobalSnackBar.error("O campo ${field.placeholder} é obrigatório");
-          return false;
-        }
-      }
-    }
-    return true;
+  void setIsSendingForm(bool value) {
+    isSendingForm = value;
   }
+
+  bool getIsSendingForm() => isSendingForm;
 
   void setFieldValue(String sectionId, String key, dynamic value) {
     sections
@@ -26,14 +20,9 @@ class FormController {
         .value = value;
   }
 
-  void saveForm() {
-    // validar se os fields preenchidos estão corretos
-    GlobalSnackBar.success("Formulário salvo com sucesso");
-  }
-
   void sendForm() {
-    // validar se as sections estão corretas
+    setIsSendingForm(true);
     GlobalSnackBar.error(
-        "Todas as secões devem ser salvas antes de enviar o formulário");
+        "Todas os campos devem ser salvos antes de enviar o formulário");
   }
 }

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 
-class CustomNumberFormField extends StatelessWidget {
+class CustomNumberFormField extends StatelessWidget with ValidationMixin {
   final NumberFieldEntity field;
   final Function(String) onChanged;
+  final FormController formController;
 
-  const CustomNumberFormField({
+  CustomNumberFormField({
     super.key,
     required this.field,
     required this.onChanged,
+    required this.formController,
   });
 
   @override
@@ -30,14 +34,14 @@ class CustomNumberFormField extends StatelessWidget {
       ],
       onChanged: onChanged,
       validator: (value) {
-        var numberValue = double.tryParse(value ?? '');
-        if (field.minValue != null && numberValue! < field.minValue!) {
-          return 'Valor mínimo é ${field.minValue}';
-        }
-        if (field.maxValue != null && numberValue! > field.maxValue!) {
-          return 'Valor máximo é ${field.maxValue}';
-        }
-        return null;
+        return combine([
+          () => isRequired(
+              value, field.isRequired, formController.getIsSendingForm()),
+          () => maxValue(value, field.maxValue),
+          () => minValue(value, field.minValue),
+          () => regex(value, field.regex),
+        ]);
+      
       },
     );
   }

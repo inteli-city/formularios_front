@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 //regex, formatting
-class CustomRadioGroupFormField extends StatelessWidget {
+class CustomRadioGroupFormField extends StatelessWidget with ValidationMixin {
   final RadioGroupFieldEntity field;
   final Function(String?) onChanged;
-
-  const CustomRadioGroupFormField({
+  final FormController formController;
+  CustomRadioGroupFormField({
     super.key,
     required this.field,
     required this.onChanged,
+    required this.formController,
   });
 
   @override
@@ -18,10 +21,11 @@ class CustomRadioGroupFormField extends StatelessWidget {
     return FormField<String>(
       initialValue: field.value,
       validator: (value) {
-        if (field.isRequired && (value == null || value.isEmpty)) {
-          return 'Este campo é obrigatório';
-        }
-        return null;
+        return combine([
+          () => isRequired(
+              value, field.isRequired, formController.getIsSendingForm()),
+          () => regex(value, field.regex),
+        ]);
       },
       builder: (state) {
         return Column(
@@ -38,7 +42,10 @@ class CustomRadioGroupFormField extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium),
                   value: option,
                   groupValue: field.value,
-                  onChanged: onChanged,
+                  onChanged: (value) {
+                    state.didChange(value);
+                    onChanged(value);
+                  },
                 );
               },
             ),
@@ -47,7 +54,7 @@ class CustomRadioGroupFormField extends StatelessWidget {
                 state.errorText ?? '',
                 style: Theme.of(context)
                     .textTheme
-                    .titleMedium
+                    .bodyLarge
                     ?.copyWith(color: AppColors.red),
               ),
           ],

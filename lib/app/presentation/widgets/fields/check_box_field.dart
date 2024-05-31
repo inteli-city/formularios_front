@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 
-class CustomCheckBoxFormField extends StatelessWidget {
+class CustomCheckBoxFormField extends StatelessWidget with ValidationMixin {
   final CheckBoxFieldEntity field;
   final Function(bool?) onChanged;
 
-  const CustomCheckBoxFormField({
+  CustomCheckBoxFormField({
     super.key,
     required this.field,
     required this.onChanged,

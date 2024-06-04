@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
+import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
 
 void main() {
   group('SelectChipController', () {

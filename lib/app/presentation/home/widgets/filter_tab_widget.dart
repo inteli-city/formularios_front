@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
-import 'package:formularios_front/app/presentation/controllers/select_chip_controller.dart';
-import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
+import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
+import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
-import 'package:formularios_front/app/presentation/widgets/dialogs/filter_order_dialog.dart';
-import 'package:formularios_front/app/presentation/widgets/dialogs/sort_forms_dialog.dart';
+import 'package:formularios_front/app/shared/widgets/dialogs/filter_order_dialog.dart';
+import 'package:formularios_front/app/shared/widgets/dialogs/sort_forms_dialog.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';

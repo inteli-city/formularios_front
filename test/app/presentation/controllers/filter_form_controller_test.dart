@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 
 void main() {
   group('FilterFormsController', () {

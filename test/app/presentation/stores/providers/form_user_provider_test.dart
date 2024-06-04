@@ -12,7 +12,7 @@ import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/presentation/states/form_user_state.dart';
+import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 

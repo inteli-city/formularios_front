@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/presentation/widgets/bottom_navigation_widget.dart';
+import 'package:formularios_front/app/presentation/landing/widgets/bottom_navigation_widget.dart';
 import 'package:formularios_front/generated/l10n.dart';
 
 void main() {

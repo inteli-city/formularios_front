@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
-import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
-import 'package:formularios_front/app/presentation/widgets/section_form.dart';
-import 'package:formularios_front/app/presentation/widgets/stepper_progress.dart';
+import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
+import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
+import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 

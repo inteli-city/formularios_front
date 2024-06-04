@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
+import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
 import 'package:gates_microapp_flutter/shared/themes/app_colors.dart';
 
 class StepperProgress extends StatelessWidget {

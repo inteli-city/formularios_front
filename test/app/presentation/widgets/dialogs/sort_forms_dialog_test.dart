@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
+import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
-import 'package:formularios_front/app/presentation/widgets/dialogs/sort_forms_dialog.dart';
+import 'package:formularios_front/app/shared/widgets/dialogs/sort_forms_dialog.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
-import 'package:formularios_front/app/presentation/controllers/sort_forms_controller.dart';
 import 'package:provider/provider.dart';
 
 import 'sort_forms_dialog_test.mocks.dart';

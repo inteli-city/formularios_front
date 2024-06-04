@@ -4,7 +4,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/presentation/widgets/form_card.dart';
+import 'package:formularios_front/app/presentation/home/widgets/form_card.dart';
 import 'package:intl/intl.dart';
 
 void main() {

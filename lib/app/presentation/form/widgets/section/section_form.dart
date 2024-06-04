@@ -3,17 +3,17 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
-import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/check_box_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/check_box_group_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/custom_date_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/custom_dropdown_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/custom_file_picker_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/custom_number_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/custom_switch_button_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/custom_text_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/radio_group_field.dart';
-import 'package:formularios_front/app/presentation/widgets/fields/type_ahead_field.dart';
+import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_group_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/custom_date_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/custom_dropdown_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/custom_file_picker_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/custom_number_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/custom_switch_button_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/custom_text_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/radio_group_field.dart';
+import 'package:formularios_front/app/presentation/form/widgets/fields/type_ahead_field.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -93,12 +93,11 @@ class SectionForm extends StatelessWidget {
                     onPressed: () {
                       if (lastSection) {
                         if (!formKey.currentState!.validate()) {
-                           GlobalSnackBar.error(
+                          GlobalSnackBar.error(
                               "Todas os campos devem ser salvos antes de enviar o formulário");
                         } else {
-
-                        formKey.currentState!.save();
-                        formController.sendForm();
+                          formKey.currentState!.save();
+                          formController.sendForm();
                         }
                       }
                     },

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 
 class CustomTypeAheadFormField extends StatefulWidget {

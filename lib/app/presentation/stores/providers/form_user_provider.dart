@@ -5,8 +5,8 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
-import 'package:formularios_front/app/presentation/controllers/filter_form_controller.dart';
-import 'package:formularios_front/app/presentation/states/form_user_state.dart';
+import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
+import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
 

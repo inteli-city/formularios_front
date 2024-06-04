@@ -3,12 +3,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
-import 'package:formularios_front/app/presentation/pages/home_page.dart';
+import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
+import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
 import 'package:mockito/mockito.dart';
-
-import 'package:formularios_front/app/presentation/states/form_user_state.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 
 import 'home_page_test.mocks.dart';

@@ -5,7 +5,7 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/presentation/pages/form_details_page.dart';
 import 'package:formularios_front/generated/l10n.dart';
@@ -14,19 +14,18 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'form_details_page_test.mocks.dart';
 
-@GenerateMocks([FormUserProvider, FormEntity, FormDetailsController])
+@GenerateMocks([FormUserProvider, FormEntity, FormController])
 void main() {
   MockFormEntity form = MockFormEntity();
   late FormUserProvider formUserProvider = MockFormUserProvider();
-  late FormDetailsController formDetailsController =
-      MockFormDetailsController();
+  late FormController formDetailsController = MockFormController();
 
   setUp(() {
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
 
     Modular.replaceInstance<FormUserProvider>(formUserProvider);
-    Modular.replaceInstance<FormDetailsController>(formDetailsController);
+    Modular.replaceInstance<FormController>(formDetailsController);
 
     when(form.system).thenReturn('system');
     when(form.template).thenReturn('Nome Template');

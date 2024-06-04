@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
@@ -7,7 +8,6 @@ import 'package:gates_microapp_flutter/shared/themes/app_colors.dart';
 
 class CustomSwitchButtonField extends StatefulWidget with ValidationMixin {
   final SwitchButtonFieldEntity field;
-  final FormController formController;
   final SectionEntity sectionEntity;
   final Function(bool?) onChanged;
 
@@ -15,7 +15,6 @@ class CustomSwitchButtonField extends StatefulWidget with ValidationMixin {
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
     required this.sectionEntity,
   });
 
@@ -25,6 +24,7 @@ class CustomSwitchButtonField extends StatefulWidget with ValidationMixin {
 }
 
 class _CustomSwitchButtonFieldState extends State<CustomSwitchButtonField> {
+  final formController = Modular.get<FormController>();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -39,10 +39,8 @@ class _CustomSwitchButtonFieldState extends State<CustomSwitchButtonField> {
           activeTrackColor: Theme.of(context).colorScheme.primary,
           inactiveThumbColor: Theme.of(context).colorScheme.secondary,
           inactiveTrackColor: AppColors.gray,
-          value: widget.formController.getFieldValue(
-                  widget.sectionEntity.sectionId,
-                  widget.field.key,
-                  widget.field.value) ??
+          value: formController.getFieldValue(widget.sectionEntity.sectionId,
+                  widget.field.key, widget.field.value) ??
               false,
           onChanged: (value) {
             setState(() {

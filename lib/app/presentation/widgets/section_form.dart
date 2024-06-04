@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
@@ -20,14 +21,13 @@ import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 class SectionForm extends StatelessWidget {
   final SectionEntity section;
   final bool lastSection;
-  final FormController formController;
   final GlobalKey<FormState> formKey;
+  final formController = Modular.get<FormController>();
 
-  const SectionForm({
+  SectionForm({
     super.key,
     required this.section,
     required this.lastSection,
-    required this.formController,
     required this.formKey,
   });
 
@@ -92,13 +92,14 @@ class SectionForm extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       if (lastSection) {
-                        formController.setIsSendingForm(true);
                         if (!formKey.currentState!.validate()) {
-                          return GlobalSnackBar.error(
+                           GlobalSnackBar.error(
                               "Todas os campos devem ser salvos antes de enviar o formulário");
-                        }
+                        } else {
+
                         formKey.currentState!.save();
                         formController.sendForm();
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -136,7 +137,6 @@ class SectionForm extends StatelessWidget {
           onChanged: (value) {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
-          formController: formController,
           key: Key(field.key),
         );
 
@@ -146,7 +146,6 @@ class SectionForm extends StatelessWidget {
           onChanged: (value) {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
-          formController: formController,
           key: Key(field.key),
         );
 
@@ -156,7 +155,6 @@ class SectionForm extends StatelessWidget {
           onChanged: (value) {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
-          formController: formController,
           key: Key(field.key),
         );
 
@@ -168,7 +166,6 @@ class SectionForm extends StatelessWidget {
           },
           key: Key(field.key),
           sectionEntity: section,
-          formController: formController,
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:
@@ -186,7 +183,6 @@ class SectionForm extends StatelessWidget {
           onChanged: (value) {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
-          formController: formController,
           key: Key(field.key),
         );
 
@@ -196,7 +192,6 @@ class SectionForm extends StatelessWidget {
           onChanged: (value) {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
-          formController: formController,
           key: Key(field.key),
           sectionEntity: section,
         );
@@ -207,9 +202,9 @@ class SectionForm extends StatelessWidget {
           onChanged: (value) {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
-          formController: formController,
           key: Key(field.key),
         );
+
       case FieldTypeEnum.SWITCH_BUTTON_FIELD:
         return CustomSwitchButtonField(
           field: field as SwitchButtonFieldEntity,
@@ -217,9 +212,9 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
-          formController: formController,
           sectionEntity: section,
         );
+
       case FieldTypeEnum.FILE_FIELD:
         return CustomFilePickerFormField(
           field: field as FileFieldEntity,

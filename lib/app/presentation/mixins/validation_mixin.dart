@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 
 mixin ValidationMixin {
-  
   String? isRequired(String? value, bool isRequired, bool isSendingForm,
       [String? message]) {
     value = value ?? '';
@@ -12,7 +11,9 @@ mixin ValidationMixin {
   }
 
   String? maxLength(String? value, int? maxLength, [String? message]) {
-    value = value ?? '';
+    if (value == null || value.isEmpty) {
+      return null;
+    }
     if (maxLength != null && value.length > maxLength) {
       return message ?? 'Este campo deve ter no máximo $maxLength caracteres';
     }
@@ -20,7 +21,9 @@ mixin ValidationMixin {
   }
 
   String? regex(String? value, String? regex, [String? message]) {
-    value = value ?? '';
+    if (value == null || value.isEmpty) {
+      return null;
+    }
     if (regex != null && !RegExp(regex).hasMatch(value)) {
       return message ?? 'Formato inválido';
     }
@@ -28,7 +31,9 @@ mixin ValidationMixin {
   }
 
   String? maxValue(String? value, int? maxValue, [String? message]) {
-    value = value ?? '';
+    if (value == null || value.isEmpty) {
+      return null;
+    }
     if (maxValue != null &&
         int.tryParse(value) != null &&
         int.parse(value) > maxValue) {
@@ -38,7 +43,9 @@ mixin ValidationMixin {
   }
 
   String? minValue(String? value, int? minValue, [String? message]) {
-    value = value ?? '';
+    if (value == null || value.isEmpty) {
+      return null;
+    }
     if (minValue != null &&
         int.tryParse(value) != null &&
         int.parse(value) < minValue) {
@@ -48,8 +55,7 @@ mixin ValidationMixin {
   }
 
   String? maxDate(String? value, DateTime? maxDate, [String? message]) {
-    value = value ?? '';
-    if (value.isEmpty) {
+    if (value == null || value.isEmpty) {
       return null;
     }
     DateTime inputDate = DateFormat('dd/MM/yyyy').parse(value);
@@ -61,8 +67,7 @@ mixin ValidationMixin {
   }
 
   String? minDate(String? value, DateTime? minDate, [String? message]) {
-    value = value ?? '';
-    if (value.isEmpty) {
+    if (value == null || value.isEmpty) {
       return null;
     }
     DateTime inputDate = DateFormat('dd/MM/yyyy').parse(value);

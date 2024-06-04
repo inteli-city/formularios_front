@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
-import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
 import 'package:formularios_front/app/presentation/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/widgets/section_form.dart';
 import 'package:formularios_front/app/presentation/widgets/stepper_progress.dart';
@@ -16,8 +15,6 @@ class FormSectionsPage extends StatefulWidget {
 }
 
 class FormSectionsPageState extends State<FormSectionsPage> {
-  FormDetailsController formDetailsController =
-      Modular.get<FormDetailsController>();
   FormController formController = Modular.get<FormController>();
   StepperController stepperController = Modular.get<StepperController>();
 
@@ -49,13 +46,13 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                       width: AppDimensions.horizontalSpaceLarge,
                     ),
                     Text(
-                      '${formDetailsController.form.template} - ${formDetailsController.form.formTitle}',
+                      '${formController.form.template} - ${formController.form.formTitle}',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                   ],
                 ),
                 StepperProgress(
-                  totalSteps: formController.sections.length,
+                  totalSteps: formController.form.sections.length,
                 ),
               ],
             ),
@@ -66,15 +63,14 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   controller: stepperController.listViewController,
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: formController.sections.length,
+                  itemCount: formController.form.sections.length,
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: ScreenHelper.width(context),
                       child: SectionForm(
-                        section: formController.sections[index],
+                        section: formController.form.sections[index],
                         lastSection:
-                            index == formController.sections.length - 1,
-                        formController: formController,
+                            index == formController.form.sections.length - 1,
                         formKey: formKey,
                       ),
                     );

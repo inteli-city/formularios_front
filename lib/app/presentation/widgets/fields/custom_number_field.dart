@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
@@ -7,17 +8,16 @@ import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart'
 class CustomNumberFormField extends StatelessWidget with ValidationMixin {
   final NumberFieldEntity field;
   final Function(String) onChanged;
-  final FormController formController;
 
   CustomNumberFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
   });
 
   @override
   Widget build(BuildContext context) {
+    final formController = Modular.get<FormController>();
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
@@ -41,7 +41,6 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
           () => minValue(value, field.minValue),
           () => regex(value, field.regex),
         ]);
-      
       },
     );
   }

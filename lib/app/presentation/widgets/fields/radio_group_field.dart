@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
@@ -9,19 +10,18 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 class CustomRadioGroupFormField extends StatelessWidget with ValidationMixin {
   final RadioGroupFieldEntity field;
   final Function(String?) onChanged;
-  final FormController formController;
   final SectionEntity sectionEntity;
 
   CustomRadioGroupFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
     required this.sectionEntity,
   });
 
   @override
   Widget build(BuildContext context) {
+    final formController = Modular.get<FormController>();
     return FormField<String>(
       initialValue: field.value,
       validator: (value) {

@@ -59,7 +59,7 @@ class FormUserProvider extends ChangeNotifier {
         },
         (forms) {
           Modular.get<Logger>().d(
-            '${DateTime.now()} - Forms from user "1" fetched successfully!',
+            '${DateTime.now()} - Forms from user fetched successfully!',
           );
           _allForms = forms;
 
@@ -81,7 +81,7 @@ class FormUserProvider extends ChangeNotifier {
           Modular.get<Logger>().e(error.toString());
           GlobalSnackBar.error(error.message);
           setState(FormUserErrorState(error: error));
-          
+
           return FormUserErrorState(error: error);
         },
         (updatedForm) async {

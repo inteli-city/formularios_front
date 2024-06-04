@@ -14,7 +14,7 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart'
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i9;
 import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i11;
-import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart'
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart'
     as _i13;
 import 'package:formularios_front/app/presentation/states/form_user_state.dart'
     as _i2;
@@ -422,12 +422,11 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as List<_i12.SectionEntity>);
 }
 
-/// A class which mocks [FormDetailsController].
+/// A class which mocks [FormController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormDetailsController extends _i1.Mock
-    implements _i13.FormDetailsController {
-  MockFormDetailsController() {
+class MockFormController extends _i1.Mock implements _i13.FormController {
+  MockFormController() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -459,6 +458,36 @@ class MockFormDetailsController extends _i1.Mock
       );
 
   @override
+  bool get isSendingForm => (super.noSuchMethod(
+        Invocation.getter(#isSendingForm),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set isSendingForm(bool? _isSendingForm) => super.noSuchMethod(
+        Invocation.setter(
+          #isSendingForm,
+          _isSendingForm,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  Map<String, dynamic> get formData => (super.noSuchMethod(
+        Invocation.getter(#formData),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
+
+  @override
+  set formData(Map<String, dynamic>? _formData) => super.noSuchMethod(
+        Invocation.setter(
+          #formData,
+          _formData,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   String get creationDate => (super.noSuchMethod(
         Invocation.getter(#creationDate),
         returnValue: _i8.dummyValue<String>(
@@ -480,6 +509,66 @@ class MockFormDetailsController extends _i1.Mock
   void getForm() => super.noSuchMethod(
         Invocation.method(
           #getForm,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setIsSendingForm(bool? value) => super.noSuchMethod(
+        Invocation.method(
+          #setIsSendingForm,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  bool getIsSendingForm() => (super.noSuchMethod(
+        Invocation.method(
+          #getIsSendingForm,
+          [],
+        ),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  void setFieldValue(
+    String? sectionId,
+    String? key,
+    dynamic value,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setFieldValue,
+          [
+            sectionId,
+            key,
+            value,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  dynamic getFieldValue(
+    String? sectionId,
+    String? key,
+    dynamic value,
+  ) =>
+      super.noSuchMethod(Invocation.method(
+        #getFieldValue,
+        [
+          sectionId,
+          key,
+          value,
+        ],
+      ));
+
+  @override
+  void sendForm() => super.noSuchMethod(
+        Invocation.method(
+          #sendForm,
           [],
         ),
         returnValueForMissingStub: null,

@@ -2,7 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/presentation/controllers/form_details_controller.dart';
+import 'package:formularios_front/app/presentation/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -12,7 +12,7 @@ import 'form_details_controller_test.mocks.dart';
 @GenerateMocks([FormUserProvider, FormEntity])
 void main() {
   late FormEntity mockEntity;
-  late FormDetailsController controller;
+  late FormController controller;
 
   MockFormUserProvider mockProvider = MockFormUserProvider();
   Modular.bindModule(AppModule());
@@ -26,7 +26,7 @@ void main() {
       when(mockEntity.formId).thenReturn('externForm1');
       when(mockEntity.expirationDate).thenReturn(1622649600000);
       when(mockProvider.getFormByExternId(any)).thenReturn(mockEntity);
-      controller = FormDetailsController(formId: mockEntity.formId);
+      controller = FormController(formId: mockEntity.formId);
     });
 
     test('Should have correct creationDate format', () {

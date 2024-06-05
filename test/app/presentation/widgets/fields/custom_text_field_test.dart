@@ -5,11 +5,12 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_text_field.dart';
+import 'package:formularios_front/generated/l10n.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'custom_text_field_test.mocks.dart';
-
 
 @GenerateMocks([FormController])
 void main() {
@@ -25,9 +26,12 @@ void main() {
         when(formController.getIsSendingForm()).thenReturn(true);
       },
     );
-    
+
     testWidgets('Displays initial value and placeholder',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
       final field = TextFieldEntity(
         placeholder: 'Enter text',
         key: 'testField',
@@ -53,6 +57,10 @@ void main() {
 
     testWidgets('Displays required field error when clicking in send option',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
+
       final field = TextFieldEntity(
         placeholder: 'Enter text',
         key: 'testField',
@@ -94,6 +102,9 @@ void main() {
     testWidgets(
         'Does not display required field error when field is filled and clicking in send option',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
       final field = TextFieldEntity(
         placeholder: 'Enter text',
         key: 'testField',
@@ -135,6 +146,9 @@ void main() {
 
     testWidgets('Validates regex pattern when clicking in sending form',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
       final field = TextFieldEntity(
         placeholder: 'Enter text',
         key: 'testField',

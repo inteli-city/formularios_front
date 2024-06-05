@@ -63,5 +63,23 @@
     
     "priorityEnumSchema": "{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}",
     
-    "formStatusEnumSchema": "{schema, select, NOT_STARTED{Not started} IN_PROGRESS{In progress} CONCLUDED{Concluded} CANCELED{Canceled} other{}}"
+    "formStatusEnumSchema": "{schema, select, NOT_STARTED{Not started} IN_PROGRESS{In progress} CONCLUDED{Concluded} CANCELED{Canceled} other{}}",
+    
+    "allFieldsShouldBeSaved": "All fields should be saved",
+
+    "thisFieldIsRequired": "This field is required",
+
+    "thisFieldShouldHaveMinimumLength": "This field should have a minimum length of ",
+    
+    "thisFieldShouldHaveMaximumLength": "This field should have a maximum length of ",
+
+    "invalidFormat": "Invalid format",
+
+    "thisFieldShouldHaveMaximumValue": "This field should have less than ",
+    
+    "thisFieldShouldHaveMinimumValue": "This field should have more than ",
+
+    "thisDateShouldBeBefore": "This date should be before of ",
+
+    "thisDateSouldBeAfter": "This date should be after of "
 }

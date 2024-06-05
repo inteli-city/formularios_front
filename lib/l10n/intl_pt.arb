@@ -63,6 +63,23 @@
 
     "priorityEnumSchema": "{schema, select, LOW{Baixa} MEDIUM{Média} HIGH{Alta} EMERCENCY{Emergencial} other{}}",
 
-    "formStatusEnumSchema": "{schema, select, NOT_STARTED{Não iniciado} IN_PROGRESS{Em andamento} CONCLUDED{Concluído} CANCELED{Cancelado} other{}}"
+    "formStatusEnumSchema": "{schema, select, NOT_STARTED{Não iniciado} IN_PROGRESS{Em andamento} CONCLUDED{Concluído} CANCELED{Cancelado} other{}}",
+    
+    "allFieldsShouldBeSaved": "Todas os campos devem ser salvos antes de enviar o formulário",
+    
+    "thisFieldIsRequired": "Este campo é obrigatório",
 
+    "thisFieldShouldHaveMinimumLength": "Este campo deve ter pelo menos ",
+    
+    "thisFieldShouldHaveMaximumLength": "Este campo deve ter no máximo ",
+
+    "invalidFormat": "Formato inválido",
+
+    "thisFieldShouldHaveMaximumValue": "Este campo deve ser menor que ",
+    
+    "thisFieldShouldHaveMinimumValue": "Este campo deve ser maior que",
+
+    "thisDateShouldBeBefore": "Esta data deve ser antes de ",
+
+    "thisDateSouldBeAfter": "Esta data deve ser depois de "
 }

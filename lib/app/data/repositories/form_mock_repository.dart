@@ -797,23 +797,67 @@ class FormMockRepository extends IFormRepository {
     required FormStatusEnum status,
     required String formId,
   }) async {
-    try {
-      await Future.delayed(const Duration(seconds: 1));
-      int index = formList.indexWhere(
-        (element) => element.formId == formId,
-      );
+    await Future.delayed(const Duration(seconds: 1));
+    int index = formList.indexWhere(
+      (element) => element.formId == formId,
+    );
 
-      FormModel formModel = FormModel.entityToModel(formList[index]);
-
-      FormModel copyFormModel = formModel.copyWith(status: status);
-
-      formList.removeAt(index);
-
-      formList.insert(index, copyFormModel);
-
-      return right(copyFormModel);
-    } catch (e) {
+    if (index == -1) {
       return left(NoItemsFound(message: "Formulário não encontrado."));
     }
+
+    FormModel formModel =
+        FormModel.entityToModel(formList[index]).copyWith(status: status);
+
+    formList.removeAt(index);
+
+    formList.insert(index, formModel);
+
+    return right(formModel);
+  }
+
+  @override
+  Future<Either<Failure, FormEntity>> updateFormSections(
+      {required String formId, required List<SectionEntity> sections}) async {
+    int index = formList.indexWhere(
+      (element) => element.formId == formId,
+    );
+
+    if (index == -1) {
+      return left(NoItemsFound(message: "Formulário não encontrado."));
+    }
+
+    FormModel formModel =
+        FormModel.entityToModel(formList[index]).copyWith(sections: sections);
+
+    formList.removeAt(index);
+
+    formList.insert(index, formModel);
+
+    return right(formModel);
+  }
+
+  @override
+  Future<Either<Failure, FormEntity>> postForm({
+    required String formId,
+    required List<SectionEntity> sections,
+    String? vinculationFormId,
+  }) async {
+    int index = formList.indexWhere(
+      (element) => element.formId == formId,
+    );
+
+    if (index == -1) {
+      return left(NoItemsFound(message: "Formulário não encontrado."));
+    }
+
+    var formModel = FormModel.entityToModel(formList[index]).copyWith(
+      sections: sections,
+      vinculationFormId: vinculationFormId,
+    );
+
+    formList.removeAt(index);
+
+    return right(formModel);
   }
 }

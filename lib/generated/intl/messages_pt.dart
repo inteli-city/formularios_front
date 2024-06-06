@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "allFieldsShouldBeSaved": MessageLookupByLibrary.simpleMessage(
+            "Todas os campos devem ser salvos antes de enviar o formulário"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "clearFilters": MessageLookupByLibrary.simpleMessage("Limpar Filtros"),
         "conclusionDate":
@@ -73,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "filters": MessageLookupByLibrary.simpleMessage("Filtros"),
         "formStatusEnumSchema": m1,
         "internId": MessageLookupByLibrary.simpleMessage("ID Interno"),
+        "invalidFormat":
+            MessageLookupByLibrary.simpleMessage("Formato inválido"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
         "linkForm": MessageLookupByLibrary.simpleMessage("Vincular Formulário"),
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
@@ -91,6 +95,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "startDate": MessageLookupByLibrary.simpleMessage("Data de Início"),
         "stepBack": MessageLookupByLibrary.simpleMessage("Retroceder"),
         "street": MessageLookupByLibrary.simpleMessage("Rua"),
+        "thisDateShouldBeBefore": MessageLookupByLibrary.simpleMessage(
+            "Esta data deve ser antes de "),
+        "thisDateSouldBeAfter": MessageLookupByLibrary.simpleMessage(
+            "Esta data deve ser depois de "),
+        "thisFieldIsRequired":
+            MessageLookupByLibrary.simpleMessage("Este campo é obrigatório"),
+        "thisFieldShouldHaveMaximumLength":
+            MessageLookupByLibrary.simpleMessage(
+                "Este campo deve ter no máximo "),
+        "thisFieldShouldHaveMaximumValue": MessageLookupByLibrary.simpleMessage(
+            "Este campo deve ser menor que "),
+        "thisFieldShouldHaveMinimumLength":
+            MessageLookupByLibrary.simpleMessage(
+                "Este campo deve ter pelo menos "),
+        "thisFieldShouldHaveMinimumValue": MessageLookupByLibrary.simpleMessage(
+            "Este campo deve ser maior que"),
         "vinculationId":
             MessageLookupByLibrary.simpleMessage("ID de Vinculação")
       };

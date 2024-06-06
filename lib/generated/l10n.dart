@@ -390,6 +390,96 @@ class S {
       args: [schema],
     );
   }
+
+  /// `All fields should be saved`
+  String get allFieldsShouldBeSaved {
+    return Intl.message(
+      'All fields should be saved',
+      name: 'allFieldsShouldBeSaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get thisFieldIsRequired {
+    return Intl.message(
+      'This field is required',
+      name: 'thisFieldIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have a minimum length of `
+  String get thisFieldShouldHaveMinimumLength {
+    return Intl.message(
+      'This field should have a minimum length of ',
+      name: 'thisFieldShouldHaveMinimumLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have a maximum length of `
+  String get thisFieldShouldHaveMaximumLength {
+    return Intl.message(
+      'This field should have a maximum length of ',
+      name: 'thisFieldShouldHaveMaximumLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid format`
+  String get invalidFormat {
+    return Intl.message(
+      'Invalid format',
+      name: 'invalidFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have less than `
+  String get thisFieldShouldHaveMaximumValue {
+    return Intl.message(
+      'This field should have less than ',
+      name: 'thisFieldShouldHaveMaximumValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have more than `
+  String get thisFieldShouldHaveMinimumValue {
+    return Intl.message(
+      'This field should have more than ',
+      name: 'thisFieldShouldHaveMinimumValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This date should be before of `
+  String get thisDateShouldBeBefore {
+    return Intl.message(
+      'This date should be before of ',
+      name: 'thisDateShouldBeBefore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This date should be after of `
+  String get thisDateSouldBeAfter {
+    return Intl.message(
+      'This date should be after of ',
+      name: 'thisDateSouldBeAfter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

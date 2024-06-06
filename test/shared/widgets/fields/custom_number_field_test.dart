@@ -231,7 +231,6 @@ void main() {
       await tester.enterText(find.byType(TextFormField), '9');
       await tester.tap(find.text('Enviar'));
       await tester.pumpAndSettle();
-      print(find.byType(Text).evaluate().map((e) => e.widget).toList());
 
       expect(find.text('Este campo deve ser maior que 10'), findsOneWidget);
     });

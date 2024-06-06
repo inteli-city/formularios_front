@@ -17,6 +17,7 @@ import 'package:formularios_front/app/presentation/form/widgets/fields/type_ahea
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/generated/l10n.dart';
 
 class SectionForm extends StatelessWidget {
   final SectionEntity section;
@@ -94,7 +95,7 @@ class SectionForm extends StatelessWidget {
                       if (lastSection) {
                         if (!formKey.currentState!.validate()) {
                           GlobalSnackBar.error(
-                              "Todas os campos devem ser salvos antes de enviar o formulário");
+                              S.current.allFieldsShouldBeSaved);
                         } else {
                           formKey.currentState!.save();
                           formController.sendForm();
@@ -165,6 +166,7 @@ class SectionForm extends StatelessWidget {
           },
           key: Key(field.key),
           sectionEntity: section,
+          formController: formController,
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:

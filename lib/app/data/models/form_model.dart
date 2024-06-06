@@ -52,16 +52,18 @@ class FormModel extends FormEntity {
       latitude: json['latitude'],
       longitude: json['longitude'],
       region: json['region'],
-      priority: PriorityEnum.values[json['priority']],
-      status: FormStatusEnum.values[json['status']],
+      priority:
+          PriorityEnum.values.firstWhere((e) => e.name == json['priority']),
+      status: FormStatusEnum.values.firstWhere((e) => e.name == json['status']),
       expirationDate: json['expirationDate'],
       creationDate: json['creationDate'],
       sections: SectionModel.fromMaps(json['sections']),
       comments: json['comments'],
       description: json['description'],
       conclusionDate: json['conclusionDate'],
-      informationFields:
-          InformationFieldModel.fromMaps(json['informationFields']),
+      informationFields: json['informationFields'] != null
+          ? InformationFieldModel.fromMaps(json['informationFields'])
+          : null,
       justificative: JustificativeModel.fromMap(json['justificative']),
       startDate: json['startDate'],
       vinculationFormId: json['vinculationFormId'],
@@ -119,8 +121,8 @@ class FormModel extends FormEntity {
       'latitude': latitude,
       'longitude': longitude,
       'region': region,
-      'priority': priority,
-      'status': status,
+      'priority': priority.name,
+      'status': status.name,
       'expirationDate': expirationDate,
       'creationDate': creationDate,
       'sections':
@@ -128,10 +130,10 @@ class FormModel extends FormEntity {
       'comments': comments,
       'description': description,
       'conclusionDate': conclusionDate,
-      // 'informationFields': informationFields
-      //         ?.map((e) => InformationFieldModel.fromEntity(e).toMap())
-      //         .toList() ??
-      //     [],
+      'informationFields': informationFields
+              ?.map((e) => InformationFieldModel.fromEntity(e).toMap())
+              .toList() ??
+          [],
       'justificative': JustificativeModel.fromEntity(justificative).toMap(),
       'startDate': startDate,
       'vinculationFormId': vinculationFormId,

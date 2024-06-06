@@ -82,12 +82,9 @@ void main() {
     ];
 
     test('should update a form sections by formId', () async {
-      var formId = repository.formList[0].formId;
+      var form = repository.formList[0];
 
-      var result = await repository.updateFormSections(
-        formId: formId,
-        sections: newSections,
-      );
+      var result = await repository.updateFormLocally(form: form);
 
       expect(result.isRight(), true);
       expect(repository.formList[0].sections, newSections);
@@ -99,10 +96,8 @@ void main() {
 
     test('should return failure when form not found', () async {
       Modular.bindModule(AppModule());
-      var result = await repository.updateFormSections(
-        formId: 'non_existent_form_id',
-        sections: newSections,
-      );
+      var form = repository.formList[0];
+      var result = await repository.updateFormLocally(form: form);
 
       expect(result.isLeft(), true);
 

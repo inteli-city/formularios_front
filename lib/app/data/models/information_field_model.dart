@@ -1,14 +1,14 @@
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/enum/information_field_type.dart';
 
-class InformationFieldModel extends InformationFieldEntity {
+abstract class InformationFieldModel extends InformationFieldEntity {
   InformationFieldModel({required super.informationFieldType});
 
   static List<InformationFieldEntity> fromMaps(List array) {
     return array.map((e) => InformationFieldModel.fromMap(e)).toList();
   }
 
-  static InformationFieldEntity fromMap(Map<String, dynamic> json) {
+  static InformationFieldModel fromMap(Map<String, dynamic> json) {
     switch (InformationFieldTypeEnum.values
         .firstWhere((e) => e.name == json['fieldType'])) {
       case InformationFieldTypeEnum.TEXT_INFORMATION_FIELD:
@@ -23,7 +23,7 @@ class InformationFieldModel extends InformationFieldEntity {
     }
   }
 
-  static InformationFieldEntity fromEntity(InformationFieldEntity entity) {
+  static InformationFieldModel fromEntity(InformationFieldEntity entity) {
     switch (entity.informationFieldType) {
       case InformationFieldTypeEnum.TEXT_INFORMATION_FIELD:
         return TextInformationFieldModel.fromEntity(
@@ -40,87 +40,83 @@ class InformationFieldModel extends InformationFieldEntity {
     }
   }
 
-  Map<String, dynamic> toMap() {
-    switch (informationFieldType) {
-      case InformationFieldTypeEnum.TEXT_INFORMATION_FIELD:
-        return (this as TextInformationFieldModel).toMap();
-      case InformationFieldTypeEnum.MAP_INFORMATION_FIELD:
-        return (this as MapInformationFieldModel).toMap();
-      case InformationFieldTypeEnum.IMAGE_INFORMATION_FIELD:
-        return (this as ImageInformationFieldModel).toMap();
-
-      default:
-        throw Exception('Invalid InformationFieldType');
-    }
-  }
+  Map<String, dynamic> toMap();
 }
 
-class TextInformationFieldModel extends TextInformationFieldEntity {
+class TextInformationFieldModel extends TextInformationFieldEntity
+    implements InformationFieldModel {
   TextInformationFieldModel({
     required super.value,
   });
 
-  static TextInformationFieldEntity fromMap(Map<String, dynamic> json) {
-    return TextInformationFieldEntity(value: json['value']);
+  static TextInformationFieldModel fromMap(Map<String, dynamic> json) {
+    return TextInformationFieldModel(value: json['value']);
   }
 
-  static TextInformationFieldEntity fromEntity(
+  static TextInformationFieldModel fromEntity(
       TextInformationFieldEntity entity) {
-    return TextInformationFieldEntity(value: entity.value);
+    return TextInformationFieldModel(value: entity.value);
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
+      'fieldType': InformationFieldTypeEnum.TEXT_INFORMATION_FIELD.name,
       'value': value,
     };
   }
 }
 
-class MapInformationFieldModel extends MapInformationFieldEntity {
+class MapInformationFieldModel extends MapInformationFieldEntity
+    implements InformationFieldModel {
   MapInformationFieldModel({
     required super.latitude,
     required super.longitude,
   });
 
-  static MapInformationFieldEntity fromMap(Map<String, dynamic> json) {
-    return MapInformationFieldEntity(
+  static MapInformationFieldModel fromMap(Map<String, dynamic> json) {
+    return MapInformationFieldModel(
       latitude: json['latitude'],
       longitude: json['longitude'],
     );
   }
 
-  static MapInformationFieldEntity fromEntity(
-      MapInformationFieldEntity entity) {
-    return MapInformationFieldEntity(
+  static MapInformationFieldModel fromEntity(MapInformationFieldEntity entity) {
+    return MapInformationFieldModel(
       latitude: entity.latitude,
       longitude: entity.longitude,
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
+      'fieldType': InformationFieldTypeEnum.MAP_INFORMATION_FIELD.name,
       'latitude': latitude,
       'longitude': longitude,
     };
   }
 }
 
-class ImageInformationFieldModel extends ImageInformationFieldEntity {
+class ImageInformationFieldModel extends ImageInformationFieldEntity
+    implements InformationFieldModel {
   ImageInformationFieldModel({
     required super.filePath,
   });
 
-  static ImageInformationFieldEntity fromMap(Map<String, dynamic> json) {
-    return ImageInformationFieldEntity(filePath: json['filePath']);
+  static ImageInformationFieldModel fromMap(Map<String, dynamic> json) {
+    return ImageInformationFieldModel(filePath: json['filePath']);
   }
 
-  static ImageInformationFieldEntity fromEntity(
+  static ImageInformationFieldModel fromEntity(
       ImageInformationFieldEntity entity) {
-    return ImageInformationFieldEntity(filePath: entity.filePath);
+    return ImageInformationFieldModel(filePath: entity.filePath);
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return {
+      'fieldType': InformationFieldTypeEnum.IMAGE_INFORMATION_FIELD.name,
       'filePath': filePath,
     };
   }

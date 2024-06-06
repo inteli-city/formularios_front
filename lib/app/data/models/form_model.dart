@@ -35,6 +35,41 @@ class FormModel extends FormEntity {
     required super.canVinculate,
   });
 
+  factory FormModel.fromMap(Map<String, dynamic> json) {
+    return FormModel(
+      formId: json['formId'],
+      creatorUserId: json['creatorUserId'],
+      userId: json['userId'],
+      template: json['template'],
+      area: json['area'],
+      system: json['system'],
+      street: json['street'],
+      city: json['city'],
+      number: json['number'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      region: json['region'],
+      priority: json['priority'],
+      status: json['status'],
+      expirationDate: json['expirationDate'],
+      creationDate: json['creationDate'],
+      sections: json['sections'],
+      comments: json['comments'],
+      description: json['description'],
+      conclusionDate: json['conclusionDate'],
+      informationFields: json['informationFields'],
+      justificative: json['justificative'],
+      startDate: json['startDate'],
+      vinculationFormId: json['vinculationFormId'],
+      formTitle: json['formTitle'],
+      canVinculate: json['canVinculate'],
+    );
+  }
+
+  static List<FormModel> fromMaps(List array) {
+    return array.map((e) => FormModel.fromMap(e)).toList();
+  }
+
   factory FormModel.entityToModel(FormEntity entity) {
     return FormModel(
       formId: entity.formId,
@@ -64,6 +99,37 @@ class FormModel extends FormEntity {
       startDate: entity.startDate,
       vinculationFormId: entity.vinculationFormId,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'formId': formId,
+      'creatorUserId': creatorUserId,
+      'userId': userId,
+      'template': template,
+      'area': area,
+      'system': system,
+      'street': street,
+      'city': city,
+      'number': number,
+      'latitude': latitude,
+      'longitude': longitude,
+      'region': region,
+      'priority': priority,
+      'status': status,
+      'expirationDate': expirationDate,
+      'creationDate': creationDate,
+      'sections': sections,
+      'comments': comments,
+      'description': description,
+      'conclusionDate': conclusionDate,
+      'informationFields': informationFields,
+      'justificative': justificative,
+      'startDate': startDate,
+      'vinculationFormId': vinculationFormId,
+      'formTitle': formTitle,
+      'canVinculate': canVinculate,
+    };
   }
 
   FormModel copyWith({

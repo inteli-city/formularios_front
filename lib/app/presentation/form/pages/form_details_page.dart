@@ -259,13 +259,8 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 child: buildCustomElevatedButton(
                   onPressed: () async {
                     await formUserProvider.updateFormStatus(
-                      formId: controller.formId,
+                      formId: controller.form.formId,
                       status: FormStatusEnum.IN_PROGRESS,
-                    );
-                    setState(
-                      () {
-                        controller.getForm();
-                      },
                     );
                     Modular.to.navigate('/home/forms');
                   },
@@ -280,8 +275,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     child: buildCustomElevatedButton(
                       onPressed: () {
                         Modular.to.pushNamed(
-                            '/home/${controller.form.formId}/fill',
-                            arguments: controller.form.sections);
+                          '/home/${controller.form.formId}/fill',
+                          arguments: controller.form,
+                        );
                       },
                       text: S.current.fillForm,
                       backgroundColor: AppColors.primaryBlue,
@@ -316,12 +312,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             child: buildCustomElevatedButton(
               onPressed: () async {
                 await formUserProvider.updateFormStatus(
-                  formId: controller.formId,
+                  formId: controller.form.formId,
                   status: FormStatusEnum.CANCELED,
                 );
-                setState(() {
-                  controller.getForm();
-                });
               },
               text: S.current.cancel,
               backgroundColor: AppColors.red,

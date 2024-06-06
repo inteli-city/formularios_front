@@ -18,7 +18,7 @@ import 'package:formularios_front/app/domain/failures/failures.dart';
 
 import 'form_user_provider_test.mocks.dart';
 
-@GenerateMocks([FetchUserFormsUsecase, UpdateFormStatusUseCase])
+@GenerateMocks([FetchUserFormsUsecase, IUpdateFormStatusUseCase])
 void main() {
   late MockFetchUserFormsUsecase mockFetchUserFormsUsecase;
   late MockUpdateFormStatusUseCase mockUpdateFormStatusUseCase;

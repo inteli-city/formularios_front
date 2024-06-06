@@ -4,9 +4,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i10;
-import 'dart:ui' as _i12;
+import 'dart:ui' as _i13;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
+import 'package:formularios_front/app/domain/entities/section_entity.dart'
+    as _i11;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i8;
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart'
@@ -20,7 +22,7 @@ import 'package:formularios_front/app/presentation/stores/providers/form_user_pr
 import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
+import 'package:mockito/src/dummies.dart' as _i12;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -275,6 +277,21 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       );
 
   @override
+  bool get isLoading => (super.noSuchMethod(
+        Invocation.getter(#isLoading),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set isLoading(bool? _isLoading) => super.noSuchMethod(
+        Invocation.setter(
+          #isLoading,
+          _isLoading,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   List<String> get templates => (super.noSuchMethod(
         Invocation.getter(#templates),
         returnValue: <String>[],
@@ -329,6 +346,15 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       );
 
   @override
+  void setIsLoading(bool? value) => super.noSuchMethod(
+        Invocation.method(
+          #setIsLoading,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i10.Future<void> fetchUserForms() => (super.noSuchMethod(
         Invocation.method(
           #fetchUserForms,
@@ -357,13 +383,51 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       ) as _i10.Future<void>);
 
   @override
+  _i10.Future<void> saveForm({
+    required String? formId,
+    required List<_i11.SectionEntity>? sections,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveForm,
+          [],
+          {
+            #formId: formId,
+            #sections: sections,
+          },
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+
+  @override
+  _i10.Future<void> sendForm({
+    required String? formId,
+    required List<_i11.SectionEntity>? sections,
+    String? vinculationFormId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendForm,
+          [],
+          {
+            #formId: formId,
+            #sections: sections,
+            #vinculationFormId: vinculationFormId,
+          },
+        ),
+        returnValue: _i10.Future<void>.value(),
+        returnValueForMissingStub: _i10.Future<void>.value(),
+      ) as _i10.Future<void>);
+
+  @override
   String getFormsCountByStatus(_i5.FormStatusEnum? status) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i12.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -405,7 +469,7 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       );
 
   @override
-  void addListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i13.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -414,7 +478,7 @@ class MockFormUserProvider extends _i1.Mock implements _i9.FormUserProvider {
       );
 
   @override
-  void removeListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i13.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

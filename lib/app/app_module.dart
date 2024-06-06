@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/data/repositories/form_hive_storage.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
@@ -66,15 +69,17 @@ class HomeModule extends Module {
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
-    i.addLazySingleton<UpdateFormStatusUseCase>(
-        InitiliazeUserFormStatusUseCase.new);
+    i.addLazySingleton<IUpdateFormStatusUseCase>(UpdateFormStatusUseCase.new);
+    i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
+    i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(StepperController.new);
     i.addLazySingleton(SortFormsController.new);
     i.addLazySingleton(SelectChipController.new);
+    i.addLazySingleton(() => FormHiveStorage.instance());
     i.add(
       () => FormController(
-        formId: i.args.params['externId'],
+        form: i.args.data,
       ),
     );
   }

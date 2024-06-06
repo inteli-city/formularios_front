@@ -98,11 +98,13 @@ void main() {
       when(formRepository.postForm(
         formId: 'non_existent_form_id',
         sections: newSections,
+        vinculationFormId: vinculationFormId,
       )).thenAnswer((_) async => Left(NoItemsFound(message: 'message')));
 
       var result = await usecase.call(
         formId: 'non_existent_form_id',
         sections: newSections,
+        vinculationFormId: vinculationFormId,
       );
 
       expect(result.isLeft(), true);

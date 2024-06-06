@@ -1,23 +1,15 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:intl/intl.dart';
 
 class FormController {
-  final String formId;
+  final FormEntity form;
 
-  FormController({required this.formId}) {
-    getForm();
+  FormController({required this.form}) {
+    setData();
   }
 
-  late FormEntity form;
-
-  void getForm() {
-    FormUserProvider provider = Modular.get<FormUserProvider>();
-
-    form = provider.getFormByExternId(formId);
-
+  void setData() {
     for (SectionEntity section in form.sections) {
       formData[section.sectionId] = {};
     }
@@ -44,11 +36,5 @@ class FormController {
 
   dynamic getFieldValue(String sectionId, String key, dynamic value) {
     return formData[sectionId][key];
-  }
-
-  void sendForm() {
-    setIsSendingForm(true);
-    print(formData);
-    setIsSendingForm(false);
   }
 }

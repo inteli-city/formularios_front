@@ -14,6 +14,7 @@ import 'package:formularios_front/app/presentation/form/widgets/fields/custom_sw
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_text_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/radio_group_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/type_ahead_field.dart';
+import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -24,6 +25,7 @@ class SectionForm extends StatelessWidget {
   final bool lastSection;
   final GlobalKey<FormState> formKey;
   final formController = Modular.get<FormController>();
+  final formProvider = Modular.get<FormUserProvider>();
 
   SectionForm({
     super.key,
@@ -98,7 +100,10 @@ class SectionForm extends StatelessWidget {
                               S.current.allFieldsShouldBeSaved);
                         } else {
                           formKey.currentState!.save();
-                          formController.sendForm();
+                          formProvider.sendForm(
+                            formId: formController.form.formId,
+                            sections: formController.form.sections,
+                          );
                         }
                       }
                     },

@@ -41,15 +41,6 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
   }
 
   @override
-  String get formId => (super.noSuchMethod(
-        Invocation.getter(#formId),
-        returnValue: _i4.dummyValue<String>(
-          this,
-          Invocation.getter(#formId),
-        ),
-      ) as String);
-
-  @override
   _i2.FormEntity get form => (super.noSuchMethod(
         Invocation.getter(#form),
         returnValue: _FakeFormEntity_0(
@@ -57,15 +48,6 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
           Invocation.getter(#form),
         ),
       ) as _i2.FormEntity);
-
-  @override
-  set form(_i2.FormEntity? _form) => super.noSuchMethod(
-        Invocation.setter(
-          #form,
-          _form,
-        ),
-        returnValueForMissingStub: null,
-      );
 
   @override
   bool get isSendingForm => (super.noSuchMethod(
@@ -116,9 +98,9 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
       ) as String);
 
   @override
-  void getForm() => super.noSuchMethod(
+  void setData() => super.noSuchMethod(
         Invocation.method(
-          #getForm,
+          #setData,
           [],
         ),
         returnValueForMissingStub: null,
@@ -174,13 +156,4 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
           value,
         ],
       ));
-
-  @override
-  void sendForm() => super.noSuchMethod(
-        Invocation.method(
-          #sendForm,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }

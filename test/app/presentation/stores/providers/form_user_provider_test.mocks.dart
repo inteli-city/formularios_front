@@ -91,12 +91,12 @@ class MockFetchUserFormsUsecase extends _i1.Mock
       ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>>);
 }
 
-/// A class which mocks [UpdateFormStatusUseCase].
+/// A class which mocks [IUpdateFormStatusUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUpdateFormStatusUseCase extends _i1.Mock
-    implements _i8.UpdateFormStatusUseCase {
-  MockUpdateFormStatusUseCase() {
+class MockIUpdateFormStatusUseCase extends _i1.Mock
+    implements _i8.IUpdateFormStatusUseCase {
+  MockIUpdateFormStatusUseCase() {
     _i1.throwOnMissingStub(this);
   }
 

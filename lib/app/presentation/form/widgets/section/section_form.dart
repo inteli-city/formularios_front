@@ -166,7 +166,6 @@ class SectionForm extends StatelessWidget {
           },
           key: Key(field.key),
           sectionEntity: section,
-          formController: formController,
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:

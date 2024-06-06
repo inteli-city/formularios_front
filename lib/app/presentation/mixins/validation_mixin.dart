@@ -1,11 +1,13 @@
 import 'package:intl/intl.dart';
 
+import '../../../generated/l10n.dart';
+
 mixin ValidationMixin {
   String? isRequired(String? value, bool isRequired, bool isSendingForm,
       [String? message]) {
     value = value ?? '';
     if (isSendingForm && isRequired) {
-      return value.isEmpty ? (message ?? 'Este campo é obrigatório') : null;
+      return value.isEmpty ? (message ?? S.current.thisFieldIsRequired) : null;
     }
     return null;
   }
@@ -15,7 +17,19 @@ mixin ValidationMixin {
       return null;
     }
     if (maxLength != null && value.length > maxLength) {
-      return message ?? 'Este campo deve ter no máximo $maxLength caracteres';
+      return message ??
+          '${S.current.thisFieldShouldHaveMaximumLength} $maxLength caracteres';
+    }
+    return null;
+  }
+
+  String? minLength(String? value, int? minLength, [String? message]) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    if (minLength != null && value.length < minLength) {
+      return message ??
+          '${S.current.thisFieldShouldHaveMinimumLength} $minLength caracteres';
     }
     return null;
   }
@@ -25,7 +39,7 @@ mixin ValidationMixin {
       return null;
     }
     if (regex != null && !RegExp(regex).hasMatch(value)) {
-      return message ?? 'Formato inválido';
+      return message ?? S.current.invalidFormat;
     }
     return null;
   }
@@ -37,7 +51,8 @@ mixin ValidationMixin {
     if (maxValue != null &&
         int.tryParse(value) != null &&
         int.parse(value) > maxValue) {
-      return message ?? 'Este campo deve ser menor que $maxValue';
+      return message ??
+          '${S.current.thisFieldShouldHaveMaximumValue}$maxValue';
     }
     return null;
   }
@@ -49,7 +64,8 @@ mixin ValidationMixin {
     if (minValue != null &&
         int.tryParse(value) != null &&
         int.parse(value) < minValue) {
-      return message ?? 'Este campo deve ser maior que $minValue';
+      return message ??
+          '${S.current.thisFieldShouldHaveMinimumValue}$minValue';
     }
     return null;
   }
@@ -61,7 +77,7 @@ mixin ValidationMixin {
     DateTime inputDate = DateFormat('dd/MM/yyyy').parse(value);
     if (maxDate != null && inputDate.isAfter(maxDate)) {
       return message ??
-          'A data deve ser anterior a ${DateFormat('dd/MM/yyyy').format(maxDate)}';
+          '${S.current.thisDateShouldBeBefore} ${DateFormat('dd/MM/yyyy').format(maxDate)}';
     }
     return null;
   }
@@ -73,7 +89,7 @@ mixin ValidationMixin {
     DateTime inputDate = DateFormat('dd/MM/yyyy').parse(value);
     if (minDate != null && inputDate.isBefore(minDate)) {
       return message ??
-          'A data deve ser posterior a ${DateFormat('dd/MM/yyyy').format(minDate)}';
+          '${S.current.thisDateSouldBeAfter} ${DateFormat('dd/MM/yyyy').format(minDate)}';
     }
     return null;
   }

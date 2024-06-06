@@ -5,6 +5,8 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/type_ahead_field.dart';
+import 'package:formularios_front/generated/l10n.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -103,6 +105,9 @@ void main() {
     testWidgets(
         'Displays required field error when no text is entered and send option is clicked',
         (WidgetTester tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
       final field = TypeAheadFieldEntity(
         placeholder: 'Enter text',
         key: 'testTypeAhead',

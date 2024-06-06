@@ -110,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Este campo deve ter pelo menos "),
         "thisFieldShouldHaveMinimumValue": MessageLookupByLibrary.simpleMessage(
-            "Este campo deve ser maior que"),
+            "Este campo deve ser maior que "),
         "vinculationId":
             MessageLookupByLibrary.simpleMessage("ID de Vinculação")
       };

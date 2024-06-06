@@ -31,9 +31,12 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m2(placeholders, message) => "No items found for ${message}";
+  static String m2(placeholders, localStorageErrorMessage) =>
+      "Local storage error: ${localStorageErrorMessage}";
 
-  static String m3(schema) => "${Intl.select(schema, {
+  static String m3(placeholders, message) => "No items found for ${message}";
+
+  static String m4(schema) => "${Intl.select(schema, {
             'PRIORIDADE_BAIXO_ALTO': 'Low-High Priority',
             'PRIORIDADE_ALTO_BAIXO': 'High-Low Priority',
             'MAIS_RECENTE': 'Recent',
@@ -41,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m4(schema) => "${Intl.select(schema, {
+  static String m5(schema) => "${Intl.select(schema, {
             'LOW': 'Low',
             'MEDIUM': 'Medium',
             'HIGH': 'High',
@@ -49,7 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m5(placeholders, message) => "${message}";
+  static String m6(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -76,16 +79,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidFormat": MessageLookupByLibrary.simpleMessage("Invalid format"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
         "linkForm": MessageLookupByLibrary.simpleMessage("Link Form"),
+        "localStorageErrorMessage": m2,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "noFormsFound": MessageLookupByLibrary.simpleMessage("No form found!"),
-        "noItemsFoundErrorMessage": m2,
+        "noInternetConnectionErrorMessage":
+            MessageLookupByLibrary.simpleMessage("No internet connection"),
+        "noItemsFoundErrorMessage": m3,
         "number": MessageLookupByLibrary.simpleMessage("Number"),
-        "orderEnumSchema": m3,
+        "orderEnumSchema": m4,
         "priority": MessageLookupByLibrary.simpleMessage("Priority"),
-        "priorityEnumSchema": m4,
+        "priorityEnumSchema": m5,
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)"),
-        "requestErrorMessage": m5,
+        "requestErrorMessage": m6,
         "sort": MessageLookupByLibrary.simpleMessage("Sort"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),

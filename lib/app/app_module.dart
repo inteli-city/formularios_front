@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/data/repositories/form_hive_storage.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
+import 'package:formularios_front/app/domain/repositories/form_storage.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
@@ -76,7 +77,7 @@ class HomeModule extends Module {
     i.addLazySingleton(StepperController.new);
     i.addLazySingleton(SortFormsController.new);
     i.addLazySingleton(SelectChipController.new);
-    i.addLazySingleton(() => FormHiveStorage.instance());
+    i.addLazySingleton<IFormStorage>(() => FormHiveStorage.instance());
     i.add(
       () => FormController(
         form: i.args.data,

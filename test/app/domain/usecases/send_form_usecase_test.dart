@@ -33,7 +33,7 @@ void main() {
   group('SendFormUsecase', () {
     var newSections = [
       SectionEntity(
-        sectionId: 'section_id',
+        sectionId: 'sectionId',
         fields: [
           DropDownFieldEntity(
             options: ['option 01', 'option 02'],

@@ -50,6 +50,27 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `No internet connection`
+  String get noInternetConnectionErrorMessage {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnectionErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Local storage error: {localStorageErrorMessage}`
+  String localStorageErrorMessage(
+      Object placeholders, Object localStorageErrorMessage) {
+    return Intl.message(
+      'Local storage error: $localStorageErrorMessage',
+      name: 'localStorageErrorMessage',
+      desc: '',
+      args: [placeholders, localStorageErrorMessage],
+    );
+  }
+
   /// `Field {entityErrorMessage} is not valid`
   String entityErrorMessage(Object placeholders, Object entityErrorMessage) {
     return Intl.message(

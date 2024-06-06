@@ -1,4 +1,15 @@
 {
+    "noInternetConnectionErrorMessage": "No internet connection",
+
+    "localStorageErrorMessage": "Local storage error: {localStorageErrorMessage}",
+    "@localStorageErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "localStorageErrorMessage": {}
+            }
+        }
+    },
+
     "entityErrorMessage": "Field {entityErrorMessage} is not valid",
     "@entityErrorMessage" : {
         "placeholders": {

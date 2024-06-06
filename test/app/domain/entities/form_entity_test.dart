@@ -144,7 +144,7 @@ void main() {
         canVinculate: false,
       );
 
-      FormModel formEntity = FormModel.entityToModel(form);
+      FormModel formEntity = FormModel.fromEntity(form);
 
       final copyForm = formEntity.copyWith();
 

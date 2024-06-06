@@ -807,7 +807,7 @@ class FormMockRepository extends IFormRepository {
     }
 
     FormModel formModel =
-        FormModel.entityToModel(formList[index]).copyWith(status: status);
+        FormModel.fromEntity(formList[index]).copyWith(status: status);
 
     formList.removeAt(index);
 
@@ -817,24 +817,22 @@ class FormMockRepository extends IFormRepository {
   }
 
   @override
-  Future<Either<Failure, FormEntity>> updateFormSections(
-      {required String formId, required List<SectionEntity> sections}) async {
+  Future<Either<Failure, FormEntity>> updateFormLocally({
+    required FormEntity form,
+  }) async {
     int index = formList.indexWhere(
-      (element) => element.formId == formId,
+      (element) => element.formId == form.formId,
     );
 
     if (index == -1) {
       return left(NoItemsFound(message: "Formulário não encontrado."));
     }
 
-    FormModel formModel =
-        FormModel.entityToModel(formList[index]).copyWith(sections: sections);
-
     formList.removeAt(index);
 
-    formList.insert(index, formModel);
+    formList.insert(index, form);
 
-    return right(formModel);
+    return right(form);
   }
 
   @override
@@ -851,7 +849,7 @@ class FormMockRepository extends IFormRepository {
       return left(NoItemsFound(message: "Formulário não encontrado."));
     }
 
-    var formModel = FormModel.entityToModel(formList[index]).copyWith(
+    var formModel = FormModel.fromEntity(formList[index]).copyWith(
       sections: sections,
       vinculationFormId: vinculationFormId,
     );

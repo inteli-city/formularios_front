@@ -14,6 +14,16 @@ class Failure implements Exception {
   }
 }
 
+class LocalStorageFailure extends Failure {
+  LocalStorageFailure({required String message})
+      : super(message: S.current.localStorageErrorMessage('', message));
+}
+
+class NoInternetConnection extends Failure {
+  NoInternetConnection()
+      : super(message: S.current.noInternetConnectionErrorMessage);
+}
+
 class ErrorRequest extends Failure {
   ErrorRequest({required String message})
       : super(message: S.current.requestErrorMessage('', message));

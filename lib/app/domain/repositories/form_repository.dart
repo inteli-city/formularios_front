@@ -13,9 +13,8 @@ abstract class IFormRepository {
     required String formId,
   });
 
-  Future<Either<Failure, FormEntity>> updateFormSections({
-    required String formId,
-    required List<SectionEntity> sections,
+  Future<Either<Failure, FormEntity>> updateFormLocally({
+    required FormEntity form,
   });
 
   Future<Either<Failure, FormEntity>> postForm({

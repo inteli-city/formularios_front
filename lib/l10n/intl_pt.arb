@@ -1,4 +1,15 @@
 {
+    "noInternetConnectionErrorMessage": "Sem conexão com a internet",
+
+    "localStorageErrorMessage": "Armazenamento local não disponível: {localStorageErrorMessage}",
+    "@localStorageErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "localStorageErrorMessage": {}
+            }
+        }
+    },
+
     "entityErrorMessage": "Campo {entityErrorMessage} não é válido",
     "@entityErrorMessage" : {
         "placeholders": {

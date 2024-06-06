@@ -31,10 +31,13 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m2(placeholders, message) =>
+  static String m2(placeholders, localStorageErrorMessage) =>
+      "Armazenamento local não disponível: ${localStorageErrorMessage}";
+
+  static String m3(placeholders, message) =>
       "Itens não encontrados para: ${message}";
 
-  static String m3(schema) => "${Intl.select(schema, {
+  static String m4(schema) => "${Intl.select(schema, {
             'PRIORIDADE_BAIXO_ALTO': 'Prioridade Baixo-Alto',
             'PRIORIDADE_ALTO_BAIXO': 'Prioridade Alto-Baixo',
             'MAIS_RECENTE': 'Mais Recente',
@@ -42,7 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m4(schema) => "${Intl.select(schema, {
+  static String m5(schema) => "${Intl.select(schema, {
             'LOW': 'Baixa',
             'MEDIUM': 'Média',
             'HIGH': 'Alta',
@@ -50,7 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m5(placeholders, message) => "${message}";
+  static String m6(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -79,17 +82,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Formato inválido"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
         "linkForm": MessageLookupByLibrary.simpleMessage("Vincular Formulário"),
+        "localStorageErrorMessage": m2,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "noFormsFound": MessageLookupByLibrary.simpleMessage(
             "Nenhum Formulário Encontrado!"),
-        "noItemsFoundErrorMessage": m2,
+        "noInternetConnectionErrorMessage":
+            MessageLookupByLibrary.simpleMessage("Sem conexão com a internet"),
+        "noItemsFoundErrorMessage": m3,
         "number": MessageLookupByLibrary.simpleMessage("Número"),
-        "orderEnumSchema": m3,
+        "orderEnumSchema": m4,
         "priority": MessageLookupByLibrary.simpleMessage("Prioridade"),
-        "priorityEnumSchema": m4,
+        "priorityEnumSchema": m5,
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)"),
-        "requestErrorMessage": m5,
+        "requestErrorMessage": m6,
         "sort": MessageLookupByLibrary.simpleMessage("Ordenar"),
         "start": MessageLookupByLibrary.simpleMessage("Iniciar"),
         "startDate": MessageLookupByLibrary.simpleMessage("Data de Início"),

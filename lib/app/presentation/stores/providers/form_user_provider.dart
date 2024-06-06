@@ -111,12 +111,12 @@ class FormUserProvider extends ChangeNotifier {
     setIsLoading(false);
   }
 
-  Future<void> saveForm(
-      {required String formId, required List<SectionEntity> sections}) async {
+  Future<void> saveForm({
+    required FormEntity form,
+  }) async {
     setIsLoading(true);
     await _saveFormUsecase(
-      formId: formId,
-      sections: sections,
+      form: form,
     ).then((value) {
       return value.fold(
         (error) {

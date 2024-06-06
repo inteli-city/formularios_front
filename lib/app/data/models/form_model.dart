@@ -1,3 +1,6 @@
+import 'package:formularios_front/app/data/models/information_field_model.dart';
+import 'package:formularios_front/app/data/models/justificative_model.dart';
+import 'package:formularios_front/app/data/models/section_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
@@ -49,16 +52,17 @@ class FormModel extends FormEntity {
       latitude: json['latitude'],
       longitude: json['longitude'],
       region: json['region'],
-      priority: json['priority'],
-      status: json['status'],
+      priority: PriorityEnum.values[json['priority']],
+      status: FormStatusEnum.values[json['status']],
       expirationDate: json['expirationDate'],
       creationDate: json['creationDate'],
-      sections: json['sections'],
+      sections: SectionModel.fromMaps(json['sections']),
       comments: json['comments'],
       description: json['description'],
       conclusionDate: json['conclusionDate'],
-      informationFields: json['informationFields'],
-      justificative: json['justificative'],
+      informationFields:
+          InformationFieldModel.fromMaps(json['informationFields']),
+      justificative: JustificativeModel.fromMap(json['justificative']),
       startDate: json['startDate'],
       vinculationFormId: json['vinculationFormId'],
       formTitle: json['formTitle'],
@@ -70,7 +74,7 @@ class FormModel extends FormEntity {
     return array.map((e) => FormModel.fromMap(e)).toList();
   }
 
-  factory FormModel.entityToModel(FormEntity entity) {
+  factory FormModel.fromEntity(FormEntity entity) {
     return FormModel(
       formId: entity.formId,
       creatorUserId: entity.creatorUserId,
@@ -119,12 +123,16 @@ class FormModel extends FormEntity {
       'status': status,
       'expirationDate': expirationDate,
       'creationDate': creationDate,
-      'sections': sections,
+      'sections':
+          sections.map((e) => SectionModel.fromEntity(e).toMap()).toList(),
       'comments': comments,
       'description': description,
       'conclusionDate': conclusionDate,
-      'informationFields': informationFields,
-      'justificative': justificative,
+      // 'informationFields': informationFields
+      //         ?.map((e) => InformationFieldModel.fromEntity(e).toMap())
+      //         .toList() ??
+      //     [],
+      'justificative': JustificativeModel.fromEntity(justificative).toMap(),
       'startDate': startDate,
       'vinculationFormId': vinculationFormId,
       'formTitle': formTitle,

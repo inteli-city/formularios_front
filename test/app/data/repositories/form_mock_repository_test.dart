@@ -69,7 +69,7 @@ void main() {
   group('updateFormSections -', () {
     var newSections = [
       SectionEntity(
-        sectionId: 'section_id',
+        sectionId: 'sectionId',
         fields: [
           DropDownFieldEntity(
             options: ['option 01', 'option 02'],
@@ -114,7 +114,7 @@ void main() {
   group('postForm - ', () {
     var newSections = [
       SectionEntity(
-        sectionId: 'section_id',
+        sectionId: 'sectionId',
         fields: [
           DropDownFieldEntity(
             options: ['option 01', 'option 02'],

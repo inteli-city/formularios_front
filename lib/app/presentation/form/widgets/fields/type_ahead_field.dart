@@ -49,7 +49,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
           maxLength: widget.field.maxLength,
           controller: controller,
           focusNode: focusNode,
-          autofocus: true,
           decoration: InputDecoration(
             labelText: widget.field.placeholder,
           ),

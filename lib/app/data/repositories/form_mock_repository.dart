@@ -65,6 +65,11 @@ class FormMockRepository extends IFormRepository {
         SectionEntity(
           sectionId: 'section-01',
           fields: [
+            CheckBoxGroupFieldEntity(
+                options: ['option 01', 'option 02', 'option 03'],
+                placeholder: 'Selecione as opções',
+                key: 'checkbox-group',
+                isRequired: true),
             DropDownFieldEntity(
               options: ['option 01', 'option 02'],
               placeholder: 'DropDownField',

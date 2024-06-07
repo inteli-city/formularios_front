@@ -45,7 +45,7 @@ void main() {
 
     when(formUserProvider.getFormByExternId(form.formId)).thenReturn(form);
     when(formDetailsController.form).thenReturn(form);
-    when(formDetailsController.formId).thenReturn(form.formId);
+    when(formDetailsController.form.formId).thenReturn(form.formId);
 
     when(formDetailsController.creationDate)
         .thenReturn(form.creationDate.toString());

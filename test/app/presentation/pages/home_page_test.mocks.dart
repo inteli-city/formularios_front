@@ -184,18 +184,12 @@ class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<void> saveForm({
-    required String? formId,
-    required List<_i7.SectionEntity>? sections,
-  }) =>
+  _i5.Future<void> saveForm({required _i3.FormEntity? form}) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveForm,
           [],
-          {
-            #formId: formId,
-            #sections: sections,
-          },
+          {#form: form},
         ),
         returnValue: _i5.Future<void>.value(),
         returnValueForMissingStub: _i5.Future<void>.value(),

@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
+import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
+import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
@@ -18,18 +23,27 @@ import 'package:formularios_front/app/domain/failures/failures.dart';
 
 import 'form_user_provider_test.mocks.dart';
 
-@GenerateMocks([FetchUserFormsUsecase, IUpdateFormStatusUseCase])
+@GenerateMocks([
+  FetchUserFormsUsecase,
+  IUpdateFormStatusUseCase,
+  ISendFormUsecase,
+  ISaveFormUsecase
+])
 void main() {
   late MockFetchUserFormsUsecase mockFetchUserFormsUsecase;
-  late MockUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
+  late MockISendFormUsecase mockSendFormUsecase;
+  late MockISaveFormUsecase mockSaveFormUsecase;
+  late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
   late FormUserProvider provider;
 
   setUp(() {
     Modular.bindModule(AppModule());
     mockFetchUserFormsUsecase = MockFetchUserFormsUsecase();
-    mockUpdateFormStatusUseCase = MockUpdateFormStatusUseCase();
-    provider = FormUserProvider(
-        mockFetchUserFormsUsecase, mockUpdateFormStatusUseCase);
+    mockSaveFormUsecase = MockISaveFormUsecase();
+    mockSendFormUsecase = MockISendFormUsecase();
+    mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
+    provider = FormUserProvider(mockFetchUserFormsUsecase,
+        mockUpdateFormStatusUseCase, mockSaveFormUsecase, mockSendFormUsecase);
   });
   Widget createWidgetForTesting({required Widget child}) {
     return MaterialApp(
@@ -70,7 +84,22 @@ void main() {
           text: '',
         ),
         comments: 'comments',
-        sections: [],
+        sections: [
+          SectionEntity(sectionId: 'section-01', fields: [
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+          ])
+        ],
         formTitle: 'formTitle',
         canVinculate: false,
       ),
@@ -128,7 +157,22 @@ void main() {
       justificative: JustificativeEntity(
           options: [], selectedOption: '', text: '', image: null),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(sectionId: 'section-01', fields: [
+          TextFieldEntity(
+            fieldType: FieldTypeEnum.TEXT_FIELD,
+            placeholder: 'TextField 01',
+            isRequired: true,
+            key: 'key-section-01-1',
+          ),
+          TextFieldEntity(
+            fieldType: FieldTypeEnum.TEXT_FIELD,
+            placeholder: 'TextField 02',
+            isRequired: true,
+            key: 'key-section-01-2',
+          ),
+        ])
+      ],
       formTitle: 'formTitle',
       canVinculate: false,
     );

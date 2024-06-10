@@ -24,11 +24,12 @@ class SectionForm extends StatelessWidget {
   final SectionEntity section;
   final bool lastSection;
   final GlobalKey<FormState> formKey;
-  final formController = Modular.get<FormController>();
+  final FormController formController;
   final formProvider = Modular.get<FormUserProvider>();
 
   SectionForm({
     super.key,
+    required this.formController,
     required this.section,
     required this.lastSection,
     required this.formKey,
@@ -70,12 +71,13 @@ class SectionForm extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      formController.setIsSendingForm(false);
-                      if (formKey.currentState!.validate()) {
-                        formKey.currentState!.save();
-                      }
-                    },
+                    onPressed: formProvider.isLoading
+                        ? null
+                        : () {
+                            if (formKey.currentState!.validate()) {
+                              formProvider.saveForm(form: formController.form);
+                            }
+                          },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       shape: RoundedRectangleBorder(
@@ -83,23 +85,28 @@ class SectionForm extends StatelessWidget {
                             BorderRadius.circular(AppDimensions.radiusMedium),
                       ),
                     ),
-                    child: Text(
-                      'Salvar',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: AppColors.white,
-                            height: 1.2,
-                            fontSize: AppDimensions.fontMedium,
+                    child: formProvider.isLoading
+                        ? const CircularProgressIndicator()
+                        : Text(
+                            'Salvar',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                  color: AppColors.white,
+                                  height: 1.2,
+                                  fontSize: AppDimensions.fontMedium,
+                                ),
                           ),
-                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       if (lastSection) {
                         if (!formKey.currentState!.validate()) {
                           GlobalSnackBar.error(
-                              S.current.allFieldsShouldBeSaved);
+                            S.current.allFieldsShouldBeSaved,
+                          );
                         } else {
-                          formKey.currentState!.save();
                           formProvider.sendForm(
                             formId: formController.form.formId,
                             sections: formController.form.sections,
@@ -139,6 +146,7 @@ class SectionForm extends StatelessWidget {
       case FieldTypeEnum.TEXT_FIELD:
         return CustomTextFormField(
           field: field as TextFieldEntity,
+          formController: formController,
           onChanged: (value) {
             formController.setFieldValue(section.sectionId, field.key, value);
           },

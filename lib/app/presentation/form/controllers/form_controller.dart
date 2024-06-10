@@ -1,19 +1,10 @@
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:intl/intl.dart';
 
 class FormController {
   final FormEntity form;
 
-  FormController({required this.form}) {
-    setData();
-  }
-
-  void setData() {
-    for (SectionEntity section in form.sections) {
-      formData[section.sectionId] = {};
-    }
-  }
+  FormController({required this.form});
 
   String get creationDate => DateFormat('dd/MM/yyyy HH:mm:ss').format(
       DateTime.fromMillisecondsSinceEpoch(form.creationDate, isUtc: true));
@@ -22,7 +13,6 @@ class FormController {
       DateTime.fromMillisecondsSinceEpoch(form.expirationDate, isUtc: true));
 
   bool isSendingForm = false;
-  Map<String, dynamic> formData = {};
 
   void setIsSendingForm(bool value) {
     isSendingForm = value;
@@ -31,10 +21,22 @@ class FormController {
   bool getIsSendingForm() => isSendingForm;
 
   void setFieldValue(String sectionId, String key, dynamic value) {
-    formData[sectionId][key] = value;
+    for (var section in form.sections) {
+      if (section.sectionId == sectionId) {
+        for (var field in section.fields) {
+          if (field.key == key) {
+            field.value = value;
+          }
+        }
+      }
+    }
   }
 
   dynamic getFieldValue(String sectionId, String key, dynamic value) {
-    return formData[sectionId][key];
+    return form.sections
+        .firstWhere((section) => section.sectionId == sectionId)
+        .fields
+        .firstWhere((field) => field.key == key)
+        .value;
   }
 }

@@ -69,6 +69,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                       width: ScreenHelper.width(context),
                       child: SectionForm(
                         section: formController.form.sections[index],
+                        formController: formController,
                         lastSection:
                             index == formController.form.sections.length - 1,
                         formKey: formKey,

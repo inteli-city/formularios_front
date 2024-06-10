@@ -42,6 +42,7 @@ void main() {
           body: CustomDropDownFormField(
             field: field,
             onChanged: (value) {},
+            formController: mockFormController,
           ),
         ),
       ),

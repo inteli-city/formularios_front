@@ -39,6 +39,7 @@ void main() {
             body: CustomTypeAheadFormField(
               field: field,
               onChanged: (value) {},
+              formController: formController,
             ),
           ),
         ),
@@ -63,6 +64,7 @@ void main() {
             body: CustomTypeAheadFormField(
               field: field,
               onChanged: (value) {},
+              formController: formController,
             ),
           ),
         ),
@@ -90,12 +92,16 @@ void main() {
             body: CustomTypeAheadFormField(
               field: field,
               onChanged: (value) {},
+              formController: formController,
             ),
           ),
         ),
       );
 
+      await tester.enterText(find.byType(TextFormField), 'Option');
+
       await tester.pumpAndSettle();
+      
       await tester.tap(find.text('Option 1'));
       await tester.pumpAndSettle();
 
@@ -126,6 +132,7 @@ void main() {
                   CustomTypeAheadFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -168,6 +175,7 @@ void main() {
                   CustomTypeAheadFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {

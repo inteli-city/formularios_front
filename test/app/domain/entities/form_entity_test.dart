@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
+import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
@@ -9,8 +11,11 @@ import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 void main() {
   group('Form Entity Test', () {
+    late SectionEntity sectionExample;
+    setUp(() {
+       sectionExample = SectionEntity(fields: [TextFieldEntity(placeholder: 'placeholder', key: 'key', isRequired: true)], sectionId: 'section-id');
+    });
     test(' should return form entity with non-null values', () {
-      final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
         formId: 'formId',
         creatorUserId: 'creatorUserId',
@@ -59,7 +64,6 @@ void main() {
 
     test('should return form entity with null values', () {
       final informationField = TextInformationFieldEntity(value: 'value');
-      final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
 
       final form = FormEntity(
         formId: 'formId',
@@ -119,7 +123,6 @@ void main() {
       expect(form.canVinculate, false);
     });
     test('should return a copy of form entity', () {
-      final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
         formId: 'formId',
         creatorUserId: 'creatorUserId',

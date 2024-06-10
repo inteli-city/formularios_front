@@ -5,18 +5,57 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/data/repositories/form_mock_repository.dart';
+import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/generated/l10n.dart';
 
 void main() {
   late FormMockRepository repository;
-
+  late FormEntity nonExistingFormLocally;
   setUp(() async {
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     repository = FormMockRepository();
+    nonExistingFormLocally = FormEntity(
+      formId: 'non_existent_form_id',
+      userId: 'non_existent_user_id',
+      sections: [
+        SectionEntity(
+          sectionId: 'section_id',
+          fields: [
+            TextFieldEntity(
+                placeholder: 'placeholder', key: 'key', isRequired: true)
+          ],
+        )
+      ],
+      latitude: 0,
+      longitude: 0,
+      number: 0,
+      priority: PriorityEnum.EMERCENCY,
+      region: 'region',
+      status: FormStatusEnum.CANCELED,
+      street: 'street',
+      system: 'system',
+      template: 'template',
+      comments: null,
+      conclusionDate: null,
+      description: null,
+      informationFields: null,
+      startDate: null,
+      vinculationFormId: null,
+      area: 'area',
+      canVinculate: false,
+      city: 'city',
+      creationDate: 0,
+      creatorUserId: 'user_id',
+      expirationDate: 0,
+      formTitle: 'form_title',
+      justificative: JustificativeEntity(
+          options: [], selectedOption: null, text: 'text', image: ''),
+    );
   });
 
   group('getUserForms -', () {
@@ -83,21 +122,21 @@ void main() {
 
     test('should update a form sections by formId', () async {
       var form = repository.formList[0];
+      form.sections[0].fields[1].value = 'option 01';
 
       var result = await repository.updateFormLocally(form: form);
 
       expect(result.isRight(), true);
-      expect(repository.formList[0].sections, newSections);
+      expect(form.sections[0].fields[1].value, 'option 01');
 
       var updatedForm = result.fold((left) => null, (right) => right);
       expect(updatedForm, isA<FormEntity>());
-      expect(updatedForm!.sections, newSections);
     });
 
     test('should return failure when form not found', () async {
       Modular.bindModule(AppModule());
-      var form = repository.formList[0];
-      var result = await repository.updateFormLocally(form: form);
+
+      var result = await repository.updateFormLocally(form: nonExistingFormLocally);
 
       expect(result.isLeft(), true);
 

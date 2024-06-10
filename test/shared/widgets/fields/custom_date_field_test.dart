@@ -44,14 +44,15 @@ void main() {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [
-          Locale('en', ''), 
-          Locale('pt', ''), 
+          Locale('en', ''),
+          Locale('pt', ''),
           Locale.fromSubtags(languageCode: 'zh')
         ],
         home: Scaffold(
           body: CustomDateFormField(
             field: field,
             onChanged: onChanged,
+            formController: mockFormController,
           ),
         ),
       ),

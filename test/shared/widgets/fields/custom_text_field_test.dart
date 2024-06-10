@@ -46,6 +46,7 @@ void main() {
             body: CustomTextFormField(
               field: field,
               onChanged: (value) {},
+              formController: formController,
             ),
           ),
         ),
@@ -78,6 +79,7 @@ void main() {
                   CustomTextFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -122,6 +124,7 @@ void main() {
                   CustomTextFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -167,6 +170,7 @@ void main() {
                   CustomTextFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {

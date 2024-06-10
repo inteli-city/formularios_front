@@ -18,14 +18,14 @@ import 'form_details_page_test.mocks.dart';
 void main() {
   MockFormEntity form = MockFormEntity();
   late FormUserProvider formUserProvider = MockFormUserProvider();
-  late FormController formDetailsController = MockFormController();
+  late FormController formController = MockFormController();
 
   setUp(() {
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
 
     Modular.replaceInstance<FormUserProvider>(formUserProvider);
-    Modular.replaceInstance<FormController>(formDetailsController);
+    Modular.replaceInstance<FormController>(formController);
 
     when(form.system).thenReturn('system');
     when(form.template).thenReturn('Nome Template');
@@ -35,7 +35,7 @@ void main() {
     when(form.description).thenReturn('description');
     when(form.longitude).thenReturn(10.0);
     when(form.latitude).thenReturn(11.0);
-
+    
     when(form.expirationDate).thenReturn(1715090009);
     when(form.creationDate).thenReturn(1715090009);
 
@@ -44,12 +44,11 @@ void main() {
     when(form.creatorUserId).thenReturn('creatorUser4');
 
     when(formUserProvider.getFormByExternId(form.formId)).thenReturn(form);
-    when(formDetailsController.form).thenReturn(form);
-    when(formDetailsController.form.formId).thenReturn(form.formId);
+    when(formController.form).thenReturn(form);
 
-    when(formDetailsController.creationDate)
+    when(formController.creationDate)
         .thenReturn(form.creationDate.toString());
-    when(formDetailsController.expirationDate)
+    when(formController.expirationDate)
         .thenReturn(form.expirationDate.toString());
   });
 

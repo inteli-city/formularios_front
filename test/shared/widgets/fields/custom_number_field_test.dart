@@ -44,6 +44,7 @@ void main() {
             body: CustomNumberFormField(
               field: field,
               onChanged: (value) {},
+              formController: formController,
             ),
           ),
         ),
@@ -76,6 +77,7 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -122,6 +124,7 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -168,6 +171,7 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -213,6 +217,7 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {

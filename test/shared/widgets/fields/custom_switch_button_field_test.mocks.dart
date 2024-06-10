@@ -349,21 +349,6 @@ class MockFormController extends _i1.Mock implements _i12.FormController {
       );
 
   @override
-  Map<String, dynamic> get formData => (super.noSuchMethod(
-        Invocation.getter(#formData),
-        returnValue: <String, dynamic>{},
-      ) as Map<String, dynamic>);
-
-  @override
-  set formData(Map<String, dynamic>? _formData) => super.noSuchMethod(
-        Invocation.setter(
-          #formData,
-          _formData,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   String get creationDate => (super.noSuchMethod(
         Invocation.getter(#creationDate),
         returnValue: _i9.dummyValue<String>(
@@ -380,15 +365,6 @@ class MockFormController extends _i1.Mock implements _i12.FormController {
           Invocation.getter(#expirationDate),
         ),
       ) as String);
-
-  @override
-  void setData() => super.noSuchMethod(
-        Invocation.method(
-          #setData,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 
   @override
   void setIsSendingForm(bool? value) => super.noSuchMethod(
@@ -430,14 +406,12 @@ class MockFormController extends _i1.Mock implements _i12.FormController {
   dynamic getFieldValue(
     String? sectionId,
     String? key,
-    dynamic value,
   ) =>
       super.noSuchMethod(Invocation.method(
         #getFieldValue,
         [
           sectionId,
           key,
-          value,
         ],
       ));
 }

@@ -75,11 +75,6 @@ void main() {
         Modular.bindModule(HomeModule());
         mockController = MockFormController();
         when(mockController.form).thenReturn(form);
-        when(mockController.formData).thenReturn({
-          'section-01': {
-            'key-section-01-1': '',
-          }
-        });
         Modular.replaceInstance<FormController>(mockController);
       },
     );
@@ -94,7 +89,7 @@ void main() {
                 mockController.setFieldValue(
                     section.sectionId, field.key, value);
               },
-              sectionEntity: section,
+              sectionEntity: section, formController: mockController,
             ),
           ),
         ),

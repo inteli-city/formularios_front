@@ -44,8 +44,7 @@ void main() {
         fields: [field],
       );
 
-      when(formController.getFieldValue(
-              section.sectionId, field.key, field.value))
+      when(formController.getFieldValue(section.sectionId, field.key))
           .thenReturn(true);
 
       await tester.pumpWidget(
@@ -58,6 +57,7 @@ void main() {
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
+              formController: formController,
             ),
           ),
         ),
@@ -80,8 +80,7 @@ void main() {
         fields: [field],
       );
 
-      when(formController.getFieldValue(
-              section.sectionId, field.key, field.value))
+      when(formController.getFieldValue(section.sectionId, field.key))
           .thenReturn(true);
 
       await tester.pumpWidget(
@@ -94,6 +93,7 @@ void main() {
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
+              formController: formController,
             ),
           ),
         ),
@@ -102,10 +102,7 @@ void main() {
       await tester.tap(find.byType(Switch));
       await tester.pumpAndSettle();
 
-      expect(
-          formController.getFieldValue(
-              section.sectionId, field.key, field.value),
-          true);
+      expect(formController.getFieldValue(section.sectionId, field.key), true);
     });
 
     testWidgets(
@@ -123,8 +120,7 @@ void main() {
       );
       final formKey = GlobalKey<FormState>();
 
-      when(formController.getFieldValue(
-              section.sectionId, field.key, field.value))
+      when(formController.getFieldValue(section.sectionId, field.key))
           .thenReturn(true);
 
       await tester.pumpWidget(
@@ -141,6 +137,7 @@ void main() {
                           section.sectionId, field.key, value);
                     },
                     sectionEntity: section,
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {

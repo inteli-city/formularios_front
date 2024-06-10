@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/presentation/home/widgets/form_card.dart';
@@ -34,7 +36,12 @@ void main() {
         justificative: JustificativeEntity(
             options: [], selectedOption: null, text: 'text', image: null),
         comments: 'comments',
-        sections: [],
+        sections: [
+          SectionEntity(sectionId: 'section-01', fields: [
+            TextFieldEntity(
+                placeholder: 'placeholder', key: 'key', isRequired: true)
+          ]),
+        ],
         canVinculate: false,
         formTitle: 'formTitle');
 

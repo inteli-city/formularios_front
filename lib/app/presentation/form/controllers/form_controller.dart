@@ -21,18 +21,14 @@ class FormController {
   bool getIsSendingForm() => isSendingForm;
 
   void setFieldValue(String sectionId, String key, dynamic value) {
-    for (var section in form.sections) {
-      if (section.sectionId == sectionId) {
-        for (var field in section.fields) {
-          if (field.key == key) {
-            field.value = value;
-          }
-        }
-      }
-    }
+    var field = form.sections
+        .firstWhere((section) => section.sectionId == sectionId)
+        .fields
+        .firstWhere((field) => field.key == key);
+    field.value = value;
   }
 
-  dynamic getFieldValue(String sectionId, String key, dynamic value) {
+  dynamic getFieldValue(String sectionId, String key) {
     return form.sections
         .firstWhere((section) => section.sectionId == sectionId)
         .fields

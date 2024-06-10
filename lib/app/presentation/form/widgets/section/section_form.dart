@@ -63,80 +63,82 @@ class SectionForm extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: AppDimensions.paddingSmall),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  ElevatedButton(
-                    onPressed: formProvider.isLoading
-                        ? null
-                        : () {
-                            if (formKey.currentState!.validate()) {
-                              formProvider.saveForm(form: formController.form);
-                            }
-                          },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.radiusMedium),
-                      ),
-                    ),
-                    child: formProvider.isLoading
-                        ? const CircularProgressIndicator()
-                        : Text(
-                            'Salvar',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: AppColors.white,
-                                  height: 1.2,
-                                  fontSize: AppDimensions.fontMedium,
-                                ),
-                          ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (lastSection) {
-                        if (!formKey.currentState!.validate()) {
-                          GlobalSnackBar.error(
-                            S.current.allFieldsShouldBeSaved,
-                          );
-                        } else {
-                          formProvider.sendForm(
-                            formId: formController.form.formId,
-                            sections: formController.form.sections,
-                          );
-                        }
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: lastSection
-                          ? Theme.of(context).colorScheme.primary
-                          : AppColors.gray,
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppDimensions.radiusMedium),
-                      ),
-                    ),
-                    child: Text(
-                      'Enviar',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: AppColors.white,
-                            height: 1.2,
-                            fontSize: AppDimensions.fontMedium,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            buildSectionButtons(context)
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildSectionButtons(BuildContext context) {
+    void saveOnPressed() {
+      if (!formProvider.isLoading && formKey.currentState!.validate()) {
+        formProvider.saveForm(form: formController.form);
+      }
+    }
+
+    void sendOnPressed() {
+      if (!formKey.currentState!.validate()) {
+        GlobalSnackBar.error(
+          S.current.allFieldsShouldBeSaved,
+        );
+      }
+      formProvider.sendForm(
+        formId: formController.form.formId,
+        sections: formController.form.sections,
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
+      child: Row(
+        mainAxisAlignment: lastSection
+            ? MainAxisAlignment.spaceAround
+            : MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          ElevatedButton(
+            onPressed: saveOnPressed,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+              ),
+            ),
+            child: formProvider.isLoading
+                ? const CircularProgressIndicator()
+                : Text(
+                    'Salvar',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: AppColors.white,
+                          height: 1.2,
+                          fontSize: AppDimensions.fontMedium,
+                        ),
+                  ),
+          ),
+          lastSection
+              ? ElevatedButton(
+                  onPressed: sendOnPressed,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: lastSection
+                        ? Theme.of(context).colorScheme.primary
+                        : AppColors.gray,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusMedium),
+                    ),
+                  ),
+                  child: Text(
+                    'Enviar',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: AppColors.white,
+                          height: 1.2,
+                          fontSize: AppDimensions.fontExtraLarge,
+                        ),
+                  ),
+                )
+              : Container(),
+        ],
       ),
     );
   }
@@ -160,6 +162,7 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          formController: formController,
         );
 
       case FieldTypeEnum.DROPDOWN_FIELD:
@@ -169,6 +172,7 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          formController: formController,
         );
 
       case FieldTypeEnum.CHECKBOX_GROUP_FIELD:
@@ -179,6 +183,7 @@ class SectionForm extends StatelessWidget {
           },
           key: Key(field.key),
           sectionEntity: section,
+          formController: formController,
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:
@@ -197,6 +202,7 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          formController: formController,
         );
 
       case FieldTypeEnum.RADIO_GROUP_FIELD:
@@ -207,6 +213,7 @@ class SectionForm extends StatelessWidget {
           },
           key: Key(field.key),
           sectionEntity: section,
+          formController: formController,
         );
 
       case FieldTypeEnum.DATE_FIELD:
@@ -216,6 +223,7 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          formController: formController,
         );
 
       case FieldTypeEnum.SWITCH_BUTTON_FIELD:
@@ -226,6 +234,7 @@ class SectionForm extends StatelessWidget {
           },
           key: Key(field.key),
           sectionEntity: section,
+          formController: formController,
         );
 
       case FieldTypeEnum.FILE_FIELD:

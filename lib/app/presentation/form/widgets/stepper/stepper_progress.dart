@@ -5,7 +5,6 @@ import 'package:gates_microapp_flutter/shared/themes/app_colors.dart';
 
 class StepperProgress extends StatelessWidget {
   final int totalSteps;
-
   const StepperProgress({
     super.key,
     required this.totalSteps,

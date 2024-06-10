@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
@@ -8,14 +7,16 @@ import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomCheckBoxGroupFormField extends StatefulWidget with ValidationMixin {
   final CheckBoxGroupFieldEntity field;
-  final Function(String) onChanged;
+  final Function(List<String?>) onChanged;
   final SectionEntity sectionEntity;
+  final FormController formController;
 
   CustomCheckBoxGroupFormField({
     super.key,
     required this.field,
     required this.onChanged,
     required this.sectionEntity,
+    required this.formController,
   });
 
   @override
@@ -30,9 +31,13 @@ class _CustomCheckBoxGroupFormFieldState
   @override
   void initState() {
     super.initState();
-    final formController = Modular.get<FormController>();
-    selectedOptions = formController.formData[widget.sectionEntity.sectionId]
-            [widget.field.key] ??
+
+    int sectionIndex = widget.formController.form.sections.indexWhere(
+        (section) => section.sectionId == widget.sectionEntity.sectionId);
+    int fieldIndex = widget.formController.form.sections[sectionIndex].fields
+        .indexWhere((field) => field.key == widget.field.key);
+    selectedOptions = widget.formController.form.sections[sectionIndex]
+            .fields[fieldIndex].value ??
         [];
   }
 
@@ -68,7 +73,7 @@ class _CustomCheckBoxGroupFormFieldState
                   selectedOptions.remove(option);
                 }
               });
-              widget.onChanged(selectedOptions.toString());
+              widget.onChanged(selectedOptions);
             },
             controlAffinity: ListTileControlAffinity.leading,
             contentPadding: EdgeInsets.zero,

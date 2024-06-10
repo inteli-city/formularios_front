@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
@@ -9,11 +8,12 @@ import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart'
 class CustomTypeAheadFormField extends StatefulWidget {
   final TypeAheadFieldEntity field;
   final Function(String?) onChanged;
+  final FormController formController;
 
   const CustomTypeAheadFormField({
     super.key,
     required this.field,
-    required this.onChanged,
+    required this.onChanged, required this.formController,
   });
 
   @override
@@ -40,7 +40,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
 
   @override
   Widget build(BuildContext context) {
-    final formController = Modular.get<FormController>();
     return TypeAheadField<String>(
       controller: _textController,
       builder: (context, controller, focusNode) {
@@ -59,7 +58,7 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
             () => isRequired(
                   value,
                   widget.field.isRequired,
-                  formController.getIsSendingForm(),
+                  widget.formController.getIsSendingForm(),
                 )
           ]),
           inputFormatters: [

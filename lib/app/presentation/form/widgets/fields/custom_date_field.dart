@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
@@ -8,10 +7,13 @@ import 'package:intl/intl.dart';
 class CustomDateFormField extends StatefulWidget with ValidationMixin {
   final DateFieldEntity field;
   final Function(DateTime?) onChanged;
+  final FormController formController;
+
   CustomDateFormField({
     super.key,
     required this.field,
     required this.onChanged,
+    required this.formController,
   });
 
   @override
@@ -40,7 +42,6 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
 
   @override
   Widget build(BuildContext context) {
-    final formController = Modular.get<FormController>();
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: _textController,
@@ -88,7 +89,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
           () => isRequired(
                 value,
                 widget.field.isRequired,
-                formController.getIsSendingForm(),
+                widget.formController.getIsSendingForm(),
               ),
           () => minDate(value, widget.field.minDate),
           () => maxDate(value, widget.field.maxDate),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
@@ -7,28 +6,36 @@ import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart'
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 //regex, formatting
-class CustomRadioGroupFormField extends StatelessWidget with ValidationMixin {
+class CustomRadioGroupFormField extends StatefulWidget {
   final RadioGroupFieldEntity field;
   final Function(String?) onChanged;
+  final FormController formController;
   final SectionEntity sectionEntity;
 
-  CustomRadioGroupFormField({
+  const CustomRadioGroupFormField({
     super.key,
     required this.field,
     required this.onChanged,
     required this.sectionEntity,
+    required this.formController,
   });
 
   @override
+  State<CustomRadioGroupFormField> createState() =>
+      _CustomRadioGroupFormFieldState();
+}
+
+class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
+    with ValidationMixin {
+  @override
   Widget build(BuildContext context) {
-    final formController = Modular.get<FormController>();
     return FormField<String>(
-      initialValue: field.value,
+      initialValue: widget.field.value,
       validator: (value) {
         return combine([
-          () => isRequired(
-              value, field.isRequired, formController.getIsSendingForm()),
-          () => regex(value, field.regex),
+          () => isRequired(value, widget.field.isRequired,
+              widget.formController.getIsSendingForm()),
+          () => regex(value, widget.field.regex),
         ]);
       },
       builder: (state) {
@@ -36,20 +43,24 @@ class CustomRadioGroupFormField extends StatelessWidget with ValidationMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              field.placeholder,
+              widget.field.placeholder,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            ...field.options.map(
+            ...widget.field.options.map(
               (option) {
                 return RadioListTile<String>(
+                  toggleable: true,
                   title: Text(option,
                       style: Theme.of(context).textTheme.titleMedium),
                   value: option,
-                  groupValue: formController.getFieldValue(
-                      sectionEntity.sectionId, field.key, field.value),
+                  groupValue: widget.formController.getFieldValue(
+                    widget.sectionEntity.sectionId,
+                    widget.field.key,
+                  ),
                   onChanged: (value) {
-                    state.didChange(value);
-                    onChanged(value);
+                    setState(() {
+                      widget.onChanged(value);
+                    });
                   },
                 );
               },

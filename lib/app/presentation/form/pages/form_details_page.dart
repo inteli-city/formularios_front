@@ -262,7 +262,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                       formId: controller.form.formId,
                       status: FormStatusEnum.IN_PROGRESS,
                     );
-                    Modular.to.navigate('/home/forms');
                   },
                   text: S.current.start,
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -289,7 +288,12 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   ),
                   Expanded(
                     child: buildCustomElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await formUserProvider.updateFormStatus(
+                          formId: controller.form.formId,
+                          status: FormStatusEnum.NOT_STARTED,
+                        );
+                      },
                       text: S.current.stepBack,
                       textColor: Theme.of(context).colorScheme.primary,
                       backgroundColor: AppColors.white,

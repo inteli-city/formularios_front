@@ -188,7 +188,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
                     : Theme.of(context).colorScheme.primary,
               ),
               textAlign: TextAlign.center,
-              '(${Modular.get<FormUserProvider>().getFormsCountByStatus(statusEnum)})',
+              '(${Modular.get<FormProvider>().getFormsCountByStatus(statusEnum)})',
             ),
           ],
         ),
@@ -201,7 +201,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
             selectChipController.setChipValue(i, value);
           }
           filterController.setStatus(selected ? statusEnum : null);
-          Modular.get<FormUserProvider>().filterForms(
+          Modular.get<FormProvider>().filterForms(
             city: filterController.filteredCity,
             enumStatus: filterController.filteredStatus,
             street: filterController.filteredStreet,

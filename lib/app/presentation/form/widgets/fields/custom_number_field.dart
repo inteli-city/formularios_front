@@ -38,7 +38,10 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
         return combine(
           [
             () => isRequired(
-                value, field.isRequired, formController.getIsSendingForm()),
+                  value,
+                  field.isRequired,
+                  formController.isSendingForm,
+                ),
             () => maxValue(value, field.maxValue),
             () => minValue(value, field.minValue),
             () => regex(value, field.regex),

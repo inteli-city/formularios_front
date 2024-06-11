@@ -34,8 +34,11 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
       validator: (value) {
         return combine(
           [
-            () => isRequired(value, widget.field.isRequired,
-                widget.formController.getIsSendingForm()),
+            () => isRequired(
+                  value,
+                  widget.field.isRequired,
+                  widget.formController.isSendingForm,
+                ),
             () => regex(value, widget.field.regex),
           ],
         );

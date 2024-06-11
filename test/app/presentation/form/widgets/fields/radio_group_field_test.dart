@@ -21,7 +21,7 @@ void main() {
   Modular.replaceInstance<FormController>(formController);
   group('CustomRadioGroupFormField Tests', () {
     setUp(() {
-      when(formController.getIsSendingForm()).thenReturn(true);
+      when(formController.isSendingForm).thenReturn(true);
     });
 
     testWidgets('Displays initial value and placeholder',

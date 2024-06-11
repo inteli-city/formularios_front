@@ -21,7 +21,7 @@ void main() {
 
   group('CustomTypeAheadFormField Tests', () {
     setUp(() {
-      when(formController.getIsSendingForm()).thenReturn(true);
+      when(formController.isSendingForm).thenReturn(true);
     });
     testWidgets('Displays initial value and placeholder',
         (WidgetTester tester) async {
@@ -101,7 +101,7 @@ void main() {
       await tester.enterText(find.byType(TextFormField), 'Option');
 
       await tester.pumpAndSettle();
-      
+
       await tester.tap(find.text('Option 1'));
       await tester.pumpAndSettle();
 

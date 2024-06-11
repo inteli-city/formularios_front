@@ -16,7 +16,7 @@ void main() {
   late MockFormController mockFormController;
   setUp(() {
     mockFormController = MockFormController();
-    when(mockFormController.getIsSendingForm()).thenReturn(false);
+    when(mockFormController.isSendingForm).thenReturn(false);
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
     Modular.replaceInstance<FormController>(mockFormController);

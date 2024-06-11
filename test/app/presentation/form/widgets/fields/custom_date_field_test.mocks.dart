@@ -3,7 +3,10 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i6;
+
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -50,6 +53,21 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
       ) as _i2.FormEntity);
 
   @override
+  bool get isFormStateLoading => (super.noSuchMethod(
+        Invocation.getter(#isFormStateLoading),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set isFormStateLoading(bool? _isFormStateLoading) => super.noSuchMethod(
+        Invocation.setter(
+          #isFormStateLoading,
+          _isFormStateLoading,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   bool get isSendingForm => (super.noSuchMethod(
         Invocation.getter(#isSendingForm),
         returnValue: false,
@@ -83,6 +101,55 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
       ) as String);
 
   @override
+  void setIsFormStateLoading(bool? value) => super.noSuchMethod(
+        Invocation.method(
+          #setIsFormStateLoading,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setFormStatus(_i5.FormStatusEnum? status) => super.noSuchMethod(
+        Invocation.method(
+          #setFormStatus,
+          [status],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i6.Future<void> saveForm() => (super.noSuchMethod(
+        Invocation.method(
+          #saveForm,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> sendForm() => (super.noSuchMethod(
+        Invocation.method(
+          #sendForm,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> updateFormStatus(_i5.FormStatusEnum? status) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateFormStatus,
+          [status],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
   void setIsSendingForm(bool? value) => super.noSuchMethod(
         Invocation.method(
           #setIsSendingForm,
@@ -90,15 +157,6 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
         ),
         returnValueForMissingStub: null,
       );
-
-  @override
-  bool getIsSendingForm() => (super.noSuchMethod(
-        Invocation.method(
-          #getIsSendingForm,
-          [],
-        ),
-        returnValue: false,
-      ) as bool);
 
   @override
   void setFieldValue(

@@ -22,7 +22,7 @@ class FormEntity {
   final String region;
   final String? description;
   final PriorityEnum priority;
-  final FormStatusEnum status;
+  FormStatusEnum status;
   final int expirationDate;
   final int creationDate;
   final int? startDate;

@@ -18,7 +18,7 @@ class _SortFormsDialog extends State<SortFormsDialog> {
   var controller = Modular.get<SortFormsController>();
   @override
   Widget build(BuildContext context) {
-    var formProvider = context.read<FormUserProvider>();
+    var formProvider = context.read<FormProvider>();
     return Container(
       padding: const EdgeInsets.only(top: AppDimensions.paddingExtraLarge),
       height: 300,

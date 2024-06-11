@@ -61,7 +61,7 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
               () => isRequired(
                     value,
                     widget.field.isRequired,
-                    widget.formController.getIsSendingForm(),
+                    widget.formController.isSendingForm,
                   )
             ],
           ),

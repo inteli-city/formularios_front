@@ -81,11 +81,11 @@ class MockSortFormsController extends _i1.Mock
       );
 }
 
-/// A class which mocks [FormUserProvider].
+/// A class which mocks [FormProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
-  MockFormUserProvider() {
+class MockFormProvider extends _i1.Mock implements _i6.FormProvider {
+  MockFormProvider() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -103,21 +103,6 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
         Invocation.setter(
           #state,
           _state,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool get isLoading => (super.noSuchMethod(
-        Invocation.getter(#isLoading),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  set isLoading(bool? _isLoading) => super.noSuchMethod(
-        Invocation.setter(
-          #isLoading,
-          _isLoading,
         ),
         returnValueForMissingStub: null,
       );
@@ -177,15 +162,6 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
       );
 
   @override
-  void setIsLoading(bool? value) => super.noSuchMethod(
-        Invocation.method(
-          #setIsLoading,
-          [value],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   _i7.Future<void> fetchUserForms() => (super.noSuchMethod(
         Invocation.method(
           #fetchUserForms,
@@ -196,7 +172,7 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> updateFormStatus({
+  _i7.Future<bool> updateFormStatus({
     required String? formId,
     required _i8.FormStatusEnum? status,
   }) =>
@@ -209,9 +185,8 @@ class MockFormUserProvider extends _i1.Mock implements _i6.FormUserProvider {
             #status: status,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 
   @override
   _i7.Future<void> saveForm({required _i3.FormEntity? form}) =>

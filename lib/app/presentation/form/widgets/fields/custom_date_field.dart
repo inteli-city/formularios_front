@@ -90,7 +90,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
             () => isRequired(
                   value,
                   widget.field.isRequired,
-                  widget.formController.getIsSendingForm(),
+                  widget.formController.isSendingForm,
                 ),
             () => minDate(value, widget.field.minDate),
             () => maxDate(value, widget.field.maxDate),

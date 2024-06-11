@@ -12,16 +12,16 @@ import 'package:provider/provider.dart';
 
 import 'filter_dialog_test.mocks.dart';
 
-@GenerateMocks([FormUserProvider, FilterFormsController])
+@GenerateMocks([FormProvider, FilterFormsController])
 void main() {
   late FilterFormsController mockController;
-  late FormUserProvider mockProvider;
+  late FormProvider mockProvider;
 
   group('FilterOrderDialog Widget Tests', () {
     setUp(() {
       Modular.bindModule(HomeModule());
       mockController = MockFilterFormsController();
-      mockProvider = MockFormUserProvider();
+      mockProvider = MockFormProvider();
 
       when(mockController.filteredTemplate).thenReturn('Template1');
       when(mockController.filteredStreet).thenReturn('Street1');
@@ -42,8 +42,7 @@ void main() {
         MaterialApp(
           home: MultiProvider(providers: [
             Provider<FilterFormsController>(create: (_) => mockController),
-            ChangeNotifierProvider<FormUserProvider>(
-                create: (_) => mockProvider),
+            ChangeNotifierProvider<FormProvider>(create: (_) => mockProvider),
           ], child: const FilterOrderDialog()),
         ),
       );

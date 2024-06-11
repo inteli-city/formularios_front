@@ -34,7 +34,7 @@ void main() {
   late MockISendFormUsecase mockSendFormUsecase;
   late MockISaveFormUsecase mockSaveFormUsecase;
   late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
-  late FormUserProvider provider;
+  late FormProvider provider;
 
   setUp(() {
     Modular.bindModule(AppModule());
@@ -42,7 +42,7 @@ void main() {
     mockSaveFormUsecase = MockISaveFormUsecase();
     mockSendFormUsecase = MockISendFormUsecase();
     mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
-    provider = FormUserProvider(mockFetchUserFormsUsecase,
+    provider = FormProvider(mockFetchUserFormsUsecase,
         mockUpdateFormStatusUseCase, mockSaveFormUsecase, mockSendFormUsecase);
   });
   Widget createWidgetForTesting({required Widget child}) {

@@ -69,7 +69,10 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
         return combine(
           [
             () => isRequired(
-                value, field.isRequired, formController.getIsSendingForm()),
+                  value,
+                  field.isRequired,
+                  formController.isSendingForm,
+                ),
             () => regex(value, field.regex),
           ],
         );

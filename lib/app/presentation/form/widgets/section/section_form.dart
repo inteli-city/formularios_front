@@ -14,7 +14,6 @@ import 'package:formularios_front/app/presentation/form/widgets/fields/custom_sw
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_text_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/radio_group_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/type_ahead_field.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -25,9 +24,8 @@ class SectionForm extends StatelessWidget {
   final bool lastSection;
   final GlobalKey<FormState> formKey;
   final FormController formController;
-  final formProvider = Modular.get<FormUserProvider>();
 
-  SectionForm({
+  const SectionForm({
     super.key,
     required this.formController,
     required this.section,
@@ -71,27 +69,6 @@ class SectionForm extends StatelessWidget {
   }
 
   Widget buildSectionButtons(BuildContext context) {
-    void saveOnPressed() {
-      if (!formProvider.isLoading && formKey.currentState!.validate()) {
-        formProvider.saveForm(form: formController.form);
-      }
-    }
-
-    void sendOnPressed() async {
-      formController.setIsSendingForm(true);
-      if (!formKey.currentState!.validate()) {
-        GlobalSnackBar.error(
-          S.current.allFieldsShouldBeSaved,
-        );
-        formController.setIsSendingForm(false);
-      } else {
-        await formProvider.sendForm(
-          formId: formController.form.formId,
-          sections: formController.form.sections,
-        );
-      }
-    }
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
       child: Row(
@@ -101,14 +78,20 @@ class SectionForm extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           ElevatedButton(
-            onPressed: saveOnPressed,
+            onPressed: () async {
+              formController.setIsSendingForm(true);
+              if (formKey.currentState!.validate()) {
+                await formController.saveForm();
+              }
+              formController.setIsSendingForm(false);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
               ),
             ),
-            child: formProvider.isLoading
+            child: formController.isSendingForm
                 ? const CircularProgressIndicator()
                 : Text(
                     'Salvar',
@@ -121,7 +104,18 @@ class SectionForm extends StatelessWidget {
           ),
           lastSection
               ? ElevatedButton(
-                  onPressed: sendOnPressed,
+                  onPressed: () async {
+                    formController.setIsSendingForm(true);
+                    if (!formKey.currentState!.validate()) {
+                      GlobalSnackBar.error(
+                        S.current.allFieldsShouldBeSaved,
+                      );
+                    } else {
+                      await formController.sendForm();
+                      Modular.to.pop();
+                    }
+                    formController.setIsSendingForm(false);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: lastSection
                         ? Theme.of(context).colorScheme.primary

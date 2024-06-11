@@ -55,11 +55,11 @@ class _FakeFormEntity_1 extends _i1.SmartFake implements _i3.FormEntity {
         );
 }
 
-/// A class which mocks [FormUserProvider].
+/// A class which mocks [FormProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
-  MockFormUserProvider() {
+class MockFormProvider extends _i1.Mock implements _i4.FormProvider {
+  MockFormProvider() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -77,21 +77,6 @@ class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
         Invocation.setter(
           #state,
           _state,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool get isLoading => (super.noSuchMethod(
-        Invocation.getter(#isLoading),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  set isLoading(bool? _isLoading) => super.noSuchMethod(
-        Invocation.setter(
-          #isLoading,
-          _isLoading,
         ),
         returnValueForMissingStub: null,
       );
@@ -151,15 +136,6 @@ class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
       );
 
   @override
-  void setIsLoading(bool? value) => super.noSuchMethod(
-        Invocation.method(
-          #setIsLoading,
-          [value],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   _i5.Future<void> fetchUserForms() => (super.noSuchMethod(
         Invocation.method(
           #fetchUserForms,
@@ -170,7 +146,7 @@ class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
       ) as _i5.Future<void>);
 
   @override
-  _i5.Future<void> updateFormStatus({
+  _i5.Future<bool> updateFormStatus({
     required String? formId,
     required _i6.FormStatusEnum? status,
   }) =>
@@ -183,9 +159,8 @@ class MockFormUserProvider extends _i1.Mock implements _i4.FormUserProvider {
             #status: status,
           },
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 
   @override
   _i5.Future<void> saveForm({required _i3.FormEntity? form}) =>
@@ -322,6 +297,21 @@ class MockFormController extends _i1.Mock implements _i11.FormController {
       ) as _i3.FormEntity);
 
   @override
+  bool get isFormStateLoading => (super.noSuchMethod(
+        Invocation.getter(#isFormStateLoading),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set isFormStateLoading(bool? _isFormStateLoading) => super.noSuchMethod(
+        Invocation.setter(
+          #isFormStateLoading,
+          _isFormStateLoading,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   bool get isSendingForm => (super.noSuchMethod(
         Invocation.getter(#isSendingForm),
         returnValue: false,
@@ -355,6 +345,55 @@ class MockFormController extends _i1.Mock implements _i11.FormController {
       ) as String);
 
   @override
+  void setIsFormStateLoading(bool? value) => super.noSuchMethod(
+        Invocation.method(
+          #setIsFormStateLoading,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setFormStatus(_i6.FormStatusEnum? status) => super.noSuchMethod(
+        Invocation.method(
+          #setFormStatus,
+          [status],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> saveForm() => (super.noSuchMethod(
+        Invocation.method(
+          #saveForm,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> sendForm() => (super.noSuchMethod(
+        Invocation.method(
+          #sendForm,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> updateFormStatus(_i6.FormStatusEnum? status) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateFormStatus,
+          [status],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
   void setIsSendingForm(bool? value) => super.noSuchMethod(
         Invocation.method(
           #setIsSendingForm,
@@ -362,15 +401,6 @@ class MockFormController extends _i1.Mock implements _i11.FormController {
         ),
         returnValueForMissingStub: null,
       );
-
-  @override
-  bool getIsSendingForm() => (super.noSuchMethod(
-        Invocation.method(
-          #getIsSendingForm,
-          [],
-        ),
-        returnValue: false,
-      ) as bool);
 
   @override
   void setFieldValue(

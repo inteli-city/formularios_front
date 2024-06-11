@@ -66,7 +66,7 @@ class HomeModule extends Module {
   List<Module> get imports => [MicroAppAuthModule()];
   @override
   void binds(i) {
-    i.addLazySingleton<FormUserProvider>(FormUserProvider.new);
+    i.addLazySingleton<FormProvider>(FormProvider.new);
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
@@ -80,6 +80,7 @@ class HomeModule extends Module {
     i.addLazySingleton<IFormStorage>(() => FormHiveStorage.instance());
     i.add(
       () => FormController(
+        i.get<FormProvider>(),
         form: i.args.data,
       ),
     );

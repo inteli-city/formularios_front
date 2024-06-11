@@ -23,7 +23,7 @@ void main() {
         formController = MockFormController();
         Modular.replaceInstance<FormController>(formController);
 
-        when(formController.getIsSendingForm()).thenReturn(true);
+        when(formController.isSendingForm).thenReturn(true);
       },
     );
 

@@ -13,20 +13,20 @@ import 'package:provider/provider.dart';
 
 import 'sort_forms_dialog_test.mocks.dart';
 
-@GenerateMocks([SortFormsController, FormUserProvider])
+@GenerateMocks([SortFormsController, FormProvider])
 void main() {
   group('SortFormsDialog UI Test', () {
     late SortFormsController mockController;
-    late FormUserProvider formUserProvider;
+    late FormProvider formUserProvider;
 
     setUp(() {
       Modular.bindModule(AppModule());
       Modular.bindModule(HomeModule());
       mockController = MockSortFormsController();
-      formUserProvider = MockFormUserProvider();
+      formUserProvider = MockFormProvider();
 
       Modular.replaceInstance<SortFormsController>(mockController);
-      Modular.replaceInstance<FormUserProvider>(formUserProvider);
+      Modular.replaceInstance<FormProvider>(formUserProvider);
     });
 
     testWidgets('Displays all order options', (WidgetTester tester) async {
@@ -42,7 +42,7 @@ void main() {
           home: MultiProvider(
               providers: [
                 Provider<SortFormsController>(create: (_) => mockController),
-                ChangeNotifierProvider<FormUserProvider>(
+                ChangeNotifierProvider<FormProvider>(
                     create: (_) => formUserProvider),
               ],
               child: const Scaffold(

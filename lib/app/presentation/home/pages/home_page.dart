@@ -23,11 +23,11 @@ class _HomePageState extends State<HomePage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => Modular.get<FormUserProvider>()..fetchUserForms(),
+          create: (_) => Modular.get<FormProvider>()..fetchUserForms(),
         ),
       ],
       child: Builder(builder: (context) {
-        final formUserProvider = Provider.of<FormUserProvider>(context);
+        final formUserProvider = Provider.of<FormProvider>(context);
         FormUserState state = formUserProvider.state;
         return state is FormUserErrorState
             ? errorBuild(state.error)

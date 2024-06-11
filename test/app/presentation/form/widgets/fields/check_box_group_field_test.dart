@@ -16,7 +16,7 @@ import 'package:mockito/mockito.dart';
 
 import 'check_box_group_field_test.mocks.dart';
 
-@GenerateMocks([FormUserProvider, FormController, SectionEntity])
+@GenerateMocks([FormProvider, FormController, SectionEntity])
 void main() {
   group('CustomCheckBoxGroupFormField Tests', () {
     late MockFormController mockController;
@@ -89,7 +89,8 @@ void main() {
                 mockController.setFieldValue(
                     section.sectionId, field.key, value);
               },
-              sectionEntity: section, formController: mockController,
+              sectionEntity: section,
+              formController: mockController,
             ),
           ),
         ),

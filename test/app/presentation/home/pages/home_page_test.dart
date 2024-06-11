@@ -12,20 +12,20 @@ import 'package:formularios_front/app/presentation/stores/providers/form_user_pr
 
 import 'home_page_test.mocks.dart';
 
-@GenerateMocks([FormUserProvider])
+@GenerateMocks([FormProvider])
 void main() {
   group('HomePage Widget Tests', () {
-    FormUserProvider formUserProvider = MockFormUserProvider();
+    FormProvider formUserProvider = MockFormProvider();
 
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
-    Modular.replaceInstance<FormUserProvider>(formUserProvider);
+    Modular.replaceInstance<FormProvider>(formUserProvider);
     testWidgets('should display CircularProgressIndicator when loading',
         (WidgetTester tester) async {
       when(formUserProvider.state).thenReturn(FormUserLoadingState());
 
       await tester.pumpWidget(MaterialApp(
-        home: ChangeNotifierProvider<FormUserProvider>(
+        home: ChangeNotifierProvider<FormProvider>(
           create: (_) => formUserProvider,
           child: const HomePage(),
         ),
@@ -40,7 +40,7 @@ void main() {
       when(formUserProvider.state)
           .thenReturn(FormUserErrorState(error: failure));
       await tester.pumpWidget(MaterialApp(
-        home: ChangeNotifierProvider<FormUserProvider>(
+        home: ChangeNotifierProvider<FormProvider>(
           create: (_) => formUserProvider,
           child: const HomePage(),
         ),

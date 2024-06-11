@@ -96,7 +96,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Tipo',
                 selectedValue: selectedType,
-                optionValues: context.read<FormUserProvider>().templates,
+                optionValues: context.read<FormProvider>().templates,
                 onChanged: (value) {
                   selectedType = value;
                 },
@@ -104,7 +104,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Rua',
                 selectedValue: selectedStreet,
-                optionValues: context.read<FormUserProvider>().streets,
+                optionValues: context.read<FormProvider>().streets,
                 onChanged: (value) {
                   selectedStreet = value;
                 },
@@ -112,7 +112,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Cidade',
                 selectedValue: selectedCity,
-                optionValues: context.read<FormUserProvider>().cities,
+                optionValues: context.read<FormProvider>().cities,
                 onChanged: (value) {
                   selectedCity = value;
                 },
@@ -120,7 +120,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Sistema de Origem',
                 selectedValue: selectedSystem,
-                optionValues: context.read<FormUserProvider>().systems,
+                optionValues: context.read<FormProvider>().systems,
                 onChanged: (value) {
                   selectedSystem = value;
                 },
@@ -132,7 +132,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                 ),
                 onPressed: () {
                   setFilterValues();
-                  context.read<FormUserProvider>().filterForms(
+                  context.read<FormProvider>().filterForms(
                         template: controller.filteredTemplate,
                         street: controller.filteredStreet,
                         city: controller.filteredCity,

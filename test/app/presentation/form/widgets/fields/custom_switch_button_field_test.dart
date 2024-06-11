@@ -13,15 +13,15 @@ import 'package:mockito/mockito.dart';
 
 import 'custom_switch_button_field_test.mocks.dart';
 
-@GenerateMocks([FormUserProvider, FormController, FormEntity])
+@GenerateMocks([FormProvider, FormController, FormEntity])
 void main() {
   FormController formController = MockFormController();
   late FormEntity formEntity;
 
-  MockFormUserProvider mockProvider = MockFormUserProvider();
+  MockFormProvider mockProvider = MockFormProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
-  Modular.replaceInstance<FormUserProvider>(mockProvider);
+  Modular.replaceInstance<FormProvider>(mockProvider);
   Modular.replaceInstance<FormController>(formController);
   group('CustomSwitchButtonField Tests', () {
     setUp(() {

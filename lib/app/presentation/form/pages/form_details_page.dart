@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/utils/breakpoints.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
@@ -19,8 +18,6 @@ class FormDetailsPage extends StatefulWidget {
 
 class FormDetailsPageState extends State<FormDetailsPage> {
   FormController controller = Modular.get<FormController>();
-  FormUserProvider formUserProvider = Modular.get<FormUserProvider>();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -195,30 +192,91 @@ class FormDetailsPageState extends State<FormDetailsPage> {
   }
 
   Widget _buildFormDetailsActions() {
-    List<FormStatusEnum> formStatusWithoutActions = [
-      FormStatusEnum.CANCELED,
-      FormStatusEnum.CONCLUDED
-    ];
+    if (controller.form.status == FormStatusEnum.CONCLUDED ||
+        controller.form.status == FormStatusEnum.CANCELED) {
+      return const SizedBox.shrink();
+    }
 
     return Column(
       children: [
-        formStatusWithoutActions.contains(controller.form.status)
-            ? const SizedBox()
-            : _buildFormStatusWithActions()
+        controller.form.status == FormStatusEnum.NOT_STARTED
+            ? SizedBox(
+                width: double.infinity,
+                child: buildCustomElevatedButton(
+                  isLoading: controller.isFormStateLoading,
+                  onPressed: () async {
+                    setState(() {
+                      controller.setIsFormStateLoading(true);
+                    });
+                    await controller.updateFormStatus(
+                      FormStatusEnum.IN_PROGRESS,
+                    );
+                    setState(() {
+                      controller.setIsFormStateLoading(false);
+                    });
+                  },
+                  text: S.current.start,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  textColor: AppColors.white,
+                ),
+              )
+            : Row(
+                children: [
+                  Expanded(
+                    child: buildCustomElevatedButton(
+                      isLoading: controller.isFormStateLoading,
+                      onPressed: () {
+                        Modular.to.pushNamed(
+                          '/home/${controller.form.formId}/fill',
+                          arguments: controller.form,
+                        );
+                      },
+                      text: S.current.fillForm,
+                      backgroundColor: AppColors.primaryBlue,
+                      textColor: AppColors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: buildCustomElevatedButton(
+                      isLoading: controller.isFormStateLoading,
+                      onPressed: () async {
+                        setState(() {
+                          controller.setIsFormStateLoading(true);
+                        });
+                        await controller.updateFormStatus(
+                          FormStatusEnum.NOT_STARTED,
+                        );
+                        setState(() {
+                          controller.setIsFormStateLoading(false);
+                        });
+                      },
+                      text: S.current.stepBack,
+                      textColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: AppColors.white,
+                      hasBorder: true,
+                    ),
+                  ),
+                ],
+              ),
+        _buildDefaultActions(),
       ],
     );
   }
 
   Widget buildCustomElevatedButton({
-    required VoidCallback onPressed,
+    required Function()? onPressed,
     required String text,
+    required bool isLoading,
     Color? backgroundColor,
     Color? textColor,
     bool hasBorder = false,
   }) {
     double screenWidth = ScreenHelper.width(context);
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: isLoading ? null : onPressed,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(
           vertical: AppDimensions.paddingMedium * 1.2,
@@ -238,72 +296,17 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         backgroundColor:
             backgroundColor ?? Theme.of(context).colorScheme.primary,
       ),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              color: textColor ?? AppColors.white,
-              height: 1.2,
-              fontSize: (screenWidth < breakpointSmallMobile ? 12 : 16),
+      child: isLoading
+          ? const CircularProgressIndicator()
+          : Text(
+              text,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: textColor ?? AppColors.white,
+                    height: 1.2,
+                    fontSize: (screenWidth < breakpointSmallMobile ? 12 : 16),
+                  ),
             ),
-      ),
-    );
-  }
-
-  Widget _buildFormStatusWithActions() {
-    return Column(
-      children: [
-        controller.form.status == FormStatusEnum.NOT_STARTED
-            ? SizedBox(
-                width: double.infinity,
-                child: buildCustomElevatedButton(
-                  onPressed: () async {
-                    await formUserProvider.updateFormStatus(
-                      formId: controller.form.formId,
-                      status: FormStatusEnum.IN_PROGRESS,
-                    );
-                  },
-                  text: S.current.start,
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  textColor: AppColors.white,
-                ),
-              )
-            : Row(
-                children: [
-                  Expanded(
-                    child: buildCustomElevatedButton(
-                      onPressed: () {
-                        Modular.to.pushNamed(
-                          '/home/${controller.form.formId}/fill',
-                          arguments: controller.form,
-                        );
-                      },
-                      text: S.current.fillForm,
-                      backgroundColor: AppColors.primaryBlue,
-                      textColor: AppColors.white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Expanded(
-                    child: buildCustomElevatedButton(
-                      onPressed: () async {
-                        await formUserProvider.updateFormStatus(
-                          formId: controller.form.formId,
-                          status: FormStatusEnum.NOT_STARTED,
-                        );
-                      },
-                      text: S.current.stepBack,
-                      textColor: Theme.of(context).colorScheme.primary,
-                      backgroundColor: AppColors.white,
-                      hasBorder: true,
-                    ),
-                  ),
-                ],
-              ),
-        _buildDefaultActions(),
-      ],
     );
   }
 
@@ -314,11 +317,17 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         children: [
           Expanded(
             child: buildCustomElevatedButton(
+              isLoading: controller.isFormStateLoading,
               onPressed: () async {
-                await formUserProvider.updateFormStatus(
-                  formId: controller.form.formId,
-                  status: FormStatusEnum.CANCELED,
+                setState(() {
+                  controller.setIsFormStateLoading(true);
+                });
+                await controller.updateFormStatus(
+                  FormStatusEnum.CANCELED,
                 );
+                setState(() {
+                  controller.setIsFormStateLoading(false);
+                });
               },
               text: S.current.cancel,
               backgroundColor: AppColors.red,
@@ -330,6 +339,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           ),
           Expanded(
             child: buildCustomElevatedButton(
+              isLoading: controller.isFormStateLoading,
               onPressed: () {},
               text: S.current.linkForm,
               backgroundColor: Theme.of(context).colorScheme.surface,

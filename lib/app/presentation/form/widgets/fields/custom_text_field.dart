@@ -29,7 +29,10 @@ class CustomTextFormField extends StatelessWidget with ValidationMixin {
         return combine(
           [
             () => isRequired(
-                value, field.isRequired, formController.getIsSendingForm()),
+                  value,
+                  field.isRequired,
+                  formController.isSendingForm,
+                ),
             () => maxLength(value, field.maxLength),
             () => regex(value, field.regex),
           ],

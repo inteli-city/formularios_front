@@ -9,15 +9,15 @@ import 'package:mockito/mockito.dart';
 
 import 'form_controller_test.mocks.dart';
 
-@GenerateMocks([FormUserProvider, FormEntity])
+@GenerateMocks([FormProvider, FormEntity])
 void main() {
   late FormEntity mockEntity;
   late FormController controller;
 
-  MockFormUserProvider mockProvider = MockFormUserProvider();
+  MockFormProvider mockProvider = MockFormProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
-  Modular.replaceInstance<FormUserProvider>(mockProvider);
+  Modular.replaceInstance<FormProvider>(mockProvider);
 
   group('Form Details Controller Test', () {
     setUp(() {
@@ -27,8 +27,7 @@ void main() {
       when(mockEntity.expirationDate).thenReturn(1622649600000);
       when(mockEntity.sections).thenReturn([]);
       when(mockProvider.getFormByExternId(any)).thenReturn(mockEntity);
-      controller = FormController(form: mockEntity);
-
+      controller = FormController(mockProvider, form: mockEntity);
     });
 
     test('Should have correct creationDate format', () {

@@ -19,23 +19,23 @@ import 'search_filter_test.mocks.dart';
   FilterFormsController,
   SelectChipController,
   SortFormsController,
-  FormUserProvider,
+  FormProvider,
 ])
 void main() {
   testWidgets('FilterTabWidget builds correctly', (WidgetTester tester) async {
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
     Modular.bindModule(HomeModule());
-    final mockFormUserProvider = MockFormUserProvider();
-    Modular.replaceInstance<FormUserProvider>(mockFormUserProvider);
+    final mockFormProvider = MockFormProvider();
+    Modular.replaceInstance<FormProvider>(mockFormProvider);
 
-    when(mockFormUserProvider.state).thenReturn(FormUserLoadingState());
-    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.CONCLUDED))
+    when(mockFormProvider.state).thenReturn(FormUserLoadingState());
+    when(mockFormProvider.getFormsCountByStatus(FormStatusEnum.CONCLUDED))
         .thenReturn(FormStatusEnum.CONCLUDED.enumString);
-    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.NOT_STARTED))
+    when(mockFormProvider.getFormsCountByStatus(FormStatusEnum.NOT_STARTED))
         .thenReturn(FormStatusEnum.NOT_STARTED.enumString);
-    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.IN_PROGRESS))
+    when(mockFormProvider.getFormsCountByStatus(FormStatusEnum.IN_PROGRESS))
         .thenReturn(FormStatusEnum.IN_PROGRESS.enumString);
-    when(mockFormUserProvider.getFormsCountByStatus(FormStatusEnum.CANCELED))
+    when(mockFormProvider.getFormsCountByStatus(FormStatusEnum.CANCELED))
         .thenReturn(FormStatusEnum.CANCELED.enumString);
 
     await tester.pumpWidget(const MaterialApp(

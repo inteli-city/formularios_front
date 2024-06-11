@@ -50,13 +50,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   height: AppDimensions.verticalSpaceMedium,
                 ),
                 _buildFormDetails(),
-                Consumer<SingleFormProvider>(
-                  builder: (context, controller, _) {
-                    return controller.form.status == FormStatusEnum.CONCLUDED
-                        ? Container()
-                        : _buildFormDetailsActions();
-                  },
-                ),
+                controller.form.status == FormStatusEnum.CONCLUDED
+                    ? Container()
+                    : _buildFormDetailsActions(),
               ],
             ),
           ),

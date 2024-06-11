@@ -2,17 +2,23 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
+import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomFilePickerFormField extends StatefulWidget {
   final FileFieldEntity field;
+  final SectionEntity section;
+  final FormController controller;
   final Function(DateTime?) onChanged;
 
   const CustomFilePickerFormField({
     super.key,
     required this.field,
     required this.onChanged,
+    required this.controller,
+    required this.section,
   });
 
   @override
@@ -53,7 +59,8 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
         setState(
           () {
             _selectedFiles.addAll(files);
-            // widget.controller.setFieldValue(widget.field.key, _selectedFiles);
+            widget.controller.setFieldValue(
+                widget.section.sectionId, widget.field.key, _selectedFiles);
           },
         );
       } else {
@@ -62,7 +69,8 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
         setState(
           () {
             _selectedFiles.add(file);
-            // widget.controller.setFieldValue(widget.field.key, _selectedFiles);
+            widget.controller.setFieldValue(
+                widget.section.sectionId, widget.field.key, _selectedFiles);
           },
         );
       }
@@ -83,32 +91,33 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.field.placeholder,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: AppDimensions.paddingSmall),
         ElevatedButton(
           onPressed: _pickFiles,
           style: ElevatedButton.styleFrom(
+            elevation: 4,
             padding: const EdgeInsets.symmetric(
-                horizontal: AppDimensions.paddingExtraLarge,
-                vertical: AppDimensions.paddingMedium),
+                vertical: AppDimensions.paddingMedium,
+                horizontal: AppDimensions.paddingLarge),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  AppDimensions.radiusMedium,
-                ),
-                side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 1.5,
-                )),
+              borderRadius: BorderRadius.circular(
+                AppDimensions.radiusMedium,
+              ),
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                width: 1.5,
+              ),
+            ),
             backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -119,7 +128,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
               Text(
                 'Selecionar Arquivos',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ],
           ),
@@ -140,8 +149,8 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
                 setState(
                   () {
                     _selectedFiles.remove(file);
-                    // widget.controller
-                    //     .setFieldValue(widget.field.key, _selectedFiles);
+                    widget.controller.setFieldValue(widget.section.sectionId,
+                        widget.field.key, _selectedFiles);
                   },
                 );
               },

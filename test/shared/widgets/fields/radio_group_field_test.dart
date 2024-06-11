@@ -37,8 +37,7 @@ void main() {
         sectionId: 'testSection',
         fields: [field],
       );
-      when(formController.getFieldValue(
-              section.sectionId, field.key, field.value))
+      when(formController.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -51,6 +50,7 @@ void main() {
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
+              formController: formController,
             ),
           ),
         ),
@@ -75,8 +75,7 @@ void main() {
         fields: [field],
       );
 
-      when(formController.getFieldValue(
-              section.sectionId, field.key, field.value))
+      when(formController.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -89,6 +88,7 @@ void main() {
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
+              formController: formController,
             ),
           ),
         ),
@@ -97,9 +97,7 @@ void main() {
       await tester.tap(find.text('Option 2'));
       await tester.pumpAndSettle();
 
-      expect(
-          formController.getFieldValue(
-              section.sectionId, field.key, field.value),
+      expect(formController.getFieldValue(section.sectionId, field.key),
           'Option 2');
     });
 
@@ -121,8 +119,7 @@ void main() {
       );
       final formKey = GlobalKey<FormState>();
 
-      when(formController.getFieldValue(
-              section.sectionId, field.key, field.value))
+      when(formController.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -139,6 +136,7 @@ void main() {
                           section.sectionId, field.key, value);
                     },
                     sectionEntity: section,
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -163,6 +161,8 @@ void main() {
     testWidgets(
         'Does not display required field error when an option is selected and send option is clicked',
         (WidgetTester tester) async {
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
       final field = RadioGroupFieldEntity(
         placeholder: 'Choose an option',
         key: 'testRadioGroup',
@@ -175,8 +175,7 @@ void main() {
       );
       final formKey = GlobalKey<FormState>();
 
-      when(formController.getFieldValue(
-              section.sectionId, field.key, field.value))
+      when(formController.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -193,6 +192,7 @@ void main() {
                           section.sectionId, field.key, value);
                     },
                     sectionEntity: section,
+                    formController: formController,
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -207,11 +207,9 @@ void main() {
           ),
         ),
       );
-
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Option 1'));
-      await tester.pumpAndSettle();
       await tester.tap(find.text('Enviar'));
-      await tester.pumpAndSettle();
 
       expect(find.text('Este campo é obrigatório'), findsNothing);
     });

@@ -78,15 +78,18 @@ class SectionForm extends StatelessWidget {
     }
 
     void sendOnPressed() {
+      formController.setIsSendingForm(true);
       if (!formKey.currentState!.validate()) {
         GlobalSnackBar.error(
           S.current.allFieldsShouldBeSaved,
         );
+        formController.setIsSendingForm(false);
+      } else {
+        formProvider.sendForm(
+          formId: formController.form.formId,
+          sections: formController.form.sections,
+        );
       }
-      formProvider.sendForm(
-        formId: formController.form.formId,
-        sections: formController.form.sections,
-      );
     }
 
     return Padding(
@@ -133,7 +136,7 @@ class SectionForm extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: AppColors.white,
                           height: 1.2,
-                          fontSize: AppDimensions.fontExtraLarge,
+                          fontSize: AppDimensions.fontMedium,
                         ),
                   ),
                 )

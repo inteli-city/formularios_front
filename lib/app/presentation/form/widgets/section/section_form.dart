@@ -247,6 +247,8 @@ class SectionForm extends StatelessWidget {
             formController.setFieldValue(section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          controller: formController,
+          section: section,
         );
 
       default:

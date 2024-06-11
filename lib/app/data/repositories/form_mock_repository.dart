@@ -5,6 +5,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -120,7 +121,14 @@ class FormMockRepository extends IFormRepository {
             SwitchButtonFieldEntity(
                 placeholder: 'SwitchButton',
                 key: 'key-section-02-0',
-                isRequired: true)
+                isRequired: true),
+            FileFieldEntity(
+                fileType: FileTypeEnum.IMAGE,
+                minQuantity: 1,
+                maxQuantity: 2,
+                placeholder: 'Selecione 2 imagens',
+                key: 'key',
+                isRequired: true),
           ],
         ),
       ],

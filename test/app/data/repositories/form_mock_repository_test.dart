@@ -106,19 +106,6 @@ void main() {
   });
 
   group('updateFormSections -', () {
-    var newSections = [
-      SectionEntity(
-        sectionId: 'sectionId',
-        fields: [
-          DropDownFieldEntity(
-            options: ['option 01', 'option 02'],
-            placeholder: 'DropDownField',
-            key: 'key-section-01-0',
-            isRequired: true,
-          ),
-        ],
-      )
-    ];
 
     test('should update a form sections by formId', () async {
       var form = repository.formList[0];

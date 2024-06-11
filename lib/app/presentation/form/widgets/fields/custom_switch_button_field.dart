@@ -15,7 +15,8 @@ class CustomSwitchButtonField extends StatefulWidget with ValidationMixin {
     super.key,
     required this.field,
     required this.onChanged,
-    required this.sectionEntity, required this.formController,
+    required this.sectionEntity,
+    required this.formController,
   });
 
   @override
@@ -26,8 +27,8 @@ class CustomSwitchButtonField extends StatefulWidget with ValidationMixin {
 class _CustomSwitchButtonFieldState extends State<CustomSwitchButtonField> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           widget.field.placeholder,
@@ -38,8 +39,8 @@ class _CustomSwitchButtonFieldState extends State<CustomSwitchButtonField> {
           activeTrackColor: Theme.of(context).colorScheme.primary,
           inactiveThumbColor: Theme.of(context).colorScheme.secondary,
           inactiveTrackColor: AppColors.gray,
-          value: widget.formController.getFieldValue(widget.sectionEntity.sectionId,
-                  widget.field.key) ??
+          value: widget.formController.getFieldValue(
+                  widget.sectionEntity.sectionId, widget.field.key) ??
               false,
           onChanged: (value) {
             setState(() {

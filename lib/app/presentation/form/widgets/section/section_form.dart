@@ -40,24 +40,21 @@ class SectionForm extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingSmall,
           horizontal: AppDimensions.paddingLarge,
         ),
         child: Column(
           children: [
             Expanded(
-              child: ListView.separated(
+              child: ListView.builder(
                 padding: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.paddingExtraLarge),
+                    vertical: AppDimensions.paddingSmall),
                 physics: const BouncingScrollPhysics(),
                 itemCount: fields.length,
-                itemBuilder: (context, index) => buildField(fields[index]),
-                separatorBuilder: (context, index) => const Divider(
-                  thickness: 0,
-                  color: Colors.transparent,
-                  indent: 100,
-                  endIndent: 0,
-                  height: 40,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppDimensions.paddingSmall,
+                  ),
+                  child: buildField(fields[index]),
                 ),
               ),
             ),

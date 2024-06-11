@@ -3,8 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
-import 'package:formularios_front/app/shared/helpers/utils/breakpoints.dart';
-import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
@@ -25,34 +23,23 @@ class FormDetailsPageState extends State<FormDetailsPage> {
       create: (_) => controller,
       child: SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              'Details',
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+          ),
           body: Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: AppDimensions.paddingMedium,
               horizontal: AppDimensions.paddingMedium,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      onPressed: () => Modular.to.pop(),
-                    ),
-                    Text(
-                      '${controller.form.system} - ${controller.form.template}',
-                      style: Theme.of(context).textTheme.displayLarge,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: AppDimensions.verticalSpaceMedium,
-                ),
                 _buildFormDetails(),
-                controller.form.status == FormStatusEnum.CONCLUDED
-                    ? Container()
-                    : _buildFormDetailsActions(),
+                const SizedBox(height: AppDimensions.verticalSpaceMedium),
+                _buildFormDetailsActions()
               ],
             ),
           ),
@@ -66,92 +53,118 @@ class FormDetailsPageState extends State<FormDetailsPage> {
 
     return Expanded(
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildDetaislRow(
-              details: [
-                [
-                  S.current.externId,
-                  form.formId,
-                ],
-                [
-                  S.current.vinculationId,
-                  form.vinculationFormId ?? '',
-                ],
-              ],
+        child: Container(
+          padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+          decoration: BoxDecoration(
+            color: AppColors.primaryBlue,
+            borderRadius: BorderRadius.circular(
+              AppDimensions.radiusMedium,
             ),
-            _buildDetaislRow(
-              details: [
-                [
-                  S.current.creatorUserId,
-                  form.creatorUserId,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '${controller.form.system} - ${controller.form.template}',
+                style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                      color: AppColors.white,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: AppDimensions.verticalSpaceMedium,
+              ),
+              _buildDetaislRow(
+                details: [
+                  [
+                    S.current.externId,
+                    form.formId,
+                  ],
+                  [
+                    S.current.vinculationId,
+                    form.vinculationFormId ?? '',
+                  ],
                 ],
-              ],
-            ),
-            _buildDetaislRow(
-              details: [
-                [
-                  S.current.priority,
-                  form.priority.enumString,
+              ),
+              _buildDetaislRow(
+                details: [
+                  [
+                    S.current.creatorUserId,
+                    form.creatorUserId,
+                  ],
                 ],
-                [
-                  'Status',
-                  form.status.enumString,
-                ]
-              ],
-            ),
-            _buildDetaislRow(
-              details: [
-                [
-                  S.current.creationDate,
-                  controller.creationDate,
+              ),
+              _buildDetaislRow(
+                details: [
+                  [
+                    S.current.priority,
+                    form.priority.enumString,
+                  ],
+                  [
+                    'Status',
+                    form.status.enumString,
+                  ]
                 ],
-                [
-                  S.current.expirationDate,
-                  controller.expirationDate,
+              ),
+              _buildDetaislRow(
+                details: [
+                  [
+                    S.current.creationDate,
+                    controller.creationDate,
+                  ],
+                  [
+                    S.current.expirationDate,
+                    controller.expirationDate,
+                  ],
                 ],
-              ],
-            ),
-            _buildDetaislRow(
-              details: [
-                [S.current.street, form.street],
-                [
-                  S.current.number,
-                  form.number.toString(),
+              ),
+              _buildDetaislRow(
+                details: [
+                  [S.current.street, form.street],
+                  [
+                    S.current.number,
+                    form.number.toString(),
+                  ],
                 ],
-              ],
-            ),
-            _buildDetaislRow(
-              details: [
-                [
-                  S.current.latitude,
-                  form.latitude.toString(),
+              ),
+              _buildDetaislRow(
+                details: [
+                  [
+                    S.current.latitude,
+                    form.latitude.toString(),
+                  ],
+                  [
+                    S.current.longitude,
+                    form.longitude.toString(),
+                  ],
                 ],
-                [
-                  S.current.longitude,
-                  form.longitude.toString(),
+              ),
+              _buildDetaislRow(
+                details: [
+                  [
+                    S.current.startDate,
+                    S.current.startDate,
+                  ],
+                  [
+                    S.current.conclusionDate,
+                    S.current.conclusionDate,
+                  ]
                 ],
-              ],
-            ),
-            _buildDetaislRow(
-              details: [
-                [
-                  S.current.startDate,
-                  S.current.startDate,
-                ],
-                [
-                  S.current.conclusionDate,
-                  S.current.conclusionDate,
-                ]
-              ],
-            ),
-            _buildFormDetail(
-              S.current.description,
-              form.description,
-            ),
-          ],
+              ),
+              _buildFormDetail(
+                S.current.description,
+                form.description,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -181,13 +194,16 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           Text(
             '$attribute:',
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white,
                   fontWeight: FontWeight.bold,
                 ),
           ),
           Text(
             value ?? '',
             textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.bodyLarge!,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white,
+                ),
             overflow: TextOverflow.clip,
           ),
         ],
@@ -202,6 +218,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
     }
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         controller.form.status == FormStatusEnum.NOT_STARTED
             ? SizedBox(
@@ -254,6 +271,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 ],
               ),
         _buildDefaultActions(),
+        const SizedBox(height: AppDimensions.verticalSpaceMedium),
       ],
     );
   }
@@ -266,13 +284,11 @@ class FormDetailsPageState extends State<FormDetailsPage> {
     Color? textColor,
     bool hasBorder = false,
   }) {
-    double screenWidth = ScreenHelper.width(context);
     return ElevatedButton(
       onPressed: isLoading ? null : onPressed,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(
           vertical: AppDimensions.paddingMedium * 1.2,
-          horizontal: 0,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
@@ -293,10 +309,8 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           : Text(
               text,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: textColor ?? AppColors.white,
-                    height: 1.2,
-                    fontSize: (screenWidth < breakpointSmallMobile ? 12 : 16),
                   ),
             ),
     );
@@ -320,19 +334,19 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               textColor: AppColors.white,
             ),
           ),
-          const SizedBox(
-            width: 8,
-          ),
-          Expanded(
-            child: buildCustomElevatedButton(
-              isLoading: controller.isFormStateLoading,
-              onPressed: () {},
-              text: S.current.linkForm,
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              textColor: Theme.of(context).colorScheme.primary,
-              hasBorder: true,
-            ),
-          ),
+          // const SizedBox(
+          //   width: 8,
+          // ),
+          // Expanded(
+          //   child: buildCustomElevatedButton(
+          //     isLoading: controller.isFormStateLoading,
+          //     onPressed: () {},
+          //     text: S.current.linkForm,
+          //     backgroundColor: Theme.of(context).colorScheme.surface,
+          //     textColor: Theme.of(context).colorScheme.primary,
+          //     hasBorder: true,
+          //   ),
+          // ),
         ],
       ),
     );

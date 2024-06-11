@@ -23,46 +23,30 @@ class FormSectionsPageState extends State<FormSectionsPage> {
     var formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Fill form',
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: AppDimensions.paddingLarge),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          Modular.to.pop();
-                        },
-                        alignment: Alignment.centerLeft,
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          size: AppDimensions.iconMedium,
-                        ),
-                      ),
-                      Text(
-                        '${formController.form.template} - ${formController.form.formTitle}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                StepperProgress(
-                  totalSteps: formController.form.sections.length,
-                ),
-              ],
+            StepperProgress(
+              totalSteps: formController.form.sections.length,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(
+                AppDimensions.paddingMedium,
+              ),
+              child: Text(
+                '${formController.form.system} - ${formController.form.template}',
+                style: Theme.of(context).textTheme.displayLarge,
+                textAlign: TextAlign.center,
+              ),
             ),
             Expanded(
               child: Form(

@@ -17,7 +17,6 @@ class StepperProgress extends StatelessWidget {
       height: 70,
       child: Stepper(
         type: StepperType.horizontal,
-        elevation: 5,
         physics: const BouncingScrollPhysics(),
         stepIconWidth: 32,
         stepIconHeight: 32,

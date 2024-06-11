@@ -28,9 +28,13 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
   @override
   void initState() {
     super.initState();
+
     _textController = TextEditingController(
       text: widget.field.value ?? '',
     );
+    print('oi');
+    print(widget.field.value);
+    print(_textController.text);
   }
 
   @override
@@ -89,6 +93,7 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
       },
       onSelected: (suggestion) {
         _textController.text = suggestion;
+        widget.onChanged(suggestion);
       },
     );
   }

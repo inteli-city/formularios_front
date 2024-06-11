@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
@@ -15,7 +15,7 @@ class FormSectionsPage extends StatefulWidget {
 }
 
 class FormSectionsPageState extends State<FormSectionsPage> {
-  FormController formController = Modular.get<FormController>();
+  SingleFormProvider formController = Modular.get<SingleFormProvider>();
   StepperController stepperController = Modular.get<StepperController>();
 
   @override

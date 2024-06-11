@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/shared/helpers/utils/breakpoints.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:provider/provider.dart';
 
 class FormDetailsPage extends StatefulWidget {
   const FormDetailsPage({super.key});
@@ -17,40 +18,47 @@ class FormDetailsPage extends StatefulWidget {
 }
 
 class FormDetailsPageState extends State<FormDetailsPage> {
-  FormController controller = Modular.get<FormController>();
+  SingleFormProvider controller = Modular.get<SingleFormProvider>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppDimensions.paddingMedium,
-            horizontal: AppDimensions.paddingMedium,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () => Modular.to.pop(),
-                  ),
-                  Text(
-                    '${controller.form.system} - ${controller.form.template}',
-                    style: Theme.of(context).textTheme.displayLarge,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: AppDimensions.verticalSpaceMedium,
-              ),
-              _buildFormDetails(),
-              controller.form.status == FormStatusEnum.CONCLUDED
-                  ? Container()
-                  : _buildFormDetailsActions(),
-            ],
+    return ChangeNotifierProvider(
+      create: (_) => controller,
+      child: SafeArea(
+        child: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppDimensions.paddingMedium,
+              horizontal: AppDimensions.paddingMedium,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () => Modular.to.pop(),
+                    ),
+                    Text(
+                      '${controller.form.system} - ${controller.form.template}',
+                      style: Theme.of(context).textTheme.displayLarge,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: AppDimensions.verticalSpaceMedium,
+                ),
+                _buildFormDetails(),
+                Consumer<SingleFormProvider>(
+                  builder: (context, controller, _) {
+                    return controller.form.status == FormStatusEnum.CONCLUDED
+                        ? Container()
+                        : _buildFormDetailsActions();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -205,15 +213,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 child: buildCustomElevatedButton(
                   isLoading: controller.isFormStateLoading,
                   onPressed: () async {
-                    setState(() {
-                      controller.setIsFormStateLoading(true);
-                    });
                     await controller.updateFormStatus(
-                      FormStatusEnum.IN_PROGRESS,
+                      status: FormStatusEnum.IN_PROGRESS,
                     );
-                    setState(() {
-                      controller.setIsFormStateLoading(false);
-                    });
                   },
                   text: S.current.start,
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -243,15 +245,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                     child: buildCustomElevatedButton(
                       isLoading: controller.isFormStateLoading,
                       onPressed: () async {
-                        setState(() {
-                          controller.setIsFormStateLoading(true);
-                        });
                         await controller.updateFormStatus(
-                          FormStatusEnum.NOT_STARTED,
+                          status: FormStatusEnum.NOT_STARTED,
                         );
-                        setState(() {
-                          controller.setIsFormStateLoading(false);
-                        });
                       },
                       text: S.current.stepBack,
                       textColor: Theme.of(context).colorScheme.primary,
@@ -319,15 +315,9 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             child: buildCustomElevatedButton(
               isLoading: controller.isFormStateLoading,
               onPressed: () async {
-                setState(() {
-                  controller.setIsFormStateLoading(true);
-                });
                 await controller.updateFormStatus(
-                  FormStatusEnum.CANCELED,
+                  status: FormStatusEnum.CANCELED,
                 );
-                setState(() {
-                  controller.setIsFormStateLoading(false);
-                });
               },
               text: S.current.cancel,
               backgroundColor: AppColors.red,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
@@ -9,7 +9,7 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 class CustomRadioGroupFormField extends StatefulWidget {
   final RadioGroupFieldEntity field;
   final Function(String?) onChanged;
-  final FormController formController;
+  final SingleFormProvider formController;
   final SectionEntity sectionEntity;
 
   const CustomRadioGroupFormField({

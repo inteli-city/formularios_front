@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomFilePickerFormField extends StatefulWidget {
   final FileFieldEntity field;
   final SectionEntity section;
-  final FormController controller;
+  final SingleFormProvider controller;
   final Function(DateTime?) onChanged;
 
   const CustomFilePickerFormField({

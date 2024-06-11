@@ -5,8 +5,8 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/presentation/form/pages/form_details_page.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -15,18 +15,18 @@ import 'package:mockito/mockito.dart';
 
 import 'form_details_page_test.mocks.dart';
 
-@GenerateMocks([FormProvider, FormEntity, FormController])
+@GenerateMocks([FormsProvider, FormEntity, SingleFormProvider])
 void main() {
   MockFormEntity form = MockFormEntity();
-  late FormProvider formUserProvider = MockFormProvider();
-  late FormController formController = MockFormController();
+  late FormsProvider formUserProvider = MockSingleFormProvider();
+  late SingleFormProvider formController = MockFormController();
 
   setUp(() {
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
 
-    Modular.replaceInstance<FormProvider>(formUserProvider);
-    Modular.replaceInstance<FormController>(formController);
+    Modular.replaceInstance<FormsProvider>(formUserProvider);
+    Modular.replaceInstance<SingleFormProvider>(formController);
 
     when(form.system).thenReturn('system');
     when(form.template).thenReturn('Nome Template');

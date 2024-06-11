@@ -2,22 +2,20 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'form_controller_test.mocks.dart';
+import 'single_form_provider_test.mocks.dart';
 
-@GenerateMocks([FormProvider, FormEntity])
+@GenerateMocks([SingleFormProvider, FormEntity])
 void main() {
   late FormEntity mockEntity;
-  late FormController controller;
+  late SingleFormProvider controller;
 
-  MockFormProvider mockProvider = MockFormProvider();
+  MockSingleFormProvider mockProvider = MockSingleFormProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
-  Modular.replaceInstance<FormProvider>(mockProvider);
 
   group('Form Details Controller Test', () {
     setUp(() {
@@ -27,7 +25,7 @@ void main() {
       when(mockEntity.expirationDate).thenReturn(1622649600000);
       when(mockEntity.sections).thenReturn([]);
       when(mockProvider.getFormByExternId(any)).thenReturn(mockEntity);
-      controller = FormController(mockProvider, form: mockEntity);
+      controller = SingleFormProvider(mockProvider, form: mockEntity);
     });
 
     test('Should have correct creationDate format', () {

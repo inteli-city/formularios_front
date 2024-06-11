@@ -4,7 +4,7 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
+import 'package:formularios_front/app/presentation/stores/user_provider.dart';
 
 import 'use_guards_test.mocks.dart';
 

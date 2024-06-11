@@ -10,14 +10,14 @@ import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.d
 import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart';
+import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 
@@ -34,7 +34,7 @@ void main() {
   late MockISendFormUsecase mockSendFormUsecase;
   late MockISaveFormUsecase mockSaveFormUsecase;
   late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
-  late FormProvider provider;
+  late FormsProvider provider;
 
   setUp(() {
     Modular.bindModule(AppModule());
@@ -42,7 +42,7 @@ void main() {
     mockSaveFormUsecase = MockISaveFormUsecase();
     mockSendFormUsecase = MockISendFormUsecase();
     mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
-    provider = FormProvider(mockFetchUserFormsUsecase,
+    provider = FormsProvider(mockFetchUserFormsUsecase,
         mockUpdateFormStatusUseCase, mockSaveFormUsecase, mockSendFormUsecase);
   });
   Widget createWidgetForTesting({required Widget child}) {

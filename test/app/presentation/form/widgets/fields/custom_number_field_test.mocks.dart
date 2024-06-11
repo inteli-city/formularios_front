@@ -4,10 +4,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
+import 'dart:ui' as _i7;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart'
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
@@ -35,11 +36,12 @@ class _FakeFormEntity_0 extends _i1.SmartFake implements _i2.FormEntity {
         );
 }
 
-/// A class which mocks [FormController].
+/// A class which mocks [SingleFormProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormController extends _i1.Mock implements _i3.FormController {
-  MockFormController() {
+class MockSingleFormProvider extends _i1.Mock
+    implements _i3.SingleFormProvider {
+  MockSingleFormProvider() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -101,6 +103,12 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
       ) as String);
 
   @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+
+  @override
   void setIsFormStateLoading(bool? value) => super.noSuchMethod(
         Invocation.method(
           #setIsFormStateLoading,
@@ -139,11 +147,12 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<void> updateFormStatus(_i5.FormStatusEnum? status) =>
+  _i6.Future<void> updateFormStatus({required _i5.FormStatusEnum? status}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateFormStatus,
-          [status],
+          [],
+          {#status: status},
         ),
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
@@ -188,4 +197,40 @@ class MockFormController extends _i1.Mock implements _i3.FormController {
           key,
         ],
       ));
+
+  @override
+  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

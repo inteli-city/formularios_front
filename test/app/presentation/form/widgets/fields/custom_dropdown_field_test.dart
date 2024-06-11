@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/app_module.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_dropdown_field.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -11,7 +11,7 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 
 import 'custom_dropdown_field_test.mocks.dart';
 
-@GenerateMocks([FormController])
+@GenerateMocks([SingleFormProvider])
 void main() {
   late MockFormController mockFormController;
   setUp(() {
@@ -19,7 +19,7 @@ void main() {
     when(mockFormController.isSendingForm).thenReturn(false);
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
-    Modular.replaceInstance<FormController>(mockFormController);
+    Modular.replaceInstance<SingleFormProvider>(mockFormController);
   });
 
   tearDown(() {

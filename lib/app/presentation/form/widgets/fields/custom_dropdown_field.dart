@@ -1,7 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -9,7 +9,7 @@ import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
   final DropDownFieldEntity field;
   final Function(String?) onChanged;
-  final FormController formController;
+  final SingleFormProvider formController;
 
   CustomDropDownFormField({
     super.key,

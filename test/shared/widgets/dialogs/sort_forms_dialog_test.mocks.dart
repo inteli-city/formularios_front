@@ -4,21 +4,19 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i7;
-import 'dart:ui' as _i11;
+import 'dart:ui' as _i10;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
-import 'package:formularios_front/app/domain/entities/section_entity.dart'
-    as _i9;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i8;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i5;
 import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart'
     as _i4;
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart'
-    as _i6;
-import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart'
+import 'package:formularios_front/app/presentation/home/states/form_user_state.dart'
     as _i2;
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart'
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -81,11 +79,11 @@ class MockSortFormsController extends _i1.Mock
       );
 }
 
-/// A class which mocks [FormProvider].
+/// A class which mocks [FormsProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormProvider extends _i1.Mock implements _i6.FormProvider {
-  MockFormProvider() {
+class MockFormsProvider extends _i1.Mock implements _i6.FormsProvider {
+  MockFormsProvider() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -172,62 +170,13 @@ class MockFormProvider extends _i1.Mock implements _i6.FormProvider {
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<bool> updateFormStatus({
-    required String? formId,
-    required _i8.FormStatusEnum? status,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateFormStatus,
-          [],
-          {
-            #formId: formId,
-            #status: status,
-          },
-        ),
-        returnValue: _i7.Future<bool>.value(false),
-      ) as _i7.Future<bool>);
-
-  @override
-  _i7.Future<void> saveForm({required _i3.FormEntity? form}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #saveForm,
-          [],
-          {#form: form},
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
-  _i7.Future<void> sendForm({
-    required String? formId,
-    required List<_i9.SectionEntity>? sections,
-    String? vinculationFormId,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #sendForm,
-          [],
-          {
-            #formId: formId,
-            #sections: sections,
-            #vinculationFormId: vinculationFormId,
-          },
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
   String getFormsCountByStatus(_i8.FormStatusEnum? status) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i10.dummyValue<String>(
+        returnValue: _i9.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -269,7 +218,7 @@ class MockFormProvider extends _i1.Mock implements _i6.FormProvider {
       );
 
   @override
-  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -278,7 +227,7 @@ class MockFormProvider extends _i1.Mock implements _i6.FormProvider {
       );
 
   @override
-  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i10.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

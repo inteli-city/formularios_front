@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
@@ -96,7 +96,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Tipo',
                 selectedValue: selectedType,
-                optionValues: context.read<FormProvider>().templates,
+                optionValues: context.read<FormsProvider>().templates,
                 onChanged: (value) {
                   selectedType = value;
                 },
@@ -104,7 +104,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Rua',
                 selectedValue: selectedStreet,
-                optionValues: context.read<FormProvider>().streets,
+                optionValues: context.read<FormsProvider>().streets,
                 onChanged: (value) {
                   selectedStreet = value;
                 },
@@ -112,7 +112,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Cidade',
                 selectedValue: selectedCity,
-                optionValues: context.read<FormProvider>().cities,
+                optionValues: context.read<FormsProvider>().cities,
                 onChanged: (value) {
                   selectedCity = value;
                 },
@@ -120,7 +120,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
               _buildDropdownItem(
                 hintText: 'Sistema de Origem',
                 selectedValue: selectedSystem,
-                optionValues: context.read<FormProvider>().systems,
+                optionValues: context.read<FormsProvider>().systems,
                 onChanged: (value) {
                   selectedSystem = value;
                 },
@@ -132,7 +132,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                 ),
                 onPressed: () {
                   setFilterValues();
-                  context.read<FormProvider>().filterForms(
+                  context.read<FormsProvider>().filterForms(
                         template: controller.filteredTemplate,
                         street: controller.filteredStreet,
                         city: controller.filteredCity,

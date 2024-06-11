@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
-import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
+import 'package:formularios_front/app/presentation/stores/user_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';

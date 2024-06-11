@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
@@ -18,7 +18,7 @@ class _SortFormsDialog extends State<SortFormsDialog> {
   var controller = Modular.get<SortFormsController>();
   @override
   Widget build(BuildContext context) {
-    var formProvider = context.read<FormProvider>();
+    var formProvider = context.read<FormsProvider>();
     return Container(
       padding: const EdgeInsets.only(top: AppDimensions.paddingExtraLarge),
       height: 300,

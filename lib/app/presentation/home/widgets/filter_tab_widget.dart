@@ -4,7 +4,7 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/widgets/dialogs/filter_order_dialog.dart';
 import 'package:formularios_front/app/shared/widgets/dialogs/sort_forms_dialog.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
@@ -188,7 +188,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
                     : Theme.of(context).colorScheme.primary,
               ),
               textAlign: TextAlign.center,
-              '(${Modular.get<FormProvider>().getFormsCountByStatus(statusEnum)})',
+              '(${Modular.get<FormsProvider>().getFormsCountByStatus(statusEnum)})',
             ),
           ],
         ),
@@ -201,7 +201,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
             selectChipController.setChipValue(i, value);
           }
           filterController.setStatus(selected ? statusEnum : null);
-          Modular.get<FormProvider>().filterForms(
+          Modular.get<FormsProvider>().filterForms(
             city: filterController.filteredCity,
             enumStatus: filterController.filteredStatus,
             street: filterController.filteredStreet,

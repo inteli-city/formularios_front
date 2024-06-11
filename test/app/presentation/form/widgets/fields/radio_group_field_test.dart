@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/radio_group_field.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -13,12 +13,12 @@ import 'package:mockito/mockito.dart';
 
 import 'radio_group_field_test.mocks.dart';
 
-@GenerateMocks([FormController])
+@GenerateMocks([SingleFormProvider])
 void main() {
-  FormController formController = MockFormController();
+  SingleFormProvider formController = MockFormController();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
-  Modular.replaceInstance<FormController>(formController);
+  Modular.replaceInstance<SingleFormProvider>(formController);
   group('CustomRadioGroupFormField Tests', () {
     setUp(() {
       when(formController.isSendingForm).thenReturn(true);

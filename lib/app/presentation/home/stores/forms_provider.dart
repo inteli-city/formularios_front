@@ -1,29 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
-import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart';
+import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
 
-class FormProvider extends ChangeNotifier {
+class FormsProvider extends ChangeNotifier {
+  final Logger _logger;
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
-  final IUpdateFormStatusUseCase _updateFormStatusUseCase;
-  final ISaveFormUsecase _saveFormUsecase;
-  final ISendFormUsecase _sendFormUsecase;
 
-  FormProvider(
+  FormsProvider(
     this._fetchUserFormsUsecase,
-    this._updateFormStatusUseCase,
-    this._saveFormUsecase,
-    this._sendFormUsecase,
+    this._logger,
   );
 
   // Altera o estado de fetch, para atualizações em tela para todos os forms
@@ -61,12 +53,12 @@ class FormProvider extends ChangeNotifier {
     ).then((value) {
       return value.fold(
         (error) {
-          Modular.get<Logger>().e(error.toString());
+          _logger.e(error.toString());
           GlobalSnackBar.error(error.message);
           return FormUserErrorState(error: error);
         },
         (forms) {
-          Modular.get<Logger>().d(
+          _logger.d(
             '${DateTime.now()} - Forms from user fetched successfully!',
           );
           _allForms = forms;
@@ -75,81 +67,6 @@ class FormProvider extends ChangeNotifier {
         },
       );
     }));
-  }
-
-  Future<bool> updateFormStatus(
-      {required String formId, required FormStatusEnum status}) async {
-    return await _updateFormStatusUseCase(
-      formId: formId,
-      status: status,
-    ).then((value) {
-      return value.fold(
-        (error) {
-          Modular.get<Logger>().e(error.toString());
-          GlobalSnackBar.error(error.message);
-          return false;
-        },
-        (updatedForm) async {
-          Modular.get<Logger>().d(
-            '${DateTime.now()} - Form with ${updatedForm.formId} updated status successfully!',
-          );
-          GlobalSnackBar.success('Formulário atualizado com sucesso!');
-          await fetchUserForms();
-          return true;
-        },
-      );
-    });
-  }
-
-  Future<void> saveForm({
-    required FormEntity form,
-  }) async {
-    await _saveFormUsecase(
-      form: form,
-    ).then((value) {
-      return value.fold(
-        (error) {
-          Modular.get<Logger>().e(error.toString());
-          GlobalSnackBar.error(error.message);
-          setState(FormUserErrorState(error: error));
-
-          return FormUserErrorState(error: error);
-        },
-        (updatedForm) async {
-          Modular.get<Logger>().d(
-            '${DateTime.now()} - Form with ${updatedForm.formId} updated status successfully!',
-          );
-          GlobalSnackBar.success('Formulário atualizado com sucesso!');
-          await fetchUserForms();
-        },
-      );
-    });
-  }
-
-  Future<void> sendForm({
-    required String formId,
-    required List<SectionEntity> sections,
-    String? vinculationFormId,
-  }) async {
-    await _sendFormUsecase(
-      formId: formId,
-      sections: sections,
-      vinculationFormId: vinculationFormId,
-    ).then((value) {
-      return value.fold(
-        (error) {
-          Modular.get<Logger>().e(error.toString());
-          GlobalSnackBar.error(error.message);
-        },
-        (updatedForm) async {
-          Modular.get<Logger>().d(
-            '${DateTime.now()} - Form with ${updatedForm.formId} updated status successfully!',
-          );
-          GlobalSnackBar.success('Formulário enviado com sucesso!');
-          await fetchUserForms();
-        },
-      );
-    });
   }
 
   String getFormsCountByStatus(FormStatusEnum status) {

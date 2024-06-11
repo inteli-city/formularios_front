@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/widgets/dialogs/sort_forms_dialog.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
@@ -13,20 +13,20 @@ import 'package:provider/provider.dart';
 
 import 'sort_forms_dialog_test.mocks.dart';
 
-@GenerateMocks([SortFormsController, FormProvider])
+@GenerateMocks([SortFormsController, FormsProvider])
 void main() {
   group('SortFormsDialog UI Test', () {
     late SortFormsController mockController;
-    late FormProvider formUserProvider;
+    late FormsProvider formUserProvider;
 
     setUp(() {
       Modular.bindModule(AppModule());
       Modular.bindModule(HomeModule());
       mockController = MockSortFormsController();
-      formUserProvider = MockFormProvider();
+      formUserProvider = MockSingleFormProvider();
 
       Modular.replaceInstance<SortFormsController>(mockController);
-      Modular.replaceInstance<FormProvider>(formUserProvider);
+      Modular.replaceInstance<FormsProvider>(formUserProvider);
     });
 
     testWidgets('Displays all order options', (WidgetTester tester) async {
@@ -42,7 +42,7 @@ void main() {
           home: MultiProvider(
               providers: [
                 Provider<SortFormsController>(create: (_) => mockController),
-                ChangeNotifierProvider<FormProvider>(
+                ChangeNotifierProvider<FormsProvider>(
                     create: (_) => formUserProvider),
               ],
               child: const Scaffold(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
@@ -9,7 +9,7 @@ class CustomCheckBoxGroupFormField extends StatefulWidget with ValidationMixin {
   final CheckBoxGroupFieldEntity field;
   final Function(List<String?>) onChanged;
   final SectionEntity sectionEntity;
-  final FormController formController;
+  final SingleFormProvider formController;
 
   CustomCheckBoxGroupFormField({
     super.key,

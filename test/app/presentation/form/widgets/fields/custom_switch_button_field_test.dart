@@ -5,24 +5,24 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_switch_button_field.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'custom_switch_button_field_test.mocks.dart';
 
-@GenerateMocks([FormProvider, FormController, FormEntity])
+@GenerateMocks([FormsProvider, SingleFormProvider, FormEntity])
 void main() {
-  FormController formController = MockFormController();
+  SingleFormProvider formController = MockFormController();
   late FormEntity formEntity;
 
-  MockFormProvider mockProvider = MockFormProvider();
+  MockSingleFormProvider mockProvider = MockSingleFormProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
-  Modular.replaceInstance<FormProvider>(mockProvider);
-  Modular.replaceInstance<FormController>(formController);
+  Modular.replaceInstance<FormsProvider>(mockProvider);
+  Modular.replaceInstance<SingleFormProvider>(formController);
   group('CustomSwitchButtonField Tests', () {
     setUp(() {
       formEntity = MockFormEntity();

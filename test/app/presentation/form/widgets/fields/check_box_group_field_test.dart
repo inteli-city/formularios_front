@@ -8,15 +8,15 @@ import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_group_field.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'check_box_group_field_test.mocks.dart';
 
-@GenerateMocks([FormProvider, FormController, SectionEntity])
+@GenerateMocks([FormsProvider, SingleFormProvider, SectionEntity])
 void main() {
   group('CustomCheckBoxGroupFormField Tests', () {
     late MockFormController mockController;
@@ -75,7 +75,7 @@ void main() {
         Modular.bindModule(HomeModule());
         mockController = MockFormController();
         when(mockController.form).thenReturn(form);
-        Modular.replaceInstance<FormController>(mockController);
+        Modular.replaceInstance<SingleFormProvider>(mockController);
       },
     );
     testWidgets('Teste do CustomCheckBoxGroupFormField',

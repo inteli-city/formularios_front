@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/widgets/dialogs/filter_order_dialog.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
@@ -12,16 +12,16 @@ import 'package:provider/provider.dart';
 
 import 'filter_dialog_test.mocks.dart';
 
-@GenerateMocks([FormProvider, FilterFormsController])
+@GenerateMocks([FormsProvider, FilterFormsController])
 void main() {
   late FilterFormsController mockController;
-  late FormProvider mockProvider;
+  late FormsProvider mockProvider;
 
   group('FilterOrderDialog Widget Tests', () {
     setUp(() {
       Modular.bindModule(HomeModule());
       mockController = MockFilterFormsController();
-      mockProvider = MockFormProvider();
+      mockProvider = MockSingleFormProvider();
 
       when(mockController.filteredTemplate).thenReturn('Template1');
       when(mockController.filteredStreet).thenReturn('Street1');
@@ -42,7 +42,7 @@ void main() {
         MaterialApp(
           home: MultiProvider(providers: [
             Provider<FilterFormsController>(create: (_) => mockController),
-            ChangeNotifierProvider<FormProvider>(create: (_) => mockProvider),
+            ChangeNotifierProvider<FormsProvider>(create: (_) => mockProvider),
           ], child: const FilterOrderDialog()),
         ),
       );

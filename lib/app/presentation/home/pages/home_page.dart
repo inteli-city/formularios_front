@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
-import 'package:formularios_front/app/presentation/stores/states/form_user_state.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
+import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/presentation/home/widgets/filter_tab_widget.dart';
 import 'package:formularios_front/app/presentation/home/widgets/form_card.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -23,11 +23,11 @@ class _HomePageState extends State<HomePage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => Modular.get<FormProvider>()..fetchUserForms(),
+          create: (_) => Modular.get<FormsProvider>()..fetchUserForms(),
         ),
       ],
       child: Builder(builder: (context) {
-        final formUserProvider = Provider.of<FormProvider>(context);
+        final formUserProvider = Provider.of<FormsProvider>(context);
         FormUserState state = formUserProvider.state;
         return state is FormUserErrorState
             ? errorBuild(state.error)

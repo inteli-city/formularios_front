@@ -10,7 +10,7 @@ import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart';
 import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
@@ -19,8 +19,8 @@ import 'package:formularios_front/app/presentation/form/pages/form_sections_page
 import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/landing/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/landing/pages/splash_page.dart';
-import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
-import 'package:formularios_front/app/presentation/stores/providers/user_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
+import 'package:formularios_front/app/presentation/stores/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
@@ -66,21 +66,24 @@ class HomeModule extends Module {
   List<Module> get imports => [MicroAppAuthModule()];
   @override
   void binds(i) {
-    i.addLazySingleton<FormProvider>(FormProvider.new);
+    i.addLazySingleton<FormsProvider>(FormsProvider.new);
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
     i.addLazySingleton<IUpdateFormStatusUseCase>(UpdateFormStatusUseCase.new);
     i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
     i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);
-    i.addLazySingleton(FilterFormsController.new);
+    i.add(FilterFormsController.new);
+    i.add(SortFormsController.new);
+    i.add(SelectChipController.new);
     i.addLazySingleton(StepperController.new);
-    i.addLazySingleton(SortFormsController.new);
-    i.addLazySingleton(SelectChipController.new);
     i.addLazySingleton<IFormStorage>(() => FormHiveStorage.instance());
     i.add(
-      () => FormController(
-        i.get<FormProvider>(),
+      () => SingleFormProvider(
+        i.get(),
+        i.get(),
+        i.get(),
+        i.get(),
         form: i.args.data,
       ),
     );

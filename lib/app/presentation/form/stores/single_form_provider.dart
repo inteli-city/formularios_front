@@ -101,6 +101,7 @@ class SingleFormProvider extends ChangeNotifier {
             '${DateTime.now()} - Form with ${updatedForm.formId} updated status to ${status.name}!',
           );
           GlobalSnackBar.success('Formulário atualizado com sucesso!');
+          setFormStatus(status);
         },
       );
     });

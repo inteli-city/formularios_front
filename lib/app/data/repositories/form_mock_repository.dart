@@ -796,11 +796,10 @@ class FormMockRepository extends IFormRepository {
   ];
 
   @override
-  Future<Either<Failure, List<FormEntity>>> getUserForms(
-      {required String userId}) async {
+  Future<Either<Failure, List<FormEntity>>> getUserForms() async {
     await Future.delayed(const Duration(seconds: 1));
     return right(
-      formList.where((element) => element.userId == userId).toList(),
+      formList.where((element) => element.userId == '1').toList(),
     );
   }
 

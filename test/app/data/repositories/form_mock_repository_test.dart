@@ -61,7 +61,7 @@ void main() {
   group('getUserForms -', () {
     test('should return all forms by userId', () async {
       var userId = repository.formList[0].userId;
-      var result = await repository.getUserForms(userId: userId);
+      var result = await repository.getUserForms();
 
       expect(result.isRight(), true);
 
@@ -106,7 +106,6 @@ void main() {
   });
 
   group('updateFormSections -', () {
-
     test('should update a form sections by formId', () async {
       var form = repository.formList[0];
       form.sections[0].fields[1].value = 'option 01';
@@ -123,7 +122,8 @@ void main() {
     test('should return failure when form not found', () async {
       Modular.bindModule(AppModule());
 
-      var result = await repository.updateFormLocally(form: nonExistingFormLocally);
+      var result =
+          await repository.updateFormLocally(form: nonExistingFormLocally);
 
       expect(result.isLeft(), true);
 

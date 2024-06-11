@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/data/models/section_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
@@ -12,14 +11,14 @@ import 'package:formularios_front/app/domain/repositories/form_storage.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
 
 class FormDioRepository extends IFormRepository {
-  final IHttpService _httpService = Modular.get<IHttpService>();
-  final _formStorage = Modular.get<IFormStorage>();
+  final IHttpService _httpService;
+  final IFormStorage _formStorage;
+  FormDioRepository(this._httpService, this._formStorage);
 
   @override
-  Future<Either<Failure, List<FormEntity>>> getUserForms(
-      {required String userId}) async {
+  Future<Either<Failure, List<FormEntity>>> getUserForms() async {
     try {
-      return _httpService.get('/forms/$userId').then((response) async {
+      return _httpService.get('/get-form-by-user-id').then((response) async {
         if (response.statusCode == 200) {
           await _formStorage.saveForms(forms: response.data['forms']);
           return Right(FormModel.fromMaps(response.data['forms']));

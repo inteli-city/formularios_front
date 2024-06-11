@@ -76,13 +76,11 @@ class MockFetchUserFormsUsecase extends _i1.Mock
       ) as _i2.IFormRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>> call(
-          {required String? userId}) =>
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>> call() =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
-          {#userId: userId},
         ),
         returnValue:
             _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>>.value(
@@ -91,7 +89,6 @@ class MockFetchUserFormsUsecase extends _i1.Mock
           Invocation.method(
             #call,
             [],
-            {#userId: userId},
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>>);

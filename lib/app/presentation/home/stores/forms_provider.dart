@@ -48,9 +48,7 @@ class FormsProvider extends ChangeNotifier {
 
   Future<void> fetchUserForms() async {
     setState(FormUserLoadingState());
-    setState(await _fetchUserFormsUsecase(
-      userId: '1',
-    ).then((value) {
+    setState(await _fetchUserFormsUsecase().then((value) {
       return value.fold(
         (error) {
           _logger.e(error.toString());

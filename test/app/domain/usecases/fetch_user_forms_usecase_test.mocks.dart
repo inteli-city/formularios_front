@@ -47,13 +47,11 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>> getUserForms(
-          {required String? userId}) =>
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>> getUserForms() =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserForms,
           [],
-          {#userId: userId},
         ),
         returnValue:
             _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>.value(
@@ -62,7 +60,6 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
           Invocation.method(
             #getUserForms,
             [],
-            {#userId: userId},
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>);

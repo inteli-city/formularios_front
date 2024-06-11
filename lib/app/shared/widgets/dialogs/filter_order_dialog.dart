@@ -183,16 +183,14 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
         isExpanded: true,
         items: dropdownItems,
         onChanged: onChanged,
+        hint: Text(
+          hintText,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        buttonStyleData:
+            const ButtonStyleData(height: 20, padding: EdgeInsets.zero),
         decoration: InputDecoration(
           isDense: true,
-          label: Text(
-            hintText,
-            style: Theme.of(context)
-                .inputDecorationTheme
-                .labelStyle
-                ?.copyWith(textBaseline: TextBaseline.ideographic),
-            textAlign: TextAlign.center,
-          ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: AppColors.primaryBlue,

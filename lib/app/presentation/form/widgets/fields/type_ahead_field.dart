@@ -32,9 +32,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
     _textController = TextEditingController(
       text: widget.field.value ?? '',
     );
-    print('oi');
-    print(widget.field.value);
-    print(_textController.text);
   }
 
   @override

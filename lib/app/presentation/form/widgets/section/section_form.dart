@@ -77,7 +77,7 @@ class SectionForm extends StatelessWidget {
       }
     }
 
-    void sendOnPressed() {
+    void sendOnPressed() async {
       formController.setIsSendingForm(true);
       if (!formKey.currentState!.validate()) {
         GlobalSnackBar.error(
@@ -85,7 +85,7 @@ class SectionForm extends StatelessWidget {
         );
         formController.setIsSendingForm(false);
       } else {
-        formProvider.sendForm(
+        await formProvider.sendForm(
           formId: formController.form.formId,
           sections: formController.form.sections,
         );

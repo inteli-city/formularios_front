@@ -37,6 +37,8 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
         SizedBox(
           height: ScreenHelper.height(context) * 0.1,
           child: ListView.separated(
+            padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppDimensions.paddingSmall * 0.5),
             separatorBuilder: (context, index) => const SizedBox(
               width: AppDimensions.horizontalSpaceSmall,
             ),

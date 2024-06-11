@@ -30,26 +30,34 @@ class FormSectionsPageState extends State<FormSectionsPage> {
           children: [
             Column(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Modular.to.pop();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        size: AppDimensions.iconLarge,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppDimensions.paddingLarge),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          Modular.to.pop();
+                        },
+                        alignment: Alignment.centerLeft,
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          size: AppDimensions.iconMedium,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: AppDimensions.horizontalSpaceLarge,
-                    ),
-                    Text(
-                      '${formController.form.template} - ${formController.form.formTitle}',
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                  ],
+                      Text(
+                        '${formController.form.template} - ${formController.form.formTitle}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
                 StepperProgress(
                   totalSteps: formController.form.sections.length,

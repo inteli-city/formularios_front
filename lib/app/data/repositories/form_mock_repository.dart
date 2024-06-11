@@ -799,7 +799,6 @@ class FormMockRepository extends IFormRepository {
   Future<Either<Failure, List<FormEntity>>> getUserForms(
       {required String userId}) async {
     await Future.delayed(const Duration(seconds: 1));
-
     return right(
       formList.where((element) => element.userId == userId).toList(),
     );
@@ -863,11 +862,13 @@ class FormMockRepository extends IFormRepository {
     }
 
     var formModel = FormModel.fromEntity(formList[index]).copyWith(
-      sections: sections,
-      vinculationFormId: vinculationFormId,
-    );
+        sections: sections,
+        vinculationFormId: vinculationFormId,
+        status: FormStatusEnum.CONCLUDED);
 
     formList.removeAt(index);
+
+    formList.insert(index, formModel);
 
     return right(formModel);
   }

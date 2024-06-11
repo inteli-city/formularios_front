@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
+import 'package:gates_microapp_flutter/helpers/utils/screen_helper.dart';
 import 'package:gates_microapp_flutter/shared/themes/app_colors.dart';
 
 class StepperProgress extends StatelessWidget {
@@ -13,7 +14,6 @@ class StepperProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StepperController controller = Modular.get<StepperController>();
-
     return SizedBox(
       height: 70,
       child: Stepper(

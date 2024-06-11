@@ -50,6 +50,8 @@ void main() {
     when(formController.creationDate).thenReturn(form.creationDate.toString());
     when(formController.expirationDate)
         .thenReturn(form.expirationDate.toString());
+
+    when(formController.isFormStateLoading).thenReturn(false);
   });
 
   group('Form Details Page', () {

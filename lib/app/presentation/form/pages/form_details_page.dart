@@ -31,14 +31,24 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: AppDimensions.iconMedium,
+                    ),
+                    padding: EdgeInsets.zero,
                     onPressed: () => Modular.to.pop(),
                   ),
                   Text(
                     '${controller.form.system} - ${controller.form.template}',
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],

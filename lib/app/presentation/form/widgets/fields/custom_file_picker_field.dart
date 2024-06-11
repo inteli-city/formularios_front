@@ -125,6 +125,9 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
                 Icons.attach_file,
                 size: AppDimensions.iconMedium,
               ),
+              const SizedBox(
+                width: AppDimensions.paddingSmall,
+              ),
               Text(
                 'Selecionar Arquivos',
                 textAlign: TextAlign.center,

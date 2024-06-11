@@ -85,16 +85,18 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
         }
       },
       validator: (value) {
-        return combine([
-          () => isRequired(
-                value,
-                widget.field.isRequired,
-                widget.formController.getIsSendingForm(),
-              ),
-          () => minDate(value, widget.field.minDate),
-          () => maxDate(value, widget.field.maxDate),
-          () => regex(value, widget.field.regex),
-        ]);
+        return combine(
+          [
+            () => isRequired(
+                  value,
+                  widget.field.isRequired,
+                  widget.formController.getIsSendingForm(),
+                ),
+            () => minDate(value, widget.field.minDate),
+            () => maxDate(value, widget.field.maxDate),
+            () => regex(value, widget.field.regex),
+          ],
+        );
       },
     );
   }

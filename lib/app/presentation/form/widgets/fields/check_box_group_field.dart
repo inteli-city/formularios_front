@@ -50,35 +50,39 @@ class _CustomCheckBoxGroupFormFieldState
           widget.field.placeholder,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        ...widget.field.options.map((option) {
-          return CheckboxListTile(
-            activeColor: Theme.of(context).colorScheme.primary,
-            checkColor: Theme.of(context).colorScheme.secondary,
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.primary,
-              style: BorderStyle.solid,
-              width: AppDimensions.borderMedium,
-            ),
-            tileColor: Theme.of(context).colorScheme.secondary,
-            title: Text(
-              option,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            value: selectedOptions.contains(option),
-            onChanged: (newValue) {
-              setState(() {
-                if (newValue == true) {
-                  selectedOptions.add(option);
-                } else {
-                  selectedOptions.remove(option);
-                }
-              });
-              widget.onChanged(selectedOptions);
-            },
-            controlAffinity: ListTileControlAffinity.leading,
-            contentPadding: EdgeInsets.zero,
-          );
-        }),
+        ...widget.field.options.map(
+          (option) {
+            return CheckboxListTile(
+              activeColor: Theme.of(context).colorScheme.primary,
+              checkColor: Theme.of(context).colorScheme.secondary,
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.primary,
+                style: BorderStyle.solid,
+                width: AppDimensions.borderMedium,
+              ),
+              tileColor: Theme.of(context).colorScheme.secondary,
+              title: Text(
+                option,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              value: selectedOptions.contains(option),
+              onChanged: (newValue) {
+                setState(
+                  () {
+                    if (newValue == true) {
+                      selectedOptions.add(option);
+                    } else {
+                      selectedOptions.remove(option);
+                    }
+                  },
+                );
+                widget.onChanged(selectedOptions);
+              },
+              controlAffinity: ListTileControlAffinity.leading,
+              contentPadding: EdgeInsets.zero,
+            );
+          },
+        ),
       ],
     );
   }

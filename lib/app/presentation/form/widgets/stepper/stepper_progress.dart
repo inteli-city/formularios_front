@@ -36,16 +36,19 @@ class StepperProgress extends StatelessWidget {
   }
 
   List<Step> _buildSteps(BuildContext context) {
-    return List.generate(totalSteps, (index) {
-      return Step(
-        title: const Text(''),
-        stepStyle: StepStyle(
-          color: AppColors.primaryBlue,
-        ),
-        isActive: true,
-        state: StepState.indexed,
-        content: Container(),
-      );
-    });
+    return List.generate(
+      totalSteps,
+      (index) {
+        return Step(
+          title: const Text(''),
+          stepStyle: StepStyle(
+            color: AppColors.primaryBlue,
+          ),
+          isActive: true,
+          state: StepState.indexed,
+          content: Container(),
+        );
+      },
+    );
   }
 }

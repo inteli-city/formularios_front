@@ -13,7 +13,8 @@ class CustomTypeAheadFormField extends StatefulWidget {
   const CustomTypeAheadFormField({
     super.key,
     required this.field,
-    required this.onChanged, required this.formController,
+    required this.onChanged,
+    required this.formController,
   });
 
   @override
@@ -52,15 +53,17 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
             labelText: widget.field.placeholder,
           ),
           onChanged: (value) => widget.onChanged(value),
-          validator: (value) => combine([
-            () => maxLength(value, widget.field.maxLength),
-            () => regex(value, widget.field.regex),
-            () => isRequired(
-                  value,
-                  widget.field.isRequired,
-                  widget.formController.getIsSendingForm(),
-                )
-          ]),
+          validator: (value) => combine(
+            [
+              () => maxLength(value, widget.field.maxLength),
+              () => regex(value, widget.field.regex),
+              () => isRequired(
+                    value,
+                    widget.field.isRequired,
+                    widget.formController.getIsSendingForm(),
+                  )
+            ],
+          ),
           inputFormatters: [
             if (widget.field.maxLength != null)
               LengthLimitingTextInputFormatter(widget.field.maxLength),

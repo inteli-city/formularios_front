@@ -26,12 +26,14 @@ class CustomTextFormField extends StatelessWidget with ValidationMixin {
       onChanged: onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        return combine([
-          () => isRequired(
-              value, field.isRequired, formController.getIsSendingForm()),
-          () => maxLength(value, field.maxLength),
-          () => regex(value, field.regex),
-        ]);
+        return combine(
+          [
+            () => isRequired(
+                value, field.isRequired, formController.getIsSendingForm()),
+            () => maxLength(value, field.maxLength),
+            () => regex(value, field.regex),
+          ],
+        );
       },
     );
   }

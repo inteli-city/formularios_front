@@ -43,9 +43,11 @@ class _CustomSwitchButtonFieldState extends State<CustomSwitchButtonField> {
                   widget.sectionEntity.sectionId, widget.field.key) ??
               false,
           onChanged: (value) {
-            setState(() {
-              widget.onChanged(value);
-            });
+            setState(
+              () {
+                widget.onChanged(value);
+              },
+            );
           },
         ),
       ],

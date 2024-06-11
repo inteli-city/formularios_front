@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/presentation/stores/providers/form_user_provider.dart';
 
-import 'home_page_test.mocks.dart';
+import '../../pages/home_page_test.mocks.dart';
 
 @GenerateMocks([FormUserProvider])
 void main() {

@@ -12,7 +12,7 @@ import 'package:formularios_front/generated/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'form_details_page_test.mocks.dart';
+import '../../pages/form_details_page_test.mocks.dart';
 
 @GenerateMocks([FormUserProvider, FormEntity, FormController])
 void main() {

@@ -32,11 +32,13 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
     return FormField<String>(
       initialValue: widget.field.value,
       validator: (value) {
-        return combine([
-          () => isRequired(value, widget.field.isRequired,
-              widget.formController.getIsSendingForm()),
-          () => regex(value, widget.field.regex),
-        ]);
+        return combine(
+          [
+            () => isRequired(value, widget.field.isRequired,
+                widget.formController.getIsSendingForm()),
+            () => regex(value, widget.field.regex),
+          ],
+        );
       },
       builder: (state) {
         return Column(
@@ -58,9 +60,11 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
                     widget.field.key,
                   ),
                   onChanged: (value) {
-                    setState(() {
-                      widget.onChanged(value);
-                    });
+                    setState(
+                      () {
+                        widget.onChanged(value);
+                      },
+                    );
                   },
                 );
               },

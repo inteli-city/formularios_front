@@ -27,8 +27,8 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
         field.placeholder,
         style: Theme.of(context)
             .textTheme
-            .titleMedium
-            !.copyWith(textBaseline: TextBaseline.ideographic),
+            .titleMedium!
+            .copyWith(textBaseline: TextBaseline.ideographic),
       ),
       value: field.value,
       style: Theme.of(context).textTheme.titleMedium,
@@ -54,21 +54,25 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
           ),
         ),
       ),
-      items: field.options.map((option) {
-        return DropdownMenuItem(
-          value: option,
-          child: Text(
-            option,
-          ),
-        );
-      }).toList(),
+      items: field.options.map(
+        (option) {
+          return DropdownMenuItem(
+            value: option,
+            child: Text(
+              option,
+            ),
+          );
+        },
+      ).toList(),
       onChanged: onChanged,
       validator: (value) {
-        return combine([
-          () => isRequired(
-              value, field.isRequired, formController.getIsSendingForm()),
-          () => regex(value, field.regex),
-        ]);
+        return combine(
+          [
+            () => isRequired(
+                value, field.isRequired, formController.getIsSendingForm()),
+            () => regex(value, field.regex),
+          ],
+        );
       },
     );
   }

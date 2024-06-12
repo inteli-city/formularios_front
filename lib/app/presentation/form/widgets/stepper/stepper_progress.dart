@@ -44,7 +44,7 @@ class StepperProgress extends StatelessWidget {
           ),
           isActive: true,
           state: StepState.indexed,
-          content: Container(),
+          content: const SizedBox.shrink(),
         );
       },
     );

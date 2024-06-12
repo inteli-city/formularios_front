@@ -35,11 +35,19 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               horizontal: AppDimensions.paddingMedium,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 _buildFormDetails(),
                 const SizedBox(height: AppDimensions.verticalSpaceMedium),
-                _buildFormDetailsActions()
+                Consumer<SingleFormProvider>(builder: (_, a, child) {
+                  return controller.isFormStateLoading
+                      ? const Padding(
+                          padding: EdgeInsets.only(bottom: 24),
+                          child: CircularProgressIndicator(),
+                        )
+                      : _buildFormDetailsActions();
+                })
               ],
             ),
           ),
@@ -224,7 +232,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             ? SizedBox(
                 width: double.infinity,
                 child: buildCustomElevatedButton(
-                  isLoading: controller.isFormStateLoading,
                   onPressed: () async {
                     await controller.updateFormStatus(
                       status: FormStatusEnum.IN_PROGRESS,
@@ -239,7 +246,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                 children: [
                   Expanded(
                     child: buildCustomElevatedButton(
-                      isLoading: controller.isFormStateLoading,
                       onPressed: () {
                         Modular.to.pushNamed(
                           '/home/${controller.form.formId}/fill',
@@ -256,7 +262,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
                   ),
                   Expanded(
                     child: buildCustomElevatedButton(
-                      isLoading: controller.isFormStateLoading,
                       onPressed: () async {
                         await controller.updateFormStatus(
                           status: FormStatusEnum.NOT_STARTED,
@@ -279,13 +284,12 @@ class FormDetailsPageState extends State<FormDetailsPage> {
   Widget buildCustomElevatedButton({
     required Function()? onPressed,
     required String text,
-    required bool isLoading,
     Color? backgroundColor,
     Color? textColor,
     bool hasBorder = false,
   }) {
     return ElevatedButton(
-      onPressed: isLoading ? null : onPressed,
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(
           vertical: AppDimensions.paddingMedium * 1.2,
@@ -304,15 +308,13 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         backgroundColor:
             backgroundColor ?? Theme.of(context).colorScheme.primary,
       ),
-      child: isLoading
-          ? const CircularProgressIndicator()
-          : Text(
-              text,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: textColor ?? AppColors.white,
-                  ),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: textColor ?? AppColors.white,
             ),
+      ),
     );
   }
 
@@ -323,7 +325,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         children: [
           Expanded(
             child: buildCustomElevatedButton(
-              isLoading: controller.isFormStateLoading,
               onPressed: () async {
                 await controller.updateFormStatus(
                   status: FormStatusEnum.CANCELED,

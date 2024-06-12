@@ -49,9 +49,9 @@ class SingleFormProvider extends ChangeNotifier {
           _logger.e(error.toString());
           GlobalSnackBar.error(error.message);
         },
-        (updatedForm) async {
+        (savedForm) async {
           _logger.d(
-            '${DateTime.now()} - Form with ${updatedForm.formId} saved successfully!',
+            '${DateTime.now()} - Form with ${savedForm.formId} saved successfully!',
           );
           GlobalSnackBar.success('Formulário atualizado com sucesso!');
         },
@@ -73,9 +73,9 @@ class SingleFormProvider extends ChangeNotifier {
           _logger.e(error.toString());
           GlobalSnackBar.error(error.message);
         },
-        (updatedForm) async {
+        (sendedForm) async {
           _logger.d(
-            '${DateTime.now()} - Form with ${updatedForm.formId} send successfully!',
+            '${DateTime.now()} - Form with ${sendedForm.formId} send successfully!',
           );
           GlobalSnackBar.success('Formulário enviado com sucesso!');
         },

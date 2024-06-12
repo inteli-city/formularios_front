@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/app_module.dart';
@@ -32,6 +31,5 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(Stepper), findsOneWidget);
-
   });
 }

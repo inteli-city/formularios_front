@@ -21,6 +21,7 @@ class StepperProgress extends StatelessWidget {
         stepIconWidth: 32,
         stepIconHeight: 32,
         connectorThickness: 2,
+        stepIconMargin: EdgeInsets.zero,
         connectorColor:
             WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
         currentStep: controller.currentStep,
@@ -38,13 +39,13 @@ class StepperProgress extends StatelessWidget {
       totalSteps,
       (index) {
         return Step(
-          title: const Text(''),
           stepStyle: StepStyle(
             color: AppColors.primaryBlue,
           ),
           isActive: true,
           state: StepState.indexed,
           content: const SizedBox.shrink(),
+          title: const Text(''),
         );
       },
     );

@@ -51,8 +51,7 @@ mixin ValidationMixin {
     if (maxValue != null &&
         int.tryParse(value) != null &&
         int.parse(value) > maxValue) {
-      return message ??
-          '${S.current.thisFieldShouldHaveMaximumValue}$maxValue';
+      return message ?? '${S.current.thisFieldShouldHaveMaximumValue}$maxValue';
     }
     return null;
   }
@@ -64,8 +63,7 @@ mixin ValidationMixin {
     if (minValue != null &&
         int.tryParse(value) != null &&
         int.parse(value) < minValue) {
-      return message ??
-          '${S.current.thisFieldShouldHaveMinimumValue}$minValue';
+      return message ?? '${S.current.thisFieldShouldHaveMinimumValue}$minValue';
     }
     return null;
   }
@@ -90,6 +88,21 @@ mixin ValidationMixin {
     if (minDate != null && inputDate.isBefore(minDate)) {
       return message ??
           '${S.current.thisDateSouldBeAfter} ${DateFormat('dd/MM/yyyy').format(minDate)}';
+    }
+    return null;
+  }
+
+  String? checkLimit(List<String?>? value, int? maxCheckLimit,
+      [String? message]) {
+    if (maxCheckLimit == null) {
+      return null;
+    }
+
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    if (value.length > maxCheckLimit) {
+      return message ?? '${S.current.maxCheckLimit} $maxCheckLimit';
     }
     return null;
   }

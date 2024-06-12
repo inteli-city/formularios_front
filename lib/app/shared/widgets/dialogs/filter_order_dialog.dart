@@ -145,7 +145,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                   S.current.confirm,
                   style: Theme.of(context)
                       .textTheme
-                      .headlineLarge!
+                      .titleMedium!
                       .copyWith(color: AppColors.white),
                 ),
               ),
@@ -178,7 +178,6 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
       child: DropdownButtonFormField2<String?>(
-        alignment: Alignment.center,
         value: selectedValue,
         isExpanded: true,
         items: dropdownItems,

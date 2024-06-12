@@ -501,6 +501,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Exceeded max check limit of `
+  String get maxCheckLimit {
+    return Intl.message(
+      'Exceeded max check limit of ',
+      name: 'maxCheckLimit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

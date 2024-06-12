@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "linkForm": MessageLookupByLibrary.simpleMessage("Vincular Formulário"),
         "localStorageErrorMessage": m2,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
+        "maxCheckLimit":
+            MessageLookupByLibrary.simpleMessage("Ultrapassou o limite de "),
         "noFormsFound": MessageLookupByLibrary.simpleMessage(
             "Nenhum Formulário Encontrado!"),
         "noInternetConnectionErrorMessage":

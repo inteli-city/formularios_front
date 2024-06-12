@@ -81,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "linkForm": MessageLookupByLibrary.simpleMessage("Link Form"),
         "localStorageErrorMessage": m2,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
+        "maxCheckLimit": MessageLookupByLibrary.simpleMessage(
+            "Exceeded max check limit of "),
         "noFormsFound": MessageLookupByLibrary.simpleMessage("No form found!"),
         "noInternetConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage("No internet connection"),

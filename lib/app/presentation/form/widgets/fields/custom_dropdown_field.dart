@@ -21,20 +21,13 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField2<String>(
-      alignment: Alignment.center,
       isExpanded: true,
-      hint: Text(
-        field.placeholder,
-        style: Theme.of(context)
-            .textTheme
-            .titleMedium!
-            .copyWith(textBaseline: TextBaseline.ideographic),
-      ),
+      isDense: true,
       value: field.value,
-      style: Theme.of(context).textTheme.titleMedium,
-      buttonStyleData:
-          const ButtonStyleData(height: 20, padding: EdgeInsets.zero),
       decoration: InputDecoration(
+        label: Text(
+          field.placeholder,
+        ),
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryBlue,
@@ -60,6 +53,7 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
             value: option,
             child: Text(
               option,
+              textAlign: TextAlign.center,
             ),
           );
         },

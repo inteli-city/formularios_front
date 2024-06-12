@@ -92,5 +92,7 @@
 
     "thisDateShouldBeBefore": "This date should be before of ",
 
-    "thisDateSouldBeAfter": "This date should be after of "
+    "thisDateSouldBeAfter": "This date should be after of ",
+
+    "maxCheckLimit" : "Exceeded max check limit of "
 }

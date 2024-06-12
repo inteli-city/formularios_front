@@ -48,7 +48,7 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.field.placeholder,
+              '${widget.field.placeholder}:',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             ...widget.field.options.map(

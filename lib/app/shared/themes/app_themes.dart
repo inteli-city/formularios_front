@@ -20,6 +20,7 @@ class AppThemes {
     elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
       elevation: WidgetStatePropertyAll(8),
+      shape: WidgetStatePropertyAll(StadiumBorder()),
       padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(
           vertical: AppDimensions.paddingLarge,
@@ -73,7 +74,6 @@ class AppThemes {
             width: AppDimensions.borderThin * 1.5,
             style: BorderStyle.solid),
       ),
-      alignLabelWithHint: true,
       floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),

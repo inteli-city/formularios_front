@@ -76,17 +76,12 @@ class SectionForm extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () async {
-              singleFormProvider.setIsSendingForm(true);
               if (formKey.currentState!.validate()) {
                 await singleFormProvider.saveForm();
               }
-              singleFormProvider.setIsSendingForm(false);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-              ),
             ),
             child: singleFormProvider.isSendingForm
                 ? const CircularProgressIndicator()
@@ -117,10 +112,6 @@ class SectionForm extends StatelessWidget {
                     backgroundColor: lastSection
                         ? Theme.of(context).colorScheme.primary
                         : AppColors.gray,
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(AppDimensions.radiusMedium),
-                    ),
                   ),
                   child: Text(
                     'Enviar',

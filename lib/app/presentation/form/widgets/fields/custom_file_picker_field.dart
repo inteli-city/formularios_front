@@ -94,7 +94,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.field.placeholder,
+          '${widget.field.placeholder}:',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: AppDimensions.paddingSmall),

@@ -294,10 +294,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         padding: const EdgeInsets.symmetric(
           vertical: AppDimensions.paddingMedium * 1.2,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            AppDimensions.radiusMedium,
-          ),
+        shape: StadiumBorder(
           side: hasBorder
               ? BorderSide(
                   color: Theme.of(context).colorScheme.primary,

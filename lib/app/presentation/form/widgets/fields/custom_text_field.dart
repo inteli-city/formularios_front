@@ -22,7 +22,6 @@ class CustomTextFormField extends StatelessWidget with ValidationMixin {
       decoration: InputDecoration(
         labelText: field.placeholder,
       ),
-      maxLength: field.maxLength,
       onChanged: onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {

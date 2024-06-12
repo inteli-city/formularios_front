@@ -17,16 +17,16 @@ import 'sort_forms_dialog_test.mocks.dart';
 void main() {
   group('SortFormsDialog UI Test', () {
     late SortFormsController mockController;
-    late FormsProvider formUserProvider;
+    late FormsProvider formsProvider;
 
     setUp(() {
       Modular.bindModule(AppModule());
       Modular.bindModule(HomeModule());
       mockController = MockSortFormsController();
-      formUserProvider = MockSingleFormProvider();
+      formsProvider = MockFormsProvider();
 
       Modular.replaceInstance<SortFormsController>(mockController);
-      Modular.replaceInstance<FormsProvider>(formUserProvider);
+      Modular.replaceInstance<FormsProvider>(formsProvider);
     });
 
     testWidgets('Displays all order options', (WidgetTester tester) async {
@@ -35,7 +35,8 @@ void main() {
       when(mockController.selectedOrder).thenReturn(OrderEnum.MAIS_ANTIGO);
       when(mockController.setSelectedOrder(OrderEnum.MAIS_ANTIGO))
           .thenReturn(null);
-      when(formUserProvider.orderForms(OrderEnum.MAIS_ANTIGO)).thenReturn(null);
+      when(formsProvider.orderForms(OrderEnum.MAIS_ANTIGO))
+          .thenReturn(null);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -43,7 +44,7 @@ void main() {
               providers: [
                 Provider<SortFormsController>(create: (_) => mockController),
                 ChangeNotifierProvider<FormsProvider>(
-                    create: (_) => formUserProvider),
+                    create: (_) => formsProvider),
               ],
               child: const Scaffold(
                   body: SizedBox(

@@ -23,11 +23,11 @@ class SectionForm extends StatelessWidget {
   final SectionEntity section;
   final bool lastSection;
   final GlobalKey<FormState> formKey;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
 
   const SectionForm({
     super.key,
-    required this.formController,
+    required this.singleFormProvider,
     required this.section,
     required this.lastSection,
     required this.formKey,
@@ -76,11 +76,11 @@ class SectionForm extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () async {
-              formController.setIsSendingForm(true);
+              singleFormProvider.setIsSendingForm(true);
               if (formKey.currentState!.validate()) {
-                await formController.saveForm();
+                await singleFormProvider.saveForm();
               }
-              formController.setIsSendingForm(false);
+              singleFormProvider.setIsSendingForm(false);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -88,7 +88,7 @@ class SectionForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
               ),
             ),
-            child: formController.isSendingForm
+            child: singleFormProvider.isSendingForm
                 ? const CircularProgressIndicator()
                 : Text(
                     'Salvar',
@@ -102,16 +102,16 @@ class SectionForm extends StatelessWidget {
           lastSection
               ? ElevatedButton(
                   onPressed: () async {
-                    formController.setIsSendingForm(true);
+                    singleFormProvider.setIsSendingForm(true);
                     if (!formKey.currentState!.validate()) {
                       GlobalSnackBar.error(
                         S.current.allFieldsShouldBeSaved,
                       );
                     } else {
-                      await formController.sendForm();
+                      await singleFormProvider.sendForm();
                       Modular.to.pop();
                     }
-                    formController.setIsSendingForm(false);
+                    singleFormProvider.setIsSendingForm(false);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: lastSection
@@ -142,9 +142,10 @@ class SectionForm extends StatelessWidget {
       case FieldTypeEnum.TEXT_FIELD:
         return CustomTextFormField(
           field: field as TextFieldEntity,
-          formController: formController,
+          singleFormProvider: singleFormProvider,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
         );
@@ -153,38 +154,42 @@ class SectionForm extends StatelessWidget {
         return CustomNumberFormField(
           field: field as NumberFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
-          formController: formController,
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.DROPDOWN_FIELD:
         return CustomDropDownFormField(
           field: field as DropDownFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
-          formController: formController,
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.CHECKBOX_GROUP_FIELD:
         return CustomCheckBoxGroupFormField(
           field: field as CheckBoxGroupFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
           sectionEntity: section,
-          formController: formController,
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:
         return CustomCheckBoxFormField(
           field: field as CheckBoxFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
         );
@@ -193,52 +198,57 @@ class SectionForm extends StatelessWidget {
         return CustomTypeAheadFormField(
           field: field as TypeAheadFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
-          formController: formController,
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.RADIO_GROUP_FIELD:
         return CustomRadioGroupFormField(
           field: field as RadioGroupFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
           sectionEntity: section,
-          formController: formController,
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.DATE_FIELD:
         return CustomDateFormField(
           field: field as DateFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
-          formController: formController,
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.SWITCH_BUTTON_FIELD:
         return CustomSwitchButtonField(
           field: field as SwitchButtonFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
           sectionEntity: section,
-          formController: formController,
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.FILE_FIELD:
         return CustomFilePickerFormField(
           field: field as FileFieldEntity,
           onChanged: (value) {
-            formController.setFieldValue(section.sectionId, field.key, value);
+            singleFormProvider.setFieldValue(
+                section.sectionId, field.key, value);
           },
           key: Key(field.key),
-          controller: formController,
+          controller: singleFormProvider,
           section: section,
         );
 

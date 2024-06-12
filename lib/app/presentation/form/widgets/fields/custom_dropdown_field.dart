@@ -9,13 +9,13 @@ import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
   final DropDownFieldEntity field;
   final Function(String?) onChanged;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
 
   CustomDropDownFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -71,7 +71,7 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
             () => isRequired(
                   value,
                   field.isRequired,
-                  formController.isSendingForm,
+                  singleFormProvider.isSendingForm,
                 ),
             () => regex(value, field.regex),
           ],

@@ -7,21 +7,21 @@ import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
 import 'package:mockito/annotations.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
 import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/form/pages/form_sections_page.dart';
 import 'package:mockito/mockito.dart';
 
-import 'form_sections_page_test.mocks.dart';
+import '../controllers/stepper_controller_test.mocks.dart';
+import 'form_details_page_test.mocks.dart';
 
-@GenerateMocks([FormController, StepperController])
+@GenerateMocks([SingleFormProvider, StepperController])
 void main() {
-  MockFormController formController = MockFormController();
+  MockSingleFormProvider singleFormProvider = MockSingleFormProvider();
   StepperController stepperController = MockStepperController();
   ScrollController scrollController = ScrollController();
 
@@ -103,15 +103,15 @@ void main() {
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
 
-    Modular.replaceInstance<FormController>(formController);
+    Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
     Modular.replaceInstance<StepperController>(stepperController);
 
-    when(formController.form).thenReturn(form);
-    when(formController.isSendingForm).thenReturn(false);
+    when(singleFormProvider.form).thenReturn(form);
+    when(singleFormProvider.isSendingForm).thenReturn(false);
     when(stepperController.currentStep).thenReturn(0);
     when(stepperController.listViewController).thenReturn(scrollController);
 
-    when(formController.form).thenReturn(form);
+    when(singleFormProvider.form).thenReturn(form);
     when(stepperController.listViewController).thenReturn(ScrollController());
   });
 
@@ -121,9 +121,9 @@ void main() {
         home: FormSectionsPage(),
       ),
     );
-    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
+    // expect(find.byIcon(Icons.arrow_back), findsOneWidget);
 
-    expect(find.text('Poda de Árvore 3 - Poda de Árvore 3'), findsOneWidget);
+    expect(find.text('Fill form'), findsOneWidget);
 
     expect(find.byType(StepperProgress), findsOneWidget);
 

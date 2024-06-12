@@ -15,15 +15,15 @@ import 'custom_number_field_test.mocks.dart';
 @GenerateMocks([SingleFormProvider])
 void main() {
   group('CustomNumberFormField Tests', () {
-    late SingleFormProvider formController;
+    late SingleFormProvider singleFormProvider;
 
     setUp(
       () {
         Modular.bindModule(HomeModule());
-        formController = MockFormController();
-        Modular.replaceInstance<SingleFormProvider>(formController);
+        singleFormProvider = MockSingleFormProvider();
+        Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
 
-        when(formController.isSendingForm).thenReturn(true);
+        when(singleFormProvider.isSendingForm).thenReturn(true);
       },
     );
     testWidgets('Displays initial value and placeholder',
@@ -44,7 +44,7 @@ void main() {
             body: CustomNumberFormField(
               field: field,
               onChanged: (value) {},
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -77,11 +77,11 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -124,11 +124,11 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -171,11 +171,11 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -217,11 +217,11 @@ void main() {
                   CustomNumberFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

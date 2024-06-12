@@ -7,13 +7,13 @@ import 'package:intl/intl.dart';
 class CustomDateFormField extends StatefulWidget with ValidationMixin {
   final DateFieldEntity field;
   final Function(DateTime?) onChanged;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
 
   CustomDateFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -90,7 +90,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
             () => isRequired(
                   value,
                   widget.field.isRequired,
-                  widget.formController.isSendingForm,
+                  widget.singleFormProvider.isSendingForm,
                 ),
             () => minDate(value, widget.field.minDate),
             () => maxDate(value, widget.field.maxDate),

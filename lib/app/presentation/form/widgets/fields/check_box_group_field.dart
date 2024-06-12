@@ -9,14 +9,14 @@ class CustomCheckBoxGroupFormField extends StatefulWidget with ValidationMixin {
   final CheckBoxGroupFieldEntity field;
   final Function(List<String?>) onChanged;
   final SectionEntity sectionEntity;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
 
   CustomCheckBoxGroupFormField({
     super.key,
     required this.field,
     required this.onChanged,
     required this.sectionEntity,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -32,11 +32,12 @@ class _CustomCheckBoxGroupFormFieldState
   void initState() {
     super.initState();
 
-    int sectionIndex = widget.formController.form.sections.indexWhere(
+    int sectionIndex = widget.singleFormProvider.form.sections.indexWhere(
         (section) => section.sectionId == widget.sectionEntity.sectionId);
-    int fieldIndex = widget.formController.form.sections[sectionIndex].fields
+    int fieldIndex = widget
+        .singleFormProvider.form.sections[sectionIndex].fields
         .indexWhere((field) => field.key == widget.field.key);
-    selectedOptions = widget.formController.form.sections[sectionIndex]
+    selectedOptions = widget.singleFormProvider.form.sections[sectionIndex]
             .fields[fieldIndex].value ??
         [];
   }

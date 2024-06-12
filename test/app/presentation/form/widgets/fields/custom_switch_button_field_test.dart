@@ -15,14 +15,14 @@ import 'custom_switch_button_field_test.mocks.dart';
 
 @GenerateMocks([FormsProvider, SingleFormProvider, FormEntity])
 void main() {
-  SingleFormProvider formController = MockFormController();
+  SingleFormProvider singleFormProvider = MockSingleFormProvider();
   late FormEntity formEntity;
 
-  MockSingleFormProvider mockProvider = MockSingleFormProvider();
+  MockFormsProvider mockProvider = MockFormsProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
   Modular.replaceInstance<FormsProvider>(mockProvider);
-  Modular.replaceInstance<SingleFormProvider>(formController);
+  Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
   group('CustomSwitchButtonField Tests', () {
     setUp(() {
       formEntity = MockFormEntity();
@@ -44,7 +44,7 @@ void main() {
         fields: [field],
       );
 
-      when(formController.getFieldValue(section.sectionId, field.key))
+      when(singleFormProvider.getFieldValue(section.sectionId, field.key))
           .thenReturn(true);
 
       await tester.pumpWidget(
@@ -53,11 +53,11 @@ void main() {
             body: CustomSwitchButtonField(
               field: field,
               onChanged: (value) {
-                formController.setFieldValue(
+                singleFormProvider.setFieldValue(
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -80,7 +80,7 @@ void main() {
         fields: [field],
       );
 
-      when(formController.getFieldValue(section.sectionId, field.key))
+      when(singleFormProvider.getFieldValue(section.sectionId, field.key))
           .thenReturn(true);
 
       await tester.pumpWidget(
@@ -89,11 +89,11 @@ void main() {
             body: CustomSwitchButtonField(
               field: field,
               onChanged: (value) {
-                formController.setFieldValue(
+                singleFormProvider.setFieldValue(
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -102,7 +102,8 @@ void main() {
       await tester.tap(find.byType(Switch));
       await tester.pumpAndSettle();
 
-      expect(formController.getFieldValue(section.sectionId, field.key), true);
+      expect(
+          singleFormProvider.getFieldValue(section.sectionId, field.key), true);
     });
 
     testWidgets(
@@ -120,7 +121,7 @@ void main() {
       );
       final formKey = GlobalKey<FormState>();
 
-      when(formController.getFieldValue(section.sectionId, field.key))
+      when(singleFormProvider.getFieldValue(section.sectionId, field.key))
           .thenReturn(true);
 
       await tester.pumpWidget(
@@ -133,15 +134,15 @@ void main() {
                   CustomSwitchButtonField(
                     field: field,
                     onChanged: (value) {
-                      formController.setFieldValue(
+                      singleFormProvider.setFieldValue(
                           section.sectionId, field.key, value);
                     },
                     sectionEntity: section,
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

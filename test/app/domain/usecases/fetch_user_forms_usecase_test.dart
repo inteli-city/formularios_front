@@ -25,7 +25,7 @@ void main() {
 
   group('FetchUserFormsUsecase', () {
     test('should return a list of FormEntity', () async {
-      when(formRepository.getUserForms(userId: '1'))
+      when(formRepository.getUserForms())
           .thenAnswer((_) async => Right([
                 FormEntity(
                   formId: 'formId',
@@ -110,7 +110,7 @@ void main() {
                   canVinculate: false,
                 ),
               ]));
-      var result = await usecase(userId: '1');
+      var result = await usecase();
       expect(result.isRight(), true);
       expect(
         result.fold((l) => null, (forms) => forms),
@@ -123,10 +123,10 @@ void main() {
     });
 
     test('should return a Failure', () async {
-      when(formRepository.getUserForms(userId: '1'))
+      when(formRepository.getUserForms())
           .thenAnswer((_) async => Left(Failure(message: '')));
 
-      var result = await usecase(userId: '1');
+      var result = await usecase();
 
       expect(result.isLeft(), true);
       expect(

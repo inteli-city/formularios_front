@@ -4,14 +4,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i7;
+import 'dart:ui' as _i8;
 
 import 'package:flutter/material.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i6;
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart'
-    as _i4;
 import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart'
-    as _i8;
+    as _i9;
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart'
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
 
@@ -49,11 +50,12 @@ class _FakeScrollController_1 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [FormController].
+/// A class which mocks [SingleFormProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormController extends _i1.Mock implements _i4.FormController {
-  MockFormController() {
+class MockSingleFormProvider extends _i1.Mock
+    implements _i4.SingleFormProvider {
+  MockSingleFormProvider() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -115,6 +117,12 @@ class MockFormController extends _i1.Mock implements _i4.FormController {
       ) as String);
 
   @override
+  bool get hasListeners => (super.noSuchMethod(
+        Invocation.getter(#hasListeners),
+        returnValue: false,
+      ) as bool);
+
+  @override
   void setIsFormStateLoading(bool? value) => super.noSuchMethod(
         Invocation.method(
           #setIsFormStateLoading,
@@ -153,11 +161,12 @@ class MockFormController extends _i1.Mock implements _i4.FormController {
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> updateFormStatus(_i6.FormStatusEnum? status) =>
+  _i7.Future<void> updateFormStatus({required _i6.FormStatusEnum? status}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateFormStatus,
-          [status],
+          [],
+          {#status: status},
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
@@ -202,12 +211,48 @@ class MockFormController extends _i1.Mock implements _i4.FormController {
           key,
         ],
       ));
+
+  @override
+  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [StepperController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStepperController extends _i1.Mock implements _i8.StepperController {
+class MockStepperController extends _i1.Mock implements _i9.StepperController {
   MockStepperController() {
     _i1.throwOnMissingStub(this);
   }

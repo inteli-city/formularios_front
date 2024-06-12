@@ -3,37 +3,45 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'single_form_provider_test.mocks.dart';
+import '../pages/form_details_page_test.mocks.dart';
 
-@GenerateMocks([SingleFormProvider, FormEntity])
+@GenerateMocks([FormsProvider, FormEntity])
 void main() {
   late FormEntity mockEntity;
-  late SingleFormProvider controller;
+  late FormsProvider mockProvider;
+  late SingleFormProvider mockSingleFormProvider;
 
-  MockSingleFormProvider mockProvider = MockSingleFormProvider();
+  mockProvider = MockFormsProvider();
+  mockSingleFormProvider = MockSingleFormProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
 
-  group('Form Details Controller Test', () {
+  group('Single Form Provider Test', () {
     setUp(() {
       mockEntity = MockFormEntity();
       when(mockEntity.creationDate).thenReturn(1622563200000);
       when(mockEntity.formId).thenReturn('externForm1');
       when(mockEntity.expirationDate).thenReturn(1622649600000);
       when(mockEntity.sections).thenReturn([]);
-      when(mockProvider.getFormByExternId(any)).thenReturn(mockEntity);
-      controller = SingleFormProvider(mockProvider, form: mockEntity);
+      when(mockProvider.getFormByExternId(mockEntity.formId))
+          .thenReturn(mockEntity);
+      mockSingleFormProvider = MockSingleFormProvider();
+      when(mockSingleFormProvider.creationDate)
+          .thenReturn('01/06/2021 16:00:00');
+      when(mockSingleFormProvider.expirationDate)
+          .thenReturn('02/06/2021 16:00:00');
     });
 
     test('Should have correct creationDate format', () {
-      expect(controller.creationDate, '01/06/2021 16:00:00');
+      expect(mockSingleFormProvider.creationDate, '01/06/2021 16:00:00');
     });
 
     test('Should have correct expirationDate format', () {
-      expect(controller.expirationDate, '02/06/2021 16:00:00');
+      expect(mockSingleFormProvider.expirationDate, '02/06/2021 16:00:00');
     });
   });
 }

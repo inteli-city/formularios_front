@@ -15,15 +15,15 @@ import 'custom_text_field_test.mocks.dart';
 @GenerateMocks([SingleFormProvider])
 void main() {
   group('CustomTextFormField Tests', () {
-    late SingleFormProvider formController;
+    late SingleFormProvider singleFormProvider;
 
     setUp(
       () {
         Modular.bindModule(HomeModule());
-        formController = MockFormController();
-        Modular.replaceInstance<SingleFormProvider>(formController);
+        singleFormProvider = MockSingleFormProvider();
+        Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
 
-        when(formController.isSendingForm).thenReturn(true);
+        when(singleFormProvider.isSendingForm).thenReturn(true);
       },
     );
 
@@ -46,7 +46,7 @@ void main() {
             body: CustomTextFormField(
               field: field,
               onChanged: (value) {},
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -79,11 +79,11 @@ void main() {
                   CustomTextFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -124,11 +124,11 @@ void main() {
                   CustomTextFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -170,11 +170,11 @@ void main() {
                   CustomTextFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

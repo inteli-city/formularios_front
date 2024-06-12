@@ -5,14 +5,14 @@ import 'package:formularios_front/app/presentation/form/stores/single_form_provi
 
 class CustomTextFormField extends StatelessWidget with ValidationMixin {
   final TextFieldEntity field;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
   final Function(String) onChanged;
 
   CustomTextFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -31,7 +31,7 @@ class CustomTextFormField extends StatelessWidget with ValidationMixin {
             () => isRequired(
                   value,
                   field.isRequired,
-                  formController.isSendingForm,
+                  singleFormProvider.isSendingForm,
                 ),
             () => maxLength(value, field.maxLength),
             () => regex(value, field.regex),

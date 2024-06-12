@@ -21,7 +21,7 @@ void main() {
     setUp(() {
       Modular.bindModule(HomeModule());
       mockController = MockFilterFormsController();
-      mockProvider = MockSingleFormProvider();
+      mockProvider = MockFormsProvider();
 
       when(mockController.filteredTemplate).thenReturn('Template1');
       when(mockController.filteredStreet).thenReturn('Street1');

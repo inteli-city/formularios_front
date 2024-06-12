@@ -14,12 +14,12 @@ import 'package:formularios_front/app/presentation/home/stores/forms_provider.da
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'check_box_group_field_test.mocks.dart';
+import '../../pages/form_details_page_test.mocks.dart';
 
 @GenerateMocks([FormsProvider, SingleFormProvider, SectionEntity])
 void main() {
   group('CustomCheckBoxGroupFormField Tests', () {
-    late MockFormController mockController;
+    late MockSingleFormProvider mockController;
 
     CheckBoxGroupFieldEntity field = CheckBoxGroupFieldEntity(
       key: 'checkBoxField',
@@ -73,7 +73,7 @@ void main() {
     setUp(
       () {
         Modular.bindModule(HomeModule());
-        mockController = MockFormController();
+        mockController = MockSingleFormProvider();
         when(mockController.form).thenReturn(form);
         Modular.replaceInstance<SingleFormProvider>(mockController);
       },
@@ -90,7 +90,7 @@ void main() {
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
-              formController: mockController,
+              singleFormProvider: mockController,
             ),
           ),
         ),

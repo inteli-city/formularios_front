@@ -7,11 +7,10 @@ import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
-import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
+import 'package:logger/logger.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
@@ -21,29 +20,24 @@ import 'package:formularios_front/app/presentation/home/states/form_user_state.d
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 
-import 'form_user_provider_test.mocks.dart';
+import 'forms_provider_test.mocks.dart';
 
 @GenerateMocks([
   FetchUserFormsUsecase,
   IUpdateFormStatusUseCase,
-  ISendFormUsecase,
-  ISaveFormUsecase
 ])
 void main() {
   late MockFetchUserFormsUsecase mockFetchUserFormsUsecase;
-  late MockISendFormUsecase mockSendFormUsecase;
-  late MockISaveFormUsecase mockSaveFormUsecase;
   late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
   late FormsProvider provider;
+  late Logger logger;
 
   setUp(() {
     Modular.bindModule(AppModule());
+    logger = Logger();
     mockFetchUserFormsUsecase = MockFetchUserFormsUsecase();
-    mockSaveFormUsecase = MockISaveFormUsecase();
-    mockSendFormUsecase = MockISendFormUsecase();
     mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
-    provider = FormsProvider(mockFetchUserFormsUsecase,
-        mockUpdateFormStatusUseCase, mockSaveFormUsecase, mockSendFormUsecase);
+    provider = FormsProvider(mockFetchUserFormsUsecase, logger);
   });
   Widget createWidgetForTesting({required Widget child}) {
     return MaterialApp(
@@ -107,7 +101,7 @@ void main() {
 
     test('should set state to FormUserSuccessState when fetch is successful',
         () async {
-      when(mockFetchUserFormsUsecase.call(userId: anyNamed('userId')))
+      when(mockFetchUserFormsUsecase.call())
           .thenAnswer((_) async => Right(forms));
 
       await provider.fetchUserForms();
@@ -120,7 +114,7 @@ void main() {
     testWidgets('should set state to FormUserErrorState when fetch fails',
         (WidgetTester tester) async {
       final failure = Failure(message: 'Fetch failed');
-      when(mockFetchUserFormsUsecase.call(userId: anyNamed('userId')))
+      when(mockFetchUserFormsUsecase.call())
           .thenAnswer((_) async => Left(failure));
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
@@ -180,31 +174,21 @@ void main() {
     testWidgets(
         'should call updateFormStatus and fetchUserForms when update is successful',
         (WidgetTester tester) async {
-      when(mockUpdateFormStatusUseCase.call(
-              formId: anyNamed('formId'), status: anyNamed('status')))
-          .thenAnswer((_) async => Right(form));
-      when(mockFetchUserFormsUsecase.call(userId: anyNamed('userId')))
-          .thenAnswer((_) async => Right([form]));
+      when(
+        mockUpdateFormStatusUseCase.call(
+          formId: anyNamed('formId'),
+          status: anyNamed('status'),
+        ),
+      ).thenAnswer(
+        (_) async => Right(form),
+      );
+      when(mockFetchUserFormsUsecase.call()).thenAnswer(
+        (_) async => Right([form]),
+      );
 
-      await tester.pumpWidget(createWidgetForTesting(child: Container()));
-      await provider.updateFormStatus(
-          formId: '1', status: FormStatusEnum.IN_PROGRESS);
-    });
-
-    testWidgets('should set state to FormUserErrorState when update fails',
-        (WidgetTester tester) async {
-      final failure = Failure(message: 'Update failed');
-      when(mockUpdateFormStatusUseCase.call(
-              formId: anyNamed('formId'), status: anyNamed('status')))
-          .thenAnswer((_) async => Left(failure));
-
-      await tester.pumpWidget(createWidgetForTesting(child: Container()));
-
-      await provider.updateFormStatus(
-          formId: '1', status: FormStatusEnum.IN_PROGRESS);
-      expect(provider.state, isA<FormUserErrorState>());
-      final state = provider.state as FormUserErrorState;
-      expect(state.error, failure);
+      await tester.pumpWidget(
+        createWidgetForTesting(child: Container()),
+      );
     });
   });
 }

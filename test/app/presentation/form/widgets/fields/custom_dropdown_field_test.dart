@@ -13,13 +13,13 @@ import 'custom_dropdown_field_test.mocks.dart';
 
 @GenerateMocks([SingleFormProvider])
 void main() {
-  late MockFormController mockFormController;
+  late SingleFormProvider singleFormProvider;
   setUp(() {
-    mockFormController = MockFormController();
-    when(mockFormController.isSendingForm).thenReturn(false);
+    singleFormProvider = MockSingleFormProvider();
+    when(singleFormProvider.isSendingForm).thenReturn(false);
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
-    Modular.replaceInstance<SingleFormProvider>(mockFormController);
+    Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
   });
 
   tearDown(() {
@@ -42,7 +42,7 @@ void main() {
           body: CustomDropDownFormField(
             field: field,
             onChanged: (value) {},
-            formController: mockFormController,
+            singleFormProvider: singleFormProvider,
           ),
         ),
       ),

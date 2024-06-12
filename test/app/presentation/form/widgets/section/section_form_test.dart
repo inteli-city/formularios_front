@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/app_module.dart';
-import 'package:formularios_front/app/presentation/form/controllers/form_controller.dart';
+import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_number_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_text_field.dart';
 import 'package:mockito/annotations.dart';
@@ -14,16 +14,16 @@ import 'package:formularios_front/app/presentation/form/widgets/section/section_
 
 import 'section_form_test.mocks.dart';
 
-@GenerateMocks([FormController])
+@GenerateMocks([SingleFormProvider])
 void main() {
-  late MockFormController mockFormController = MockFormController();
+  late MockSingleFormProvider mocksingleFormProvider = MockSingleFormProvider();
 
   Modular.bindModule(HomeModule());
   Modular.bindModule(AppModule());
-  Modular.replaceInstance<FormController>(mockFormController);
+  Modular.replaceInstance<SingleFormProvider>(mocksingleFormProvider);
 
   testWidgets('SectionForm Test', (WidgetTester tester) async {
-    when(mockFormController.isSendingForm).thenReturn(false);
+    when(mocksingleFormProvider.isSendingForm).thenReturn(false);
 
     final section = SectionEntity(
       sectionId: 'section-01',
@@ -48,7 +48,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: SectionForm(
-            formController: mockFormController,
+            singleFormProvider: mocksingleFormProvider,
             section: section,
             lastSection: true,
             formKey: GlobalKey<FormState>(),

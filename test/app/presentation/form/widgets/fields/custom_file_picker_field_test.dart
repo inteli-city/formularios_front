@@ -11,7 +11,7 @@ import 'custom_file_picker_field_test.mocks.dart';
 
 @GenerateMocks([SingleFormProvider])
 void main() {
-  late SingleFormProvider mockFormController;
+  late SingleFormProvider mockSingleFormProvider;
   SectionEntity section = SectionEntity(fields: [
     FileFieldEntity(
         fileType: FileTypeEnum.IMAGE,
@@ -23,7 +23,7 @@ void main() {
   ], sectionId: 'section');
   setUp(
     () {
-      mockFormController = MockFormController();
+      mockSingleFormProvider = MockSingleFormProvider();
     },
   );
   testWidgets('CustomFilePickerFormField Test', (WidgetTester tester) async {
@@ -45,7 +45,7 @@ void main() {
           body: CustomFilePickerFormField(
             field: field,
             onChanged: onChanged,
-            controller: mockFormController,
+            controller: mockSingleFormProvider,
             section: section,
           ),
         ),

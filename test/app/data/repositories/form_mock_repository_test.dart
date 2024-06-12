@@ -160,7 +160,7 @@ void main() {
           vinculationFormId: vinculationFormId);
 
       expect(result.isRight(), true);
-      expect(repository.formList.length, formLength - 1);
+      expect(repository.formList.length, formLength);
 
       var updatedForm = result.fold((left) => null, (right) => right);
       expect(updatedForm, isA<FormEntity>());

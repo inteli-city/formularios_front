@@ -15,7 +15,7 @@ class FormSectionsPage extends StatefulWidget {
 }
 
 class FormSectionsPageState extends State<FormSectionsPage> {
-  SingleFormProvider formController = Modular.get<SingleFormProvider>();
+  SingleFormProvider singleFormProvider = Modular.get<SingleFormProvider>();
   StepperController stepperController = Modular.get<StepperController>();
 
   @override
@@ -36,14 +36,14 @@ class FormSectionsPageState extends State<FormSectionsPage> {
           mainAxisSize: MainAxisSize.max,
           children: [
             StepperProgress(
-              totalSteps: formController.form.sections.length,
+              totalSteps: singleFormProvider.form.sections.length,
             ),
             Padding(
               padding: const EdgeInsets.all(
                 AppDimensions.paddingMedium,
               ),
               child: Text(
-                '${formController.form.system} - ${formController.form.template}',
+                '${singleFormProvider.form.system} - ${singleFormProvider.form.template}',
                 style: Theme.of(context).textTheme.displayLarge,
                 textAlign: TextAlign.center,
               ),
@@ -55,15 +55,15 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   controller: stepperController.listViewController,
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: formController.form.sections.length,
+                  itemCount: singleFormProvider.form.sections.length,
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: ScreenHelper.width(context),
                       child: SectionForm(
-                        section: formController.form.sections[index],
-                        formController: formController,
-                        lastSection:
-                            index == formController.form.sections.length - 1,
+                        section: singleFormProvider.form.sections[index],
+                        singleFormProvider: singleFormProvider,
+                        lastSection: index ==
+                            singleFormProvider.form.sections.length - 1,
                         formKey: formKey,
                       ),
                     );

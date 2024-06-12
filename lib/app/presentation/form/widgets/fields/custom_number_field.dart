@@ -7,13 +7,13 @@ import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart'
 class CustomNumberFormField extends StatelessWidget with ValidationMixin {
   final NumberFieldEntity field;
   final Function(String) onChanged;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
 
   CustomNumberFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -40,7 +40,7 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
             () => isRequired(
                   value,
                   field.isRequired,
-                  formController.isSendingForm,
+                  singleFormProvider.isSendingForm,
                 ),
             () => maxValue(value, field.maxValue),
             () => minValue(value, field.minValue),

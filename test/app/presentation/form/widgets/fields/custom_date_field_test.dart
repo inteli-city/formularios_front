@@ -19,11 +19,11 @@ void main() {
       (WidgetTester tester) async {
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     initializeDateFormatting();
-    final mockFormController = MockFormController();
-    when(mockFormController.isSendingForm).thenReturn(false);
+    final mocksingleFormProvider = MockSingleFormProvider();
+    when(mocksingleFormProvider.isSendingForm).thenReturn(false);
 
     Modular.bindModule(HomeModule());
-    Modular.replaceInstance<SingleFormProvider>(mockFormController);
+    Modular.replaceInstance<SingleFormProvider>(mocksingleFormProvider);
 
     final field = DateFieldEntity(
       key: 'dateField',
@@ -52,7 +52,7 @@ void main() {
           body: CustomDateFormField(
             field: field,
             onChanged: onChanged,
-            formController: mockFormController,
+            singleFormProvider: mocksingleFormProvider,
           ),
         ),
       ),

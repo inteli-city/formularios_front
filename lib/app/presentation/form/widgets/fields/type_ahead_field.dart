@@ -8,13 +8,13 @@ import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart'
 class CustomTypeAheadFormField extends StatefulWidget {
   final TypeAheadFieldEntity field;
   final Function(String?) onChanged;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
 
   const CustomTypeAheadFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -61,7 +61,7 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
               () => isRequired(
                     value,
                     widget.field.isRequired,
-                    widget.formController.isSendingForm,
+                    widget.singleFormProvider.isSendingForm,
                   )
             ],
           ),

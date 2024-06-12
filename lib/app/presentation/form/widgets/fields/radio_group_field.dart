@@ -9,7 +9,7 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 class CustomRadioGroupFormField extends StatefulWidget {
   final RadioGroupFieldEntity field;
   final Function(String?) onChanged;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
   final SectionEntity sectionEntity;
 
   const CustomRadioGroupFormField({
@@ -17,7 +17,7 @@ class CustomRadioGroupFormField extends StatefulWidget {
     required this.field,
     required this.onChanged,
     required this.sectionEntity,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -37,7 +37,7 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
             () => isRequired(
                   value,
                   widget.field.isRequired,
-                  widget.formController.isSendingForm,
+                  widget.singleFormProvider.isSendingForm,
                 ),
             () => regex(value, widget.field.regex),
           ],
@@ -58,7 +58,7 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
                   title: Text(option,
                       style: Theme.of(context).textTheme.titleMedium),
                   value: option,
-                  groupValue: widget.formController.getFieldValue(
+                  groupValue: widget.singleFormProvider.getFieldValue(
                     widget.sectionEntity.sectionId,
                     widget.field.key,
                   ),

@@ -14,14 +14,14 @@ import 'type_ahead_field_test.mocks.dart';
 
 @GenerateMocks([SingleFormProvider])
 void main() {
-  SingleFormProvider formController = MockFormController();
+  SingleFormProvider singleFormProvider = MockSingleFormProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
-  Modular.replaceInstance<SingleFormProvider>(formController);
+  Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
 
   group('CustomTypeAheadFormField Tests', () {
     setUp(() {
-      when(formController.isSendingForm).thenReturn(true);
+      when(singleFormProvider.isSendingForm).thenReturn(true);
     });
     testWidgets('Displays initial value and placeholder',
         (WidgetTester tester) async {
@@ -39,7 +39,7 @@ void main() {
             body: CustomTypeAheadFormField(
               field: field,
               onChanged: (value) {},
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -64,7 +64,7 @@ void main() {
             body: CustomTypeAheadFormField(
               field: field,
               onChanged: (value) {},
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -92,7 +92,7 @@ void main() {
             body: CustomTypeAheadFormField(
               field: field,
               onChanged: (value) {},
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -132,11 +132,11 @@ void main() {
                   CustomTypeAheadFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -175,11 +175,11 @@ void main() {
                   CustomTypeAheadFormField(
                     field: field,
                     onChanged: (value) {},
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

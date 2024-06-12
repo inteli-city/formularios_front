@@ -9,14 +9,14 @@ class CustomSwitchButtonField extends StatefulWidget with ValidationMixin {
   final SwitchButtonFieldEntity field;
   final SectionEntity sectionEntity;
   final Function(bool?) onChanged;
-  final SingleFormProvider formController;
+  final SingleFormProvider singleFormProvider;
 
   CustomSwitchButtonField({
     super.key,
     required this.field,
     required this.onChanged,
     required this.sectionEntity,
-    required this.formController,
+    required this.singleFormProvider,
   });
 
   @override
@@ -39,7 +39,7 @@ class _CustomSwitchButtonFieldState extends State<CustomSwitchButtonField> {
           activeTrackColor: Theme.of(context).colorScheme.primary,
           inactiveThumbColor: Theme.of(context).colorScheme.secondary,
           inactiveTrackColor: AppColors.gray,
-          value: widget.formController.getFieldValue(
+          value: widget.singleFormProvider.getFieldValue(
                   widget.sectionEntity.sectionId, widget.field.key) ??
               false,
           onChanged: (value) {

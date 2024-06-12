@@ -15,13 +15,13 @@ import 'radio_group_field_test.mocks.dart';
 
 @GenerateMocks([SingleFormProvider])
 void main() {
-  SingleFormProvider formController = MockFormController();
+  SingleFormProvider singleFormProvider = MockSingleFormProvider();
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
-  Modular.replaceInstance<SingleFormProvider>(formController);
+  Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
   group('CustomRadioGroupFormField Tests', () {
     setUp(() {
-      when(formController.isSendingForm).thenReturn(true);
+      when(singleFormProvider.isSendingForm).thenReturn(true);
     });
 
     testWidgets('Displays initial value and placeholder',
@@ -37,7 +37,7 @@ void main() {
         sectionId: 'testSection',
         fields: [field],
       );
-      when(formController.getFieldValue(section.sectionId, field.key))
+      when(singleFormProvider.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -46,11 +46,11 @@ void main() {
             body: CustomRadioGroupFormField(
               field: field,
               onChanged: (value) {
-                formController.setFieldValue(
+                singleFormProvider.setFieldValue(
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -75,7 +75,7 @@ void main() {
         fields: [field],
       );
 
-      when(formController.getFieldValue(section.sectionId, field.key))
+      when(singleFormProvider.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -84,11 +84,11 @@ void main() {
             body: CustomRadioGroupFormField(
               field: field,
               onChanged: (value) {
-                formController.setFieldValue(
+                singleFormProvider.setFieldValue(
                     section.sectionId, field.key, value);
               },
               sectionEntity: section,
-              formController: formController,
+              singleFormProvider: singleFormProvider,
             ),
           ),
         ),
@@ -97,7 +97,7 @@ void main() {
       await tester.tap(find.text('Option 2'));
       await tester.pumpAndSettle();
 
-      expect(formController.getFieldValue(section.sectionId, field.key),
+      expect(singleFormProvider.getFieldValue(section.sectionId, field.key),
           'Option 2');
     });
 
@@ -119,7 +119,7 @@ void main() {
       );
       final formKey = GlobalKey<FormState>();
 
-      when(formController.getFieldValue(section.sectionId, field.key))
+      when(singleFormProvider.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -132,15 +132,15 @@ void main() {
                   CustomRadioGroupFormField(
                     field: field,
                     onChanged: (value) {
-                      formController.setFieldValue(
+                      singleFormProvider.setFieldValue(
                           section.sectionId, field.key, value);
                     },
                     sectionEntity: section,
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -175,7 +175,7 @@ void main() {
       );
       final formKey = GlobalKey<FormState>();
 
-      when(formController.getFieldValue(section.sectionId, field.key))
+      when(singleFormProvider.getFieldValue(section.sectionId, field.key))
           .thenReturn('Option 2');
 
       await tester.pumpWidget(
@@ -188,15 +188,15 @@ void main() {
                   CustomRadioGroupFormField(
                     field: field,
                     onChanged: (value) {
-                      formController.setFieldValue(
+                      singleFormProvider.setFieldValue(
                           section.sectionId, field.key, value);
                     },
                     sectionEntity: section,
-                    formController: formController,
+                    singleFormProvider: singleFormProvider,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      formController.setIsSendingForm(true);
+                      singleFormProvider.setIsSendingForm(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

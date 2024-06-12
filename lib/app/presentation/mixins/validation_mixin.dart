@@ -68,6 +68,20 @@ mixin ValidationMixin {
     return null;
   }
 
+  String? maxQuantity(int? quantity, int? maxQuantity, [String? message]) {
+    if (maxQuantity != null && quantity != null && quantity > maxQuantity) {
+      return message ?? '${S.current.maxFilesQuantity}$maxQuantity';
+    }
+    return null;
+  }
+
+  String? minQuantity(int? quantity, int? minQuantity, [String? message]) {
+    if (minQuantity != null && quantity != null && quantity < minQuantity) {
+      return message ?? '${S.current.minFilesQuantity}$minQuantity';
+    }
+    return null;
+  }
+
   String? maxDate(String? value, DateTime? maxDate, [String? message]) {
     if (value == null || value.isEmpty) {
       return null;
@@ -94,14 +108,10 @@ mixin ValidationMixin {
 
   String? checkLimit(List<String?>? value, int? maxCheckLimit,
       [String? message]) {
-    if (maxCheckLimit == null) {
-      return null;
-    }
-
     if (value == null || value.isEmpty) {
       return null;
     }
-    if (value.length > maxCheckLimit) {
+    if (maxCheckLimit != null && value.length > maxCheckLimit) {
       return message ?? '${S.current.maxCheckLimit} $maxCheckLimit';
     }
     return null;

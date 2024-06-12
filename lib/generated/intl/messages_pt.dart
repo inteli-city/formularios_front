@@ -85,7 +85,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "localStorageErrorMessage": m2,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "maxCheckLimit":
-            MessageLookupByLibrary.simpleMessage("Ultrapassou o limite de "),
+            MessageLookupByLibrary.simpleMessage("Ultrapassou o limite de: "),
+        "maxFilesQuantity": MessageLookupByLibrary.simpleMessage(
+            "Quantidade maxima de arquivos: "),
+        "minFilesQuantity": MessageLookupByLibrary.simpleMessage(
+            "Quantidade minima de arquivos: "),
         "noFormsFound": MessageLookupByLibrary.simpleMessage(
             "Nenhum Formulário Encontrado!"),
         "noInternetConnectionErrorMessage":
@@ -104,21 +108,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "stepBack": MessageLookupByLibrary.simpleMessage("Retroceder"),
         "street": MessageLookupByLibrary.simpleMessage("Rua"),
         "thisDateShouldBeBefore": MessageLookupByLibrary.simpleMessage(
-            "Esta data deve ser antes de "),
+            "Esta data deve ser antes de: "),
         "thisDateSouldBeAfter": MessageLookupByLibrary.simpleMessage(
-            "Esta data deve ser depois de "),
+            "Esta data deve ser depois de: "),
         "thisFieldIsRequired":
             MessageLookupByLibrary.simpleMessage("Este campo é obrigatório"),
         "thisFieldShouldHaveMaximumLength":
             MessageLookupByLibrary.simpleMessage(
-                "Este campo deve ter no máximo "),
+                "Este campo deve ter no máximo: "),
         "thisFieldShouldHaveMaximumValue": MessageLookupByLibrary.simpleMessage(
-            "Este campo deve ser menor que "),
+            "Este campo deve ser menor que: "),
         "thisFieldShouldHaveMinimumLength":
             MessageLookupByLibrary.simpleMessage(
-                "Este campo deve ter pelo menos "),
+                "Este campo deve ter pelo menos: "),
         "thisFieldShouldHaveMinimumValue": MessageLookupByLibrary.simpleMessage(
-            "Este campo deve ser maior que "),
+            "Este campo deve ser maior que: "),
         "vinculationId":
             MessageLookupByLibrary.simpleMessage("ID de Vinculação")
       };

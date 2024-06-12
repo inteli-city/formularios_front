@@ -80,19 +80,23 @@
 
     "thisFieldIsRequired": "This field is required",
 
-    "thisFieldShouldHaveMinimumLength": "This field should have a minimum length of ",
+    "thisFieldShouldHaveMinimumLength": "This field should have a minimum length of: ",
     
-    "thisFieldShouldHaveMaximumLength": "This field should have a maximum length of ",
+    "thisFieldShouldHaveMaximumLength": "This field should have a maximum length of: ",
 
     "invalidFormat": "Invalid format",
 
-    "thisFieldShouldHaveMaximumValue": "This field should have less than ",
+    "thisFieldShouldHaveMaximumValue": "This field should have less than: ",
     
-    "thisFieldShouldHaveMinimumValue": "This field should have more than ",
+    "thisFieldShouldHaveMinimumValue": "This field should have more than: ",
 
-    "thisDateShouldBeBefore": "This date should be before of ",
+    "thisDateShouldBeBefore": "This date should be before of: ",
 
-    "thisDateSouldBeAfter": "This date should be after of ",
+    "thisDateSouldBeAfter": "This date should be after of: ",
 
-    "maxCheckLimit" : "Exceeded max check limit of "
+    "maxCheckLimit" : "Exceeded max check limit of: ",
+
+    "maxFilesQuantity": "Max files quantity: ",
+    
+    "minFilesQuantity": "Min files quantity: "
 }

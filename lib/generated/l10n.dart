@@ -432,20 +432,20 @@ class S {
     );
   }
 
-  /// `This field should have a minimum length of `
+  /// `This field should have a minimum length of: `
   String get thisFieldShouldHaveMinimumLength {
     return Intl.message(
-      'This field should have a minimum length of ',
+      'This field should have a minimum length of: ',
       name: 'thisFieldShouldHaveMinimumLength',
       desc: '',
       args: [],
     );
   }
 
-  /// `This field should have a maximum length of `
+  /// `This field should have a maximum length of: `
   String get thisFieldShouldHaveMaximumLength {
     return Intl.message(
-      'This field should have a maximum length of ',
+      'This field should have a maximum length of: ',
       name: 'thisFieldShouldHaveMaximumLength',
       desc: '',
       args: [],
@@ -462,51 +462,71 @@ class S {
     );
   }
 
-  /// `This field should have less than `
+  /// `This field should have less than: `
   String get thisFieldShouldHaveMaximumValue {
     return Intl.message(
-      'This field should have less than ',
+      'This field should have less than: ',
       name: 'thisFieldShouldHaveMaximumValue',
       desc: '',
       args: [],
     );
   }
 
-  /// `This field should have more than `
+  /// `This field should have more than: `
   String get thisFieldShouldHaveMinimumValue {
     return Intl.message(
-      'This field should have more than ',
+      'This field should have more than: ',
       name: 'thisFieldShouldHaveMinimumValue',
       desc: '',
       args: [],
     );
   }
 
-  /// `This date should be before of `
+  /// `This date should be before of: `
   String get thisDateShouldBeBefore {
     return Intl.message(
-      'This date should be before of ',
+      'This date should be before of: ',
       name: 'thisDateShouldBeBefore',
       desc: '',
       args: [],
     );
   }
 
-  /// `This date should be after of `
+  /// `This date should be after of: `
   String get thisDateSouldBeAfter {
     return Intl.message(
-      'This date should be after of ',
+      'This date should be after of: ',
       name: 'thisDateSouldBeAfter',
       desc: '',
       args: [],
     );
   }
 
-  /// `Exceeded max check limit of `
+  /// `Exceeded max check limit of: `
   String get maxCheckLimit {
     return Intl.message(
-      'Exceeded max check limit of ',
+      'Exceeded max check limit of: ',
       name: 'maxCheckLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max files quantity: `
+  String get maxFilesQuantity {
+    return Intl.message(
+      'Max files quantity: ',
+      name: 'maxFilesQuantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Min files quantity: `
+  String get minFilesQuantity {
+    return Intl.message(
+      'Min files quantity: ',
+      name: 'minFilesQuantity',
       desc: '',
       args: [],
     );

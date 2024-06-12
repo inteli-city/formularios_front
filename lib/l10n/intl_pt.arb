@@ -80,19 +80,23 @@
     
     "thisFieldIsRequired": "Este campo é obrigatório",
 
-    "thisFieldShouldHaveMinimumLength": "Este campo deve ter pelo menos ",
+    "thisFieldShouldHaveMinimumLength": "Este campo deve ter pelo menos: ",
     
-    "thisFieldShouldHaveMaximumLength": "Este campo deve ter no máximo ",
+    "thisFieldShouldHaveMaximumLength": "Este campo deve ter no máximo: ",
 
     "invalidFormat": "Formato inválido",
 
-    "thisFieldShouldHaveMaximumValue": "Este campo deve ser menor que ",
+    "thisFieldShouldHaveMaximumValue": "Este campo deve ser menor que: ",
     
-    "thisFieldShouldHaveMinimumValue": "Este campo deve ser maior que ",
+    "thisFieldShouldHaveMinimumValue": "Este campo deve ser maior que: ",
 
-    "thisDateShouldBeBefore": "Esta data deve ser antes de ",
+    "thisDateShouldBeBefore": "Esta data deve ser antes de: ",
 
-    "thisDateSouldBeAfter": "Esta data deve ser depois de ",
+    "thisDateSouldBeAfter": "Esta data deve ser depois de: ",
 
-    "maxCheckLimit": "Ultrapassou o limite de "
+    "maxCheckLimit": "Ultrapassou o limite de: ",
+
+    "maxFilesQuantity": "Quantidade maxima de arquivos: ",
+    
+    "minFilesQuantity": "Quantidade minima de arquivos: "
 }

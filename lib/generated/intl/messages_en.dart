@@ -82,7 +82,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "localStorageErrorMessage": m2,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "maxCheckLimit": MessageLookupByLibrary.simpleMessage(
-            "Exceeded max check limit of "),
+            "Exceeded max check limit of: "),
+        "maxFilesQuantity":
+            MessageLookupByLibrary.simpleMessage("Max files quantity: "),
+        "minFilesQuantity":
+            MessageLookupByLibrary.simpleMessage("Min files quantity: "),
         "noFormsFound": MessageLookupByLibrary.simpleMessage("No form found!"),
         "noInternetConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
@@ -100,21 +104,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "stepBack": MessageLookupByLibrary.simpleMessage("Step Back"),
         "street": MessageLookupByLibrary.simpleMessage("Street"),
         "thisDateShouldBeBefore": MessageLookupByLibrary.simpleMessage(
-            "This date should be before of "),
+            "This date should be before of: "),
         "thisDateSouldBeAfter": MessageLookupByLibrary.simpleMessage(
-            "This date should be after of "),
+            "This date should be after of: "),
         "thisFieldIsRequired":
             MessageLookupByLibrary.simpleMessage("This field is required"),
         "thisFieldShouldHaveMaximumLength":
             MessageLookupByLibrary.simpleMessage(
-                "This field should have a maximum length of "),
+                "This field should have a maximum length of: "),
         "thisFieldShouldHaveMaximumValue": MessageLookupByLibrary.simpleMessage(
-            "This field should have less than "),
+            "This field should have less than: "),
         "thisFieldShouldHaveMinimumLength":
             MessageLookupByLibrary.simpleMessage(
-                "This field should have a minimum length of "),
+                "This field should have a minimum length of: "),
         "thisFieldShouldHaveMinimumValue": MessageLookupByLibrary.simpleMessage(
-            "This field should have more than "),
+            "This field should have more than: "),
         "vinculationId": MessageLookupByLibrary.simpleMessage("Vinculation ID")
       };
 }

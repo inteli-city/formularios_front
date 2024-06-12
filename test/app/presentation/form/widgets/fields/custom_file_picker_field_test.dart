@@ -45,7 +45,7 @@ void main() {
           body: CustomFilePickerFormField(
             field: field,
             onChanged: onChanged,
-            controller: mockSingleFormProvider,
+            singleFormProvider: mockSingleFormProvider,
             section: section,
           ),
         ),

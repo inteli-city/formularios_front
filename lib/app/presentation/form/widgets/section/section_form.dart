@@ -239,7 +239,7 @@ class SectionForm extends StatelessWidget {
                 section.sectionId, field.key, value);
           },
           key: Key(field.key),
-          controller: singleFormProvider,
+          singleFormProvider: singleFormProvider,
           section: section,
         );
 

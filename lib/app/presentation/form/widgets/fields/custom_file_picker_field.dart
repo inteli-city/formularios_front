@@ -5,19 +5,20 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
+import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class CustomFilePickerFormField extends StatefulWidget {
   final FileFieldEntity field;
   final SectionEntity section;
-  final SingleFormProvider controller;
+  final SingleFormProvider singleFormProvider;
   final Function(DateTime?) onChanged;
 
   const CustomFilePickerFormField({
     super.key,
     required this.field,
     required this.onChanged,
-    required this.controller,
+    required this.singleFormProvider,
     required this.section,
   });
 
@@ -26,7 +27,8 @@ class CustomFilePickerFormField extends StatefulWidget {
       _CustomFilePickerFormFieldState();
 }
 
-class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
+class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
+    with ValidationMixin {
   late List<String> _selectedFiles;
   bool _showError = false;
 
@@ -59,7 +61,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
         setState(
           () {
             _selectedFiles.addAll(files);
-            widget.controller.setFieldValue(
+            widget.singleFormProvider.setFieldValue(
                 widget.section.sectionId, widget.field.key, _selectedFiles);
           },
         );
@@ -69,7 +71,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
         setState(
           () {
             _selectedFiles.add(file);
-            widget.controller.setFieldValue(
+            widget.singleFormProvider.setFieldValue(
                 widget.section.sectionId, widget.field.key, _selectedFiles);
           },
         );
@@ -90,82 +92,97 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          '${widget.field.placeholder}:',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const SizedBox(height: AppDimensions.paddingSmall),
-        ElevatedButton(
-          onPressed: _pickFiles,
-          style: ElevatedButton.styleFrom(
-            elevation: 4,
-            padding: const EdgeInsets.symmetric(
-                vertical: AppDimensions.paddingMedium,
-                horizontal: AppDimensions.paddingLarge),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
+    return FormField<List<String?>>(
+      initialValue: widget.field.value,
+      validator: (value) {
+        return combine([
+          () => isRequired(value.toString(), widget.field.isRequired,
+              widget.singleFormProvider.isSendingForm),
+          () => minQuantity(value?.length, widget.field.minQuantity),
+          () => maxQuantity(value?.length, widget.field.maxQuantity),
+        ]);
+      },
+      builder: (state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${widget.field.placeholder}:',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: AppDimensions.paddingSmall),
+            ElevatedButton(
+              onPressed: _pickFiles,
+              style: ElevatedButton.styleFrom(
+                elevation: 4,
+                padding: const EdgeInsets.symmetric(
+                    vertical: AppDimensions.paddingMedium,
+                    horizontal: AppDimensions.paddingLarge),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    AppDimensions.radiusMedium,
+                  ),
+                  side: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 1.5,
+                  ),
+                ),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-                width: 1.5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.attach_file,
+                    size: AppDimensions.iconMedium,
+                  ),
+                  const SizedBox(
+                    width: AppDimensions.paddingSmall,
+                  ),
+                  Text(
+                    'Selecionar Arquivos',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
               ),
             ),
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.attach_file,
-                size: AppDimensions.iconMedium,
-              ),
-              const SizedBox(
-                width: AppDimensions.paddingSmall,
-              ),
-              Text(
-                'Selecionar Arquivos',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: AppDimensions.paddingSmall),
-        ..._selectedFiles.map(
-          (file) => ListTile(
-            title: Text(
-              textAlign: TextAlign.center,
-              file.split('/').last,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.delete,
-                  size: AppDimensions.iconMedium,
-                  color: Theme.of(context).colorScheme.primary),
-              onPressed: () {
-                setState(
-                  () {
-                    _selectedFiles.remove(file);
-                    widget.controller.setFieldValue(widget.section.sectionId,
-                        widget.field.key, _selectedFiles);
+            const SizedBox(height: AppDimensions.paddingSmall),
+            ..._selectedFiles.map(
+              (file) => ListTile(
+                title: Text(
+                  textAlign: TextAlign.center,
+                  file.split('/').last,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete,
+                      size: AppDimensions.iconMedium,
+                      color: Theme.of(context).colorScheme.primary),
+                  onPressed: () {
+                    setState(
+                      () {
+                        _selectedFiles.remove(file);
+                        widget.singleFormProvider.setFieldValue(
+                            widget.section.sectionId,
+                            widget.field.key,
+                            _selectedFiles);
+                      },
+                    );
                   },
-                );
-              },
+                ),
+              ),
             ),
-          ),
-        ),
-        if (_showError)
-          Text(
-            'Este campo é obrigatório, ou a quantidade de arquivos está fora do permitido.',
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
-          ),
-      ],
+            if (state.hasError)
+              Text(
+                state.errorText ?? '',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+          ],
+        );
+      },
     );
   }
 }

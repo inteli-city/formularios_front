@@ -67,11 +67,12 @@ class FormMockRepository extends IFormRepository {
           sectionId: 'section-01',
           fields: [
             CheckBoxGroupFieldEntity(
-                options: ['option 01', 'option 02', 'option 03'],
-                placeholder: 'Selecione as opções',
-                key: 'checkbox-group',
-                checkLimit: 1,
-                isRequired: true),
+              options: ['option 01', 'option 02', 'option 03'],
+              placeholder: 'Selecione as opções',
+              key: 'checkbox-group',
+              checkLimit: 1,
+              isRequired: true,
+            ),
             DropDownFieldEntity(
               options: ['option 01', 'option 02'],
               placeholder: 'DropDownField',
@@ -81,7 +82,6 @@ class FormMockRepository extends IFormRepository {
             TextFieldEntity(
               fieldType: FieldTypeEnum.TEXT_FIELD,
               placeholder: 'TextField 01',
-              regex: r'^.{6,}$',
               maxLength: 10,
               isRequired: true,
               key: 'key-section-01-1',

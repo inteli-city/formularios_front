@@ -372,8 +372,8 @@ class DateFieldModel extends DateFieldEntity implements FieldModel {
 
   factory DateFieldModel.fromMap(Map<String, dynamic> json) {
     return DateFieldModel(
-      minDate: json['min_date'],
-      maxDate: json['max_date'],
+      minDate: DateTime.fromMillisecondsSinceEpoch(json['min_date']),
+      maxDate: DateTime.fromMillisecondsSinceEpoch(json['max_date']),
       placeholder: json['placeholder'],
       key: json['key'],
       isRequired: json['required'],

@@ -6,7 +6,7 @@ import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
-import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
 
 class FormsProvider extends ChangeNotifier {

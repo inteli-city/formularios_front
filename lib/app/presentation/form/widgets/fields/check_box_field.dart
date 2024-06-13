@@ -18,7 +18,7 @@ class CustomCheckBoxFormField extends StatelessWidget with ValidationMixin {
       builder: (state) {
         return CheckboxListTile(
           title: Text(field.placeholder),
-          value: field.value,
+          value: field.value ?? false,
           onChanged: onChanged,
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,

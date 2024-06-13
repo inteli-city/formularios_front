@@ -6,7 +6,7 @@ import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
-import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 

@@ -25,9 +25,14 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
       isDense: true,
       value: field.value,
       decoration: InputDecoration(
-        label: Text(
-          field.placeholder,
-        ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        label: Text('*',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: AppColors.red, fontWeight: FontWeight.bold)),
+        hintText: field.placeholder,
+        alignLabelWithHint: true,
         border: OutlineInputBorder(
           borderSide: BorderSide(
             color: AppColors.primaryBlue,

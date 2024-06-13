@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:intl/intl.dart';
 
 class CustomDateFormField extends StatefulWidget with ValidationMixin {
@@ -29,7 +30,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
     super.initState();
     _textController = TextEditingController(
       text: widget.field.value != null
-          ? DateFormat('dd/MM/yyyy').format(widget.field.value!)
+          ? DateFormat('dd/MM/yyyy').format(widget.field.value!).toString()
           : '',
     );
   }
@@ -46,11 +47,18 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: _textController,
       decoration: InputDecoration(
-        labelText: widget.field.placeholder,
-      ),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          label: Text('*',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: AppColors.red, fontWeight: FontWeight.bold)),
+          hintText: widget.field.placeholder,
+          alignLabelWithHint: true),
       readOnly: true,
       onTap: () async {
         DateTime? pickedDate = await showDatePicker(
+          barrierDismissible: false,
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
@@ -70,13 +78,12 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
           },
           initialDatePickerMode: DatePickerMode.day,
           context: context,
-          initialDate: widget.field.value?.toUtc() ?? DateTime.now(),
+          initialDate: widget.field.value?.toUtc() ?? widget.field.minDate,
           firstDate: widget.field.minDate ??
               DateTime(
                 1900,
               ),
           lastDate: widget.field.maxDate ?? DateTime(2100),
-          locale: const Locale('pt', 'BR'),
         );
         if (pickedDate != null) {
           String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);

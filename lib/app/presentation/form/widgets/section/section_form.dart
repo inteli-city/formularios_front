@@ -183,6 +183,8 @@ class SectionForm extends StatelessWidget {
                 section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          sectionEntity: section,
+          singleFormProvider: singleFormProvider, 
         );
 
       case FieldTypeEnum.TYPEAHEAD_FIELD:

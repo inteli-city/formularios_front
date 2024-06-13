@@ -52,7 +52,7 @@ void main() {
       ),
     );
 
-    expect(find.text('Selecione um arquivo'), findsOneWidget);
+    expect(find.text('Selecione um arquivo:'), findsOneWidget);
 
     expect(find.byType(ElevatedButton), findsOneWidget);
 

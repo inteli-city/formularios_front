@@ -63,7 +63,7 @@ void main() {
         ),
       );
 
-      expect(find.text('Enable feature'), findsOneWidget);
+      expect(find.text('Enable feature:'), findsOneWidget);
       expect(find.byType(Switch), findsOneWidget);
     });
 

@@ -190,7 +190,7 @@ void main() {
       await tester.enterText(find.byType(TextFormField), '101');
       await tester.tap(find.text('Enviar'));
       await tester.pumpAndSettle();
-      expect(find.text('Este campo deve ser menor que 100'), findsOneWidget);
+      expect(find.text('Este campo deve ser menor que: 100'), findsOneWidget);
     });
 
     testWidgets('Validates min value when clicking in send form',
@@ -237,7 +237,7 @@ void main() {
       await tester.tap(find.text('Enviar'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Este campo deve ser maior que 10'), findsOneWidget);
+      expect(find.text('Este campo deve ser maior que: 10'), findsOneWidget);
     });
   });
 }

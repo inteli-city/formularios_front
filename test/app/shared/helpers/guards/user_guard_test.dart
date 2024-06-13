@@ -4,9 +4,9 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:formularios_front/app/presentation/stores/user_provider.dart';
+import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
 
-import 'use_guards_test.mocks.dart';
+import 'user_guard_test.mocks.dart';
 
 @GenerateMocks([UserProvider])
 void main() {
@@ -14,7 +14,6 @@ void main() {
   late UserGuard userGuard;
 
   setUp(() {
-    Modular.bindModule(UserModule());
     Modular.bindModule(AppModule());
 
     mockUserProvider = MockUserProvider();

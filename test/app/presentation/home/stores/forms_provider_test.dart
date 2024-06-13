@@ -9,7 +9,7 @@ import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
-import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
 import 'package:logger/logger.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

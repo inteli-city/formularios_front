@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
+import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
 
 void main() {
   testWidgets('GlobalSnackBar shows error snackbar',
@@ -25,7 +25,7 @@ void main() {
     );
 
     await tester.tap(find.text('Show Error SnackBar'));
-    await tester.pump(); 
+    await tester.pump();
 
     expect(find.text('Error message'), findsOneWidget);
     expect(find.byType(SnackBar), findsOneWidget);
@@ -59,7 +59,7 @@ void main() {
     );
 
     await tester.tap(find.text('Show Success SnackBar'));
-    await tester.pump(); 
+    await tester.pump();
 
     expect(find.text('Success message'), findsOneWidget);
     expect(find.byType(SnackBar), findsOneWidget);

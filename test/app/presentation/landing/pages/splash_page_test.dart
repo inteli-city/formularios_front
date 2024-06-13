@@ -11,7 +11,6 @@ import 'splash_page_test.mocks.dart';
 @GenerateMocks([IModularNavigator])
 void main() {
   Modular.bindModule(AppModule());
-  Modular.bindModule(UserModule());
   final navigator = MockIModularNavigator();
 
   testWidgets('should display CircularProgressIndicator when loading',

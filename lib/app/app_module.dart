@@ -20,7 +20,7 @@ import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/landing/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/landing/pages/splash_page.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
-import 'package:formularios_front/app/presentation/stores/user_provider.dart';
+import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
@@ -32,7 +32,7 @@ import 'package:logger/logger.dart';
 
 class AppModule extends Module {
   @override
-  List<Module> get imports => [MicroAppAuthModule(), UserModule()];
+  List<Module> get imports => [MicroAppAuthModule()];
 
   @override
   void binds(i) {
@@ -68,6 +68,9 @@ class HomeModule extends Module {
   List<Module> get imports => [MicroAppAuthModule()];
   @override
   void binds(i) {
+    i.addSingleton(UserProvider.new);
+    i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
+    i.addSingleton<UserRepository>(() => EnvironmentConfig.getUserRepository());
     i.addLazySingleton<IFormStorage>(() => FormHiveStorage(storage));
     i.addLazySingleton<FormsProvider>(FormsProvider.new);
     i.addLazySingleton<IFormRepository>(
@@ -114,17 +117,5 @@ class HomeModule extends Module {
       child: (context) => const FormSectionsPage(),
       guards: [UserGuard()],
     );
-  }
-}
-
-class UserModule extends Module {
-  @override
-  List<Module> get imports => [MicroAppAuthModule()];
-
-  @override
-  void exportedBinds(i) {
-    i.addSingleton(UserProvider.new);
-    i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
-    i.addSingleton<UserRepository>(() => EnvironmentConfig.getUserRepository());
   }
 }

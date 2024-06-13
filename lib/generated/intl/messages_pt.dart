@@ -49,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'LOW': 'Baixa',
             'MEDIUM': 'Média',
             'HIGH': 'Alta',
-            'EMERCENCY': 'Emergencial',
+            'EMERGENCY': 'Emergencial',
             'other': '',
           })}";
 

@@ -10,7 +10,7 @@ abstract class InformationFieldModel extends InformationFieldEntity {
 
   static InformationFieldModel fromMap(Map<String, dynamic> json) {
     switch (InformationFieldTypeEnum.values
-        .firstWhere((e) => e.name == json['fieldType'])) {
+        .firstWhere((e) => e.name == json['information_field_type'])) {
       case InformationFieldTypeEnum.TEXT_INFORMATION_FIELD:
         return TextInformationFieldModel.fromMap(json);
       case InformationFieldTypeEnum.MAP_INFORMATION_FIELD:
@@ -61,7 +61,8 @@ class TextInformationFieldModel extends TextInformationFieldEntity
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': InformationFieldTypeEnum.TEXT_INFORMATION_FIELD.name,
+      'information_field_type':
+          InformationFieldTypeEnum.TEXT_INFORMATION_FIELD.name,
       'value': value,
     };
   }
@@ -91,7 +92,8 @@ class MapInformationFieldModel extends MapInformationFieldEntity
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': InformationFieldTypeEnum.MAP_INFORMATION_FIELD.name,
+      'information_field_type':
+          InformationFieldTypeEnum.MAP_INFORMATION_FIELD.name,
       'latitude': latitude,
       'longitude': longitude,
     };
@@ -105,7 +107,7 @@ class ImageInformationFieldModel extends ImageInformationFieldEntity
   });
 
   static ImageInformationFieldModel fromMap(Map<String, dynamic> json) {
-    return ImageInformationFieldModel(filePath: json['filePath']);
+    return ImageInformationFieldModel(filePath: json['file_path']);
   }
 
   static ImageInformationFieldModel fromEntity(
@@ -116,8 +118,9 @@ class ImageInformationFieldModel extends ImageInformationFieldEntity
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': InformationFieldTypeEnum.IMAGE_INFORMATION_FIELD.name,
-      'filePath': filePath,
+      'information_field_type':
+          InformationFieldTypeEnum.IMAGE_INFORMATION_FIELD.name,
+      'file_path': filePath,
     };
   }
 }

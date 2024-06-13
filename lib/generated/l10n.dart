@@ -378,7 +378,7 @@ class S {
     );
   }
 
-  /// `{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}`
+  /// `{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERGENCY{Emergency} other{}}`
   String priorityEnumSchema(Object schema) {
     return Intl.select(
       schema,
@@ -386,7 +386,7 @@ class S {
         'LOW': 'Low',
         'MEDIUM': 'Medium',
         'HIGH': 'High',
-        'EMERCENCY': 'Emergency',
+        'EMERGENCY': 'Emergency',
         'other': '',
       },
       name: 'priorityEnumSchema',

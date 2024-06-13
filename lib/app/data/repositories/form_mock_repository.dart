@@ -21,8 +21,8 @@ class FormMockRepository extends IFormRepository {
       ),
     ],
     selectedOption: null,
-    text: null,
-    image: null,
+    justificationText: null,
+    justificationImage: null,
   );
 
   List<FormEntity> formList = [
@@ -58,8 +58,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [
@@ -171,8 +171,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [
@@ -268,8 +268,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [
@@ -364,8 +364,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [
@@ -461,8 +461,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [
@@ -558,8 +558,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [
@@ -654,8 +654,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [
@@ -752,8 +752,8 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
       sections: [

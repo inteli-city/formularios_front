@@ -4,16 +4,16 @@ class JustificativeModel extends JustificativeEntity {
   JustificativeModel({
     required super.options,
     required super.selectedOption,
-    required super.text,
-    required super.image,
+    required super.justificationText,
+    required super.justificationImage,
   });
 
   factory JustificativeModel.fromMap(Map<String, dynamic> json) {
     return JustificativeModel(
       options: JustificativeOptionModel.fromMaps(json['options']),
-      selectedOption: json['selectedOption'],
-      text: json['text'],
-      image: json['image'],
+      selectedOption: json['selected_option'],
+      justificationText: json['justification_text'],
+      justificationImage: json['justification_image'],
     );
   }
 
@@ -23,8 +23,8 @@ class JustificativeModel extends JustificativeEntity {
           .map((e) => JustificativeOptionModel.fromEntity(e))
           .toList(),
       selectedOption: entity.selectedOption,
-      text: entity.text,
-      image: entity.image,
+      justificationText: entity.justificationText,
+      justificationImage: entity.justificationImage,
     );
   }
 
@@ -33,9 +33,9 @@ class JustificativeModel extends JustificativeEntity {
       'options': options
           .map((e) => JustificativeOptionModel.fromEntity(e).toMap())
           .toList(),
-      'selectedOption': selectedOption,
-      'text': text,
-      'image': image,
+      'selected_option': selectedOption,
+      'justification_text': justificationText,
+      'justification_image': justificationImage,
     };
   }
 }
@@ -50,13 +50,12 @@ class JustificativeOptionModel extends JustificativeOptionEntity {
   factory JustificativeOptionModel.fromMap(Map<String, dynamic> json) {
     return JustificativeOptionModel(
       option: json['option'],
-      requiredImage: json['requiredImage'],
-      requiredText: json['requiredText'],
+      requiredImage: json['required_image'],
+      requiredText: json['required_text'],
     );
   }
 
-  static List<JustificativeOptionModel> fromMaps(
-      List<Map<String, dynamic>> json) {
+  static List<JustificativeOptionModel> fromMaps(List json) {
     return json.map((e) => JustificativeOptionModel.fromMap(e)).toList();
   }
 
@@ -72,8 +71,8 @@ class JustificativeOptionModel extends JustificativeOptionEntity {
   Map<String, dynamic> toMap() {
     return {
       'option': option,
-      'requiredImage': requiredImage,
-      'requiredText': requiredText,
+      'required_image': requiredImage,
+      'required_text': requiredText,
     };
   }
 }

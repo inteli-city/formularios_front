@@ -8,7 +8,7 @@ enum PriorityEnum {
   LOW,
   MEDIUM,
   HIGH,
-  EMERCENCY;
+  EMERGENCY;
 
   String get enumString {
     return S.current.priorityEnumSchema(this);
@@ -22,7 +22,7 @@ enum PriorityEnum {
         return AppColors.yellow;
       case PriorityEnum.HIGH:
         return AppColors.orange;
-      case PriorityEnum.EMERCENCY:
+      case PriorityEnum.EMERGENCY:
         return AppColors.red;
       default:
         return AppColors.white;

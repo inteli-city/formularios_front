@@ -6,13 +6,13 @@ class SectionModel extends SectionEntity {
 
   factory SectionModel.fromMap(Map<String, dynamic> json) {
     return SectionModel(
-      sectionId: json['sectionId'],
+      sectionId: json['section_id'],
       fields: FieldModel.fromMaps(json['fields']),
     );
   }
 
-  static List<SectionModel> fromMaps(List<Map<String, dynamic>> json) {
-    return json.map((e) => SectionModel.fromMap(e)).toList();
+  static List<SectionModel> fromMaps(List array) {
+    return array.map((e) => SectionModel.fromMap(e)).toList();
   }
 
   factory SectionModel.fromEntity(SectionEntity entity) {
@@ -24,7 +24,7 @@ class SectionModel extends SectionEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      'sectionId': sectionId,
+      'section_id': sectionId,
       'fields': fields.map((e) => FieldModel.fromEntity(e).toMap()).toList(),
     };
   }

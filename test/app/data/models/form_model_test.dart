@@ -48,8 +48,8 @@ void main() {
       justificative: JustificativeEntity(
         options: [],
         selectedOption: null,
-        text: 'text',
-        image: null,
+        justificationText: 'text',
+        justificationImage: null,
       ),
     );
     test('toMap', () {
@@ -124,8 +124,8 @@ void main() {
       expect(fromMap.canVinculate, false);
       expect(fromMap.justificative.options, []);
       expect(fromMap.justificative.selectedOption, null);
-      expect(fromMap.justificative.text, 'text');
-      expect(fromMap.justificative.image, null);
+      expect(fromMap.justificative.justificationText, 'text');
+      expect(fromMap.justificative.justificationImage, null);
     });
   });
 }

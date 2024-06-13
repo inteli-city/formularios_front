@@ -12,7 +12,10 @@ void main() {
   group('Form Entity Test', () {
     late SectionEntity sectionExample;
     setUp(() {
-       sectionExample = SectionEntity(fields: [TextFieldEntity(placeholder: 'placeholder', key: 'key', isRequired: true)], sectionId: 'section-id');
+      sectionExample = SectionEntity(fields: [
+        TextFieldEntity(
+            placeholder: 'placeholder', key: 'key', isRequired: true)
+      ], sectionId: 'section-id');
     });
     test(' should return form entity with non-null values', () {
       final form = FormEntity(
@@ -36,7 +39,11 @@ void main() {
         formTitle: 'formTitle',
         canVinculate: false,
         justificative: JustificativeEntity(
-            options: [], selectedOption: null, text: 'text', image: null),
+          options: [],
+          selectedOption: null,
+          justificationText: 'text',
+          justificationImage: null,
+        ),
       );
 
       expect(form.formId, 'formId');
@@ -86,7 +93,10 @@ void main() {
         startDate: 1,
         conclusionDate: 1,
         justificative: JustificativeEntity(
-            options: [], selectedOption: null, text: 'text', image: null),
+            options: [],
+            selectedOption: null,
+            justificationText: 'text',
+            justificationImage: null),
         comments: 'comments',
         sections: [sectionExample],
         informationFields: [informationField],
@@ -141,7 +151,10 @@ void main() {
         creationDate: 1,
         sections: [sectionExample],
         justificative: JustificativeEntity(
-            options: [], selectedOption: null, text: 'text', image: null),
+            options: [],
+            selectedOption: null,
+            justificationText: 'text',
+            justificationImage: null),
         formTitle: 'formTitle',
         canVinculate: false,
       );

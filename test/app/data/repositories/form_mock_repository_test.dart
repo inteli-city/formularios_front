@@ -34,7 +34,7 @@ void main() {
       latitude: 0,
       longitude: 0,
       number: 0,
-      priority: PriorityEnum.EMERCENCY,
+      priority: PriorityEnum.EMERGENCY,
       region: 'region',
       status: FormStatusEnum.CANCELED,
       street: 'street',
@@ -54,7 +54,10 @@ void main() {
       expirationDate: 0,
       formTitle: 'form_title',
       justificative: JustificativeEntity(
-          options: [], selectedOption: null, text: 'text', image: ''),
+          options: [],
+          selectedOption: null,
+          justificationText: 'text',
+          justificationImage: ''),
     );
   });
 

@@ -57,8 +57,8 @@ void main() {
         ),
       ],
       selectedOption: null,
-      text: null,
-      image: null,
+      justificationText: null,
+      justificationImage: null,
     ),
     comments: 'comments',
     sections: [
@@ -116,8 +116,8 @@ void main() {
                   justificative: JustificativeEntity(
                       options: [],
                       selectedOption: null,
-                      text: 'text',
-                      image: null),
+                      justificationText: 'text',
+                      justificationImage: null),
                   comments: 'comments',
                   sections: form.sections,
                   formTitle: 'formTitle',

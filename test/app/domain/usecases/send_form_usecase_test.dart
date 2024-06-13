@@ -75,7 +75,10 @@ void main() {
               startDate: 1,
               conclusionDate: 1,
               justificative: JustificativeEntity(
-                  options: [], selectedOption: null, text: 'text', image: null),
+                  options: [],
+                  selectedOption: null,
+                  justificationText: 'text',
+                  justificationImage: null),
               comments: 'comments',
               sections: newSections,
               formTitle: 'formTitle',

@@ -72,10 +72,10 @@ void main() {
         startDate: 1,
         conclusionDate: 1,
         justificative: JustificativeEntity(
-          image: null,
+          justificationImage: null,
           options: [],
           selectedOption: '',
-          text: '',
+          justificationText: '',
         ),
         comments: 'comments',
         sections: [
@@ -149,7 +149,10 @@ void main() {
       startDate: 1,
       conclusionDate: 1,
       justificative: JustificativeEntity(
-          options: [], selectedOption: '', text: '', image: null),
+          options: [],
+          selectedOption: '',
+          justificationText: '',
+          justificationImage: null),
       comments: 'comments',
       sections: [
         SectionEntity(sectionId: 'section-01', fields: [

@@ -25,91 +25,90 @@ void main() {
 
   group('FetchUserFormsUsecase', () {
     test('should return a list of FormEntity', () async {
-      when(formRepository.getUserForms())
-          .thenAnswer((_) async => Right([
-                FormEntity(
-                  formId: 'formId',
-                  creatorUserId: 'creatorUserId',
-                  userId: 'userId',
-                  vinculationFormId: 'vinculationFormId',
-                  template: 'template',
-                  area: 'area',
-                  system: 'system',
-                  street: 'street',
-                  city: 'city',
-                  number: 1,
-                  latitude: 1.0,
-                  longitude: 1.0,
-                  region: 'region',
-                  description: 'description',
-                  priority: PriorityEnum.HIGH,
-                  status: FormStatusEnum.IN_PROGRESS,
-                  expirationDate: 1,
-                  creationDate: 1,
-                  startDate: 1,
-                  conclusionDate: 1,
-                  justificative: JustificativeEntity(
-                      options: [],
-                      selectedOption: null,
-                      text: 'text',
-                      image: null),
-                  comments: 'comments',
-                  sections: [
-                    SectionEntity(
-                      sectionId: 'sectionId',
-                      fields: [
-                        TextFieldEntity(
-                            placeholder: 'placeholder',
-                            key: 'key',
-                            isRequired: true)
-                      ],
-                    )
+      when(formRepository.getUserForms()).thenAnswer((_) async => Right([
+            FormEntity(
+              formId: 'formId',
+              creatorUserId: 'creatorUserId',
+              userId: 'userId',
+              vinculationFormId: 'vinculationFormId',
+              template: 'template',
+              area: 'area',
+              system: 'system',
+              street: 'street',
+              city: 'city',
+              number: 1,
+              latitude: 1.0,
+              longitude: 1.0,
+              region: 'region',
+              description: 'description',
+              priority: PriorityEnum.HIGH,
+              status: FormStatusEnum.IN_PROGRESS,
+              expirationDate: 1,
+              creationDate: 1,
+              startDate: 1,
+              conclusionDate: 1,
+              justificative: JustificativeEntity(
+                  options: [],
+                  selectedOption: null,
+                  justificationText: 'text',
+                  justificationImage: null),
+              comments: 'comments',
+              sections: [
+                SectionEntity(
+                  sectionId: 'sectionId',
+                  fields: [
+                    TextFieldEntity(
+                        placeholder: 'placeholder',
+                        key: 'key',
+                        isRequired: true)
                   ],
-                  formTitle: 'formTitle',
-                  canVinculate: false,
-                ),
-                FormEntity(
-                  formId: 'formId',
-                  creatorUserId: 'creatorUserId',
-                  userId: 'userId',
-                  vinculationFormId: 'vinculationFormId',
-                  template: 'template',
-                  area: 'area',
-                  system: 'system',
-                  street: 'street',
-                  city: 'city',
-                  number: 1,
-                  latitude: 1.0,
-                  longitude: 1.0,
-                  region: 'region',
-                  description: 'description',
-                  priority: PriorityEnum.HIGH,
-                  status: FormStatusEnum.IN_PROGRESS,
-                  expirationDate: 1,
-                  creationDate: 1,
-                  startDate: 1,
-                  conclusionDate: 1,
-                  justificative: JustificativeEntity(
-                      options: [],
-                      selectedOption: null,
-                      text: 'text',
-                      image: null),
-                  comments: 'comments',
-                  sections: [
-                    SectionEntity(
-                      sectionId: 'sectionId',
-                      fields: [
-                        TextFieldEntity(
-                            placeholder: 'placeholder',
-                            key: 'key',
-                            isRequired: true)
-                      ],
-                    )
+                )
+              ],
+              formTitle: 'formTitle',
+              canVinculate: false,
+            ),
+            FormEntity(
+              formId: 'formId',
+              creatorUserId: 'creatorUserId',
+              userId: 'userId',
+              vinculationFormId: 'vinculationFormId',
+              template: 'template',
+              area: 'area',
+              system: 'system',
+              street: 'street',
+              city: 'city',
+              number: 1,
+              latitude: 1.0,
+              longitude: 1.0,
+              region: 'region',
+              description: 'description',
+              priority: PriorityEnum.HIGH,
+              status: FormStatusEnum.IN_PROGRESS,
+              expirationDate: 1,
+              creationDate: 1,
+              startDate: 1,
+              conclusionDate: 1,
+              justificative: JustificativeEntity(
+                  options: [],
+                  selectedOption: null,
+                  justificationText: 'text',
+                  justificationImage: null),
+              comments: 'comments',
+              sections: [
+                SectionEntity(
+                  sectionId: 'sectionId',
+                  fields: [
+                    TextFieldEntity(
+                        placeholder: 'placeholder',
+                        key: 'key',
+                        isRequired: true)
                   ],
-                  formTitle: 'formTitle',
-                  canVinculate: false,
-                ),
-              ]));
+                )
+              ],
+              formTitle: 'formTitle',
+              canVinculate: false,
+            ),
+          ]));
       var result = await usecase();
       expect(result.isRight(), true);
       expect(

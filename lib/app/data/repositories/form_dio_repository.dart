@@ -18,13 +18,12 @@ class FormDioRepository extends IFormRepository {
   @override
   Future<Either<Failure, List<FormEntity>>> getUserForms() async {
     try {
-      return _httpService.get('/get-form-by-user-id').then((response) async {
-        if (response.statusCode == 200) {
-          await _formStorage.saveForms(forms: response.data['forms']);
-          return Right(FormModel.fromMaps(response.data['forms']));
-        }
-        throw Exception();
-      });
+      var response = await _httpService.get('/get-form-by-user-id');
+      if (response.statusCode == 200) {
+        // await _formStorage.saveForms(forms: response.data['form_list']);
+        return Right(FormModel.fromMaps(response.data['form_list']));
+      }
+      throw Exception();
     } on DioException catch (e) {
       return left(ErrorRequest(message: e.message!));
     }
@@ -36,14 +35,14 @@ class FormDioRepository extends IFormRepository {
       required List<SectionEntity> sections,
       String? vinculationFormId}) async {
     try {
-      return _httpService.post('/forms', data: {
-        'formId': formId,
+      return await _httpService.post('/complete-form', data: {
+        'form_id': formId,
         'sections':
             sections.map((e) => SectionModel.fromEntity(e).toMap()).toList(),
-        'vinculationFormId': vinculationFormId,
+        'vinculation_form_id': vinculationFormId,
       }).then((response) async {
         if (response.statusCode == 200) {
-          await _formStorage.deleteForm(formId: formId);
+          // await _formStorage.deleteForm(formId: formId);
           return Right(FormModel.fromMap(response.data['form']));
         }
         throw Exception();
@@ -58,7 +57,7 @@ class FormDioRepository extends IFormRepository {
     required FormEntity form,
   }) async {
     try {
-      await _formStorage.updateForm(form: FormModel.fromEntity(form).toMap());
+      // await _formStorage.updateForm(form: FormModel.fromEntity(form).toMap());
       return Right(form);
     } catch (e) {
       return left(LocalStorageFailure(message: e.toString()));
@@ -69,12 +68,12 @@ class FormDioRepository extends IFormRepository {
   Future<Either<Failure, FormEntity>> updateFormStatus(
       {required FormStatusEnum status, required String formId}) async {
     try {
-      return _httpService.post('/update-form-status', data: {
-        'formId': formId,
+      return await _httpService.post('/update-form-status', data: {
+        'form_id': formId,
         'status': status.name,
       }).then((response) async {
         if (response.statusCode == 200) {
-          await _formStorage.updateForm(form: response.data['form']);
+          // await _formStorage.updateForm(form: response.data['form']);
           return Right(FormModel.fromMap(response.data['form']));
         }
         throw Exception();

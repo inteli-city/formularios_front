@@ -22,9 +22,11 @@ import 'package:formularios_front/app/presentation/landing/pages/splash_page.dar
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/presentation/stores/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
+import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_auth_interceptor.dart';
 import 'package:formularios_front/app/shared/helpers/services/dio/dio_http_service.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
+import 'package:formularios_front/main.dart';
 import 'package:gates_microapp_flutter/login.dart';
 import 'package:logger/logger.dart';
 
@@ -66,6 +68,7 @@ class HomeModule extends Module {
   List<Module> get imports => [MicroAppAuthModule()];
   @override
   void binds(i) {
+    i.addLazySingleton<IFormStorage>(() => FormHiveStorage(storage));
     i.addLazySingleton<FormsProvider>(FormsProvider.new);
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
@@ -77,7 +80,6 @@ class HomeModule extends Module {
     i.add(SortFormsController.new);
     i.add(SelectChipController.new);
     i.addLazySingleton(StepperController.new);
-    i.addLazySingleton<IFormStorage>(() => FormHiveStorage.instance());
     i.add(
       () => SingleFormProvider(
         i.get(),
@@ -98,19 +100,19 @@ class HomeModule extends Module {
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
-          // guards: [UserGuard()],
+          guards: [UserGuard()],
         ),
       ],
     );
     r.child(
       '/:externId',
       child: (context) => const FormDetailsPage(),
-      // guards: [UserGuard()],
+      guards: [UserGuard()],
     );
     r.child(
       '/:externId/fill',
       child: (context) => const FormSectionsPage(),
-      // guards: [UserGuard()],
+      guards: [UserGuard()],
     );
   }
 }

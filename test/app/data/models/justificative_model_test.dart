@@ -66,8 +66,8 @@ void main() {
 
       expect(model.options.length, 1);
       expect(model.selectedOption, map['selectedOption']);
-      expect(model.text, map['text']);
-      expect(model.image, map['image']);
+      expect(model.justificationText, map['justification_text']);
+      expect(model.justificationImage, map['justification_image']);
     });
 
     test('fromEntity', () {
@@ -80,16 +80,16 @@ void main() {
           )
         ],
         selectedOption: 'selectedOption',
-        text: 'text',
-        image: 'image',
+        justificationText: 'text',
+        justificationImage: 'image',
       );
 
       var model = JustificativeModel.fromEntity(entity);
 
       expect(model.options.length, entity.options.length);
       expect(model.selectedOption, entity.selectedOption);
-      expect(model.text, entity.text);
-      expect(model.image, entity.image);
+      expect(model.justificationText, entity.justificationText);
+      expect(model.justificationImage, entity.justificationImage);
     });
 
     test('toMap', () {
@@ -102,16 +102,16 @@ void main() {
           )
         ],
         selectedOption: 'selectedOption',
-        text: 'text',
-        image: 'image',
+        justificationText: 'text',
+        justificationImage: 'image',
       );
 
       var map = model.toMap();
 
       expect(map['options'].length, model.options.length);
       expect(map['selectedOption'], model.selectedOption);
-      expect(map['text'], model.text);
-      expect(map['image'], model.image);
+      expect(map['justification_text'], model.justificationText);
+      expect(map['justification_image'], model.justificationImage);
     });
   });
 }

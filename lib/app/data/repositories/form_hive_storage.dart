@@ -5,12 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class FormHiveStorage extends IFormStorage {
   final Box storage;
 
-  FormHiveStorage._(this.storage);
-
-  static Future<FormHiveStorage> instance() async {
-    await Hive.initFlutter();
-    return FormHiveStorage._(await Hive.openBox<List<Map>>('form'));
-  }
+  FormHiveStorage(this.storage);
 
   @override
   Future<void> deleteForm({required String formId}) async {

@@ -40,9 +40,9 @@ class FormModel extends FormEntity {
 
   factory FormModel.fromMap(Map<String, dynamic> json) {
     return FormModel(
-      formId: json['formId'],
-      creatorUserId: json['creatorUserId'],
-      userId: json['userId'],
+      formId: json['form_id'],
+      creatorUserId: json['creator_user_id'],
+      userId: json['user_id'],
       template: json['template'],
       area: json['area'],
       system: json['system'],
@@ -55,20 +55,20 @@ class FormModel extends FormEntity {
       priority:
           PriorityEnum.values.firstWhere((e) => e.name == json['priority']),
       status: FormStatusEnum.values.firstWhere((e) => e.name == json['status']),
-      expirationDate: json['expirationDate'],
-      creationDate: json['creationDate'],
+      expirationDate: json['expiration_date'],
+      creationDate: json['creation_date'],
       sections: SectionModel.fromMaps(json['sections']),
       comments: json['comments'],
       description: json['description'],
-      conclusionDate: json['conclusionDate'],
-      informationFields: json['informationFields'] != null
-          ? InformationFieldModel.fromMaps(json['informationFields'])
+      conclusionDate: json['conclusion_date'],
+      informationFields: json['information_fields'] != null
+          ? InformationFieldModel.fromMaps(json['information_fields'])
           : null,
-      justificative: JustificativeModel.fromMap(json['justificative']),
-      startDate: json['startDate'],
-      vinculationFormId: json['vinculationFormId'],
-      formTitle: json['formTitle'],
-      canVinculate: json['canVinculate'],
+      justificative: JustificativeModel.fromMap(json['justification']),
+      startDate: json['start_date'],
+      vinculationFormId: json['vinculation_form_id'],
+      formTitle: json['form_title'],
+      canVinculate: json['can_vinculate'],
     );
   }
 

@@ -13,13 +13,13 @@ class JustificativeOptionEntity {
 class JustificativeEntity {
   final List<JustificativeOptionEntity> options;
   final String? selectedOption;
-  final String? text;
-  final String? image;
+  final String? justificationText;
+  final String? justificationImage;
 
   JustificativeEntity({
     required this.options,
     required this.selectedOption,
-    required this.text,
-    required this.image,
+    required this.justificationText,
+    required this.justificationImage,
   });
 }

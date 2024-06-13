@@ -48,7 +48,7 @@ abstract class FieldModel extends FieldEntity {
 
   static FieldEntity fromMap(Map<String, dynamic> json) {
     switch (
-        FieldTypeEnum.values.firstWhere((e) => e.name == json['fieldType'])) {
+        FieldTypeEnum.values.firstWhere((e) => e.name == json['field_type'])) {
       case FieldTypeEnum.TEXT_FIELD:
         return TextFieldModel.fromMap(json);
       case FieldTypeEnum.NUMBER_FIELD:
@@ -104,14 +104,14 @@ class TextFieldModel extends TextFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
-      'maxLength': maxLength,
+      'max_length': maxLength,
     };
   }
 
@@ -119,11 +119,11 @@ class TextFieldModel extends TextFieldEntity implements FieldModel {
     return TextFieldModel(
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
-      maxLength: json['maxLength'],
+      maxLength: json['max_length'],
     );
   }
 }
@@ -159,15 +159,15 @@ class NumberFieldModel extends NumberFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
-      'minValue': minValue,
-      'maxValue': maxValue,
+      'min_value': minValue,
+      'max_value': maxValue,
       'decimal': decimal,
     };
   }
@@ -176,12 +176,12 @@ class NumberFieldModel extends NumberFieldEntity implements FieldModel {
     return NumberFieldModel(
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
-      minValue: json['minValue'],
-      maxValue: json['maxValue'],
+      minValue: json['min_value'],
+      maxValue: json['max_value'],
       decimal: json['decimal'],
     );
   }
@@ -193,7 +193,7 @@ class DropDownFieldModel extends DropDownFieldEntity implements FieldModel {
     required super.options,
     required super.placeholder,
     required super.key,
-    super.isRequired = true,
+    required super.isRequired,
     super.regex,
     super.formatting,
     super.value,
@@ -216,7 +216,7 @@ class DropDownFieldModel extends DropDownFieldEntity implements FieldModel {
       options: List<String>.from(json['options']),
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
@@ -226,11 +226,11 @@ class DropDownFieldModel extends DropDownFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.toString().split('.').last,
+      'field_type': fieldType.toString().split('.').last,
       'options': options,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
@@ -245,7 +245,7 @@ class TypeAheadFieldModel extends TypeAheadFieldEntity implements FieldModel {
     super.maxLength,
     required super.placeholder,
     required super.key,
-    super.isRequired = true,
+    required super.isRequired,
     super.regex,
     super.formatting,
     super.value,
@@ -267,10 +267,10 @@ class TypeAheadFieldModel extends TypeAheadFieldEntity implements FieldModel {
   factory TypeAheadFieldModel.fromMap(Map<String, dynamic> json) {
     return TypeAheadFieldModel(
       options: List<String>.from(json['options']),
-      maxLength: json['maxLength'],
+      maxLength: json['max_length'],
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
@@ -280,12 +280,12 @@ class TypeAheadFieldModel extends TypeAheadFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'options': options,
-      'maxLength': maxLength,
+      'max_length': maxLength,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
@@ -299,7 +299,7 @@ class RadioGroupFieldModel extends RadioGroupFieldEntity implements FieldModel {
     required super.options,
     required super.placeholder,
     required super.key,
-    super.isRequired = true,
+    required super.isRequired,
     super.regex,
     super.formatting,
     super.value,
@@ -322,7 +322,7 @@ class RadioGroupFieldModel extends RadioGroupFieldEntity implements FieldModel {
       options: List<String>.from(json['options']),
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
@@ -332,11 +332,11 @@ class RadioGroupFieldModel extends RadioGroupFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'options': options,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
@@ -351,7 +351,7 @@ class DateFieldModel extends DateFieldEntity implements FieldModel {
     super.maxDate,
     required super.placeholder,
     required super.key,
-    super.isRequired = true,
+    required super.isRequired,
     super.regex,
     super.formatting,
     super.value,
@@ -372,11 +372,11 @@ class DateFieldModel extends DateFieldEntity implements FieldModel {
 
   factory DateFieldModel.fromMap(Map<String, dynamic> json) {
     return DateFieldModel(
-      minDate: json['minDate'],
-      maxDate: json['maxDate'],
+      minDate: json['min_date'],
+      maxDate: json['max_date'],
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
@@ -386,12 +386,12 @@ class DateFieldModel extends DateFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.toString().split('.').last,
-      'minDate': minDate,
-      'maxDate': maxDate,
+      'field_type': fieldType.toString().split('.').last,
+      'min_date': minDate,
+      'max_date': maxDate,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
@@ -405,7 +405,7 @@ class CheckBoxFieldModel extends CheckBoxFieldEntity implements FieldModel {
     super.value,
     required super.placeholder,
     required super.key,
-    super.isRequired = true,
+    required super.isRequired,
     super.regex,
     super.formatting,
   });
@@ -425,7 +425,7 @@ class CheckBoxFieldModel extends CheckBoxFieldEntity implements FieldModel {
     return CheckBoxFieldModel(
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
@@ -435,10 +435,10 @@ class CheckBoxFieldModel extends CheckBoxFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
@@ -453,7 +453,7 @@ class CheckBoxGroupFieldModel extends CheckBoxGroupFieldEntity
     required super.options,
     required super.placeholder,
     required super.key,
-    super.isRequired = true,
+    required super.isRequired,
     super.regex,
     super.formatting,
     super.value,
@@ -476,7 +476,7 @@ class CheckBoxGroupFieldModel extends CheckBoxGroupFieldEntity
       options: List<String>.from(json['options']),
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
@@ -486,11 +486,11 @@ class CheckBoxGroupFieldModel extends CheckBoxGroupFieldEntity
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'options': options,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
@@ -505,7 +505,7 @@ class SwitchButtonFieldModel extends SwitchButtonFieldEntity
     super.value,
     required super.placeholder,
     required super.key,
-    super.isRequired = true,
+    required super.isRequired,
     super.regex,
     super.formatting,
   });
@@ -525,7 +525,7 @@ class SwitchButtonFieldModel extends SwitchButtonFieldEntity
     return SwitchButtonFieldModel(
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
@@ -535,10 +535,10 @@ class SwitchButtonFieldModel extends SwitchButtonFieldEntity
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'value': value,
@@ -578,29 +578,29 @@ class FileFieldModel extends FileFieldEntity implements FieldModel {
     return FileFieldModel(
       placeholder: json['placeholder'],
       key: json['key'],
-      isRequired: json['isRequired'],
+      isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
       value: json['value'],
       fileType: FileTypeEnum.values
-          .firstWhere((e) => e.name.toUpperCase() == json['fileType']),
-      minQuantity: json['minQuantity'],
-      maxQuantity: json['maxQuantity'],
+          .firstWhere((e) => e.name.toUpperCase() == json['file_type']),
+      minQuantity: json['min_quantity'],
+      maxQuantity: json['max_quantity'],
     );
   }
 
   @override
   Map<String, dynamic> toMap() {
     return {
-      'fieldType': fieldType.name,
+      'field_type': fieldType.name,
       'placeholder': placeholder,
       'key': key,
-      'isRequired': isRequired,
+      'required': isRequired,
       'regex': regex,
       'formatting': formatting,
       'fileType': fileType.name,
-      'minQuantity': minQuantity,
-      'maxQuantity': maxQuantity,
+      'min_quantity': minQuantity,
+      'max_quantity': maxQuantity,
       'value': value,
     };
   }

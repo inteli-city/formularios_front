@@ -72,7 +72,7 @@
 
     "orderEnumSchema" : "{schema, select, PRIORIDADE_BAIXO_ALTO{Prioridade Baixo-Alto} PRIORIDADE_ALTO_BAIXO{Prioridade Alto-Baixo} MAIS_RECENTE{Mais Recente} MAIS_ANTIGO{Mais Antigo} other{}}",
 
-    "priorityEnumSchema": "{schema, select, LOW{Baixa} MEDIUM{Média} HIGH{Alta} EMERCENCY{Emergencial} other{}}",
+    "priorityEnumSchema": "{schema, select, LOW{Baixa} MEDIUM{Média} HIGH{Alta} EMERGENCY{Emergencial} other{}}",
 
     "formStatusEnumSchema": "{schema, select, NOT_STARTED{Não iniciado} IN_PROGRESS{Em andamento} CONCLUDED{Concluído} CANCELED{Cancelado} other{}}",
     

@@ -7,6 +7,8 @@ import 'package:formularios_front/app/domain/failures/failures.dart';
 abstract class IFormRepository {
   Future<Either<Failure, List<FormEntity>>> getUserForms();
 
+  Future<Either<Failure, List<FormEntity>>> getUserFormsLocally();
+
   Future<Either<Failure, FormEntity>> updateFormStatus({
     required FormStatusEnum status,
     required String formId,

@@ -226,7 +226,7 @@ class DropDownFieldModel extends DropDownFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'field_type': fieldType.toString().split('.').last,
+      'field_type': fieldType.name,
       'options': options,
       'placeholder': placeholder,
       'key': key,
@@ -386,9 +386,9 @@ class DateFieldModel extends DateFieldEntity implements FieldModel {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'field_type': fieldType.toString().split('.').last,
-      'min_date': minDate,
-      'max_date': maxDate,
+      'field_type': fieldType.name,
+      'min_date': minDate?.millisecondsSinceEpoch,
+      'max_date': maxDate?.millisecondsSinceEpoch,
       'placeholder': placeholder,
       'key': key,
       'required': isRequired,
@@ -598,7 +598,7 @@ class FileFieldModel extends FileFieldEntity implements FieldModel {
       'required': isRequired,
       'regex': regex,
       'formatting': formatting,
-      'fileType': fileType.name,
+      'file_type': fileType.name,
       'min_quantity': minQuantity,
       'max_quantity': maxQuantity,
       'value': value,

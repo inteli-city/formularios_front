@@ -20,12 +20,22 @@ class FormDioRepository extends IFormRepository {
     try {
       var response = await _httpService.get('/get-form-by-user-id');
       if (response.statusCode == 200) {
-        // await _formStorage.saveForms(forms: response.data['form_list']);
-        return Right(FormModel.fromMaps(response.data['form_list']));
+        List forms = response.data['form_list'];
+        await _formStorage.saveForms(forms: forms);
+        return Right(forms.isEmpty ? [] : FormModel.fromMaps(forms));
       }
       throw Exception();
     } on DioException catch (e) {
       return left(ErrorRequest(message: e.message!));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<FormEntity>>> getUserFormsLocally() async {
+    try {
+      return Right(await _formStorage.getForms());
+    } catch (e) {
+      return left(LocalStorageFailure(message: e.toString()));
     }
   }
 
@@ -42,8 +52,9 @@ class FormDioRepository extends IFormRepository {
         'vinculation_form_id': vinculationFormId,
       }).then((response) async {
         if (response.statusCode == 200) {
-          // await _formStorage.deleteForm(formId: formId);
-          return Right(FormModel.fromMap(response.data['form']));
+          var form = FormModel.fromMap(response.data['form']);
+          await _formStorage.updateForm(form: form.toMap());
+          return Right(form);
         }
         throw Exception();
       });
@@ -57,7 +68,7 @@ class FormDioRepository extends IFormRepository {
     required FormEntity form,
   }) async {
     try {
-      // await _formStorage.updateForm(form: FormModel.fromEntity(form).toMap());
+      await _formStorage.updateForm(form: FormModel.fromEntity(form).toMap());
       return Right(form);
     } catch (e) {
       return left(LocalStorageFailure(message: e.toString()));
@@ -73,7 +84,7 @@ class FormDioRepository extends IFormRepository {
         'status': status.name,
       }).then((response) async {
         if (response.statusCode == 200) {
-          // await _formStorage.updateForm(form: response.data['form']);
+          await _formStorage.updateForm(form: response.data['form']);
           return Right(FormModel.fromMap(response.data['form']));
         }
         throw Exception();

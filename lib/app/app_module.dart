@@ -4,6 +4,7 @@ import 'package:formularios_front/app/data/repositories/form_hive_storage.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/repositories/form_storage.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
+import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
@@ -76,6 +77,7 @@ class HomeModule extends Module {
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
+    i.addLazySingleton<IFetchFormsLocallyUsecase>(FetchFormsLocallyUsecase.new);
     i.addLazySingleton<IUpdateFormStatusUseCase>(UpdateFormStatusUseCase.new);
     i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
     i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);

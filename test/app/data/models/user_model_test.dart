@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/data/models/user_model.dart';
-import 'package:formularios_front/app/domain/enum/role_enum.dart'; 
+import 'package:formularios_front/app/domain/enum/role_enum.dart';
 
 void main() {
   group('UserModel', () {
@@ -14,7 +14,7 @@ void main() {
         'groups': ['group1', 'group2'],
       };
 
-      final userModel = UserModel.fromJson(userJson);
+      final userModel = UserModel.fromMap(userJson);
 
       expect(userModel.userId, '123');
       expect(userModel.name, 'joao');
@@ -27,14 +27,15 @@ void main() {
     test('deve lançar um erro se o JSON estiver incompleto', () {
       final Map<String, dynamic> incompleteJson = {
         'userId': '123',
-        // 'name': 'joao', 
+        // 'name': 'joao',
         'email': 'joao@example.com',
         'enabled': true,
         'role': RoleEnum.COORDINATOR,
         'groups': ['group1', 'group2'],
       };
 
-      expect(() => UserModel.fromJson(incompleteJson), throwsA(isA<TypeError>()));
+      expect(
+          () => UserModel.fromMap(incompleteJson), throwsA(isA<TypeError>()));
     });
   });
 }

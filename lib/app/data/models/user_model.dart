@@ -1,4 +1,5 @@
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
+import 'package:formularios_front/app/domain/enum/role_enum.dart';
 
 class UserModel extends UserEntity {
   UserModel(
@@ -9,14 +10,14 @@ class UserModel extends UserEntity {
       required super.role,
       required super.groups});
 
-  factory UserModel.fromJson(Map<String, dynamic> map) {
+  factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      userId: map['userId'],
+      userId: map['profile_id'],
       name: map['name'],
       email: map['email'],
       enabled: map['enabled'],
-      role: map['role'],
-      groups: map['groups'],
+      role: RoleEnum.values.firstWhere((e) => e.name == map['role']),
+      groups: List<String>.from(map['systems']),
     );
   }
 }

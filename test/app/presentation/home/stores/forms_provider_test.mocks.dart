@@ -7,14 +7,17 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i7;
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i9;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart'
+    as _i10;
 import 'package:formularios_front/app/domain/failures/failures.dart' as _i6;
 import 'package:formularios_front/app/domain/repositories/form_repository.dart'
     as _i2;
+import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart'
+    as _i8;
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart'
     as _i4;
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart'
-    as _i8;
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -88,18 +91,55 @@ class MockFetchUserFormsUsecase extends _i1.Mock
       ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>>);
 }
 
+/// A class which mocks [FetchFormsLocallyUsecase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFetchFormsLocallyUsecase extends _i1.Mock
+    implements _i8.FetchFormsLocallyUsecase {
+  MockFetchFormsLocallyUsecase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.IFormRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeIFormRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.IFormRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>> call() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>>.value(
+                _FakeEither_1<_i6.Failure, List<_i7.FormEntity>>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, List<_i7.FormEntity>>>);
+}
+
 /// A class which mocks [IUpdateFormStatusUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockIUpdateFormStatusUseCase extends _i1.Mock
-    implements _i8.IUpdateFormStatusUseCase {
+    implements _i9.IUpdateFormStatusUseCase {
   MockIUpdateFormStatusUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>> call({
-    required _i9.FormStatusEnum? status,
+    required _i10.FormStatusEnum? status,
     required String? formId,
   }) =>
       (super.noSuchMethod(

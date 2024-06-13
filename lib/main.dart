@@ -12,6 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureAmplify(amplifyconfig);
   await Hive.initFlutter();
-  storage = await Hive.openBox<List<Map>>('form');
+  storage = await Hive.openBox<List>('form');
   return runApp(ModularApp(module: AppModule(), child: const AppWidget()));
 }

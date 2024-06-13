@@ -6,6 +6,7 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
@@ -24,10 +25,12 @@ import 'forms_provider_test.mocks.dart';
 
 @GenerateMocks([
   FetchUserFormsUsecase,
+  FetchFormsLocallyUsecase,
   IUpdateFormStatusUseCase,
 ])
 void main() {
   late MockFetchUserFormsUsecase mockFetchUserFormsUsecase;
+  late MockFetchFormsLocallyUsecase mockFetchFormsLocallyUsecase;
   late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
   late FormsProvider provider;
   late Logger logger;
@@ -36,8 +39,10 @@ void main() {
     Modular.bindModule(AppModule());
     logger = Logger();
     mockFetchUserFormsUsecase = MockFetchUserFormsUsecase();
+    mockFetchFormsLocallyUsecase = MockFetchFormsLocallyUsecase();
     mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
-    provider = FormsProvider(mockFetchUserFormsUsecase, logger);
+    provider = FormsProvider(
+        mockFetchUserFormsUsecase, mockFetchFormsLocallyUsecase, logger);
   });
   Widget createWidgetForTesting({required Widget child}) {
     return MaterialApp(
@@ -104,7 +109,7 @@ void main() {
       when(mockFetchUserFormsUsecase.call())
           .thenAnswer((_) async => Right(forms));
 
-      await provider.fetchUserForms();
+      await provider.syncForms();
 
       expect(provider.state, isA<FormUserSuccessState>());
       final state = provider.state as FormUserSuccessState;
@@ -118,7 +123,7 @@ void main() {
           .thenAnswer((_) async => Left(failure));
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
-      await provider.fetchUserForms();
+      await provider.syncForms();
 
       expect(provider.state, isA<FormUserErrorState>());
       final state = provider.state as FormUserErrorState;

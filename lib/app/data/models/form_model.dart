@@ -109,9 +109,9 @@ class FormModel extends FormEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      'formId': formId,
-      'creatorUserId': creatorUserId,
-      'userId': userId,
+      'form_id': formId,
+      'creator_user_id': creatorUserId,
+      'user_id': userId,
       'template': template,
       'area': area,
       'system': system,
@@ -123,22 +123,22 @@ class FormModel extends FormEntity {
       'region': region,
       'priority': priority.name,
       'status': status.name,
-      'expirationDate': expirationDate,
-      'creationDate': creationDate,
+      'expiration_date': expirationDate,
+      'creation_date': creationDate,
       'sections':
           sections.map((e) => SectionModel.fromEntity(e).toMap()).toList(),
       'comments': comments,
       'description': description,
-      'conclusionDate': conclusionDate,
-      'informationFields': informationFields
+      'conclusion_date': conclusionDate,
+      'information_fields': informationFields
               ?.map((e) => InformationFieldModel.fromEntity(e).toMap())
               .toList() ??
           [],
-      'justificative': JustificativeModel.fromEntity(justificative).toMap(),
-      'startDate': startDate,
-      'vinculationFormId': vinculationFormId,
-      'formTitle': formTitle,
-      'canVinculate': canVinculate,
+      'justification': JustificativeModel.fromEntity(justificative).toMap(),
+      'start_date': startDate,
+      'vinculation_form_id': vinculationFormId,
+      'form_title': formTitle,
+      'can_vinculate': canVinculate,
     };
   }
 

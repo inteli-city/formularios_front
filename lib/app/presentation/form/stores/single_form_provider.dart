@@ -51,13 +51,13 @@ class SingleFormProvider extends ChangeNotifier {
         },
         (savedForm) async {
           _logger.d(
-            '${DateTime.now()} - Form with ${savedForm.formId} saved successfully!',
+            '${DateTime.now()} - Form ${savedForm.formId} saved successfully!',
           );
           GlobalSnackBar.success('Formulário atualizado com sucesso!');
         },
       );
     });
-    await Modular.get<FormsProvider>().fetchUserForms();
+    await Modular.get<FormsProvider>().fetchFormsLocally();
     setIsFormStateLoading(false);
   }
 
@@ -75,13 +75,13 @@ class SingleFormProvider extends ChangeNotifier {
         },
         (sendedForm) async {
           _logger.d(
-            '${DateTime.now()} - Form with ${sendedForm.formId} send successfully!',
+            '${DateTime.now()} - Form ${sendedForm.formId} send successfully!',
           );
           GlobalSnackBar.success('Formulário enviado com sucesso!');
         },
       );
     });
-    await Modular.get<FormsProvider>().fetchUserForms();
+    await Modular.get<FormsProvider>().fetchFormsLocally();
     setIsFormStateLoading(false);
   }
 
@@ -98,14 +98,14 @@ class SingleFormProvider extends ChangeNotifier {
         },
         (updatedForm) async {
           _logger.d(
-            '${DateTime.now()} - Form with ${updatedForm.formId} updated status to ${status.name}!',
+            '${DateTime.now()} - Form ${updatedForm.formId} updated status to ${status.name}!',
           );
           GlobalSnackBar.success('Formulário atualizado com sucesso!');
           setFormStatus(status);
         },
       );
     });
-    await Modular.get<FormsProvider>().fetchUserForms();
+    await Modular.get<FormsProvider>().fetchFormsLocally();
     setIsFormStateLoading(false);
   }
 

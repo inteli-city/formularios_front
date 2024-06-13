@@ -136,9 +136,19 @@ class MockFormsProvider extends _i1.Mock implements _i4.FormsProvider {
       );
 
   @override
-  _i5.Future<void> fetchUserForms() => (super.noSuchMethod(
+  _i5.Future<void> fetchFormsLocally() => (super.noSuchMethod(
         Invocation.method(
-          #fetchUserForms,
+          #fetchFormsLocally,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> syncForms() => (super.noSuchMethod(
+        Invocation.method(
+          #syncForms,
           [],
         ),
         returnValue: _i5.Future<void>.value(),

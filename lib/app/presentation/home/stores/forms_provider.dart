@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
+import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
@@ -12,11 +13,15 @@ import 'package:logger/logger.dart';
 class FormsProvider extends ChangeNotifier {
   final Logger _logger;
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
+  final IFetchFormsLocallyUsecase _fetchFormsLocallyUsecase;
 
   FormsProvider(
     this._fetchUserFormsUsecase,
+    this._fetchFormsLocallyUsecase,
     this._logger,
-  );
+  ) {
+    syncForms();
+  }
 
   // Altera o estado de fetch, para atualizações em tela para todos os forms
   FormUserState state = FormUserInitialState();
@@ -46,7 +51,28 @@ class FormsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchUserForms() async {
+  Future<void> fetchFormsLocally() async {
+    setState(FormUserLoadingState());
+    setState(await _fetchFormsLocallyUsecase().then((value) {
+      return value.fold(
+        (error) {
+          _logger.e(error.toString());
+          GlobalSnackBar.error(error.message);
+          return FormUserErrorState(error: error);
+        },
+        (forms) {
+          _logger.d(
+            '${DateTime.now()} - Locally forms from user fetched successfully!',
+          );
+          _allForms = forms;
+
+          return FormUserSuccessState(forms: forms);
+        },
+      );
+    }));
+  }
+
+  Future<void> syncForms() async {
     setState(FormUserLoadingState());
     setState(await _fetchUserFormsUsecase().then((value) {
       return value.fold(
@@ -57,7 +83,7 @@ class FormsProvider extends ChangeNotifier {
         },
         (forms) {
           _logger.d(
-            '${DateTime.now()} - Forms from user fetched successfully!',
+            '${DateTime.now()} - API forms from user fetched successfully!',
           );
           _allForms = forms;
 

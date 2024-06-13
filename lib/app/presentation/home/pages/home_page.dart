@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => Modular.get<FormsProvider>()..fetchUserForms(),
+          create: (_) => Modular.get<FormsProvider>(),
         ),
       ],
       child: Builder(builder: (context) {

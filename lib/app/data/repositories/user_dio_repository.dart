@@ -15,7 +15,7 @@ class UserDioRepository implements UserRepository {
     try {
       return await _httpService.post('/login-profile').then((response) {
         if (response.statusCode == 200) {
-          return Right(UserModel.fromJson(response.data['profile']));
+          return Right(UserModel.fromMap(response.data['profile']));
         }
         throw Exception();
       });

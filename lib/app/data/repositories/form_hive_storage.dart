@@ -20,26 +20,27 @@ class FormHiveStorage extends IFormStorage {
 
   @override
   Future<List<FormModel>> getForms() async {
-    List<Map<String, dynamic>> form = storage.get('forms');
+    List form = storage.get('forms');
 
     return FormModel.fromMaps(form);
   }
 
   @override
-  Future<void> saveForms({required List<Map<String, dynamic>> forms}) async {
+  Future<void> saveForms({required List forms}) async {
     await storage.put('forms', forms);
   }
 
   @override
   Future<void> updateForm({required Map<String, dynamic> form}) async {
-    var forms = FormModel.fromMaps(await storage.get('forms'));
+    List forms = await storage.get('forms');
 
-    var index = forms.indexWhere((element) => element.formId == form['formId']);
+    var index =
+        forms.indexWhere((element) => element['form_id'] == form['form_id']);
 
     forms.removeAt(index);
 
-    forms.insert(index, FormModel.fromMap(form));
+    forms.insert(index, form);
 
-    await saveForms(forms: forms.map((e) => e.toMap()).toList());
+    await saveForms(forms: forms);
   }
 }

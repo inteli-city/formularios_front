@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 
 class StepperController {
-  int currentStep = 0;
   int currentSectionIndex = 0;
   final ScrollController listViewController = ScrollController();
 

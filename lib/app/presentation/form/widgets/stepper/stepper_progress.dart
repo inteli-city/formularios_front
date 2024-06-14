@@ -14,17 +14,12 @@ class StepperProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     StepperController controller = Modular.get<StepperController>();
     return SizedBox(
-      height: 70,
+      height: 80,
       child: Stepper(
         type: StepperType.horizontal,
+        connectorColor: WidgetStatePropertyAll(AppColors.primaryBlue),
         physics: const BouncingScrollPhysics(),
-        stepIconWidth: 32,
-        stepIconHeight: 32,
-        connectorThickness: 2,
-        stepIconMargin: EdgeInsets.zero,
-        connectorColor:
-            WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
-        currentStep: controller.currentStep,
+        currentStep: controller.currentSectionIndex,
         steps: _buildSteps(context),
         onStepTapped: (step) {
           controller.setCurrentSectionIndex(step);
@@ -45,7 +40,10 @@ class StepperProgress extends StatelessWidget {
           isActive: true,
           state: StepState.indexed,
           content: const SizedBox.shrink(),
-          title: const Text(''),
+          title: Text(
+            'FormID',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         );
       },
     );

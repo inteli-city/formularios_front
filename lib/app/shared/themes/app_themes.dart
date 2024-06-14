@@ -61,6 +61,7 @@ class AppThemes {
     ),
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: AppTextStyles.titleMedium,
+      hintStyle: AppTextStyles.titleMedium.copyWith(color: AppColors.gray),
       contentPadding: const EdgeInsets.only(
         left: AppDimensions.paddingMedium,
         right: AppDimensions.paddingMedium,

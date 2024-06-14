@@ -108,7 +108,6 @@ void main() {
 
     when(singleFormProvider.form).thenReturn(form);
     when(singleFormProvider.isSendingForm).thenReturn(false);
-    when(stepperController.currentStep).thenReturn(0);
     when(stepperController.listViewController).thenReturn(scrollController);
 
     when(singleFormProvider.form).thenReturn(form);

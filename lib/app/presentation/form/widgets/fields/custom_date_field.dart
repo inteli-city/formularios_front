@@ -43,68 +43,80 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      controller: _textController,
-      decoration: InputDecoration(
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          label: Text('*',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: AppColors.red, fontWeight: FontWeight.bold)),
-          hintText: widget.field.placeholder,
-          alignLabelWithHint: true),
-      readOnly: true,
-      onTap: () async {
-        DateTime? pickedDate = await showDatePicker(
-          barrierDismissible: false,
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
-                  primary: Theme.of(context).colorScheme.primary,
-                  onPrimary: Theme.of(context).colorScheme.secondary,
-                  onSurface: Theme.of(context).colorScheme.primary,
-                ),
-                textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.primary,
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: [
+        TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: _textController,
+          decoration: InputDecoration(labelText: widget.field.placeholder),
+          readOnly: true,
+          onTap: () async {
+            DateTime? pickedDate = await showDatePicker(
+              barrierDismissible: false,
+              builder: (context, child) {
+                return Theme(
+                  data: Theme.of(context).copyWith(
+                    colorScheme: ColorScheme.light(
+                      primary: Theme.of(context).colorScheme.primary,
+                      onPrimary: Theme.of(context).colorScheme.secondary,
+                      onSurface: Theme.of(context).colorScheme.primary,
+                    ),
+                    textButtonTheme: TextButtonThemeData(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              child: child!,
+                  child: child!,
+                );
+              },
+              initialDatePickerMode: DatePickerMode.day,
+              context: context,
+              initialDate: widget.field.value?.toUtc() ?? widget.field.minDate,
+              firstDate: widget.field.minDate ??
+                  DateTime(
+                    1900,
+                  ),
+              lastDate: widget.field.maxDate ?? DateTime(2100),
+            );
+            if (pickedDate != null) {
+              String formattedDate =
+                  DateFormat('dd/MM/yyyy').format(pickedDate);
+              _textController.text = formattedDate;
+              widget.onChanged(DateFormat('dd/MM/yyyy').parse(formattedDate));
+            }
+          },
+          validator: (value) {
+            return combine(
+              [
+                () => isRequired(
+                      value,
+                      widget.field.isRequired,
+                      widget.singleFormProvider.isSendingForm,
+                    ),
+                () => minDate(value, widget.field.minDate),
+                () => maxDate(value, widget.field.maxDate),
+                () => regex(value, widget.field.regex),
+              ],
             );
           },
-          initialDatePickerMode: DatePickerMode.day,
-          context: context,
-          initialDate: widget.field.value?.toUtc() ?? widget.field.minDate,
-          firstDate: widget.field.minDate ??
-              DateTime(
-                1900,
-              ),
-          lastDate: widget.field.maxDate ?? DateTime(2100),
-        );
-        if (pickedDate != null) {
-          String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
-          _textController.text = formattedDate;
-          widget.onChanged(DateFormat('dd/MM/yyyy').parse(formattedDate));
-        }
-      },
-      validator: (value) {
-        return combine(
-          [
-            () => isRequired(
-                  value,
-                  widget.field.isRequired,
-                  widget.singleFormProvider.isSendingForm,
+        ),
+        widget.field.isRequired
+            ? Positioned(
+                top: 10.0,
+                right: 10.0,
+                child: Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-            () => minDate(value, widget.field.minDate),
-            () => maxDate(value, widget.field.maxDate),
-            () => regex(value, widget.field.regex),
-          ],
-        );
-      },
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }

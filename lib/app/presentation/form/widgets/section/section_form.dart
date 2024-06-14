@@ -86,7 +86,7 @@ class SectionForm extends StatelessWidget {
             child: singleFormProvider.isSendingForm
                 ? const CircularProgressIndicator()
                 : Text(
-                    'Salvar',
+                    S.current.saveForm,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: AppColors.white,
                           height: 1.2,
@@ -114,7 +114,7 @@ class SectionForm extends StatelessWidget {
                         : AppColors.gray,
                   ),
                   child: Text(
-                    'Enviar',
+                    S.current.sendForm,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: AppColors.white,
                           height: 1.2,
@@ -146,7 +146,7 @@ class SectionForm extends StatelessWidget {
           field: field as NumberFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
-                section.sectionId, field.key, value);
+                section.sectionId, field.key, double.tryParse(value));
           },
           key: Key(field.key),
           singleFormProvider: singleFormProvider,
@@ -184,7 +184,7 @@ class SectionForm extends StatelessWidget {
           },
           key: Key(field.key),
           sectionEntity: section,
-          singleFormProvider: singleFormProvider, 
+          singleFormProvider: singleFormProvider,
         );
 
       case FieldTypeEnum.TYPEAHEAD_FIELD:

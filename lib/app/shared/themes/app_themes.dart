@@ -75,6 +75,14 @@ class AppThemes {
             width: AppDimensions.borderThin * 1.5,
             style: BorderStyle.solid),
       ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        gapPadding: AppDimensions.paddingSmall,
+        borderSide: BorderSide(
+            color: AppColors.primaryBlue,
+            width: AppDimensions.borderThin * 1.5,
+            style: BorderStyle.solid),
+      ),
       floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),

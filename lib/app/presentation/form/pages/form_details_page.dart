@@ -26,7 +26,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              'Details',
+              S.current.details,
               style: Theme.of(context).textTheme.displayLarge,
             ),
           ),

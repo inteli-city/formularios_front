@@ -301,6 +301,46 @@ class S {
     );
   }
 
+  /// `Details`
+  String get details {
+    return Intl.message(
+      'Details',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Files`
+  String get selectFiles {
+    return Intl.message(
+      'Select Files',
+      name: 'selectFiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Form`
+  String get saveForm {
+    return Intl.message(
+      'Save Form',
+      name: 'saveForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Form`
+  String get sendForm {
+    return Intl.message(
+      'Send Form',
+      name: 'sendForm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)`
   String get priorityTooltip {
     return Intl.message(

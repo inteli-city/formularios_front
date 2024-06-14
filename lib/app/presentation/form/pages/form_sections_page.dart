@@ -6,6 +6,7 @@ import 'package:formularios_front/app/presentation/form/widgets/section/section_
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/generated/l10n.dart';
 
 class FormSectionsPage extends StatefulWidget {
   const FormSectionsPage({super.key});
@@ -26,7 +27,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'Fill form',
+            S.current.fillForm,
             style: Theme.of(context).textTheme.displayLarge,
           ),
         ),

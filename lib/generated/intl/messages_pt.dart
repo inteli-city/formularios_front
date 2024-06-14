@@ -70,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "creatorUserId":
             MessageLookupByLibrary.simpleMessage("ID do Usuário Criador"),
         "description": MessageLookupByLibrary.simpleMessage("Descrição"),
+        "details": MessageLookupByLibrary.simpleMessage("Detalhes"),
         "entityErrorMessage": m0,
         "expirationDate":
             MessageLookupByLibrary.simpleMessage("Data de Expiração"),
@@ -102,6 +103,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)"),
         "requestErrorMessage": m6,
+        "saveForm": MessageLookupByLibrary.simpleMessage("Salvar"),
+        "selectFiles":
+            MessageLookupByLibrary.simpleMessage("Selecionar Arquivos"),
+        "sendForm": MessageLookupByLibrary.simpleMessage("Enviar"),
         "sort": MessageLookupByLibrary.simpleMessage("Ordenar"),
         "start": MessageLookupByLibrary.simpleMessage("Iniciar"),
         "startDate": MessageLookupByLibrary.simpleMessage("Data de Início"),

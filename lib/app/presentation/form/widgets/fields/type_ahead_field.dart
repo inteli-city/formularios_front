@@ -43,60 +43,74 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
 
   @override
   Widget build(BuildContext context) {
-    return TypeAheadField<String>(
-      controller: _textController,
-      builder: (context, controller, focusNode) {
-        return TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          maxLength: widget.field.maxLength,
-          controller: controller,
-          focusNode: focusNode,
-          decoration: InputDecoration(
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              label: Text('*',
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: AppColors.red, fontWeight: FontWeight.bold)),
-              hintText: widget.field.placeholder,
-              alignLabelWithHint: true),
-          onChanged: (value) => widget.onChanged(value),
-          validator: (value) => combine(
-            [
-              () => maxLength(value, widget.field.maxLength),
-              () => regex(value, widget.field.regex),
-              () => isRequired(
-                    value,
-                    widget.field.isRequired,
-                    widget.singleFormProvider.isSendingForm,
-                  )
-            ],
-          ),
-          inputFormatters: [
-            if (widget.field.maxLength != null)
-              LengthLimitingTextInputFormatter(widget.field.maxLength),
-            if (widget.field.regex != null)
-              FilteringTextInputFormatter.allow(RegExp(widget.field.regex!)),
-          ],
-        );
-      },
-      suggestionsCallback: (pattern) async {
-        return widget.field.options
-            .where(
-              (option) => option.toLowerCase().contains(pattern.toLowerCase()),
-            )
-            .toList();
-      },
-      itemBuilder: (context, suggestion) {
-        return ListTile(
-          title: Text(
-            suggestion,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        );
-      },
-      onSelected: (suggestion) {
-        _textController.text = suggestion;
-        widget.onChanged(suggestion);
-      },
+    return Stack(
+      children: [
+        TypeAheadField<String>(
+          controller: _textController,
+          builder: (context, controller, focusNode) {
+            return TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              maxLines: null,
+              controller: controller,
+              focusNode: focusNode,
+              decoration: InputDecoration(labelText: widget.field.placeholder),
+              onChanged: (value) => widget.onChanged(value),
+              validator: (value) => combine(
+                [
+                  () => maxLength(value, widget.field.maxLength),
+                  () => regex(value, widget.field.regex),
+                  () => isRequired(
+                        value,
+                        widget.field.isRequired,
+                        widget.singleFormProvider.isSendingForm,
+                      )
+                ],
+              ),
+              inputFormatters: [
+                if (widget.field.maxLength != null)
+                  LengthLimitingTextInputFormatter(widget.field.maxLength),
+                if (widget.field.regex != null)
+                  FilteringTextInputFormatter.allow(
+                      RegExp(widget.field.regex!)),
+              ],
+            );
+          },
+          suggestionsCallback: (pattern) async {
+            return widget.field.options
+                .where(
+                  (option) =>
+                      option.toLowerCase().contains(pattern.toLowerCase()),
+                )
+                .toList();
+          },
+          itemBuilder: (context, suggestion) {
+            return ListTile(
+              title: Text(
+                suggestion,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            );
+          },
+          onSelected: (suggestion) {
+            _textController.text = suggestion;
+            widget.onChanged(suggestion);
+          },
+        ),
+        widget.field.isRequired
+            ? Positioned(
+                top: 10.0,
+                right: 10.0,
+                child: Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }

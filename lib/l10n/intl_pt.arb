@@ -58,6 +58,13 @@
     "linkForm": "Vincular Formulário",
     "stepBack" : "Retroceder",
 
+    "details": "Detalhes",
+
+    "selectFiles": "Selecionar Arquivos",
+
+    "saveForm": "Salvar",
+    "sendForm": "Enviar",
+
     "priorityTooltip": "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)",
 
     "noFormsFound": "Nenhum Formulário Encontrado!",

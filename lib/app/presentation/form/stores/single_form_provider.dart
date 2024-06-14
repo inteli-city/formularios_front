@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/data/models/section_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
@@ -74,6 +75,9 @@ class SingleFormProvider extends ChangeNotifier {
           GlobalSnackBar.error(error.message);
         },
         (sendedForm) async {
+          print(form.sections.map(
+            (e) => SectionModel.fromEntity(e).toMap(),
+          ));
           _logger.d(
             '${DateTime.now()} - Form ${sendedForm.formId} send successfully!',
           );

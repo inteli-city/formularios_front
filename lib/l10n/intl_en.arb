@@ -58,6 +58,13 @@
     "linkForm": "Link Form",
     "stepBack": "Step Back",
 
+    "details": "Details",
+
+    "selectFiles": "Select Files",
+
+    "saveForm": "Save Form",
+    "sendForm": "Send Form",
+
     "priorityTooltip": "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)",
 
     "noFormsFound": "No form found!",

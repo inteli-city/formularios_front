@@ -19,42 +19,55 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: field.value,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration: InputDecoration(
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          label: Text('*',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: AppColors.red, fontWeight: FontWeight.bold)),
-          hintText: field.placeholder,
-          alignLabelWithHint: true),
-      keyboardType: TextInputType.numberWithOptions(
-        decimal: field.decimal,
-      ),
-      inputFormatters: [
-        if (field.decimal)
-          FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
-        else
-          FilteringTextInputFormatter.digitsOnly,
-      ],
-      onChanged: onChanged,
-      validator: (value) {
-        return combine(
-          [
-            () => isRequired(
-                  value,
-                  field.isRequired,
-                  singleFormProvider.isSendingForm,
-                ),
-            () => maxValue(value, field.maxValue),
-            () => minValue(value, field.minValue),
-            () => regex(value, field.regex),
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: [
+        TextFormField(
+          initialValue: field.value == null ? '' : field.value.toString(), 
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            labelText: field.placeholder,
+          ),
+          keyboardType: TextInputType.numberWithOptions(
+            decimal: field.decimal,
+          ),
+          inputFormatters: [
+            if (field.decimal)
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+            else
+              FilteringTextInputFormatter.digitsOnly,
           ],
-        );
-      },
+          onChanged: onChanged,
+          validator: (value) {
+            return combine(
+              [
+                () => isRequired(
+                      value,
+                      field.isRequired,
+                      singleFormProvider.isSendingForm,
+                    ),
+                () => maxValue(value, field.maxValue),
+                () => minValue(value, field.minValue),
+                () => regex(value, field.regex),
+              ],
+            );
+          },
+        ),
+        field.isRequired
+            ? Positioned(
+                top: 10.0,
+                right: 10.0,
+                child: Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }

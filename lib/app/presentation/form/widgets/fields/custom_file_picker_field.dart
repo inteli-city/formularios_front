@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/generated/l10n.dart';
 
 class CustomFilePickerFormField extends StatefulWidget {
   final FileFieldEntity field;
@@ -53,7 +56,9 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
       if (widget.field.maxQuantity > 1) {
         List<String> files = result.files.map((file) {
           if (kIsWeb) {
-            return file.name;
+            return file.bytes != null
+                ? 'data:image/${file.extension};base64,${base64Encode(file.bytes!)}'
+                : file.name;
           } else {
             return file.path!;
           }
@@ -66,8 +71,11 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
           },
         );
       } else {
-        String file =
-            kIsWeb ? result.files.single.name : result.files.single.path!;
+        String file = kIsWeb
+            ? (result.files.single.bytes != null
+                ? 'data:image/${result.files.single.extension};base64,${base64Encode(result.files.single.bytes!)}'
+                : result.files.single.name)
+            : result.files.single.path!;
         setState(
           () {
             _selectedFiles.add(file);
@@ -142,7 +150,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
                     width: AppDimensions.paddingSmall,
                   ),
                   Text(
-                    'Selecionar Arquivos',
+                    S.current.selectFiles,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
@@ -151,29 +159,59 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
             ),
             const SizedBox(height: AppDimensions.paddingSmall),
             ..._selectedFiles.map(
-              (file) => ListTile(
-                title: Text(
-                  textAlign: TextAlign.center,
-                  file.split('/').last,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete,
-                      size: AppDimensions.iconMedium,
-                      color: Theme.of(context).colorScheme.primary),
-                  onPressed: () {
-                    setState(
-                      () {
-                        _selectedFiles.remove(file);
-                        widget.singleFormProvider.setFieldValue(
-                            widget.section.sectionId,
-                            widget.field.key,
-                            _selectedFiles);
-                      },
-                    );
-                  },
-                ),
-              ),
+              (file) {
+                return Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: AppDimensions.paddingSmall),
+                        child: kIsWeb
+                            ? Image.network(
+                                file,
+                                width: 150,
+                                height: 50,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.file(
+                                File(file),
+                                width: 150,
+                                height: 50,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedFiles.remove(file);
+                              widget.singleFormProvider.setFieldValue(
+                                  widget.section.sectionId,
+                                  widget.field.key,
+                                  _selectedFiles);
+                            });
+                          },
+                          child: Container(
+                            width: 24,
+                            height: 24,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              size: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
             if (state.hasError)
               Text(

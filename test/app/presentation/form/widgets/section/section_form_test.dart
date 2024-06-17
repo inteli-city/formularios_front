@@ -5,6 +5,8 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_number_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_text_field.dart';
+import 'package:formularios_front/generated/l10n.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
@@ -23,6 +25,8 @@ void main() {
   Modular.replaceInstance<SingleFormProvider>(mocksingleFormProvider);
 
   testWidgets('SectionForm Test', (WidgetTester tester) async {
+    await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+    initializeDateFormatting();
     when(mocksingleFormProvider.isSendingForm).thenReturn(false);
 
     final section = SectionEntity(

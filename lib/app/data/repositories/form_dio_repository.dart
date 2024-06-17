@@ -26,7 +26,7 @@ class FormDioRepository extends IFormRepository {
       }
       throw Exception();
     } on DioException catch (e) {
-      return left(ErrorRequest(message: e.message!));
+      return left(ErrorRequest(message: e.response!.data['message']));
     }
   }
 
@@ -59,7 +59,7 @@ class FormDioRepository extends IFormRepository {
         throw Exception();
       });
     } on DioException catch (e) {
-      return left(ErrorRequest(message: e.message!));
+      return left(ErrorRequest(message: e.response!.data['message']));
     }
   }
 
@@ -90,7 +90,7 @@ class FormDioRepository extends IFormRepository {
         throw Exception();
       });
     } on DioException catch (e) {
-      return left(ErrorRequest(message: e.message!));
+      return left(ErrorRequest(message: e.response!.data['message']));
     }
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:gates_microapp_flutter/core/auth_controller.dart';
@@ -13,7 +12,7 @@ class UserProvider extends ChangeNotifier {
   ) {
     if (_authController.isLogged) {
       loginUser();
-    } 
+    }
     // else {
     //   Modular.to.navigate('./home/');
     // }

@@ -31,7 +31,7 @@ void main() {
     expect(find.byType(SnackBar), findsOneWidget);
 
     final snackBar = tester.widget<SnackBar>(find.byType(SnackBar));
-    expect(snackBar.backgroundColor, const Color.fromARGB(255, 97, 15, 9));
+    expect(snackBar.backgroundColor, const Color.fromARGB(255, 229, 115, 115));
     expect(snackBar.content, isA<Text>());
 
     final textWidget = snackBar.content as Text;
@@ -65,7 +65,8 @@ void main() {
     expect(find.byType(SnackBar), findsOneWidget);
 
     final snackBar = tester.widget<SnackBar>(find.byType(SnackBar));
-    expect(snackBar.backgroundColor, const Color.fromARGB(255, 29, 54, 1));
+    expect(
+        snackBar.backgroundColor, const Color.fromARGB(0xff, 0x81, 0xc7, 0x84));
     expect(snackBar.content, isA<Text>());
 
     final textWidget = snackBar.content as Text;

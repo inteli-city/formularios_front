@@ -16,13 +16,12 @@ import 'filter_dialog_test.mocks.dart';
 void main() {
   late FilterFormsController mockController;
   late FormsProvider mockProvider;
+  Modular.bindModule(HomeModule());
+  mockController = MockFilterFormsController();
+  mockProvider = MockFormsProvider();
 
   group('FilterOrderDialog Widget Tests', () {
     setUp(() {
-      Modular.bindModule(HomeModule());
-      mockController = MockFilterFormsController();
-      mockProvider = MockFormsProvider();
-
       when(mockController.filteredTemplate).thenReturn('Template1');
       when(mockController.filteredStreet).thenReturn('Street1');
       when(mockController.filteredCity).thenReturn('City1');
@@ -39,15 +38,15 @@ void main() {
       await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: MultiProvider(providers: [
-            Provider<FilterFormsController>(create: (_) => mockController),
-            ChangeNotifierProvider<FormsProvider>(create: (_) => mockProvider),
-          ], child: const FilterOrderDialog()),
-        ),
-      );
+          MaterialApp(
+            home: MultiProvider(providers: [
+              Provider<FilterFormsController>(create: (_) => mockController),
+              ChangeNotifierProvider<FormsProvider>(
+                  create: (_) => mockProvider),
+            ], child: const FilterOrderDialog()),
+          ),
+          duration: const Duration(seconds: 1));
 
-      await tester.pumpAndSettle();
       expect(find.text('Tipo'), findsOneWidget);
       expect(find.text('Rua'), findsOneWidget);
       expect(find.text('Cidade'), findsOneWidget);

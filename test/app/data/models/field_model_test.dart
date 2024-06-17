@@ -1,766 +1,452 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/data/models/field_model.dart';
-import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 
 void main() {
-  group('FieldModel generator -', () {
-    test('fromEntity', () {
-      var entity = TextFieldEntity(
+  group('TextFieldModel Tests', () {
+    final textFieldMap = {
+      'field_type': 'TEXT_FIELD',
+      'placeholder': 'Enter text',
+      'key': 'text_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': null,
+      'max_length': 100,
+    };
+
+    test('should create TextFieldModel from map', () {
+      final textFieldModel = TextFieldModel.fromMap(textFieldMap);
+
+      expect(textFieldModel.placeholder, 'Enter text');
+      expect(textFieldModel.key, 'text_field');
+      expect(textFieldModel.isRequired, true);
+      expect(textFieldModel.maxLength, 100);
+    });
+
+    test('should convert TextFieldModel to map', () {
+      final textFieldModel = TextFieldModel.fromMap(textFieldMap);
+      final map = textFieldModel.toMap();
+
+      expect(map, textFieldMap);
+    });
+
+    test('should create TextFieldModel from entity', () {
+      final entity = TextFieldEntity(
         fieldType: FieldTypeEnum.TEXT_FIELD,
-        placeholder: 'TextField 01',
-        regex: r'^.{6,}$',
+        placeholder: 'Enter text',
+        key: 'text_field',
         isRequired: true,
-        key: 'key-section-01-1',
+        maxLength: 100,
       );
 
-      var model = FieldModel.fromEntity(entity);
+      final textFieldModel = TextFieldModel.fromEntity(entity);
 
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.TEXT_FIELD.name,
-        'placeholder': 'TextField 01',
-        'isRequired': true,
-        'key': 'key-section-01-1',
-        'formatting': null,
-        'value': null,
-      };
-
-      var model = FieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.TEXT_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
-    });
-
-    test('fromMaps', () {
-      var maps = [
-        {
-          'fieldType': FieldTypeEnum.TEXT_FIELD.name,
-          'placeholder': 'TextField 01',
-          'isRequired': true,
-          'key': 'key-section-01-1',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.NUMBER_FIELD.name,
-          'placeholder': 'NumberField 01',
-          'minValue': 0,
-          'maxValue': 100,
-          'decimal': false,
-          'isRequired': true,
-          'key': 'key-section-01-2',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.DROPDOWN_FIELD.name,
-          'placeholder': 'DropdownField 01',
-          'isRequired': true,
-          'key': 'key-section-01-3',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-        },
-        {
-          'fieldType': FieldTypeEnum.TYPEAHEAD_FIELD.name,
-          'placeholder': 'TypeAheadField 01',
-          'isRequired': true,
-          'key': 'key-section-01-4',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-          'maxLength': 10,
-        },
-        {
-          'fieldType': FieldTypeEnum.RADIO_GROUP_FIELD.name,
-          'placeholder': 'RadioGroupField 01',
-          'isRequired': true,
-          'key': 'key-section-01-5',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-        },
-        {
-          'fieldType': FieldTypeEnum.DATE_FIELD.name,
-          'placeholder': 'DateField 01',
-          'isRequired': true,
-          'key': 'key-section-01-6',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.CHECKBOX_FIELD.name,
-          'placeholder': 'CheckBoxField 01',
-          'isRequired': true,
-          'key': 'key-section-01-7',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.CHECKBOX_GROUP_FIELD.name,
-          'placeholder': 'CheckBoxGroupField 01',
-          'isRequired': true,
-          'key': 'key-section-01-8',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-        },
-      ];
-
-      var models = FieldModel.fromMaps(maps);
-
-      expect(models.length, maps.length);
-
-      for (var i = 0; i < models.length; i++) {
-        expect(models[i].fieldType.name, maps[i]['fieldType']);
-        expect(models[i].placeholder, maps[i]['placeholder']);
-        expect(models[i].isRequired, maps[i]['isRequired']);
-        expect(models[i].key, maps[i]['key']);
-        expect(models[i].formatting, maps[i]['formatting']);
-        expect(models[i].value, maps[i]['value']);
-      }
-    });
-  });
-  group('TextFieldModel -', () {
-    test('fromEntity', () {
-      var entity = TextFieldEntity(
-        fieldType: FieldTypeEnum.TEXT_FIELD,
-        placeholder: 'TextField 01',
-        regex: r'^.{6,}$',
-        isRequired: true,
-        key: 'key-section-01-1',
-      );
-      var model = TextFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.regex, entity.regex);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-    });
-
-    test('toMap', () {
-      var model = TextFieldModel(
-        placeholder: 'TextField 01',
-        regex: r'^.{6,}$',
-        isRequired: true,
-        key: 'key-section-01-1',
-      );
-
-      var map = model.toMap();
-
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['regex'], model.regex);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.TEXT_FIELD.name,
-        'placeholder': 'TextField 01',
-        'regex': r'^.{6,}$',
-        'isRequired': true,
-        'key': 'key-section-01-1',
-        'formatting': null,
-        'value': null,
-      };
-
-      var model = TextFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.TEXT_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.regex, map['regex']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
+      expect(textFieldModel.placeholder, 'Enter text');
+      expect(textFieldModel.key, 'text_field');
+      expect(textFieldModel.isRequired, true);
+      expect(textFieldModel.maxLength, 100);
     });
   });
 
-  group('NumberFieldModel -', () {
-    test('fromEntity', () {
-      var entity = NumberFieldEntity(
+  group('NumberFieldModel Tests', () {
+    final numberFieldMap = {
+      'field_type': 'NUMBER_FIELD',
+      'placeholder': 'Enter number',
+      'key': 'number_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': null,
+      'min_value': 0,
+      'max_value': 100,
+      'decimal': true,
+    };
+
+    test('should create NumberFieldModel from map', () {
+      final numberFieldModel = NumberFieldModel.fromMap(numberFieldMap);
+
+      expect(numberFieldModel.placeholder, 'Enter number');
+      expect(numberFieldModel.key, 'number_field');
+      expect(numberFieldModel.isRequired, true);
+      expect(numberFieldModel.minValue, 0);
+      expect(numberFieldModel.maxValue, 100);
+      expect(numberFieldModel.decimal, true);
+    });
+
+    test('should convert NumberFieldModel to map', () {
+      final numberFieldModel = NumberFieldModel.fromMap(numberFieldMap);
+      final map = numberFieldModel.toMap();
+
+      expect(map, numberFieldMap);
+    });
+
+    test('should create NumberFieldModel from entity', () {
+      final entity = NumberFieldEntity(
         fieldType: FieldTypeEnum.NUMBER_FIELD,
-        placeholder: 'NumberField 01',
+        placeholder: 'Enter number',
+        key: 'number_field',
+        isRequired: true,
         minValue: 0,
         maxValue: 100,
-        decimal: false,
-        isRequired: true,
-        key: 'key-section-01-2',
-      );
-      var model = NumberFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.minValue, entity.minValue);
-      expect(model.maxValue, entity.maxValue);
-      expect(model.decimal, entity.decimal);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-    });
-
-    test('toMap', () {
-      var model = NumberFieldModel(
-        placeholder: 'NumberField 01',
-        minValue: 0,
-        maxValue: 100,
-        decimal: false,
-        isRequired: true,
-        key: 'key-section-01-2',
+        decimal: true,
       );
 
-      var map = model.toMap();
+      final numberFieldModel = NumberFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['minValue'], model.minValue);
-      expect(map['maxValue'], model.maxValue);
-      expect(map['decimal'], model.decimal);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.NUMBER_FIELD.name,
-        'placeholder': 'NumberField 01',
-        'minValue': 0,
-        'maxValue': 100,
-        'decimal': false,
-        'isRequired': true,
-        'key': 'key-section-01-2',
-        'formatting': null,
-        'value': null,
-      };
-
-      var model = NumberFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.NUMBER_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.minValue, map['minValue']);
-      expect(model.maxValue, map['maxValue']);
-      expect(model.decimal, map['decimal']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
+      expect(numberFieldModel.placeholder, 'Enter number');
+      expect(numberFieldModel.key, 'number_field');
+      expect(numberFieldModel.isRequired, true);
+      expect(numberFieldModel.minValue, 0);
+      expect(numberFieldModel.maxValue, 100);
+      expect(numberFieldModel.decimal, true);
     });
   });
 
-  group('DropdownFieldModel -', () {
-    test('fromEntity', () {
-      var entity = DropDownFieldEntity(
+  group('DropDownFieldModel Tests', () {
+    final dropDownFieldMap = {
+      'field_type': 'DROPDOWN_FIELD',
+      'options': ['Option1', 'Option2'],
+      'placeholder': 'Select an option',
+      'key': 'dropdown_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': null,
+    };
+
+    test('should create DropDownFieldModel from map', () {
+      final dropDownFieldModel = DropDownFieldModel.fromMap(dropDownFieldMap);
+
+      expect(dropDownFieldModel.options, ['Option1', 'Option2']);
+      expect(dropDownFieldModel.placeholder, 'Select an option');
+      expect(dropDownFieldModel.key, 'dropdown_field');
+      expect(dropDownFieldModel.isRequired, true);
+    });
+
+    test('should convert DropDownFieldModel to map', () {
+      final dropDownFieldModel = DropDownFieldModel.fromMap(dropDownFieldMap);
+      final map = dropDownFieldModel.toMap();
+
+      expect(map, dropDownFieldMap);
+    });
+
+    test('should create DropDownFieldModel from entity', () {
+      final entity = DropDownFieldEntity(
         fieldType: FieldTypeEnum.DROPDOWN_FIELD,
-        placeholder: 'DropdownField 01',
+        options: ['Option1', 'Option2'],
+        placeholder: 'Select an option',
+        key: 'dropdown_field',
         isRequired: true,
-        key: 'key-section-01-3',
-        options: ['Option 01', 'Option 02', 'Option 03'],
-      );
-      var model = DropDownFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-      expect(model.options, entity.options);
-    });
-
-    test('toMap', () {
-      var model = DropDownFieldModel(
-        placeholder: 'DropdownField 01',
-        isRequired: true,
-        key: 'key-section-01-3',
-        options: ['Option 01', 'Option 02', 'Option 03'],
       );
 
-      var map = model.toMap();
+      final dropDownFieldModel = DropDownFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-      expect(map['options'], model.options);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.DROPDOWN_FIELD.name,
-        'placeholder': 'DropdownField 01',
-        'isRequired': true,
-        'key': 'key-section-01-3',
-        'formatting': null,
-        'value': null,
-        'options': ['Option 01', 'Option 02', 'Option 03'],
-      };
-
-      var model = DropDownFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.DROPDOWN_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
-      expect(model.options, map['options']);
+      expect(dropDownFieldModel.options, ['Option1', 'Option2']);
+      expect(dropDownFieldModel.placeholder, 'Select an option');
+      expect(dropDownFieldModel.key, 'dropdown_field');
+      expect(dropDownFieldModel.isRequired, true);
     });
   });
+  group('TypeAheadFieldModel Tests', () {
+    final typeAheadFieldMap = {
+      'field_type': 'TYPEAHEAD_FIELD',
+      'options': ['Option1', 'Option2'],
+      'max_length': 50,
+      'placeholder': 'Type ahead',
+      'key': 'typeahead_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': null,
+    };
 
-  group('TypeAheadFieldModel -', () {
-    test('fromEntity', () {
-      var entity = TypeAheadFieldEntity(
+    test('should create TypeAheadFieldModel from map', () {
+      final typeAheadFieldModel =
+          TypeAheadFieldModel.fromMap(typeAheadFieldMap);
+
+      expect(typeAheadFieldModel.options, ['Option1', 'Option2']);
+      expect(typeAheadFieldModel.maxLength, 50);
+      expect(typeAheadFieldModel.placeholder, 'Type ahead');
+      expect(typeAheadFieldModel.key, 'typeahead_field');
+      expect(typeAheadFieldModel.isRequired, true);
+    });
+
+    test('should convert TypeAheadFieldModel to map', () {
+      final typeAheadFieldModel =
+          TypeAheadFieldModel.fromMap(typeAheadFieldMap);
+      final map = typeAheadFieldModel.toMap();
+
+      expect(map, typeAheadFieldMap);
+    });
+
+    test('should create TypeAheadFieldModel from entity', () {
+      final entity = TypeAheadFieldEntity(
         fieldType: FieldTypeEnum.TYPEAHEAD_FIELD,
-        placeholder: 'TypeAheadField 01',
+        options: ['Option1', 'Option2'],
+        maxLength: 50,
+        placeholder: 'Type ahead',
+        key: 'typeahead_field',
         isRequired: true,
-        key: 'key-section-01-4',
-        options: ['Option 01', 'Option 02', 'Option 03'],
-        maxLength: 10,
-      );
-      var model = TypeAheadFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-      expect(model.options, entity.options);
-      expect(model.maxLength, entity.maxLength);
-    });
-
-    test('toMap', () {
-      var model = TypeAheadFieldModel(
-        placeholder: 'TypeAheadField 01',
-        isRequired: true,
-        key: 'key-section-01-4',
-        options: ['Option 01', 'Option 02', 'Option 03'],
-        maxLength: 10,
       );
 
-      var map = model.toMap();
+      final typeAheadFieldModel = TypeAheadFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-      expect(map['options'], model.options);
-      expect(map['maxLength'], model.maxLength);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.TYPEAHEAD_FIELD.name,
-        'placeholder': 'TypeAheadField 01',
-        'isRequired': true,
-        'key': 'key-section-01-4',
-        'formatting': null,
-        'value': null,
-        'options': ['Option 01', 'Option 02', 'Option 03'],
-        'maxLength': 10,
-      };
-
-      var model = TypeAheadFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.TYPEAHEAD_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
-      expect(model.options, map['options']);
-      expect(model.maxLength, map['maxLength']);
+      expect(typeAheadFieldModel.options, ['Option1', 'Option2']);
+      expect(typeAheadFieldModel.maxLength, 50);
+      expect(typeAheadFieldModel.placeholder, 'Type ahead');
+      expect(typeAheadFieldModel.key, 'typeahead_field');
+      expect(typeAheadFieldModel.isRequired, true);
     });
   });
 
-  group('RadioGroupFieldModel -', () {
-    test('fromEntity', () {
-      var entity = RadioGroupFieldEntity(
-        fieldType: FieldTypeEnum.RADIO_GROUP_FIELD,
-        placeholder: 'RadioGroupField 01',
-        isRequired: true,
-        key: 'key-section-01-5',
-        options: ['Option 01', 'Option 02', 'Option 03'],
-      );
-      var model = RadioGroupFieldModel.fromEntity(entity);
+  group('DateFieldModel Tests', () {
+    final dateFieldMap = {
+      'field_type': 'DATE_FIELD',
+      'min_date': DateTime(2022, 01, 01).millisecondsSinceEpoch,
+      'max_date': DateTime(2022, 12, 31).millisecondsSinceEpoch,
+      'placeholder': 'Select a date',
+      'key': 'date_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': null,
+    };
 
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-      expect(model.options, entity.options);
+    test('should create DateFieldModel from map', () {
+      final dateFieldModel = DateFieldModel.fromMap(dateFieldMap);
+
+      expect(dateFieldModel.minDate, DateTime(2022, 01, 01));
+      expect(dateFieldModel.maxDate, DateTime(2022, 12, 31));
+      expect(dateFieldModel.placeholder, 'Select a date');
+      expect(dateFieldModel.key, 'date_field');
+      expect(dateFieldModel.isRequired, true);
     });
 
-    test('toMap', () {
-      var model = RadioGroupFieldModel(
-        placeholder: 'RadioGroupField 01',
-        isRequired: true,
-        key: 'key-section-01-5',
-        options: ['Option 01', 'Option 02', 'Option 03'],
-      );
+    test('should convert DateFieldModel to map', () {
+      final dateFieldModel = DateFieldModel.fromMap(dateFieldMap);
+      final map = dateFieldModel.toMap();
 
-      var map = model.toMap();
-
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-      expect(map['options'], model.options);
+      expect(map, dateFieldMap);
     });
 
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.RADIO_GROUP_FIELD.name,
-        'placeholder': 'RadioGroupField 01',
-        'isRequired': true,
-        'key': 'key-section-01-5',
-        'formatting': null,
-        'value': null,
-        'options': ['Option 01', 'Option 02', 'Option 03'],
-      };
-
-      var model = RadioGroupFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.RADIO_GROUP_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
-      expect(model.options, map['options']);
-    });
-  });
-
-  group('DateFieldModel -', () {
-    test('fromEntity', () {
-      var entity = DateFieldEntity(
+    test('should create DateFieldModel from entity', () {
+      final entity = DateFieldEntity(
         fieldType: FieldTypeEnum.DATE_FIELD,
-        placeholder: 'DateField 01',
+        minDate: DateTime(2022, 01, 01),
+        maxDate: DateTime(2022, 12, 31),
+        placeholder: 'Select a date',
+        key: 'date_field',
         isRequired: true,
-        key: 'key-section-01-6',
-      );
-      var model = DateFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-    });
-
-    test('toMap', () {
-      var model = DateFieldModel(
-        placeholder: 'DateField 01',
-        isRequired: true,
-        key: 'key-section-01-6',
       );
 
-      var map = model.toMap();
+      final dateFieldModel = DateFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.DATE_FIELD.name,
-        'placeholder': 'DateField 01',
-        'isRequired': true,
-        'key': 'key-section-01-6',
-        'formatting': null,
-        'value': null,
-      };
-
-      var model = DateFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.DATE_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
+      expect(dateFieldModel.minDate, DateTime(2022, 01, 01));
+      expect(dateFieldModel.maxDate, DateTime(2022, 12, 31));
+      expect(dateFieldModel.placeholder, 'Select a date');
+      expect(dateFieldModel.key, 'date_field');
+      expect(dateFieldModel.isRequired, true);
     });
   });
 
-  group('CheckBoxFieldModel -', () {
-    test('fromEntity', () {
-      var entity = CheckBoxFieldEntity(
+  group('CheckBoxFieldModel Tests', () {
+    final checkBoxFieldMap = {
+      'field_type': 'CHECKBOX_FIELD',
+      'placeholder': 'Accept terms',
+      'key': 'checkbox_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': true,
+    };
+
+    test('should create CheckBoxFieldModel from map', () {
+      final checkBoxFieldModel = CheckBoxFieldModel.fromMap(checkBoxFieldMap);
+
+      expect(checkBoxFieldModel.placeholder, 'Accept terms');
+      expect(checkBoxFieldModel.key, 'checkbox_field');
+      expect(checkBoxFieldModel.isRequired, true);
+      expect(checkBoxFieldModel.value, true);
+    });
+
+    test('should convert CheckBoxFieldModel to map', () {
+      final checkBoxFieldModel = CheckBoxFieldModel.fromMap(checkBoxFieldMap);
+      final map = checkBoxFieldModel.toMap();
+
+      expect(map, checkBoxFieldMap);
+    });
+
+    test('should create CheckBoxFieldModel from entity', () {
+      final entity = CheckBoxFieldEntity(
         fieldType: FieldTypeEnum.CHECKBOX_FIELD,
-        placeholder: 'CheckBoxField 01',
+        placeholder: 'Accept terms',
+        key: 'checkbox_field',
         isRequired: true,
-        key: 'key-section-01-7',
-      );
-      var model = CheckBoxFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-    });
-
-    test('toMap', () {
-      var model = CheckBoxFieldModel(
-        placeholder: 'CheckBoxField 01',
-        isRequired: true,
-        key: 'key-section-01-7',
+        value: true,
       );
 
-      var map = model.toMap();
+      final checkBoxFieldModel = CheckBoxFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.CHECKBOX_FIELD.name,
-        'placeholder': 'CheckBoxField 01',
-        'isRequired': true,
-        'key': 'key-section-01-7',
-        'formatting': null,
-        'value': null,
-      };
-
-      var model = CheckBoxFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.CHECKBOX_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
+      expect(checkBoxFieldModel.placeholder, 'Accept terms');
+      expect(checkBoxFieldModel.key, 'checkbox_field');
+      expect(checkBoxFieldModel.isRequired, true);
+      expect(checkBoxFieldModel.value, true);
     });
   });
 
-  group('CheckBoxGroupFieldModel -', () {
-    test('fromEntity', () {
-      var entity = CheckBoxGroupFieldEntity(
+  group('CheckBoxGroupFieldModel Tests', () {
+    final checkBoxGroupFieldMap = {
+      'field_type': 'CHECKBOX_GROUP_FIELD',
+      'options': ['Option1', 'Option2'],
+      'placeholder': 'Select options',
+      'key': 'checkbox_group_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': ['Option1'],
+    };
+
+    test('should create CheckBoxGroupFieldModel from map', () {
+      final checkBoxGroupFieldModel =
+          CheckBoxGroupFieldModel.fromMap(checkBoxGroupFieldMap);
+
+      expect(checkBoxGroupFieldModel.options, ['Option1', 'Option2']);
+      expect(checkBoxGroupFieldModel.placeholder, 'Select options');
+      expect(checkBoxGroupFieldModel.key, 'checkbox_group_field');
+      expect(checkBoxGroupFieldModel.isRequired, true);
+      expect(checkBoxGroupFieldModel.value, ['Option1']);
+    });
+
+    test('should convert CheckBoxGroupFieldModel to map', () {
+      final checkBoxGroupFieldModel =
+          CheckBoxGroupFieldModel.fromMap(checkBoxGroupFieldMap);
+      final map = checkBoxGroupFieldModel.toMap();
+
+      expect(map, checkBoxGroupFieldMap);
+    });
+
+    test('should create CheckBoxGroupFieldModel from entity', () {
+      final entity = CheckBoxGroupFieldEntity(
         fieldType: FieldTypeEnum.CHECKBOX_GROUP_FIELD,
-        placeholder: 'CheckBoxGroupField 01',
+        options: ['Option1', 'Option2'],
+        placeholder: 'Select options',
+        key: 'checkbox_group_field',
         isRequired: true,
-        key: 'key-section-01-8',
-        options: ['Option 01', 'Option 02', 'Option 03'],
-      );
-      var model = CheckBoxGroupFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-      expect(model.options, entity.options);
-    });
-
-    test('toMap', () {
-      var model = CheckBoxGroupFieldModel(
-        placeholder: 'CheckBoxGroupField 01',
-        isRequired: true,
-        key: 'key-section-01-8',
-        options: ['Option 01', 'Option 02', 'Option 03'],
+        value: ['Option1'],
       );
 
-      var map = model.toMap();
+      final checkBoxGroupFieldModel =
+          CheckBoxGroupFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-      expect(map['options'], model.options);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.CHECKBOX_GROUP_FIELD.name,
-        'placeholder': 'CheckBoxGroupField 01',
-        'isRequired': true,
-        'key': 'key-section-01-8',
-        'formatting': null,
-        'value': null,
-        'options': ['Option 01', 'Option 02', 'Option 03'],
-      };
-
-      var model = CheckBoxGroupFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.CHECKBOX_GROUP_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
-      expect(model.options, map['options']);
+      expect(checkBoxGroupFieldModel.options, ['Option1', 'Option2']);
+      expect(checkBoxGroupFieldModel.placeholder, 'Select options');
+      expect(checkBoxGroupFieldModel.key, 'checkbox_group_field');
+      expect(checkBoxGroupFieldModel.isRequired, true);
+      expect(checkBoxGroupFieldModel.value, ['Option1']);
     });
   });
 
-  group('SwitchButtonFieldModel -', () {
-    test('fromEntity', () {
-      var entity = SwitchButtonFieldEntity(
+  group('SwitchButtonFieldModel Tests', () {
+    final switchButtonFieldMap = {
+      'field_type': 'SWITCH_BUTTON_FIELD',
+      'placeholder': 'Enable feature',
+      'key': 'switch_button_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': true,
+    };
+
+    test('should create SwitchButtonFieldModel from map', () {
+      final switchButtonFieldModel =
+          SwitchButtonFieldModel.fromMap(switchButtonFieldMap);
+
+      expect(switchButtonFieldModel.placeholder, 'Enable feature');
+      expect(switchButtonFieldModel.key, 'switch_button_field');
+      expect(switchButtonFieldModel.isRequired, true);
+      expect(switchButtonFieldModel.value, true);
+    });
+
+    test('should convert SwitchButtonFieldModel to map', () {
+      final switchButtonFieldModel =
+          SwitchButtonFieldModel.fromMap(switchButtonFieldMap);
+      final map = switchButtonFieldModel.toMap();
+
+      expect(map, switchButtonFieldMap);
+    });
+
+    test('should create SwitchButtonFieldModel from entity', () {
+      final entity = SwitchButtonFieldEntity(
         fieldType: FieldTypeEnum.SWITCH_BUTTON_FIELD,
-        placeholder: 'SwitchButtonField 01',
+        placeholder: 'Enable feature',
+        key: 'switch_button_field',
         isRequired: true,
-        key: 'key-section-01-9',
-      );
-      var model = SwitchButtonFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-    });
-
-    test('toMap', () {
-      var model = SwitchButtonFieldModel(
-        placeholder: 'SwitchButtonField 01',
-        isRequired: true,
-        key: 'key-section-01-9',
+        value: true,
       );
 
-      var map = model.toMap();
+      final switchButtonFieldModel = SwitchButtonFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.SWITCH_BUTTON_FIELD.name,
-        'placeholder': 'SwitchButtonField 01',
-        'isRequired': true,
-        'key': 'key-section-01-9',
-        'formatting': null,
-        'value': null,
-      };
-
-      var model = SwitchButtonFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.SWITCH_BUTTON_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
+      expect(switchButtonFieldModel.placeholder, 'Enable feature');
+      expect(switchButtonFieldModel.key, 'switch_button_field');
+      expect(switchButtonFieldModel.isRequired, true);
+      expect(switchButtonFieldModel.value, true);
     });
   });
 
-  group('FileFieldModel -', () {
-    test('fromEntity', () {
-      var entity = FileFieldEntity(
-        fileType: FileTypeEnum.DOCUMENT,
-        minQuantity: 1,
-        maxQuantity: 10,
+  group('FileFieldModel Tests', () {
+    final fileFieldMap = {
+      'field_type': 'FILE_FIELD',
+      'placeholder': 'Upload file',
+      'key': 'file_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': null,
+      'file_type': 'IMAGE',
+      'min_quantity': 1,
+      'max_quantity': 3,
+    };
+
+    test('should create FileFieldModel from map', () {
+      final fileFieldModel = FileFieldModel.fromMap(fileFieldMap);
+
+      expect(fileFieldModel.placeholder, 'Upload file');
+      expect(fileFieldModel.key, 'file_field');
+      expect(fileFieldModel.isRequired, true);
+      expect(fileFieldModel.fileType, FileTypeEnum.IMAGE);
+      expect(fileFieldModel.minQuantity, 1);
+      expect(fileFieldModel.maxQuantity, 3);
+    });
+
+    test('should convert FileFieldModel to map', () {
+      final fileFieldModel = FileFieldModel.fromMap(fileFieldMap);
+      final map = fileFieldModel.toMap();
+
+      expect(map, fileFieldMap);
+    });
+
+    test('should create FileFieldModel from entity', () {
+      final entity = FileFieldEntity(
         fieldType: FieldTypeEnum.FILE_FIELD,
-        placeholder: 'FileField 01',
+        placeholder: 'Upload file',
+        key: 'file_field',
         isRequired: true,
-        key: 'key-section-01-10',
-      );
-      var model = FileFieldModel.fromEntity(entity);
-
-      expect(model.fieldType, entity.fieldType);
-      expect(model.placeholder, entity.placeholder);
-      expect(model.isRequired, entity.isRequired);
-      expect(model.key, entity.key);
-      expect(model.formatting, entity.formatting);
-      expect(model.value, entity.value);
-    });
-
-    test('toMap', () {
-      var model = FileFieldModel(
-        fileType: FileTypeEnum.DOCUMENT,
+        fileType: FileTypeEnum.IMAGE,
         minQuantity: 1,
-        maxQuantity: 10,
-        placeholder: 'FileField 01',
-        isRequired: true,
-        key: 'key-section-01-10',
+        maxQuantity: 3,
       );
 
-      var map = model.toMap();
+      final fileFieldModel = FileFieldModel.fromEntity(entity);
 
-      expect(map['fieldType'], model.fieldType.name);
-      expect(map['placeholder'], model.placeholder);
-      expect(map['isRequired'], model.isRequired);
-      expect(map['key'], model.key);
-      expect(map['formatting'], model.formatting);
-      expect(map['value'], model.value);
-      expect(map['fileType'], model.fileType.name);
-      expect(map['minQuantity'], model.minQuantity);
-      expect(map['maxQuantity'], model.maxQuantity);
-    });
-
-    test('fromMap', () {
-      var map = {
-        'fieldType': FieldTypeEnum.FILE_FIELD.name,
-        'maxQuantity': 10,
-        'minQuantity': 1,
-        'fileType': FileTypeEnum.DOCUMENT.name,
-        'placeholder': 'FileField 01',
-        'isRequired': true,
-        'key': 'key-section-01-10',
-        'formatting': null,
-        'value': null,
-      };
-
-      var model = FileFieldModel.fromMap(map);
-
-      expect(model.fieldType, FieldTypeEnum.FILE_FIELD);
-      expect(model.placeholder, map['placeholder']);
-      expect(model.isRequired, map['isRequired']);
-      expect(model.key, map['key']);
-      expect(model.formatting, map['formatting']);
-      expect(model.value, map['value']);
-      expect(model.fileType, FileTypeEnum.DOCUMENT);
-      expect(model.minQuantity, map['minQuantity']);
-      expect(model.maxQuantity, map['maxQuantity']);
+      expect(fileFieldModel.placeholder, 'Upload file');
+      expect(fileFieldModel.key, 'file_field');
+      expect(fileFieldModel.isRequired, true);
+      expect(fileFieldModel.fileType, FileTypeEnum.IMAGE);
+      expect(fileFieldModel.minQuantity, 1);
+      expect(fileFieldModel.maxQuantity, 3);
     });
   });
 }

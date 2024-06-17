@@ -5,6 +5,7 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_file_picker_field.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
 
 import 'custom_file_picker_field_test.mocks.dart';
@@ -27,6 +28,7 @@ void main() {
     },
   );
   testWidgets('CustomFilePickerFormField Test', (WidgetTester tester) async {
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     final field = FileFieldEntity(
       key: 'filePickerField',
       placeholder: 'Selecione um arquivo',

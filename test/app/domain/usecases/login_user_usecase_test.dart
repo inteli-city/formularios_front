@@ -12,7 +12,6 @@ import 'package:mockito/mockito.dart';
 
 import 'login_user_usecase_test.mocks.dart';
 
-
 @GenerateMocks([IUserRepository])
 void main() {
   Modular.bindModule(AppModule());

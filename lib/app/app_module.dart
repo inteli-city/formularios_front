@@ -71,7 +71,8 @@ class HomeModule extends Module {
   void binds(i) {
     i.addSingleton(UserProvider.new);
     i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
-    i.addSingleton<IUserRepository>(() => EnvironmentConfig.getUserRepository(),config: BindConfig());
+    i.addSingleton<IUserRepository>(() => EnvironmentConfig.getUserRepository(),
+        config: BindConfig());
     i.addLazySingleton<IFormStorage>(() => FormHiveStorage(storage));
     i.addLazySingleton<FormsProvider>(FormsProvider.new);
     i.addLazySingleton<IFormRepository>(

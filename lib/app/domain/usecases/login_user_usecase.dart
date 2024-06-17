@@ -8,7 +8,7 @@ abstract class ILoginUserUsecase {
 }
 
 class LoginUserUsecase implements ILoginUserUsecase {
-  final UserRepository repository;
+  final IUserRepository repository;
 
   LoginUserUsecase({required this.repository});
 

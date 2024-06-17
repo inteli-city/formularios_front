@@ -7,7 +7,7 @@ import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
 
-class UserDioRepository implements UserRepository {
+class UserDioRepository implements IUserRepository {
   final IHttpService _httpService = Modular.get<IHttpService>();
 
   @override

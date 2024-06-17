@@ -3,115 +3,108 @@ import 'package:formularios_front/app/data/models/justificative_model.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 
 void main() {
-  group('JustificativeOptionModel', () {
-    test('fromMap', () {
-      var map = {
-        'option': 'option',
-        'requiredImage': true,
-        'requiredText': true,
-      };
+  group('JustificativeOptionModel Tests', () {
+    final optionMap = {
+      'option': 'Option 1',
+      'required_image': true,
+      'required_text': false,
+    };
 
-      var model = JustificativeOptionModel.fromMap(map);
+    test('should create JustificativeOptionModel from map', () {
+      final model = JustificativeOptionModel.fromMap(optionMap);
 
-      expect(model.option, map['option']);
-      expect(model.requiredImage, map['requiredImage']);
-      expect(model.requiredText, map['requiredText']);
+      expect(model.option, 'Option 1');
+      expect(model.requiredImage, true);
+      expect(model.requiredText, false);
     });
 
-    test('fromEntity', () {
-      var entity = JustificativeOptionEntity(
-        option: 'option',
-        requiredImage: true,
-        requiredText: true,
-      );
+    test('should convert JustificativeOptionModel to map', () {
+      final model = JustificativeOptionModel.fromMap(optionMap);
+      final map = model.toMap();
 
-      var model = JustificativeOptionModel.fromEntity(entity);
-
-      expect(model.option, entity.option);
-      expect(model.requiredImage, entity.requiredImage);
-      expect(model.requiredText, entity.requiredText);
+      expect(map, optionMap);
     });
 
-    test('toMap', () {
-      var model = JustificativeOptionModel(
-        option: 'option',
+    test('should create JustificativeOptionModel from entity', () {
+      final entity = JustificativeOptionEntity(
+        option: 'Option 1',
         requiredImage: true,
-        requiredText: true,
+        requiredText: false,
       );
 
-      var map = model.toMap();
+      final model = JustificativeOptionModel.fromEntity(entity);
 
-      expect(map['option'], model.option);
-      expect(map['requiredImage'], model.requiredImage);
-      expect(map['requiredText'], model.requiredText);
+      expect(model.option, 'Option 1');
+      expect(model.requiredImage, true);
+      expect(model.requiredText, false);
+    });
+
+    test('should convert list of maps to list of JustificativeOptionModel', () {
+      final optionsListMap = [optionMap, optionMap];
+
+      final models = JustificativeOptionModel.fromMaps(optionsListMap);
+
+      expect(models.length, 2);
+      expect(models[0].option, 'Option 1');
+      expect(models[0].requiredImage, true);
+      expect(models[0].requiredText, false);
     });
   });
 
-  group('JustificativeModel', () {
-    test('fromMap', () {
-      var map = {
-        'options': [
-          {
-            'option': 'option',
-            'requiredImage': true,
-            'requiredText': true,
-          }
-        ],
-        'selectedOption': 'selectedOption',
-        'text': 'text',
-        'image': 'image',
-      };
+  group('JustificativeModel Tests', () {
+    final justificativeMap = {
+      'options': [
+        {
+          'option': 'Option 1',
+          'required_image': true,
+          'required_text': false,
+        },
+      ],
+      'selected_option': 'Option 1',
+      'justification_text': 'Some text',
+      'justification_image': '/path/to/image.png',
+    };
 
-      var model = JustificativeModel.fromMap(map);
+    test('should create JustificativeModel from map', () {
+      final model = JustificativeModel.fromMap(justificativeMap);
 
       expect(model.options.length, 1);
-      expect(model.selectedOption, map['selectedOption']);
-      expect(model.justificationText, map['justification_text']);
-      expect(model.justificationImage, map['justification_image']);
+      expect(model.options[0].option, 'Option 1');
+      expect(model.selectedOption, 'Option 1');
+      expect(model.justificationText, 'Some text');
+      expect(model.justificationImage, '/path/to/image.png');
     });
 
-    test('fromEntity', () {
-      var entity = JustificativeEntity(
-        options: [
-          JustificativeOptionEntity(
-            option: 'option',
-            requiredImage: true,
-            requiredText: true,
-          )
-        ],
-        selectedOption: 'selectedOption',
-        justificationText: 'text',
-        justificationImage: 'image',
-      );
+    test('should convert JustificativeModel to map', () {
+      final model = JustificativeModel.fromMap(justificativeMap);
+      final map = model.toMap();
 
-      var model = JustificativeModel.fromEntity(entity);
-
-      expect(model.options.length, entity.options.length);
-      expect(model.selectedOption, entity.selectedOption);
-      expect(model.justificationText, entity.justificationText);
-      expect(model.justificationImage, entity.justificationImage);
+      expect(map, justificativeMap);
     });
 
-    test('toMap', () {
-      var model = JustificativeModel(
-        options: [
-          JustificativeOptionModel(
-            option: 'option',
-            requiredImage: true,
-            requiredText: true,
-          )
-        ],
-        selectedOption: 'selectedOption',
-        justificationText: 'text',
-        justificationImage: 'image',
+    test('should create JustificativeModel from entity', () {
+      final options = [
+        JustificativeOptionEntity(
+          option: 'Option 1',
+          requiredImage: true,
+          requiredText: false,
+        ),
+      ];
+
+      final entity = JustificativeEntity(
+        options: options,
+        selectedOption: 'Option 1',
+        justificationText: 'Some text',
+        justificationImage: '/path/to/image.png',
       );
 
-      var map = model.toMap();
+      final model = JustificativeModel.fromEntity(entity);
 
-      expect(map['options'].length, model.options.length);
-      expect(map['selectedOption'], model.selectedOption);
-      expect(map['justification_text'], model.justificationText);
-      expect(map['justification_image'], model.justificationImage);
+      expect(model.options.length, 1);
+      expect(model.options[0].option, 'Option 1');
+      expect(model.selectedOption, 'Option 1');
+      expect(model.justificationText, 'Some text');
+      expect(model.justificationImage, '/path/to/image.png');
     });
   });
 }

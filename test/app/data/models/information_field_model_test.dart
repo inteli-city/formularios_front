@@ -3,178 +3,151 @@ import 'package:formularios_front/app/data/models/information_field_model.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 
 void main() {
-  group('InformationFieldModel generator', () {
-    test('fromEntity', () {
-      var entity = TextInformationFieldEntity(value: 'value');
+  group('TextInformationFieldModel Tests', () {
+    final textInformationFieldMap = {
+      'information_field_type': 'TEXT_INFORMATION_FIELD',
+      'value': 'Sample text',
+    };
 
-      var model = InformationFieldModel.fromEntity(entity);
+    test('should create TextInformationFieldModel from map', () {
+      final model = TextInformationFieldModel.fromMap(textInformationFieldMap);
 
-      expect(model, isA<TextInformationFieldModel>());
-
-      TextInformationFieldModel textModel = model as TextInformationFieldModel;
-      expect(textModel.value, 'value');
+      expect(model.value, 'Sample text');
     });
 
-    test('fromMap', () {
-      var map = {
-        'fieldType': 'TEXT_INFORMATION_FIELD',
-        'value': 'value',
-      };
+    test('should convert TextInformationFieldModel to map', () {
+      final model = TextInformationFieldModel.fromMap(textInformationFieldMap);
+      final map = model.toMap();
 
-      var model = InformationFieldModel.fromMap(map);
-
-      expect(model, isA<TextInformationFieldModel>());
-
-      TextInformationFieldModel textModel = model as TextInformationFieldModel;
-      expect(textModel.value, 'value');
+      expect(map, textInformationFieldMap);
     });
 
-    test('fromMaps', () {
-      var maps = [
-        {
-          'fieldType': 'TEXT_INFORMATION_FIELD',
-          'value': 'value',
-        },
-        {
-          'fieldType': 'MAP_INFORMATION_FIELD',
-          'latitude': 1.0,
-          'longitude': 2.0,
-        },
-        {
-          'fieldType': 'IMAGE_INFORMATION_FIELD',
-          'filePath': 'file_path',
-        },
-      ];
+    test('should create TextInformationFieldModel from entity', () {
+      final entity = TextInformationFieldEntity(
+        value: 'Sample text',
+      );
 
-      var models = InformationFieldModel.fromMaps(maps);
+      final model = TextInformationFieldModel.fromEntity(entity);
 
-      expect(models.length, 3);
-
-      expect(models[0], isA<TextInformationFieldModel>());
-      TextInformationFieldModel textModel =
-          models[0] as TextInformationFieldModel;
-      expect(textModel.value, 'value');
-
-      expect(models[1], isA<MapInformationFieldModel>());
-      MapInformationFieldModel mapModel = models[1] as MapInformationFieldModel;
-      expect(mapModel.latitude, 1.0);
-      expect(mapModel.longitude, 2.0);
-
-      expect(models[2], isA<ImageInformationFieldModel>());
-      ImageInformationFieldModel imageModel =
-          models[2] as ImageInformationFieldModel;
-      expect(imageModel.filePath, 'file_path');
-    });
-
-    test('toMap', () {
-      var entity = TextInformationFieldEntity(value: 'value');
-
-      var model = InformationFieldModel.fromEntity(entity);
-
-      var map = model.toMap();
-
-      expect(map['fieldType'], 'TEXT_INFORMATION_FIELD');
-      expect(map['value'], 'value');
+      expect(model.value, 'Sample text');
     });
   });
 
-  group('MapInformationFieldModel', () {
-    test('fromEntity', () {
-      var entity = MapInformationFieldEntity(latitude: 1.0, longitude: 2.0);
+  group('MapInformationFieldModel Tests', () {
+    final mapInformationFieldMap = {
+      'information_field_type': 'MAP_INFORMATION_FIELD',
+      'latitude': 12.34,
+      'longitude': 56.78,
+    };
 
-      var model = MapInformationFieldModel.fromEntity(entity);
+    test('should create MapInformationFieldModel from map', () {
+      final model = MapInformationFieldModel.fromMap(mapInformationFieldMap);
 
-      expect(model.latitude, 1.0);
-      expect(model.longitude, 2.0);
+      expect(model.latitude, 12.34);
+      expect(model.longitude, 56.78);
     });
 
-    test('fromMap', () {
-      var map = {
-        'fieldType': 'MAP_INFORMATION_FIELD',
-        'latitude': 1.0,
-        'longitude': 2.0,
-      };
+    test('should convert MapInformationFieldModel to map', () {
+      final model = MapInformationFieldModel.fromMap(mapInformationFieldMap);
+      final map = model.toMap();
 
-      var model = MapInformationFieldModel.fromMap(map);
-
-      expect(model.latitude, 1.0);
-      expect(model.longitude, 2.0);
+      expect(map, mapInformationFieldMap);
     });
 
-    test('toMap', () {
-      var entity = MapInformationFieldEntity(latitude: 1.0, longitude: 2.0);
+    test('should create MapInformationFieldModel from entity', () {
+      final entity = MapInformationFieldEntity(
+        latitude: 12.34,
+        longitude: 56.78,
+      );
 
-      var model = MapInformationFieldModel.fromEntity(entity);
+      final model = MapInformationFieldModel.fromEntity(entity);
 
-      var map = model.toMap();
-
-      expect(map['fieldType'], 'MAP_INFORMATION_FIELD');
-      expect(map['latitude'], 1.0);
-      expect(map['longitude'], 2.0);
+      expect(model.latitude, 12.34);
+      expect(model.longitude, 56.78);
     });
   });
 
-  group('ImageInformationFieldModel', () {
-    test('fromEntity', () {
-      var entity = ImageInformationFieldEntity(filePath: 'file_path');
+  group('ImageInformationFieldModel Tests', () {
+    final imageInformationFieldMap = {
+      'information_field_type': 'IMAGE_INFORMATION_FIELD',
+      'file_path': '/path/to/image.png',
+    };
 
-      var model = ImageInformationFieldModel.fromEntity(entity);
+    test('should create ImageInformationFieldModel from map', () {
+      final model =
+          ImageInformationFieldModel.fromMap(imageInformationFieldMap);
 
-      expect(model.filePath, 'file_path');
+      expect(model.filePath, '/path/to/image.png');
     });
 
-    test('fromMap', () {
-      var map = {
-        'fieldType': 'IMAGE_INFORMATION_FIELD',
-        'filePath': 'file_path',
-      };
+    test('should convert ImageInformationFieldModel to map', () {
+      final model =
+          ImageInformationFieldModel.fromMap(imageInformationFieldMap);
+      final map = model.toMap();
 
-      var model = ImageInformationFieldModel.fromMap(map);
-
-      expect(model.filePath, 'file_path');
+      expect(map, imageInformationFieldMap);
     });
 
-    test('toMap', () {
-      var entity = ImageInformationFieldEntity(filePath: 'file_path');
+    test('should create ImageInformationFieldModel from entity', () {
+      final entity = ImageInformationFieldEntity(
+        filePath: '/path/to/image.png',
+      );
 
-      var model = ImageInformationFieldModel.fromEntity(entity);
+      final model = ImageInformationFieldModel.fromEntity(entity);
 
-      var map = model.toMap();
-
-      expect(map['fieldType'], 'IMAGE_INFORMATION_FIELD');
-      expect(map['filePath'], 'file_path');
+      expect(model.filePath, '/path/to/image.png');
     });
   });
 
-  group('TextInformationFieldModel', () {
-    test('fromEntity', () {
-      var entity = TextInformationFieldEntity(value: 'value');
+  group('InformationFieldModel Tests', () {
+    final textInformationFieldMap = {
+      'information_field_type': 'TEXT_INFORMATION_FIELD',
+      'value': 'Sample text',
+    };
 
-      var model = TextInformationFieldModel.fromEntity(entity);
+    final mapInformationFieldMap = {
+      'information_field_type': 'MAP_INFORMATION_FIELD',
+      'latitude': 12.34,
+      'longitude': 56.78,
+    };
 
-      expect(model.value, 'value');
+    final imageInformationFieldMap = {
+      'information_field_type': 'IMAGE_INFORMATION_FIELD',
+      'file_path': '/path/to/image.png',
+    };
+
+    test('should create appropriate InformationFieldModel from map', () {
+      final textModel = InformationFieldModel.fromMap(textInformationFieldMap);
+      final mapModel = InformationFieldModel.fromMap(mapInformationFieldMap);
+      final imageModel =
+          InformationFieldModel.fromMap(imageInformationFieldMap);
+
+      expect(textModel, isA<TextInformationFieldModel>());
+      expect(mapModel, isA<MapInformationFieldModel>());
+      expect(imageModel, isA<ImageInformationFieldModel>());
     });
 
-    test('fromMap', () {
-      var map = {
-        'fieldType': 'TEXT_INFORMATION_FIELD',
-        'value': 'value',
-      };
+    test('should create appropriate InformationFieldModel from entity', () {
+      final textEntity = TextInformationFieldEntity(
+        value: 'Sample text',
+      );
 
-      var model = TextInformationFieldModel.fromMap(map);
+      final mapEntity = MapInformationFieldEntity(
+        latitude: 12.34,
+        longitude: 56.78,
+      );
 
-      expect(model.value, 'value');
-    });
+      final imageEntity = ImageInformationFieldEntity(
+        filePath: '/path/to/image.png',
+      );
 
-    test('toMap', () {
-      var entity = TextInformationFieldEntity(value: 'value');
+      final textModel = InformationFieldModel.fromEntity(textEntity);
+      final mapModel = InformationFieldModel.fromEntity(mapEntity);
+      final imageModel = InformationFieldModel.fromEntity(imageEntity);
 
-      var model = TextInformationFieldModel.fromEntity(entity);
-
-      var map = model.toMap();
-
-      expect(map['fieldType'], 'TEXT_INFORMATION_FIELD');
-      expect(map['value'], 'value');
+      expect(textModel, isA<TextInformationFieldModel>());
+      expect(mapModel, isA<MapInformationFieldModel>());
+      expect(imageModel, isA<ImageInformationFieldModel>());
     });
   });
 }

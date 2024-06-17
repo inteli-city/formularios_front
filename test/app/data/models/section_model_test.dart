@@ -1,209 +1,109 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/data/models/section_model.dart';
-import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/section_entity.dart';
-import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
-
+import 'package:formularios_front/app/data/models/justificative_model.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 void main() {
-  group('SectionModel', () {
-    var map = {
-      'sectionId': 'sectionId',
-      'fields': [
-        {
-          'fieldType': FieldTypeEnum.TEXT_FIELD.name,
-          'placeholder': 'TextField 01',
-          'isRequired': true,
-          'key': 'key-section-01-1',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.NUMBER_FIELD.name,
-          'placeholder': 'NumberField 01',
-          'minValue': 0,
-          'maxValue': 100,
-          'decimal': false,
-          'isRequired': true,
-          'key': 'key-section-01-2',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.DROPDOWN_FIELD.name,
-          'placeholder': 'DropdownField 01',
-          'isRequired': true,
-          'key': 'key-section-01-3',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-        },
-        {
-          'fieldType': FieldTypeEnum.TYPEAHEAD_FIELD.name,
-          'placeholder': 'TypeAheadField 01',
-          'isRequired': true,
-          'key': 'key-section-01-4',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-          'maxLength': 10,
-        },
-        {
-          'fieldType': FieldTypeEnum.RADIO_GROUP_FIELD.name,
-          'placeholder': 'RadioGroupField 01',
-          'isRequired': true,
-          'key': 'key-section-01-5',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-        },
-        {
-          'fieldType': FieldTypeEnum.DATE_FIELD.name,
-          'placeholder': 'DateField 01',
-          'isRequired': true,
-          'key': 'key-section-01-6',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.CHECKBOX_FIELD.name,
-          'placeholder': 'CheckBoxField 01',
-          'isRequired': true,
-          'key': 'key-section-01-7',
-          'formatting': null,
-          'value': null,
-        },
-        {
-          'fieldType': FieldTypeEnum.CHECKBOX_GROUP_FIELD.name,
-          'placeholder': 'CheckBoxGroupField 01',
-          'isRequired': true,
-          'key': 'key-section-01-8',
-          'formatting': null,
-          'value': null,
-          'options': ['Option 01', 'Option 02', 'Option 03'],
-        },
-      ]
+  group('JustificativeOptionModel Tests', () {
+    final optionMap = {
+      'option': 'Option 1',
+      'required_image': true,
+      'required_text': false,
     };
-    test('fromMap', () {
-      var section = SectionModel.fromMap(map);
 
-      expect(section.sectionId, 'sectionId');
-      expect(section.fields.length, 8);
+    test('should create JustificativeOptionModel from map', () {
+      final model = JustificativeOptionModel.fromMap(optionMap);
+
+      expect(model.option, 'Option 1');
+      expect(model.requiredImage, true);
+      expect(model.requiredText, false);
     });
 
-    test('fromMaps', () {
-      var sections = SectionModel.fromMaps([map, map]);
+    test('should convert JustificativeOptionModel to map', () {
+      final model = JustificativeOptionModel.fromMap(optionMap);
+      final map = model.toMap();
 
-      expect(sections.length, 2);
+      expect(map, optionMap);
     });
 
-    test('fromEntity', () {
-      var entity = SectionEntity(
-        sectionId: 'sectionId',
-        fields: [
-          TextFieldEntity(
-            placeholder: 'TextField 01',
-            key: 'key-section-01-1',
-            isRequired: true,
-          ),
-          NumberFieldEntity(
-            placeholder: 'NumberField 01',
-            key: 'key-section-01-2',
-            isRequired: true,
-            minValue: 0,
-            maxValue: 100,
-            decimal: false,
-          ),
-          TypeAheadFieldEntity(
-            placeholder: 'TypeAheadField 01',
-            key: 'key-section-01-4',
-            isRequired: true,
-            options: ['Option 01', 'Option 02', 'Option 03'],
-            maxLength: 10,
-          ),
-          RadioGroupFieldEntity(
-            placeholder: 'RadioGroupField 01',
-            key: 'key-section-01-5',
-            isRequired: true,
-            options: ['Option 01', 'Option 02', 'Option 03'],
-          ),
-          DateFieldEntity(
-            placeholder: 'DateField 01',
-            key: 'key-section-01-6',
-            isRequired: true,
-          ),
-          CheckBoxFieldEntity(
-            placeholder: 'CheckBoxField 01',
-            key: 'key-section-01-7',
-            isRequired: true,
-          ),
-          CheckBoxGroupFieldEntity(
-            placeholder: 'CheckBoxGroupField 01',
-            key: 'key-section-01-8',
-            isRequired: true,
-            options: ['Option 01', 'Option 02', 'Option 03'],
-          ),
-        ],
+    test('should create JustificativeOptionModel from entity', () {
+      final entity = JustificativeOptionEntity(
+        option: 'Option 1',
+        requiredImage: true,
+        requiredText: false,
       );
 
-      var section = SectionModel.fromEntity(entity);
+      final model = JustificativeOptionModel.fromEntity(entity);
 
-      expect(section.sectionId, 'sectionId');
-      expect(section.fields.length, 7);
+      expect(model.option, 'Option 1');
+      expect(model.requiredImage, true);
+      expect(model.requiredText, false);
     });
 
-    test('toMap', () {
-      var section = SectionModel(
-        sectionId: 'sectionId',
-        fields: [
-          TextFieldEntity(
-            placeholder: 'TextField 01',
-            key: 'key-section-01-1',
-            isRequired: true,
-          ),
-          NumberFieldEntity(
-            placeholder: 'NumberField 01',
-            key: 'key-section-01-2',
-            isRequired: true,
-            minValue: 0,
-            maxValue: 100,
-            decimal: false,
-          ),
-          TypeAheadFieldEntity(
-            placeholder: 'TypeAheadField 01',
-            key: 'key-section-01-4',
-            isRequired: true,
-            options: ['Option 01', 'Option 02', 'Option 03'],
-            maxLength: 10,
-          ),
-          RadioGroupFieldEntity(
-            placeholder: 'RadioGroupField 01',
-            key: 'key-section-01-5',
-            isRequired: true,
-            options: ['Option 01', 'Option 02', 'Option 03'],
-          ),
-          DateFieldEntity(
-            placeholder: 'DateField 01',
-            key: 'key-section-01-6',
-            isRequired: true,
-          ),
-          CheckBoxFieldEntity(
-            placeholder: 'CheckBoxField 01',
-            key: 'key-section-01-7',
-            isRequired: true,
-          ),
-          CheckBoxGroupFieldEntity(
-            placeholder: 'CheckBoxGroupField 01',
-            key: 'key-section-01-8',
-            isRequired: true,
-            options: ['Option 01', 'Option 02', 'Option 03'],
-          ),
-        ],
+    test('should convert list of maps to list of JustificativeOptionModel', () {
+      final optionsListMap = [optionMap, optionMap];
+
+      final models = JustificativeOptionModel.fromMaps(optionsListMap);
+
+      expect(models.length, 2);
+      expect(models[0].option, 'Option 1');
+      expect(models[0].requiredImage, true);
+      expect(models[0].requiredText, false);
+    });
+  });
+
+  group('JustificativeModel Tests', () {
+    final justificativeMap = {
+      'options': [
+        {
+          'option': 'Option 1',
+          'required_image': true,
+          'required_text': false,
+        },
+      ],
+      'selected_option': 'Option 1',
+      'justification_text': 'Some text',
+      'justification_image': '/path/to/image.png',
+    };
+
+    test('should create JustificativeModel from map', () {
+      final model = JustificativeModel.fromMap(justificativeMap);
+
+      expect(model.options.length, 1);
+      expect(model.options[0].option, 'Option 1');
+      expect(model.selectedOption, 'Option 1');
+      expect(model.justificationText, 'Some text');
+      expect(model.justificationImage, '/path/to/image.png');
+    });
+
+    test('should convert JustificativeModel to map', () {
+      final model = JustificativeModel.fromMap(justificativeMap);
+      final map = model.toMap();
+
+      expect(map, justificativeMap);
+    });
+
+    test('should create JustificativeModel from entity', () {
+      final options = [
+        JustificativeOptionEntity(
+          option: 'Option 1',
+          requiredImage: true,
+          requiredText: false,
+        ),
+      ];
+
+      final entity = JustificativeEntity(
+        options: options,
+        selectedOption: 'Option 1',
+        justificationText: 'Some text',
+        justificationImage: '/path/to/image.png',
       );
 
-      var map = section.toMap();
+      final model = JustificativeModel.fromEntity(entity);
 
-      expect(map['sectionId'], 'sectionId');
-      expect(map['fields'].length, 7);
+      expect(model.options.length, 1);
+      expect(model.options[0].option, 'Option 1');
+      expect(model.selectedOption, 'Option 1');
+      expect(model.justificationText, 'Some text');
+      expect(model.justificationImage, '/path/to/image.png');
     });
   });
 }

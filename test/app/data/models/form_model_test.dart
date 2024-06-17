@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
@@ -8,124 +10,185 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 void main() {
-  group('FormModel -', () {
-    final section = SectionEntity(
-      sectionId: 'section-id',
-      fields: [
-        TextFieldEntity(
-          fieldType: FieldTypeEnum.TEXT_FIELD,
-          placeholder: 'Placeholder Campo',
-          isRequired: true,
-          regex: 'regex',
-          formatting: 'formatting',
-          key: 'key',
-          maxLength: 100,
-          value: 'Initial value',
-        )
-      ],
-    );
-
-    var model = FormModel(
-      formId: 'formId',
-      creatorUserId: 'creatorUserId',
-      userId: 'userId',
-      template: 'template',
-      area: 'area',
-      system: 'system',
-      street: 'street',
-      city: 'city',
-      number: 1,
-      latitude: 1.0,
-      longitude: 1.0,
-      region: 'region',
-      priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.IN_PROGRESS,
-      expirationDate: 1,
-      creationDate: 1,
-      sections: [section],
-      formTitle: 'formTitle',
-      canVinculate: false,
-      justificative: JustificativeEntity(
-        options: [],
-        selectedOption: null,
-        justificationText: 'text',
-        justificationImage: null,
-      ),
-    );
-    test('toMap', () {
-      var map = model.toMap();
-
-      expect(map['formId'], 'formId');
-      expect(map['creatorUserId'], 'creatorUserId');
-      expect(map['userId'], 'userId');
-      expect(map['template'], 'template');
-      expect(map['area'], 'area');
-      expect(map['system'], 'system');
-      expect(map['street'], 'street');
-      expect(map['city'], 'city');
-      expect(map['number'], 1);
-      expect(map['latitude'], 1.0);
-      expect(map['longitude'], 1.0);
-      expect(map['region'], 'region');
-      expect(map['priority'], PriorityEnum.HIGH.name);
-      expect(map['status'], FormStatusEnum.IN_PROGRESS.name);
-      expect(map['expirationDate'], 1);
-      expect(map['creationDate'], 1);
-      expect(map['sections'], [
+  group('FormModel Tests', () {
+    final formMap = {
+      'form_id': '1',
+      'creator_user_id': '123',
+      'user_id': '456',
+      'template': 'template1',
+      'area': 'area1',
+      'system': 'system1',
+      'street': 'street1',
+      'city': 'city1',
+      'number': 1,
+      'latitude': 12.34,
+      'longitude': 56.78,
+      'region': 'region1',
+      'priority': 'HIGH',
+      'status': 'CONCLUDED',
+      'expiration_date': 1627849200000,
+      'creation_date': 1627849200000,
+      'sections': [
         {
-          'sectionId': 'section-id',
+          'section_id': 'section-id',
           'fields': [
             {
-              'fieldType': 'TEXT_FIELD',
+              'field_type': 'TEXT_FIELD',
               'placeholder': 'Placeholder Campo',
               'key': 'key',
-              'isRequired': true,
+              'required': true,
               'regex': 'regex',
               'formatting': 'formatting',
               'value': 'Initial value',
-              'maxLength': 100
+              'max_length': 100
             }
           ],
         }
-      ]);
-      expect(map['formTitle'], 'formTitle');
-      expect(map['canVinculate'], false);
-      expect(map['justificative'], {
+      ],
+      'comments': 'some comments',
+      'description': 'some description',
+      'conclusion_date': 1627849200000,
+      'information_fields': [],
+      'justification': {
         'options': [],
-        'selectedOption': null,
-        'text': 'text',
-        'image': null,
-      });
+        'selected_option': '',
+        'justification_text': '',
+        'justification_image':'',
+      },
+      'start_date': 1627849200000,
+      'vinculation_form_id': 'vinc1',
+      'form_title': 'Form Title',
+      'can_vinculate': true,
+    };
+
+    test('should create FormModel from map', () {
+      final formModel = FormModel.fromMap(formMap);
+
+      expect(formModel.formId, '1');
+      expect(formModel.creatorUserId, '123');
+      expect(formModel.userId, '456');
+      expect(formModel.template, 'template1');
+      expect(formModel.area, 'area1');
+      expect(formModel.system, 'system1');
+      expect(formModel.street, 'street1');
+      expect(formModel.city, 'city1');
+      expect(formModel.number, 1);
+      expect(formModel.latitude, 12.34);
+      expect(formModel.longitude, 56.78);
+      expect(formModel.region, 'region1');
+      expect(formModel.priority, PriorityEnum.HIGH);
+      expect(formModel.status, FormStatusEnum.CONCLUDED);
+      expect(formModel.expirationDate, 1627849200000);
+      expect(formModel.creationDate, 1627849200000);
+      expect(formModel.sections, isA<List<SectionEntity>>());
+      expect(formModel.comments, 'some comments');
+      expect(formModel.description, 'some description');
+      expect(formModel.conclusionDate, 1627849200000);
+      expect(formModel.informationFields, isA<List<InformationFieldEntity>>());
+      expect(formModel.justificative, isA<JustificativeEntity>());
+      expect(formModel.startDate, 1627849200000);
+      expect(formModel.vinculationFormId, 'vinc1');
+      expect(formModel.formTitle, 'Form Title');
+      expect(formModel.canVinculate, true);
     });
 
-    test('fromMap', () {
-      var map = model.toMap();
+    test('should convert FormModel to map', () {
+      final formModel = FormModel.fromMap(formMap);
+      final formMapFromModel = formModel.toMap();
 
-      var fromMap = FormModel.fromMap(map);
+      expect(formMapFromModel, formMap);
+    });
 
-      expect(fromMap.formId, 'formId');
-      expect(fromMap.creatorUserId, 'creatorUserId');
-      expect(fromMap.userId, 'userId');
-      expect(fromMap.template, 'template');
-      expect(fromMap.area, 'area');
-      expect(fromMap.system, 'system');
-      expect(fromMap.street, 'street');
-      expect(fromMap.city, 'city');
-      expect(fromMap.number, 1);
-      expect(fromMap.latitude, 1.0);
-      expect(fromMap.longitude, 1.0);
-      expect(fromMap.region, 'region');
-      expect(fromMap.priority, PriorityEnum.HIGH);
-      expect(fromMap.status, FormStatusEnum.IN_PROGRESS);
-      expect(fromMap.expirationDate, 1);
-      expect(fromMap.creationDate, 1);
-      expect(fromMap.sections.length, 1);
-      expect(fromMap.formTitle, 'formTitle');
-      expect(fromMap.canVinculate, false);
-      expect(fromMap.justificative.options, []);
-      expect(fromMap.justificative.selectedOption, null);
-      expect(fromMap.justificative.justificationText, 'text');
-      expect(fromMap.justificative.justificationImage, null);
+    test('should create FormModel from entity', () {
+      final entity = FormEntity(
+        formId: '1',
+        creatorUserId: '123',
+        userId: '456',
+        template: 'template1',
+        area: 'area1',
+        system: 'system1',
+        street: 'street1',
+        city: 'city1',
+        number: 1,
+        latitude: 12.34,
+        longitude: 56.78,
+        region: 'region1',
+        priority: PriorityEnum.HIGH,
+        status: FormStatusEnum.CONCLUDED,
+        expirationDate: 1627849200000,
+        creationDate: 1627849200000,
+        sections: [
+          SectionEntity(
+            sectionId: 'section-id',
+            fields: [
+              TextFieldEntity(
+                  placeholder: 'Placeholder Campo',
+                  key: 'key',
+                  fieldType: FieldTypeEnum.TEXT_FIELD,
+                  formatting: 'formatting',
+                  maxLength: 100,
+                  value: 'Initial value',
+                  regex: 'regex',
+                  isRequired: true)
+            ],
+          )
+        ],
+        justificative: JustificativeEntity(
+            justificationImage: '',
+            options: [],
+            selectedOption: '',
+            justificationText: ''),
+        formTitle: 'Form Title',
+        canVinculate: true,
+        comments: 'some comments',
+        description: 'some description',
+        conclusionDate: 1627849200000,
+        informationFields: [],
+        startDate: 1627849200000,
+        vinculationFormId: 'vinc1',
+      );
+
+      final formModel = FormModel.fromEntity(entity);
+
+      expect(formModel.formId, '1');
+      expect(formModel.creatorUserId, '123');
+      expect(formModel.userId, '456');
+      expect(formModel.template, 'template1');
+      expect(formModel.area, 'area1');
+      expect(formModel.system, 'system1');
+      expect(formModel.street, 'street1');
+      expect(formModel.city, 'city1');
+      expect(formModel.number, 1);
+      expect(formModel.latitude, 12.34);
+      expect(formModel.longitude, 56.78);
+      expect(formModel.region, 'region1');
+      expect(formModel.priority, PriorityEnum.HIGH);
+      expect(formModel.status, FormStatusEnum.CONCLUDED);
+      expect(formModel.expirationDate, 1627849200000);
+      expect(formModel.creationDate, 1627849200000);
+      expect(formModel.sections, isA<List<SectionEntity>>());
+      expect(formModel.comments, 'some comments');
+      expect(formModel.description, 'some description');
+      expect(formModel.conclusionDate, 1627849200000);
+      expect(formModel.informationFields, isA<List<InformationFieldEntity>>());
+      expect(formModel.justificative, isA<JustificativeEntity>());
+      expect(formModel.startDate, 1627849200000);
+      expect(formModel.vinculationFormId, 'vinc1');
+      expect(formModel.formTitle, 'Form Title');
+      expect(formModel.canVinculate, true);
+    });
+
+    test('should copy FormModel with new values', () {
+      final formModel = FormModel.fromMap(formMap);
+      final updatedFormModel = formModel.copyWith(
+        formTitle: 'Updated Form Title',
+        city: 'new city',
+      );
+
+      expect(updatedFormModel.formTitle, 'Updated Form Title');
+      expect(updatedFormModel.city, 'new city');
+      expect(updatedFormModel.formId, formModel.formId);
+      expect(updatedFormModel.creatorUserId, formModel.creatorUserId);
     });
   });
 }

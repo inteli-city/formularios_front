@@ -34,11 +34,62 @@ void main() {
   late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
   late FormsProvider provider;
   late Logger logger;
+  final forms = [
+    FormEntity(
+      formId: '1',
+      creatorUserId: 'creatorUserId',
+      userId: 'userId',
+      vinculationFormId: 'vinculationFormId',
+      template: 'template',
+      area: 'area',
+      system: 'system',
+      street: 'street',
+      city: 'city',
+      number: 1,
+      latitude: 1.0,
+      longitude: 1.0,
+      region: 'region',
+      description: 'description',
+      priority: PriorityEnum.HIGH,
+      status: FormStatusEnum.IN_PROGRESS,
+      expirationDate: 1,
+      creationDate: 1,
+      startDate: 1,
+      conclusionDate: 1,
+      justificative: JustificativeEntity(
+        justificationImage: null,
+        options: [],
+        selectedOption: '',
+        justificationText: '',
+      ),
+      comments: 'comments',
+      sections: [
+        SectionEntity(sectionId: 'section-01', fields: [
+          TextFieldEntity(
+            fieldType: FieldTypeEnum.TEXT_FIELD,
+            placeholder: 'TextField 01',
+            isRequired: true,
+            key: 'key-section-01-1',
+          ),
+          TextFieldEntity(
+            fieldType: FieldTypeEnum.TEXT_FIELD,
+            placeholder: 'TextField 02',
+            isRequired: true,
+            key: 'key-section-01-2',
+          ),
+        ])
+      ],
+      formTitle: 'formTitle',
+      canVinculate: false,
+    ),
+  ];
 
   setUp(() {
     Modular.bindModule(AppModule());
     logger = Logger();
     mockFetchUserFormsUsecase = MockFetchUserFormsUsecase();
+    when(mockFetchUserFormsUsecase.call())
+        .thenAnswer((_) async => Right(forms));
     mockFetchFormsLocallyUsecase = MockFetchFormsLocallyUsecase();
     mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
     provider = FormsProvider(
@@ -54,61 +105,8 @@ void main() {
   }
 
   group('fetchUserForms', () {
-    final forms = [
-      FormEntity(
-        formId: '1',
-        creatorUserId: 'creatorUserId',
-        userId: 'userId',
-        vinculationFormId: 'vinculationFormId',
-        template: 'template',
-        area: 'area',
-        system: 'system',
-        street: 'street',
-        city: 'city',
-        number: 1,
-        latitude: 1.0,
-        longitude: 1.0,
-        region: 'region',
-        description: 'description',
-        priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.IN_PROGRESS,
-        expirationDate: 1,
-        creationDate: 1,
-        startDate: 1,
-        conclusionDate: 1,
-        justificative: JustificativeEntity(
-          justificationImage: null,
-          options: [],
-          selectedOption: '',
-          justificationText: '',
-        ),
-        comments: 'comments',
-        sections: [
-          SectionEntity(sectionId: 'section-01', fields: [
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'TextField 01',
-              isRequired: true,
-              key: 'key-section-01-1',
-            ),
-            TextFieldEntity(
-              fieldType: FieldTypeEnum.TEXT_FIELD,
-              placeholder: 'TextField 02',
-              isRequired: true,
-              key: 'key-section-01-2',
-            ),
-          ])
-        ],
-        formTitle: 'formTitle',
-        canVinculate: false,
-      ),
-    ];
-
     test('should set state to FormUserSuccessState when fetch is successful',
         () async {
-      when(mockFetchUserFormsUsecase.call())
-          .thenAnswer((_) async => Right(forms));
-
       await provider.syncForms();
 
       expect(provider.state, isA<FormUserSuccessState>());

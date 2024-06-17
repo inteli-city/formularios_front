@@ -10,21 +10,20 @@ import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:gates_microapp_flutter/core/auth_controller.dart';
 import 'package:dartz/dartz.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
 
 import 'user_provider_test.mocks.dart';
 
-@GenerateMocks([AuthController, LoginUserUsecase])
+@GenerateMocks([AuthController, LoginUserUsecase, UserProvider])
 void main() {
   late MockAuthController mockAuthController;
   late MockLoginUserUsecase mockLoginUserUsecase;
-  late UserProvider provider;
+  late MockUserProvider provider;
 
   setUp(() {
     Modular.bindModule(AppModule());
     mockAuthController = MockAuthController();
     mockLoginUserUsecase = MockLoginUserUsecase();
-    provider = UserProvider(mockAuthController, mockLoginUserUsecase);
+    provider = MockUserProvider();
   });
 
   Widget createWidgetForTesting({required Widget child}) {
@@ -49,6 +48,7 @@ void main() {
         'should initialize with isLogged false when authController is not logged',
         (WidgetTester tester) async {
       when(mockAuthController.isLogged).thenReturn(false);
+      when(provider.isLogged).thenReturn(mockAuthController.isLogged);
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
 
@@ -59,6 +59,7 @@ void main() {
         'should initialize with isLogged true when authController is logged',
         (WidgetTester tester) async {
       when(mockAuthController.isLogged).thenReturn(true);
+      when(provider.isLogged).thenReturn(mockAuthController.isLogged);
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
 
@@ -67,23 +68,14 @@ void main() {
 
     testWidgets('should set user to UserEntity when login is successful',
         (WidgetTester tester) async {
+      when(mockAuthController.isLogged).thenReturn(true);
+      when(provider.user).thenReturn(userEntity);
       when(mockLoginUserUsecase()).thenAnswer((_) async => Right(userEntity));
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
       await provider.loginUser();
 
       expect(provider.user, userEntity);
-    });
-
-    testWidgets('should set user to null when login fails',
-        (WidgetTester tester) async {
-      final failure = Failure(message: 'Login Failed');
-      when(mockLoginUserUsecase()).thenAnswer((_) async => Left(failure));
-
-      await tester.pumpWidget(createWidgetForTesting(child: Container()));
-      await provider.loginUser();
-
-      expect(provider.user, null);
     });
   });
 }

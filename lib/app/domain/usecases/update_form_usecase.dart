@@ -4,15 +4,15 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 
-abstract class UpdateFormStatusUseCase {
+abstract class IUpdateFormStatusUseCase {
   Future<Either<Failure, FormEntity>> call(
       {required FormStatusEnum status, required String formId});
 }
 
-class InitiliazeUserFormStatusUseCase implements UpdateFormStatusUseCase {
+class UpdateFormStatusUseCase implements IUpdateFormStatusUseCase {
   final IFormRepository repository;
 
-  InitiliazeUserFormStatusUseCase({required this.repository});
+  UpdateFormStatusUseCase({required this.repository});
 
   @override
   Future<Either<Failure, FormEntity>> call(

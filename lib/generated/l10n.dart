@@ -50,6 +50,27 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `No internet connection`
+  String get noInternetConnectionErrorMessage {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnectionErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Local storage error: {localStorageErrorMessage}`
+  String localStorageErrorMessage(
+      Object placeholders, Object localStorageErrorMessage) {
+    return Intl.message(
+      'Local storage error: $localStorageErrorMessage',
+      name: 'localStorageErrorMessage',
+      desc: '',
+      args: [placeholders, localStorageErrorMessage],
+    );
+  }
+
   /// `Field {entityErrorMessage} is not valid`
   String entityErrorMessage(Object placeholders, Object entityErrorMessage) {
     return Intl.message(
@@ -210,11 +231,11 @@ class S {
     );
   }
 
-  /// `End Date`
-  String get endDate {
+  /// `Conclusion Date`
+  String get conclusionDate {
     return Intl.message(
-      'End Date',
-      name: 'endDate',
+      'Conclusion Date',
+      name: 'conclusionDate',
       desc: '',
       args: [],
     );
@@ -275,6 +296,46 @@ class S {
     return Intl.message(
       'Step Back',
       name: 'stepBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message(
+      'Details',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Files`
+  String get selectFiles {
+    return Intl.message(
+      'Select Files',
+      name: 'selectFiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Form`
+  String get saveForm {
+    return Intl.message(
+      'Save Form',
+      name: 'saveForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Form`
+  String get sendForm {
+    return Intl.message(
+      'Send Form',
+      name: 'sendForm',
       desc: '',
       args: [],
     );
@@ -357,7 +418,7 @@ class S {
     );
   }
 
-  /// `{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERCENCY{Emergency} other{}}`
+  /// `{schema, select, LOW{Low} MEDIUM{Medium} HIGH{High} EMERGENCY{Emergency} other{}}`
   String priorityEnumSchema(Object schema) {
     return Intl.select(
       schema,
@@ -365,7 +426,7 @@ class S {
         'LOW': 'Low',
         'MEDIUM': 'Medium',
         'HIGH': 'High',
-        'EMERCENCY': 'Emergency',
+        'EMERGENCY': 'Emergency',
         'other': '',
       },
       name: 'priorityEnumSchema',
@@ -388,6 +449,126 @@ class S {
       name: 'formStatusEnumSchema',
       desc: '',
       args: [schema],
+    );
+  }
+
+  /// `All fields should be saved`
+  String get allFieldsShouldBeSaved {
+    return Intl.message(
+      'All fields should be saved',
+      name: 'allFieldsShouldBeSaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get thisFieldIsRequired {
+    return Intl.message(
+      'This field is required',
+      name: 'thisFieldIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have a minimum length of: `
+  String get thisFieldShouldHaveMinimumLength {
+    return Intl.message(
+      'This field should have a minimum length of: ',
+      name: 'thisFieldShouldHaveMinimumLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have a maximum length of: `
+  String get thisFieldShouldHaveMaximumLength {
+    return Intl.message(
+      'This field should have a maximum length of: ',
+      name: 'thisFieldShouldHaveMaximumLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid format`
+  String get invalidFormat {
+    return Intl.message(
+      'Invalid format',
+      name: 'invalidFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have less than: `
+  String get thisFieldShouldHaveMaximumValue {
+    return Intl.message(
+      'This field should have less than: ',
+      name: 'thisFieldShouldHaveMaximumValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field should have more than: `
+  String get thisFieldShouldHaveMinimumValue {
+    return Intl.message(
+      'This field should have more than: ',
+      name: 'thisFieldShouldHaveMinimumValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This date should be before of: `
+  String get thisDateShouldBeBefore {
+    return Intl.message(
+      'This date should be before of: ',
+      name: 'thisDateShouldBeBefore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This date should be after of: `
+  String get thisDateSouldBeAfter {
+    return Intl.message(
+      'This date should be after of: ',
+      name: 'thisDateSouldBeAfter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exceeded max check limit of: `
+  String get maxCheckLimit {
+    return Intl.message(
+      'Exceeded max check limit of: ',
+      name: 'maxCheckLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max files quantity: `
+  String get maxFilesQuantity {
+    return Intl.message(
+      'Max files quantity: ',
+      name: 'maxFilesQuantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Min files quantity: `
+  String get minFilesQuantity {
+    return Intl.message(
+      'Min files quantity: ',
+      name: 'minFilesQuantity',
+      desc: '',
+      args: [],
     );
   }
 }

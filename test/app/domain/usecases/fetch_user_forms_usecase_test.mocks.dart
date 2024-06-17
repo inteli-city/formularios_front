@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i6;
+import 'package:formularios_front/app/domain/entities/section_entity.dart'
+    as _i8;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
 import 'package:formularios_front/app/domain/failures/failures.dart' as _i5;
 import 'package:formularios_front/app/domain/repositories/form_repository.dart'
@@ -45,13 +47,11 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>> getUserForms(
-          {required String? userId}) =>
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>> getUserForms() =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserForms,
           [],
-          {#userId: userId},
         ),
         returnValue:
             _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>.value(
@@ -60,10 +60,27 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
           Invocation.method(
             #getUserForms,
             [],
-            {#userId: userId},
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>
+      getUserFormsLocally() => (super.noSuchMethod(
+            Invocation.method(
+              #getUserFormsLocally,
+              [],
+            ),
+            returnValue:
+                _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>.value(
+                    _FakeEither_0<_i5.Failure, List<_i6.FormEntity>>(
+              this,
+              Invocation.method(
+                #getUserFormsLocally,
+                [],
+              ),
+            )),
+          ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.FormEntity>>>);
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>> updateFormStatus({
@@ -88,6 +105,57 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
             {
               #status: status,
               #formId: formId,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>> updateFormLocally(
+          {required _i6.FormEntity? form}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateFormLocally,
+          [],
+          {#form: form},
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>.value(
+            _FakeEither_0<_i5.Failure, _i6.FormEntity>(
+          this,
+          Invocation.method(
+            #updateFormLocally,
+            [],
+            {#form: form},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>> postForm({
+    required String? formId,
+    required List<_i8.SectionEntity>? sections,
+    String? vinculationFormId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #postForm,
+          [],
+          {
+            #formId: formId,
+            #sections: sections,
+            #vinculationFormId: vinculationFormId,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>.value(
+            _FakeEither_0<_i5.Failure, _i6.FormEntity>(
+          this,
+          Invocation.method(
+            #postForm,
+            [],
+            {
+              #formId: formId,
+              #sections: sections,
+              #vinculationFormId: vinculationFormId,
             },
           ),
         )),

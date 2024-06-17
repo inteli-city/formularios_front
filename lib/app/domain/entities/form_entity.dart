@@ -9,7 +9,6 @@ class FormEntity {
   final String formId;
   final String creatorUserId;
   final String userId;
-  final List<String> coordinatorsId;
   final String? vinculationFormId;
   final bool canVinculate;
   final String template;
@@ -23,11 +22,11 @@ class FormEntity {
   final String region;
   final String? description;
   final PriorityEnum priority;
-  final FormStatusEnum status;
+  FormStatusEnum status;
   final int expirationDate;
   final int creationDate;
   final int? startDate;
-  final int? endDate;
+  final int? conclusionDate;
   final JustificativeEntity justificative;
   final String? comments;
   final List<SectionEntity> sections;
@@ -38,7 +37,6 @@ class FormEntity {
     required this.formId,
     required this.creatorUserId,
     required this.userId,
-    required this.coordinatorsId,
     this.vinculationFormId,
     required this.canVinculate,
     required this.template,
@@ -56,10 +54,14 @@ class FormEntity {
     required this.expirationDate,
     required this.creationDate,
     this.startDate,
-    this.endDate,
+    this.conclusionDate,
     required this.justificative,
     this.comments,
     required this.sections,
     this.informationFields,
-  });
+  }) {
+    if (sections.isEmpty) {
+      throw Exception('Form must have at least one section');
+    }
+  }
 }

@@ -31,9 +31,12 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m2(placeholders, message) => "No items found for ${message}";
+  static String m2(placeholders, localStorageErrorMessage) =>
+      "Local storage error: ${localStorageErrorMessage}";
 
-  static String m3(schema) => "${Intl.select(schema, {
+  static String m3(placeholders, message) => "No items found for ${message}";
+
+  static String m4(schema) => "${Intl.select(schema, {
             'PRIORIDADE_BAIXO_ALTO': 'Low-High Priority',
             'PRIORIDADE_ALTO_BAIXO': 'High-Low Priority',
             'MAIS_RECENTE': 'Recent',
@@ -41,27 +44,31 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m4(schema) => "${Intl.select(schema, {
+  static String m5(schema) => "${Intl.select(schema, {
             'LOW': 'Low',
             'MEDIUM': 'Medium',
             'HIGH': 'High',
-            'EMERCENCY': 'Emergency',
+            'EMERGENCY': 'Emergency',
             'other': '',
           })}";
 
-  static String m5(placeholders, message) => "${message}";
+  static String m6(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "allFieldsShouldBeSaved":
+            MessageLookupByLibrary.simpleMessage("All fields should be saved"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "clearFilters": MessageLookupByLibrary.simpleMessage("Clear Filters"),
+        "conclusionDate":
+            MessageLookupByLibrary.simpleMessage("Conclusion Date"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "coordinatorId": MessageLookupByLibrary.simpleMessage("Coordinator ID"),
         "creationDate": MessageLookupByLibrary.simpleMessage("Creation Date"),
         "creatorUserId":
             MessageLookupByLibrary.simpleMessage("Creator User ID"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
-        "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
+        "details": MessageLookupByLibrary.simpleMessage("Details"),
         "entityErrorMessage": m0,
         "expirationDate":
             MessageLookupByLibrary.simpleMessage("Expiration Date"),
@@ -70,23 +77,52 @@ class MessageLookup extends MessageLookupByLibrary {
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "formStatusEnumSchema": m1,
         "internId": MessageLookupByLibrary.simpleMessage("Internal ID"),
+        "invalidFormat": MessageLookupByLibrary.simpleMessage("Invalid format"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
         "linkForm": MessageLookupByLibrary.simpleMessage("Link Form"),
+        "localStorageErrorMessage": m2,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
+        "maxCheckLimit": MessageLookupByLibrary.simpleMessage(
+            "Exceeded max check limit of: "),
+        "maxFilesQuantity":
+            MessageLookupByLibrary.simpleMessage("Max files quantity: "),
+        "minFilesQuantity":
+            MessageLookupByLibrary.simpleMessage("Min files quantity: "),
         "noFormsFound": MessageLookupByLibrary.simpleMessage("No form found!"),
-        "noItemsFoundErrorMessage": m2,
+        "noInternetConnectionErrorMessage":
+            MessageLookupByLibrary.simpleMessage("No internet connection"),
+        "noItemsFoundErrorMessage": m3,
         "number": MessageLookupByLibrary.simpleMessage("Number"),
-        "orderEnumSchema": m3,
+        "orderEnumSchema": m4,
         "priority": MessageLookupByLibrary.simpleMessage("Priority"),
-        "priorityEnumSchema": m4,
+        "priorityEnumSchema": m5,
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)"),
-        "requestErrorMessage": m5,
+        "requestErrorMessage": m6,
+        "saveForm": MessageLookupByLibrary.simpleMessage("Save Form"),
+        "selectFiles": MessageLookupByLibrary.simpleMessage("Select Files"),
+        "sendForm": MessageLookupByLibrary.simpleMessage("Send Form"),
         "sort": MessageLookupByLibrary.simpleMessage("Sort"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "stepBack": MessageLookupByLibrary.simpleMessage("Step Back"),
         "street": MessageLookupByLibrary.simpleMessage("Street"),
+        "thisDateShouldBeBefore": MessageLookupByLibrary.simpleMessage(
+            "This date should be before of: "),
+        "thisDateSouldBeAfter": MessageLookupByLibrary.simpleMessage(
+            "This date should be after of: "),
+        "thisFieldIsRequired":
+            MessageLookupByLibrary.simpleMessage("This field is required"),
+        "thisFieldShouldHaveMaximumLength":
+            MessageLookupByLibrary.simpleMessage(
+                "This field should have a maximum length of: "),
+        "thisFieldShouldHaveMaximumValue": MessageLookupByLibrary.simpleMessage(
+            "This field should have less than: "),
+        "thisFieldShouldHaveMinimumLength":
+            MessageLookupByLibrary.simpleMessage(
+                "This field should have a minimum length of: "),
+        "thisFieldShouldHaveMinimumValue": MessageLookupByLibrary.simpleMessage(
+            "This field should have more than: "),
         "vinculationId": MessageLookupByLibrary.simpleMessage("Vinculation ID")
       };
 }

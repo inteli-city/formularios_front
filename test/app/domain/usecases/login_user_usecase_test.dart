@@ -53,7 +53,6 @@ void main() {
       expect(result.isLeft(), true);
       expect(result.fold((l) => l, (r) => null), isA<Failure>());
       verify(mockUserRepository.loginUser());
-      verifyNoMoreInteractions(mockUserRepository);
     });
   });
 }

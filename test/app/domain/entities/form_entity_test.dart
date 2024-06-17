@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
+import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
@@ -9,13 +10,18 @@ import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 
 void main() {
   group('Form Entity Test', () {
+    late SectionEntity sectionExample;
+    setUp(() {
+      sectionExample = SectionEntity(fields: [
+        TextFieldEntity(
+            placeholder: 'placeholder', key: 'key', isRequired: true)
+      ], sectionId: 'section-id');
+    });
     test(' should return form entity with non-null values', () {
-      final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
         formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
-        coordinatorsId: ['coordinatorsId'],
         template: 'template',
         area: 'area',
         system: 'system',
@@ -33,13 +39,16 @@ void main() {
         formTitle: 'formTitle',
         canVinculate: false,
         justificative: JustificativeEntity(
-            options: [], selectedOption: null, text: 'text', image: null),
+          options: [],
+          selectedOption: null,
+          justificationText: 'text',
+          justificationImage: null,
+        ),
       );
 
       expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
-      expect(form.coordinatorsId, ['coordinatorsId']);
       expect(form.template, 'template');
       expect(form.area, 'area');
       expect(form.system, 'system');
@@ -61,13 +70,11 @@ void main() {
 
     test('should return form entity with null values', () {
       final informationField = TextInformationFieldEntity(value: 'value');
-      final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
 
       final form = FormEntity(
         formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
-        coordinatorsId: ['coordinatorsId'],
         vinculationFormId: 'vinculationFormId',
         template: 'template',
         area: 'area',
@@ -84,9 +91,12 @@ void main() {
         expirationDate: 1,
         creationDate: 1,
         startDate: 1,
-        endDate: 1,
+        conclusionDate: 1,
         justificative: JustificativeEntity(
-            options: [], selectedOption: null, text: 'text', image: null),
+            options: [],
+            selectedOption: null,
+            justificationText: 'text',
+            justificationImage: null),
         comments: 'comments',
         sections: [sectionExample],
         informationFields: [informationField],
@@ -97,7 +107,6 @@ void main() {
       expect(form.formId, 'formId');
       expect(form.creatorUserId, 'creatorUserId');
       expect(form.userId, 'userId');
-      expect(form.coordinatorsId, ['coordinatorsId']);
       expect(form.vinculationFormId, 'vinculationFormId');
       expect(form.template, 'template');
       expect(form.area, 'area');
@@ -114,7 +123,7 @@ void main() {
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.startDate, 1);
-      expect(form.endDate, 1);
+      expect(form.conclusionDate, 1);
       expect(form.comments, 'comments');
       expect(form.sections, [sectionExample]);
       expect(form.informationFields, [informationField]);
@@ -123,12 +132,10 @@ void main() {
       expect(form.canVinculate, false);
     });
     test('should return a copy of form entity', () {
-      final sectionExample = SectionEntity(fields: [], sectionId: 'section-id');
       final form = FormEntity(
         formId: 'formId',
         creatorUserId: 'creatorUserId',
         userId: 'userId',
-        coordinatorsId: ['coordinatorsId'],
         template: 'template',
         area: 'area',
         system: 'system',
@@ -144,19 +151,21 @@ void main() {
         creationDate: 1,
         sections: [sectionExample],
         justificative: JustificativeEntity(
-            options: [], selectedOption: null, text: 'text', image: null),
+            options: [],
+            selectedOption: null,
+            justificationText: 'text',
+            justificationImage: null),
         formTitle: 'formTitle',
         canVinculate: false,
       );
 
-      FormModel formEntity = FormModel.entityToModel(form);
+      FormModel formEntity = FormModel.fromEntity(form);
 
       final copyForm = formEntity.copyWith();
 
       expect(copyForm.formId, 'formId');
       expect(copyForm.creatorUserId, 'creatorUserId');
       expect(copyForm.userId, 'userId');
-      expect(copyForm.coordinatorsId, ['coordinatorsId']);
       expect(copyForm.template, 'template');
       expect(copyForm.area, 'area');
       expect(copyForm.system, 'system');

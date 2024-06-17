@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:formularios_front/app/shared/helpers/functions/global_snackbar.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_themes.dart';
 import 'package:gates_microapp_flutter/generated/l10n.dart' as gates;
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});

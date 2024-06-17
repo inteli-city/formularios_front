@@ -1,4 +1,15 @@
 {
+    "noInternetConnectionErrorMessage": "Sem conexão com a internet",
+
+    "localStorageErrorMessage": "Armazenamento local não disponível: {localStorageErrorMessage}",
+    "@localStorageErrorMessage" : {
+        "placeholders": {
+            "placeholders": {
+                "localStorageErrorMessage": {}
+            }
+        }
+    },
+
     "entityErrorMessage": "Campo {entityErrorMessage} não é válido",
     "@entityErrorMessage" : {
         "placeholders": {
@@ -39,13 +50,20 @@
     "latitude": "Latitude",
     "longitude" : "Longitude",
     "startDate" : "Data de Início",
-    "endDate" : "Data de Término",
+    "conclusionDate" : "Data de Conclusão",
     "description": "Descrição",
     "cancel" : "Cancelar",
     "start" : "Iniciar",
     "fillForm" : "Preencher",
     "linkForm": "Vincular Formulário",
     "stepBack" : "Retroceder",
+
+    "details": "Detalhes",
+
+    "selectFiles": "Selecionar Arquivos",
+
+    "saveForm": "Salvar",
+    "sendForm": "Enviar",
 
     "priorityTooltip": "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)",
 
@@ -61,8 +79,31 @@
 
     "orderEnumSchema" : "{schema, select, PRIORIDADE_BAIXO_ALTO{Prioridade Baixo-Alto} PRIORIDADE_ALTO_BAIXO{Prioridade Alto-Baixo} MAIS_RECENTE{Mais Recente} MAIS_ANTIGO{Mais Antigo} other{}}",
 
-    "priorityEnumSchema": "{schema, select, LOW{Baixa} MEDIUM{Média} HIGH{Alta} EMERCENCY{Emergencial} other{}}",
+    "priorityEnumSchema": "{schema, select, LOW{Baixa} MEDIUM{Média} HIGH{Alta} EMERGENCY{Emergencial} other{}}",
 
-    "formStatusEnumSchema": "{schema, select, NOT_STARTED{Não iniciado} IN_PROGRESS{Em andamento} CONCLUDED{Concluído} CANCELED{Cancelado} other{}}"
+    "formStatusEnumSchema": "{schema, select, NOT_STARTED{Não iniciado} IN_PROGRESS{Em andamento} CONCLUDED{Concluído} CANCELED{Cancelado} other{}}",
+    
+    "allFieldsShouldBeSaved": "Todas os campos devem ser salvos antes de enviar o formulário",
+    
+    "thisFieldIsRequired": "Este campo é obrigatório",
 
+    "thisFieldShouldHaveMinimumLength": "Este campo deve ter pelo menos: ",
+    
+    "thisFieldShouldHaveMaximumLength": "Este campo deve ter no máximo: ",
+
+    "invalidFormat": "Formato inválido",
+
+    "thisFieldShouldHaveMaximumValue": "Este campo deve ser menor que: ",
+    
+    "thisFieldShouldHaveMinimumValue": "Este campo deve ser maior que: ",
+
+    "thisDateShouldBeBefore": "Esta data deve ser antes de: ",
+
+    "thisDateSouldBeAfter": "Esta data deve ser depois de: ",
+
+    "maxCheckLimit": "Ultrapassou o limite de: ",
+
+    "maxFilesQuantity": "Quantidade maxima de arquivos: ",
+    
+    "minFilesQuantity": "Quantidade minima de arquivos: "
 }

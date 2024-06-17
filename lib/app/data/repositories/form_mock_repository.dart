@@ -1,7 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
+import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
+import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -17,17 +21,16 @@ class FormMockRepository extends IFormRepository {
       ),
     ],
     selectedOption: null,
-    text: null,
-    image: null,
+    justificationText: null,
+    justificationImage: null,
   );
 
   List<FormEntity> formList = [
     FormEntity(
-      formTitle: 'Poda de Árvore',
+      formTitle: 'Form Title',
       formId: 'ID1142342524242',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['1314312731967', '1314312731967', '1314312731967'],
       vinculationFormId: '10',
       template: 'Poda de Árvore',
       area: 'area',
@@ -45,7 +48,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1715000631000,
       creationDate: 1704561963000,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -55,11 +58,85 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            CheckBoxGroupFieldEntity(
+              options: ['option 01', 'option 02', 'option 03'],
+              placeholder: 'Selecione as opções',
+              key: 'checkbox-group',
+              checkLimit: 1,
+              isRequired: true,
+            ),
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              maxLength: 10,
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              maxValue: 10,
+              minValue: 1,
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              minDate: DateTime.now(),
+              maxDate: DateTime(2024, 12, 31),
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              maxLength: 10,
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+              placeholder: 'SwitchButton',
+              key: 'key-section-02-0',
+              isRequired: true,
+            ),
+            FileFieldEntity(
+              fileType: FileTypeEnum.IMAGE,
+              minQuantity: 1,
+              maxQuantity: 2,
+              placeholder: 'Selecione 2 imagens',
+              key: 'key',
+              isRequired: true,
+            ),
+          ],
+        ),
+      ],
       canVinculate: true,
     ),
     FormEntity(
@@ -67,7 +144,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524243',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 2',
       area: 'area',
@@ -85,7 +161,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -95,11 +171,70 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+              placeholder: 'SwitchButton',
+              key: 'key-section-02-0',
+              isRequired: true,
+            )
+          ],
+        ),
+      ],
       canVinculate: false,
     ),
     FormEntity(
@@ -107,7 +242,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524244',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 3',
       area: 'area',
@@ -124,7 +258,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -134,11 +268,69 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+                placeholder: 'SwitchButton',
+                key: 'key-section-02-0',
+                isRequired: true)
+          ],
+        ),
+      ],
       canVinculate: true,
     ),
     FormEntity(
@@ -146,7 +338,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524245',
       creatorUserId: '1',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 4',
       area: 'area',
@@ -163,7 +354,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -173,11 +364,70 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+              placeholder: 'SwitchButton',
+              key: 'key-section-02-0',
+              isRequired: true,
+            )
+          ],
+        ),
+      ],
       canVinculate: true,
     ),
     FormEntity(
@@ -185,7 +435,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524246',
       creatorUserId: '2',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 5',
       area: 'area',
@@ -202,7 +451,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -212,11 +461,70 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+              placeholder: 'SwitchButton',
+              key: 'key-section-02-0',
+              isRequired: true,
+            )
+          ],
+        ),
+      ],
       canVinculate: false,
     ),
     FormEntity(
@@ -224,7 +532,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524247',
       creatorUserId: '2',
       userId: '1',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Poda de Árvore 6',
       area: 'area',
@@ -241,7 +548,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -251,18 +558,76 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+              placeholder: 'SwitchButton',
+              key: 'key-section-02-0',
+              isRequired: true,
+            )
+          ],
+        ),
+      ],
       canVinculate: true,
     ),
     FormEntity(
       formId: 'ID1142342524248',
       creatorUserId: '4',
       userId: '2',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'Inspeção de PV',
       area: 'area',
@@ -279,7 +644,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -289,11 +654,70 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+              placeholder: 'SwitchButton',
+              key: 'key-section-02-0',
+              isRequired: true,
+            )
+          ],
+        ),
+      ],
       formTitle: 'Potencial de Vazamento',
       canVinculate: true,
     ),
@@ -302,7 +726,6 @@ class FormMockRepository extends IFormRepository {
       formId: 'ID1142342524249',
       creatorUserId: '5',
       userId: '2',
-      coordinatorsId: ['coordinatorsId'],
       vinculationFormId: null,
       template: 'PV',
       area: 'area',
@@ -319,7 +742,7 @@ class FormMockRepository extends IFormRepository {
       expirationDate: 1,
       creationDate: 1,
       startDate: 1,
-      endDate: 1,
+      conclusionDate: 1,
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(
@@ -329,22 +752,87 @@ class FormMockRepository extends IFormRepository {
           ),
         ],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       ),
       comments: 'comments',
-      sections: [],
+      sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 02',
+              isRequired: true,
+              key: 'key-section-01-2',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'section-02',
+          fields: [
+            SwitchButtonFieldEntity(
+              placeholder: 'SwitchButton',
+              key: 'key-section-02-0',
+              isRequired: true,
+            )
+          ],
+        ),
+      ],
       canVinculate: false,
     ),
   ];
 
   @override
-  Future<Either<Failure, List<FormEntity>>> getUserForms(
-      {required String userId}) async {
-    await Future.delayed(const Duration(seconds: 1));
-
+  Future<Either<Failure, List<FormEntity>>> getUserForms() async {
+    // await Future.delayed(const Duration(seconds: 1));
     return right(
-      formList.where((element) => element.userId == userId).toList(),
+      formList.where((element) => element.userId == '1').toList(),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<FormEntity>>> getUserFormsLocally() async {
+    // await Future.delayed(const Duration(seconds: 1));
+    return right(
+      formList.where((element) => element.userId == '1').toList(),
     );
   }
 
@@ -353,23 +841,67 @@ class FormMockRepository extends IFormRepository {
     required FormStatusEnum status,
     required String formId,
   }) async {
-    try {
-      await Future.delayed(const Duration(seconds: 1));
-      int index = formList.indexWhere(
-        (element) => element.formId == formId,
-      );
+    // await Future.delayed(const Duration(seconds: 1));
+    int index = formList.indexWhere(
+      (element) => element.formId == formId,
+    );
 
-      FormModel formModel = FormModel.entityToModel(formList[index]);
-
-      FormModel copyFormModel = formModel.copyWith(status: status);
-
-      formList.removeAt(index);
-
-      formList.insert(index, copyFormModel);
-
-      return right(copyFormModel);
-    } catch (e) {
+    if (index == -1) {
       return left(NoItemsFound(message: "Formulário não encontrado."));
     }
+
+    FormModel formModel =
+        FormModel.fromEntity(formList[index]).copyWith(status: status);
+
+    formList.removeAt(index);
+
+    formList.insert(index, formModel);
+
+    return right(formModel);
+  }
+
+  @override
+  Future<Either<Failure, FormEntity>> updateFormLocally({
+    required FormEntity form,
+  }) async {
+    int index = formList.indexWhere(
+      (element) => element.formId == form.formId,
+    );
+
+    if (index == -1) {
+      return left(NoItemsFound(message: "Formulário não encontrado."));
+    }
+
+    formList.removeAt(index);
+
+    formList.insert(index, form);
+
+    return right(form);
+  }
+
+  @override
+  Future<Either<Failure, FormEntity>> postForm({
+    required String formId,
+    required List<SectionEntity> sections,
+    String? vinculationFormId,
+  }) async {
+    int index = formList.indexWhere(
+      (element) => element.formId == formId,
+    );
+
+    if (index == -1) {
+      return left(NoItemsFound(message: "Formulário não encontrado."));
+    }
+
+    var formModel = FormModel.fromEntity(formList[index]).copyWith(
+        sections: sections,
+        vinculationFormId: vinculationFormId,
+        status: FormStatusEnum.CONCLUDED);
+
+    formList.removeAt(index);
+
+    formList.insert(index, formModel);
+
+    return right(formModel);
   }
 }

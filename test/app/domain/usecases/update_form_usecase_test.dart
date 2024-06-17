@@ -2,8 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
+import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -18,8 +20,8 @@ import 'fetch_user_forms_usecase_test.mocks.dart';
 void main() {
   Modular.bindModule(AppModule());
   IFormRepository formRepository = MockIFormRepository();
-  late UpdateFormStatusUseCase usecase;
-  usecase = InitiliazeUserFormStatusUseCase(repository: formRepository);
+  late IUpdateFormStatusUseCase usecase;
+  usecase = UpdateFormStatusUseCase(repository: formRepository);
 
   group('InitializedUserFormStatus', () {
     late FormEntity form;
@@ -28,7 +30,6 @@ void main() {
           formId: 'formId',
           creatorUserId: 'creatorUserId',
           userId: 'userId',
-          coordinatorsId: ['coordinatorsId'],
           vinculationFormId: 'vinculationFormId',
           template: 'template',
           area: 'area',
@@ -45,11 +46,22 @@ void main() {
           expirationDate: 1,
           creationDate: 1,
           startDate: 1,
-          endDate: 1,
+          conclusionDate: 1,
           justificative: JustificativeEntity(
-              options: [], selectedOption: null, text: 'text', image: null),
+              options: [],
+              selectedOption: null,
+              justificationText: 'text',
+              justificationImage: null),
           comments: 'comments',
-          sections: [],
+          sections: [
+            SectionEntity(
+              sectionId: 'sectionId',
+              fields: [
+                TextFieldEntity(
+                    placeholder: 'placeholder', key: 'key', isRequired: true)
+              ],
+            )
+          ],
           formTitle: 'formTitle',
           canVinculate: false);
     });

@@ -13,9 +13,9 @@ class UserDioRepository implements IUserRepository {
   @override
   Future<Either<Failure, UserEntity>> loginUser() async {
     try {
-      return _httpService.post('/login-profile').then((response) {
+      return await _httpService.post('/login-profile').then((response) {
         if (response.statusCode == 200) {
-          return Right(UserModel.fromJson(response.data['profile']));
+          return Right(UserModel.fromMap(response.data['profile']));
         }
         throw Exception();
       });

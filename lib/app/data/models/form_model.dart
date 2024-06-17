@@ -1,3 +1,6 @@
+import 'package:formularios_front/app/data/models/information_field_model.dart';
+import 'package:formularios_front/app/data/models/justificative_model.dart';
+import 'package:formularios_front/app/data/models/section_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
@@ -10,7 +13,6 @@ class FormModel extends FormEntity {
     required super.formId,
     required super.creatorUserId,
     required super.userId,
-    required super.coordinatorsId,
     required super.template,
     required super.area,
     required super.system,
@@ -27,7 +29,7 @@ class FormModel extends FormEntity {
     required super.sections,
     super.comments,
     super.description,
-    super.endDate,
+    super.conclusionDate,
     super.informationFields,
     required super.justificative,
     super.startDate,
@@ -36,53 +38,49 @@ class FormModel extends FormEntity {
     required super.canVinculate,
   });
 
-  static List<FormModel> fromMaps(List<dynamic> list) {
-    return list.map((e) => FormModel.fromMap(e)).toList();
-  }
-
-  factory FormModel.fromMap(Map<String, dynamic> map) {
+  factory FormModel.fromMap(Map<String, dynamic> json) {
     return FormModel(
-      formId: map['formId'],
-      creatorUserId: map['creatorUserId'],
-      userId: map['userId'],
-      coordinatorsId: List<String>.from(map['coordinatorsId']),
-      template: map['template'],
-      area: map['area'],
-      system: map['system'],
-      street: map['street'],
-      city: map['city'],
-      number: map['number'],
-      latitude: map['latitude'],
-      longitude: map['longitude'],
-      region: map['region'],
-      priority: PriorityEnum.values[map['priority']],
-      status: FormStatusEnum.values[map['status']],
-      expirationDate: map['expirationDate'],
-      creationDate: map['creationDate'],
-      sections: [],
-      comments: map['comments'],
-      description: map['description'],
-      endDate: map['endDate'],
-      informationFields: [],
-      justificative: JustificativeEntity(
-        image: map['justificative']['image'],
-        options: [],
-        selectedOption: map['justificative']['selectedOption'],
-        text: map['justificative']['text'],
-      ),
-      startDate: map['startDate'],
-      vinculationFormId: map['vinculationFormId'],
-      formTitle: map['formTitle'],
-      canVinculate: map['canVinculate'],
+      formId: json['form_id'],
+      creatorUserId: json['creator_user_id'],
+      userId: json['user_id'],
+      template: json['template'],
+      area: json['area'],
+      system: json['system'],
+      street: json['street'],
+      city: json['city'],
+      number: json['number'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      region: json['region'],
+      priority:
+          PriorityEnum.values.firstWhere((e) => e.name == json['priority']),
+      status: FormStatusEnum.values.firstWhere((e) => e.name == json['status']),
+      expirationDate: json['expiration_date'],
+      creationDate: json['creation_date'],
+      sections: SectionModel.fromMaps(json['sections']),
+      comments: json['comments'],
+      description: json['description'],
+      conclusionDate: json['conclusion_date'],
+      informationFields: json['information_fields'] != null
+          ? InformationFieldModel.fromMaps(json['information_fields'])
+          : null,
+      justificative: JustificativeModel.fromMap(json['justification']),
+      startDate: json['start_date'],
+      vinculationFormId: json['vinculation_form_id'],
+      formTitle: json['form_title'],
+      canVinculate: json['can_vinculate'],
     );
   }
 
-  factory FormModel.entityToModel(FormEntity entity) {
+  static List<FormModel> fromMaps(List array) {
+    return array.map((e) => FormModel.fromMap(e)).toList();
+  }
+
+  factory FormModel.fromEntity(FormEntity entity) {
     return FormModel(
       formId: entity.formId,
       creatorUserId: entity.creatorUserId,
       userId: entity.userId,
-      coordinatorsId: entity.coordinatorsId,
       template: entity.template,
       area: entity.area,
       system: entity.system,
@@ -102,11 +100,46 @@ class FormModel extends FormEntity {
       canVinculate: entity.canVinculate,
       comments: entity.comments,
       description: entity.description,
-      endDate: entity.endDate,
+      conclusionDate: entity.conclusionDate,
       informationFields: entity.informationFields,
       startDate: entity.startDate,
       vinculationFormId: entity.vinculationFormId,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'form_id': formId,
+      'creator_user_id': creatorUserId,
+      'user_id': userId,
+      'template': template,
+      'area': area,
+      'system': system,
+      'street': street,
+      'city': city,
+      'number': number,
+      'latitude': latitude,
+      'longitude': longitude,
+      'region': region,
+      'priority': priority.name,
+      'status': status.name,
+      'expiration_date': expirationDate,
+      'creation_date': creationDate,
+      'sections':
+          sections.map((e) => SectionModel.fromEntity(e).toMap()).toList(),
+      'comments': comments,
+      'description': description,
+      'conclusion_date': conclusionDate,
+      'information_fields': informationFields
+              ?.map((e) => InformationFieldModel.fromEntity(e).toMap())
+              .toList() ??
+          [],
+      'justification': JustificativeModel.fromEntity(justificative).toMap(),
+      'start_date': startDate,
+      'vinculation_form_id': vinculationFormId,
+      'form_title': formTitle,
+      'can_vinculate': canVinculate,
+    };
   }
 
   FormModel copyWith({
@@ -114,7 +147,6 @@ class FormModel extends FormEntity {
     String? formId,
     String? creatorUserId,
     String? userId,
-    List<String>? coordinatorsId,
     String? vinculationFormId,
     String? template,
     String? area,
@@ -131,7 +163,7 @@ class FormModel extends FormEntity {
     int? expirationDate,
     int? creationDate,
     int? startDate,
-    int? endDate,
+    int? conclusionDate,
     JustificativeEntity? justificative,
     String? comments,
     List<SectionEntity>? sections,
@@ -143,7 +175,6 @@ class FormModel extends FormEntity {
       formId: formId ?? this.formId,
       creatorUserId: creatorUserId ?? this.creatorUserId,
       userId: userId ?? this.userId,
-      coordinatorsId: coordinatorsId ?? this.coordinatorsId,
       vinculationFormId: vinculationFormId ?? this.vinculationFormId,
       template: template ?? this.template,
       area: area ?? this.area,
@@ -160,7 +191,7 @@ class FormModel extends FormEntity {
       expirationDate: expirationDate ?? this.expirationDate,
       creationDate: creationDate ?? this.creationDate,
       startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
+      conclusionDate: conclusionDate ?? this.conclusionDate,
       justificative: justificative ?? this.justificative,
       comments: comments ?? this.comments,
       sections: sections ?? this.sections,

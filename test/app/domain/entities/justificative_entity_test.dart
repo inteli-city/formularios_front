@@ -17,7 +17,8 @@ void main() {
   });
 
   group('JustificativeEntity', () {
-    test('should create a valid JustificativeEntity instance with all fields', () {
+    test('should create a valid JustificativeEntity instance with all fields',
+        () {
       final option1 = JustificativeOptionEntity(
         option: 'Option 1',
         requiredImage: true,
@@ -27,18 +28,19 @@ void main() {
       final justificative = JustificativeEntity(
         options: [option1],
         selectedOption: 'Option 1',
-        text: 'Sample text',
-        image: 'image/path',
+        justificationText: 'Sample text',
+        justificationImage: 'image/path',
       );
 
       expect(justificative.options.length, 1);
       expect(justificative.options[0].option, 'Option 1');
       expect(justificative.selectedOption, 'Option 1');
-      expect(justificative.text, 'Sample text');
-      expect(justificative.image, 'image/path');
+      expect(justificative.justificationText, 'Sample text');
+      expect(justificative.justificationImage, 'image/path');
     });
 
-    test('should create a valid JustificativeEntity instance with null fields', () {
+    test('should create a valid JustificativeEntity instance with null fields',
+        () {
       final option1 = JustificativeOptionEntity(
         option: 'Option 1',
         requiredImage: true,
@@ -48,15 +50,15 @@ void main() {
       final justificative = JustificativeEntity(
         options: [option1],
         selectedOption: null,
-        text: null,
-        image: null,
+        justificationText: null,
+        justificationImage: null,
       );
 
       expect(justificative.options.length, 1);
       expect(justificative.options[0].option, 'Option 1');
       expect(justificative.selectedOption, null);
-      expect(justificative.text, null);
-      expect(justificative.image, null);
+      expect(justificative.justificationText, null);
+      expect(justificative.justificationImage, null);
     });
   });
 }

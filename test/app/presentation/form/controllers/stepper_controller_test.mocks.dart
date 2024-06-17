@@ -89,21 +89,6 @@ class MockStepperController extends _i1.Mock implements _i4.StepperController {
   }
 
   @override
-  int get currentStep => (super.noSuchMethod(
-        Invocation.getter(#currentStep),
-        returnValue: 0,
-      ) as int);
-
-  @override
-  set currentStep(int? _currentStep) => super.noSuchMethod(
-        Invocation.setter(
-          #currentStep,
-          _currentStep,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   int get currentSectionIndex => (super.noSuchMethod(
         Invocation.getter(#currentSectionIndex),
         returnValue: 0,

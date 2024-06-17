@@ -9,6 +9,7 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
@@ -111,10 +112,12 @@ void main() {
     when(stepperController.listViewController).thenReturn(scrollController);
 
     when(singleFormProvider.form).thenReturn(form);
+    when(stepperController.currentSectionIndex).thenReturn(0);
     when(stepperController.listViewController).thenReturn(ScrollController());
   });
 
   testWidgets('FormSectionsPage Test', (WidgetTester tester) async {
+     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     await tester.pumpWidget(
       const MaterialApp(
         home: FormSectionsPage(),
@@ -122,7 +125,7 @@ void main() {
     );
     // expect(find.byIcon(Icons.arrow_back), findsOneWidget);
 
-    expect(find.text('Fill form'), findsOneWidget);
+    expect(find.text(S.current.fillForm), findsOneWidget);
 
     expect(find.byType(StepperProgress), findsOneWidget);
 

@@ -2,12 +2,14 @@ name: Flutter CI TEST
 
 on:
   pull_request:
-    branches:
-      - dev
+    branches: [dev]
 jobs:
   flutter_test:
     name: Run flutter test
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -20,7 +22,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
-      
+
       - name: Get flutter dependencies
         run: flutter pub get
       - name: Setup AWS Credentials
@@ -59,10 +61,6 @@ jobs:
           }"
        
           amplify pull --amplify $AMPLIFY --frontend $FRONTEND --providers $PROVIDERS --yes
-
-      - name: Get flutter dependencies
-        run: flutter pub get
-
       # Report:
       - name: Install lcov
         run: sudo apt-get install lcov

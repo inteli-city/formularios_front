@@ -32,7 +32,7 @@ class EnvironmentConfig {
     }
   }
 
-  static UserRepository getUserRepository() {
+  static IUserRepository getUserRepository() {
     EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
       (element) {
         return element.name.toUpperCase() == ENV.toUpperCase();

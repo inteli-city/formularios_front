@@ -13,9 +13,10 @@ class UserProvider extends ChangeNotifier {
   ) {
     if (_authController.isLogged) {
       loginUser();
-    } else {
-      Modular.to.navigate('./home/');
-    }
+    } 
+    // else {
+    //   Modular.to.navigate('./home/');
+    // }
   }
 
   bool get isLogged => _authController.isLogged;

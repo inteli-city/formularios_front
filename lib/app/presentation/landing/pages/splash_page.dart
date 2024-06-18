@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/presentation/landing/controllers/splash_controller.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
@@ -13,9 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2)).then(
-      (_) => Modular.to.navigate('/home/forms'),
-    );
+    Modular.get<SplashController>();
   }
 
   @override

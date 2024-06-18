@@ -73,7 +73,7 @@ void main() {
       when(mockLoginUserUsecase()).thenAnswer((_) async => Right(userEntity));
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
-      await provider.loginUser();
+      await provider.signIn();
 
       expect(provider.user, userEntity);
     });

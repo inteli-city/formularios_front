@@ -201,21 +201,15 @@ class MockUserProvider extends _i1.Mock implements _i12.UserProvider {
       );
 
   @override
-  bool get isLogged => (super.noSuchMethod(
-        Invocation.getter(#isLogged),
-        returnValue: false,
-      ) as bool);
-
-  @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
         returnValue: false,
       ) as bool);
 
   @override
-  _i8.Future<void> loginUser() => (super.noSuchMethod(
+  _i8.Future<void> loadUser() => (super.noSuchMethod(
         Invocation.method(
-          #loginUser,
+          #loadUser,
           [],
         ),
         returnValue: _i8.Future<void>.value(),

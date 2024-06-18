@@ -18,6 +18,7 @@ import 'package:formularios_front/app/presentation/form/controllers/stepper_cont
 import 'package:formularios_front/app/presentation/form/pages/form_details_page.dart';
 import 'package:formularios_front/app/presentation/form/pages/form_sections_page.dart';
 import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
+import 'package:formularios_front/app/presentation/landing/controllers/splash_controller.dart';
 import 'package:formularios_front/app/presentation/landing/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/landing/pages/splash_page.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
@@ -33,10 +34,11 @@ import 'package:logger/logger.dart';
 
 class AppModule extends Module {
   @override
-  List<Module> get imports => [MicroAppAuthModule()];
+  List<Module> get imports => [MicroAppAuthModule(), UserModule()];
 
   @override
   void binds(i) {
+    i.add<SplashController>(SplashController.new);
     i.addLazySingleton(Logger.new);
     i.add<IHttpService>(DioHttpService.new);
     i.addLazySingleton<Dio>(
@@ -64,7 +66,7 @@ class AppModule extends Module {
   }
 }
 
-class HomeModule extends Module {
+class UserModule extends Module {
   @override
   List<Module> get imports => [MicroAppAuthModule()];
   @override
@@ -73,6 +75,14 @@ class HomeModule extends Module {
     i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
     i.addSingleton<IUserRepository>(() => EnvironmentConfig.getUserRepository(),
         config: BindConfig());
+  }
+}
+
+class HomeModule extends Module {
+  @override
+  List<Module> get imports => [MicroAppAuthModule(), UserModule()];
+  @override
+  void binds(i) {
     i.addLazySingleton<IFormStorage>(() => FormHiveStorage(storage));
     i.addLazySingleton<FormsProvider>(FormsProvider.new);
     i.addLazySingleton<IFormRepository>(
@@ -102,6 +112,7 @@ class HomeModule extends Module {
     r.child(
       Modular.initialRoute,
       child: (context) => const LandingPage(),
+      guards: [UserGuard()],
       children: [
         ChildRoute(
           '/forms',

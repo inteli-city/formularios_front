@@ -14,7 +14,6 @@ import 'package:formularios_front/app/presentation/home/controllers/filter_form_
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
 import 'package:formularios_front/app/presentation/home/controllers/sort_forms_controller.dart';
-import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/form/pages/form_details_page.dart';
 import 'package:formularios_front/app/presentation/form/pages/form_sections_page.dart';
 import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
@@ -95,7 +94,6 @@ class HomeModule extends Module {
     i.add(FilterFormsController.new);
     i.add(SortFormsController.new);
     i.add(SelectChipController.new);
-    i.addLazySingleton(StepperController.new);
     i.add(
       () => SingleFormProvider(
         i.get(),

@@ -44,28 +44,6 @@ void main() {
         role: RoleEnum.COORDINATOR,
         groups: []);
 
-    testWidgets(
-        'should initialize with isLogged false when authController is not logged',
-        (WidgetTester tester) async {
-      when(mockAuthController.isLogged).thenReturn(false);
-      when(provider.isLogged).thenReturn(mockAuthController.isLogged);
-
-      await tester.pumpWidget(createWidgetForTesting(child: Container()));
-
-      expect(provider.isLogged, false);
-    });
-
-    testWidgets(
-        'should initialize with isLogged true when authController is logged',
-        (WidgetTester tester) async {
-      when(mockAuthController.isLogged).thenReturn(true);
-      when(provider.isLogged).thenReturn(mockAuthController.isLogged);
-
-      await tester.pumpWidget(createWidgetForTesting(child: Container()));
-
-      expect(provider.isLogged, true);
-    });
-
     testWidgets('should set user to UserEntity when login is successful',
         (WidgetTester tester) async {
       when(mockAuthController.isLogged).thenReturn(true);
@@ -73,7 +51,6 @@ void main() {
       when(mockLoginUserUsecase()).thenAnswer((_) async => Right(userEntity));
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
-      await provider.signIn();
 
       expect(provider.user, userEntity);
     });

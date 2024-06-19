@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
-import 'package:formularios_front/app/presentation/form/controllers/stepper_controller.dart';
 import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
 import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
@@ -17,7 +16,7 @@ class FormSectionsPage extends StatefulWidget {
 
 class FormSectionsPageState extends State<FormSectionsPage> {
   SingleFormProvider singleFormProvider = Modular.get<SingleFormProvider>();
-  StepperController stepperController = Modular.get<StepperController>();
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +37,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
           children: [
             StepperProgress(
               totalSteps: singleFormProvider.form.sections.length,
+              pageController: _pageController,
             ),
             Padding(
               padding: const EdgeInsets.all(
@@ -52,8 +52,8 @@ class FormSectionsPageState extends State<FormSectionsPage> {
             Expanded(
               child: Form(
                 key: formKey,
-                child: ListView.builder(
-                  controller: stepperController.listViewController,
+                child: PageView.builder(
+                  controller: _pageController,
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: singleFormProvider.form.sections.length,

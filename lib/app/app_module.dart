@@ -91,7 +91,7 @@ class HomeModule extends Module {
     i.addLazySingleton<IUpdateFormStatusUseCase>(UpdateFormStatusUseCase.new);
     i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
     i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);
-    i.add(FilterFormsController.new);
+    i.addLazySingleton(FilterFormsController.new);
     i.add(SortFormsController.new);
     i.add(SelectChipController.new);
     i.add(

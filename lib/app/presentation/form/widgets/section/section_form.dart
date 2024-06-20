@@ -104,7 +104,7 @@ class SectionForm extends StatelessWidget {
                       );
                     } else {
                       await singleFormProvider.sendForm();
-                      Modular.to.pop();
+                      Modular.to.navigate('/home/forms');
                     }
                     singleFormProvider.setIsSendingForm(false);
                   },

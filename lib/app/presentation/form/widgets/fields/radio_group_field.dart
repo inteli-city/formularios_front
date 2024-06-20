@@ -35,11 +35,11 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
         return combine(
           [
             () => isRequired(
-                  value,
+                  widget.field.value,
                   widget.field.isRequired,
                   widget.singleFormProvider.isSendingForm,
                 ),
-            () => regex(value, widget.field.regex),
+            () => regex(widget.field.value, widget.field.regex),
           ],
         );
       },
@@ -53,7 +53,6 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
             ),
             ...widget.field.options.map(
               (option) {
-                
                 return RadioListTile<String>(
                   toggleable: true,
                   title: Text(option,

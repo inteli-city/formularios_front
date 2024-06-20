@@ -49,7 +49,6 @@ class FormDioRepository extends IFormRepository {
         'form_id': formId,
         'sections':
             sections.map((e) => SectionModel.fromEntity(e).toMap()).toList(),
-        'vinculation_form_id': vinculationFormId,
       }).then((response) async {
         if (response.statusCode == 200) {
           var form = FormModel.fromMap(response.data['form']);

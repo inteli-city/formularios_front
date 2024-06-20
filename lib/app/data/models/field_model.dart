@@ -379,7 +379,9 @@ class DateFieldModel extends DateFieldEntity implements FieldModel {
       isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
-      value: json['value'],
+      value: json['value'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(json['value'])
+          : json['value'],
     );
   }
 
@@ -394,7 +396,8 @@ class DateFieldModel extends DateFieldEntity implements FieldModel {
       'required': isRequired,
       'regex': regex,
       'formatting': formatting,
-      'value': value,
+      'value':
+          value != null ? (value as DateTime).millisecondsSinceEpoch : value,
     };
   }
 }
@@ -479,7 +482,9 @@ class CheckBoxGroupFieldModel extends CheckBoxGroupFieldEntity
       isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
-      value: json['value'],
+      value: json['value'] != null
+          ? List<String>.from(json['value'])
+          : json['value'],
     );
   }
 
@@ -581,7 +586,9 @@ class FileFieldModel extends FileFieldEntity implements FieldModel {
       isRequired: json['required'],
       regex: json['regex'],
       formatting: json['formatting'],
-      value: json['value'],
+      value: json['value'] != null
+          ? List<String>.from(json['value'])
+          : json['value'],
       fileType: FileTypeEnum.values
           .firstWhere((e) => e.name.toUpperCase() == json['file_type']),
       minQuantity: json['min_quantity'],

@@ -52,7 +52,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
             Expanded(
               child: Form(
                 key: formKey,
-                child: PageView.builder(
+                child: ListView.builder(
                   controller: _pageController,
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),

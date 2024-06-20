@@ -23,7 +23,7 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
       alignment: Alignment.centerLeft,
       children: [
         TextFormField(
-          initialValue: field.value == null ? '' : field.value.toString(), 
+          initialValue: field.value == null ? '' : field.value.toString(),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             labelText: field.placeholder,

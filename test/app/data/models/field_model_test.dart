@@ -449,4 +449,60 @@ void main() {
       expect(fileFieldModel.maxQuantity, 3);
     });
   });
+
+  group('RadioGroupFieldModel Tests', () {
+    final radioGroupFieldMap = {
+      'field_type': 'RADIO_GROUP_FIELD',
+      'options': ['Option1', 'Option2'],
+      'placeholder': 'Choose an option',
+      'key': 'radio_group_field',
+      'required': true,
+      'regex': null,
+      'formatting': null,
+      'value': 'Option1',
+    };
+
+    test('should create RadioGroupFieldModel from map', () {
+      final radioGroupFieldModel =
+          RadioGroupFieldModel.fromMap(radioGroupFieldMap);
+
+      expect(radioGroupFieldModel.options, ['Option1', 'Option2']);
+      expect(radioGroupFieldModel.placeholder, 'Choose an option');
+      expect(radioGroupFieldModel.key, 'radio_group_field');
+      expect(radioGroupFieldModel.isRequired, true);
+      expect(radioGroupFieldModel.value, 'Option1');
+    });
+
+    test('should convert RadioGroupFieldModel to map', () {
+      final radioGroupFieldModel =
+          RadioGroupFieldModel.fromMap(radioGroupFieldMap);
+      final map = radioGroupFieldModel.toMap();
+
+      expect(map['field_type'], 'RADIO_GROUP_FIELD');
+      expect(map['options'], ['Option1', 'Option2']);
+      expect(map['placeholder'], 'Choose an option');
+      expect(map['key'], 'radio_group_field');
+      expect(map['required'], true);
+      expect(map['value'], 'Option1');
+    });
+
+    test('should create RadioGroupFieldModel from entity', () {
+      final entity = RadioGroupFieldEntity(
+        fieldType: FieldTypeEnum.RADIO_GROUP_FIELD,
+        options: ['Option1', 'Option2'],
+        placeholder: 'Choose an option',
+        key: 'radio_group_field',
+        isRequired: true,
+        value: 'Option1',
+      );
+
+      final radioGroupFieldModel = RadioGroupFieldModel.fromEntity(entity);
+
+      expect(radioGroupFieldModel.options, ['Option1', 'Option2']);
+      expect(radioGroupFieldModel.placeholder, 'Choose an option');
+      expect(radioGroupFieldModel.key, 'radio_group_field');
+      expect(radioGroupFieldModel.isRequired, true);
+      expect(radioGroupFieldModel.value, 'Option1');
+    });
+  });
 }

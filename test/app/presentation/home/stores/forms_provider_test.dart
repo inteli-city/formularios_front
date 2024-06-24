@@ -116,7 +116,7 @@ void main() {
 
     testWidgets('should set state to FormUserErrorState when fetch fails',
         (WidgetTester tester) async {
-      final failure = Failure(message: 'Fetch failed');
+      final failure = Failure(errorMessage: 'Fetch failed');
       when(mockFetchUserFormsUsecase.call())
           .thenAnswer((_) async => Left(failure));
 

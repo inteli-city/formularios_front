@@ -847,7 +847,7 @@ class FormMockRepository extends IFormRepository {
     );
 
     if (index == -1) {
-      return left(NoItemsFound(message: "Formulário não encontrado."));
+      return left(NoDataFound());
     }
 
     FormModel formModel =
@@ -869,7 +869,7 @@ class FormMockRepository extends IFormRepository {
     );
 
     if (index == -1) {
-      return left(NoItemsFound(message: "Formulário não encontrado."));
+      return left(NoDataFound());
     }
 
     formList.removeAt(index);
@@ -890,7 +890,7 @@ class FormMockRepository extends IFormRepository {
     );
 
     if (index == -1) {
-      return left(NoItemsFound(message: "Formulário não encontrado."));
+      return left(NoDataFound());
     }
 
     var formModel = FormModel.fromEntity(formList[index]).copyWith(

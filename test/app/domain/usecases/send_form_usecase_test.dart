@@ -102,7 +102,7 @@ void main() {
         formId: 'non_existent_form_id',
         sections: newSections,
         vinculationFormId: vinculationFormId,
-      )).thenAnswer((_) async => Left(NoItemsFound(message: 'message')));
+      )).thenAnswer((_) async => Left(NoDataFound()));
 
       var result = await usecase.call(
         formId: 'non_existent_form_id',
@@ -113,7 +113,7 @@ void main() {
       expect(result.isLeft(), true);
 
       var failure = result.fold((left) => left, (right) => null);
-      expect(failure, isA<NoItemsFound>());
+      expect(failure, isA<NoDataFound>());
     });
   });
 }

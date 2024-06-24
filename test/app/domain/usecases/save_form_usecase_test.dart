@@ -138,7 +138,7 @@ void main() {
     test('should return a failure when form not found', () async {
       when(formRepository.updateFormLocally(
         form: form,
-      )).thenAnswer((_) async => Left(NoItemsFound(message: 'message')));
+      )).thenAnswer((_) async => Left(NoDataFound()));
 
       var result = await usecase.call(
         form: form,
@@ -147,7 +147,7 @@ void main() {
       expect(result.isLeft(), true);
 
       var failure = result.fold((left) => left, (right) => null);
-      expect(failure, isA<NoItemsFound>());
+      expect(failure, isA<NoDataFound>());
     });
   });
 }

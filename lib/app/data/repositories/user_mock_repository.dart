@@ -4,7 +4,7 @@ import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 
-class UserMockRepository implements IUserRepository {
+class UserRepositoryMock implements IUserRepository {
   UserEntity user = UserEntity(
     userId: '125fb34e-aacf-4a47-9914-82ea64ff9f32',
     name: 'Gabriel Godoy',
@@ -16,9 +16,11 @@ class UserMockRepository implements IUserRepository {
 
   @override
   Future<Either<Failure, UserEntity>> loginUser() async {
-    // await Future.delayed(const Duration(seconds: 2));
     if (user.enabled == false) {
-      return Left(ErrorRequest(message: 'Usuário desabilitado'));
+      return Left(UserLoginError(
+        errorMessage: 'Usuário desabilitado',
+        stackTrace: StackTrace.current,
+      ));
     }
     return Right(user);
   }

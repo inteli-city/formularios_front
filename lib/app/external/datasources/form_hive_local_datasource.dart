@@ -1,11 +1,12 @@
 import 'package:formularios_front/app/data/models/form_model.dart';
-import 'package:formularios_front/app/domain/repositories/form_storage.dart';
+import 'package:formularios_front/app/data/datasources/form_local_datasource.dart';
+import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-class FormHiveStorage extends IFormStorage {
+class FormHiveLocalDatasource extends IFormLocalDatasource {
   final Box storage;
 
-  FormHiveStorage(this.storage);
+  FormHiveLocalDatasource(this.storage);
 
   @override
   Future<void> deleteForm({required String formId}) async {
@@ -19,7 +20,7 @@ class FormHiveStorage extends IFormStorage {
   }
 
   @override
-  Future<List<FormModel>> getForms() async {
+  Future<List<FormEntity>> getForms() async {
     List form = storage.get('forms');
 
     return FormModel.fromMaps(form);
@@ -31,15 +32,16 @@ class FormHiveStorage extends IFormStorage {
   }
 
   @override
-  Future<void> updateForm({required Map<String, dynamic> form}) async {
+  Future<void> updateForm({required FormEntity form}) async {
+    var formModel = FormModel.fromEntity(form);
     List forms = await storage.get('forms');
 
     var index =
-        forms.indexWhere((element) => element['form_id'] == form['form_id']);
+        forms.indexWhere((element) => element['form_id'] == formModel.formId);
 
     forms.removeAt(index);
 
-    forms.insert(index, form);
+    forms.insert(index, formModel.toMap());
 
     await saveForms(forms: forms);
   }

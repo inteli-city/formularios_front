@@ -47,7 +47,7 @@ class SingleFormProvider extends ChangeNotifier {
       return value.fold(
         (error) {
           _logger.e(error.toString());
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
         },
         (savedForm) async {
           _logger.d(
@@ -71,7 +71,7 @@ class SingleFormProvider extends ChangeNotifier {
       return value.fold(
         (error) {
           _logger.e(error.toString());
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
         },
         (sendedForm) async {
           _logger.d(
@@ -94,7 +94,7 @@ class SingleFormProvider extends ChangeNotifier {
       return value.fold(
         (error) {
           _logger.e(error.toString());
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
         },
         (updatedForm) async {
           _logger.d(

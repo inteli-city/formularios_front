@@ -57,7 +57,7 @@ class FormsProvider extends ChangeNotifier {
       return value.fold(
         (error) {
           _logger.e(error.toString());
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
           return FormUserErrorState(error: error);
         },
         (forms) {
@@ -78,7 +78,7 @@ class FormsProvider extends ChangeNotifier {
       return value.fold(
         (error) {
           _logger.e(error.toString());
-          GlobalSnackBar.error(error.message);
+          GlobalSnackBar.error(error.errorMessage);
           return FormUserErrorState(error: error);
         },
         (forms) {

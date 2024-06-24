@@ -3,18 +3,14 @@ import 'dart:ui';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
+import 'package:formularios_front/app/data/repositories/user_mock_repository.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
-import 'package:formularios_front/app/data/repositories/user_mock_repository.dart';
 import 'package:formularios_front/generated/l10n.dart';
 
 void main() {
-  late UserMockRepository repository;
-
-  setUp(() {
-    repository = UserMockRepository();
-  });
+  UserRepositoryMock repository = UserRepositoryMock();
 
   test('should return a UserEntity', () async {
     final result = await repository.loginUser();
@@ -46,7 +42,7 @@ void main() {
 
     final failure = result.fold((left) => left, (right) => null);
 
-    expect(failure, isA<ErrorRequest>());
-    expect((failure as ErrorRequest).message, 'Usuário desabilitado');
+    expect(failure, isA<UserLoginError>());
+    expect((failure as UserLoginError).errorMessage, 'Usuário desabilitado');
   });
 }

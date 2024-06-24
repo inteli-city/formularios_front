@@ -92,7 +92,7 @@ void main() {
     test('should return a Failure', () async {
       when(formRepository.updateFormStatus(
               formId: form.formId, status: FormStatusEnum.IN_PROGRESS))
-          .thenAnswer((_) async => Left(Failure(message: '')));
+          .thenAnswer((_) async => Left(Failure(errorMessage: '')));
 
       var result = await usecase(
           formId: form.formId, status: FormStatusEnum.IN_PROGRESS);

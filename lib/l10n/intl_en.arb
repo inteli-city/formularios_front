@@ -28,14 +28,8 @@
         }
     },
 
-    "noItemsFoundErrorMessage": "No items found for {message}",
-    "@noItemsFoundErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "noItemsFoundErrorMessage": {}
-            }
-        }
-    },
+    "noDataFoundError": "No data found",
+    "unknownError": "Unknown error, please try again",
     
     "externId" : "External ID",
     "internId" : "Internal ID",

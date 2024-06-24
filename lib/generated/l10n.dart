@@ -91,13 +91,23 @@ class S {
     );
   }
 
-  /// `No items found for {message}`
-  String noItemsFoundErrorMessage(Object placeholders, Object message) {
+  /// `No data found`
+  String get noDataFoundError {
     return Intl.message(
-      'No items found for $message',
-      name: 'noItemsFoundErrorMessage',
+      'No data found',
+      name: 'noDataFoundError',
       desc: '',
-      args: [placeholders, message],
+      args: [],
+    );
+  }
+
+  /// `Unknown error, please try again`
+  String get unknownError {
+    return Intl.message(
+      'Unknown error, please try again',
+      name: 'unknownError',
+      desc: '',
+      args: [],
     );
   }
 

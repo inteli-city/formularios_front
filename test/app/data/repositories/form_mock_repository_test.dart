@@ -8,7 +8,7 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/data/repositories/form_mock_repository.dart';
+import 'package:formularios_front/app/data/repositories/form_repository_mock.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/generated/l10n.dart';
@@ -104,7 +104,7 @@ void main() {
       expect(result.isLeft(), true);
 
       var failure = result.fold((left) => left, (right) => null);
-      expect(failure, isA<NoItemsFound>());
+      expect(failure, isA<NoDataFound>());
     });
   });
 
@@ -131,7 +131,7 @@ void main() {
       expect(result.isLeft(), true);
 
       var failure = result.fold((left) => left, (right) => null);
-      expect(failure, isA<NoItemsFound>());
+      expect(failure, isA<NoDataFound>());
     });
   });
 
@@ -182,7 +182,7 @@ void main() {
       expect(result.isLeft(), true);
 
       var failure = result.fold((left) => left, (right) => null);
-      expect(failure, isA<NoItemsFound>());
+      expect(failure, isA<NoDataFound>());
     });
   });
 }

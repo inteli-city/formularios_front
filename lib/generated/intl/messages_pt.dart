@@ -34,10 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(placeholders, localStorageErrorMessage) =>
       "Armazenamento local não disponível: ${localStorageErrorMessage}";
 
-  static String m3(placeholders, message) =>
-      "Itens não encontrados para: ${message}";
-
-  static String m4(schema) => "${Intl.select(schema, {
+  static String m3(schema) => "${Intl.select(schema, {
             'PRIORIDADE_BAIXO_ALTO': 'Prioridade Baixo-Alto',
             'PRIORIDADE_ALTO_BAIXO': 'Prioridade Alto-Baixo',
             'MAIS_RECENTE': 'Mais Recente',
@@ -45,7 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m5(schema) => "${Intl.select(schema, {
+  static String m4(schema) => "${Intl.select(schema, {
             'LOW': 'Baixa',
             'MEDIUM': 'Média',
             'HIGH': 'Alta',
@@ -53,7 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m6(placeholders, message) => "${message}";
+  static String m5(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -91,18 +88,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Quantidade maxima de arquivos: "),
         "minFilesQuantity": MessageLookupByLibrary.simpleMessage(
             "Quantidade minima de arquivos: "),
+        "noDataFoundError":
+            MessageLookupByLibrary.simpleMessage("Nenhum dado encontrado"),
         "noFormsFound": MessageLookupByLibrary.simpleMessage(
             "Nenhum Formulário Encontrado!"),
         "noInternetConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage("Sem conexão com a internet"),
-        "noItemsFoundErrorMessage": m3,
         "number": MessageLookupByLibrary.simpleMessage("Número"),
-        "orderEnumSchema": m4,
+        "orderEnumSchema": m3,
         "priority": MessageLookupByLibrary.simpleMessage("Prioridade"),
-        "priorityEnumSchema": m5,
+        "priorityEnumSchema": m4,
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)"),
-        "requestErrorMessage": m6,
+        "requestErrorMessage": m5,
         "saveForm": MessageLookupByLibrary.simpleMessage("Salvar"),
         "selectFiles":
             MessageLookupByLibrary.simpleMessage("Selecionar Arquivos"),
@@ -128,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Este campo deve ter pelo menos: "),
         "thisFieldShouldHaveMinimumValue": MessageLookupByLibrary.simpleMessage(
             "Este campo deve ser maior que: "),
+        "unknownError": MessageLookupByLibrary.simpleMessage(
+            "Erro desconhecido, por favor, tente novamente"),
         "vinculationId":
             MessageLookupByLibrary.simpleMessage("ID de Vinculação")
       };

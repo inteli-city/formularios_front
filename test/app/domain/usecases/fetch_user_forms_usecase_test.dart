@@ -123,7 +123,7 @@ void main() {
 
     test('should return a Failure', () async {
       when(formRepository.getUserForms())
-          .thenAnswer((_) async => Left(Failure(message: '')));
+          .thenAnswer((_) async => Left(Failure(errorMessage: '')));
 
       var result = await usecase();
 

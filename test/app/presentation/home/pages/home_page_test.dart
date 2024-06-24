@@ -12,7 +12,6 @@ import 'package:formularios_front/app/presentation/home/stores/forms_provider.da
 
 import 'home_page_test.mocks.dart';
 
-
 @GenerateMocks([FormsProvider])
 void main() {
   group('HomePage Widget Tests', () {
@@ -37,9 +36,8 @@ void main() {
 
     testWidgets('should display error message when in error state',
         (WidgetTester tester) async {
-      var failure = Failure(message: 'Error Message');
-      when(formsProvider.state)
-          .thenReturn(FormUserErrorState(error: failure));
+      var failure = Failure(errorMessage: 'Error Message');
+      when(formsProvider.state).thenReturn(FormUserErrorState(error: failure));
       await tester.pumpWidget(MaterialApp(
         home: ChangeNotifierProvider<FormsProvider>(
           create: (_) => formsProvider,

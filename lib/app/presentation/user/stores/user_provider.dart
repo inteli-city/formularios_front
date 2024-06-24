@@ -14,7 +14,7 @@ class UserProvider extends ChangeNotifier {
   Future<void> loadUser() async {
     await _loginUser().then(
       (value) => value.fold((error) {
-        GlobalSnackBar.error(error.message);
+        GlobalSnackBar.error(error.errorMessage);
       }, (user) {
         this.user = user;
       }),

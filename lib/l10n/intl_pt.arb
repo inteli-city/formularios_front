@@ -19,14 +19,8 @@
         }
     },
 
-    "noItemsFoundErrorMessage": "Itens não encontrados para: {message}",
-    "@noItemsFoundErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "restaurantName": {}
-            }
-        }
-    },
+    "noDataFoundError": "Nenhum dado encontrado",
+    "unknownError": "Erro desconhecido, por favor, tente novamente",
 
     "requestErrorMessage": "{message}",
     "@requestErrorMessage" : {

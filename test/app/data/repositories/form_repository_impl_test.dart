@@ -5,8 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
+import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/data/models/form_model.dart';
-import 'package:formularios_front/app/data/models/section_model.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
@@ -18,23 +18,23 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
-import 'package:formularios_front/app/domain/repositories/form_storage.dart';
-import 'package:formularios_front/app/shared/helpers/services/http_service.dart';
-import 'package:formularios_front/app/data/repositories/form_dio_repository.dart';
+import 'package:formularios_front/app/data/datasources/form_local_datasource.dart';
+import 'package:formularios_front/app/data/repositories/form_repository_impl.dart';
 
-import 'form_dio_mock_repository_test.mocks.dart';
+import 'form_repository_impl_test.mocks.dart';
 
-@GenerateMocks([IHttpService, IFormStorage])
+@GenerateMocks([IFormDatasource, IFormLocalDatasource])
 void main() {
-  late MockIHttpService mockHttpService;
-  late MockIFormStorage mockFormStorage;
-  late FormDioRepository repository;
+  late MockIFormDatasource mockFormDatasource;
+  late MockIFormLocalDatasource mockFormLocalDatasource;
+  late FormRepositoryImpl repository;
 
   setUp(() {
-    mockHttpService = MockIHttpService();
-    mockFormStorage = MockIFormStorage();
-    repository = FormDioRepository(mockHttpService, mockFormStorage);
-    Modular.bindModule(HomeModule());
+    Modular.bindModule(AppModule());
+    mockFormDatasource = MockIFormDatasource();
+    mockFormLocalDatasource = MockIFormLocalDatasource();
+    repository =
+        FormRepositoryImpl(mockFormDatasource, mockFormLocalDatasource);
   });
 
   final form = FormEntity(
@@ -85,15 +85,7 @@ void main() {
     test(
         'should return list of forms when the call to remote data source is successful',
         () async {
-      final response = Response(
-        data: {
-          'form_list': [formModel],
-        },
-        statusCode: 200,
-        requestOptions: RequestOptions(path: '/get-form-by-user-id'),
-      );
-
-      when(mockHttpService.get(any)).thenAnswer((_) async => response);
+      when(mockFormDatasource.getUserForms()).thenAnswer((_) async => [form]);
 
       final result = await repository.getUserForms();
 
@@ -106,7 +98,7 @@ void main() {
         () async {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting();
-      when(mockHttpService.get(any)).thenThrow(DioException(
+      when(mockFormDatasource.getUserForms()).thenThrow(DioException(
         requestOptions: RequestOptions(path: '/get-form-by-user-id'),
         response: Response(
           data: {'message': 'Error occurred'},
@@ -123,11 +115,11 @@ void main() {
 
   group('getUserFormsLocally', () {
     test('should return list of forms from local storage', () async {
-      when(mockFormStorage.getForms()).thenAnswer((_) async => []);
+      when(mockFormLocalDatasource.getForms()).thenAnswer((_) async => []);
 
       final result = await repository.getUserFormsLocally();
 
-      verify(mockFormStorage.getForms());
+      verify(mockFormLocalDatasource.getForms());
 
       expect(result, isA<Right>());
       expect(result.getOrElse(() => []), isEmpty);
@@ -137,7 +129,7 @@ void main() {
         () async {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting();
-      when(mockFormStorage.getForms())
+      when(mockFormLocalDatasource.getForms())
           .thenThrow(Exception('Local storage error'));
 
       final result = await repository.getUserFormsLocally();
@@ -149,23 +141,16 @@ void main() {
   group('postForm', () {
     test('should return FormEntity when the form is posted successfully',
         () async {
-      final response = Response(
-        data: {'form': formModel},
-        statusCode: 200,
-        requestOptions: RequestOptions(path: '/complete-form'),
-      );
+      when(mockFormDatasource.postForm(
+        formId: form.formId,
+        sections: form.sections,
+      )).thenAnswer((_) async => form);
 
-      when(mockHttpService.post('/complete-form', data: {
-        'form_id': formModel['form_id'],
-        'sections': formModel['sections'],
-      })).thenAnswer((_) async => response);
-
-      when(mockFormStorage.updateForm(form: formModel))
+      when(mockFormLocalDatasource.updateForm(form: form))
           .thenAnswer((_) async {});
 
       final result = await repository.postForm(
-          formId: formModel['form_id'],
-          sections: form.sections);
+          formId: formModel['form_id'], sections: form.sections);
 
       expect(result, isA<Right>());
     });
@@ -173,8 +158,10 @@ void main() {
     test('should return Failure when the form post is unsuccessful', () async {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting();
-      when(mockHttpService.post(any, data: anyNamed('data')))
-          .thenThrow(DioException(
+      when(mockFormDatasource.postForm(
+        formId: '1',
+        sections: [],
+      )).thenThrow(DioException(
         requestOptions: RequestOptions(path: '/complete-form'),
         response: Response(
           data: {'message': 'Error occurred'},
@@ -191,7 +178,7 @@ void main() {
 
   group('updateFormLocally', () {
     test('should return FormEntity when the form is updated locally', () async {
-      when(mockFormStorage.updateForm(form: anyNamed('form')))
+      when(mockFormLocalDatasource.updateForm(form: anyNamed('form')))
           .thenAnswer((_) async {});
 
       final result = await repository.updateFormLocally(form: form);
@@ -203,7 +190,7 @@ void main() {
         () async {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting();
-      when(mockFormStorage.updateForm(form: anyNamed('form')))
+      when(mockFormLocalDatasource.updateForm(form: anyNamed('form')))
           .thenThrow(Exception('Local storage error'));
 
       final result = await repository.updateFormLocally(form: form);
@@ -216,18 +203,11 @@ void main() {
     test(
         'should return FormEntity when the form status is updated successfully',
         () async {
-      final response = Response(
-        data: {'form': formModel},
-        statusCode: 200,
-        requestOptions: RequestOptions(path: '/update-form-status'),
-      );
+      when(mockFormDatasource.updateFormStatus(
+              formId: form.formId, status: FormStatusEnum.CANCELED))
+          .thenAnswer((_) async => form);
 
-      when(mockHttpService.post('/update-form-status', data: {
-        'form_id': formModel['form_id'],
-        'status': FormStatusEnum.CANCELED.name
-      })).thenAnswer((_) async => response);
-
-      when(mockFormStorage.updateForm(form: formModel))
+      when(mockFormLocalDatasource.updateForm(form: form))
           .thenAnswer((_) async {});
 
       final result = await repository.updateFormStatus(
@@ -240,8 +220,10 @@ void main() {
         () async {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting();
-      when(mockHttpService.post(any, data: anyNamed('data')))
-          .thenThrow(DioException(
+      when(mockFormDatasource.updateFormStatus(
+        status: FormStatusEnum.CANCELED,
+        formId: '1',
+      )).thenThrow(DioException(
         requestOptions: RequestOptions(path: '/update-form-status'),
         response: Response(
           data: {'message': 'Error occurred'},

@@ -31,7 +31,7 @@ void main() {
         enabled: false,
         role: RoleEnum.COORDINATOR,
         groups: []);
-    final failure = Failure(message: 'Login Failed');
+    final failure = Failure(errorMessage: 'Login Failed');
 
     test('should return UserEntity when login is successful', () async {
       when(mockUserRepository.loginUser())

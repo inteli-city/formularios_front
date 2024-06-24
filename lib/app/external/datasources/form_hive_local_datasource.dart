@@ -1,4 +1,4 @@
-import 'package:formularios_front/app/data/models/form_model.dart';
+import 'package:formularios_front/app/data/adapters/form_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_local_datasource.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -10,20 +10,20 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
 
   @override
   Future<void> deleteForm({required String formId}) async {
-    var forms = FormModel.fromMaps(await storage.get('forms'));
+    var forms = FormAdapter.fromJsonList(await storage.get('forms'));
 
     var index = forms.indexWhere((element) => element.formId == formId);
 
     forms.removeAt(index);
 
-    await saveForms(forms: forms.map((e) => e.toMap()).toList());
+    await saveForms(forms: forms.map((e) => FormAdapter.toJson(e)).toList());
   }
 
   @override
   Future<List<FormEntity>> getForms() async {
     List form = storage.get('forms');
 
-    return FormModel.fromMaps(form);
+    return FormAdapter.fromJsonList(form);
   }
 
   @override
@@ -33,15 +33,14 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
 
   @override
   Future<void> updateForm({required FormEntity form}) async {
-    var formModel = FormModel.fromEntity(form);
     List forms = await storage.get('forms');
 
     var index =
-        forms.indexWhere((element) => element['form_id'] == formModel.formId);
+        forms.indexWhere((element) => element['form_id'] == form.formId);
 
     forms.removeAt(index);
 
-    forms.insert(index, formModel.toMap());
+    forms.insert(index, FormAdapter.toJson(form));
 
     await saveForms(forms: forms);
   }

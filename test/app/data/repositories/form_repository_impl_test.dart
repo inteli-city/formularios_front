@@ -5,8 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
+import 'package:formularios_front/app/data/adapters/form_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
-import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
@@ -80,7 +80,7 @@ void main() {
     ],
   );
 
-  final formModel = FormModel.fromEntity(form).toMap();
+  final formModel = FormAdapter.toJson(form);
   group('getUserForms', () {
     test(
         'should return list of forms when the call to remote data source is successful',

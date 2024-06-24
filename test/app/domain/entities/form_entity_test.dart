@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
@@ -130,59 +129,6 @@ void main() {
       expect(form.justificative, isA<JustificativeEntity>());
       expect(form.formTitle, 'formTitle');
       expect(form.canVinculate, false);
-    });
-    test('should return a copy of form entity', () {
-      final form = FormEntity(
-        formId: 'formId',
-        creatorUserId: 'creatorUserId',
-        userId: 'userId',
-        template: 'template',
-        area: 'area',
-        system: 'system',
-        street: 'street',
-        city: 'city',
-        number: 1,
-        latitude: 1.0,
-        longitude: 1.0,
-        region: 'region',
-        priority: PriorityEnum.HIGH,
-        status: FormStatusEnum.IN_PROGRESS,
-        expirationDate: 1,
-        creationDate: 1,
-        sections: [sectionExample],
-        justificative: JustificativeEntity(
-            options: [],
-            selectedOption: null,
-            justificationText: 'text',
-            justificationImage: null),
-        formTitle: 'formTitle',
-        canVinculate: false,
-      );
-
-      FormModel formEntity = FormModel.fromEntity(form);
-
-      final copyForm = formEntity.copyWith();
-
-      expect(copyForm.formId, 'formId');
-      expect(copyForm.creatorUserId, 'creatorUserId');
-      expect(copyForm.userId, 'userId');
-      expect(copyForm.template, 'template');
-      expect(copyForm.area, 'area');
-      expect(copyForm.system, 'system');
-      expect(copyForm.street, 'street');
-      expect(copyForm.city, 'city');
-      expect(copyForm.number, 1);
-      expect(copyForm.latitude, 1.0);
-      expect(copyForm.longitude, 1.0);
-      expect(copyForm.region, 'region');
-      expect(copyForm.priority, PriorityEnum.HIGH);
-      expect(copyForm.status, FormStatusEnum.IN_PROGRESS);
-      expect(copyForm.expirationDate, 1);
-      expect(copyForm.creationDate, 1);
-      expect(copyForm.sections, [sectionExample]);
-      expect(copyForm.justificative, isA<JustificativeEntity>());
-      expect(copyForm.formTitle, 'formTitle');
-      expect(copyForm.canVinculate, false);
     });
   });
 }

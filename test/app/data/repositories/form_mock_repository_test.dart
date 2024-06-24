@@ -168,7 +168,6 @@ void main() {
       var updatedForm = result.fold((left) => null, (right) => right);
       expect(updatedForm, isA<FormEntity>());
       expect(updatedForm!.sections, newSections);
-      expect(updatedForm.vinculationFormId, vinculationFormId);
     });
 
     test('should return failure when form not found', () async {

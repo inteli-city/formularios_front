@@ -1,6 +1,6 @@
+import 'package:formularios_front/app/data/adapters/form_adapter.dart';
+import 'package:formularios_front/app/data/adapters/section_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
-import 'package:formularios_front/app/data/models/form_model.dart';
-import 'package:formularios_front/app/data/models/section_model.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
@@ -18,7 +18,7 @@ class FormDatasourceImpl implements IFormDatasource {
     try {
       final response = await _httpClient.get('/get-form-by-user-id');
 
-      return FormModel.fromMaps(response.data['form_list']);
+      return FormAdapter.fromJsonList(response.data['form_list']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
         throw NoInternetConnection();
@@ -40,11 +40,10 @@ class FormDatasourceImpl implements IFormDatasource {
     try {
       final response = await _httpClient.post('/complete-form', data: {
         'form_id': formId,
-        'sections':
-            sections.map((e) => SectionModel.fromEntity(e).toMap()).toList(),
+        'sections': sections.map((e) => SectionAdapter.toJson(e)).toList(),
       });
 
-      return FormModel.fromMap(response.data['form']);
+      return FormAdapter.fromJson(response.data['form']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
         throw NoInternetConnection();
@@ -66,7 +65,7 @@ class FormDatasourceImpl implements IFormDatasource {
         'status': status.name,
       });
 
-      return FormModel.fromMap(response.data['form']);
+      return FormAdapter.fromJson(response.data['form']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
         throw NoInternetConnection();

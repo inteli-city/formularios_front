@@ -29,7 +29,7 @@ class FormEntity {
   final int? conclusionDate;
   final JustificativeEntity justificative;
   final String? comments;
-  final List<SectionEntity> sections;
+  List<SectionEntity> sections;
   final List<InformationFieldEntity>? informationFields;
 
   FormEntity({

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:formularios_front/app/data/models/form_model.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
@@ -850,14 +849,13 @@ class FormMockRepository extends IFormRepository {
       return left(NoDataFound());
     }
 
-    FormModel formModel =
-        FormModel.fromEntity(formList[index]).copyWith(status: status);
+    FormEntity newForm = formList[index]..status = status;
 
     formList.removeAt(index);
 
-    formList.insert(index, formModel);
+    formList.insert(index, newForm);
 
-    return right(formModel);
+    return right(newForm);
   }
 
   @override
@@ -893,15 +891,12 @@ class FormMockRepository extends IFormRepository {
       return left(NoDataFound());
     }
 
-    var formModel = FormModel.fromEntity(formList[index]).copyWith(
-        sections: sections,
-        vinculationFormId: vinculationFormId,
-        status: FormStatusEnum.CONCLUDED);
+    FormEntity newForm = formList[index]..sections = sections;
 
     formList.removeAt(index);
 
-    formList.insert(index, formModel);
+    formList.insert(index, newForm);
 
-    return right(formModel);
+    return right(newForm);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
+import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -53,6 +54,36 @@ void main() {
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
 
       expect(provider.user, userEntity);
+    });
+
+    test('should load user successfully when usecase returns a user', () async {
+      var user = UserEntity(
+          name: 'Test User',
+          userId: '1',
+          email: 'test@example.com',
+          enabled: true,
+          role: RoleEnum.COORDINATOR,
+          groups: []);
+
+      when(provider.user).thenReturn(user);
+
+      when(mockLoginUserUsecase()).thenAnswer((_) async => Right(user));
+
+      await provider.loadUser();
+
+      expect(provider.user, equals(user));
+    });
+
+    test('should show an error when usecase returns a failure', () async {
+      when(provider.user).thenReturn(null);
+
+      var errorMessage = 'Failed to load user';
+      when(mockLoginUserUsecase())
+          .thenAnswer((_) async => Left(Failure(errorMessage: errorMessage)));
+
+      await provider.loadUser();
+
+      expect(provider.user, isNull);
     });
   });
 }

@@ -130,5 +130,42 @@ void main() {
       expect(form.formTitle, 'formTitle');
       expect(form.canVinculate, false);
     });
+
+    test('should return an Exception when Form Entity  is invalid', () {
+      expect(
+          () => FormEntity(
+                formId: 'formId',
+                creatorUserId: 'creatorUserId',
+                userId: 'userId',
+                vinculationFormId: 'vinculationFormId',
+                template: 'template',
+                area: 'area',
+                system: 'system',
+                street: 'street',
+                city: 'city',
+                number: 1,
+                latitude: 1.0,
+                longitude: 1.0,
+                region: 'region',
+                description: 'description',
+                priority: PriorityEnum.HIGH,
+                status: FormStatusEnum.IN_PROGRESS,
+                expirationDate: 1,
+                creationDate: 1,
+                startDate: 1,
+                conclusionDate: 1,
+                justificative: JustificativeEntity(
+                    options: [],
+                    selectedOption: null,
+                    justificationText: 'text',
+                    justificationImage: null),
+                comments: 'comments',
+                sections: [],
+                informationFields: [],
+                formTitle: 'formTitle',
+                canVinculate: false,
+              ),
+          throwsException);
+    });
   });
 }

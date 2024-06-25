@@ -18,6 +18,8 @@ import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.d
     as _i4;
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart'
     as _i9;
+import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart'
+    as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -164,4 +166,120 @@ class MockIUpdateFormStatusUseCase extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>);
+}
+
+/// A class which mocks [FilterFormsController].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFilterFormsController extends _i1.Mock
+    implements _i11.FilterFormsController {
+  MockFilterFormsController() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set filteredTemplate(String? _filteredTemplate) => super.noSuchMethod(
+        Invocation.setter(
+          #filteredTemplate,
+          _filteredTemplate,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set filteredStreet(String? _filteredStreet) => super.noSuchMethod(
+        Invocation.setter(
+          #filteredStreet,
+          _filteredStreet,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set filteredCity(String? _filteredCity) => super.noSuchMethod(
+        Invocation.setter(
+          #filteredCity,
+          _filteredCity,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set filteredSystem(String? _filteredSystem) => super.noSuchMethod(
+        Invocation.setter(
+          #filteredSystem,
+          _filteredSystem,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set filteredStatus(_i10.FormStatusEnum? _filteredStatus) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #filteredStatus,
+          _filteredStatus,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  int get activeFiltersAmount => (super.noSuchMethod(
+        Invocation.getter(#activeFiltersAmount),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  void setTemplate(String? value) => super.noSuchMethod(
+        Invocation.method(
+          #setTemplate,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setStreet(String? value) => super.noSuchMethod(
+        Invocation.method(
+          #setStreet,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setCity(String? value) => super.noSuchMethod(
+        Invocation.method(
+          #setCity,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setSystem(String? value) => super.noSuchMethod(
+        Invocation.method(
+          #setSystem,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setStatus(_i10.FormStatusEnum? value) => super.noSuchMethod(
+        Invocation.method(
+          #setStatus,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void clearFilters() => super.noSuchMethod(
+        Invocation.method(
+          #clearFilters,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

@@ -9,6 +9,7 @@ class SplashController extends ChangeNotifier {
 
   SplashController(this._userProvider, this._authController) {
     _authController.checkLogin().then((value) {
+      print(value);
       if (!value) {
         Modular.to.navigate('/login/');
       } else {

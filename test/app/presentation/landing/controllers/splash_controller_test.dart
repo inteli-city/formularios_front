@@ -23,14 +23,6 @@ void main() {
       mockUserProvider = MockUserProvider();
     });
 
-    test('should check login status when created', () {
-      when(mockAuthController.checkLogin()).thenAnswer((_) async => false);
-
-      SplashController(mockUserProvider, mockAuthController);
-
-      verify(mockAuthController.checkLogin()).called(1);
-    });
-
     test('should navigate to login page if not logged in', () async {
       when(mockAuthController.checkLogin()).thenAnswer((_) async => false);
 
@@ -38,6 +30,7 @@ void main() {
 
       await Future.delayed(Duration.zero);
 
+      verify(mockAuthController.checkLogin()).called(1);
       verify(navigator.navigate('/login/')).called(1);
     });
 

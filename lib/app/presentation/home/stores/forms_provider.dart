@@ -8,6 +8,7 @@ import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.d
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:logger/logger.dart';
 
 class FormsProvider extends ChangeNotifier {
@@ -45,6 +46,11 @@ class FormsProvider extends ChangeNotifier {
 
   List<String> get cities =>
       _allForms.map((form) => form.city).toSet().toList();
+
+  List<(String, String, LatLng)> get locations => _allForms
+      .map((form) =>
+          (form.system, form.formTitle, LatLng(form.latitude, form.longitude)))
+      .toList();
 
   void setState(FormUserState value) {
     state = value;

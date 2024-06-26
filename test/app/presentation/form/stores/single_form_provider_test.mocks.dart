@@ -419,4 +419,13 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
         Invocation.getter(#sections),
         returnValue: <_i12.SectionEntity>[],
       ) as List<_i12.SectionEntity>);
+
+  @override
+  set sections(List<_i12.SectionEntity>? _sections) => super.noSuchMethod(
+        Invocation.setter(
+          #sections,
+          _sections,
+        ),
+        returnValueForMissingStub: null,
+      );
 }

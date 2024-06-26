@@ -57,7 +57,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -65,10 +65,11 @@ class ProfilePage extends StatelessWidget {
                   Modular.get<UserProvider>().logout();
                 },
                 style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: AppColors.primaryBlue,
                 ),
                 child: Text(
-                  'Logout',
+                  'Sair',
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: Colors.white,
                       ),

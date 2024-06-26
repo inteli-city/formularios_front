@@ -24,6 +24,8 @@ import 'package:formularios_front/app/presentation/landing/controllers/splash_co
 import 'package:formularios_front/app/presentation/landing/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/landing/pages/splash_page.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
+import 'package:formularios_front/app/presentation/map/pages/map_page.dart';
+import 'package:formularios_front/app/presentation/profile/pages/profile_page.dart';
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
@@ -107,6 +109,19 @@ class HomeModule extends Module {
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
+          transition: TransitionType.leftToRightWithFade,
+          guards: [UserGuard()],
+        ),
+        ChildRoute(
+          '/map',
+          child: (context) => const MapPage(),
+          transition: TransitionType.rightToLeftWithFade,
+          guards: [UserGuard()],
+        ),
+        ChildRoute(
+          '/profile',
+          child: (context) => const ProfilePage(),
+          transition: TransitionType.rightToLeftWithFade,
           guards: [UserGuard()],
         ),
       ],

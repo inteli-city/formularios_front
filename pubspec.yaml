@@ -1,7 +1,7 @@
 name: formularios_front
 description: "A Flutter Clean Architecture project for Intelicity demands."
 publish_to: 'none'
-version: 1.0.0+4
+version: 1.0.0+5
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -33,6 +33,7 @@ dependencies:
   file_picker: ^8.0.3
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  google_maps_flutter: ^2.7.0
 
 dev_dependencies:
   flutter_test:

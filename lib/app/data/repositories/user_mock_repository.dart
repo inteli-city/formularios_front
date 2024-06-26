@@ -11,7 +11,7 @@ class UserRepositoryMock implements IUserRepository {
     email: 'gabriel.godoybz@hotmail.com',
     enabled: true,
     role: RoleEnum.COORDINATOR,
-    groups: ['groups'],
+    groups: ['GAIA', 'JUNDIAI', 'RECAPE_SP'],
   );
 
   @override

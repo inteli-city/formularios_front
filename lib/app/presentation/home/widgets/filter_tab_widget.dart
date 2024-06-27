@@ -22,11 +22,6 @@ class FilterTabWidget extends StatefulWidget {
 }
 
 class _FilterTabWidgetState extends State<FilterTabWidget> {
-  FilterFormsController filterController = Modular.get<FilterFormsController>();
-  SortFormsController sortController = Modular.get<SortFormsController>();
-  SelectChipController selectChipController =
-      Modular.get<SelectChipController>();
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,19 +39,32 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
             ),
             scrollDirection: Axis.horizontal,
             itemCount: FormStatusEnum.values.length,
-            itemBuilder: (context, index) => _choiceChip(
-              index,
-              FormStatusEnum.values[index],
+            itemBuilder: (context, index) => ChoiceChipWidget(
+              index: index,
+              statusEnum: FormStatusEnum.values[index],
             ),
           ),
         ),
         const SizedBox(height: AppDimensions.paddingMedium),
-        _buildSearchFilterTab(),
+        const SearchFilterTabWidget(),
       ],
     );
   }
+}
 
-  Widget _buildSearchFilterTab() {
+class SearchFilterTabWidget extends StatefulWidget {
+  const SearchFilterTabWidget({super.key});
+
+  @override
+  State<SearchFilterTabWidget> createState() => _SearchFilterTabWidgetState();
+}
+
+class _SearchFilterTabWidgetState extends State<SearchFilterTabWidget> {
+  FilterFormsController filterController = Modular.get<FilterFormsController>();
+  SortFormsController sortController = Modular.get<SortFormsController>();
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSmall),
@@ -159,9 +167,25 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
       ),
     );
   }
+}
 
-  Widget _choiceChip(int index, FormStatusEnum statusEnum) {
-    var filterController = Modular.get<FilterFormsController>();
+class ChoiceChipWidget extends StatefulWidget {
+  final int index;
+  final FormStatusEnum statusEnum;
+  const ChoiceChipWidget(
+      {super.key, required this.index, required this.statusEnum});
+
+  @override
+  State<ChoiceChipWidget> createState() => _ChoiceChipWidgetState();
+}
+
+class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
+  FilterFormsController filterController = Modular.get<FilterFormsController>();
+  SelectChipController selectChipController =
+      Modular.get<SelectChipController>();
+
+  @override
+  Widget build(BuildContext context) {
     return ChoiceChip(
       labelPadding: EdgeInsets.zero,
       label: SizedBox(
@@ -171,10 +195,10 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              statusEnum.enumString,
+              widget.statusEnum.enumString,
               style: AppTextStyles.bodyText1.copyWith(
                 fontWeight: FontWeight.bold,
-                color: selectChipController.getSelectedChip(index)
+                color: selectChipController.getSelectedChip(widget.index)
                     ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).colorScheme.primary,
               ),
@@ -183,24 +207,24 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
             ),
             Text(
               style: AppTextStyles.titleMedium.copyWith(
-                color: selectChipController.getSelectedChip(index)
+                color: selectChipController.getSelectedChip(widget.index)
                     ? Theme.of(context).colorScheme.secondary
                     : Theme.of(context).colorScheme.primary,
               ),
               textAlign: TextAlign.center,
-              '(${context.read<FormsProvider>().getFormsCountByStatus(statusEnum)})',
+              '(${context.read<FormsProvider>().getFormsCountByStatus(widget.statusEnum)})',
             ),
           ],
         ),
       ),
-      selected: selectChipController.getSelectedChip(index),
+      selected: selectChipController.getSelectedChip(widget.index),
       onSelected: (bool selected) {
         setState(() {
           for (int i = 0; i < selectChipController.isSelectedList.length; i++) {
-            bool value = (i == index && selected);
+            bool value = (i == widget.index && selected);
             selectChipController.setChipValue(i, value);
           }
-          filterController.setStatus(selected ? statusEnum : null);
+          filterController.setStatus(selected ? widget.statusEnum : null);
           context.read<FormsProvider>().filterForms(
                 city: filterController.filteredCity,
                 enumStatus: filterController.filteredStatus,

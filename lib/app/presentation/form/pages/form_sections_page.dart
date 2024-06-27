@@ -17,10 +17,10 @@ class FormSectionsPage extends StatefulWidget {
 class FormSectionsPageState extends State<FormSectionsPage> {
   SingleFormProvider singleFormProvider = Modular.get<SingleFormProvider>();
   final PageController _pageController = PageController();
+  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    var formKey = GlobalKey<FormState>();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

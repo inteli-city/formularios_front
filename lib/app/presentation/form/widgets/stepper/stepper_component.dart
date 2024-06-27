@@ -27,7 +27,13 @@ class StepperComponent extends StatelessWidget {
                 child: Container(
                     height: 2, color: Theme.of(context).colorScheme.primary),
               ),
-              buildStep(context),
+              StepWidget(
+                color: index == currentIndex
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.grey,
+                onTap: onTap,
+                title: index.toString(),
+              ),
             ],
           )
         : isFirst
@@ -35,7 +41,13 @@ class StepperComponent extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  buildStep(context),
+                  StepWidget(
+                    color: index == currentIndex
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.grey,
+                    onTap: onTap,
+                    title: index.toString(),
+                  ),
                   Expanded(
                     child: Container(
                       height: 2,
@@ -54,7 +66,13 @@ class StepperComponent extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
-                  buildStep(context),
+                  StepWidget(
+                    color: index == currentIndex
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.grey,
+                    onTap: onTap,
+                    title: index.toString(),
+                  ),
                   Expanded(
                     child: Container(
                         height: 2,
@@ -63,8 +81,20 @@ class StepperComponent extends StatelessWidget {
                 ],
               );
   }
+}
 
-  Widget buildStep(BuildContext context) {
+class StepWidget extends StatelessWidget {
+  final Color color;
+  final Function() onTap;
+  final String title;
+  const StepWidget(
+      {super.key,
+      required this.color,
+      required this.onTap,
+      required this.title});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -75,13 +105,11 @@ class StepperComponent extends StatelessWidget {
             height: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: index == currentIndex
-                  ? Theme.of(context).colorScheme.primary
-                  : Colors.grey,
+              color: color,
             ),
             child: Center(
               child: Text(
-                index.toString(),
+                title,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,

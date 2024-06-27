@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
+import 'package:formularios_front/app/presentation/landing/controllers/connectivity_provider.dart';
 import 'package:formularios_front/app/presentation/landing/widgets/bottom_navigation_widget.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {
@@ -22,6 +24,9 @@ class _LandingPageState extends State<LandingPage> {
         ChangeNotifierProvider<FormsProvider>.value(
           value: Modular.get<FormsProvider>(),
         ),
+        ChangeNotifierProvider<ConnectivityProvider>.value(
+          value: Modular.get<ConnectivityProvider>(),
+        ),
       ],
       child: Scaffold(
         body: const SafeArea(
@@ -32,19 +37,26 @@ class _LandingPageState extends State<LandingPage> {
         ),
         extendBody: true,
         bottomNavigationBar: const BottomNavigationWidget(),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          hoverColor: Theme.of(context).colorScheme.primary,
-          shape: const CircleBorder(),
-          onPressed: () {
-            Modular.get<FormsProvider>().syncForms();
-          },
-          child: Icon(
-            Icons.rotate_right,
-            size: AppDimensions.iconLarge,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
+        floatingActionButton:
+            Consumer<ConnectivityProvider>(builder: (_, provider, child) {
+          return FloatingActionButton(
+            backgroundColor: provider.indicatorColor,
+            hoverColor: Theme.of(context).colorScheme.primary,
+            shape: const CircleBorder(),
+            onPressed: !provider.isConnected
+                ? () {
+                    GlobalSnackBar.error('Sem conexão com a internet!');
+                  }
+                : () {
+                    Modular.get<FormsProvider>().syncForms();
+                  },
+            child: Icon(
+              Icons.rotate_right,
+              size: AppDimensions.iconLarge,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          );
+        }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );

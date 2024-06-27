@@ -188,7 +188,7 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
                     : Theme.of(context).colorScheme.primary,
               ),
               textAlign: TextAlign.center,
-              '(${Modular.get<FormsProvider>().getFormsCountByStatus(statusEnum)})',
+              '(${context.read<FormsProvider>().getFormsCountByStatus(statusEnum)})',
             ),
           ],
         ),
@@ -201,13 +201,13 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
             selectChipController.setChipValue(i, value);
           }
           filterController.setStatus(selected ? statusEnum : null);
-          Modular.get<FormsProvider>().filterForms(
-            city: filterController.filteredCity,
-            enumStatus: filterController.filteredStatus,
-            street: filterController.filteredStreet,
-            system: filterController.filteredSystem,
-            template: filterController.filteredTemplate,
-          );
+          context.read<FormsProvider>().filterForms(
+                city: filterController.filteredCity,
+                enumStatus: filterController.filteredStatus,
+                street: filterController.filteredStreet,
+                system: filterController.filteredSystem,
+                template: filterController.filteredTemplate,
+              );
         });
       },
       selectedColor: Theme.of(context).colorScheme.primary,

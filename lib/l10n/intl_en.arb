@@ -1,29 +1,12 @@
 {
     "noInternetConnectionErrorMessage": "No internet connection",
+    "inQueueNoInternetConnectionErrorMessage": "No internet connection but we will try to send again every 5 minutes",
 
     "localStorageErrorMessage": "Local storage error: {localStorageErrorMessage}",
     "@localStorageErrorMessage" : {
         "placeholders": {
             "placeholders": {
                 "localStorageErrorMessage": {}
-            }
-        }
-    },
-
-    "entityErrorMessage": "Field {entityErrorMessage} is not valid",
-    "@entityErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "entityErrorMessage": {}
-            }
-        }
-    },
-
-    "requestErrorMessage": "{message}",
-    "@requestErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "requestErrorMessage": {}
             }
         }
     },

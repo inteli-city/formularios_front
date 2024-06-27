@@ -19,9 +19,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      final formUserProvider = Provider.of<FormsProvider>(context);
-      FormUserState state = formUserProvider.state;
+    return Consumer<FormsProvider>(builder: (_, provider, child) {
+      var state = provider.state;
       return state is FormUserErrorState
           ? errorBuild(state.error)
           : state is FormUserSuccessState

@@ -821,7 +821,7 @@ class FormMockRepository extends IFormRepository {
 
   @override
   Future<Either<Failure, List<FormEntity>>> getUserForms() async {
-    // await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     return right(
       formList.where((element) => element.userId == '1').toList(),
     );
@@ -829,7 +829,7 @@ class FormMockRepository extends IFormRepository {
 
   @override
   Future<Either<Failure, List<FormEntity>>> getUserFormsLocally() async {
-    // await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     return right(
       formList.where((element) => element.userId == '1').toList(),
     );
@@ -840,7 +840,7 @@ class FormMockRepository extends IFormRepository {
     required FormStatusEnum status,
     required String formId,
   }) async {
-    // await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     int index = formList.indexWhere(
       (element) => element.formId == formId,
     );

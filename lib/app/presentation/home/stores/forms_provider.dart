@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
@@ -15,13 +21,45 @@ class FormsProvider extends ChangeNotifier {
   final Logger _logger;
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
   final IFetchFormsLocallyUsecase _fetchFormsLocallyUsecase;
+  final IUpdateFormStatusUseCase _updateFormStatusUseCase;
+  final ISendFormUsecase _sendFormUsecase;
+  final ISaveFormUsecase _saveFormUsecase;
 
   FormsProvider(
     this._fetchUserFormsUsecase,
     this._fetchFormsLocallyUsecase,
     this._logger,
+    this._updateFormStatusUseCase,
+    this._sendFormUsecase,
+    this._saveFormUsecase,
   ) {
     syncForms();
+    _startRetryTimer();
+  }
+
+  final List<Function> _pendingRequests = [];
+
+  int get pendingRequestsCount => _pendingRequests.length;
+
+  void _startRetryTimer() {
+    Timer.periodic(const Duration(seconds: 30), (timer) {
+      _retryPendingRequests();
+    });
+  }
+
+  Future<void> _retryPendingRequests() async {
+    if (_pendingRequests.isNotEmpty) {
+      List<Function> requestsToRetry = List.from(_pendingRequests);
+      _pendingRequests.clear();
+
+      for (var request in requestsToRetry) {
+        await request();
+      }
+    }
+  }
+
+  void _addRequestToRetryQueue(Function request) {
+    _pendingRequests.add(request);
   }
 
   // Altera o estado de fetch, para atualizações em tela para todos os forms
@@ -163,5 +201,82 @@ class FormsProvider extends ChangeNotifier {
         orderedForms = _allForms;
     }
     setState(FormUserSuccessState(forms: orderedForms));
+  }
+
+  Future<FormEntity?> updateFormStatus(
+      {required String formId, required FormStatusEnum status}) async {
+    var result = await _updateFormStatusUseCase(
+      formId: formId,
+      status: status,
+    );
+
+    return result.fold(
+      (error) {
+        _logger.e(error.toString());
+        GlobalSnackBar.error(error.errorMessage);
+        _addRequestToRetryQueue(
+            () => updateFormStatus(formId: formId, status: status));
+        return null;
+      },
+      (updatedForm) async {
+        _logger.d(
+          '${DateTime.now()} - Form ${updatedForm.formId} updated status to ${status.name}!',
+        );
+        GlobalSnackBar.success('Formulário atualizado com sucesso!');
+        await fetchFormsLocally();
+        return updatedForm;
+      },
+    );
+  }
+
+  Future<void> sendForm({
+    required String formId,
+    required List<SectionEntity> sections,
+    String? vinculationFormId,
+  }) async {
+    await _sendFormUsecase(
+      formId: formId,
+      sections: sections,
+      vinculationFormId: vinculationFormId,
+    ).then((value) {
+      return value.fold(
+        (error) {
+          _logger.e(error.toString());
+          GlobalSnackBar.error(error.errorMessage);
+          _addRequestToRetryQueue(() => sendForm(
+                formId: formId,
+                sections: sections,
+                vinculationFormId: vinculationFormId,
+              ));
+        },
+        (sendedForm) async {
+          _logger.d(
+            '${DateTime.now()} - Form ${sendedForm.formId} send successfully!',
+          );
+          GlobalSnackBar.success('Formulário enviado com sucesso!');
+          await fetchFormsLocally();
+        },
+      );
+    });
+  }
+
+  Future<void> saveForm({required FormEntity form}) async {
+    await _saveFormUsecase(
+      form: form,
+    ).then((value) {
+      return value.fold(
+        (error) {
+          _logger.e(error.toString());
+          GlobalSnackBar.error(error.errorMessage);
+        },
+        (savedForm) async {
+          _logger.d(
+            '${DateTime.now()} - Form ${savedForm.formId} saved successfully!',
+          );
+          GlobalSnackBar.success('Formulário atualizado com sucesso!');
+        },
+      );
+    });
+    await fetchFormsLocally();
   }
 }

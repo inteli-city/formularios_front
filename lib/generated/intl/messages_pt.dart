@@ -20,10 +20,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'pt';
 
-  static String m0(placeholders, entityErrorMessage) =>
-      "Campo ${entityErrorMessage} não é válido";
-
-  static String m1(schema) => "${Intl.select(schema, {
+  static String m0(schema) => "${Intl.select(schema, {
             'NOT_STARTED': 'Não iniciado',
             'IN_PROGRESS': 'Em andamento',
             'CONCLUDED': 'Concluído',
@@ -31,10 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m2(placeholders, localStorageErrorMessage) =>
+  static String m1(placeholders, localStorageErrorMessage) =>
       "Armazenamento local não disponível: ${localStorageErrorMessage}";
 
-  static String m3(schema) => "${Intl.select(schema, {
+  static String m2(schema) => "${Intl.select(schema, {
             'PRIORIDADE_BAIXO_ALTO': 'Prioridade Baixo-Alto',
             'PRIORIDADE_ALTO_BAIXO': 'Prioridade Alto-Baixo',
             'MAIS_RECENTE': 'Mais Recente',
@@ -42,15 +39,13 @@ class MessageLookup extends MessageLookupByLibrary {
             'other': '',
           })}";
 
-  static String m4(schema) => "${Intl.select(schema, {
+  static String m3(schema) => "${Intl.select(schema, {
             'LOW': 'Baixa',
             'MEDIUM': 'Média',
             'HIGH': 'Alta',
             'EMERGENCY': 'Emergencial',
             'other': '',
           })}";
-
-  static String m5(placeholders, message) => "${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -68,19 +63,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ID do Usuário Criador"),
         "description": MessageLookupByLibrary.simpleMessage("Descrição"),
         "details": MessageLookupByLibrary.simpleMessage("Detalhes"),
-        "entityErrorMessage": m0,
         "expirationDate":
             MessageLookupByLibrary.simpleMessage("Data de Expiração"),
         "externId": MessageLookupByLibrary.simpleMessage("ID Externo"),
         "fillForm": MessageLookupByLibrary.simpleMessage("Preencher"),
         "filters": MessageLookupByLibrary.simpleMessage("Filtros"),
-        "formStatusEnumSchema": m1,
+        "formStatusEnumSchema": m0,
+        "inQueueNoInternetConnectionErrorMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Sem conexão porém a cada 5 minutos tentaremos enviar novamente"),
         "internId": MessageLookupByLibrary.simpleMessage("ID Interno"),
         "invalidFormat":
             MessageLookupByLibrary.simpleMessage("Formato inválido"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
         "linkForm": MessageLookupByLibrary.simpleMessage("Vincular Formulário"),
-        "localStorageErrorMessage": m2,
+        "localStorageErrorMessage": m1,
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "maxCheckLimit":
             MessageLookupByLibrary.simpleMessage("Ultrapassou o limite de: "),
@@ -95,12 +92,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "noInternetConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage("Sem conexão com a internet"),
         "number": MessageLookupByLibrary.simpleMessage("Número"),
-        "orderEnumSchema": m3,
+        "orderEnumSchema": m2,
         "priority": MessageLookupByLibrary.simpleMessage("Prioridade"),
-        "priorityEnumSchema": m4,
+        "priorityEnumSchema": m3,
         "priorityTooltip": MessageLookupByLibrary.simpleMessage(
             "Cores de Prioridade: \nVermelho (Emergencial)\nAmarelo (Em andamento)\nVerde (Concluído)"),
-        "requestErrorMessage": m5,
         "saveForm": MessageLookupByLibrary.simpleMessage("Salvar"),
         "selectFiles":
             MessageLookupByLibrary.simpleMessage("Selecionar Arquivos"),

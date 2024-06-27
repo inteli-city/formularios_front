@@ -16,7 +16,7 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
 
     forms.removeAt(index);
 
-    await saveForms(forms: forms.map((e) => FormAdapter.toJson(e)).toList());
+    await saveForms(forms: forms);
   }
 
   @override
@@ -27,8 +27,9 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
   }
 
   @override
-  Future<void> saveForms({required List forms}) async {
-    await storage.put('forms', forms);
+  Future<void> saveForms({required List<FormEntity> forms}) async {
+    await storage.put(
+        'forms', forms.map((e) => FormAdapter.toJson(e)).toList());
   }
 
   @override
@@ -42,6 +43,6 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
 
     forms.insert(index, FormAdapter.toJson(form));
 
-    await saveForms(forms: forms);
+    await saveForms(forms: FormAdapter.fromJsonList(forms));
   }
 }

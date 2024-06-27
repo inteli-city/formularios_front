@@ -15,7 +15,14 @@ class JustificativeAdapter {
   }
 
   static Map<String, dynamic> toJson(JustificativeEntity justificative) {
-    return {};
+    return {
+      'options': justificative.options
+          .map((e) => JustificativeOptionAdapter.toJson(e))
+          .toList(),
+      'selected_option': justificative.selectedOption,
+      'justification_text': justificative.justificationText,
+      'justification_image': justificative.justificationImage,
+    };
   }
 }
 

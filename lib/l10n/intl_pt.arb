@@ -1,5 +1,6 @@
 {
     "noInternetConnectionErrorMessage": "Sem conexão com a internet",
+    "inQueueNoInternetConnectionErrorMessage": "Sem conexão porém a cada 5 minutos tentaremos enviar novamente",
 
     "localStorageErrorMessage": "Armazenamento local não disponível: {localStorageErrorMessage}",
     "@localStorageErrorMessage" : {
@@ -10,26 +11,8 @@
         }
     },
 
-    "entityErrorMessage": "Campo {entityErrorMessage} não é válido",
-    "@entityErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "entityErrorMessage": {}
-            }
-        }
-    },
-
     "noDataFoundError": "Nenhum dado encontrado",
     "unknownError": "Erro desconhecido, por favor, tente novamente",
-
-    "requestErrorMessage": "{message}",
-    "@requestErrorMessage" : {
-        "placeholders": {
-            "placeholders": {
-                "requestErrorMessage": {}
-            }
-        }
-    },
 
     "externId"  : "ID Externo",
     "internId"  : "ID Interno",

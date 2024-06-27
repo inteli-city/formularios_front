@@ -60,6 +60,16 @@ class S {
     );
   }
 
+  /// `No internet connection but we will try to send again every 5 minutes`
+  String get inQueueNoInternetConnectionErrorMessage {
+    return Intl.message(
+      'No internet connection but we will try to send again every 5 minutes',
+      name: 'inQueueNoInternetConnectionErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Local storage error: {localStorageErrorMessage}`
   String localStorageErrorMessage(
       Object placeholders, Object localStorageErrorMessage) {
@@ -68,26 +78,6 @@ class S {
       name: 'localStorageErrorMessage',
       desc: '',
       args: [placeholders, localStorageErrorMessage],
-    );
-  }
-
-  /// `Field {entityErrorMessage} is not valid`
-  String entityErrorMessage(Object placeholders, Object entityErrorMessage) {
-    return Intl.message(
-      'Field $entityErrorMessage is not valid',
-      name: 'entityErrorMessage',
-      desc: '',
-      args: [placeholders, entityErrorMessage],
-    );
-  }
-
-  /// `{message}`
-  String requestErrorMessage(Object placeholders, Object message) {
-    return Intl.message(
-      '$message',
-      name: 'requestErrorMessage',
-      desc: '',
-      args: [placeholders, message],
     );
   }
 

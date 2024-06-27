@@ -20,6 +20,7 @@ import 'package:formularios_front/app/presentation/home/controllers/sort_forms_c
 import 'package:formularios_front/app/presentation/form/pages/form_details_page.dart';
 import 'package:formularios_front/app/presentation/form/pages/form_sections_page.dart';
 import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
+import 'package:formularios_front/app/presentation/landing/controllers/connectivity_provider.dart';
 import 'package:formularios_front/app/presentation/landing/controllers/splash_controller.dart';
 import 'package:formularios_front/app/presentation/landing/pages/landing_page.dart';
 import 'package:formularios_front/app/presentation/landing/pages/splash_page.dart';
@@ -91,11 +92,11 @@ class HomeModule extends Module {
     i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
     i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);
     i.addLazySingleton(FilterFormsController.new);
+    i.addLazySingleton(ConnectivityProvider.new);
     i.add(SortFormsController.new);
     i.add(SelectChipController.new);
     i.add(
-      () => SingleFormProvider(i.get(), i.get(), i.get(), i.get(),
-          form: i.args.data),
+      () => SingleFormProvider(i.get(), form: i.args.data),
     );
   }
 

@@ -17,7 +17,7 @@ class UserDatasourceImpl implements IUserDatasource {
       return UserAdapter.fromJson(response.data['profile']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
-        throw NoInternetConnection();
+        throw NoInternetConnectionError();
       } else {
         throw UserLoginError(
           stackTrace: stackTrace,

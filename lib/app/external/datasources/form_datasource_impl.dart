@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:formularios_front/app/data/adapters/form_adapter.dart';
 import 'package:formularios_front/app/data/adapters/section_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
@@ -17,11 +19,10 @@ class FormDatasourceImpl implements IFormDatasource {
   Future<List<FormEntity>> getUserForms() async {
     try {
       final response = await _httpClient.get('/get-form-by-user-id');
-
       return FormAdapter.fromJsonList(response.data['form_list']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
-        throw NoInternetConnection();
+        throw NoInternetConnectionError();
       } else {
         throw FetchFormsError(
           stackTrace: stackTrace,
@@ -38,15 +39,18 @@ class FormDatasourceImpl implements IFormDatasource {
     String? vinculationFormId,
   }) async {
     try {
-      final response = await _httpClient.post('/complete-form', data: {
-        'form_id': formId,
-        'sections': sections.map((e) => SectionAdapter.toJson(e)).toList(),
-      });
+      final response = await _httpClient.post(
+        '/complete-form',
+        data: {
+          'form_id': formId,
+          'sections': sections.map((e) => SectionAdapter.toJson(e)).toList(),
+        },
+      );
 
       return FormAdapter.fromJson(response.data['form']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
-        throw NoInternetConnection();
+        throw InQueueNoInternetConnectionError();
       } else {
         throw CompleteFormError(
           stackTrace: stackTrace,
@@ -57,18 +61,23 @@ class FormDatasourceImpl implements IFormDatasource {
   }
 
   @override
-  Future<FormEntity> updateFormStatus(
-      {required FormStatusEnum status, required String formId}) async {
+  Future<FormEntity> updateFormStatus({
+    required FormStatusEnum status,
+    required String formId,
+  }) async {
     try {
-      final response = await _httpClient.post('/update-form-status', data: {
-        'form_id': formId,
-        'status': status.name,
-      });
+      final response = await _httpClient.post(
+        '/update-form-status',
+        data: {
+          'form_id': formId,
+          'status': status.name,
+        },
+      );
 
       return FormAdapter.fromJson(response.data['form']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
-        throw NoInternetConnection();
+        throw InQueueNoInternetConnectionError();
       } else {
         throw UpdateFormStatusError(
           stackTrace: stackTrace,

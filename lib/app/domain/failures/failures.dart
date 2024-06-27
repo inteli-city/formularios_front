@@ -24,9 +24,14 @@ class LocalStorageFailure extends Failure {
             errorMessage: S.current.localStorageErrorMessage('', errorMessage));
 }
 
-class NoInternetConnection extends Failure {
-  NoInternetConnection()
+class NoInternetConnectionError extends Failure {
+  NoInternetConnectionError()
       : super(errorMessage: S.current.noInternetConnectionErrorMessage);
+}
+
+class InQueueNoInternetConnectionError extends Failure {
+  InQueueNoInternetConnectionError()
+      : super(errorMessage: S.current.inQueueNoInternetConnectionErrorMessage);
 }
 
 class NoDataFound extends Failure {

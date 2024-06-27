@@ -58,6 +58,15 @@ class MockUserProvider extends _i1.Mock implements _i2.UserProvider {
       ) as _i4.Future<void>);
 
   @override
+  void logout() => super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void addListener(_i5.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,

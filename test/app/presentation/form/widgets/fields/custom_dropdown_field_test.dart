@@ -32,7 +32,6 @@ void main() {
       value: null,
       options: ['Option 1', 'Option 2'],
       isRequired: true,
-      regex: r'^[a-zA-Z]+$',
       key: '',
     );
 

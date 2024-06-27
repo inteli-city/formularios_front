@@ -6,8 +6,6 @@ abstract class FieldEntity {
   final String placeholder;
   final bool isRequired;
   final String key;
-  final String? regex;
-  final String? formatting;
   dynamic value;
 
   FieldEntity({
@@ -15,22 +13,22 @@ abstract class FieldEntity {
     required this.placeholder,
     required this.isRequired,
     required this.key,
-    this.regex,
-    this.formatting,
     this.value,
   });
 }
 
 class TextFieldEntity extends FieldEntity {
   final int? maxLength;
+  final String? regex;
+  final String? formatting;
 
   TextFieldEntity({
     this.maxLength,
+    this.regex,
+    this.formatting,
     super.fieldType = FieldTypeEnum.TEXT_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
     super.value,
   }) {
@@ -52,8 +50,6 @@ class NumberFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.NUMBER_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
     super.value,
   }) {
@@ -71,8 +67,6 @@ class DropDownFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.DROPDOWN_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
     super.value,
   }) {
@@ -92,8 +86,6 @@ class TypeAheadFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.TYPEAHEAD_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
     super.value,
   }) {
@@ -111,8 +103,6 @@ class RadioGroupFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.RADIO_GROUP_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
     super.value,
   }) {
@@ -132,8 +122,6 @@ class DateFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.DATE_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
     super.value,
   }) {
@@ -149,8 +137,6 @@ class CheckBoxFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.CHECKBOX_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
   }) {
     if (value != null && value is! bool) {
@@ -170,8 +156,6 @@ class CheckBoxGroupFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.CHECKBOX_GROUP_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
   }) {
     if (value != null && value is! List<String>) {
@@ -186,8 +170,6 @@ class SwitchButtonFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.SWITCH_BUTTON_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
   }) {
     if (value != null && value is! bool) {
@@ -209,8 +191,6 @@ class FileFieldEntity extends FieldEntity {
     super.fieldType = FieldTypeEnum.FILE_FIELD,
     required super.placeholder,
     required super.key,
-    super.regex,
-    super.formatting,
     required super.isRequired,
   }) {
     if (value != null && value is! List<String>) {

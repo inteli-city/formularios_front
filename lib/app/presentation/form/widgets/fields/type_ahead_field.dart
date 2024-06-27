@@ -58,7 +58,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
               validator: (value) => combine(
                 [
                   () => maxLength(value, widget.field.maxLength),
-                  () => regex(value, widget.field.regex),
                   () => isRequired(
                         value,
                         widget.field.isRequired,
@@ -69,9 +68,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
               inputFormatters: [
                 if (widget.field.maxLength != null)
                   LengthLimitingTextInputFormatter(widget.field.maxLength),
-                if (widget.field.regex != null)
-                  FilteringTextInputFormatter.allow(
-                      RegExp(widget.field.regex!)),
               ],
             );
           },

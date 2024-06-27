@@ -3,10 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
-import 'dart:ui' as _i12;
+import 'dart:async' as _i11;
+import 'dart:ui' as _i14;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
+import 'package:formularios_front/app/domain/entities/section_entity.dart'
+    as _i13;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i8;
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart'
@@ -19,8 +21,9 @@ import 'package:formularios_front/app/presentation/home/states/form_user_state.d
     as _i2;
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart'
     as _i9;
+import 'package:google_maps_flutter/google_maps_flutter.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
+import 'package:mockito/src/dummies.dart' as _i12;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -275,6 +278,12 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
       );
 
   @override
+  int get pendingRequestsCount => (super.noSuchMethod(
+        Invocation.getter(#pendingRequestsCount),
+        returnValue: 0,
+      ) as int);
+
+  @override
   List<String> get templates => (super.noSuchMethod(
         Invocation.getter(#templates),
         returnValue: <String>[],
@@ -297,6 +306,12 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
         Invocation.getter(#cities),
         returnValue: <String>[],
       ) as List<String>);
+
+  @override
+  List<(String, String, _i10.LatLng)> get locations => (super.noSuchMethod(
+        Invocation.getter(#locations),
+        returnValue: <(String, String, _i10.LatLng)>[],
+      ) as List<(String, String, _i10.LatLng)>);
 
   @override
   bool get hasListeners => (super.noSuchMethod(
@@ -329,24 +344,24 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
       );
 
   @override
-  _i10.Future<void> fetchFormsLocally() => (super.noSuchMethod(
+  _i11.Future<void> fetchFormsLocally() => (super.noSuchMethod(
         Invocation.method(
           #fetchFormsLocally,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
 
   @override
-  _i10.Future<void> syncForms() => (super.noSuchMethod(
+  _i11.Future<void> syncForms() => (super.noSuchMethod(
         Invocation.method(
           #syncForms,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
 
   @override
   String getFormsCountByStatus(_i5.FormStatusEnum? status) =>
@@ -355,7 +370,7 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i11.dummyValue<String>(
+        returnValue: _i12.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -397,7 +412,56 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
       );
 
   @override
-  void addListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  _i11.Future<_i3.FormEntity?> updateFormStatus({
+    required String? formId,
+    required _i5.FormStatusEnum? status,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateFormStatus,
+          [],
+          {
+            #formId: formId,
+            #status: status,
+          },
+        ),
+        returnValue: _i11.Future<_i3.FormEntity?>.value(),
+      ) as _i11.Future<_i3.FormEntity?>);
+
+  @override
+  _i11.Future<void> sendForm({
+    required String? formId,
+    required List<_i13.SectionEntity>? sections,
+    String? vinculationFormId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendForm,
+          [],
+          {
+            #formId: formId,
+            #sections: sections,
+            #vinculationFormId: vinculationFormId,
+          },
+        ),
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
+
+  @override
+  _i11.Future<void> saveForm({required _i3.FormEntity? form}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveForm,
+          [],
+          {#form: form},
+        ),
+        returnValue: _i11.Future<void>.value(),
+        returnValueForMissingStub: _i11.Future<void>.value(),
+      ) as _i11.Future<void>);
+
+  @override
+  void addListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -406,7 +470,7 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
       );
 
   @override
-  void removeListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

@@ -9,6 +9,8 @@ import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
+import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
@@ -30,6 +32,8 @@ import 'forms_provider_test.mocks.dart';
   FetchFormsLocallyUsecase,
   IUpdateFormStatusUseCase,
   FilterFormsController,
+  ISendFormUsecase,
+  ISaveFormUsecase
 ])
 void main() {
   MockFilterFormsController mockFilterFormsController =
@@ -37,6 +41,8 @@ void main() {
   late MockFetchUserFormsUsecase mockFetchUserFormsUsecase;
   late MockFetchFormsLocallyUsecase mockFetchFormsLocallyUsecase;
   late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
+  late MockISendFormUsecase mockSendFormUsecase;
+  late MockISaveFormUsecase mockSaveFormUsecase;
   late FormsProvider provider;
   late Logger logger;
 
@@ -148,9 +154,17 @@ void main() {
         .thenAnswer((_) async => Right(forms));
     mockFetchFormsLocallyUsecase = MockFetchFormsLocallyUsecase();
     mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
+    mockSendFormUsecase = MockISendFormUsecase();
+    mockSaveFormUsecase = MockISaveFormUsecase();
 
     provider = FormsProvider(
-        mockFetchUserFormsUsecase, mockFetchFormsLocallyUsecase, logger);
+      mockFetchUserFormsUsecase,
+      mockFetchFormsLocallyUsecase,
+      logger,
+      mockUpdateFormStatusUseCase,
+      mockSendFormUsecase,
+      mockSaveFormUsecase,
+    );
   });
   Widget createWidgetForTesting({required Widget child}) {
     return MaterialApp(

@@ -97,7 +97,6 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
                     ),
                 () => minDate(value, widget.field.minDate),
                 () => maxDate(value, widget.field.maxDate),
-                () => regex(value, widget.field.regex),
               ],
             );
           },

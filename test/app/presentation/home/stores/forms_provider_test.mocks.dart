@@ -7,6 +7,8 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i7;
+import 'package:formularios_front/app/domain/entities/section_entity.dart'
+    as _i13;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart'
     as _i10;
 import 'package:formularios_front/app/domain/failures/failures.dart' as _i6;
@@ -16,6 +18,10 @@ import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecas
     as _i8;
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart'
     as _i4;
+import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart'
+    as _i14;
+import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart'
+    as _i12;
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart'
     as _i9;
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart'
@@ -282,4 +288,73 @@ class MockFilterFormsController extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [ISendFormUsecase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockISendFormUsecase extends _i1.Mock implements _i12.ISendFormUsecase {
+  MockISendFormUsecase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>> call({
+    required String? formId,
+    required List<_i13.SectionEntity>? sections,
+    String? vinculationFormId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+          {
+            #formId: formId,
+            #sections: sections,
+            #vinculationFormId: vinculationFormId,
+          },
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>.value(
+            _FakeEither_1<_i6.Failure, _i7.FormEntity>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+            {
+              #formId: formId,
+              #sections: sections,
+              #vinculationFormId: vinculationFormId,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>);
+}
+
+/// A class which mocks [ISaveFormUsecase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockISaveFormUsecase extends _i1.Mock implements _i14.ISaveFormUsecase {
+  MockISaveFormUsecase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>> call(
+          {required _i7.FormEntity? form}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+          {#form: form},
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>.value(
+            _FakeEither_1<_i6.Failure, _i7.FormEntity>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+            {#form: form},
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>);
 }

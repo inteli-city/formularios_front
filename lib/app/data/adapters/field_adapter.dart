@@ -25,8 +25,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'],
           minValue: json['min_value'],
           maxValue: json['max_value'],
@@ -38,8 +36,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'],
         );
       case FieldTypeEnum.TYPEAHEAD_FIELD:
@@ -49,8 +45,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'],
         );
       case FieldTypeEnum.RADIO_GROUP_FIELD:
@@ -59,8 +53,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'],
         );
       case FieldTypeEnum.DATE_FIELD:
@@ -70,8 +62,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'] != null
               ? DateTime.fromMillisecondsSinceEpoch(json['value'])
               : json['value'],
@@ -81,8 +71,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'],
         );
       case FieldTypeEnum.CHECKBOX_GROUP_FIELD:
@@ -91,8 +79,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'] != null
               ? List<String>.from(json['value'])
               : json['value'],
@@ -102,8 +88,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'],
         );
       case FieldTypeEnum.FILE_FIELD:
@@ -111,8 +95,6 @@ class FieldAdapter {
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],
-          regex: json['regex'],
-          formatting: json['formatting'],
           value: json['value'] != null
               ? List<String>.from(json['value'])
               : json['value'],
@@ -147,8 +129,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
           'min_value': field.minValue,
           'max_value': field.maxValue,
@@ -162,8 +142,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
         };
       case FieldTypeEnum.TYPEAHEAD_FIELD:
@@ -175,8 +153,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
         };
       case FieldTypeEnum.RADIO_GROUP_FIELD:
@@ -187,8 +163,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
         };
       case FieldTypeEnum.DATE_FIELD:
@@ -200,8 +174,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value?.millisecondsSinceEpoch,
         };
       case FieldTypeEnum.CHECKBOX_FIELD:
@@ -211,8 +183,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
         };
       case FieldTypeEnum.CHECKBOX_GROUP_FIELD:
@@ -223,8 +193,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
         };
       case FieldTypeEnum.SWITCH_BUTTON_FIELD:
@@ -234,8 +202,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
         };
       case FieldTypeEnum.FILE_FIELD:
@@ -245,8 +211,6 @@ class FieldAdapter {
           'placeholder': field.placeholder,
           'key': field.key,
           'required': field.isRequired,
-          'regex': field.regex,
-          'formatting': field.formatting,
           'value': field.value,
           'file_type': field.fileType.name,
           'min_quantity': field.minQuantity,

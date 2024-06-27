@@ -39,7 +39,6 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
                   widget.field.isRequired,
                   widget.singleFormProvider.isSendingForm,
                 ),
-            () => regex(widget.field.value, widget.field.regex),
           ],
         );
       },

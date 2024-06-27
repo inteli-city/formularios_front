@@ -123,7 +123,7 @@ class MockIFormLocalDatasource extends _i1.Mock
   }
 
   @override
-  _i4.Future<void> saveForms({required List<dynamic>? forms}) =>
+  _i4.Future<void> saveForms({required List<_i2.FormEntity>? forms}) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveForms,

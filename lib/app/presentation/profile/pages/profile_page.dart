@@ -4,13 +4,17 @@ import 'package:formularios_front/app/presentation/user/stores/user_provider.dar
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final user = Modular.get<UserProvider>().user!;
+  @override
   Widget build(BuildContext context) {
-    final userProvider = Modular.get<UserProvider>();
-    final user = userProvider.user!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),

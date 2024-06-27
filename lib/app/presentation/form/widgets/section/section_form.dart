@@ -35,8 +35,6 @@ class SectionForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fields = section.fields;
-
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -49,12 +47,12 @@ class SectionForm extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     vertical: AppDimensions.paddingSmall),
                 physics: const BouncingScrollPhysics(),
-                itemCount: fields.length,
+                itemCount: section.fields.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: AppDimensions.paddingSmall,
                   ),
-                  child: buildField(fields[index]),
+                  child: buildField(section.fields[index]),
                 ),
               ),
             ),

@@ -48,10 +48,6 @@ class _FormCardState extends State<FormCard>
 
   @override
   Widget build(BuildContext context) {
-    DateTime dateTime =
-        DateTime.fromMillisecondsSinceEpoch(widget.form.expirationDate);
-    String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(dateTime);
-
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -108,7 +104,9 @@ class _FormCardState extends State<FormCard>
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  formattedDate,
+                  DateFormat('dd/MM/yyyy HH:mm:ss').format(
+                      DateTime.fromMillisecondsSinceEpoch(
+                          widget.form.expirationDate)),
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),

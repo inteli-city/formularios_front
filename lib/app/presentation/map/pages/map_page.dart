@@ -8,28 +8,24 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<(String, String, LatLng)> location =
-        Modular.get<FormsProvider>().locations;
-    CameraPosition kGooglePlex = const CameraPosition(
-      target: LatLng(-23.6114, -46.694),
-      zoom: 12,
-    );
-
-    Set<Marker> markers = location
-        .map((location) => Marker(
-              markerId: MarkerId(location.toString()),
-              position: location.$3,
-              infoWindow: InfoWindow(
-                title: location.$2,
-                snippet: location.$1,
-                anchor: const Offset(0.5, 0.5),
-              ),
-            ))
-        .toSet();
     return GoogleMap(
       mapType: MapType.normal,
-      markers: markers,
-      initialCameraPosition: kGooglePlex,
+      markers: Modular.get<FormsProvider>()
+          .locations
+          .map((location) => Marker(
+                markerId: MarkerId(location.toString()),
+                position: location.$3,
+                infoWindow: InfoWindow(
+                  title: location.$2,
+                  snippet: location.$1,
+                  anchor: const Offset(0.5, 0.5),
+                ),
+              ))
+          .toSet(),
+      initialCameraPosition: const CameraPosition(
+        target: LatLng(-23.6114, -46.694),
+        zoom: 12,
+      ),
     );
   }
 }

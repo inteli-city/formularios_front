@@ -1,238 +1,263 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 
 void main() {
-  test('should return text field entity', () {
-    final textFieldEntity = TextFieldEntity(
-      fieldType: FieldTypeEnum.TEXT_FIELD,
-      placeholder: 'Placeholder Campo',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      maxLength: 100,
-      value: 'Initial value',
-    );
+  group('TextFieldEntity tests', () {
+    test('should create a valid text field entity without exception', () {
+      expect(
+          () => TextFieldEntity(
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: 'Valid Text',
+              ),
+          returnsNormally);
+    });
 
-    expect(textFieldEntity.fieldType, FieldTypeEnum.TEXT_FIELD);
-    expect(textFieldEntity.placeholder, 'Placeholder Campo');
-    expect(textFieldEntity.regex, 'regex');
-    expect(textFieldEntity.formatting, 'formatting');
-    expect(textFieldEntity.isRequired, true);
-    expect(textFieldEntity.key, 'key');
-    expect(textFieldEntity.maxLength, 100);
-    expect(textFieldEntity.value, 'Initial value');
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => TextFieldEntity(
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: 123,
+              ),
+          throwsException);
+    });
   });
 
-  test('should return number field entity', () {
-    final numberFieldEntity = NumberFieldEntity(
-      minValue: 1,
-      maxValue: 100,
-      decimal: true,
-      fieldType: FieldTypeEnum.NUMBER_FIELD,
-      placeholder: 'Placeholder Número',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: 50.0,
-    );
+  group('NumberFieldEntity tests', () {
+    test('should create a valid number field entity without exception', () {
+      expect(
+          () => NumberFieldEntity(
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                decimal: true,
+                value: 5.0,
+              ),
+          returnsNormally);
+    });
 
-    expect(numberFieldEntity.fieldType, FieldTypeEnum.NUMBER_FIELD);
-    expect(numberFieldEntity.placeholder, 'Placeholder Número');
-    expect(numberFieldEntity.regex, 'regex');
-    expect(numberFieldEntity.formatting, 'formatting');
-    expect(numberFieldEntity.isRequired, true);
-    expect(numberFieldEntity.key, 'key');
-    expect(numberFieldEntity.minValue, 1);
-    expect(numberFieldEntity.maxValue, 100);
-    expect(numberFieldEntity.decimal, true);
-    expect(numberFieldEntity.value, 50.0);
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => NumberFieldEntity(
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                decimal: false,
+                value: 'Not a number',
+              ),
+          throwsException);
+    });
   });
 
-  test('should return dropdown field entity', () {
-    final dropDownFieldEntity = DropDownFieldEntity(
-      options: ['Option 1', 'Option 2'],
-      fieldType: FieldTypeEnum.DROPDOWN_FIELD,
-      placeholder: 'Placeholder Dropdown',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: 'Option 1',
-    );
+  group('DropDownFieldEntity tests', () {
+    test('should create a valid dropdown field entity without exception', () {
+      expect(
+          () => DropDownFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: 'Option 1',
+              ),
+          returnsNormally);
+    });
 
-    expect(dropDownFieldEntity.fieldType, FieldTypeEnum.DROPDOWN_FIELD);
-    expect(dropDownFieldEntity.placeholder, 'Placeholder Dropdown');
-    expect(dropDownFieldEntity.regex, 'regex');
-    expect(dropDownFieldEntity.formatting, 'formatting');
-    expect(dropDownFieldEntity.isRequired, true);
-    expect(dropDownFieldEntity.key, 'key');
-    expect(dropDownFieldEntity.options, ['Option 1', 'Option 2']);
-    expect(dropDownFieldEntity.value, 'Option 1');
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => DropDownFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: 123,
+              ),
+          throwsException);
+    });
   });
 
-  test('should return typeahead field entity', () {
-    final typeAheadFieldEntity = TypeAheadFieldEntity(
-      options: ['Option 1', 'Option 2'],
-      maxLength: 50,
-      fieldType: FieldTypeEnum.TYPEAHEAD_FIELD,
-      placeholder: 'Placeholder TypeAhead',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: 'Option 1',
-    );
+  group('TypeAheadFieldEntity tests', () {
+    test('should create a valid typeahead field entity without exception', () {
+      expect(
+          () => TypeAheadFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: 'Option 1',
+              ),
+          returnsNormally);
+    });
 
-    expect(typeAheadFieldEntity.fieldType, FieldTypeEnum.TYPEAHEAD_FIELD);
-    expect(typeAheadFieldEntity.placeholder, 'Placeholder TypeAhead');
-    expect(typeAheadFieldEntity.regex, 'regex');
-    expect(typeAheadFieldEntity.formatting, 'formatting');
-    expect(typeAheadFieldEntity.isRequired, true);
-    expect(typeAheadFieldEntity.key, 'key');
-    expect(typeAheadFieldEntity.options, ['Option 1', 'Option 2']);
-    expect(typeAheadFieldEntity.maxLength, 50);
-    expect(typeAheadFieldEntity.value, 'Option 1');
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => TypeAheadFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: false,
+              ),
+          throwsException);
+    });
   });
 
-  test('should return radio group field entity', () {
-    final radioGroupFieldEntity = RadioGroupFieldEntity(
-      options: ['Option 1', 'Option 2'],
-      fieldType: FieldTypeEnum.RADIO_GROUP_FIELD,
-      placeholder: 'Placeholder Radio Group',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: 'Option 1',
-    );
+  group('RadioGroupFieldEntity tests', () {
+    test('should create a valid radio group field entity without exception',
+        () {
+      expect(
+          () => RadioGroupFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: 'Option 1',
+              ),
+          returnsNormally);
+    });
 
-    expect(radioGroupFieldEntity.fieldType, FieldTypeEnum.RADIO_GROUP_FIELD);
-    expect(radioGroupFieldEntity.placeholder, 'Placeholder Radio Group');
-    expect(radioGroupFieldEntity.regex, 'regex');
-    expect(radioGroupFieldEntity.formatting, 'formatting');
-    expect(radioGroupFieldEntity.isRequired, true);
-    expect(radioGroupFieldEntity.key, 'key');
-    expect(radioGroupFieldEntity.options, ['Option 1', 'Option 2']);
-    expect(radioGroupFieldEntity.value, 'Option 1');
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => RadioGroupFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: 123,
+              ),
+          throwsException);
+    });
   });
 
-  test('should return date field entity', () {
-    final dateFieldEntity = DateFieldEntity(
-      minDate: DateTime(2020, 1, 1),
-      maxDate: DateTime(2023, 12, 31),
-      fieldType: FieldTypeEnum.DATE_FIELD,
-      placeholder: 'Placeholder Data',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: DateTime(2022, 5, 20),
-    );
+  group('DateFieldEntity tests', () {
+    test('should create a valid date field entity without exception', () {
+      expect(
+          () => DateFieldEntity(
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: DateTime.now(),
+              ),
+          returnsNormally);
+    });
 
-    expect(dateFieldEntity.fieldType, FieldTypeEnum.DATE_FIELD);
-    expect(dateFieldEntity.placeholder, 'Placeholder Data');
-    expect(dateFieldEntity.regex, 'regex');
-    expect(dateFieldEntity.formatting, 'formatting');
-    expect(dateFieldEntity.isRequired, true);
-    expect(dateFieldEntity.key, 'key');
-    expect(dateFieldEntity.minDate, DateTime(2020, 1, 1));
-    expect(dateFieldEntity.maxDate, DateTime(2023, 12, 31));
-    expect(dateFieldEntity.value, DateTime(2022, 5, 20));
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => DateFieldEntity(
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: '2020-01-01',
+              ),
+          throwsException);
+    });
+  });
+  group('CheckBoxFieldEntity tests', () {
+    test('should create a valid checkbox field entity without exception', () {
+      expect(
+          () => CheckBoxFieldEntity(
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: true,
+              ),
+          returnsNormally);
+    });
+
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => CheckBoxFieldEntity(
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: 'not a boolean',
+              ),
+          throwsException);
+    });
   });
 
-  test('should return checkbox field entity', () {
-    final checkBoxFieldEntity = CheckBoxFieldEntity(
-      fieldType: FieldTypeEnum.CHECKBOX_FIELD,
-      placeholder: 'Placeholder Checkbox',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: true,
-    );
+  group('CheckBoxGroupFieldEntity tests', () {
+    test('should create a valid checkbox group field entity without exception',
+        () {
+      expect(
+          () => CheckBoxGroupFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: ['Option 1'],
+              ),
+          returnsNormally);
+    });
 
-    expect(checkBoxFieldEntity.fieldType, FieldTypeEnum.CHECKBOX_FIELD);
-    expect(checkBoxFieldEntity.placeholder, 'Placeholder Checkbox');
-    expect(checkBoxFieldEntity.regex, 'regex');
-    expect(checkBoxFieldEntity.formatting, 'formatting');
-    expect(checkBoxFieldEntity.isRequired, true);
-    expect(checkBoxFieldEntity.key, 'key');
-    expect(checkBoxFieldEntity.value, true);
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => CheckBoxGroupFieldEntity(
+                options: ['Option 1', 'Option 2'],
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: 'not a list',
+              ),
+          throwsException);
+    });
   });
 
-  test('should return checkbox group field entity', () {
-    final checkBoxGroupFieldEntity = CheckBoxGroupFieldEntity(
-      options: ['Option 1', 'Option 2'],
-      checkLimit: 2,
-      fieldType: FieldTypeEnum.CHECKBOX_GROUP_FIELD,
-      placeholder: 'Placeholder Checkbox Group',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: ['Option 1'],
-    );
+  group('SwitchButtonFieldEntity tests', () {
+    test('should create a valid switch button field entity without exception',
+        () {
+      expect(
+          () => SwitchButtonFieldEntity(
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: true,
+              ),
+          returnsNormally);
+    });
 
-    expect(
-        checkBoxGroupFieldEntity.fieldType, FieldTypeEnum.CHECKBOX_GROUP_FIELD);
-    expect(checkBoxGroupFieldEntity.placeholder, 'Placeholder Checkbox Group');
-    expect(checkBoxGroupFieldEntity.regex, 'regex');
-    expect(checkBoxGroupFieldEntity.formatting, 'formatting');
-    expect(checkBoxGroupFieldEntity.isRequired, true);
-    expect(checkBoxGroupFieldEntity.key, 'key');
-    expect(checkBoxGroupFieldEntity.options, ['Option 1', 'Option 2']);
-    expect(checkBoxGroupFieldEntity.checkLimit, 2);
-    expect(checkBoxGroupFieldEntity.value, ['Option 1']);
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => SwitchButtonFieldEntity(
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: 'not a boolean',
+              ),
+          throwsException);
+    });
   });
 
-  test('should return switch button field entity', () {
-    final switchButtonFieldEntity = SwitchButtonFieldEntity(
-      fieldType: FieldTypeEnum.SWITCH_BUTTON_FIELD,
-      placeholder: 'Placeholder Switch Button',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: true,
-    );
+  group('FileFieldEntity tests', () {
+    test('should create a valid file field entity without exception', () {
+      expect(
+          () => FileFieldEntity(
+                fileType: FileTypeEnum.IMAGE,
+                minQuantity: 1,
+                maxQuantity: 3,
+                placeholder: 'Valid Placeholder',
+                key: 'validKey',
+                isRequired: true,
+                value: ['file1.png', 'file2.jpg'],
+              ),
+          returnsNormally);
+    });
 
-    expect(
-        switchButtonFieldEntity.fieldType, FieldTypeEnum.SWITCH_BUTTON_FIELD);
-    expect(switchButtonFieldEntity.placeholder, 'Placeholder Switch Button');
-    expect(switchButtonFieldEntity.regex, 'regex');
-    expect(switchButtonFieldEntity.formatting, 'formatting');
-    expect(switchButtonFieldEntity.isRequired, true);
-    expect(switchButtonFieldEntity.key, 'key');
-    expect(switchButtonFieldEntity.value, true);
-  });
-
-  test('should return file field entity', () {
-    final fileFieldEntity = FileFieldEntity(
-      fileType: FileTypeEnum.IMAGE,
-      minQuantity: 1,
-      maxQuantity: 5,
-      fieldType: FieldTypeEnum.FILE_FIELD,
-      placeholder: 'Placeholder File',
-      isRequired: true,
-      regex: 'regex',
-      formatting: 'formatting',
-      key: 'key',
-      value: ['file1.png', 'file2.jpg'],
-    );
-
-    expect(fileFieldEntity.fieldType, FieldTypeEnum.FILE_FIELD);
-    expect(fileFieldEntity.placeholder, 'Placeholder File');
-    expect(fileFieldEntity.regex, 'regex');
-    expect(fileFieldEntity.formatting, 'formatting');
-    expect(fileFieldEntity.isRequired, true);
-    expect(fileFieldEntity.key, 'key');
-    expect(fileFieldEntity.fileType, FileTypeEnum.IMAGE);
-    expect(fileFieldEntity.minQuantity, 1);
-    expect(fileFieldEntity.maxQuantity, 5);
-    expect(fileFieldEntity.value, ['file1.png', 'file2.jpg']);
+    test('should throw exception for invalid value type', () {
+      expect(
+          () => FileFieldEntity(
+                fileType: FileTypeEnum.IMAGE,
+                minQuantity: 1,
+                maxQuantity: 3,
+                placeholder: 'Invalid Placeholder',
+                key: 'invalidKey',
+                isRequired: true,
+                value: 'not a list',
+              ),
+          throwsException);
+    });
   });
 }

@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
         ),
         filteredForms.isNotEmpty
             ? Expanded(
+                key: const Key('success-build-not-empty'),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: ScrollConfiguration(
@@ -60,6 +61,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               )
             : Expanded(
+                key: const Key('success-build-empty'),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

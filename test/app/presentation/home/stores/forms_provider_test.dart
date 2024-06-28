@@ -5,6 +5,7 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
+import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
@@ -36,6 +37,7 @@ import 'forms_provider_test.mocks.dart';
   ISendFormUsecase,
   ISaveFormUsecase,
   ICreateFormUsecase,
+  Logger
 ])
 void main() {
   MockFilterFormsController mockFilterFormsController =
@@ -47,7 +49,7 @@ void main() {
   late MockISaveFormUsecase mockSaveFormUsecase;
   late MockICreateFormUsecase mockCreateFormUsecase;
   late FormsProvider provider;
-  late Logger logger;
+  MockLogger logger = MockLogger();
 
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
@@ -150,8 +152,6 @@ void main() {
     ),
   ];
   setUp(() {
-    logger = Logger();
-
     mockFetchUserFormsUsecase = MockFetchUserFormsUsecase();
     when(mockFetchUserFormsUsecase.call())
         .thenAnswer((_) async => Right(forms));
@@ -218,11 +218,26 @@ void main() {
   });
 
   group('order forms | filter forms | getFormsCountByStatus', () {
-    test('should return the number of forms by status', () async {
+    test(
+        'should return the number of forms by status when filters are not applied',
+        () async {
       when(mockFilterFormsController.activeFiltersAmount).thenReturn(0);
       await provider.syncForms();
 
       expect(provider.getFormsCountByStatus(forms[0].status), '1');
+    });
+
+    test(
+        'should return the number of forms by status when filters are  applied',
+        () async {
+      when(mockFilterFormsController.activeFiltersAmount).thenReturn(1);
+
+      await provider.syncForms();
+
+      expect(provider.getFormsCountByStatus(forms[0].status), '0');
+    });
+    test('should return locations', () async {
+      expect(provider.locations.length, forms.length);
     });
 
     test('should filter forms by any filter', () async {
@@ -238,51 +253,143 @@ void main() {
       expect((provider.state as FormUserSuccessState).forms.length, 1);
     });
 
-    test('should order forms by any order', () async {
-      await provider.syncForms();
+    group('should order forms by each switch order', () {
+      test('should order forms by each PRIORIDADE_BAIXO_ALTO', () async {
+        await provider.syncForms();
 
-      provider.orderForms(OrderEnum.PRIORIDADE_BAIXO_ALTO);
+        provider.orderForms(OrderEnum.PRIORIDADE_BAIXO_ALTO);
 
-      expect((provider.state as FormUserSuccessState).forms[0], forms[1]);
+        expect((provider.state as FormUserSuccessState).forms[0], forms[1]);
+      });
+
+      test('should order forms by each PRIORIDADE_ALTO_BAIXO', () async {
+        await provider.syncForms();
+
+        provider.orderForms(OrderEnum.PRIORIDADE_ALTO_BAIXO);
+
+        expect((provider.state as FormUserSuccessState).forms[0], forms[0]);
+      });
+
+      test('should order forms by each MAIS_RECENTE', () async {
+        await provider.syncForms();
+
+        provider.orderForms(OrderEnum.MAIS_RECENTE);
+
+        expect((provider.state as FormUserSuccessState).forms[0], forms[0]);
+      });
+
+      test('should order forms by each MAIS_ANTIGO', () async {
+        await provider.syncForms();
+
+        provider.orderForms(OrderEnum.MAIS_ANTIGO);
+
+        expect((provider.state as FormUserSuccessState).forms[0], forms[1]);
+      });
     });
   });
 
-  group('updateFormStatus', () {
-    final form = FormEntity(
-      formId: '1',
-      creatorUserId: 'creatorUserId',
-      userId: 'userId',
-      vinculationFormId: 'vinculationFormId',
-      template: 'template',
-      area: 'area',
-      system: 'system',
-      street: 'street',
-      city: 'city',
-      number: 1,
-      latitude: 1.0,
-      longitude: 1.0,
-      region: 'region',
-      description: 'description',
-      priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.IN_PROGRESS,
-      expirationDate: 1,
-      creationDate: 1,
-      startDate: 1,
-      conclusionDate: 1,
-      justificative: JustificativeEntity(
-          options: [],
-          selectedOption: '',
-          justificationText: '',
-          justificationImage: null),
-      comments: 'comments',
-      sections: [
-        SectionEntity(sectionId: 'section-01', fields: [
-          TextFieldEntity(
-            fieldType: FieldTypeEnum.TEXT_FIELD,
-            placeholder: 'TextField 01',
-            isRequired: true,
-            key: 'key-section-01-1',
+  group('sendForm', () {
+    testWidgets('should handle sending a form successfully',
+        (WidgetTester tester) async {
+      when(mockSendFormUsecase.call(
+        formId: anyNamed('formId'),
+        sections: anyNamed('sections'),
+        vinculationFormId: anyNamed('vinculationFormId'),
+      )).thenAnswer((_) async => Right(
+            FormEntity(
+              formId: '2',
+              creatorUserId: 'creatorUserId2',
+              userId: 'userId2',
+              vinculationFormId: 'vinculationFormId2',
+              template: 'template2',
+              area: 'area2',
+              system: 'system2',
+              street: 'street2',
+              city: 'city2',
+              number: 2,
+              latitude: 2.0,
+              longitude: 2.0,
+              region: 'region',
+              description: 'description',
+              priority: PriorityEnum.LOW,
+              status: FormStatusEnum.CONCLUDED,
+              expirationDate: 2,
+              creationDate: 2,
+              startDate: 2,
+              conclusionDate: 2,
+              justificative: JustificativeEntity(
+                justificationImage: null,
+                options: [],
+                selectedOption: '',
+                justificationText: '',
+              ),
+              comments: 'comments',
+              sections: [
+                SectionEntity(sectionId: 'section-01', fields: [
+                  TextFieldEntity(
+                    fieldType: FieldTypeEnum.TEXT_FIELD,
+                    placeholder: 'TextField 01',
+                    isRequired: true,
+                    key: 'key-section-01-1',
+                  ),
+                  TextFieldEntity(
+                    fieldType: FieldTypeEnum.TEXT_FIELD,
+                    placeholder: 'TextField 02',
+                    isRequired: true,
+                    key: 'key-section-01-2',
+                  ),
+                ])
+              ],
+              formTitle: 'formTitle',
+              canVinculate: false,
+            ),
+          ));
+
+      await tester.pumpWidget(
+        MaterialApp(
+          scaffoldMessengerKey: rootScaffoldMessengerKey,
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                return ElevatedButton(
+                  onPressed: () async {
+                    await provider.sendForm(
+                      formId: '2',
+                      sections: [
+                        SectionEntity(sectionId: 'section-01', fields: [
+                          TextFieldEntity(
+                            fieldType: FieldTypeEnum.TEXT_FIELD,
+                            placeholder: 'TextField 01',
+                            isRequired: true,
+                            key: 'key-section-01-1',
+                          ),
+                          TextFieldEntity(
+                            fieldType: FieldTypeEnum.TEXT_FIELD,
+                            placeholder: 'TextField 02',
+                            isRequired: true,
+                            key: 'key-section-01-2',
+                          ),
+                        ])
+                      ],
+                    );
+                  },
+                  child: const Text('Show Error SnackBar'),
+                );
+              },
+            ),
           ),
+        ),
+      );
+
+      expect(provider.state, isA<FormUserSuccessState>());
+    });
+
+    testWidgets('should handle errors when sending a form',
+        (WidgetTester tester) async {
+      Modular.replaceInstance<Logger>(logger);
+
+      final sections = [
+        SectionEntity(sectionId: 'section-01', fields: [
           TextFieldEntity(
             fieldType: FieldTypeEnum.TEXT_FIELD,
             placeholder: 'TextField 02',
@@ -290,29 +397,320 @@ void main() {
             key: 'key-section-01-2',
           ),
         ])
+      ];
+
+      when(mockSendFormUsecase.call(
+        formId: '1',
+        sections: sections,
+        vinculationFormId: 'vinculationFormId1',
+      )).thenAnswer((_) async => Left(Failure(errorMessage: 'Error')));
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          MaterialApp(
+            scaffoldMessengerKey: rootScaffoldMessengerKey,
+            home: Scaffold(
+              body: ElevatedButton(
+                onPressed: () async {
+                  await provider.sendForm(
+                    formId: '1',
+                    sections: sections,
+                    vinculationFormId: 'vinculationFormId1',
+                  );
+                },
+                child: const Text('Show Error SnackBar'),
+              ),
+            ),
+          ),
+        );
+      });
+
+      await tester.tap(find.byType(ElevatedButton));
+
+      await tester.pumpAndSettle();
+
+      verify(logger.e(any)).called(2);
+    });
+  });
+
+  group('createForm', () {
+    var template = TemplateEntity(
+      canVinculate: true,
+      formTitle: 'Form Title',
+      justificative: JustificativeEntity(
+          options: [
+            JustificativeOptionEntity(
+                option: 'option', requiredImage: true, requiredText: true)
+          ],
+          selectedOption: null,
+          justificationText: 'justificationText',
+          justificationImage: 'justificationImage'),
+      template: '',
+      system: '',
+      sections: [
+        SectionEntity(sectionId: '123', fields: [
+          TextFieldEntity(
+              placeholder: 'placeholder', key: 'kye', isRequired: true)
+        ])
       ],
-      formTitle: 'formTitle',
-      canVinculate: false,
     );
-
-    testWidgets(
-        'should call updateFormStatus and fetchUserForms when update is successful',
+    testWidgets('should handle creating a form successfully',
         (WidgetTester tester) async {
-      when(
-        mockUpdateFormStatusUseCase.call(
-          formId: anyNamed('formId'),
-          status: anyNamed('status'),
-        ),
-      ).thenAnswer(
-        (_) async => Right(form),
-      );
-      when(mockFetchUserFormsUsecase.call()).thenAnswer(
-        (_) async => Right([form]),
+      when(mockFetchFormsLocallyUsecase.call()).thenAnswer(
+        (_) async => Right([
+          FormEntity(
+            formId: '2',
+            creatorUserId: 'creatorUserId2',
+            userId: 'userId2',
+            vinculationFormId: 'vinculationFormId2',
+            template: 'template2',
+            area: 'area2',
+            system: 'system2',
+            street: 'street2',
+            city: 'city2',
+            number: 2,
+            latitude: 2.0,
+            longitude: 2.0,
+            region: 'region',
+            description: 'description',
+            priority: PriorityEnum.LOW,
+            status: FormStatusEnum.CONCLUDED,
+            expirationDate: 2,
+            creationDate: 2,
+            startDate: 2,
+            conclusionDate: 2,
+            justificative: JustificativeEntity(
+              justificationImage: null,
+              options: [],
+              selectedOption: '',
+              justificationText: '',
+            ),
+            comments: 'comments',
+            sections: [
+              SectionEntity(sectionId: 'section-01', fields: [
+                TextFieldEntity(
+                  fieldType: FieldTypeEnum.TEXT_FIELD,
+                  placeholder: 'TextField 01',
+                  isRequired: true,
+                  key: 'key-section-01-1',
+                ),
+                TextFieldEntity(
+                  fieldType: FieldTypeEnum.TEXT_FIELD,
+                  placeholder: 'TextField 02',
+                  isRequired: true,
+                  key: 'key-section-01-2',
+                ),
+              ])
+            ],
+            formTitle: 'formTitle',
+            canVinculate: false,
+          ),
+        ]),
       );
 
-      await tester.pumpWidget(
-        createWidgetForTesting(child: Container()),
+      when(mockCreateFormUsecase.call(
+        template: template,
+        area: 'area',
+        city: 'city',
+        street: 'street',
+        number: 0,
+        latitude: 0.0,
+        longitude: 0.0,
+        region: 'region',
+        priority: PriorityEnum.LOW,
+        description: 'description',
+      )).thenAnswer((_) async => Right(
+            FormEntity(
+              formId: '2',
+              creatorUserId: 'creatorUserId2',
+              userId: 'userId2',
+              vinculationFormId: 'vinculationFormId2',
+              template: 'template2',
+              area: 'area2',
+              system: 'system2',
+              street: 'street2',
+              city: 'city2',
+              number: 2,
+              latitude: 2.0,
+              longitude: 2.0,
+              region: 'region',
+              description: 'description',
+              priority: PriorityEnum.LOW,
+              status: FormStatusEnum.CONCLUDED,
+              expirationDate: 2,
+              creationDate: 2,
+              startDate: 2,
+              conclusionDate: 2,
+              justificative: JustificativeEntity(
+                justificationImage: null,
+                options: [],
+                selectedOption: '',
+                justificationText: '',
+              ),
+              comments: 'comments',
+              sections: [
+                SectionEntity(sectionId: 'section-01', fields: [
+                  TextFieldEntity(
+                    fieldType: FieldTypeEnum.TEXT_FIELD,
+                    placeholder: 'TextField 01',
+                    isRequired: true,
+                    key: 'key-section-01-1',
+                  ),
+                  TextFieldEntity(
+                    fieldType: FieldTypeEnum.TEXT_FIELD,
+                    placeholder: 'TextField 02',
+                    isRequired: true,
+                    key: 'key-section-01-2',
+                  ),
+                ])
+              ],
+              formTitle: 'formTitle',
+              canVinculate: false,
+            ),
+          ));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          MaterialApp(
+            scaffoldMessengerKey: rootScaffoldMessengerKey,
+            home: Scaffold(
+              body: Builder(
+                builder: (context) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      await provider.createForm(
+                        template: template,
+                        area: 'area',
+                        city: 'city',
+                        street: 'street',
+                        number: 0,
+                        latitude: 0.0,
+                        longitude: 0.0,
+                        region: 'region',
+                        priority: PriorityEnum.LOW,
+                        description: 'description',
+                      );
+                    },
+                    child: const Text('Show Error SnackBar'),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      });
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(ElevatedButton));
+
+      expect(provider.state, isA<FormUserSuccessState>());
+    });
+
+    testWidgets('should handle errors when creating a form',
+        (WidgetTester tester) async {
+      Modular.replaceInstance<Logger>(logger);
+
+      Failure failure = Failure(errorMessage: 'Error');
+
+      when(mockFetchFormsLocallyUsecase.call()).thenAnswer(
+        (_) async => Right([
+          FormEntity(
+            formId: '2',
+            creatorUserId: 'creatorUserId2',
+            userId: 'userId2',
+            vinculationFormId: 'vinculationFormId2',
+            template: 'template2',
+            area: 'area2',
+            system: 'system2',
+            street: 'street2',
+            city: 'city2',
+            number: 2,
+            latitude: 2.0,
+            longitude: 2.0,
+            region: 'region',
+            description: 'description',
+            priority: PriorityEnum.LOW,
+            status: FormStatusEnum.CONCLUDED,
+            expirationDate: 2,
+            creationDate: 2,
+            startDate: 2,
+            conclusionDate: 2,
+            justificative: JustificativeEntity(
+              justificationImage: null,
+              options: [],
+              selectedOption: '',
+              justificationText: '',
+            ),
+            comments: 'comments',
+            sections: [
+              SectionEntity(sectionId: 'section-01', fields: [
+                TextFieldEntity(
+                  fieldType: FieldTypeEnum.TEXT_FIELD,
+                  placeholder: 'TextField 01',
+                  isRequired: true,
+                  key: 'key-section-01-1',
+                ),
+                TextFieldEntity(
+                  fieldType: FieldTypeEnum.TEXT_FIELD,
+                  placeholder: 'TextField 02',
+                  isRequired: true,
+                  key: 'key-section-01-2',
+                ),
+              ])
+            ],
+            formTitle: 'formTitle',
+            canVinculate: false,
+          ),
+        ]),
       );
+
+      when(mockCreateFormUsecase.call(
+        template: template,
+        area: "Area",
+        city: "City",
+        street: "Street",
+        number: 123,
+        latitude: 1.23,
+        longitude: 4.56,
+        region: "Region",
+        priority: PriorityEnum.HIGH,
+        description: "Description",
+      )).thenAnswer((_) async => Left(failure));
+
+      await tester.runAsync(() async {
+        await tester.pumpWidget(
+          MaterialApp(
+            scaffoldMessengerKey: rootScaffoldMessengerKey,
+            home: Scaffold(
+              body: Builder(
+                builder: (context) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      await provider.createForm(
+                        template: template,
+                        area: "Area",
+                        city: "City",
+                        street: "Street",
+                        number: 123,
+                        latitude: 1.23,
+                        longitude: 4.56,
+                        region: "Region",
+                        priority: PriorityEnum.HIGH,
+                        description: "Description",
+                      );
+                    },
+                    child: const Text('Show Error SnackBar'),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      });
+      await tester.pumpAndSettle();
+      await tester.tap(find.byType(ElevatedButton));
+
+      verify(logger.e(any)).called(1);
     });
   });
 }

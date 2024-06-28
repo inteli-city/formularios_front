@@ -5,6 +5,7 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -68,6 +69,7 @@ void main() {
     testWidgets('should show an error when usecase returns a failure',
         (WidgetTester tester) async {
       var errorMessage = 'Failed to load user';
+
       when(mockLoginUserUsecase())
           .thenAnswer((_) async => Left(Failure(errorMessage: errorMessage)));
 
@@ -88,9 +90,15 @@ void main() {
           ),
         ),
       );
-     
+
       await tester.tap(find.text('Show Error SnackBar'));
 
+      expect(userProvider.user, isNull);
+    });
+
+    test('should logout the user', () {
+      S.load(const Locale.fromSubtags(languageCode: 'en'));
+      userProvider.logout();
       expect(userProvider.user, isNull);
     });
   });

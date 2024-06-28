@@ -1,6 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/data/datasources/user_datasource.dart';
+import 'package:formularios_front/app/data/repositories/template_repository_mock.dart';
+import 'package:formularios_front/app/domain/repositories/template_repository.dart';
+import 'package:formularios_front/app/domain/usecases/get_templates_usecase.dart';
 import 'package:formularios_front/app/external/datasources/form_datasource_impl.dart';
 import 'package:formularios_front/app/external/datasources/form_hive_local_datasource.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
@@ -13,6 +16,8 @@ import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/external/datasources/user_datasource_impl.dart';
+import 'package:formularios_front/app/presentation/create-form/pages/create_form_page.dart';
+import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
@@ -84,13 +89,16 @@ class HomeModule extends Module {
     i.addLazySingleton<IFormLocalDatasource>(
         () => FormHiveLocalDatasource(storage));
     i.addLazySingleton<FormsProvider>(FormsProvider.new);
+    i.addLazySingleton<TemplateProvider>(TemplateProvider.new);
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
+    i.addLazySingleton<ITemplateRepository>(TemplateRepositoryMock.new);
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
     i.addLazySingleton<IFetchFormsLocallyUsecase>(FetchFormsLocallyUsecase.new);
     i.addLazySingleton<IUpdateFormStatusUseCase>(UpdateFormStatusUseCase.new);
     i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
     i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);
+    i.addLazySingleton<IGetTemplatesUsecase>(GetTemplatesUsecase.new);
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(ConnectivityProvider.new);
     i.add(SortFormsController.new);
@@ -116,6 +124,12 @@ class HomeModule extends Module {
         ChildRoute(
           '/map',
           child: (context) => const MapPage(),
+          transition: TransitionType.rightToLeftWithFade,
+          guards: [UserGuard()],
+        ),
+        ChildRoute(
+          '/create-form',
+          child: (context) => const CreateFormPage(),
           transition: TransitionType.rightToLeftWithFade,
           guards: [UserGuard()],
         ),

@@ -7,6 +7,7 @@ import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
+import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
@@ -33,7 +34,8 @@ import 'forms_provider_test.mocks.dart';
   IUpdateFormStatusUseCase,
   FilterFormsController,
   ISendFormUsecase,
-  ISaveFormUsecase
+  ISaveFormUsecase,
+  ICreateFormUsecase,
 ])
 void main() {
   MockFilterFormsController mockFilterFormsController =
@@ -43,6 +45,7 @@ void main() {
   late MockIUpdateFormStatusUseCase mockUpdateFormStatusUseCase;
   late MockISendFormUsecase mockSendFormUsecase;
   late MockISaveFormUsecase mockSaveFormUsecase;
+  late MockICreateFormUsecase mockCreateFormUsecase;
   late FormsProvider provider;
   late Logger logger;
 
@@ -156,6 +159,7 @@ void main() {
     mockUpdateFormStatusUseCase = MockIUpdateFormStatusUseCase();
     mockSendFormUsecase = MockISendFormUsecase();
     mockSaveFormUsecase = MockISaveFormUsecase();
+    mockCreateFormUsecase = MockICreateFormUsecase();
 
     provider = FormsProvider(
       mockFetchUserFormsUsecase,
@@ -164,6 +168,7 @@ void main() {
       mockUpdateFormStatusUseCase,
       mockSendFormUsecase,
       mockSaveFormUsecase,
+      mockCreateFormUsecase,
     );
   });
   Widget createWidgetForTesting({required Widget child}) {

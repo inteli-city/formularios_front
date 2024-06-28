@@ -15,4 +15,6 @@ abstract class IFormDatasource {
     required List<SectionEntity> sections,
     String? vinculationFormId,
   });
+
+  Future<FormEntity> createForm({required FormEntity form});
 }

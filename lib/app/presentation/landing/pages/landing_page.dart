@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/presentation/landing/controllers/connectivity_provider.dart';
 import 'package:formularios_front/app/presentation/landing/widgets/bottom_navigation_widget.dart';
@@ -23,6 +24,9 @@ class _LandingPageState extends State<LandingPage> {
       providers: [
         ChangeNotifierProvider<FormsProvider>.value(
           value: Modular.get<FormsProvider>(),
+        ),
+        ChangeNotifierProvider<TemplateProvider>.value(
+          value: Modular.get<TemplateProvider>(),
         ),
         ChangeNotifierProvider<ConnectivityProvider>.value(
           value: Modular.get<ConnectivityProvider>(),

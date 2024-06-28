@@ -111,6 +111,24 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
           ),
         )),
       ) as _i4.Future<_i2.FormEntity>);
+
+  @override
+  _i4.Future<_i2.FormEntity> createForm({required _i2.FormEntity? form}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createForm,
+          [],
+          {#form: form},
+        ),
+        returnValue: _i4.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
+          this,
+          Invocation.method(
+            #createForm,
+            [],
+            {#form: form},
+          ),
+        )),
+      ) as _i4.Future<_i2.FormEntity>);
 }
 
 /// A class which mocks [IFormLocalDatasource].

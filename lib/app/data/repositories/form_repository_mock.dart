@@ -822,17 +822,13 @@ class FormMockRepository extends IFormRepository {
   @override
   Future<Either<Failure, List<FormEntity>>> getUserForms() async {
     await Future.delayed(const Duration(seconds: 1));
-    return right(
-      formList.where((element) => element.userId == '1').toList(),
-    );
+    return right(formList);
   }
 
   @override
   Future<Either<Failure, List<FormEntity>>> getUserFormsLocally() async {
     await Future.delayed(const Duration(seconds: 1));
-    return right(
-      formList.where((element) => element.userId == '1').toList(),
-    );
+    return right(formList);
   }
 
   @override
@@ -898,5 +894,13 @@ class FormMockRepository extends IFormRepository {
     formList.insert(index, newForm);
 
     return right(newForm);
+  }
+
+  @override
+  Future<Either<Failure, FormEntity>> createForm(
+      {required FormEntity form}) async {
+    formList.add(form);
+
+    return right(form);
   }
 }

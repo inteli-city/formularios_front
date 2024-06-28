@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
+import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
+import 'package:formularios_front/app/domain/enum/priority_enum.dart';
+import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
@@ -24,6 +27,7 @@ class FormsProvider extends ChangeNotifier {
   final IUpdateFormStatusUseCase _updateFormStatusUseCase;
   final ISendFormUsecase _sendFormUsecase;
   final ISaveFormUsecase _saveFormUsecase;
+  final ICreateFormUsecase _createFormUsecase;
 
   FormsProvider(
     this._fetchUserFormsUsecase,
@@ -32,6 +36,7 @@ class FormsProvider extends ChangeNotifier {
     this._updateFormStatusUseCase,
     this._sendFormUsecase,
     this._saveFormUsecase,
+    this._createFormUsecase,
   ) {
     syncForms();
     _startRetryTimer();
@@ -272,6 +277,46 @@ class FormsProvider extends ChangeNotifier {
         (savedForm) async {
           _logger.d(
             '${DateTime.now()} - Form ${savedForm.formId} saved successfully!',
+          );
+          GlobalSnackBar.success('Formulário atualizado com sucesso!');
+        },
+      );
+    });
+    await fetchFormsLocally();
+  }
+
+  Future<void> createForm({
+    required TemplateEntity template,
+    required String area,
+    required String city,
+    required String street,
+    required int number,
+    required double latitude,
+    required double longitude,
+    required String region,
+    required PriorityEnum priority,
+    required String? description,
+  }) async {
+    await _createFormUsecase(
+      template: template,
+      area: area,
+      city: city,
+      street: street,
+      number: number,
+      latitude: latitude,
+      longitude: longitude,
+      region: region,
+      priority: priority,
+      description: description,
+    ).then((value) {
+      return value.fold(
+        (error) {
+          _logger.e(error.toString());
+          GlobalSnackBar.error(error.errorMessage);
+        },
+        (createdForm) async {
+          _logger.d(
+            '${DateTime.now()} - Form ${createdForm.formId} created successfully!',
           );
           GlobalSnackBar.success('Formulário atualizado com sucesso!');
         },

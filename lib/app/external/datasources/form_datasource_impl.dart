@@ -86,4 +86,25 @@ class FormDatasourceImpl implements IFormDatasource {
       }
     }
   }
+
+  @override
+  Future<FormEntity> createForm({required FormEntity form}) async {
+    try {
+      final response = await _httpClient.post(
+        '/create-form',
+        data: FormAdapter.toJson(form),
+      );
+
+      return FormAdapter.fromJson(response.data['form']);
+    } on Failure catch (e, stackTrace) {
+      if (e is TimeOutError) {
+        throw NoInternetConnectionError();
+      } else {
+        throw CreateFormStatusError(
+          stackTrace: stackTrace,
+          errorMessage: e.errorMessage,
+        );
+      }
+    }
+  }
 }

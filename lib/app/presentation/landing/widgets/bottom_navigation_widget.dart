@@ -46,7 +46,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             key: 'AddIconButton',
             icon: Icons.add,
             index: 2,
-            route: '',
+            route: 'create-form',
           ),
           _buildBottomNavigationBarItem(
             key: 'SettingsIconButton',

@@ -4,7 +4,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:ui' as _i13;
 
 import 'package:dartz/dartz.dart' as _i5;
 import 'package:formularios_front/app/domain/entities/user_entity.dart' as _i11;
@@ -13,8 +12,6 @@ import 'package:formularios_front/app/domain/repositories/user_repository.dart'
     as _i4;
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart'
     as _i9;
-import 'package:formularios_front/app/presentation/user/stores/user_provider.dart'
-    as _i12;
 import 'package:gates_microapp_flutter/core/auth_controller.dart' as _i6;
 import 'package:gates_microapp_flutter/domain/entities/logged_user_info.dart'
     as _i7;
@@ -181,83 +178,4 @@ class MockLoginUserUsecase extends _i1.Mock implements _i9.LoginUserUsecase {
           ),
         )),
       ) as _i8.Future<_i5.Either<_i10.Failure, _i11.UserEntity>>);
-}
-
-/// A class which mocks [UserProvider].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockUserProvider extends _i1.Mock implements _i12.UserProvider {
-  MockUserProvider() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  set user(_i11.UserEntity? _user) => super.noSuchMethod(
-        Invocation.setter(
-          #user,
-          _user,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  _i8.Future<void> loadUser() => (super.noSuchMethod(
-        Invocation.method(
-          #loadUser,
-          [],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
-  void logout() => super.noSuchMethod(
-        Invocation.method(
-          #logout,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addListener(_i13.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeListener(_i13.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-        Invocation.method(
-          #notifyListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }

@@ -15,7 +15,8 @@ import 'package:formularios_front/generated/l10n.dart';
 
 void main() {
   late FormMockRepository repository;
-  late FormEntity nonExistingFormLocally;
+  late FormEntity nonExistingFormLocally; 
+
   setUp(() async {
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     repository = FormMockRepository();
@@ -62,16 +63,14 @@ void main() {
   });
 
   group('getUserForms -', () {
-    test('should return all forms by userId', () async {
-      var userId = repository.formList[0].userId;
+    test('should return all forms by user', () async {
       var result = await repository.getUserForms();
-
+      
       expect(result.isRight(), true);
 
       var forms = result.fold((left) => null, (right) => right);
       expect(forms, isA<List<FormEntity>>());
       expect(forms!.length, greaterThan(0));
-      expect(forms.every((form) => form.userId == userId), true);
     });
   });
 

@@ -23,4 +23,6 @@ abstract class IFormRepository {
     required List<SectionEntity> sections,
     String? vinculationFormId,
   });
+
+  Future<Either<Failure, FormEntity>> createForm({required FormEntity form});
 }

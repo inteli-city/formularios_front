@@ -4,13 +4,16 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:ui' as _i11;
+import 'dart:ui' as _i13;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i10;
+import 'package:formularios_front/app/domain/entities/template_entity.dart'
+    as _i11;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i9;
+import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i12;
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart'
     as _i2;
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart'
@@ -262,7 +265,41 @@ class MockFormsProvider extends _i1.Mock implements _i4.FormsProvider {
       ) as _i6.Future<void>);
 
   @override
-  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  _i6.Future<void> createForm({
+    required _i11.TemplateEntity? template,
+    required String? area,
+    required String? city,
+    required String? street,
+    required int? number,
+    required double? latitude,
+    required double? longitude,
+    required String? region,
+    required _i12.PriorityEnum? priority,
+    required String? description,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createForm,
+          [],
+          {
+            #template: template,
+            #area: area,
+            #city: city,
+            #street: street,
+            #number: number,
+            #latitude: latitude,
+            #longitude: longitude,
+            #region: region,
+            #priority: priority,
+            #description: description,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  void addListener(_i13.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -271,7 +308,7 @@ class MockFormsProvider extends _i1.Mock implements _i4.FormsProvider {
       );
 
   @override
-  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i13.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

@@ -70,6 +70,13 @@ class UpdateFormStatusError extends Failure {
   });
 }
 
+class CreateFormStatusError extends Failure {
+  CreateFormStatusError({
+    required super.stackTrace,
+    required super.errorMessage,
+  });
+}
+
 class UserLoginError extends Failure {
   UserLoginError({
     required super.stackTrace,

@@ -89,4 +89,20 @@ class FormRepositoryImpl extends IFormRepository {
       return Left(UnknownError(stackTrace: stackTrace));
     }
   }
+
+  @override
+  Future<Either<Failure, FormEntity>> createForm(
+      {required FormEntity form}) async {
+    try {
+      final result = await _formDatasource.createForm(form: form);
+
+      await _localDatasource.updateForm(form: result);
+
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    } on Exception catch (exception, stackTrace) {
+      return Left(UnknownError(stackTrace: stackTrace));
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
+import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/domain/usecases/get_templates_usecase.dart';
 import 'package:formularios_front/app/presentation/create-form/states/template_state.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
@@ -54,10 +55,31 @@ class TemplateProvider extends ChangeNotifier {
     }));
   }
 
-  Future<void> createForm() async {
+  Future<void> createForm({
+    required TemplateEntity template,
+    required String area,
+    required String city,
+    required String street,
+    required int number,
+    required double latitude,
+    required double longitude,
+    required String region,
+    required PriorityEnum priority,
+    required String? description,
+  }) async {
     setIsLoading(true);
-    // _formsProvider.createForm();
-    await Future.delayed(const Duration(seconds: 2));
+    await _formsProvider.createForm(
+      template: template,
+      area: area,
+      city: city,
+      street: street,
+      number: number,
+      latitude: latitude,
+      longitude: longitude,
+      region: region,
+      priority: priority,
+      description: description,
+    );
     setIsLoading(false);
   }
 }

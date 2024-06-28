@@ -4,18 +4,20 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i7;
-import 'dart:ui' as _i12;
+import 'dart:ui' as _i14;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
     as _i4;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i11;
+import 'package:formularios_front/app/domain/entities/template_entity.dart'
+    as _i12;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i8;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i10;
-import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i14;
+import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i13;
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart'
-    as _i13;
+    as _i15;
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart'
     as _i2;
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart'
@@ -278,7 +280,41 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       ) as _i7.Future<void>);
 
   @override
-  void addListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  _i7.Future<void> createForm({
+    required _i12.TemplateEntity? template,
+    required String? area,
+    required String? city,
+    required String? street,
+    required int? number,
+    required double? latitude,
+    required double? longitude,
+    required String? region,
+    required _i13.PriorityEnum? priority,
+    required String? description,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createForm,
+          [],
+          {
+            #template: template,
+            #area: area,
+            #city: city,
+            #street: street,
+            #number: number,
+            #latitude: latitude,
+            #longitude: longitude,
+            #region: region,
+            #priority: priority,
+            #description: description,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  void addListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -287,7 +323,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       );
 
   @override
-  void removeListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -318,7 +354,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSingleFormProvider extends _i1.Mock
-    implements _i13.SingleFormProvider {
+    implements _i15.SingleFormProvider {
   MockSingleFormProvider() {
     _i1.throwOnMissingStub(this);
   }
@@ -477,7 +513,7 @@ class MockSingleFormProvider extends _i1.Mock
       ));
 
   @override
-  void addListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -486,7 +522,7 @@ class MockSingleFormProvider extends _i1.Mock
       );
 
   @override
-  void removeListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i14.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -636,10 +672,10 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as String);
 
   @override
-  _i14.PriorityEnum get priority => (super.noSuchMethod(
+  _i13.PriorityEnum get priority => (super.noSuchMethod(
         Invocation.getter(#priority),
-        returnValue: _i14.PriorityEnum.LOW,
-      ) as _i14.PriorityEnum);
+        returnValue: _i13.PriorityEnum.LOW,
+      ) as _i13.PriorityEnum);
 
   @override
   _i8.FormStatusEnum get status => (super.noSuchMethod(

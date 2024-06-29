@@ -554,7 +554,7 @@ packages:
     description:
       path: "packages/gates_microapp_flutter"
       ref: dev
-      resolved-ref: "4e58b6f7cf324299f8479e7c8a03fedc122a47b6"
+      resolved-ref: "5bb0188263a689ec1764d5224c455c10879fa99a"
       url: "https://github.com/inteli-city/gates_authentication.git"
     source: git
     version: "0.0.1"

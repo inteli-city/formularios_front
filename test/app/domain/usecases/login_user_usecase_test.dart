@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:mockito/annotations.dart';
@@ -31,7 +31,7 @@ void main() {
         enabled: false,
         role: RoleEnum.COORDINATOR,
         groups: []);
-    final failure = Failure(errorMessage: 'Login Failed');
+    final failure = UnknownError();
 
     test('should return UserEntity when login is successful', () async {
       when(mockUserRepository.loginUser())

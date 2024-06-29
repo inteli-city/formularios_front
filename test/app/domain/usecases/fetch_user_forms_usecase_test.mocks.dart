@@ -10,9 +10,10 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i6;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i8;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
-import 'package:formularios_front/app/domain/failures/failures.dart' as _i5;
 import 'package:formularios_front/app/domain/repositories/form_repository.dart'
     as _i3;
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

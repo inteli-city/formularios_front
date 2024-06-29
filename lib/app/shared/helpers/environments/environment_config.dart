@@ -7,7 +7,7 @@ import 'package:formularios_front/app/data/repositories/user_mock_repository.dar
 import 'package:formularios_front/app/data/repositories/user_repository_impl.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
-import 'package:formularios_front/app/shared/helpers/enums/environment_enum.dart';
+import 'package:gates_microapp_flutter/shared/helpers/enums/environment_enum.dart';
 
 class EnvironmentConfig {
   static const MSS_BASE_URL = String.fromEnvironment('MSS_BASE_URL');

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
-import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
 
 void main() {
   testWidgets('GlobalSnackBar shows error snackbar',

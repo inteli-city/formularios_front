@@ -6,7 +6,7 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_themes.dart';
 import 'package:gates_microapp_flutter/generated/l10n.dart' as gates;
 import 'package:formularios_front/generated/l10n.dart';
-import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});

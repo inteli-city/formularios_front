@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -76,10 +76,8 @@ void main() {
 
     test('should show an error when usecase returns a failure', () async {
       when(provider.user).thenReturn(null);
-
-      var errorMessage = 'Failed to load user';
       when(mockLoginUserUsecase())
-          .thenAnswer((_) async => Left(Failure(errorMessage: errorMessage)));
+          .thenAnswer((_) async => Left(UnknownError()));
 
       await provider.loadUser();
 

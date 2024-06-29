@@ -3,21 +3,21 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i5;
 import 'dart:ui' as _i10;
 
 import 'package:flutter/material.dart' as _i9;
-import 'package:flutter_modular/flutter_modular.dart' as _i7;
+import 'package:flutter_modular/flutter_modular.dart' as _i6;
+import 'package:flutter_modular/src/presenter/models/route.dart' as _i8;
 import 'package:formularios_front/app/domain/entities/user_entity.dart' as _i12;
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart'
     as _i11;
-import 'package:gates_microapp_flutter/core/auth_controller.dart' as _i4;
+import 'package:gates_microapp_flutter/core/auth_controller.dart' as _i3;
 import 'package:gates_microapp_flutter/domain/entities/logged_user_info.dart'
-    as _i5;
-import 'package:logger/logger.dart' as _i2;
-import 'package:mobx/mobx.dart' as _i3;
+    as _i4;
+import 'package:mobx/mobx.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
+import 'package:mockito/src/dummies.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -32,19 +32,9 @@ import 'package:mockito/src/dummies.dart' as _i8;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeLogger_0 extends _i1.SmartFake implements _i2.Logger {
-  _FakeLogger_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeReactiveContext_1 extends _i1.SmartFake
-    implements _i3.ReactiveContext {
-  _FakeReactiveContext_1(
+class _FakeReactiveContext_0 extends _i1.SmartFake
+    implements _i2.ReactiveContext {
+  _FakeReactiveContext_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -56,22 +46,13 @@ class _FakeReactiveContext_1 extends _i1.SmartFake
 /// A class which mocks [AuthController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthController extends _i1.Mock implements _i4.AuthController {
+class MockAuthController extends _i1.Mock implements _i3.AuthController {
   MockAuthController() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.Logger get logger => (super.noSuchMethod(
-        Invocation.getter(#logger),
-        returnValue: _FakeLogger_0(
-          this,
-          Invocation.getter(#logger),
-        ),
-      ) as _i2.Logger);
-
-  @override
-  set user(_i5.LoggedUserInfo? value) => super.noSuchMethod(
+  set user(_i4.LoggedUserInfo? value) => super.noSuchMethod(
         Invocation.setter(
           #user,
           value,
@@ -86,16 +67,16 @@ class MockAuthController extends _i1.Mock implements _i4.AuthController {
       ) as bool);
 
   @override
-  _i3.ReactiveContext get context => (super.noSuchMethod(
+  _i2.ReactiveContext get context => (super.noSuchMethod(
         Invocation.getter(#context),
-        returnValue: _FakeReactiveContext_1(
+        returnValue: _FakeReactiveContext_0(
           this,
           Invocation.getter(#context),
         ),
-      ) as _i3.ReactiveContext);
+      ) as _i2.ReactiveContext);
 
   @override
-  void setUser(_i5.LoggedUserInfo? value) => super.noSuchMethod(
+  void setUser(_i4.LoggedUserInfo? value) => super.noSuchMethod(
         Invocation.method(
           #setUser,
           [value],
@@ -104,29 +85,29 @@ class MockAuthController extends _i1.Mock implements _i4.AuthController {
       );
 
   @override
-  _i6.Future<void> signOut() => (super.noSuchMethod(
+  _i5.Future<void> signOut() => (super.noSuchMethod(
         Invocation.method(
           #signOut,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i6.Future<bool> checkLogin() => (super.noSuchMethod(
+  _i5.Future<bool> checkLogin() => (super.noSuchMethod(
         Invocation.method(
           #checkLogin,
           [],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 }
 
 /// A class which mocks [IModularNavigator].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIModularNavigator extends _i1.Mock implements _i7.IModularNavigator {
+class MockIModularNavigator extends _i1.Mock implements _i6.IModularNavigator {
   MockIModularNavigator() {
     _i1.throwOnMissingStub(this);
   }
@@ -134,30 +115,30 @@ class MockIModularNavigator extends _i1.Mock implements _i7.IModularNavigator {
   @override
   String get path => (super.noSuchMethod(
         Invocation.getter(#path),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i7.dummyValue<String>(
           this,
           Invocation.getter(#path),
         ),
       ) as String);
 
   @override
-  List<_i7.ParallelRoute<dynamic>> get navigateHistory => (super.noSuchMethod(
+  List<_i8.ParallelRoute<dynamic>> get navigateHistory => (super.noSuchMethod(
         Invocation.getter(#navigateHistory),
-        returnValue: <_i7.ParallelRoute<dynamic>>[],
-      ) as List<_i7.ParallelRoute<dynamic>>);
+        returnValue: <_i8.ParallelRoute<dynamic>>[],
+      ) as List<_i8.ParallelRoute<dynamic>>);
 
   @override
-  _i6.Future<T?> push<T extends Object?>(_i9.Route<T>? route) =>
+  _i5.Future<T?> push<T extends Object?>(_i9.Route<T>? route) =>
       (super.noSuchMethod(
         Invocation.method(
           #push,
           [route],
         ),
-        returnValue: _i6.Future<T?>.value(),
-      ) as _i6.Future<T?>);
+        returnValue: _i5.Future<T?>.value(),
+      ) as _i5.Future<T?>);
 
   @override
-  _i6.Future<T?> popAndPushNamed<T extends Object?, TO extends Object?>(
+  _i5.Future<T?> popAndPushNamed<T extends Object?, TO extends Object?>(
     String? routeName, {
     TO? result,
     Object? arguments,
@@ -173,11 +154,11 @@ class MockIModularNavigator extends _i1.Mock implements _i7.IModularNavigator {
             #forRoot: forRoot,
           },
         ),
-        returnValue: _i6.Future<T?>.value(),
-      ) as _i6.Future<T?>);
+        returnValue: _i5.Future<T?>.value(),
+      ) as _i5.Future<T?>);
 
   @override
-  _i6.Future<T?> pushNamed<T extends Object?>(
+  _i5.Future<T?> pushNamed<T extends Object?>(
     String? routeName, {
     Object? arguments,
     bool? forRoot = false,
@@ -191,11 +172,11 @@ class MockIModularNavigator extends _i1.Mock implements _i7.IModularNavigator {
             #forRoot: forRoot,
           },
         ),
-        returnValue: _i6.Future<T?>.value(),
-      ) as _i6.Future<T?>);
+        returnValue: _i5.Future<T?>.value(),
+      ) as _i5.Future<T?>);
 
   @override
-  _i6.Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
+  _i5.Future<T?> pushNamedAndRemoveUntil<T extends Object?>(
     String? newRouteName,
     bool Function(_i9.Route<dynamic>)? predicate, {
     Object? arguments,
@@ -213,11 +194,11 @@ class MockIModularNavigator extends _i1.Mock implements _i7.IModularNavigator {
             #forRoot: forRoot,
           },
         ),
-        returnValue: _i6.Future<T?>.value(),
-      ) as _i6.Future<T?>);
+        returnValue: _i5.Future<T?>.value(),
+      ) as _i5.Future<T?>);
 
   @override
-  _i6.Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
+  _i5.Future<T?> pushReplacementNamed<T extends Object?, TO extends Object?>(
     String? routeName, {
     TO? result,
     Object? arguments,
@@ -233,8 +214,8 @@ class MockIModularNavigator extends _i1.Mock implements _i7.IModularNavigator {
             #forRoot: forRoot,
           },
         ),
-        returnValue: _i6.Future<T?>.value(),
-      ) as _i6.Future<T?>);
+        returnValue: _i5.Future<T?>.value(),
+      ) as _i5.Future<T?>);
 
   @override
   void pop<T extends Object?>([T? result]) => super.noSuchMethod(
@@ -255,14 +236,14 @@ class MockIModularNavigator extends _i1.Mock implements _i7.IModularNavigator {
       ) as bool);
 
   @override
-  _i6.Future<bool> maybePop<T extends Object?>([T? result]) =>
+  _i5.Future<bool> maybePop<T extends Object?>([T? result]) =>
       (super.noSuchMethod(
         Invocation.method(
           #maybePop,
           [result],
         ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 
   @override
   void popUntil(bool Function(_i9.Route<dynamic>)? predicate) =>
@@ -351,14 +332,14 @@ class MockUserProvider extends _i1.Mock implements _i11.UserProvider {
       ) as bool);
 
   @override
-  _i6.Future<void> loadUser() => (super.noSuchMethod(
+  _i5.Future<void> loadUser() => (super.noSuchMethod(
         Invocation.method(
           #loadUser,
           [],
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   void logout() => super.noSuchMethod(

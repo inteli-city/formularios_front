@@ -15,8 +15,7 @@ import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
-import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
-import 'package:logger/logger.dart';
+import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
@@ -24,7 +23,7 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:dartz/dartz.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 
 import 'forms_provider_test.mocks.dart';
 
@@ -47,7 +46,6 @@ void main() {
   late MockISaveFormUsecase mockSaveFormUsecase;
   late MockICreateFormUsecase mockCreateFormUsecase;
   late FormsProvider provider;
-  late Logger logger;
 
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
@@ -150,8 +148,6 @@ void main() {
     ),
   ];
   setUp(() {
-    logger = Logger();
-
     mockFetchUserFormsUsecase = MockFetchUserFormsUsecase();
     when(mockFetchUserFormsUsecase.call())
         .thenAnswer((_) async => Right(forms));
@@ -164,7 +160,6 @@ void main() {
     provider = FormsProvider(
       mockFetchUserFormsUsecase,
       mockFetchFormsLocallyUsecase,
-      logger,
       mockUpdateFormStatusUseCase,
       mockSendFormUsecase,
       mockSaveFormUsecase,
@@ -204,7 +199,7 @@ void main() {
 
     testWidgets('should set state to FormUserErrorState when fetch fails',
         (WidgetTester tester) async {
-      final failure = Failure(errorMessage: 'Fetch failed');
+      final failure = UnknownError();
       when(mockFetchUserFormsUsecase.call())
           .thenAnswer((_) async => Left(failure));
 

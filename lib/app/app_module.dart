@@ -36,11 +36,12 @@ import 'package:formularios_front/app/presentation/profile/pages/profile_page.da
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
 import 'package:formularios_front/app/shared/helpers/environments/environment_config.dart';
 import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
-import 'package:formularios_front/app/shared/helpers/network/http_clients/dio_http_client.dart';
-import 'package:formularios_front/app/shared/helpers/network/http_clients/http_client.dart';
 import 'package:formularios_front/main.dart';
-import 'package:gates_microapp_flutter/login.dart';
-import 'package:logger/logger.dart';
+import 'package:gates_microapp_flutter/micro_app_auth_module.dart';
+import 'package:gates_microapp_flutter/micro_app_login_module.dart';
+import 'package:gates_microapp_flutter/shared/guards/login_guard.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/http_clients/dio_http_client.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/http_clients/http_client.dart';
 
 class AppModule extends Module {
   @override
@@ -49,7 +50,6 @@ class AppModule extends Module {
   @override
   void binds(i) {
     i.add<SplashController>(SplashController.new);
-    i.addLazySingleton(Logger.new);
   }
 
   @override

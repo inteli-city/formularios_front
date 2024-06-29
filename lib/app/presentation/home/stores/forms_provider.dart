@@ -16,12 +16,10 @@ import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
-import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
 
 class FormsProvider extends ChangeNotifier {
-  final Logger _logger;
   final IFetchUserFormsUsecase _fetchUserFormsUsecase;
   final IFetchFormsLocallyUsecase _fetchFormsLocallyUsecase;
   final IUpdateFormStatusUseCase _updateFormStatusUseCase;
@@ -32,7 +30,6 @@ class FormsProvider extends ChangeNotifier {
   FormsProvider(
     this._fetchUserFormsUsecase,
     this._fetchFormsLocallyUsecase,
-    this._logger,
     this._updateFormStatusUseCase,
     this._sendFormUsecase,
     this._saveFormUsecase,
@@ -105,16 +102,11 @@ class FormsProvider extends ChangeNotifier {
     setState(await _fetchFormsLocallyUsecase().then((value) {
       return value.fold(
         (error) {
-          _logger.e(error.toString());
           GlobalSnackBar.error(error.errorMessage);
           return FormUserErrorState(error: error);
         },
         (forms) {
-          _logger.d(
-            '${DateTime.now()} - Locally forms from user fetched successfully!',
-          );
           _allForms = forms;
-
           return FormUserSuccessState(forms: forms);
         },
       );
@@ -126,16 +118,11 @@ class FormsProvider extends ChangeNotifier {
     setState(await _fetchUserFormsUsecase().then((value) {
       return value.fold(
         (error) {
-          _logger.e(error.toString());
           GlobalSnackBar.error(error.errorMessage);
           return FormUserErrorState(error: error);
         },
         (forms) {
-          _logger.d(
-            '${DateTime.now()} - API forms from user fetched successfully!',
-          );
           _allForms = forms;
-
           return FormUserSuccessState(forms: forms);
         },
       );
@@ -217,16 +204,12 @@ class FormsProvider extends ChangeNotifier {
 
     return result.fold(
       (error) {
-        _logger.e(error.toString());
         GlobalSnackBar.error(error.errorMessage);
         _addRequestToRetryQueue(
             () => updateFormStatus(formId: formId, status: status));
         return null;
       },
       (updatedForm) async {
-        _logger.d(
-          '${DateTime.now()} - Form ${updatedForm.formId} updated status to ${status.name}!',
-        );
         GlobalSnackBar.success('Formulário atualizado com sucesso!');
         await fetchFormsLocally();
         return updatedForm;
@@ -246,7 +229,6 @@ class FormsProvider extends ChangeNotifier {
     ).then((value) {
       return value.fold(
         (error) {
-          _logger.e(error.toString());
           GlobalSnackBar.error(error.errorMessage);
           _addRequestToRetryQueue(() => sendForm(
                 formId: formId,
@@ -255,9 +237,6 @@ class FormsProvider extends ChangeNotifier {
               ));
         },
         (sendedForm) async {
-          _logger.d(
-            '${DateTime.now()} - Form ${sendedForm.formId} send successfully!',
-          );
           GlobalSnackBar.success('Formulário enviado com sucesso!');
           await fetchFormsLocally();
         },
@@ -271,13 +250,9 @@ class FormsProvider extends ChangeNotifier {
     ).then((value) {
       return value.fold(
         (error) {
-          _logger.e(error.toString());
           GlobalSnackBar.error(error.errorMessage);
         },
         (savedForm) async {
-          _logger.d(
-            '${DateTime.now()} - Form ${savedForm.formId} saved successfully!',
-          );
           GlobalSnackBar.success('Formulário atualizado com sucesso!');
         },
       );
@@ -311,13 +286,9 @@ class FormsProvider extends ChangeNotifier {
     ).then((value) {
       return value.fold(
         (error) {
-          _logger.e(error.toString());
           GlobalSnackBar.error(error.errorMessage);
         },
         (createdForm) async {
-          _logger.d(
-            '${DateTime.now()} - Form ${createdForm.formId} created successfully!',
-          );
           GlobalSnackBar.success('Formulário atualizado com sucesso!');
         },
       );

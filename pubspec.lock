@@ -13,74 +13,74 @@ packages:
     dependency: transitive
     description:
       name: amplify_analytics_pinpoint
-      sha256: "422e20a03103f39f8349addffae7ac32beaa508a6b17774e4f88f9bd01e5eedc"
+      sha256: "47eb1f6ccb6e547b9417f7b3810e0f795add35868c4bd2f0589bf188cba65565"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   amplify_analytics_pinpoint_dart:
     dependency: transitive
     description:
       name: amplify_analytics_pinpoint_dart
-      sha256: "23b7e9a31661e2a41ece4c5bd53003ede51766fa7d730d9991d39df7d2f86810"
+      sha256: "0dfd0034c0319604102ea51829dfa965ccc5659a8d404e1584223398520245e3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.1"
+    version: "0.4.2"
   amplify_auth_cognito:
     dependency: transitive
     description:
       name: amplify_auth_cognito
-      sha256: "9a7874204c9e5f6faf42bf5b8048e4672bed66a9fc1f264ebdf2ea931149cf50"
+      sha256: f80dc5f17143e0655baa595c30986fb03a3ae14dd82a702f86789fbbcf31b99b
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   amplify_auth_cognito_dart:
     dependency: transitive
     description:
       name: amplify_auth_cognito_dart
-      sha256: "1ccdce85bb91022da4ae837164490444467b05b4af622ce26a2592baae41d403"
+      sha256: "409f2d70b8566fefdf6d881e354485e49bbc33f60010bf92ff4da6431b269a9a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.11.1"
+    version: "0.11.2"
   amplify_core:
     dependency: transitive
     description:
       name: amplify_core
-      sha256: e37260920a4f63421c27c9c84563b9fd6de63fa23a7014947285589e7bf3670a
+      sha256: "10e918fae0f5f46ee76efedab3c828739d6fad89f73402f1fb677fc80a0d7a21"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   amplify_db_common:
     dependency: transitive
     description:
       name: amplify_db_common
-      sha256: "339d7a31df10856616daf983d14f457a3956cb3c7b97a60e2fa8e298a89bb427"
+      sha256: a6201a0a757f333178c1cfd5c3496c8afb07d17ed6b18c1091fedd848d76b44c
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.1"
+    version: "0.4.2"
   amplify_db_common_dart:
     dependency: transitive
     description:
       name: amplify_db_common_dart
-      sha256: e0996ab8b883a08163d7c71bf05231b2de54327b8f5a8f5e56c99588410f7a9a
+      sha256: e227e121afe00c42918d7dc5503f33eee765cc7cda302866eb9a07db2492314d
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.3"
   amplify_flutter:
     dependency: transitive
     description:
       name: amplify_flutter
-      sha256: "31675a37dcae92f7fc9a3a3ae404dc1c5cc319759102b156a3659e62a6148fcb"
+      sha256: "2011083c7eef2e135919a00f78494be48ab38affc860cf563096acad763e9836"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   amplify_secure_storage:
     dependency: transitive
     description:
       name: amplify_secure_storage
-      sha256: d1e64504d31094ad2a3136ed5677b4bbc3324a0378c693bb2f45bac78873e38a
+      sha256: "93209911906648d71f26b2495b1f876acdc70d45418c0f78706a39de9dd1484d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.2"
+    version: "0.5.3"
   amplify_secure_storage_dart:
     dependency: transitive
     description:
@@ -554,7 +554,7 @@ packages:
     description:
       path: "packages/gates_microapp_flutter"
       ref: dev
-      resolved-ref: b009414592b92a3f0df70daf0d6e1003c2e33662
+      resolved-ref: "979a9551d004db8cb7f7396bab0fce0f4e956a6a"
       url: "https://github.com/inteli-city/gates_authentication.git"
     source: git
     version: "0.0.1"

@@ -8,7 +8,7 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/presentation/create-form/pages/create_form_page.dart';
 import 'package:formularios_front/app/presentation/create-form/states/template_state.dart';
-import 'package:gates_microapp_flutter/generated/l10n.dart' as gatesL10n;
+import 'package:gates_microapp_flutter/generated/l10n.dart' as gates_l10n;
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:mockito/annotations.dart';
@@ -51,7 +51,7 @@ void main() {
     });
     testWidgets('Displays error message when in error state',
         (WidgetTester tester) async {
-      await gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'pt-br'));
+      await gates_l10n.S.load(const Locale.fromSubtags(languageCode: 'pt-br'));
       when(mockProvider.state)
           .thenReturn(TemplateErrorState(error: UnknownError()));
 

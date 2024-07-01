@@ -7,7 +7,7 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/external/datasources/form_datasource_impl.dart';
 import 'package:formularios_front/generated/l10n.dart';
-import 'package:gates_microapp_flutter/generated/l10n.dart' as gatesL10n;
+import 'package:gates_microapp_flutter/generated/l10n.dart' as gates_l10n;
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:gates_microapp_flutter/shared/helpers/network/http_clients/http_client.dart';
 import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_error.dart';
@@ -119,7 +119,7 @@ void main() {
     test(
         'deve lançar NoInternetConnection em caso de TimeOutError ao buscar formulários',
         () async {
-      await gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      await gates_l10n.S.load(const Locale.fromSubtags(languageCode: 'pt'));
 
       when(mockHttpClient.get(any)).thenThrow(TimeOutError('Timeout'));
 

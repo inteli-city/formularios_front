@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/presentation/create-form/states/template_state.dart';
 import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
 import 'package:formularios_front/app/presentation/create-form/widgets/text_field_widget.dart';

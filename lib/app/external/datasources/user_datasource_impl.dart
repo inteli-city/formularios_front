@@ -2,8 +2,9 @@ import 'package:formularios_front/app/data/adapters/user_adapter.dart';
 import 'package:formularios_front/app/data/datasources/user_datasource.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
-import 'package:formularios_front/app/shared/helpers/network/http_clients/http_client.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_error.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/http_clients/http_client.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_error.dart';
 
 class UserDatasourceImpl implements IUserDatasource {
   final IHttpClient _httpClient;

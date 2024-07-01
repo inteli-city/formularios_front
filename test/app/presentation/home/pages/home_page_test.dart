@@ -9,7 +9,7 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:formularios_front/generated/l10n.dart';
@@ -45,7 +45,7 @@ void main() {
 
     testWidgets('should display error message when in error state',
         (WidgetTester tester) async {
-      var failure = Failure(errorMessage: 'Error Message');
+      var failure = UnknownError();
       when(formsProvider.state).thenReturn(FormUserErrorState(error: failure));
       await tester.pumpWidget(MaterialApp(
         home: ChangeNotifierProvider<FormsProvider>(
@@ -145,7 +145,7 @@ void main() {
             canVinculate: false,
           ),
         ]));
-        
+
         await tester.pumpWidget(MaterialApp(
           localizationsDelegates: const [
             S.delegate,

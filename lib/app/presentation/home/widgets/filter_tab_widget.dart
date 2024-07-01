@@ -7,12 +7,12 @@ import 'package:formularios_front/app/presentation/home/controllers/sort_forms_c
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/shared/widgets/dialogs/filter_order_dialog.dart';
 import 'package:formularios_front/app/shared/widgets/dialogs/sort_forms_dialog.dart';
-import 'package:formularios_front/app/shared/helpers/utils/screen_helper.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 
 class FilterTabWidget extends StatefulWidget {
   const FilterTabWidget({super.key});

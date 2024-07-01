@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 
 class UserRepositoryMock implements IUserRepository {

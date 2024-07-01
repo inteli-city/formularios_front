@@ -5,7 +5,7 @@ import 'package:formularios_front/app/presentation/home/stores/forms_provider.da
 import 'package:formularios_front/app/presentation/landing/controllers/connectivity_provider.dart';
 import 'package:formularios_front/app/presentation/landing/widgets/bottom_navigation_widget.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
-import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatefulWidget {

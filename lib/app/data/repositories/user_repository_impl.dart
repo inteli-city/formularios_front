@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/data/datasources/user_datasource.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 
 class UserRepositoryImpl implements IUserRepository {
   final IUserDatasource _userDatasource;

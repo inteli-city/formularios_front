@@ -7,8 +7,9 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
-import 'package:formularios_front/app/shared/helpers/network/http_clients/http_client.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_error.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/http_clients/http_client.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_error.dart';
 
 class FormDatasourceImpl implements IFormDatasource {
   final IHttpClient _httpClient;

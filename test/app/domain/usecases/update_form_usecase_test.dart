@@ -8,7 +8,7 @@ import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:mockito/annotations.dart';
@@ -92,7 +92,7 @@ void main() {
     test('should return a Failure', () async {
       when(formRepository.updateFormStatus(
               formId: form.formId, status: FormStatusEnum.IN_PROGRESS))
-          .thenAnswer((_) async => Left(Failure(errorMessage: '')));
+          .thenAnswer((_) async => Left(UnknownError()));
 
       var result = await usecase(
           formId: form.formId, status: FormStatusEnum.IN_PROGRESS);

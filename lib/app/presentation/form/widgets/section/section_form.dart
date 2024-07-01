@@ -17,7 +17,7 @@ import 'package:formularios_front/app/presentation/form/widgets/fields/type_ahea
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
-import 'package:gates_microapp_flutter/helpers/functions/global_snackbar.dart';
+import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
 
 class SectionForm extends StatelessWidget {
   final SectionEntity section;

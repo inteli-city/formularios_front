@@ -14,7 +14,6 @@ import 'package:formularios_front/app/domain/entities/template_entity.dart'
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart'
     as _i10;
 import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i17;
-import 'package:formularios_front/app/domain/failures/failures.dart' as _i6;
 import 'package:formularios_front/app/domain/repositories/form_repository.dart'
     as _i2;
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart'
@@ -31,6 +30,8 @@ import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart'
     as _i9;
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart'
     as _i11;
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart'
+    as _i6;
 import 'package:logger/src/log_level.dart' as _i19;
 import 'package:logger/src/logger.dart' as _i18;
 import 'package:mockito/mockito.dart' as _i1;

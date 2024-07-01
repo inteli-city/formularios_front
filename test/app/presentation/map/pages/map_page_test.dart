@@ -31,7 +31,6 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    debugPrint(tester.element(find.byType(MapPage)).toStringDeep());
     expect(find.byType(GoogleMap), findsOneWidget);
   });
 }

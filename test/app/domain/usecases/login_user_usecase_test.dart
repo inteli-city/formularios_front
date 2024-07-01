@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/domain/repositories/user_repository.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
@@ -31,9 +34,10 @@ void main() {
         enabled: false,
         role: RoleEnum.COORDINATOR,
         groups: []);
-    final failure = UnknownError();
 
     test('should return UserEntity when login is successful', () async {
+      S.load(const Locale.fromSubtags(languageCode: 'pt'));
+
       when(mockUserRepository.loginUser())
           .thenAnswer((_) async => Right(userEntity));
 
@@ -45,8 +49,10 @@ void main() {
     });
 
     test('should return Failure when login fails', () async {
+      S.load(const Locale.fromSubtags(languageCode: 'pt'));
+
       when(mockUserRepository.loginUser())
-          .thenAnswer((_) async => Left(failure));
+          .thenAnswer((_) async => Left(UnknownError()));
 
       final result = await usecase.call();
 

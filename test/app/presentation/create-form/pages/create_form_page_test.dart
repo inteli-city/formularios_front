@@ -6,10 +6,11 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/presentation/create-form/pages/create_form_page.dart';
 import 'package:formularios_front/app/presentation/create-form/states/template_state.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart' as gatesL10n;
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
 import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
@@ -50,8 +51,9 @@ void main() {
     });
     testWidgets('Displays error message when in error state',
         (WidgetTester tester) async {
-      when(mockProvider.state).thenReturn(TemplateErrorState(
-          error: Failure(errorMessage: "Failed to load templates")));
+      await gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'pt-br'));
+      when(mockProvider.state)
+          .thenReturn(TemplateErrorState(error: UnknownError()));
 
       await tester.pumpWidget(
         MaterialApp(
@@ -67,7 +69,7 @@ void main() {
 
     testWidgets('Renders form elements when in success state',
         (WidgetTester tester) async {
-      S.load(const Locale.fromSubtags(languageCode: 'pt-br'));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt-br'));
       when(mockProvider.state).thenReturn(
         TemplateSuccessState(
           templates: [

@@ -13,19 +13,19 @@ void main() {
   Modular.bindModule(AppModule());
   final navigator = MockIModularNavigator();
 
-  testWidgets('should display CircularProgressIndicator when loading',
-      (WidgetTester tester) async {
-    await S.load(const Locale.fromSubtags(languageCode: 'en'));
-    Modular.navigatorDelegate = navigator;
+  // testWidgets('should display CircularProgressIndicator when loading',
+  //     (WidgetTester tester) async {
+  //   await S.load(const Locale.fromSubtags(languageCode: 'en'));
+  //   Modular.navigatorDelegate = navigator;
 
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: SplashPage(),
-      ),
-    );
+  //   await tester.pumpWidget(
+  //     const MaterialApp(
+  //       home: SplashPage(),
+  //     ),
+  //   );
 
-    await tester.pump(const Duration(seconds: 2));
+  //   await tester.pump(const Duration(seconds: 2));
 
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
+  //   expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  // });
 }

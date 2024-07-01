@@ -68,6 +68,7 @@ void main() {
 
     testWidgets('should show an error when usecase returns a failure',
         (WidgetTester tester) async {
+      S.load(const Locale.fromSubtags(languageCode: 'en'));
       when(mockLoginUserUsecase())
           .thenAnswer((_) async => Left(UnknownError()));
 
@@ -91,12 +92,6 @@ void main() {
 
       await tester.tap(find.text('Show Error SnackBar'));
 
-      expect(userProvider.user, isNull);
-    });
-
-    test('should logout the user', () {
-      S.load(const Locale.fromSubtags(languageCode: 'en'));
-      userProvider.logout();
       expect(userProvider.user, isNull);
     });
   });

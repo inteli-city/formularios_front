@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_request_params.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_request_methods_enum.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_request_params.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_request_methods_enum.dart';
 
 void main() {
   group('HttpClientRequestParams', () {

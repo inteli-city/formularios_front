@@ -7,7 +7,7 @@ import 'package:formularios_front/app/data/repositories/user_mock_repository.dar
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
-import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 
 void main() {
   UserRepositoryMock repository = UserRepositoryMock();

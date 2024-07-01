@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:formularios_front/app/shared/helpers/network/http_clients/http_client.dart'
+import 'package:gates_microapp_flutter/shared/helpers/network/http_clients/http_client.dart'
     as _i3;
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_response.dart'
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_response.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 

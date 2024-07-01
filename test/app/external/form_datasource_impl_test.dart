@@ -6,8 +6,12 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/external/datasources/form_datasource_impl.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_response.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart' as gatesL10n;
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/http_clients/http_client.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_error.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_response.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/data/adapters/form_adapter.dart';
@@ -15,8 +19,6 @@ import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
-import 'package:formularios_front/app/shared/helpers/network/http_clients/http_client.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_error.dart';
 
 import 'user_datasource_impl_test.mocks.dart';
 
@@ -117,7 +119,7 @@ void main() {
     test(
         'deve lançar NoInternetConnection em caso de TimeOutError ao buscar formulários',
         () async {
-      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'pt'));
 
       when(mockHttpClient.get(any)).thenThrow(TimeOutError('Timeout'));
 

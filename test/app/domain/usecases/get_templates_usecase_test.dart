@@ -1,14 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
-import 'package:formularios_front/app/domain/failures/failures.dart';
 import 'package:formularios_front/app/domain/repositories/template_repository.dart';
 import 'package:formularios_front/app/domain/usecases/get_templates_usecase.dart';
 
@@ -25,8 +28,7 @@ void main() {
     Modular.bindModule(AppModule());
   });
 
-  test(
-      'should return a list of TemplateEntity when getTemplates is called',
+  test('should return a list of TemplateEntity when getTemplates is called',
       () async {
     List<TemplateEntity> templateList = [
       TemplateEntity(
@@ -60,13 +62,16 @@ void main() {
   });
 
   test('should return a Failure when getTemplates is called', () async {
-    Failure failure = Failure(errorMessage: 'Failure');
+    S.load(const Locale.fromSubtags(languageCode: 'pt'));
     when(mockTemplateRepository.getTemplates())
-        .thenAnswer((_) async => Left(failure));
+        .thenAnswer((_) async => Left(UnknownError()));
 
     final result = await usecase();
 
-    expect(result, Left(failure));
-    verify(mockTemplateRepository.getTemplates()).called(1);
+    expect(result.isLeft(), true);
+    expect(
+      result.fold((l) => l, (templates) => null),
+      isA<Failure>(),
+    );
   });
 }

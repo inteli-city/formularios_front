@@ -8,9 +8,10 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:formularios_front/app/domain/entities/template_entity.dart'
     as _i6;
-import 'package:formularios_front/app/domain/failures/failures.dart' as _i5;
 import 'package:formularios_front/app/domain/repositories/template_repository.dart'
     as _i3;
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

@@ -16,8 +16,8 @@ import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
-import 'package:logger/logger.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
@@ -29,6 +29,7 @@ import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 
 import 'forms_provider_test.mocks.dart';
 
+
 @GenerateMocks([
   FetchUserFormsUsecase,
   FetchFormsLocallyUsecase,
@@ -37,7 +38,6 @@ import 'forms_provider_test.mocks.dart';
   ISendFormUsecase,
   ISaveFormUsecase,
   ICreateFormUsecase,
-  Logger
 ])
 void main() {
   MockFilterFormsController mockFilterFormsController =
@@ -49,7 +49,6 @@ void main() {
   late MockISaveFormUsecase mockSaveFormUsecase;
   late MockICreateFormUsecase mockCreateFormUsecase;
   late FormsProvider provider;
-  MockLogger logger = MockLogger();
 
   Modular.bindModule(AppModule());
   Modular.bindModule(HomeModule());
@@ -182,6 +181,7 @@ void main() {
   group('fetchUserForms', () {
     test('should set state to FormUserSuccessState when fetch is successful',
         () async {
+      S.load(const Locale.fromSubtags(languageCode: 'en'));
       await provider.syncForms();
 
       expect(provider.state, isA<FormUserSuccessState>());
@@ -385,7 +385,6 @@ void main() {
 
     testWidgets('should handle errors when sending a form',
         (WidgetTester tester) async {
-      Modular.replaceInstance<Logger>(logger);
 
       final sections = [
         SectionEntity(sectionId: 'section-01', fields: [
@@ -402,7 +401,7 @@ void main() {
         formId: '1',
         sections: sections,
         vinculationFormId: 'vinculationFormId1',
-      )).thenAnswer((_) async => Left(Failure(errorMessage: 'Error')));
+      )).thenAnswer((_) async => Left(UnknownError()));
       await tester.runAsync(() async {
         await tester.pumpWidget(
           MaterialApp(
@@ -427,7 +426,6 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      verify(logger.e(any)).called(2);
     });
   });
 
@@ -607,9 +605,6 @@ void main() {
 
     testWidgets('should handle errors when creating a form',
         (WidgetTester tester) async {
-      Modular.replaceInstance<Logger>(logger);
-
-      Failure failure = Failure(errorMessage: 'Error');
 
       when(mockFetchFormsLocallyUsecase.call()).thenAnswer(
         (_) async => Right([
@@ -674,7 +669,7 @@ void main() {
         region: "Region",
         priority: PriorityEnum.HIGH,
         description: "Description",
-      )).thenAnswer((_) async => Left(failure));
+      )).thenAnswer((_) async => Left(UnknownError()));
 
       await tester.runAsync(() async {
         await tester.pumpWidget(
@@ -709,7 +704,6 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byType(ElevatedButton));
 
-      verify(logger.e(any)).called(1);
     });
   });
 }

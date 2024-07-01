@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +10,7 @@ import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
@@ -122,6 +125,7 @@ void main() {
     });
 
     test('should return a Failure', () async {
+      S.load(const Locale.fromSubtags(languageCode: 'en'));
       when(formRepository.getUserForms())
           .thenAnswer((_) async => Left(UnknownError()));
 

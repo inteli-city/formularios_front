@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_error.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart' as gatesL10n;
+
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_error.dart';
 
 void main() {
   setUp(() async {
@@ -20,6 +22,7 @@ void main() {
     });
 
     test('should use default message when no message provided', () async {
+      gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'pt'));
       final error = HttpClientError(null);
 
       expect(error.errorMessage, S.current.unknownError);
@@ -35,6 +38,8 @@ void main() {
     });
 
     test('should use default message when no message provided', () async {
+      gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'pt'));
+
       final error = TimeOutError(null);
 
       expect(error.errorMessage, S.current.unknownError);

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/shared/helpers/network/model/http_client_response.dart';
+import 'package:gates_microapp_flutter/shared/helpers/network/model/http_client_response.dart';
 
 void main() {
   group('HttpClientResponse', () {

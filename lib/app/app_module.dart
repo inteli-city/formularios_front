@@ -39,7 +39,9 @@ import 'package:formularios_front/app/shared/helpers/guards/user_guard.dart';
 import 'package:formularios_front/app/shared/helpers/network/http_clients/dio_http_client.dart';
 import 'package:formularios_front/app/shared/helpers/network/http_clients/http_client.dart';
 import 'package:formularios_front/main.dart';
-import 'package:gates_microapp_flutter/login.dart';
+import 'package:gates_microapp_flutter/helpers/guards/login_guard.dart';
+import 'package:gates_microapp_flutter/micro_app_auth_module.dart';
+import 'package:gates_microapp_flutter/micro_app_login_module.dart';
 import 'package:logger/logger.dart';
 
 class AppModule extends Module {

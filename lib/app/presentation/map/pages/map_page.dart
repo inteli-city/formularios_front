@@ -10,6 +10,7 @@ class MapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GoogleMap(
       mapType: MapType.normal,
+      zoomControlsEnabled: false,
       markers: Modular.get<FormsProvider>()
           .locations
           .map((location) => Marker(

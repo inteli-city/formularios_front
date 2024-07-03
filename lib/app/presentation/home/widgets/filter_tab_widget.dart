@@ -22,6 +22,9 @@ class FilterTabWidget extends StatefulWidget {
 }
 
 class _FilterTabWidgetState extends State<FilterTabWidget> {
+  FilterFormsController filterController = Modular.get<FilterFormsController>();
+  SelectChipController selectChipController =
+      Modular.get<SelectChipController>();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,9 +42,76 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
             ),
             scrollDirection: Axis.horizontal,
             itemCount: FormStatusEnum.values.length,
-            itemBuilder: (context, index) => ChoiceChipWidget(
-              index: index,
-              statusEnum: FormStatusEnum.values[index],
+            itemBuilder: (context, index) => ChoiceChip(
+              labelPadding: EdgeInsets.zero,
+              label: SizedBox(
+                width: ScreenHelper.width(context) * 0.25,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      FormStatusEnum.values[index].enumString,
+                      style: AppTextStyles.bodyText1.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: selectChipController.getSelectedChip(index)
+                            ? Theme.of(context).colorScheme.secondary
+                            : Theme.of(context).colorScheme.primary,
+                      ),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      style: AppTextStyles.titleMedium.copyWith(
+                        color: selectChipController.getSelectedChip(index)
+                            ? Theme.of(context).colorScheme.secondary
+                            : Theme.of(context).colorScheme.primary,
+                      ),
+                      textAlign: TextAlign.center,
+                      '(${context.read<FormsProvider>().getFormsCountByStatus(FormStatusEnum.values[index])})',
+                    ),
+                  ],
+                ),
+              ),
+              selected: selectChipController.getSelectedChip(index),
+              onSelected: (bool selected) {
+                setState(() {
+                  for (int i = 0;
+                      i < selectChipController.isSelectedList.length;
+                      i++) {
+                    bool value = (i == index && selected);
+                    selectChipController.setChipValue(i, value);
+                  }
+                  filterController.setStatus(
+                      selected ? FormStatusEnum.values[index] : null);
+                  context.read<FormsProvider>().filterForms(
+                        city: filterController.filteredCity,
+                        enumStatus: filterController.filteredStatus,
+                        street: filterController.filteredStreet,
+                        system: filterController.filteredSystem,
+                        template: filterController.filteredTemplate,
+                      );
+                });
+              },
+              selectedColor: Theme.of(context).colorScheme.primary,
+              checkmarkColor: AppColors.green,
+              showCheckmark: false,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimensions.paddingSmall,
+                vertical: AppDimensions.paddingMedium,
+              ),
+              elevation: 5,
+              pressElevation: 5,
+              shadowColor: Theme.of(context).colorScheme.secondary,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  width: 2,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.radiusExtraLarge),
+              ),
             ),
           ),
         ),

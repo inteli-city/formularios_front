@@ -15,10 +15,14 @@ class MapPage extends StatelessWidget {
           .locations
           .map((location) => Marker(
                 markerId: MarkerId(location.toString()),
-                position: location.$3,
+                position: location.$2,
                 infoWindow: InfoWindow(
-                  title: location.$2,
-                  snippet: location.$1,
+                  title: location.$1.formTitle,
+                  snippet: location.$1.system,
+                  onTap: () => Modular.to.pushNamed(
+                    '/home/${location.$1.formId}',
+                    arguments: location.$1,
+                  ),
                   anchor: const Offset(0.5, 0.5),
                 ),
               ))

@@ -837,21 +837,15 @@ class FormMockRepository extends IFormRepository {
     required String formId,
   }) async {
     await Future.delayed(const Duration(seconds: 1));
-    int index = formList.indexWhere(
-      (element) => element.formId == formId,
-    );
 
-    if (index == -1) {
-      return left(NoDataFound());
+    for (var form in formList) {
+      if (form.formId == formId) {
+        form.status = status;
+        return right(form);
+      }
     }
 
-    FormEntity newForm = formList[index]..status = status;
-
-    formList.removeAt(index);
-
-    formList.insert(index, newForm);
-
-    return right(newForm);
+    return left(NoDataFound());
   }
 
   @override
@@ -879,21 +873,15 @@ class FormMockRepository extends IFormRepository {
     required List<SectionEntity> sections,
     String? vinculationFormId,
   }) async {
-    int index = formList.indexWhere(
-      (element) => element.formId == formId,
-    );
-
-    if (index == -1) {
-      return left(NoDataFound());
+    for (var form in formList) {
+      if (form.formId == formId) {
+        form.status = FormStatusEnum.CONCLUDED;
+        form.sections = sections;
+        return right(form);
+      }
     }
 
-    FormEntity newForm = formList[index]..sections = sections;
-
-    formList.removeAt(index);
-
-    formList.insert(index, newForm);
-
-    return right(newForm);
+    return left(NoDataFound());
   }
 
   @override

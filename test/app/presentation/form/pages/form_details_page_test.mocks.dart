@@ -127,10 +127,10 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       ) as List<String>);
 
   @override
-  List<(String, String, _i6.LatLng)> get locations => (super.noSuchMethod(
+  List<(_i3.FormEntity, _i6.LatLng)> get locations => (super.noSuchMethod(
         Invocation.getter(#locations),
-        returnValue: <(String, String, _i6.LatLng)>[],
-      ) as List<(String, String, _i6.LatLng)>);
+        returnValue: <(_i3.FormEntity, _i6.LatLng)>[],
+      ) as List<(_i3.FormEntity, _i6.LatLng)>);
 
   @override
   bool get hasListeners => (super.noSuchMethod(

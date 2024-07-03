@@ -21,9 +21,10 @@ void main() {
 
   group('FilterOrderDialog Widget Tests', () {
     testWidgets('FilterOrderDialog UI Test', (WidgetTester tester) async {
-      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await tester.runAsync(() async {
+        await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-      await tester.pumpWidget(
+        await tester.pumpWidget(
           MaterialApp(
             home: MultiProvider(providers: [
               Provider<FilterFormsController>(create: (_) => mockController),
@@ -31,79 +32,86 @@ void main() {
                   create: (_) => mockProvider),
             ], child: const FilterOrderDialog()),
           ),
-          duration: const Duration(seconds: 1));
+        );
 
-      expect(find.text('Tipo'), findsOneWidget);
-      expect(find.text('Rua'), findsOneWidget);
-      expect(find.text('Cidade'), findsOneWidget);
-      expect(find.text('Sistema de Origem'), findsOneWidget);
+        await tester.pumpAndSettle();
+        expect(find.text('Tipo'), findsOneWidget);
+        expect(find.text('Rua'), findsOneWidget);
+        expect(find.text('Cidade'), findsOneWidget);
+        expect(find.text('Sistema de Origem'), findsOneWidget);
+      });
     });
 
     testWidgets('should set filter values when confirm button is pressed ',
         (WidgetTester tester) async {
-      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await tester.runAsync(() async {
+        await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-      await tester.pumpWidget(
-          MaterialApp(
-            home: MultiProvider(providers: [
-              Provider<FilterFormsController>(create: (_) => mockController),
-              ChangeNotifierProvider<FormsProvider>(
-                  create: (_) => mockProvider),
-            ], child: const FilterOrderDialog()),
-          ),
-          duration: const Duration(seconds: 1));
+        await tester.pumpWidget(
+            MaterialApp(
+              home: MultiProvider(providers: [
+                Provider<FilterFormsController>(create: (_) => mockController),
+                ChangeNotifierProvider<FormsProvider>(
+                    create: (_) => mockProvider),
+              ], child: const FilterOrderDialog()),
+            ),
+            duration: const Duration(seconds: 1));
 
-      await tester.tap(find.text(S.current.confirm));
+        await tester.tap(find.text(S.current.confirm));
 
-      expect(mockController.filteredTemplate, null);
-      expect(mockController.filteredStreet, null);
-      expect(mockController.filteredCity, null);
-      expect(mockController.filteredSystem, null);
+        expect(mockController.filteredTemplate, null);
+        expect(mockController.filteredStreet, null);
+        expect(mockController.filteredCity, null);
+        expect(mockController.filteredSystem, null);
+      });
     });
 
     testWidgets('should set filter values when confirm button is pressed ',
         (WidgetTester tester) async {
-      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await tester.runAsync(() async {
+        await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-      await tester.pumpWidget(
-          MaterialApp(
-            home: MultiProvider(providers: [
-              Provider<FilterFormsController>(create: (_) => mockController),
-              ChangeNotifierProvider<FormsProvider>(
-                  create: (_) => mockProvider),
-            ], child: const FilterOrderDialog()),
-          ),
-          duration: const Duration(seconds: 1));
+        await tester.pumpWidget(
+            MaterialApp(
+              home: MultiProvider(providers: [
+                Provider<FilterFormsController>(create: (_) => mockController),
+                ChangeNotifierProvider<FormsProvider>(
+                    create: (_) => mockProvider),
+              ], child: const FilterOrderDialog()),
+            ),
+            duration: const Duration(seconds: 1));
 
-      await tester.tap(find.text(S.current.confirm));
+        await tester.tap(find.text(S.current.confirm));
 
-      expect(mockController.filteredTemplate, null);
-      expect(mockController.filteredStreet, null);
-      expect(mockController.filteredCity, null);
-      expect(mockController.filteredSystem, null);
+        expect(mockController.filteredTemplate, null);
+        expect(mockController.filteredStreet, null);
+        expect(mockController.filteredCity, null);
+        expect(mockController.filteredSystem, null);
+      });
     });
 
     testWidgets('should clear selections when clear filters button is pressed ',
         (WidgetTester tester) async {
-      await S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await tester.runAsync(() async {
+        await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-      await tester.pumpWidget(
-          MaterialApp(
-            home: MultiProvider(providers: [
-              Provider<FilterFormsController>(create: (_) => mockController),
-              ChangeNotifierProvider<FormsProvider>(
-                  create: (_) => mockProvider),
-            ], child: const FilterOrderDialog()),
-          ),
-          duration: const Duration(seconds: 1));
+        await tester.pumpWidget(
+            MaterialApp(
+              home: MultiProvider(providers: [
+                Provider<FilterFormsController>(create: (_) => mockController),
+                ChangeNotifierProvider<FormsProvider>(
+                    create: (_) => mockProvider),
+              ], child: const FilterOrderDialog()),
+            ),
+            duration: const Duration(seconds: 1));
 
-      await tester.tap(find.text(S.current.clearFilters));
+        await tester.tap(find.text(S.current.clearFilters));
 
-      expect(mockController.filteredTemplate, null);
-      expect(mockController.filteredStreet, null);
-      expect(mockController.filteredCity, null);
-      expect(mockController.filteredSystem, null);
-   
+        expect(mockController.filteredTemplate, null);
+        expect(mockController.filteredStreet, null);
+        expect(mockController.filteredCity, null);
+        expect(mockController.filteredSystem, null);
+      });
     });
   });
 }

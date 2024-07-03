@@ -11,10 +11,10 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/domain/repositories/form_repository.dart';
 import 'package:formularios_front/app/domain/usecases/save_form_usecase.dart';
-import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -85,7 +85,6 @@ void main() {
 
   group('SaveFormUsecase', () {
     setUp(() async {
-      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       usecase = SaveFormUsecase(repository: formRepository);
     });
 
@@ -136,6 +135,8 @@ void main() {
     });
 
     test('should return a failure when form not found', () async {
+      S.load(const Locale.fromSubtags(languageCode: 'pt'));
+
       when(formRepository.updateFormLocally(
         form: form,
       )).thenAnswer((_) async => Left(NoDataFound()));

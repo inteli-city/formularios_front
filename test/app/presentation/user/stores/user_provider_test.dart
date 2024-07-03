@@ -5,6 +5,8 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
+import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/user_entity.dart';
@@ -14,18 +16,24 @@ import 'package:dartz/dartz.dart';
 
 import 'user_provider_test.mocks.dart';
 
-@GenerateMocks([AuthController, LoginUserUsecase, UserProvider])
+@GenerateMocks([AuthController, LoginUserUsecase])
 void main() {
-  late MockAuthController mockAuthController;
   late MockLoginUserUsecase mockLoginUserUsecase;
-  late MockUserProvider provider;
+  late UserProvider userProvider;
 
   setUp(() {
     Modular.bindModule(AppModule());
-    mockAuthController = MockAuthController();
     mockLoginUserUsecase = MockLoginUserUsecase();
-    provider = MockUserProvider();
+    userProvider = UserProvider(mockLoginUserUsecase);
   });
+
+  final userEntity = UserEntity(
+      name: 'Test User',
+      userId: '',
+      email: '',
+      enabled: false,
+      role: RoleEnum.COORDINATOR,
+      groups: []);
 
   Widget createWidgetForTesting({required Widget child}) {
     return MaterialApp(
@@ -37,51 +45,54 @@ void main() {
   }
 
   group('UserProvider', () {
-    final userEntity = UserEntity(
-        name: 'Test User',
-        userId: '',
-        email: '',
-        enabled: false,
-        role: RoleEnum.COORDINATOR,
-        groups: []);
-
     testWidgets('should set user to UserEntity when login is successful',
         (WidgetTester tester) async {
-      when(mockAuthController.isLogged).thenReturn(true);
-      when(provider.user).thenReturn(userEntity);
+      userProvider.user = userEntity;
+
       when(mockLoginUserUsecase()).thenAnswer((_) async => Right(userEntity));
 
       await tester.pumpWidget(createWidgetForTesting(child: Container()));
 
-      expect(provider.user, userEntity);
+      expect(userProvider.user, userEntity);
     });
 
     test('should load user successfully when usecase returns a user', () async {
-      var user = UserEntity(
-          name: 'Test User',
-          userId: '1',
-          email: 'test@example.com',
-          enabled: true,
-          role: RoleEnum.COORDINATOR,
-          groups: []);
+      userProvider.user = userEntity;
 
-      when(provider.user).thenReturn(user);
+      when(mockLoginUserUsecase()).thenAnswer((_) async => Right(userEntity));
 
-      when(mockLoginUserUsecase()).thenAnswer((_) async => Right(user));
+      await userProvider.loadUser();
 
-      await provider.loadUser();
-
-      expect(provider.user, equals(user));
+      expect(userProvider.user, equals(userEntity));
     });
 
-    test('should show an error when usecase returns a failure', () async {
-      when(provider.user).thenReturn(null);
+    testWidgets('should show an error when usecase returns a failure',
+        (WidgetTester tester) async {
+      S.load(const Locale.fromSubtags(languageCode: 'en'));
       when(mockLoginUserUsecase())
           .thenAnswer((_) async => Left(UnknownError()));
 
-      await provider.loadUser();
+      await tester.pumpWidget(
+        MaterialApp(
+          scaffoldMessengerKey: rootScaffoldMessengerKey,
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                return ElevatedButton(
+                  onPressed: () async {
+                    await userProvider.loadUser();
+                  },
+                  child: const Text('Show Error SnackBar'),
+                );
+              },
+            ),
+          ),
+        ),
+      );
 
-      expect(provider.user, isNull);
+      await tester.tap(find.text('Show Error SnackBar'));
+
+      expect(userProvider.user, isNull);
     });
   });
 }

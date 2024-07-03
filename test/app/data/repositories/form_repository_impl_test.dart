@@ -12,7 +12,7 @@ import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
-import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

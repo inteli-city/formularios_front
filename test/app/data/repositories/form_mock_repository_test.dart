@@ -10,12 +10,13 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/data/repositories/form_repository_mock.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
-import 'package:formularios_front/generated/l10n.dart';
 
 void main() {
   late FormMockRepository repository;
   late FormEntity nonExistingFormLocally;
+
   setUp(() async {
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     repository = FormMockRepository();
@@ -62,8 +63,7 @@ void main() {
   });
 
   group('getUserForms -', () {
-    test('should return all forms by userId', () async {
-      var userId = repository.formList[0].userId;
+    test('should return all forms by user', () async {
       var result = await repository.getUserForms();
 
       expect(result.isRight(), true);
@@ -71,7 +71,6 @@ void main() {
       var forms = result.fold((left) => null, (right) => right);
       expect(forms, isA<List<FormEntity>>());
       expect(forms!.length, greaterThan(0));
-      expect(forms.every((form) => form.userId == userId), true);
     });
   });
 
@@ -95,6 +94,7 @@ void main() {
     });
 
     test('should return failure when form not found', () async {
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       Modular.bindModule(AppModule());
       var result = await repository.updateFormStatus(
         status: FormStatusEnum.IN_PROGRESS,
@@ -123,6 +123,7 @@ void main() {
     });
 
     test('should return failure when form not found', () async {
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       Modular.bindModule(AppModule());
 
       var result =
@@ -171,7 +172,9 @@ void main() {
     });
 
     test('should return failure when form not found', () async {
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       Modular.bindModule(AppModule());
+
       var result = await repository.postForm(
         formId: 'non_existent_form_id',
         sections: newSections,

@@ -13,6 +13,7 @@ import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/presentation/home/pages/home_page.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/generated/l10n.dart' as gates_l10n;
 import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
 import 'package:mockito/mockito.dart';
@@ -45,6 +46,7 @@ void main() {
 
     testWidgets('should display error message when in error state',
         (WidgetTester tester) async {
+      gates_l10n.S.load(const Locale.fromSubtags(languageCode: 'en'));
       var failure = UnknownError();
       when(formsProvider.state).thenReturn(FormUserErrorState(error: failure));
       await tester.pumpWidget(MaterialApp(

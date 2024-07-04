@@ -66,11 +66,14 @@ void main() {
 
       when(form.status).thenReturn(FormStatusEnum.NOT_STARTED);
 
-      await tester.pumpWidget(ModularApp(
-          module: AppModule(),
-          child: const MaterialApp(
-            home: FormDetailsPage(),
-          )));
+      await tester.runAsync(() async {
+        await tester.pumpWidget(ModularApp(
+            module: AppModule(),
+            child: const MaterialApp(
+              home: FormDetailsPage(),
+            )));
+      });
+
       await tester.pumpAndSettle();
 
       expect(find.text('${form.system} - ${form.template}'), findsOneWidget);
@@ -101,11 +104,13 @@ void main() {
 
       when(form.status).thenReturn(FormStatusEnum.NOT_STARTED);
 
-      await tester.pumpWidget(ModularApp(
-          module: AppModule(),
-          child: const MaterialApp(
-            home: FormDetailsPage(),
-          )));
+      await tester.runAsync(() async {
+        await tester.pumpWidget(ModularApp(
+            module: AppModule(),
+            child: const MaterialApp(
+              home: FormDetailsPage(),
+            )));
+      });
 
       await tester.pumpAndSettle();
 
@@ -125,11 +130,13 @@ void main() {
 
       when(form.status).thenReturn(FormStatusEnum.IN_PROGRESS);
 
-      await tester.pumpWidget(ModularApp(
-          module: AppModule(),
-          child: const MaterialApp(
-            home: FormDetailsPage(),
-          )));
+      await tester.runAsync(() async {
+        await tester.pumpWidget(ModularApp(
+            module: AppModule(),
+            child: const MaterialApp(
+              home: FormDetailsPage(),
+            )));
+      });
 
       await tester.pumpAndSettle();
       expect(find.text('Preencher'), findsOneWidget);
@@ -148,12 +155,14 @@ void main() {
       initializeDateFormatting('pt_BR', null);
 
       when(form.status).thenReturn(FormStatusEnum.IN_PROGRESS);
-
-      await tester.pumpWidget(ModularApp(
-          module: AppModule(),
-          child: const MaterialApp(
-            home: FormDetailsPage(),
-          )));
+      
+      await tester.runAsync(() async {
+        await tester.pumpWidget(ModularApp(
+            module: AppModule(),
+            child: const MaterialApp(
+              home: FormDetailsPage(),
+            )));
+      });
 
       await tester.pumpAndSettle();
       expect(find.byElementType(ElevatedButton), findsNothing);

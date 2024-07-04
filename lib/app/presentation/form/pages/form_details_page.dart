@@ -27,18 +27,11 @@ class FormDetailsPageState extends State<FormDetailsPage> {
       ],
       child: SafeArea(
         child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(70),
-            child: Column(
-              children: [
-                AppBar(
-                  centerTitle: true,
-                  title: Text(
-                    S.current.details,
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                ),
-              ],
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              S.current.details,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
           ),
           body: Padding(

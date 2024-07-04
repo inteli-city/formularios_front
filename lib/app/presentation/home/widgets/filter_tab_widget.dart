@@ -27,96 +27,14 @@ class _FilterTabWidgetState extends State<FilterTabWidget> {
       Modular.get<SelectChipController>();
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: ScreenHelper.height(context) * 0.1,
-          child: ListView.separated(
-            padding: const EdgeInsetsDirectional.symmetric(
-                horizontal: AppDimensions.paddingSmall * 0.5),
-            separatorBuilder: (context, index) => const SizedBox(
-              width: AppDimensions.horizontalSpaceSmall,
-            ),
-            scrollDirection: Axis.horizontal,
-            itemCount: FormStatusEnum.values.length,
-            itemBuilder: (context, index) => ChoiceChip(
-              labelPadding: EdgeInsets.zero,
-              label: SizedBox(
-                width: ScreenHelper.width(context) * 0.25,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      FormStatusEnum.values[index].enumString,
-                      style: AppTextStyles.bodyText1.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: selectChipController.getSelectedChip(index)
-                            ? Theme.of(context).colorScheme.secondary
-                            : Theme.of(context).colorScheme.primary,
-                      ),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      style: AppTextStyles.titleMedium.copyWith(
-                        color: selectChipController.getSelectedChip(index)
-                            ? Theme.of(context).colorScheme.secondary
-                            : Theme.of(context).colorScheme.primary,
-                      ),
-                      textAlign: TextAlign.center,
-                      '(${context.read<FormsProvider>().getFormsCountByStatus(FormStatusEnum.values[index])})',
-                    ),
-                  ],
-                ),
-              ),
-              selected: selectChipController.getSelectedChip(index),
-              onSelected: (bool selected) {
-                setState(() {
-                  for (int i = 0;
-                      i < selectChipController.isSelectedList.length;
-                      i++) {
-                    bool value = (i == index && selected);
-                    selectChipController.setChipValue(i, value);
-                  }
-                  filterController.setStatus(
-                      selected ? FormStatusEnum.values[index] : null);
-                  context.read<FormsProvider>().filterForms(
-                        city: filterController.filteredCity,
-                        enumStatus: filterController.filteredStatus,
-                        street: filterController.filteredStreet,
-                        system: filterController.filteredSystem,
-                        template: filterController.filteredTemplate,
-                      );
-                });
-              },
-              selectedColor: Theme.of(context).colorScheme.primary,
-              checkmarkColor: AppColors.green,
-              showCheckmark: false,
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimensions.paddingSmall,
-                vertical: AppDimensions.paddingMedium,
-              ),
-              elevation: 5,
-              pressElevation: 5,
-              shadowColor: Theme.of(context).colorScheme.secondary,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: 2,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                borderRadius:
-                    BorderRadius.circular(AppDimensions.radiusExtraLarge),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: AppDimensions.paddingMedium),
-        const SearchFilterTabWidget(),
+        ChipsWidget(),
+        SizedBox(height: AppDimensions.paddingMedium),
+        SearchFilterTabWidget(),
       ],
     );
   }
@@ -239,88 +157,100 @@ class _SearchFilterTabWidgetState extends State<SearchFilterTabWidget> {
   }
 }
 
-class ChoiceChipWidget extends StatefulWidget {
-  final int index;
-  final FormStatusEnum statusEnum;
-  const ChoiceChipWidget(
-      {super.key, required this.index, required this.statusEnum});
+class ChipsWidget extends StatefulWidget {
+  const ChipsWidget({super.key});
 
   @override
-  State<ChoiceChipWidget> createState() => _ChoiceChipWidgetState();
+  State<ChipsWidget> createState() => _ChipsWidgetState();
 }
 
-class _ChoiceChipWidgetState extends State<ChoiceChipWidget> {
+class _ChipsWidgetState extends State<ChipsWidget> {
   FilterFormsController filterController = Modular.get<FilterFormsController>();
   SelectChipController selectChipController =
       Modular.get<SelectChipController>();
 
   @override
   Widget build(BuildContext context) {
-    return ChoiceChip(
-      labelPadding: EdgeInsets.zero,
-      label: SizedBox(
-        width: ScreenHelper.width(context) * 0.25,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              widget.statusEnum.enumString,
-              style: AppTextStyles.bodyText1.copyWith(
-                fontWeight: FontWeight.bold,
-                color: selectChipController.getSelectedChip(widget.index)
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.primary,
-              ),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              style: AppTextStyles.titleMedium.copyWith(
-                color: selectChipController.getSelectedChip(widget.index)
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.primary,
-              ),
-              textAlign: TextAlign.center,
-              '(${context.read<FormsProvider>().getFormsCountByStatus(widget.statusEnum)})',
-            ),
-          ],
+    return SizedBox(
+      height: ScreenHelper.height(context) * 0.1,
+      child: ListView.separated(
+        padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: AppDimensions.paddingSmall * 0.5),
+        separatorBuilder: (context, index) => const SizedBox(
+          width: AppDimensions.horizontalSpaceSmall,
         ),
-      ),
-      selected: selectChipController.getSelectedChip(widget.index),
-      onSelected: (bool selected) {
-        setState(() {
-          for (int i = 0; i < selectChipController.isSelectedList.length; i++) {
-            bool value = (i == widget.index && selected);
-            selectChipController.setChipValue(i, value);
-          }
-          filterController.setStatus(selected ? widget.statusEnum : null);
-          context.read<FormsProvider>().filterForms(
-                city: filterController.filteredCity,
-                enumStatus: filterController.filteredStatus,
-                street: filterController.filteredStreet,
-                system: filterController.filteredSystem,
-                template: filterController.filteredTemplate,
-              );
-        });
-      },
-      selectedColor: Theme.of(context).colorScheme.primary,
-      checkmarkColor: AppColors.green,
-      showCheckmark: false,
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.paddingSmall,
-        vertical: AppDimensions.paddingMedium,
-      ),
-      elevation: 5,
-      pressElevation: 5,
-      shadowColor: Theme.of(context).colorScheme.secondary,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          width: 2,
-          color: Theme.of(context).colorScheme.primary,
+        scrollDirection: Axis.horizontal,
+        itemCount: FormStatusEnum.values.length,
+        itemBuilder: (context, index) => ChoiceChip(
+          labelPadding: EdgeInsets.zero,
+          label: SizedBox(
+            width: ScreenHelper.width(context) * 0.25,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  FormStatusEnum.values[index].enumString,
+                  style: AppTextStyles.bodyText1.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: selectChipController.getSelectedChip(index)
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(context).colorScheme.primary,
+                  ),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  style: AppTextStyles.titleMedium.copyWith(
+                    color: selectChipController.getSelectedChip(index)
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(context).colorScheme.primary,
+                  ),
+                  textAlign: TextAlign.center,
+                  '(${context.read<FormsProvider>().getFormsCountByStatus(FormStatusEnum.values[index])})',
+                ),
+              ],
+            ),
+          ),
+          selected: selectChipController.getSelectedChip(index),
+          onSelected: (bool selected) {
+            setState(() {
+              for (int i = 0;
+                  i < selectChipController.isSelectedList.length;
+                  i++) {
+                bool value = (i == index && selected);
+                selectChipController.setChipValue(i, value);
+              }
+              filterController
+                  .setStatus(selected ? FormStatusEnum.values[index] : null);
+              context.read<FormsProvider>().filterForms(
+                    city: filterController.filteredCity,
+                    enumStatus: filterController.filteredStatus,
+                    street: filterController.filteredStreet,
+                    system: filterController.filteredSystem,
+                    template: filterController.filteredTemplate,
+                  );
+            });
+          },
+          selectedColor: Theme.of(context).colorScheme.primary,
+          checkmarkColor: AppColors.green,
+          showCheckmark: false,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.paddingSmall,
+            vertical: AppDimensions.paddingMedium,
+          ),
+          elevation: 5,
+          pressElevation: 5,
+          shadowColor: Theme.of(context).colorScheme.secondary,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: 2,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            borderRadius: BorderRadius.circular(AppDimensions.radiusExtraLarge),
+          ),
         ),
-        borderRadius: BorderRadius.circular(AppDimensions.radiusExtraLarge),
       ),
     );
   }

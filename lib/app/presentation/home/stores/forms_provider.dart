@@ -106,7 +106,6 @@ class FormsProvider extends ChangeNotifier {
         },
         (forms) {
           _allForms = forms;
-          ('fetchFormsLocally success');
           return FormUserSuccessState(forms: forms);
         },
       );
@@ -237,7 +236,6 @@ class FormsProvider extends ChangeNotifier {
               ));
         },
         (sendedForm) async {
-     
           GlobalSnackBar.success('Formulário enviado com sucesso!');
 
           await fetchFormsLocally();

@@ -88,10 +88,7 @@ class FormsProvider extends ChangeNotifier {
       _allForms.map((form) => form.city).toSet().toList();
 
   List<(FormEntity, LatLng)> get locations => _allForms
-      .map((form) => (
-            form,
-            LatLng(form.latitude, form.longitude)
-          ))
+      .map((form) => (form, LatLng(form.latitude, form.longitude)))
       .toList();
 
   void setState(FormUserState value) {
@@ -109,6 +106,7 @@ class FormsProvider extends ChangeNotifier {
         },
         (forms) {
           _allForms = forms;
+          ('fetchFormsLocally success');
           return FormUserSuccessState(forms: forms);
         },
       );
@@ -239,7 +237,9 @@ class FormsProvider extends ChangeNotifier {
               ));
         },
         (sendedForm) async {
+     
           GlobalSnackBar.success('Formulário enviado com sucesso!');
+
           await fetchFormsLocally();
         },
       );

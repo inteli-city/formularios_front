@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Nenhum formulário encontrado!',
+                      S.current.notFoundForm,
                       style: AppTextStyles.display,
                       softWrap: true,
                       textAlign: TextAlign.center,

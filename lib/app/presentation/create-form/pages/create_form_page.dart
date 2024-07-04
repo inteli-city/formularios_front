@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:formularios_front/app/presentation/create-form/states/template_state.dart';
 import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
@@ -188,7 +189,7 @@ class _CreateFormPageState extends State<CreateFormPage> {
                         ? const CircularProgressIndicator(
                             color: Colors.white,
                           )
-                        : Text('Criar Formulário',
+                        : Text(S.current.createForm,
                             style: Theme.of(context).textTheme.titleLarge),
                   ),
                 ),

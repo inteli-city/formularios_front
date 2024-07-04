@@ -120,13 +120,13 @@ class StepWidget extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          'FORMID',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
+        // Text(
+        //   'FORMID',
+        //   textAlign: TextAlign.center,
+        //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        // ),
       ],
     );
   }

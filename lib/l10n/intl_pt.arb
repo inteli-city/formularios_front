@@ -35,6 +35,10 @@
     "linkForm": "Vincular Formulário",
     "stepBack" : "Retroceder",
 
+    "createForm": "Criar Formulário",
+
+    "notFoundForm":"Nenhum Formulário Encontrado!",
+
     "details": "Detalhes",
 
     "selectFiles": "Selecionar Arquivos",

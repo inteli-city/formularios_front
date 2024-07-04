@@ -361,7 +361,7 @@ class _CreateFormPageState extends State<CreateFormPage> {
                             style: Theme.of(context).textTheme.titleLarge),
                   ),
                 ),
-                const SizedBox(height: AppDimensions.paddingMedium),
+                const SizedBox(height: 100),
               ],
             ),
           ),

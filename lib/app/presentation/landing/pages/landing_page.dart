@@ -44,7 +44,7 @@ class _LandingPageState extends State<LandingPage> {
           bottom: false,
           child: RouterOutlet(),
         ),
-        extendBody: false,
+        extendBody: true,
         bottomNavigationBar: const BottomNavigationWidget(),
         floatingActionButton:
             Consumer<ConnectivityProvider>(builder: (_, provider, child) {

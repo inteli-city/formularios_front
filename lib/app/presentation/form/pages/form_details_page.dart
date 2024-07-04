@@ -34,26 +34,23 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               style: Theme.of(context).textTheme.displayLarge,
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppDimensions.paddingMedium,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                _buildFormDetails(),
-                const SizedBox(height: AppDimensions.verticalSpaceMedium),
-                Consumer<SingleFormProvider>(builder: (_, provider, child) {
-                  return controller.isFormStateLoading
-                      ? const Padding(
-                          padding: EdgeInsets.only(bottom: 24),
-                          child: CircularProgressIndicator(),
-                        )
-                      : _buildFormDetailsActions();
-                })
-              ],
-            ),
+          body: ListView(
+            padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+            children: [
+              _buildFormDetails(),
+              const SizedBox(height: AppDimensions.verticalSpaceMedium),
+              Consumer<SingleFormProvider>(builder: (_, provider, child) {
+                return controller.isFormStateLoading
+                    ? const Padding(
+                        padding: EdgeInsets.only(bottom: 24),
+                        child: CircularProgressIndicator(),
+                      )
+                    : _buildFormDetailsActions();
+              }),
+              const SizedBox(
+                height: 32,
+              )
+            ],
           ),
         ),
       ),
@@ -63,121 +60,117 @@ class FormDetailsPageState extends State<FormDetailsPage> {
   Widget _buildFormDetails() {
     FormEntity form = controller.form;
 
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(AppDimensions.paddingMedium),
-          decoration: BoxDecoration(
-            color: AppColors.primaryBlue,
-            borderRadius: BorderRadius.circular(
-              AppDimensions.radiusMedium,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                '${controller.form.system} - ${controller.form.template}',
-                style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                      color: AppColors.white,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: AppDimensions.verticalSpaceMedium,
-              ),
-              _buildDetaislRow(
-                details: [
-                  [
-                    S.current.externId,
-                    form.formId,
-                  ],
-                  [
-                    S.current.vinculationId,
-                    form.vinculationFormId ?? '',
-                  ],
-                ],
-              ),
-              _buildDetaislRow(
-                details: [
-                  [
-                    S.current.creatorUserId,
-                    form.creatorUserId,
-                  ],
-                ],
-              ),
-              _buildDetaislRow(
-                details: [
-                  [
-                    S.current.priority,
-                    form.priority.enumString,
-                  ],
-                  [
-                    'Status',
-                    form.status.enumString,
-                  ]
-                ],
-              ),
-              _buildDetaislRow(
-                details: [
-                  [
-                    S.current.creationDate,
-                    controller.creationDate,
-                  ],
-                  [
-                    S.current.expirationDate,
-                    controller.expirationDate,
-                  ],
-                ],
-              ),
-              _buildDetaislRow(
-                details: [
-                  [S.current.street, form.street],
-                  [
-                    S.current.number,
-                    form.number.toString(),
-                  ],
-                ],
-              ),
-              _buildDetaislRow(
-                details: [
-                  [
-                    S.current.latitude,
-                    form.latitude.toString(),
-                  ],
-                  [
-                    S.current.longitude,
-                    form.longitude.toString(),
-                  ],
-                ],
-              ),
-              _buildDetaislRow(
-                details: [
-                  [
-                    S.current.startDate,
-                    S.current.startDate,
-                  ],
-                  [
-                    S.current.conclusionDate,
-                    S.current.conclusionDate,
-                  ]
-                ],
-              ),
-              _buildFormDetail(
-                S.current.description,
-                form.description,
-              ),
-            ],
-          ),
+    return Container(
+      padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+      decoration: BoxDecoration(
+        color: AppColors.primaryBlue,
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusMedium,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '${controller.form.system} - ${controller.form.template}',
+            style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                  color: AppColors.white,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: AppDimensions.verticalSpaceMedium,
+          ),
+          _buildDetaislRow(
+            details: [
+              [
+                S.current.externId,
+                form.formId,
+              ],
+              [
+                S.current.vinculationId,
+                form.vinculationFormId ?? '',
+              ],
+            ],
+          ),
+          _buildDetaislRow(
+            details: [
+              [
+                S.current.creatorUserId,
+                form.creatorUserId,
+              ],
+            ],
+          ),
+          _buildDetaislRow(
+            details: [
+              [
+                S.current.priority,
+                form.priority.enumString,
+              ],
+              [
+                'Status',
+                form.status.enumString,
+              ]
+            ],
+          ),
+          _buildDetaislRow(
+            details: [
+              [
+                S.current.creationDate,
+                controller.creationDate,
+              ],
+              [
+                S.current.expirationDate,
+                controller.expirationDate,
+              ],
+            ],
+          ),
+          _buildDetaislRow(
+            details: [
+              [S.current.street, form.street],
+              [
+                S.current.number,
+                form.number.toString(),
+              ],
+            ],
+          ),
+          _buildDetaislRow(
+            details: [
+              [
+                S.current.latitude,
+                form.latitude.toString(),
+              ],
+              [
+                S.current.longitude,
+                form.longitude.toString(),
+              ],
+            ],
+          ),
+          _buildDetaislRow(
+            details: [
+              [
+                S.current.startDate,
+                S.current.startDate,
+              ],
+              [
+                S.current.conclusionDate,
+                S.current.conclusionDate,
+              ]
+            ],
+          ),
+          _buildFormDetail(
+            S.current.description,
+            form.description,
+          ),
+        ],
       ),
     );
   }

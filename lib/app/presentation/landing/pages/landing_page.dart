@@ -33,6 +33,15 @@ class _LandingPageState extends State<LandingPage> {
         ),
       ],
       child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(10),
+            child: Consumer<ConnectivityProvider>(
+              builder: (_, provider, child) {
+                return Container(
+                  color: provider.indicatorColor,
+                );
+              },
+            )),
         body: const SafeArea(
           left: false,
           right: false,
@@ -44,13 +53,11 @@ class _LandingPageState extends State<LandingPage> {
         floatingActionButton:
             Consumer<ConnectivityProvider>(builder: (_, provider, child) {
           return FloatingActionButton(
-            backgroundColor: provider.indicatorColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             hoverColor: Theme.of(context).colorScheme.primary,
             shape: const CircleBorder(),
             onPressed: !provider.isConnected
-                ? () {
-                    GlobalSnackBar.error('Sem conexão com a internet!');
-                  }
+                ? () {}
                 : () {
                     Modular.get<FormsProvider>().syncForms();
                   },

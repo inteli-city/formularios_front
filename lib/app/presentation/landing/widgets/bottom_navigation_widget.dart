@@ -16,7 +16,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   void _onItemTapped(int index, String route) {
     setState(() {
       _selectedIndex = index;
-      Modular.to.navigate('./$route');
+      Modular.to.navigate('/home/$route');
     });
   }
 

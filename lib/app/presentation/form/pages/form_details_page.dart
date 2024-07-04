@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
-import 'package:formularios_front/app/presentation/landing/controllers/connectivity_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
@@ -25,9 +24,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         ChangeNotifierProvider<SingleFormProvider>(
           create: (context) => controller,
         ),
-        ChangeNotifierProvider<ConnectivityProvider>.value(
-          value: Modular.get<ConnectivityProvider>(),
-        ),
       ],
       child: SafeArea(
         child: Scaffold(
@@ -35,14 +31,6 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             preferredSize: const Size.fromHeight(70),
             child: Column(
               children: [
-                Consumer<ConnectivityProvider>(
-                  builder: (_, provider, child) {
-                    return Container(
-                      color: provider.indicatorColor,
-                      height: 10,
-                    );
-                  },
-                ),
                 AppBar(
                   centerTitle: true,
                   title: Text(

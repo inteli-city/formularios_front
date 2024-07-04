@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
-import 'package:formularios_front/app/presentation/landing/controllers/connectivity_provider.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
@@ -28,32 +27,14 @@ class FormSectionsPageState extends State<FormSectionsPage> {
         ChangeNotifierProvider<SingleFormProvider>(
           create: (context) => singleFormProvider,
         ),
-        ChangeNotifierProvider<ConnectivityProvider>.value(
-          value: Modular.get<ConnectivityProvider>(),
-        ),
       ],
       child: SafeArea(
         child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(70),
-            child: Column(
-              children: [
-                Consumer<ConnectivityProvider>(
-                  builder: (_, provider, child) {
-                    return Container(
-                      color: provider.indicatorColor,
-                      height: 10,
-                    );
-                  },
-                ),
-                AppBar(
-                  centerTitle: true,
-                  title: Text(
-                    S.current.fillForm,
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                ),
-              ],
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              S.current.fillForm,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
           ),
           body: Column(

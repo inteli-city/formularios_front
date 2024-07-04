@@ -45,4 +45,13 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
 
     await saveForms(forms: FormAdapter.fromJsonList(forms));
   }
+
+  @override
+  Future<void> addForm({required FormEntity form}) async {
+    List forms = await storage.get('forms');
+
+    forms.add(FormAdapter.toJson(form));
+
+    await saveForms(forms: FormAdapter.fromJsonList(forms));
+  }
 }

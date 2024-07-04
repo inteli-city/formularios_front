@@ -17,6 +17,7 @@ import 'package:formularios_front/app/domain/usecases/send_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/update_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/login_user_usecase.dart';
 import 'package:formularios_front/app/external/datasources/user_datasource_impl.dart';
+import 'package:formularios_front/app/presentation/create-form/controlles/create_form_controller.dart';
 import 'package:formularios_front/app/presentation/create-form/pages/create_form_page.dart';
 import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
@@ -91,6 +92,7 @@ class HomeModule extends Module {
         () => FormHiveLocalDatasource(storage));
     i.addLazySingleton<FormsProvider>(FormsProvider.new);
     i.addLazySingleton<TemplateProvider>(TemplateProvider.new);
+    i.add<CreateFormController>(CreateFormController.new);
     i.addLazySingleton<IFormRepository>(
         () => EnvironmentConfig.getFormRepository());
     i.addLazySingleton<ITemplateRepository>(TemplateRepositoryMock.new);

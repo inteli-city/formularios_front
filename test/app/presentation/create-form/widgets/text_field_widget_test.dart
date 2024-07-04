@@ -5,10 +5,12 @@ import 'package:formularios_front/app/presentation/create-form/widgets/text_fiel
 void main() {
   testWidgets('TextFieldWidget validation test', (WidgetTester tester) async {
     const key = Key('test-textfield');
+    TextEditingController controller = TextEditingController();
 
-    await tester.pumpWidget(const MaterialApp(
+    await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: TextFieldWidget(
+          controller: controller,
           key: key,
           label: 'Test Label',
           isRequired: true,

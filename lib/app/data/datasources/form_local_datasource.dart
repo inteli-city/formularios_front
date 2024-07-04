@@ -5,4 +5,5 @@ abstract class IFormLocalDatasource {
   Future<List<FormEntity>> getForms();
   Future<void> updateForm({required FormEntity form});
   Future<void> deleteForm({required String formId});
+  Future<void> addForm({required FormEntity form});
 }

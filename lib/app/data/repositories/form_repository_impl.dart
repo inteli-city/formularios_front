@@ -94,11 +94,11 @@ class FormRepositoryImpl extends IFormRepository {
   Future<Either<Failure, FormEntity>> createForm(
       {required FormEntity form}) async {
     try {
-      final result = await _formDatasource.createForm(form: form);
+      // final result = await _formDatasource.createForm(form: form);
 
-      await _localDatasource.updateForm(form: result);
+      await _localDatasource.addForm(form: form);
 
-      return Right(result);
+      return Right(form);
     } on Failure catch (e) {
       return Left(e);
     } on Exception catch (exception, stackTrace) {

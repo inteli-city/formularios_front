@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/external/datasources/user_datasource_impl.dart';
 import 'package:formularios_front/generated/l10n.dart';
+// ignore: library_prefixes
 import 'package:gates_microapp_flutter/generated/l10n.dart' as gatesL10n;
 
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
@@ -59,7 +60,7 @@ void main() {
 
     test('deve lançar NoInternetConnectionError em caso de TimeOutError',
         () async {
-      await  gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'en'));
+      await gatesL10n.S.load(const Locale.fromSubtags(languageCode: 'en'));
       when(mockHttpClient.post(any)).thenThrow(TimeOutError('Timeout'));
 
       expect(

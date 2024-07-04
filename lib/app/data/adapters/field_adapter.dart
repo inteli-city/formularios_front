@@ -57,8 +57,12 @@ class FieldAdapter {
         );
       case FieldTypeEnum.DATE_FIELD:
         return DateFieldEntity(
-          minDate: DateTime.fromMillisecondsSinceEpoch(json['min_date']),
-          maxDate: DateTime.fromMillisecondsSinceEpoch(json['max_date']),
+          minDate: json['min_date'] == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(json['min_date']),
+          maxDate: json['max_date'] == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(json['max_date']),
           placeholder: json['placeholder'],
           key: json['key'],
           isRequired: json['required'],

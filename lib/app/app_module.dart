@@ -105,7 +105,7 @@ class HomeModule extends Module {
     i.addLazySingleton<IGetTemplatesUsecase>(GetTemplatesUsecase.new);
     i.addLazySingleton<ICreateFormUsecase>(CreateFormUsecase.new);
     i.addLazySingleton(FilterFormsController.new);
-    i.add(SortFormsController.new);
+    i.addLazySingleton(SortFormsController.new);
     i.add(SelectChipController.new);
     i.add(
       () => SingleFormProvider(i.get(), form: i.args.data),

@@ -109,12 +109,15 @@ void main() {
   });
 
   testWidgets('FormSectionsPage Test', (WidgetTester tester) async {
-     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: FormSectionsPage(),
-      ),
-    );
+    await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+    await tester.runAsync(() async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: FormSectionsPage(),
+        ),
+      );
+    });
+
     // expect(find.byIcon(Icons.arrow_back), findsOneWidget);
 
     expect(find.text(S.current.fillForm), findsOneWidget);

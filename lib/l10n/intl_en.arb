@@ -35,6 +35,10 @@
     "linkForm": "Link Form",
     "stepBack": "Step Back",
 
+    "createForm": "Create Form",
+    
+    "notFoundForm":"Not Found Forms",
+
     "details": "Details",
 
     "selectFiles": "Select Files",

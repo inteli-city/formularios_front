@@ -301,6 +301,26 @@ class S {
     );
   }
 
+  /// `Create Form`
+  String get createForm {
+    return Intl.message(
+      'Create Form',
+      name: 'createForm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Found Forms`
+  String get notFoundForm {
+    return Intl.message(
+      'Not Found Forms',
+      name: 'notFoundForm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Details`
   String get details {
     return Intl.message(

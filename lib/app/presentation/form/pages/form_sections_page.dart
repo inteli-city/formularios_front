@@ -6,6 +6,7 @@ import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
+import 'package:provider/provider.dart';
 
 class FormSectionsPage extends StatefulWidget {
   const FormSectionsPage({super.key});
@@ -21,58 +22,65 @@ class FormSectionsPageState extends State<FormSectionsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            S.current.fillForm,
-            style: Theme.of(context).textTheme.displayLarge,
-          ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SingleFormProvider>(
+          create: (context) => singleFormProvider,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            StepperProgress(
-              totalSteps: singleFormProvider.form.sections.length,
-              pageController: _pageController,
+      ],
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              S.current.fillForm,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
-            Padding(
-              padding: const EdgeInsets.all(
-                AppDimensions.paddingMedium,
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              StepperProgress(
+                totalSteps: singleFormProvider.form.sections.length,
+                pageController: _pageController,
               ),
-              child: Text(
-                '${singleFormProvider.form.system} - ${singleFormProvider.form.template}',
-                style: Theme.of(context).textTheme.displayLarge,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Expanded(
-              child: Form(
-                key: formKey,
-                child: ListView.builder(
-                  controller: _pageController,
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: singleFormProvider.form.sections.length,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: ScreenHelper.width(context),
-                      child: SectionForm(
-                        section: singleFormProvider.form.sections[index],
-                        singleFormProvider: singleFormProvider,
-                        lastSection: index ==
-                            singleFormProvider.form.sections.length - 1,
-                        formKey: formKey,
-                      ),
-                    );
-                  },
+              Padding(
+                padding: const EdgeInsets.all(
+                  AppDimensions.paddingMedium,
+                ),
+                child: Text(
+                  '${singleFormProvider.form.system} - ${singleFormProvider.form.template}',
+                  style: Theme.of(context).textTheme.displayLarge,
+                  textAlign: TextAlign.center,
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Form(
+                  key: formKey,
+                  child: ListView.builder(
+                    controller: _pageController,
+                    scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: singleFormProvider.form.sections.length,
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        width: ScreenHelper.width(context),
+                        child: SectionForm(
+                          section: singleFormProvider.form.sections[index],
+                          singleFormProvider: singleFormProvider,
+                          lastSection: index ==
+                              singleFormProvider.form.sections.length - 1,
+                          formKey: formKey,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -50,6 +50,7 @@ class AppModule extends Module {
 
   @override
   void binds(i) {
+    i.addLazySingleton(ConnectivityProvider.new);
     i.add<SplashController>(SplashController.new);
   }
 
@@ -104,7 +105,6 @@ class HomeModule extends Module {
     i.addLazySingleton<IGetTemplatesUsecase>(GetTemplatesUsecase.new);
     i.addLazySingleton<ICreateFormUsecase>(CreateFormUsecase.new);
     i.addLazySingleton(FilterFormsController.new);
-    i.addLazySingleton(ConnectivityProvider.new);
     i.add(SortFormsController.new);
     i.add(SelectChipController.new);
     i.add(
@@ -122,7 +122,7 @@ class HomeModule extends Module {
         ChildRoute(
           '/forms',
           child: (context) => const HomePage(),
-          transition: TransitionType.leftToRightWithFade,
+          transition: TransitionType.fadeIn,
           guards: [UserGuard()],
         ),
         ChildRoute(
@@ -143,17 +143,17 @@ class HomeModule extends Module {
           transition: TransitionType.rightToLeftWithFade,
           guards: [UserGuard()],
         ),
+        ChildRoute(
+          '/:externId',
+          child: (context) => const FormDetailsPage(),
+          guards: [UserGuard()],
+        ),
+        ChildRoute(
+          '/:externId/fill',
+          child: (context) => const FormSectionsPage(),
+          guards: [UserGuard()],
+        )
       ],
-    );
-    r.child(
-      '/:externId',
-      child: (context) => const FormDetailsPage(),
-      guards: [UserGuard()],
-    );
-    r.child(
-      '/:externId/fill',
-      child: (context) => const FormSectionsPage(),
-      guards: [UserGuard()],
     );
   }
 }

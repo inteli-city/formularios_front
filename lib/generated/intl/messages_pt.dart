@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
         "coordinatorId":
             MessageLookupByLibrary.simpleMessage("ID do Coordenador"),
+        "createForm": MessageLookupByLibrary.simpleMessage("Criar Formulário"),
         "creationDate": MessageLookupByLibrary.simpleMessage("Data de Criação"),
         "creatorUserId":
             MessageLookupByLibrary.simpleMessage("ID do Usuário Criador"),
@@ -91,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nenhum Formulário Encontrado!"),
         "noInternetConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage("Sem conexão com a internet"),
+        "notFoundForm": MessageLookupByLibrary.simpleMessage(
+            "Nenhum Formulário Encontrado!"),
         "number": MessageLookupByLibrary.simpleMessage("Número"),
         "orderEnumSchema": m2,
         "priority": MessageLookupByLibrary.simpleMessage("Prioridade"),

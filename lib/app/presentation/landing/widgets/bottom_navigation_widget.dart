@@ -16,13 +16,15 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   void _onItemTapped(int index, String route) {
     setState(() {
       _selectedIndex = index;
-      Modular.to.navigate('./$route');
+      Modular.to.navigate('/home/$route');
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      color: AppColors.primaryBlue,
+      surfaceTintColor: AppColors.primaryBlue,
       shape: const CircularNotchedRectangle(),
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -69,9 +71,7 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
       key: Key(key),
       icon: Icon(
         icon,
-        color: _selectedIndex == index
-            ? Theme.of(context).colorScheme.primary
-            : AppColors.gray,
+        color: _selectedIndex == index ? AppColors.white : AppColors.gray,
         size: AppDimensions.iconLarge,
       ),
       color: Theme.of(context).colorScheme.primary,

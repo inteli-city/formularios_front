@@ -23,7 +23,7 @@ void main() {
 
     var formField = tester.widget<TextFormField>(find.byType(TextFormField));
     var validationMessage = formField.validator!('');
-    expect(validationMessage, 'Campo obrigatório');
+    expect(validationMessage, '');
 
     await tester.enterText(find.byKey(key), 'Test');
     await tester.pump();

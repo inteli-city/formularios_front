@@ -289,7 +289,7 @@ class FormsProvider extends ChangeNotifier {
           GlobalSnackBar.error(error.errorMessage);
         },
         (createdForm) async {
-          GlobalSnackBar.success('Formulário atualizado com sucesso!');
+          GlobalSnackBar.success('Formulário criado com sucesso!');
         },
       );
     });

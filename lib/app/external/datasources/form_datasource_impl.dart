@@ -91,9 +91,13 @@ class FormDatasourceImpl implements IFormDatasource {
   @override
   Future<FormEntity> createForm({required FormEntity form}) async {
     try {
+      var json = FormAdapter.toJson(form);
+
+      json.remove('user_id');
+
       final response = await _httpClient.post(
         '/create-form',
-        data: FormAdapter.toJson(form),
+        data: json,
       );
 
       return FormAdapter.fromJson(response.data['form']);

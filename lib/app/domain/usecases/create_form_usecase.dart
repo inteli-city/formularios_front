@@ -41,9 +41,9 @@ class CreateFormUsecase implements ICreateFormUsecase {
   }) async {
     FormEntity form = FormEntity(
       formTitle: template.formTitle,
-      formId: '1',
-      creatorUserId: '1',
-      userId: '1',
+      formId: '',
+      creatorUserId: '',
+      userId: '',
       vinculationFormId: null,
       template: template.template,
       area: area,
@@ -57,7 +57,8 @@ class CreateFormUsecase implements ICreateFormUsecase {
       description: description,
       priority: priority,
       status: FormStatusEnum.NOT_STARTED,
-      expirationDate: 0,
+      expirationDate:
+          DateTime.now().add(const Duration(days: 1)).millisecondsSinceEpoch,
       creationDate: 0,
       startDate: null,
       conclusionDate: null,

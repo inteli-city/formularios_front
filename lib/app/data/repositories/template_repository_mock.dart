@@ -91,7 +91,7 @@ class TemplateRepositoryMock implements ITemplateRepository {
       formTitle: 'Template Recape SP',
       canVinculate: true,
       template: 'Template Recape SP',
-      system: 'RECAPE_SP',
+      system: 'GAIA',
       justificative: JustificativeEntity(
         options: [
           JustificativeOptionEntity(

@@ -46,6 +46,7 @@ class FormAdapter {
 
   static Map<String, dynamic> toJson(FormEntity form) {
     return {
+      'form_title': form.formTitle,
       'form_id': form.formId,
       'creator_user_id': form.creatorUserId,
       'user_id': form.userId,
@@ -66,14 +67,16 @@ class FormAdapter {
       'comments': form.comments,
       'description': form.description,
       'conclusion_date': form.conclusionDate,
-      'information_fields': form.informationFields
-              ?.map((e) => InformationFieldAdapter.toJson(e))
-              .toList() ??
-          [],
+      'information_fields': form.informationFields == null
+          ? null
+          : form.informationFields!.isEmpty
+              ? null
+              : form.informationFields!
+                  .map((e) => InformationFieldAdapter.toJson(e))
+                  .toList(),
       'justification': JustificativeAdapter.toJson(form.justificative),
       'start_date': form.startDate,
       'vinculation_form_id': form.vinculationFormId,
-      'form_title': form.formTitle,
       'can_vinculate': form.canVinculate,
     };
   }

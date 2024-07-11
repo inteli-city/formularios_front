@@ -41,9 +41,11 @@ class FormDetailsPageState extends State<FormDetailsPage> {
               const SizedBox(height: AppDimensions.verticalSpaceMedium),
               Consumer<SingleFormProvider>(builder: (_, provider, child) {
                 return controller.isFormStateLoading
-                    ? const Padding(
-                        padding: EdgeInsets.only(bottom: 24),
-                        child: CircularProgressIndicator(),
+                    ? const Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 24),
+                          child: CircularProgressIndicator(),
+                        ),
                       )
                     : _buildFormDetailsActions();
               }),

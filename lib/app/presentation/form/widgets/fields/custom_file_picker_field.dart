@@ -8,6 +8,7 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
 
@@ -100,6 +101,8 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
 
   @override
   Widget build(BuildContext context) {
+    String requiredAsterisk = widget.field.isRequired ? '*' : '';
+
     return FormField<List<String?>>(
       initialValue: widget.field.value,
       validator: (value) {
@@ -114,10 +117,27 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${widget.field.placeholder}:',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            Stack(children: [
+              Padding(
+                padding:
+                    const EdgeInsets.only(right: AppDimensions.paddingSmall),
+                child: Text(
+                  '${widget.field.placeholder}:',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Text(
+                  requiredAsterisk,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              )
+            ]),
             const SizedBox(height: AppDimensions.paddingSmall),
             ElevatedButton(
               onPressed: _pickFiles,

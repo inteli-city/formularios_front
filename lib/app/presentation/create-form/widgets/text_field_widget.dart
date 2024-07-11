@@ -17,55 +17,73 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      enabled: isEnabled,
-      validator: (value) {
-        if (isRequired && value!.isEmpty) {
-          return '';
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        errorStyle: const TextStyle(height: 0),
-        labelText: label,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryBlue,
-            width: AppDimensions.borderMedium,
-          ),
-          borderRadius: BorderRadius.circular(
-            AppDimensions.radiusMedium,
+    return Stack(
+      children: [
+        TextFormField(
+          controller: controller,
+          enabled: isEnabled,
+          validator: (value) {
+            if (isRequired && value!.isEmpty) {
+              return '';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            errorStyle: const TextStyle(height: 0),
+            labelText: label,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.primaryBlue,
+                width: AppDimensions.borderMedium,
+              ),
+              borderRadius: BorderRadius.circular(
+                AppDimensions.radiusMedium,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.red,
+                width: AppDimensions.borderMedium,
+              ),
+              borderRadius: BorderRadius.circular(
+                AppDimensions.radiusMedium,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.primaryBlue,
+                width: AppDimensions.borderMedium,
+              ),
+              borderRadius: BorderRadius.circular(
+                AppDimensions.radiusMedium,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.primaryBlue,
+                width: AppDimensions.borderMedium,
+              ),
+              borderRadius: BorderRadius.circular(
+                AppDimensions.radiusMedium,
+              ),
+            ),
           ),
         ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.red,
-            width: AppDimensions.borderMedium,
-          ),
-          borderRadius: BorderRadius.circular(
-            AppDimensions.radiusMedium,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryBlue,
-            width: AppDimensions.borderMedium,
-          ),
-          borderRadius: BorderRadius.circular(
-            AppDimensions.radiusMedium,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.primaryBlue,
-            width: AppDimensions.borderMedium,
-          ),
-          borderRadius: BorderRadius.circular(
-            AppDimensions.radiusMedium,
-          ),
-        ),
-      ),
+        isRequired
+            ? Positioned(
+                top: 10.0,
+                right: 10.0,
+                child: Text(
+                  '*',
+                  style: TextStyle(
+                    color: AppColors.red,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            : const SizedBox()
+      ],
     );
   }
 }

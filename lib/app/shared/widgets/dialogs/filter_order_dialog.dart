@@ -9,16 +9,14 @@ import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:formularios_front/generated/l10n.dart';
 
 class FilterOrderDialog extends StatefulWidget {
-  const FilterOrderDialog({
-    super.key,
-  });
+  const FilterOrderDialog({super.key});
 
   @override
   State<FilterOrderDialog> createState() => _FilterOrderDialogState();
 }
 
 class _FilterOrderDialogState extends State<FilterOrderDialog> {
-  var controller = Modular.get<FilterFormsController>();
+  final controller = Modular.get<FilterFormsController>();
   String? selectedType;
   String? selectedStreet;
   String? selectedCity;
@@ -34,10 +32,12 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
   }
 
   void clearSelections() {
-    selectedType = null;
-    selectedStreet = null;
-    selectedCity = null;
-    selectedSystem = null;
+    setState(() {
+      selectedType = null;
+      selectedStreet = null;
+      selectedCity = null;
+      selectedSystem = null;
+    });
   }
 
   void setFilterValues() {
@@ -50,13 +50,9 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.all(
-        AppDimensions.paddingSmall,
-      ),
+      insetPadding: const EdgeInsets.all(AppDimensions.paddingSmall),
       child: Padding(
-        padding: const EdgeInsets.all(
-          AppDimensions.paddingMedium,
-        ),
+        padding: const EdgeInsets.all(AppDimensions.paddingMedium),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(
@@ -69,7 +65,8 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                     child: Text(
                       S.current.filters,
                       style: AppTextStyles.display.copyWith(
-                          color: Theme.of(context).colorScheme.primary),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -77,53 +74,39 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
                     top: 0,
                     child: IconButton(
                       padding: EdgeInsets.zero,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                      onPressed: () => Navigator.pop(context),
                       icon: const Icon(Icons.close),
                     ),
                   ),
                 ],
               ),
               TextButton(
-                onPressed: () {
-                  setState(() {
-                    clearSelections();
-                  });
-                },
+                onPressed: clearSelections,
                 child: Text(S.current.clearFilters),
               ),
               _buildDropdownItem(
                 hintText: 'Tipo',
                 selectedValue: selectedType,
                 optionValues: context.read<FormsProvider>().templates,
-                onChanged: (value) {
-                  selectedType = value;
-                },
+                onChanged: (value) => setState(() => selectedType = value),
               ),
               _buildDropdownItem(
                 hintText: 'Rua',
                 selectedValue: selectedStreet,
                 optionValues: context.read<FormsProvider>().streets,
-                onChanged: (value) {
-                  selectedStreet = value;
-                },
+                onChanged: (value) => setState(() => selectedStreet = value),
               ),
               _buildDropdownItem(
                 hintText: 'Cidade',
                 selectedValue: selectedCity,
                 optionValues: context.read<FormsProvider>().cities,
-                onChanged: (value) {
-                  selectedCity = value;
-                },
+                onChanged: (value) => setState(() => selectedCity = value),
               ),
               _buildDropdownItem(
                 hintText: 'Sistema de Origem',
                 selectedValue: selectedSystem,
                 optionValues: context.read<FormsProvider>().systems,
-                onChanged: (value) {
-                  selectedSystem = value;
-                },
+                onChanged: (value) => setState(() => selectedSystem = value),
               ),
               const SizedBox(height: AppDimensions.paddingMedium),
               ElevatedButton(
@@ -168,9 +151,7 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
         .map(
           (value) => DropdownMenuItem<String?>(
             value: value,
-            child: Text(
-              value,
-            ),
+            child: Text(value),
           ),
         )
         .toList();

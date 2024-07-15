@@ -9,7 +9,7 @@ import 'package:mockito/annotations.dart';
 
 import 'splash_page_test.mocks.dart';
 
-@GenerateMocks([IModularNavigator, SplashController])
+@GenerateMocks([SplashController])
 void main() {
   SplashController mockSplashController = MockSplashController();
   Modular.bindModule(AppModule());

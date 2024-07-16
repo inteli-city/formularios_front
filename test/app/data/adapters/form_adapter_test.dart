@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
@@ -9,6 +8,7 @@ import 'package:formularios_front/app/data/adapters/form_adapter.dart';
 void main() {
   group('FormAdapter', () {
     final formJson = {
+      'form_title': 'Form Title',
       'form_id': '1',
       'creator_user_id': '123',
       'user_id': '456',
@@ -45,7 +45,7 @@ void main() {
       'comments': 'some comments',
       'description': 'some description',
       'conclusion_date': 1627849200000,
-      'information_fields': [],
+      'information_fields': null,
       'justification': {
         'options': [],
         'selected_option': '',
@@ -54,7 +54,6 @@ void main() {
       },
       'start_date': 1627849200000,
       'vinculation_form_id': 'vinc1',
-      'form_title': 'Form Title',
       'can_vinculate': true,
     };
 
@@ -83,7 +82,7 @@ void main() {
       expect(form.comments, 'some comments');
       expect(form.description, 'some description');
       expect(form.conclusionDate, 1627849200000);
-      expect(form.informationFields, isA<List<InformationFieldEntity>>());
+      expect(form.informationFields, isNull);
       expect(form.justificative, isA<JustificativeEntity>());
       expect(form.startDate, 1627849200000);
       expect(form.vinculationFormId, 'vinc1');

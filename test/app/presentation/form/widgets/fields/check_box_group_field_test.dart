@@ -103,6 +103,25 @@ void main() {
       expect(find.text('Option 3'), findsOneWidget);
 
       expect(find.byType(CheckboxListTile), findsNWidgets(3));
+
+      await tester.tap(find.byType(CheckboxListTile).first);
+      await tester.pump();
+
+      final checkboxTile =
+          tester.widget<CheckboxListTile>(find.byType(CheckboxListTile).first);
+
+      expect(
+        checkboxTile.activeColor,
+        Theme.of(
+          tester.element(find.byType(CheckboxListTile).first),
+        ).colorScheme.primary,
+      );
+      expect(
+        checkboxTile.checkColor,
+        Theme.of(
+          tester.element(find.byType(CheckboxListTile).first),
+        ).colorScheme.secondary,
+      );
     });
   });
 }

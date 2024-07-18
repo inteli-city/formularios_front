@@ -13,6 +13,7 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:gates_microapp_flutter/generated/l10n.dart';
+import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -236,6 +237,54 @@ void main() {
           status: FormStatusEnum.CANCELED, formId: '1');
 
       expect(result, isA<Left>());
+    });
+  });
+
+  group('createForm', () {
+    test('should return FormEntity when form creation is successful', () async {
+      // Arrange
+      when(mockFormDatasource.createForm(form: form))
+          .thenAnswer((_) async => form);
+      when(mockFormLocalDatasource.addForm(form: form))
+          .thenAnswer((_) async {});
+
+      // Act
+      final result = await repository.createForm(form: form);
+
+      // Assert
+      expect(result, Right(form));
+      verify(mockFormDatasource.createForm(form: form));
+      verify(mockFormLocalDatasource.addForm(form: form));
+      verifyNoMoreInteractions(mockFormDatasource);
+      verifyNoMoreInteractions(mockFormLocalDatasource);
+    });
+
+    test('should return Failure when datasource throws Failure', () async {
+      final failure = UnknownError();
+      when(mockFormDatasource.createForm(form: form)).thenThrow(failure);
+
+      final result = await repository.createForm(form: form);
+
+      expect(result, Left(failure));
+      verify(mockFormDatasource.createForm(form: form));
+      verifyZeroInteractions(mockFormLocalDatasource);
+      verifyNoMoreInteractions(mockFormDatasource);
+    });
+
+    test('should return UnknownError when an exception is thrown', () async {
+      final exception = Exception('Unexpected error');
+      when(mockFormDatasource.createForm(form: form)).thenThrow(exception);
+
+      final result = await repository.createForm(form: form);
+
+      expect(result.isLeft(), true);
+      result.fold(
+        (failure) => expect(failure, isA<UnknownError>()),
+        (_) => fail('Expected a failure'),
+      );
+      verify(mockFormDatasource.createForm(form: form));
+      verifyZeroInteractions(mockFormLocalDatasource);
+      verifyNoMoreInteractions(mockFormDatasource);
     });
   });
 }

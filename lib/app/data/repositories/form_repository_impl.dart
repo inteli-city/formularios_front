@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/data/datasources/form_local_datasource.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
@@ -97,6 +98,40 @@ class FormRepositoryImpl extends IFormRepository {
       final result = await _formDatasource.createForm(form: form);
 
       await _localDatasource.addForm(form: result);
+
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    } on Exception catch (exception, stackTrace) {
+      return Left(UnknownError(stackTrace: stackTrace));
+    }
+  }
+
+  @override
+  Future<Either<Failure, JustificativeEntity>> cancelForm(
+      {required JustificativeEntity justificative,
+      required String formId}) async {
+    try {
+
+      final updateResult = await updateFormStatus(
+              status: FormStatusEnum.CANCELED, formId: formId)
+          .then(
+        (value) => value.fold(
+          (l) => l,
+          (r) => r,
+        ),
+      );
+
+      if(updateResult is Failure) {
+        return Left(updateResult);
+      }
+
+      final result = await _formDatasource.cancelForm(
+        justificative: justificative,
+        formId: formId,
+      );
+
+      await _localDatasource.cancelForm(justificative: result, formId: formId);
 
       return Right(result);
     } on Failure catch (e) {

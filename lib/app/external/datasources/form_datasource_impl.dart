@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:formularios_front/app/data/adapters/form_adapter.dart';
+import 'package:formularios_front/app/data/adapters/justificative_adapter.dart';
 import 'package:formularios_front/app/data/adapters/section_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/failures/failures.dart';
@@ -106,6 +108,36 @@ class FormDatasourceImpl implements IFormDatasource {
         throw NoInternetConnectionError();
       } else {
         throw CreateFormStatusError(
+          stackTrace: stackTrace,
+          errorMessage: e.errorMessage,
+        );
+      }
+    }
+  }
+
+  @override
+  Future<JustificativeEntity> cancelForm(
+      {required JustificativeEntity justificative,
+      required String formId}) async {
+    try {
+      await updateFormStatus(status: FormStatusEnum.CANCELED, formId: formId);
+
+      final response = await _httpClient.post(
+        '/cancel-form',
+        data: {
+          'form_id': formId,
+          'selected_option': justificative.selectedOption,
+          "justification_text": justificative.justificationText,
+          "justification_image": justificative.justificationImage,
+        },
+      );
+
+      return JustificativeAdapter.fromJson(response.data['justificative']);
+    } on Failure catch (e, stackTrace) {
+      if (e is TimeOutError) {
+        throw InQueueNoInternetConnectionError();
+      } else {
+        throw UpdateFormStatusError(
           stackTrace: stackTrace,
           errorMessage: e.errorMessage,
         );

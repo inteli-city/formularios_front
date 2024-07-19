@@ -55,6 +55,11 @@ class FormMockRepository extends IFormRepository {
             requiredImage: true,
             requiredText: true,
           ),
+          JustificativeOptionEntity(
+            option: 'option',
+            requiredImage: false,
+            requiredText: false,
+          ),
         ],
         selectedOption: null,
         justificationText: null,
@@ -890,5 +895,19 @@ class FormMockRepository extends IFormRepository {
     formList.add(form);
 
     return right(form);
+  }
+
+  @override
+  Future<Either<Failure, JustificativeEntity>> cancelForm(
+      {required JustificativeEntity justificative,
+      required String formId}) async {
+    for (var form in formList) {
+      if (form.formId == formId) {
+        await updateFormStatus(status: FormStatusEnum.CANCELED, formId: formId);
+        return right(justificative);
+      }
+    }
+
+    return left(NoDataFound());
   }
 }

@@ -187,4 +187,56 @@ void main() {
       expect(failure, isA<NoDataFound>());
     });
   });
+
+  group('create form - ', () {
+    test('should create a form', () async {
+      var result = await repository.createForm(
+        form: FormEntity(
+          formId: 'existent_form_id',
+          userId: 'existent_user_id',
+          sections: [
+            SectionEntity(
+              sectionId: 'section_id',
+              fields: [
+                TextFieldEntity(
+                  placeholder: 'placeholder',
+                  key: 'key',
+                  isRequired: true,
+                ),
+              ],
+            )
+          ],
+          latitude: 0,
+          longitude: 0,
+          number: 0,
+          priority: PriorityEnum.EMERGENCY,
+          region: 'region',
+          status: FormStatusEnum.CANCELED,
+          street: 'street',
+          system: 'system',
+          template: 'template',
+          comments: null,
+          conclusionDate: null,
+          description: null,
+          informationFields: null,
+          startDate: null,
+          vinculationFormId: null,
+          area: 'area',
+          canVinculate: false,
+          city: 'city',
+          creationDate: 0,
+          creatorUserId: 'user_id',
+          expirationDate: 0,
+          formTitle: 'form_title',
+          justificative: JustificativeEntity(
+            options: [],
+            selectedOption: null,
+            justificationText: 'text',
+            justificationImage: '',
+          ),
+        ),
+      );
+      expect(result.isRight(), true);
+    });
+  });
 }

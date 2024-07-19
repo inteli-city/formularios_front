@@ -4,7 +4,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/external/datasources/form_datasource_impl.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/generated/l10n.dart' as gates_l10n;
@@ -233,6 +235,120 @@ void main() {
         ),
         throwsA(isA<UpdateFormStatusError>()),
       );
+    });
+    group('createForm', () {
+      test('deve retornar FormEntity ao criar um novo formulário', () async {
+        when(mockHttpClient.post(any, data: anyNamed('data'))).thenAnswer(
+          (_) async => HttpClientResponse(
+            data: {'form': formJson},
+            statusCode: 200,
+          ),
+        );
+
+        final result = await datasource.createForm(
+          form: FormEntity(
+            formId: 'existent_form_id',
+            userId: 'existent_user_id',
+            sections: [
+              SectionEntity(
+                sectionId: 'section_id',
+                fields: [
+                  TextFieldEntity(
+                    placeholder: 'placeholder',
+                    key: 'key',
+                    isRequired: true,
+                  ),
+                ],
+              )
+            ],
+            latitude: 0,
+            longitude: 0,
+            number: 0,
+            priority: PriorityEnum.EMERGENCY,
+            region: 'region',
+            status: FormStatusEnum.CANCELED,
+            street: 'street',
+            system: 'system',
+            template: 'template',
+            comments: null,
+            conclusionDate: null,
+            description: null,
+            informationFields: null,
+            startDate: null,
+            vinculationFormId: null,
+            area: 'area',
+            canVinculate: false,
+            city: 'city',
+            creationDate: 0,
+            creatorUserId: 'user_id',
+            expirationDate: 0,
+            formTitle: 'form_title',
+            justificative: JustificativeEntity(
+              options: [],
+              selectedOption: null,
+              justificationText: 'text',
+              justificationImage: '',
+            ),
+          ),
+        );
+
+        expect(result, isA<FormEntity>());
+        expect(result.formId, form.formId);
+      });
+      test('deve retornar erro ao tentar criar um novo formulário', () async {
+        when(mockHttpClient.post(any, data: anyNamed('data'))).thenThrow(
+          HttpClientError('Erro ao criar um novo formulário'),
+        );
+
+        expect(
+          () async => await datasource.createForm(
+              form: FormEntity(
+            formId: 'existent_form_id',
+            userId: 'existent_user_id',
+            sections: [
+              SectionEntity(
+                sectionId: 'section_id',
+                fields: [
+                  TextFieldEntity(
+                    placeholder: 'placeholder',
+                    key: 'key',
+                    isRequired: true,
+                  ),
+                ],
+              )
+            ],
+            latitude: 0,
+            longitude: 0,
+            number: 0,
+            priority: PriorityEnum.EMERGENCY,
+            region: 'region',
+            status: FormStatusEnum.CANCELED,
+            street: 'street',
+            system: 'system',
+            template: 'template',
+            comments: null,
+            conclusionDate: null,
+            description: null,
+            informationFields: null,
+            startDate: null,
+            vinculationFormId: null,
+            area: 'area',
+            canVinculate: false,
+            city: 'city',
+            creationDate: 0,
+            creatorUserId: 'user_id',
+            expirationDate: 0,
+            formTitle: 'form_title',
+            justificative: JustificativeEntity(
+              options: [],
+              selectedOption: null,
+              justificationText: 'text',
+              justificationImage: '',
+            ),
+          )),
+          throwsA(isA<CreateFormStatusError>()),
+        );
+      });
     });
   });
 }

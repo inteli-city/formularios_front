@@ -38,7 +38,14 @@ void main() {
         ),
       ),
     );
+    final emailFinder = find.text('john.doe@example.com');
 
+    expect(emailFinder, findsOneWidget);
+
+    final Text emailText = tester.widget(emailFinder);
+    expect(emailText.style,
+        Theme.of(tester.element(emailFinder)).textTheme.headlineLarge);
+    
     expect(find.text('John Doe'), findsOneWidget);
     expect(find.text('john.doe@example.com'), findsOneWidget);
     expect(find.text('Group 1'), findsOneWidget);

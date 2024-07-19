@@ -183,4 +183,16 @@ class MockIFormLocalDatasource extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> addForm({required _i2.FormEntity? form}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addForm,
+          [],
+          {#form: form},
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

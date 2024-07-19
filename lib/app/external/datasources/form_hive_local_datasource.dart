@@ -1,6 +1,8 @@
 import 'package:formularios_front/app/data/adapters/form_adapter.dart';
+import 'package:formularios_front/app/data/adapters/justificative_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_local_datasource.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class FormHiveLocalDatasource extends IFormLocalDatasource {
@@ -51,6 +53,25 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
     List forms = await storage.get('forms');
 
     forms.add(FormAdapter.toJson(form));
+
+    await saveForms(forms: FormAdapter.fromJsonList(forms));
+  }
+
+  @override
+  Future<void> cancelForm(
+      {required JustificativeEntity justificative,
+      required String formId}) async {
+    List forms = await storage.get('forms');
+
+    var index = forms.indexWhere((element) => element['form_id'] == formId);
+
+    var canceledForm = forms[index];
+
+    canceledForm['justificative'] = JustificativeAdapter.toJson(justificative);
+
+    forms.removeAt(index);
+
+    forms.insert(index, FormAdapter.toJson(canceledForm));
 
     await saveForms(forms: FormAdapter.fromJsonList(forms));
   }

@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
+import 'package:formularios_front/app/presentation/form/widgets/dialogs/cancel_form_dialog.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
@@ -322,9 +323,13 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           Expanded(
             child: buildCustomElevatedButton(
               onPressed: () async {
-                await controller.updateFormStatus(
-                  status: FormStatusEnum.CANCELED,
-                );
+                // await controller.updateFormStatus(
+                //   status: FormStatusEnum.CANCELED,
+                // );
+
+                await showDialog(context: context, builder: (context) {
+                  return const CancelFormDialog();
+                });
               },
               text: S.current.cancel,
               backgroundColor: AppColors.red,

@@ -20,6 +20,7 @@ import 'package:formularios_front/app/external/datasources/user_datasource_impl.
 import 'package:formularios_front/app/presentation/create-form/controlles/create_form_controller.dart';
 import 'package:formularios_front/app/presentation/create-form/pages/create_form_page.dart';
 import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
+import 'package:formularios_front/app/presentation/form/controller/cancel_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
@@ -107,6 +108,7 @@ class HomeModule extends Module {
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);
     i.add(SelectChipController.new);
+    i.add(CancelFormController.new);
     i.add(
       () => SingleFormProvider(i.get(), form: i.args.data),
     );

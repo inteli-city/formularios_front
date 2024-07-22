@@ -19,6 +19,6 @@ abstract class IFormDatasource {
 
   Future<FormEntity> createForm({required FormEntity form});
 
-  Future<JustificativeEntity> cancelForm(
+  Future<FormEntity> cancelForm(
       {required JustificativeEntity justificative, required String formId});
 }

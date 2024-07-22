@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:formularios_front/app/data/adapters/form_adapter.dart';
-import 'package:formularios_front/app/data/adapters/justificative_adapter.dart';
 import 'package:formularios_front/app/data/adapters/section_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
@@ -116,7 +115,7 @@ class FormDatasourceImpl implements IFormDatasource {
   }
 
   @override
-  Future<JustificativeEntity> cancelForm(
+  Future<FormEntity> cancelForm(
       {required JustificativeEntity justificative,
       required String formId}) async {
     try {
@@ -130,7 +129,7 @@ class FormDatasourceImpl implements IFormDatasource {
         },
       );
 
-      return JustificativeAdapter.fromJson(response.data['justificative']);
+      return FormAdapter.fromJson(response.data['form']);
     } on Failure catch (e, stackTrace) {
       if (e is TimeOutError) {
         throw InQueueNoInternetConnectionError();

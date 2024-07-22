@@ -898,13 +898,13 @@ class FormMockRepository extends IFormRepository {
   }
 
   @override
-  Future<Either<Failure, JustificativeEntity>> cancelForm(
+  Future<Either<Failure, FormEntity>> cancelForm(
       {required JustificativeEntity justificative,
       required String formId}) async {
     for (var form in formList) {
       if (form.formId == formId) {
         await updateFormStatus(status: FormStatusEnum.CANCELED, formId: formId);
-        return right(justificative);
+        return right(form);
       }
     }
 

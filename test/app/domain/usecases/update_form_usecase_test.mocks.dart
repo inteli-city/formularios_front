@@ -185,7 +185,7 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i9.JustificativeEntity>> cancelForm({
+  _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>> cancelForm({
     required _i9.JustificativeEntity? justificative,
     required String? formId,
   }) =>
@@ -198,9 +198,8 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
             #formId: formId,
           },
         ),
-        returnValue:
-            _i4.Future<_i2.Either<_i5.Failure, _i9.JustificativeEntity>>.value(
-                _FakeEither_0<_i5.Failure, _i9.JustificativeEntity>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>.value(
+            _FakeEither_0<_i5.Failure, _i6.FormEntity>(
           this,
           Invocation.method(
             #cancelForm,
@@ -211,5 +210,5 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
             },
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i9.JustificativeEntity>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>);
 }

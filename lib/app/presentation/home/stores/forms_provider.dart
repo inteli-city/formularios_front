@@ -267,10 +267,8 @@ class FormsProvider extends ChangeNotifier {
   Future<void> cancelForm(
       {required JustificativeEntity justificative,
       required String formId}) async {
-    await _cancelFormUseCase(
-     formId: formId,
-     justificative: justificative
-    ).then((value) {
+    await _cancelFormUseCase(formId: formId, justificative: justificative)
+        .then((value) {
       return value.fold(
         (error) {
           GlobalSnackBar.error(error.errorMessage);
@@ -312,7 +310,6 @@ class FormsProvider extends ChangeNotifier {
           GlobalSnackBar.error(error.errorMessage);
         },
         (createdForm) async {
-          print('createdForm: $createdForm');
           GlobalSnackBar.success('Formulário criado com sucesso!');
         },
       );

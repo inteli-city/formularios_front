@@ -27,6 +27,6 @@ abstract class IFormRepository {
 
   Future<Either<Failure, FormEntity>> createForm({required FormEntity form});
 
-  Future<Either<Failure, JustificativeEntity>> cancelForm(
+  Future<Either<Failure, FormEntity>> cancelForm(
       {required JustificativeEntity justificative, required String formId});
 }

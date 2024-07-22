@@ -441,7 +441,7 @@ class MockICancelFormUseCase extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i19.JustificativeEntity>> call({
+  _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>> call({
     required _i19.JustificativeEntity? justificative,
     required String? formId,
   }) =>
@@ -454,9 +454,8 @@ class MockICancelFormUseCase extends _i1.Mock
             #formId: formId,
           },
         ),
-        returnValue:
-            _i5.Future<_i3.Either<_i6.Failure, _i19.JustificativeEntity>>.value(
-                _FakeEither_1<_i6.Failure, _i19.JustificativeEntity>(
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>.value(
+            _FakeEither_1<_i6.Failure, _i7.FormEntity>(
           this,
           Invocation.method(
             #call,
@@ -467,5 +466,5 @@ class MockICancelFormUseCase extends _i1.Mock
             },
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, _i19.JustificativeEntity>>);
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>);
 }

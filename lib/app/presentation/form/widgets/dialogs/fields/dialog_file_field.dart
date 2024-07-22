@@ -7,7 +7,6 @@ import 'package:formularios_front/app/presentation/form/controller/cancel_form_c
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
-import 'package:formularios_front/generated/l10n.dart';
 
 class DialogFileField extends StatefulWidget {
   final CancelFormController cancelFormController;
@@ -101,28 +100,21 @@ class _DialogFileFieldState extends State<DialogFileField>
                     AppDimensions.radiusMedium,
                   ),
                   side: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: 1.5,
+                    color: AppColors.primaryBlue,
+                    width: AppDimensions.borderMedium,
                   ),
                 ),
                 backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  const Icon(
-                    Icons.attach_file,
-                    size: AppDimensions.iconMedium,
-                  ),
-                  const SizedBox(
-                    width: AppDimensions.paddingSmall,
-                  ),
-                  Text(
-                    S.current.selectFiles,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium,
+                  Icon(
+                    Icons.image_search_rounded,
+                    fill: 1,
+                    size: AppDimensions.iconLarge,
                   ),
                 ],
               ),
@@ -179,10 +171,15 @@ class _DialogFileFieldState extends State<DialogFileField>
                   )
                 : const SizedBox(),
             state.hasError
-                ? Text(
-                    state.errorText ?? '',
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.error),
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      state.errorText ?? '',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: AppColors.red),
+                    ),
                   )
                 : const SizedBox(),
           ],

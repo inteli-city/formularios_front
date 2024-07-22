@@ -4,10 +4,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:typed_data' as _i10;
+import 'dart:typed_data' as _i11;
+import 'dart:ui' as _i8;
 
-import 'package:file_picker/src/file_picker.dart' as _i8;
-import 'package:file_picker/src/file_picker_result.dart' as _i9;
+import 'package:file_picker/src/file_picker.dart' as _i9;
+import 'package:file_picker/src/file_picker_result.dart' as _i10;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
     as _i7;
@@ -260,18 +261,18 @@ class MockSingleFormProvider extends _i1.Mock
 /// A class which mocks [FilePicker].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFilePicker extends _i1.Mock implements _i8.FilePicker {
+class MockFilePicker extends _i1.Mock implements _i9.FilePicker {
   MockFilePicker() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i9.FilePickerResult?> pickFiles({
+  _i6.Future<_i10.FilePickerResult?> pickFiles({
     String? dialogTitle,
     String? initialDirectory,
-    _i8.FileType? type = _i8.FileType.any,
+    _i9.FileType? type = _i9.FileType.any,
     List<String>? allowedExtensions,
-    dynamic Function(_i8.FilePickerStatus)? onFileLoading,
+    dynamic Function(_i9.FilePickerStatus)? onFileLoading,
     bool? allowCompression = true,
     int? compressionQuality = 30,
     bool? allowMultiple = false,
@@ -299,8 +300,8 @@ class MockFilePicker extends _i1.Mock implements _i8.FilePicker {
             #readSequential: readSequential,
           },
         ),
-        returnValue: _i6.Future<_i9.FilePickerResult?>.value(),
-      ) as _i6.Future<_i9.FilePickerResult?>);
+        returnValue: _i6.Future<_i10.FilePickerResult?>.value(),
+      ) as _i6.Future<_i10.FilePickerResult?>);
 
   @override
   _i6.Future<bool?> clearTemporaryFiles() => (super.noSuchMethod(
@@ -335,9 +336,9 @@ class MockFilePicker extends _i1.Mock implements _i8.FilePicker {
     String? dialogTitle,
     String? fileName,
     String? initialDirectory,
-    _i8.FileType? type = _i8.FileType.any,
+    _i9.FileType? type = _i9.FileType.any,
     List<String>? allowedExtensions,
-    _i10.Uint8List? bytes,
+    _i11.Uint8List? bytes,
     bool? lockParentWindow = false,
   }) =>
       (super.noSuchMethod(

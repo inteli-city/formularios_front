@@ -112,17 +112,23 @@ class FormRepositoryImpl extends IFormRepository {
       {required JustificativeEntity justificative,
       required String formId}) async {
     try {
-
       final updateResult = await updateFormStatus(
               status: FormStatusEnum.CANCELED, formId: formId)
-          .then(
-        (value) => value.fold(
-          (l) => l,
-          (r) => r,
-        ),
-      );
-
-      if(updateResult is Failure) {
+          .then((value) {
+        return value.fold(
+          (l) {
+            return l;
+          },
+          (r) {
+            return r;
+          },
+        );
+      });
+      if (updateResult is FormEntity) {
+        await _localDatasource.updateForm(form: updateResult);
+      }
+      
+      if (updateResult is Failure) {
         return Left(updateResult);
       }
 
@@ -131,7 +137,8 @@ class FormRepositoryImpl extends IFormRepository {
         formId: formId,
       );
 
-      await _localDatasource.cancelForm(justificative: result, formId: formId);
+      await _localDatasource.cancelForm(
+          justificative: justificative, formId: formId);
 
       return Right(result);
     } on Failure catch (e) {

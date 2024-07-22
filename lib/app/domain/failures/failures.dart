@@ -1,4 +1,4 @@
-import 'package:formularios_front/generated/l10n.dart';
+ import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 
 class InQueueNoInternetConnectionError extends Failure {
@@ -22,6 +22,13 @@ class CompleteFormError extends Failure {
 
 class UpdateFormStatusError extends Failure {
   UpdateFormStatusError({
+    required super.stackTrace,
+    required super.errorMessage,
+  });
+}
+
+class CancelFormError extends Failure {
+  CancelFormError({
     required super.stackTrace,
     required super.errorMessage,
   });

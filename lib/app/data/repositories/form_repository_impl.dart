@@ -138,7 +138,7 @@ class FormRepositoryImpl extends IFormRepository {
       );
 
       await _localDatasource.cancelForm(
-          justificative: justificative, formId: formId);
+          justificative: result, formId: formId);
 
       return Right(result);
     } on Failure catch (e) {

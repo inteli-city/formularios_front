@@ -135,7 +135,7 @@ class FormDatasourceImpl implements IFormDatasource {
       if (e is TimeOutError) {
         throw InQueueNoInternetConnectionError();
       } else {
-        throw UpdateFormStatusError(
+        throw CancelFormError(
           stackTrace: stackTrace,
           errorMessage: e.errorMessage,
         );

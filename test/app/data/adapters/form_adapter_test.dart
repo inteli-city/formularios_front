@@ -3,12 +3,14 @@ import 'package:formularios_front/app/domain/entities/information_field_entity.d
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+import 'package:formularios_front/app/domain/enum/information_field_type.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/data/adapters/form_adapter.dart';
 
 void main() {
   group('FormAdapter', () {
     final formJson = {
+      'form_title': 'Form Title',
       'form_id': '1',
       'creator_user_id': '123',
       'user_id': '456',
@@ -45,7 +47,11 @@ void main() {
       'comments': 'some comments',
       'description': 'some description',
       'conclusion_date': 1627849200000,
-      'information_fields': [],
+      'information_fields': [{
+        'information_field_type':InformationFieldTypeEnum.MAP_INFORMATION_FIELD.name,
+        'latitude': 12.34,
+        'longitude': 56.78
+      }],
       'justification': {
         'options': [],
         'selected_option': '',
@@ -54,7 +60,6 @@ void main() {
       },
       'start_date': 1627849200000,
       'vinculation_form_id': 'vinc1',
-      'form_title': 'Form Title',
       'can_vinculate': true,
     };
 

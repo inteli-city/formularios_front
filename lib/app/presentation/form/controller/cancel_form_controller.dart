@@ -1,14 +1,21 @@
 class CancelFormController {
-  String? selectedImage;
+  List<String>? selectedImages;
   String? justificativeText;
+  String? selectedOption;
 
-  CancelFormController({this.selectedImage, this.justificativeText});
+  CancelFormController({this.selectedImages, this.justificativeText}) {
+    selectedImages = [];
+  }
 
-  String? get image => selectedImage;
+  List<String>? get images => selectedImages;
 
-  void setImage(String? value) => selectedImage = value;
+  void setImage(List<String> value) => selectedImages = value;
 
   String? get justificative => justificativeText;
 
   void setJustificative(String? value) => justificativeText = value;
+
+  String? get option => selectedOption;
+
+  void setOption(String? value) => selectedOption = value;
 }

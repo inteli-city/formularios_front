@@ -1,11 +1,13 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/presentation/form/controller/cancel_form_controller.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/dialogs/fields/dialog_file_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/dialogs/fields/dialog_text_field.dart';
+import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
@@ -139,6 +141,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                                     ? DialogFileField(
                                         cancelFormController:
                                             cancelFormController,
+                                        maxQuantity: 1,
                                       )
                                     : const SizedBox(),
                                 const SizedBox(
@@ -146,7 +149,8 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                                 ),
                                 selectedOption!.requiredText
                                     ? DialogTextField(
-                                        label: 'Inserir texto de jusitificação',
+                                        label:
+                                            'Inserir texto de jusitificação',
                                         controller: cancelFormController)
                                     : const SizedBox(),
                               ],
@@ -160,11 +164,24 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        FormEntity form =
+                            context.read<SingleFormProvider>().form;
+
                         if (formKey.currentState!.validate()) {
-                          Navigator.pop(
-                            context,
+                          await Modular.get<FormsProvider>().cancelForm(
+                            justificative: JustificativeEntity(
+                              options: form.justificative.options,
+                              selectedOption: selectedOption!.option,
+                              justificationText:
+                                  cancelFormController.justificative,
+                              justificationImage:
+                                  cancelFormController.images![0],
+                            ),
+                            formId: form.formId,
                           );
+                          Modular.to.pop();
+                          Modular.to.navigate('/home/forms');
                         }
                       },
                       child: Text(

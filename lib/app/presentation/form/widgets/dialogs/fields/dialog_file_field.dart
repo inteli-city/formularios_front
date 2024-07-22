@@ -24,13 +24,7 @@ class DialogFileField extends StatefulWidget {
 
 class _DialogFileFieldState extends State<DialogFileField>
     with ValidationMixin {
-  late List<String> _selectedFiles;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedFiles = widget.cancelFormController.images ?? [];
-  }
+  final List<String> _selectedFiles = [];
 
   Future<void> _pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -76,8 +70,8 @@ class _DialogFileFieldState extends State<DialogFileField>
       validator: (value) {
         return combine([
           () => isRequired(value.toString(), true, true),
-          () => minQuantity(widget.cancelFormController.images?.length ?? 0, 1),
-          () => maxQuantity(widget.cancelFormController.images?.length ?? 0, 1),
+          () => minQuantity(_selectedFiles.length, 1),
+          () => maxQuantity(_selectedFiles.length, 1),
         ]);
       },
       builder: (state) {
@@ -199,31 +193,6 @@ class _DialogFileFieldState extends State<DialogFileField>
                             },
                           ),
                       ],
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedFiles = [];
-                          widget.cancelFormController.setImage([]);
-                        });
-                      },
-                      child: Container(
-                        width: 24,
-                        height: 24,
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.close,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                      ),
                     ),
                   ),
                 ],

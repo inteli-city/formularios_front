@@ -9,11 +9,13 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 
 class DialogFileField extends StatefulWidget {
+  final int maxQuantity;
   final CancelFormController cancelFormController;
 
   const DialogFileField({
     super.key,
     required this.cancelFormController,
+    required this.maxQuantity,
   });
 
   @override
@@ -22,12 +24,12 @@ class DialogFileField extends StatefulWidget {
 
 class _DialogFileFieldState extends State<DialogFileField>
     with ValidationMixin {
-  late String _selectedFile;
+  late List<String> _selectedFiles;
 
   @override
   void initState() {
     super.initState();
-    _selectedFile = widget.cancelFormController.image ?? '';
+    _selectedFiles = widget.cancelFormController.images ?? [];
   }
 
   Future<void> _pickFiles() async {
@@ -35,31 +37,47 @@ class _DialogFileFieldState extends State<DialogFileField>
         allowMultiple: false,
         type: FileType.custom,
         allowedExtensions: ['jpg', 'jpeg', 'png']);
-
     if (result != null && result.files.isNotEmpty) {
-      String file = kIsWeb
-          ? (result.files.single.bytes != null
-              ? 'data:image/${result.files.single.extension};base64,${base64Encode(result.files.single.bytes!)}'
-              : result.files.single.name)
-          : result.files.single.path!;
-      setState(
-        () {
-          _selectedFile = file;
-          widget.cancelFormController.setImage(_selectedFile);
-        },
-      );
+      if (widget.maxQuantity > 1) {
+        List<String> files = result.files.map((file) {
+          if (kIsWeb) {
+            return file.bytes != null
+                ? 'data:image/${file.extension};base64,${base64Encode(file.bytes!)}'
+                : file.name;
+          } else {
+            return file.path!;
+          }
+        }).toList();
+        setState(
+          () {
+            _selectedFiles.addAll(files);
+            widget.cancelFormController.selectedImages = files;
+          },
+        );
+      } else {
+        String file = kIsWeb
+            ? (result.files.single.bytes != null
+                ? 'data:image/${result.files.single.extension};base64,${base64Encode(result.files.single.bytes!)}'
+                : result.files.single.name)
+            : result.files.single.path!;
+        setState(
+          () {
+            _selectedFiles.add(file);
+            widget.cancelFormController.selectedImages = [file];
+          },
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return FormField<String?>(
-      initialValue: '',
       validator: (value) {
         return combine([
           () => isRequired(value.toString(), true, true),
-          () => minQuantity(value?.length, 1),
-          () => maxQuantity(value?.length, 1),
+          () => minQuantity(widget.cancelFormController.images?.length ?? 0, 1),
+          () => maxQuantity(widget.cancelFormController.images?.length ?? 0, 1),
         ]);
       },
       builder: (state) {
@@ -120,56 +138,97 @@ class _DialogFileFieldState extends State<DialogFileField>
               ),
             ),
             const SizedBox(height: AppDimensions.paddingSmall),
-            widget.cancelFormController.image != null
-                ? Center(
-                    child: Stack(
+            Center(
+              child: Stack(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: AppDimensions.paddingSmall),
+                    child: Column(
                       children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: AppDimensions.paddingSmall),
-                          child: kIsWeb
-                              ? Image.network(
-                                  _selectedFile,
-                                  width: 150,
-                                  height: 50,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.file(
-                                  File(_selectedFile),
-                                  width: 150,
-                                  height: 50,
-                                  fit: BoxFit.cover,
+                        if (_selectedFiles.isNotEmpty)
+                          ..._selectedFiles.map(
+                            (file) {
+                              return Center(
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: AppDimensions.paddingSmall),
+                                      child: kIsWeb
+                                          ? Image.network(
+                                              file,
+                                              width: 150,
+                                              height: 50,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.file(
+                                              File(file),
+                                              width: 150,
+                                              height: 50,
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
+                                    Positioned(
+                                      top: 0,
+                                      right: 0,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _selectedFiles.remove(file);
+                                          });
+                                        },
+                                        child: Container(
+                                          width: 24,
+                                          height: 24,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: const Icon(
+                                            Icons.close,
+                                            size: 16,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _selectedFile = '';
-                                widget.cancelFormController.setImage(null);
-                              });
+                              );
                             },
-                            child: Container(
-                              width: 24,
-                              height: 24,
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.close,
-                                size: 16,
-                                color: Colors.white,
-                              ),
-                            ),
                           ),
-                        ),
                       ],
                     ),
-                  )
-                : const SizedBox(),
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedFiles = [];
+                          widget.cancelFormController.setImage([]);
+                        });
+                      },
+                      child: Container(
+                        width: 24,
+                        height: 24,
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             state.hasError
                 ? Padding(
                     padding: const EdgeInsets.only(left: 8.0),

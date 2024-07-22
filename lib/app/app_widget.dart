@@ -34,7 +34,6 @@ class AppWidget extends StatelessWidget {
         routeInformationParser: Modular.routeInformationParser,
         routerDelegate: Modular.routerDelegate,
         theme: AppThemes.lightTheme,
-        // darkTheme: AppThemes.darkTheme,
         themeMode: ThemeMode.system,
         localizationsDelegates: const [
           S.delegate,

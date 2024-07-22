@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
@@ -239,6 +240,7 @@ class SectionForm extends StatelessWidget {
                 section.sectionId, field.key, value);
           },
           key: Key(field.key),
+          filePicker: FilePicker.platform,
           singleFormProvider: singleFormProvider,
           section: section,
         );

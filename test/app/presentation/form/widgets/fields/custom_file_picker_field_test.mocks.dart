@@ -4,8 +4,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:ui' as _i8;
+import 'dart:typed_data' as _i10;
 
+import 'package:file_picker/src/file_picker.dart' as _i8;
+import 'package:file_picker/src/file_picker_result.dart' as _i9;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
     as _i7;
@@ -253,4 +255,105 @@ class MockSingleFormProvider extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [FilePicker].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFilePicker extends _i1.Mock implements _i8.FilePicker {
+  MockFilePicker() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<_i9.FilePickerResult?> pickFiles({
+    String? dialogTitle,
+    String? initialDirectory,
+    _i8.FileType? type = _i8.FileType.any,
+    List<String>? allowedExtensions,
+    dynamic Function(_i8.FilePickerStatus)? onFileLoading,
+    bool? allowCompression = true,
+    int? compressionQuality = 30,
+    bool? allowMultiple = false,
+    bool? withData = false,
+    bool? withReadStream = false,
+    bool? lockParentWindow = false,
+    bool? readSequential = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickFiles,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #initialDirectory: initialDirectory,
+            #type: type,
+            #allowedExtensions: allowedExtensions,
+            #onFileLoading: onFileLoading,
+            #allowCompression: allowCompression,
+            #compressionQuality: compressionQuality,
+            #allowMultiple: allowMultiple,
+            #withData: withData,
+            #withReadStream: withReadStream,
+            #lockParentWindow: lockParentWindow,
+            #readSequential: readSequential,
+          },
+        ),
+        returnValue: _i6.Future<_i9.FilePickerResult?>.value(),
+      ) as _i6.Future<_i9.FilePickerResult?>);
+
+  @override
+  _i6.Future<bool?> clearTemporaryFiles() => (super.noSuchMethod(
+        Invocation.method(
+          #clearTemporaryFiles,
+          [],
+        ),
+        returnValue: _i6.Future<bool?>.value(),
+      ) as _i6.Future<bool?>);
+
+  @override
+  _i6.Future<String?> getDirectoryPath({
+    String? dialogTitle,
+    bool? lockParentWindow = false,
+    String? initialDirectory,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDirectoryPath,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #lockParentWindow: lockParentWindow,
+            #initialDirectory: initialDirectory,
+          },
+        ),
+        returnValue: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
+
+  @override
+  _i6.Future<String?> saveFile({
+    String? dialogTitle,
+    String? fileName,
+    String? initialDirectory,
+    _i8.FileType? type = _i8.FileType.any,
+    List<String>? allowedExtensions,
+    _i10.Uint8List? bytes,
+    bool? lockParentWindow = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveFile,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #fileName: fileName,
+            #initialDirectory: initialDirectory,
+            #type: type,
+            #allowedExtensions: allowedExtensions,
+            #bytes: bytes,
+            #lockParentWindow: lockParentWindow,
+          },
+        ),
+        returnValue: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
 }

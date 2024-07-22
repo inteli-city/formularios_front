@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
@@ -47,11 +46,7 @@ void main() {
       'comments': 'some comments',
       'description': 'some description',
       'conclusion_date': 1627849200000,
-      'information_fields': [{
-        'information_field_type':InformationFieldTypeEnum.MAP_INFORMATION_FIELD.name,
-        'latitude': 12.34,
-        'longitude': 56.78
-      }],
+      'information_fields': null,
       'justification': {
         'options': [],
         'selected_option': '',
@@ -88,7 +83,7 @@ void main() {
       expect(form.comments, 'some comments');
       expect(form.description, 'some description');
       expect(form.conclusionDate, 1627849200000);
-      expect(form.informationFields, isA<List<InformationFieldEntity>>());
+      expect(form.informationFields, isNull);
       expect(form.justificative, isA<JustificativeEntity>());
       expect(form.startDate, 1627849200000);
       expect(form.vinculationFormId, 'vinc1');

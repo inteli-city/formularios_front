@@ -19,12 +19,16 @@ import 'user_provider_test.mocks.dart';
 @GenerateMocks([AuthController, LoginUserUsecase])
 void main() {
   late MockLoginUserUsecase mockLoginUserUsecase;
+  late AuthController mockAuthController;
   late UserProvider userProvider;
 
   setUp(() {
     Modular.bindModule(AppModule());
     mockLoginUserUsecase = MockLoginUserUsecase();
+    mockAuthController = MockAuthController();
     userProvider = UserProvider(mockLoginUserUsecase);
+
+    Modular.replaceInstance<AuthController>(mockAuthController);
   });
 
   final userEntity = UserEntity(
@@ -91,6 +95,15 @@ void main() {
       );
 
       await tester.tap(find.text('Show Error SnackBar'));
+
+      expect(userProvider.user, isNull);
+    });
+    test('should logout user', () async {
+      userProvider.user = userEntity;
+
+      when(mockLoginUserUsecase()).thenAnswer((_) async => Right(userEntity));
+
+      userProvider.logout();
 
       expect(userProvider.user, isNull);
     });

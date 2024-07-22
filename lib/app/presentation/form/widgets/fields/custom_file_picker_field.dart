@@ -17,6 +17,7 @@ class CustomFilePickerFormField extends StatefulWidget {
   final SectionEntity section;
   final SingleFormProvider singleFormProvider;
   final Function(DateTime?) onChanged;
+  final FilePicker filePicker;
 
   const CustomFilePickerFormField({
     super.key,
@@ -24,6 +25,7 @@ class CustomFilePickerFormField extends StatefulWidget {
     required this.onChanged,
     required this.singleFormProvider,
     required this.section,
+    required this.filePicker,
   });
 
   @override
@@ -42,7 +44,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
   }
 
   Future<void> _pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
+    FilePickerResult? result =  await widget.filePicker.pickFiles(
       allowMultiple: widget.field.maxQuantity > 1,
       type: FileType.custom,
       allowedExtensions: widget.field.fileType == FileTypeEnum.IMAGE

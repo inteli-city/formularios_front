@@ -141,5 +141,14 @@ void main() {
       verify(mockBox.put('forms', [FormAdapter.toJson(updatedFormCopy)]))
           .called(1);
     });
+
+    test('deve adicionar formularios', () async {
+      when(mockBox.get('forms')).thenReturn([]);
+     
+      await datasource.addForm(form: form);
+
+      verify(mockBox.put('forms', [FormAdapter.toJson(form)]))
+          .called(1);
+    });
   });
 }

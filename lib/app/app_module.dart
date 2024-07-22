@@ -3,6 +3,7 @@ import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/data/datasources/user_datasource.dart';
 import 'package:formularios_front/app/data/repositories/template_repository_mock.dart';
 import 'package:formularios_front/app/domain/repositories/template_repository.dart';
+import 'package:formularios_front/app/domain/usecases/cancel_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/get_templates_usecase.dart';
 import 'package:formularios_front/app/external/datasources/form_datasource_impl.dart';
@@ -101,6 +102,7 @@ class HomeModule extends Module {
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
     i.addLazySingleton<IFetchFormsLocallyUsecase>(FetchFormsLocallyUsecase.new);
     i.addLazySingleton<IUpdateFormStatusUseCase>(UpdateFormStatusUseCase.new);
+    i.addLazySingleton<ICancelFormUseCase>(CancelFormUseCase.new);
     i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
     i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);
     i.addLazySingleton<IGetTemplatesUsecase>(GetTemplatesUsecase.new);

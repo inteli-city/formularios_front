@@ -69,10 +69,6 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
 
     canceledForm['justificative'] = JustificativeAdapter.toJson(justificative);
 
-    forms.removeAt(index);
-
-    forms.insert(index, FormAdapter.toJson(canceledForm));
-
-    await saveForms(forms: FormAdapter.fromJsonList(forms));
+    await updateForm(form: FormAdapter.fromJson(canceledForm));
   }
 }

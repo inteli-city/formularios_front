@@ -120,8 +120,6 @@ class FormDatasourceImpl implements IFormDatasource {
       {required JustificativeEntity justificative,
       required String formId}) async {
     try {
-      await updateFormStatus(status: FormStatusEnum.CANCELED, formId: formId);
-
       final response = await _httpClient.post(
         '/cancel-form',
         data: {

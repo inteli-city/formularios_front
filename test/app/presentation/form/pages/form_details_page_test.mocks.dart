@@ -280,6 +280,24 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       ) as _i7.Future<void>);
 
   @override
+  _i7.Future<void> cancelForm({
+    required _i4.JustificativeEntity? justificative,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justificative: justificative,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
   _i7.Future<void> createForm({
     required _i12.TemplateEntity? template,
     required String? area,
@@ -619,6 +637,24 @@ class MockSingleFormProvider extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i7.Future<void> cancelForm({
+    required _i4.JustificativeEntity? justificative,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justificative: justificative,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
   _i7.Future<void> saveForm() => (super.noSuchMethod(

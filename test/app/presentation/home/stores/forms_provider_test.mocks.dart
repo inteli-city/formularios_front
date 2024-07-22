@@ -7,6 +7,8 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i7;
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+    as _i19;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i13;
 import 'package:formularios_front/app/domain/entities/template_entity.dart'
@@ -16,6 +18,8 @@ import 'package:formularios_front/app/domain/enum/form_status_enum.dart'
 import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i17;
 import 'package:formularios_front/app/domain/repositories/form_repository.dart'
     as _i2;
+import 'package:formularios_front/app/domain/usecases/cancel_form_usecase.dart'
+    as _i18;
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart'
     as _i15;
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart'
@@ -425,4 +429,43 @@ class MockICreateFormUsecase extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>>);
+}
+
+/// A class which mocks [ICancelFormUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockICancelFormUseCase extends _i1.Mock
+    implements _i18.ICancelFormUseCase {
+  MockICancelFormUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i19.JustificativeEntity>> call({
+    required _i19.JustificativeEntity? justificative,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [],
+          {
+            #justificative: justificative,
+            #formId: formId,
+          },
+        ),
+        returnValue:
+            _i5.Future<_i3.Either<_i6.Failure, _i19.JustificativeEntity>>.value(
+                _FakeEither_1<_i6.Failure, _i19.JustificativeEntity>(
+          this,
+          Invocation.method(
+            #call,
+            [],
+            {
+              #justificative: justificative,
+              #formId: formId,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, _i19.JustificativeEntity>>);
 }

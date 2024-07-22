@@ -4,9 +4,11 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:ui' as _i7;
+import 'dart:ui' as _i8;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+    as _i7;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart'
     as _i3;
@@ -127,6 +129,24 @@ class MockSingleFormProvider extends _i1.Mock
       );
 
   @override
+  _i6.Future<void> cancelForm({
+    required _i7.JustificativeEntity? justificative,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justificative: justificative,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
   _i6.Future<void> saveForm() => (super.noSuchMethod(
         Invocation.method(
           #saveForm,
@@ -199,7 +219,7 @@ class MockSingleFormProvider extends _i1.Mock
       ));
 
   @override
-  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -208,7 +228,7 @@ class MockSingleFormProvider extends _i1.Mock
       );
 
   @override
-  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

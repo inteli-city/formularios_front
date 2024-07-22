@@ -3,16 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:formularios_front/app/data/datasources/form_datasource.dart'
-    as _i3;
+    as _i4;
 import 'package:formularios_front/app/data/datasources/form_local_datasource.dart'
-    as _i7;
+    as _i8;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
+import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+    as _i3;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
-    as _i6;
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
+    as _i7;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -38,26 +40,37 @@ class _FakeFormEntity_0 extends _i1.SmartFake implements _i2.FormEntity {
         );
 }
 
+class _FakeJustificativeEntity_1 extends _i1.SmartFake
+    implements _i3.JustificativeEntity {
+  _FakeJustificativeEntity_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [IFormDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
+class MockIFormDatasource extends _i1.Mock implements _i4.IFormDatasource {
   MockIFormDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<List<_i2.FormEntity>> getUserForms() => (super.noSuchMethod(
+  _i5.Future<List<_i2.FormEntity>> getUserForms() => (super.noSuchMethod(
         Invocation.method(
           #getUserForms,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.FormEntity>>.value(<_i2.FormEntity>[]),
-      ) as _i4.Future<List<_i2.FormEntity>>);
+        returnValue: _i5.Future<List<_i2.FormEntity>>.value(<_i2.FormEntity>[]),
+      ) as _i5.Future<List<_i2.FormEntity>>);
 
   @override
-  _i4.Future<_i2.FormEntity> updateFormStatus({
-    required _i5.FormStatusEnum? status,
+  _i5.Future<_i2.FormEntity> updateFormStatus({
+    required _i6.FormStatusEnum? status,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -69,7 +82,7 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
             #formId: formId,
           },
         ),
-        returnValue: _i4.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
+        returnValue: _i5.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
           this,
           Invocation.method(
             #updateFormStatus,
@@ -80,12 +93,12 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
             },
           ),
         )),
-      ) as _i4.Future<_i2.FormEntity>);
+      ) as _i5.Future<_i2.FormEntity>);
 
   @override
-  _i4.Future<_i2.FormEntity> postForm({
+  _i5.Future<_i2.FormEntity> postForm({
     required String? formId,
-    required List<_i6.SectionEntity>? sections,
+    required List<_i7.SectionEntity>? sections,
     String? vinculationFormId,
   }) =>
       (super.noSuchMethod(
@@ -98,7 +111,7 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
             #vinculationFormId: vinculationFormId,
           },
         ),
-        returnValue: _i4.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
+        returnValue: _i5.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
           this,
           Invocation.method(
             #postForm,
@@ -110,17 +123,17 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
             },
           ),
         )),
-      ) as _i4.Future<_i2.FormEntity>);
+      ) as _i5.Future<_i2.FormEntity>);
 
   @override
-  _i4.Future<_i2.FormEntity> createForm({required _i2.FormEntity? form}) =>
+  _i5.Future<_i2.FormEntity> createForm({required _i2.FormEntity? form}) =>
       (super.noSuchMethod(
         Invocation.method(
           #createForm,
           [],
           {#form: form},
         ),
-        returnValue: _i4.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
+        returnValue: _i5.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
           this,
           Invocation.method(
             #createForm,
@@ -128,59 +141,117 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
             {#form: form},
           ),
         )),
-      ) as _i4.Future<_i2.FormEntity>);
+      ) as _i5.Future<_i2.FormEntity>);
+
+  @override
+  _i5.Future<_i3.JustificativeEntity> cancelForm({
+    required _i3.JustificativeEntity? justificative,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justificative: justificative,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i5.Future<_i3.JustificativeEntity>.value(
+            _FakeJustificativeEntity_1(
+          this,
+          Invocation.method(
+            #cancelForm,
+            [],
+            {
+              #justificative: justificative,
+              #formId: formId,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.JustificativeEntity>);
 }
 
 /// A class which mocks [IFormLocalDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockIFormLocalDatasource extends _i1.Mock
-    implements _i7.IFormLocalDatasource {
+    implements _i8.IFormLocalDatasource {
   MockIFormLocalDatasource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<void> saveForms({required List<_i2.FormEntity>? forms}) =>
+  _i5.Future<void> saveForms({required List<_i2.FormEntity>? forms}) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveForms,
           [],
           {#forms: forms},
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i4.Future<List<_i2.FormEntity>> getForms() => (super.noSuchMethod(
+  _i5.Future<List<_i2.FormEntity>> getForms() => (super.noSuchMethod(
         Invocation.method(
           #getForms,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.FormEntity>>.value(<_i2.FormEntity>[]),
-      ) as _i4.Future<List<_i2.FormEntity>>);
+        returnValue: _i5.Future<List<_i2.FormEntity>>.value(<_i2.FormEntity>[]),
+      ) as _i5.Future<List<_i2.FormEntity>>);
 
   @override
-  _i4.Future<void> updateForm({required _i2.FormEntity? form}) =>
+  _i5.Future<void> updateForm({required _i2.FormEntity? form}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateForm,
           [],
           {#form: form},
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  _i4.Future<void> deleteForm({required String? formId}) => (super.noSuchMethod(
+  _i5.Future<void> deleteForm({required String? formId}) => (super.noSuchMethod(
         Invocation.method(
           #deleteForm,
           [],
           {#formId: formId},
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> addForm({required _i2.FormEntity? form}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addForm,
+          [],
+          {#form: form},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> cancelForm({
+    required _i3.JustificativeEntity? justificative,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justificative: justificative,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

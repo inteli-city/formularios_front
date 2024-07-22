@@ -8,6 +8,7 @@ import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
+import 'package:formularios_front/app/domain/usecases/cancel_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
@@ -29,7 +30,6 @@ import 'package:gates_microapp_flutter/shared/helpers/errors/errors.dart';
 
 import 'forms_provider_test.mocks.dart';
 
-
 @GenerateMocks([
   FetchUserFormsUsecase,
   FetchFormsLocallyUsecase,
@@ -38,6 +38,7 @@ import 'forms_provider_test.mocks.dart';
   ISendFormUsecase,
   ISaveFormUsecase,
   ICreateFormUsecase,
+  ICancelFormUseCase
 ])
 void main() {
   MockFilterFormsController mockFilterFormsController =
@@ -48,6 +49,7 @@ void main() {
   late MockISendFormUsecase mockSendFormUsecase;
   late MockISaveFormUsecase mockSaveFormUsecase;
   late MockICreateFormUsecase mockCreateFormUsecase;
+  late MockICancelFormUseCase mockCancelFormUseCase;
   late FormsProvider provider;
 
   Modular.bindModule(AppModule());
@@ -159,6 +161,7 @@ void main() {
     mockSendFormUsecase = MockISendFormUsecase();
     mockSaveFormUsecase = MockISaveFormUsecase();
     mockCreateFormUsecase = MockICreateFormUsecase();
+    mockCancelFormUseCase = MockICancelFormUseCase();
 
     provider = FormsProvider(
       mockFetchUserFormsUsecase,
@@ -167,6 +170,7 @@ void main() {
       mockSendFormUsecase,
       mockSaveFormUsecase,
       mockCreateFormUsecase,
+      mockCancelFormUseCase,
     );
   });
   Widget createWidgetForTesting({required Widget child}) {
@@ -385,7 +389,6 @@ void main() {
 
     testWidgets('should handle errors when sending a form',
         (WidgetTester tester) async {
-
       final sections = [
         SectionEntity(sectionId: 'section-01', fields: [
           TextFieldEntity(
@@ -425,7 +428,6 @@ void main() {
       await tester.tap(find.byType(ElevatedButton));
 
       await tester.pumpAndSettle();
-
     });
   });
 
@@ -605,7 +607,6 @@ void main() {
 
     testWidgets('should handle errors when creating a form',
         (WidgetTester tester) async {
-
       when(mockFetchFormsLocallyUsecase.call()).thenAnswer(
         (_) async => Right([
           FormEntity(
@@ -703,7 +704,6 @@ void main() {
       });
       await tester.pumpAndSettle();
       await tester.tap(find.byType(ElevatedButton));
-
     });
   });
 }

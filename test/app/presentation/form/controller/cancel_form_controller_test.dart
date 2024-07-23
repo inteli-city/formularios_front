@@ -34,7 +34,7 @@ void main() {
       controller.setOption(JustificativeOptionEntity(
           option: option, requiredImage: true, requiredText: true));
 
-      expect(controller.option, equals(option));
+      expect(controller.option!.option, equals(option));
     });
   });
 }

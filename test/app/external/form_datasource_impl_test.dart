@@ -283,7 +283,7 @@ void main() {
             creatorUserId: 'user_id',
             expirationDate: 0,
             formTitle: 'form_title',
-            justificative: JustificativeEntity(
+            justification: JustificativeEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',
@@ -339,7 +339,7 @@ void main() {
             creatorUserId: 'user_id',
             expirationDate: 0,
             formTitle: 'form_title',
-            justificative: JustificativeEntity(
+            justification: JustificativeEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',
@@ -347,6 +347,55 @@ void main() {
             ),
           )),
           throwsA(isA<CreateFormStatusError>()),
+        );
+      });
+    });
+
+    group('cancelForm', () {
+      test('deve retornar FormEntity ao cancelar um formulário', () async {
+        when(mockHttpClient.post(any, data: anyNamed('data'))).thenAnswer(
+          (_) async => HttpClientResponse(
+            data: {'form': formJson},
+            statusCode: 200,
+          ),
+        );
+
+        final result = await datasource.cancelForm(
+            justificative: JustificativeEntity(
+                options: [
+                  JustificativeOptionEntity(
+                      option: 'Option 1',
+                      requiredImage: true,
+                      requiredText: true)
+                ],
+                selectedOption: 'selectedOption',
+                justificationText: 'justificationText',
+                justificationImage: 'justificationImage'),
+            formId: '123');
+
+        expect(result, isA<FormEntity>());
+        expect(result.formId, form.formId);
+      });
+
+      test('deve retornar erro ao tentar cancelar um formulário', () async {
+        when(mockHttpClient.post(any, data: anyNamed('data'))).thenThrow(
+          HttpClientError('Erro ao cancelar um formulário'),
+        );
+
+        expect(
+          () async => await datasource.cancelForm(
+              justificative: JustificativeEntity(
+                  options: [
+                    JustificativeOptionEntity(
+                        option: 'Option 1',
+                        requiredImage: true,
+                        requiredText: true)
+                  ],
+                  selectedOption: 'selectedOption',
+                  justificationText: 'justificationText',
+                  justificationImage: 'justificationImage'),
+              formId: '123'),
+          throwsA(isA<CancelFormError>()),
         );
       });
     });

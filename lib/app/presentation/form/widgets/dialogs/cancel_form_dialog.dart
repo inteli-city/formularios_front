@@ -83,7 +83,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                       items: context
                           .read<SingleFormProvider>()
                           .form
-                          .justificative
+                          .justification
                           .options
                           .map((option) => DropdownMenuItem(
                                 value: option,
@@ -171,10 +171,10 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                         if (formKey.currentState!.validate()) {
                           await Modular.get<FormsProvider>().cancelForm(
                             justificative: JustificativeEntity(
-                              options: form.justificative.options,
+                              options: form.justification.options,
                               selectedOption: selectedOption!.option,
                               justificationText:
-                                  cancelFormController.justificative,
+                                  cancelFormController.justificativeText,
                               justificationImage:
                                   cancelFormController.images![0],
                             ),

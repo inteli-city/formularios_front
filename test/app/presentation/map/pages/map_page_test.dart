@@ -61,7 +61,7 @@ void main() {
       creationDate: 1704561963000,
       startDate: 1,
       conclusionDate: 1,
-      justificative: justificative,
+      justification: justificative,
       comments: 'comments',
       sections: [
         SectionEntity(

@@ -36,7 +36,7 @@ class FormAdapter {
       informationFields: json['information_fields'] != null
           ? InformationFieldAdapter.fromJsonList(json['information_fields'])
           : null,
-      justificative: JustificativeAdapter.fromJson(json['justification']),
+      justification: JustificativeAdapter.fromJson(json['justification']),
       startDate: json['start_date'],
       vinculationFormId: json['vinculation_form_id'],
       formTitle: json['form_title'],
@@ -74,7 +74,7 @@ class FormAdapter {
               : form.informationFields!
                   .map((e) => InformationFieldAdapter.toJson(e))
                   .toList(),
-      'justification': JustificativeAdapter.toJson(form.justificative),
+      'justification': JustificativeAdapter.toJson(form.justification),
       'start_date': form.startDate,
       'vinculation_form_id': form.vinculationFormId,
       'can_vinculate': form.canVinculate,

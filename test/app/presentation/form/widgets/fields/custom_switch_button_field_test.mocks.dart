@@ -741,11 +741,11 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as int);
 
   @override
-  _i4.JustificativeEntity get justificative => (super.noSuchMethod(
-        Invocation.getter(#justificative),
+  _i4.JustificativeEntity get justification => (super.noSuchMethod(
+        Invocation.getter(#justification),
         returnValue: _FakeJustificativeEntity_2(
           this,
-          Invocation.getter(#justificative),
+          Invocation.getter(#justification),
         ),
       ) as _i4.JustificativeEntity);
 

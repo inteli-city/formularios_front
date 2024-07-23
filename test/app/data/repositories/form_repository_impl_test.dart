@@ -57,7 +57,7 @@ void main() {
     status: FormStatusEnum.CANCELED,
     expirationDate: 0,
     creationDate: 0,
-    justificative: JustificativeEntity(
+    justification: JustificativeEntity(
       options: [
         JustificativeOptionEntity(
             option: 'Option 1', requiredImage: true, requiredText: false),

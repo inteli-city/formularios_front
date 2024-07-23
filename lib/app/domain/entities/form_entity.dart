@@ -27,7 +27,7 @@ class FormEntity {
   final int creationDate;
   final int? startDate;
   final int? conclusionDate;
-  final JustificativeEntity justificative;
+  final JustificativeEntity justification;
   final String? comments;
   List<SectionEntity> sections;
   final List<InformationFieldEntity>? informationFields;
@@ -55,7 +55,7 @@ class FormEntity {
     required this.creationDate,
     this.startDate,
     this.conclusionDate,
-    required this.justificative,
+    required this.justification,
     this.comments,
     required this.sections,
     this.informationFields,

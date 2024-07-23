@@ -83,7 +83,7 @@ void main() {
       expect(form.description, 'some description');
       expect(form.conclusionDate, 1627849200000);
       expect(form.informationFields, isNull);
-      expect(form.justificative, isA<JustificativeEntity>());
+      expect(form.justification, isA<JustificativeEntity>());
       expect(form.startDate, 1627849200000);
       expect(form.vinculationFormId, 'vinc1');
       expect(form.formTitle, 'Form Title');

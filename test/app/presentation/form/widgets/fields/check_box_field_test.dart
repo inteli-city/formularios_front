@@ -47,7 +47,7 @@ void main() {
     creationDate: 1704561963000,
     startDate: 1,
     conclusionDate: 1,
-    justificative: JustificativeEntity(
+    justification: JustificativeEntity(
       options: [
         JustificativeOptionEntity(
           option: 'option',

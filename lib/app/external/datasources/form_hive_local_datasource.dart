@@ -58,16 +58,17 @@ class FormHiveLocalDatasource extends IFormLocalDatasource {
   }
 
   @override
-  Future<void> cancelForm(
-      {required JustificativeEntity justificative,
-      required String formId}) async {
+  Future<void> cancelForm({
+    required JustificativeEntity justificative,
+    required String formId,
+  }) async {
     List forms = await storage.get('forms');
 
     var index = forms.indexWhere((element) => element['form_id'] == formId);
 
     var canceledForm = forms[index];
-
-    canceledForm['justificative'] = JustificativeAdapter.toJson(justificative);
+    
+    canceledForm['justification'] = JustificativeAdapter.toJson(justificative);
 
     await updateForm(form: FormAdapter.fromJson(canceledForm));
   }

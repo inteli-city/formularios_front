@@ -49,7 +49,7 @@ void main() {
     creationDate: 1704561963000,
     startDate: 1,
     conclusionDate: 1,
-    justificative: JustificativeEntity(
+    justification: JustificativeEntity(
       options: [
         JustificativeOptionEntity(
             option: 'option', requiredImage: true, requiredText: true),
@@ -100,7 +100,7 @@ void main() {
         isA<FormEntity>(),
       );
       expect(
-        result.fold((l) => null, (r) => r.justificative.selectedOption),
+        result.fold((l) => null, (r) => r.justification.selectedOption),
         'option',
       );
     });

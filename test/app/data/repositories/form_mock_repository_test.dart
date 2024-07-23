@@ -54,7 +54,7 @@ void main() {
       creatorUserId: 'user_id',
       expirationDate: 0,
       formTitle: 'form_title',
-      justificative: JustificativeEntity(
+      justification: JustificativeEntity(
           options: [],
           selectedOption: null,
           justificationText: 'text',
@@ -228,7 +228,7 @@ void main() {
           creatorUserId: 'user_id',
           expirationDate: 0,
           formTitle: 'form_title',
-          justificative: JustificativeEntity(
+          justification: JustificativeEntity(
             options: [],
             selectedOption: null,
             justificationText: 'text',

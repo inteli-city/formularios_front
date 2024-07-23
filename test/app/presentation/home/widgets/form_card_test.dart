@@ -34,7 +34,7 @@ void main() {
           creationDate: 1704561963000,
           startDate: 1,
           conclusionDate: 1,
-          justificative: JustificativeEntity(
+          justification: JustificativeEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',
@@ -70,7 +70,7 @@ void main() {
           creationDate: 1704561963000,
           startDate: 1,
           conclusionDate: 1,
-          justificative: JustificativeEntity(
+          justification: JustificativeEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',
@@ -106,7 +106,7 @@ void main() {
           creationDate: 1704561963000,
           startDate: 1,
           conclusionDate: 1,
-          justificative: JustificativeEntity(
+          justification: JustificativeEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',
@@ -142,7 +142,7 @@ void main() {
           creationDate: 1704561963000,
           startDate: 1,
           conclusionDate: 1,
-          justificative: JustificativeEntity(
+          justification: JustificativeEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',

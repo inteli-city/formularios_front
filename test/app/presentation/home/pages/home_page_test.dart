@@ -120,7 +120,7 @@ void main() {
             creationDate: 1,
             startDate: 1,
             conclusionDate: 1,
-            justificative: JustificativeEntity(
+            justification: JustificativeEntity(
               justificationImage: null,
               options: [],
               selectedOption: '',

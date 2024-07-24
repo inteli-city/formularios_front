@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
+import 'package:formularios_front/app/domain/usecases/cancel_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
@@ -26,6 +28,7 @@ class FormsProvider extends ChangeNotifier {
   final ISendFormUsecase _sendFormUsecase;
   final ISaveFormUsecase _saveFormUsecase;
   final ICreateFormUsecase _createFormUsecase;
+  final ICancelFormUseCase _cancelFormUseCase;
 
   FormsProvider(
     this._fetchUserFormsUsecase,
@@ -34,6 +37,7 @@ class FormsProvider extends ChangeNotifier {
     this._sendFormUsecase,
     this._saveFormUsecase,
     this._createFormUsecase,
+    this._cancelFormUseCase,
   ) {
     syncForms();
     _startRetryTimer();
@@ -260,6 +264,23 @@ class FormsProvider extends ChangeNotifier {
     await fetchFormsLocally();
   }
 
+  Future<void> cancelForm(
+      {required JustificationEntity justification,
+      required String formId}) async {
+    await _cancelFormUseCase(formId: formId, justification: justification)
+        .then((value) {
+      return value.fold(
+        (error) {
+          GlobalSnackBar.error(error.errorMessage);
+        },
+        (savedForm) async {
+          GlobalSnackBar.success('Formulário cancelado com sucesso!');
+        },
+      );
+    });
+    await fetchFormsLocally();
+  }
+
   Future<void> createForm({
     required TemplateEntity template,
     required String area,
@@ -289,7 +310,6 @@ class FormsProvider extends ChangeNotifier {
           GlobalSnackBar.error(error.errorMessage);
         },
         (createdForm) async {
-          print('createdForm: $createdForm');
           GlobalSnackBar.success('Formulário criado com sucesso!');
         },
       );

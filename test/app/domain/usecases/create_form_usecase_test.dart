@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -54,9 +54,9 @@ void main() {
     creationDate: 1704561963000,
     startDate: 1,
     conclusionDate: 1,
-    justificative: JustificativeEntity(
+    justification: JustificationEntity(
       options: [
-        JustificativeOptionEntity(
+        JustificationOptionEntity(
           option: 'option',
           requiredImage: true,
           requiredText: true,
@@ -89,9 +89,9 @@ void main() {
     template: 'Poda de Árvore',
     canVinculate: false,
     system: 'system',
-    justificative: JustificativeEntity(
+    justification: JustificationEntity(
         options: [
-          JustificativeOptionEntity(
+          JustificationOptionEntity(
               option: 'option', requiredImage: false, requiredText: false)
         ],
         selectedOption: 'selectedOption',

@@ -36,7 +36,6 @@ class CustomFilePickerFormField extends StatefulWidget {
 class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
     with ValidationMixin {
   late List<String> _selectedFiles;
-  bool _showError = false;
 
   @override
   void initState() {
@@ -88,17 +87,6 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
         );
       }
     }
-  }
-
-  bool validate() {
-    setState(
-      () {
-        _showError = widget.field.isRequired && _selectedFiles.isEmpty ||
-            _selectedFiles.length < widget.field.minQuantity ||
-            _selectedFiles.length > widget.field.maxQuantity;
-      },
-    );
-    return !_showError;
   }
 
   @override

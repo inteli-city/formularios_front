@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart';
 import 'package:intl/intl.dart';
@@ -26,6 +27,15 @@ class SingleFormProvider extends ChangeNotifier {
   void setFormStatus(FormStatusEnum status) {
     form.status = status;
     notifyListeners();
+  }
+
+  Future<void> cancelForm(
+      {required JustificationEntity justification,
+      required String formId}) async {
+    setIsFormStateLoading(true);
+    await _formsProvider.cancelForm(
+        justification: justification, formId: formId);
+    setIsFormStateLoading(false);
   }
 
   Future<void> saveForm() async {

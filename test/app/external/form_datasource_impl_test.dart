@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/external/datasources/form_datasource_impl.dart';
@@ -283,7 +283,7 @@ void main() {
             creatorUserId: 'user_id',
             expirationDate: 0,
             formTitle: 'form_title',
-            justificative: JustificativeEntity(
+            justification: JustificationEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',
@@ -339,7 +339,7 @@ void main() {
             creatorUserId: 'user_id',
             expirationDate: 0,
             formTitle: 'form_title',
-            justificative: JustificativeEntity(
+            justification: JustificationEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',
@@ -347,6 +347,55 @@ void main() {
             ),
           )),
           throwsA(isA<CreateFormStatusError>()),
+        );
+      });
+    });
+
+    group('cancelForm', () {
+      test('deve retornar FormEntity ao cancelar um formulário', () async {
+        when(mockHttpClient.post(any, data: anyNamed('data'))).thenAnswer(
+          (_) async => HttpClientResponse(
+            data: {'form': formJson},
+            statusCode: 200,
+          ),
+        );
+
+        final result = await datasource.cancelForm(
+            justification: JustificationEntity(
+                options: [
+                  JustificationOptionEntity(
+                      option: 'Option 1',
+                      requiredImage: true,
+                      requiredText: true)
+                ],
+                selectedOption: 'selectedOption',
+                justificationText: 'justificationText',
+                justificationImage: 'justificationImage'),
+            formId: '123');
+
+        expect(result, isA<FormEntity>());
+        expect(result.formId, form.formId);
+      });
+
+      test('deve retornar erro ao tentar cancelar um formulário', () async {
+        when(mockHttpClient.post(any, data: anyNamed('data'))).thenThrow(
+          HttpClientError('Erro ao cancelar um formulário'),
+        );
+
+        expect(
+          () async => await datasource.cancelForm(
+              justification: JustificationEntity(
+                  options: [
+                    JustificationOptionEntity(
+                        option: 'Option 1',
+                        requiredImage: true,
+                        requiredText: true)
+                  ],
+                  selectedOption: 'selectedOption',
+                  justificationText: 'justificationText',
+                  justificationImage: 'justificationImage'),
+              formId: '123'),
+          throwsA(isA<CancelFormError>()),
         );
       });
     });

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/external/datasources/form_hive_local_datasource.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -38,7 +38,7 @@ void main() {
       longitude: 0,
       region: 'region1',
       priority: PriorityEnum.HIGH,
-      status: FormStatusEnum.CANCELED,
+      status: FormStatusEnum.IN_PROGRESS,
       expirationDate: 0,
       creationDate: 0,
       sections: [
@@ -51,12 +51,12 @@ void main() {
       description: 'description',
       conclusionDate: 0,
       informationFields: [],
-      justificative: JustificativeEntity(
+      justification: JustificationEntity(
           options: [
-            JustificativeOptionEntity(
+            JustificationOptionEntity(
                 option: 'option', requiredImage: true, requiredText: true)
           ],
-          selectedOption: 'selectedOption',
+          selectedOption: null,
           justificationText: 'justificationText',
           justificationImage: 'justificationImage'),
       startDate: 0,
@@ -92,9 +92,9 @@ void main() {
       description: 'description',
       conclusionDate: 0,
       informationFields: [],
-      justificative: JustificativeEntity(
+      justification: JustificationEntity(
           options: [
-            JustificativeOptionEntity(
+            JustificationOptionEntity(
                 option: 'option', requiredImage: true, requiredText: true)
           ],
           selectedOption: 'selectedOption',
@@ -144,11 +144,30 @@ void main() {
 
     test('deve adicionar formularios', () async {
       when(mockBox.get('forms')).thenReturn([]);
-     
+
       await datasource.addForm(form: form);
 
-      verify(mockBox.put('forms', [FormAdapter.toJson(form)]))
-          .called(1);
+      verify(mockBox.put('forms', [FormAdapter.toJson(form)])).called(1);
+    });
+
+    test('deve cancelar formularios', () async {
+      when(mockBox.get('forms')).thenReturn([FormAdapter.toJson(form)]);
+
+      await datasource.cancelForm(
+        formId: '123',
+        justification: JustificationEntity(
+          options: [
+            JustificationOptionEntity(
+                option: 'option', requiredImage: true, requiredText: true)
+          ],
+          selectedOption: 'option',
+          justificationText: 'justificationText',
+          justificationImage: 'justificationImage',
+        ),
+      );
+
+      expect(mockBox.get('forms')[0]['justification']['selected_option'],
+          'option');
     });
   });
 }

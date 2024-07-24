@@ -7,7 +7,7 @@ import 'dart:async' as _i7;
 import 'dart:ui' as _i14;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i4;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i11;
@@ -59,9 +59,9 @@ class _FakeFormEntity_1 extends _i1.SmartFake implements _i3.FormEntity {
         );
 }
 
-class _FakeJustificativeEntity_2 extends _i1.SmartFake
-    implements _i4.JustificativeEntity {
-  _FakeJustificativeEntity_2(
+class _FakeJustificationEntity_2 extends _i1.SmartFake
+    implements _i4.JustificationEntity {
+  _FakeJustificationEntity_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -274,6 +274,24 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
           #saveForm,
           [],
           {#form: form},
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> cancelForm({
+    required _i4.JustificationEntity? justification,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justification: justification,
+            #formId: formId,
+          },
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
@@ -506,13 +524,13 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as int);
 
   @override
-  _i4.JustificativeEntity get justificative => (super.noSuchMethod(
-        Invocation.getter(#justificative),
-        returnValue: _FakeJustificativeEntity_2(
+  _i4.JustificationEntity get justification => (super.noSuchMethod(
+        Invocation.getter(#justification),
+        returnValue: _FakeJustificationEntity_2(
           this,
-          Invocation.getter(#justificative),
+          Invocation.getter(#justification),
         ),
-      ) as _i4.JustificativeEntity);
+      ) as _i4.JustificationEntity);
 
   @override
   List<_i11.SectionEntity> get sections => (super.noSuchMethod(
@@ -619,6 +637,24 @@ class MockSingleFormProvider extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+
+  @override
+  _i7.Future<void> cancelForm({
+    required _i4.JustificationEntity? justification,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justification: justification,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
   _i7.Future<void> saveForm() => (super.noSuchMethod(

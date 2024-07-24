@@ -1,4 +1,5 @@
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 
@@ -17,4 +18,7 @@ abstract class IFormDatasource {
   });
 
   Future<FormEntity> createForm({required FormEntity form});
+
+  Future<FormEntity> cancelForm(
+      {required JustificationEntity justification, required String formId});
 }

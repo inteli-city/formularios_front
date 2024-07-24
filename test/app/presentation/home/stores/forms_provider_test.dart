@@ -3,11 +3,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/order_enum.dart';
+import 'package:formularios_front/app/domain/usecases/cancel_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_forms_locally_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/fetch_user_forms_usecase.dart';
@@ -37,6 +38,7 @@ import 'forms_provider_test.mocks.dart';
   ISendFormUsecase,
   ISaveFormUsecase,
   ICreateFormUsecase,
+  ICancelFormUseCase
 ])
 void main() {
   MockFilterFormsController mockFilterFormsController =
@@ -47,6 +49,7 @@ void main() {
   late MockISendFormUsecase mockSendFormUsecase;
   late MockISaveFormUsecase mockSaveFormUsecase;
   late MockICreateFormUsecase mockCreateFormUsecase;
+  late MockICancelFormUseCase mockCancelFormUseCase;
   late FormsProvider provider;
 
   Modular.bindModule(AppModule());
@@ -65,7 +68,7 @@ void main() {
     ],
   );
 
-  final justificative = JustificativeEntity(
+  final justification = JustificationEntity(
     justificationImage: null,
     options: [],
     selectedOption: '',
@@ -94,7 +97,7 @@ void main() {
       creationDate: 1,
       startDate: 1,
       conclusionDate: 1,
-      justificative: justificative,
+      justification: justification,
       comments: 'comments',
       sections: [section],
       formTitle: 'formTitle',
@@ -121,7 +124,7 @@ void main() {
       creationDate: 2,
       startDate: 2,
       conclusionDate: 2,
-      justificative: justificative,
+      justification: justification,
       comments: 'comments',
       sections: [section],
       formTitle: 'formTitle',
@@ -138,6 +141,7 @@ void main() {
     mockSendFormUsecase = MockISendFormUsecase();
     mockSaveFormUsecase = MockISaveFormUsecase();
     mockCreateFormUsecase = MockICreateFormUsecase();
+    mockCancelFormUseCase = MockICancelFormUseCase();
 
     provider = FormsProvider(
       mockFetchUserFormsUsecase,
@@ -146,6 +150,7 @@ void main() {
       mockSendFormUsecase,
       mockSaveFormUsecase,
       mockCreateFormUsecase,
+      mockCancelFormUseCase,
     );
   });
   Widget createWidgetForTesting({required void Function()? onPressed}) {
@@ -333,7 +338,7 @@ void main() {
             creationDate: 2,
             startDate: 2,
             conclusionDate: 2,
-            justificative: justificative,
+            justification: justification,
             comments: 'comments',
             sections: [section],
             formTitle: 'formTitle',
@@ -398,7 +403,7 @@ void main() {
     var template = TemplateEntity(
       canVinculate: true,
       formTitle: 'Form Title',
-      justificative: justificative,
+      justification: justification,
       template: '',
       system: '',
       sections: [section],
@@ -443,7 +448,7 @@ void main() {
             creationDate: 2,
             startDate: 2,
             conclusionDate: 2,
-            justificative: justificative,
+            justification: justification,
             comments: 'comments',
             sections: [section],
             formTitle: 'formTitle',
@@ -560,7 +565,7 @@ void main() {
               creationDate: 2,
               startDate: 2,
               conclusionDate: 2,
-              justificative: justificative,
+              justification: justification,
               comments: 'comments',
               sections: [section],
               formTitle: 'formTitle',
@@ -650,7 +655,7 @@ void main() {
             creationDate: 2,
             startDate: 2,
             conclusionDate: 2,
-            justificative: justificative,
+            justification: justification,
             comments: 'comments',
             sections: [section],
             formTitle: 'formTitle',
@@ -708,7 +713,7 @@ void main() {
         creationDate: 2,
         startDate: 2,
         conclusionDate: 2,
-        justificative: justificative,
+        justification: justification,
         comments: 'comments',
         sections: [section],
         formTitle: 'formTitle',

@@ -1,5 +1,5 @@
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -27,7 +27,7 @@ class FormEntity {
   final int creationDate;
   final int? startDate;
   final int? conclusionDate;
-  final JustificativeEntity justificative;
+  final JustificationEntity justification;
   final String? comments;
   List<SectionEntity> sections;
   final List<InformationFieldEntity>? informationFields;
@@ -55,7 +55,7 @@ class FormEntity {
     required this.creationDate,
     this.startDate,
     this.conclusionDate,
-    required this.justificative,
+    required this.justification,
     this.comments,
     required this.sections,
     this.informationFields,

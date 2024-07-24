@@ -1,4 +1,4 @@
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 
 class TemplateEntity {
@@ -6,7 +6,7 @@ class TemplateEntity {
   final bool canVinculate;
   final String template;
   final String system;
-  final JustificativeEntity justificative;
+  final JustificationEntity justification;
   final List<SectionEntity> sections;
 
   TemplateEntity({
@@ -14,7 +14,7 @@ class TemplateEntity {
     required this.canVinculate,
     required this.template,
     required this.system,
-    required this.justificative,
+    required this.justification,
     required this.sections,
   }) {
     if (sections.isEmpty) {

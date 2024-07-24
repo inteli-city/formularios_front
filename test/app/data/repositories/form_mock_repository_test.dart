@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/data/repositories/form_repository_mock.dart';
@@ -54,7 +54,7 @@ void main() {
       creatorUserId: 'user_id',
       expirationDate: 0,
       formTitle: 'form_title',
-      justificative: JustificativeEntity(
+      justification: JustificationEntity(
           options: [],
           selectedOption: null,
           justificationText: 'text',
@@ -228,7 +228,7 @@ void main() {
           creatorUserId: 'user_id',
           expirationDate: 0,
           formTitle: 'form_title',
-          justificative: JustificativeEntity(
+          justification: JustificationEntity(
             options: [],
             selectedOption: null,
             justificationText: 'text',

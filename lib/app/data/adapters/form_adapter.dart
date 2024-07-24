@@ -1,5 +1,5 @@
 import 'package:formularios_front/app/data/adapters/information_field_adapter.dart';
-import 'package:formularios_front/app/data/adapters/justificative_adapter.dart';
+import 'package:formularios_front/app/data/adapters/justification_adapter.dart';
 import 'package:formularios_front/app/data/adapters/section_adapter.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
@@ -36,7 +36,7 @@ class FormAdapter {
       informationFields: json['information_fields'] != null
           ? InformationFieldAdapter.fromJsonList(json['information_fields'])
           : null,
-      justificative: JustificativeAdapter.fromJson(json['justification']),
+      justification: JustificationAdapter.fromJson(json['justification']),
       startDate: json['start_date'],
       vinculationFormId: json['vinculation_form_id'],
       formTitle: json['form_title'],
@@ -74,7 +74,7 @@ class FormAdapter {
               : form.informationFields!
                   .map((e) => InformationFieldAdapter.toJson(e))
                   .toList(),
-      'justification': JustificativeAdapter.toJson(form.justificative),
+      'justification': JustificationAdapter.toJson(form.justification),
       'start_date': form.startDate,
       'vinculation_form_id': form.vinculationFormId,
       'can_vinculate': form.canVinculate,

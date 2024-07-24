@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i6;
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
+    as _i9;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i8;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i7;
@@ -178,6 +180,34 @@ class MockIFormRepository extends _i1.Mock implements _i3.IFormRepository {
             #createForm,
             [],
             {#form: form},
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>> cancelForm({
+    required _i9.JustificationEntity? justification,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justification: justification,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>.value(
+            _FakeEither_0<_i5.Failure, _i6.FormEntity>(
+          this,
+          Invocation.method(
+            #cancelForm,
+            [],
+            {
+              #justification: justification,
+              #formId: formId,
+            },
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.FormEntity>>);

@@ -1,22 +1,22 @@
-class JustificativeOptionEntity {
+class JustificationOptionEntity {
   final String option;
   final bool requiredImage;
   final bool requiredText;
 
-  JustificativeOptionEntity({
+  JustificationOptionEntity({
     required this.option,
     required this.requiredImage,
     required this.requiredText,
   });
 }
 
-class JustificativeEntity {
-  final List<JustificativeOptionEntity> options;
+class JustificationEntity {
+  final List<JustificationOptionEntity> options;
   final String? selectedOption;
   final String? justificationText;
   final String? justificationImage;
 
-  JustificativeEntity({
+  JustificationEntity({
     required this.options,
     required this.selectedOption,
     required this.justificationText,

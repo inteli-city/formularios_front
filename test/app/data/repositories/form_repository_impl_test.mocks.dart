@@ -8,8 +8,10 @@ import 'dart:async' as _i4;
 import 'package:formularios_front/app/data/datasources/form_datasource.dart'
     as _i3;
 import 'package:formularios_front/app/data/datasources/form_local_datasource.dart'
-    as _i7;
+    as _i8;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
+    as _i7;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i6;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
@@ -129,13 +131,40 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
           ),
         )),
       ) as _i4.Future<_i2.FormEntity>);
+
+  @override
+  _i4.Future<_i2.FormEntity> cancelForm({
+    required _i7.JustificationEntity? justification,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justification: justification,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i4.Future<_i2.FormEntity>.value(_FakeFormEntity_0(
+          this,
+          Invocation.method(
+            #cancelForm,
+            [],
+            {
+              #justification: justification,
+              #formId: formId,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.FormEntity>);
 }
 
 /// A class which mocks [IFormLocalDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockIFormLocalDatasource extends _i1.Mock
-    implements _i7.IFormLocalDatasource {
+    implements _i8.IFormLocalDatasource {
   MockIFormLocalDatasource() {
     _i1.throwOnMissingStub(this);
   }
@@ -191,6 +220,24 @@ class MockIFormLocalDatasource extends _i1.Mock
           #addForm,
           [],
           {#form: form},
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> cancelForm({
+    required _i7.JustificationEntity? justification,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justification: justification,
+            #formId: formId,
+          },
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),

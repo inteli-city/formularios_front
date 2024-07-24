@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -37,7 +37,7 @@ void main() {
         sections: [sectionExample],
         formTitle: 'formTitle',
         canVinculate: false,
-        justificative: JustificativeEntity(
+        justification: JustificationEntity(
           options: [],
           selectedOption: null,
           justificationText: 'text',
@@ -62,7 +62,7 @@ void main() {
       expect(form.expirationDate, 1);
       expect(form.creationDate, 1);
       expect(form.sections, [sectionExample]);
-      expect(form.justificative, isA<JustificativeEntity>());
+      expect(form.justification, isA<JustificationEntity>());
       expect(form.formTitle, 'formTitle');
       expect(form.canVinculate, false);
     });
@@ -91,7 +91,7 @@ void main() {
         creationDate: 1,
         startDate: 1,
         conclusionDate: 1,
-        justificative: JustificativeEntity(
+        justification: JustificationEntity(
             options: [],
             selectedOption: null,
             justificationText: 'text',
@@ -126,7 +126,7 @@ void main() {
       expect(form.comments, 'comments');
       expect(form.sections, [sectionExample]);
       expect(form.informationFields, [informationField]);
-      expect(form.justificative, isA<JustificativeEntity>());
+      expect(form.justification, isA<JustificationEntity>());
       expect(form.formTitle, 'formTitle');
       expect(form.canVinculate, false);
     });
@@ -154,7 +154,7 @@ void main() {
                 creationDate: 1,
                 startDate: 1,
                 conclusionDate: 1,
-                justificative: JustificativeEntity(
+                justification: JustificationEntity(
                     options: [],
                     selectedOption: null,
                     justificationText: 'text',

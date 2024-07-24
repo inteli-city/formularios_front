@@ -4,10 +4,12 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
-import 'dart:ui' as _i16;
+import 'dart:ui' as _i17;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i4;
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
+    as _i15;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i14;
 import 'package:formularios_front/app/domain/entities/template_entity.dart'
@@ -15,7 +17,7 @@ import 'package:formularios_front/app/domain/entities/template_entity.dart'
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart'
     as _i11;
 import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i13;
-import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i15;
+import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i16;
 import 'package:formularios_front/app/domain/usecases/get_templates_usecase.dart'
     as _i5;
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart'
@@ -309,6 +311,24 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
       ) as _i6.Future<void>);
 
   @override
+  _i6.Future<void> cancelForm({
+    required _i15.JustificationEntity? justification,
+    required String? formId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelForm,
+          [],
+          {
+            #justification: justification,
+            #formId: formId,
+          },
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
   _i6.Future<void> createForm({
     required _i8.TemplateEntity? template,
     required String? area,
@@ -318,7 +338,7 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
     required double? latitude,
     required double? longitude,
     required String? region,
-    required _i15.PriorityEnum? priority,
+    required _i16.PriorityEnum? priority,
     required String? description,
   }) =>
       (super.noSuchMethod(
@@ -343,7 +363,7 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
       ) as _i6.Future<void>);
 
   @override
-  void addListener(_i16.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i17.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -352,7 +372,7 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
       );
 
   @override
-  void removeListener(_i16.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i17.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

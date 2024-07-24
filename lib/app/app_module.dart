@@ -3,6 +3,7 @@ import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/data/datasources/user_datasource.dart';
 import 'package:formularios_front/app/data/repositories/template_repository_mock.dart';
 import 'package:formularios_front/app/domain/repositories/template_repository.dart';
+import 'package:formularios_front/app/domain/usecases/cancel_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/create_form_usecase.dart';
 import 'package:formularios_front/app/domain/usecases/get_templates_usecase.dart';
 import 'package:formularios_front/app/external/datasources/form_datasource_impl.dart';
@@ -20,6 +21,7 @@ import 'package:formularios_front/app/external/datasources/user_datasource_impl.
 import 'package:formularios_front/app/presentation/create-form/controlles/create_form_controller.dart';
 import 'package:formularios_front/app/presentation/create-form/pages/create_form_page.dart';
 import 'package:formularios_front/app/presentation/create-form/stores/template_provider.dart';
+import 'package:formularios_front/app/presentation/form/controller/cancel_form_controller.dart';
 import 'package:formularios_front/app/presentation/home/controllers/filter_form_controller.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/home/controllers/select_chip_controller.dart';
@@ -100,6 +102,7 @@ class HomeModule extends Module {
     i.addLazySingleton<IFetchUserFormsUsecase>(FetchUserFormsUsecase.new);
     i.addLazySingleton<IFetchFormsLocallyUsecase>(FetchFormsLocallyUsecase.new);
     i.addLazySingleton<IUpdateFormStatusUseCase>(UpdateFormStatusUseCase.new);
+    i.addLazySingleton<ICancelFormUseCase>(CancelFormUseCase.new);
     i.addLazySingleton<ISendFormUsecase>(SendFormUsecase.new);
     i.addLazySingleton<ISaveFormUsecase>(SaveFormUsecase.new);
     i.addLazySingleton<IGetTemplatesUsecase>(GetTemplatesUsecase.new);
@@ -107,6 +110,7 @@ class HomeModule extends Module {
     i.addLazySingleton(FilterFormsController.new);
     i.addLazySingleton(SortFormsController.new);
     i.add(SelectChipController.new);
+    i.add(CancelFormController.new);
     i.add(
       () => SingleFormProvider(i.get(), form: i.args.data),
     );

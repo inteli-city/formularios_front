@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -50,7 +50,7 @@ void main() {
           creationDate: 1,
           startDate: 1,
           conclusionDate: 1,
-          justification: JustificativeEntity(
+          justification: JustificationEntity(
               options: [],
               selectedOption: null,
               justificationText: 'text',

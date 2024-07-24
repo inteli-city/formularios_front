@@ -10,7 +10,7 @@ import 'package:formularios_front/app/data/datasources/form_datasource.dart'
 import 'package:formularios_front/app/data/datasources/form_local_datasource.dart'
     as _i8;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i7;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i6;
@@ -134,7 +134,7 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
 
   @override
   _i4.Future<_i2.FormEntity> cancelForm({
-    required _i7.JustificativeEntity? justificative,
+    required _i7.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -142,7 +142,7 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
           #cancelForm,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),
@@ -152,7 +152,7 @@ class MockIFormDatasource extends _i1.Mock implements _i3.IFormDatasource {
             #cancelForm,
             [],
             {
-              #justificative: justificative,
+              #justification: justification,
               #formId: formId,
             },
           ),
@@ -227,7 +227,7 @@ class MockIFormLocalDatasource extends _i1.Mock
 
   @override
   _i4.Future<void> cancelForm({
-    required _i7.JustificativeEntity? justificative,
+    required _i7.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -235,7 +235,7 @@ class MockIFormLocalDatasource extends _i1.Mock
           #cancelForm,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),

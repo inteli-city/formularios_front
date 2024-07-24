@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -83,7 +83,7 @@ void main() {
       expect(form.description, 'some description');
       expect(form.conclusionDate, 1627849200000);
       expect(form.informationFields, isNull);
-      expect(form.justification, isA<JustificativeEntity>());
+      expect(form.justification, isA<JustificationEntity>());
       expect(form.startDate, 1627849200000);
       expect(form.vinculationFormId, 'vinc1');
       expect(form.formTitle, 'Form Title');

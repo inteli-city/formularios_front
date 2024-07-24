@@ -10,7 +10,7 @@ import 'dart:ui' as _i8;
 import 'package:file_picker/src/file_picker.dart' as _i9;
 import 'package:file_picker/src/file_picker_result.dart' as _i10;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i7;
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i5;
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart'
@@ -133,7 +133,7 @@ class MockSingleFormProvider extends _i1.Mock
 
   @override
   _i6.Future<void> cancelForm({
-    required _i7.JustificativeEntity? justificative,
+    required _i7.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -141,7 +141,7 @@ class MockSingleFormProvider extends _i1.Mock
           #cancelForm,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),

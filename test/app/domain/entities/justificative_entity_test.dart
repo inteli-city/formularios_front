@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 
 void main() {
-  group('JustificativeOptionEntity', () {
-    test('should create a valid JustificativeOptionEntity instance', () {
-      final option = JustificativeOptionEntity(
+  group('justificationOptionEntity', () {
+    test('should create a valid justificationOptionEntity instance', () {
+      final option = JustificationOptionEntity(
         option: 'Option 1',
         requiredImage: true,
         requiredText: false,
@@ -16,49 +16,49 @@ void main() {
     });
   });
 
-  group('JustificativeEntity', () {
-    test('should create a valid JustificativeEntity instance with all fields',
+  group('justificationEntity', () {
+    test('should create a valid justificationEntity instance with all fields',
         () {
-      final option1 = JustificativeOptionEntity(
+      final option1 = JustificationOptionEntity(
         option: 'Option 1',
         requiredImage: true,
         requiredText: false,
       );
 
-      final justificative = JustificativeEntity(
+      final justification = JustificationEntity(
         options: [option1],
         selectedOption: 'Option 1',
         justificationText: 'Sample text',
         justificationImage: 'image/path',
       );
 
-      expect(justificative.options.length, 1);
-      expect(justificative.options[0].option, 'Option 1');
-      expect(justificative.selectedOption, 'Option 1');
-      expect(justificative.justificationText, 'Sample text');
-      expect(justificative.justificationImage, 'image/path');
+      expect(justification.options.length, 1);
+      expect(justification.options[0].option, 'Option 1');
+      expect(justification.selectedOption, 'Option 1');
+      expect(justification.justificationText, 'Sample text');
+      expect(justification.justificationImage, 'image/path');
     });
 
-    test('should create a valid JustificativeEntity instance with null fields',
+    test('should create a valid justificationEntity instance with null fields',
         () {
-      final option1 = JustificativeOptionEntity(
+      final option1 = JustificationOptionEntity(
         option: 'Option 1',
         requiredImage: true,
         requiredText: false,
       );
 
-      final justificative = JustificativeEntity(
+      final justification = JustificationEntity(
         options: [option1],
         selectedOption: null,
         justificationText: null,
         justificationImage: null,
       );
 
-      expect(justificative.options.length, 1);
-      expect(justificative.options[0].option, 'Option 1');
-      expect(justificative.selectedOption, null);
-      expect(justificative.justificationText, null);
-      expect(justificative.justificationImage, null);
+      expect(justification.options.length, 1);
+      expect(justification.options[0].option, 'Option 1');
+      expect(justification.selectedOption, null);
+      expect(justification.justificationText, null);
+      expect(justification.justificationImage, null);
     });
   });
 }

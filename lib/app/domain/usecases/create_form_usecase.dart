@@ -62,7 +62,7 @@ class CreateFormUsecase implements ICreateFormUsecase {
       creationDate: 0,
       startDate: null,
       conclusionDate: null,
-      justification: template.justificative,
+      justification: template.justification,
       comments: null,
       sections: template.sections,
       canVinculate: template.canVinculate,

@@ -9,7 +9,7 @@ import 'dart:ui' as _i9;
 import 'package:flutter/material.dart' as _i18;
 import 'package:flutter_modular/flutter_modular.dart' as _i17;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i2;
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i8;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i13;
@@ -155,7 +155,7 @@ class MockSingleFormProvider extends _i1.Mock
 
   @override
   _i7.Future<void> cancelForm({
-    required _i8.JustificativeEntity? justificative,
+    required _i8.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -163,7 +163,7 @@ class MockSingleFormProvider extends _i1.Mock
           #cancelForm,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),
@@ -491,7 +491,7 @@ class MockFormsProvider extends _i1.Mock implements _i10.FormsProvider {
 
   @override
   _i7.Future<void> cancelForm({
-    required _i8.JustificativeEntity? justificative,
+    required _i8.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -499,7 +499,7 @@ class MockFormsProvider extends _i1.Mock implements _i10.FormsProvider {
           #cancelForm,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),
@@ -597,16 +597,16 @@ class MockCancelFormController extends _i1.Mock
       );
 
   @override
-  set justificativeText(String? _justificativeText) => super.noSuchMethod(
+  set justificationText(String? _justificationText) => super.noSuchMethod(
         Invocation.setter(
-          #justificativeText,
-          _justificativeText,
+          #justificationText,
+          _justificationText,
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  set selectedOption(_i8.JustificativeOptionEntity? _selectedOption) =>
+  set selectedOption(_i8.JustificationOptionEntity? _selectedOption) =>
       super.noSuchMethod(
         Invocation.setter(
           #selectedOption,
@@ -625,16 +625,16 @@ class MockCancelFormController extends _i1.Mock
       );
 
   @override
-  void setJustificative(String? value) => super.noSuchMethod(
+  void setjustification(String? value) => super.noSuchMethod(
         Invocation.method(
-          #setJustificative,
+          #setjustification,
           [value],
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void setOption(_i8.JustificativeOptionEntity? value) => super.noSuchMethod(
+  void setOption(_i8.JustificationOptionEntity? value) => super.noSuchMethod(
         Invocation.method(
           #setOption,
           [value],

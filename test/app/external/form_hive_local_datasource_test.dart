@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/external/datasources/form_hive_local_datasource.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -51,9 +51,9 @@ void main() {
       description: 'description',
       conclusionDate: 0,
       informationFields: [],
-      justification: JustificativeEntity(
+      justification: JustificationEntity(
           options: [
-            JustificativeOptionEntity(
+            JustificationOptionEntity(
                 option: 'option', requiredImage: true, requiredText: true)
           ],
           selectedOption: null,
@@ -92,9 +92,9 @@ void main() {
       description: 'description',
       conclusionDate: 0,
       informationFields: [],
-      justification: JustificativeEntity(
+      justification: JustificationEntity(
           options: [
-            JustificativeOptionEntity(
+            JustificationOptionEntity(
                 option: 'option', requiredImage: true, requiredText: true)
           ],
           selectedOption: 'selectedOption',
@@ -155,9 +155,9 @@ void main() {
 
       await datasource.cancelForm(
         formId: '123',
-        justificative: JustificativeEntity(
+        justification: JustificationEntity(
           options: [
-            JustificativeOptionEntity(
+            JustificationOptionEntity(
                 option: 'option', requiredImage: true, requiredText: true)
           ],
           selectedOption: 'option',

@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -50,9 +50,9 @@ void main() {
 
   testWidgets('CancelFormDialog shows title and close button',
       (WidgetTester tester) async {
-    JustificativeEntity justificative = JustificativeEntity(
+    JustificationEntity justification = JustificationEntity(
       options: [
-        JustificativeOptionEntity(
+        JustificationOptionEntity(
             option: 'Option 1', requiredImage: false, requiredText: true),
       ],
       justificationImage: 'image',
@@ -62,11 +62,11 @@ void main() {
 
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-    when(cancelFormController.option).thenReturn(justificative.options.first);
+    when(cancelFormController.option).thenReturn(justification.options.first);
 
     when(mockSingleFormProvider.form).thenReturn(FormEntity(
       formId: '123',
-      justification: justificative,
+      justification: justification,
       formTitle: 'formTitle',
       area: 'area',
       canVinculate: false,
@@ -121,9 +121,9 @@ void main() {
 
   testWidgets('CancelFormDialog shows dropdown and updates selection',
       (WidgetTester tester) async {
-    JustificativeEntity justificative = JustificativeEntity(
+    JustificationEntity justification = JustificationEntity(
       options: [
-        JustificativeOptionEntity(
+        JustificationOptionEntity(
             option: 'Option 1', requiredImage: true, requiredText: true),
       ],
       justificationImage: 'image',
@@ -133,12 +133,12 @@ void main() {
 
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-    when(cancelFormController.option).thenReturn(justificative.options.first);
+    when(cancelFormController.option).thenReturn(justification.options.first);
 
     when(mockSingleFormProvider.form).thenReturn(
       FormEntity(
         formId: '123',
-        justification: justificative,
+        justification: justification,
         formTitle: 'formTitle',
         area: 'area',
         canVinculate: false,
@@ -188,11 +188,11 @@ void main() {
       ),
     );
 
-    expect(find.byType(DropdownButtonFormField2<JustificativeOptionEntity>),
+    expect(find.byType(DropdownButtonFormField2<JustificationOptionEntity>),
         findsOneWidget);
 
     await tester
-        .tap(find.byType(DropdownButtonFormField2<JustificativeOptionEntity>));
+        .tap(find.byType(DropdownButtonFormField2<JustificationOptionEntity>));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('Option 1'));

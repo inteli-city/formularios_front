@@ -7,7 +7,7 @@ import 'dart:async' as _i7;
 import 'dart:ui' as _i14;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i4;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i11;
@@ -57,9 +57,9 @@ class _FakeFormEntity_1 extends _i1.SmartFake implements _i3.FormEntity {
         );
 }
 
-class _FakeJustificativeEntity_2 extends _i1.SmartFake
-    implements _i4.JustificativeEntity {
-  _FakeJustificativeEntity_2(
+class _FakejustificationEntity_2 extends _i1.SmartFake
+    implements _i4.JustificationEntity {
+  _FakejustificationEntity_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -279,7 +279,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
 
   @override
   _i7.Future<void> cancelForm({
-    required _i4.JustificativeEntity? justificative,
+    required _i4.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -287,7 +287,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
           #cancelForm,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),
@@ -522,13 +522,13 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as int);
 
   @override
-  _i4.JustificativeEntity get justification => (super.noSuchMethod(
+  _i4.JustificationEntity get justification => (super.noSuchMethod(
         Invocation.getter(#justification),
-        returnValue: _FakeJustificativeEntity_2(
+        returnValue: _FakejustificationEntity_2(
           this,
           Invocation.getter(#justification),
         ),
-      ) as _i4.JustificativeEntity);
+      ) as _i4.JustificationEntity);
 
   @override
   List<_i11.SectionEntity> get sections => (super.noSuchMethod(

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
@@ -265,9 +265,9 @@ class FormsProvider extends ChangeNotifier {
   }
 
   Future<void> cancelForm(
-      {required JustificativeEntity justificative,
+      {required JustificationEntity justification,
       required String formId}) async {
-    await _cancelFormUseCase(formId: formId, justificative: justificative)
+    await _cancelFormUseCase(formId: formId, justification: justification)
         .then((value) {
       return value.fold(
         (error) {

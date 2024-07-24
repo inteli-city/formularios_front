@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
@@ -14,9 +14,9 @@ class TemplateRepositoryMock implements ITemplateRepository {
       canVinculate: true,
       template: 'Template Poda de Árvore',
       system: 'GAIA',
-      justificative: JustificativeEntity(
+      justification: JustificationEntity(
         options: [
-          JustificativeOptionEntity(
+          JustificationOptionEntity(
             option: 'option',
             requiredImage: true,
             requiredText: true,
@@ -92,9 +92,9 @@ class TemplateRepositoryMock implements ITemplateRepository {
       canVinculate: true,
       template: 'Template Recape SP',
       system: 'GAIA',
-      justificative: JustificativeEntity(
+      justification: JustificationEntity(
         options: [
-          JustificativeOptionEntity(
+          JustificationOptionEntity(
             option: 'option',
             requiredImage: true,
             requiredText: true,

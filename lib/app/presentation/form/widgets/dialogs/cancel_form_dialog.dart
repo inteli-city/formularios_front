@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/presentation/form/controller/cancel_form_controller.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/dialogs/fields/dialog_file_field.dart';
@@ -25,7 +25,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
     with ValidationMixin {
   CancelFormController cancelFormController =
       Modular.get<CancelFormController>();
-  JustificativeOptionEntity? selectedOption;
+  JustificationOptionEntity? selectedOption;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    DropdownButtonFormField2<JustificativeOptionEntity>(
+                    DropdownButtonFormField2<JustificationOptionEntity>(
                       value: selectedOption,
                       isExpanded: true,
                       validator: (value) {
@@ -123,7 +123,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                           ),
                         ),
                       ),
-                      onChanged: (JustificativeOptionEntity? option) {
+                      onChanged: (JustificationOptionEntity? option) {
                         setState(() {
                           selectedOption = option;
                         });
@@ -170,11 +170,11 @@ class _CancelFormDialogState extends State<CancelFormDialog>
 
                         if (formKey.currentState!.validate()) {
                           await Modular.get<FormsProvider>().cancelForm(
-                            justificative: JustificativeEntity(
+                            justification: JustificationEntity(
                               options: form.justification.options,
                               selectedOption: selectedOption!.option,
                               justificationText:
-                                  cancelFormController.justificativeText,
+                                  cancelFormController.justificationText,
                               justificationImage:
                                   cancelFormController.images![0],
                             ),

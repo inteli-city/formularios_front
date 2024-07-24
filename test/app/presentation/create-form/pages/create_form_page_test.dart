@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 import 'package:formularios_front/app/presentation/create-form/pages/create_form_page.dart';
@@ -83,9 +83,9 @@ void main() {
                         isRequired: false)
                   ])
                 ],
-                justificative: JustificativeEntity(
+                justification: JustificationEntity(
                     options: [
-                      JustificativeOptionEntity(
+                      JustificationOptionEntity(
                           option: 'option',
                           requiredImage: true,
                           requiredText: true)

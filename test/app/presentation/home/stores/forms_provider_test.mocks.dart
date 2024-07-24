@@ -7,7 +7,7 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i7;
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i19;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i13;
@@ -442,7 +442,7 @@ class MockICancelFormUseCase extends _i1.Mock
 
   @override
   _i5.Future<_i3.Either<_i6.Failure, _i7.FormEntity>> call({
-    required _i19.JustificativeEntity? justificative,
+    required _i19.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -450,7 +450,7 @@ class MockICancelFormUseCase extends _i1.Mock
           #call,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),
@@ -461,7 +461,7 @@ class MockICancelFormUseCase extends _i1.Mock
             #call,
             [],
             {
-              #justificative: justificative,
+              #justification: justification,
               #formId: formId,
             },
           ),

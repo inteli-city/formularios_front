@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/presentation/form/controller/cancel_form_controller.dart';
 
 void main() {
@@ -18,20 +18,20 @@ void main() {
       expect(controller.images, equals(images));
     });
 
-    test('should set and get justificative', () {
+    test('should set and get justification', () {
       final controller = CancelFormController();
-      const justificative = 'This is a justificative text';
+      const justification = 'This is a justification text';
 
-      controller.setJustificative(justificative);
+      controller.setjustification(justification);
 
-      expect(controller.justificative, equals(justificative));
+      expect(controller.justification, equals(justification));
     });
 
     test('should set and get option', () {
       final controller = CancelFormController();
       const option = 'Option 1';
 
-      controller.setOption(JustificativeOptionEntity(
+      controller.setOption(JustificationOptionEntity(
           option: option, requiredImage: true, requiredText: true));
 
       expect(controller.option!.option, equals(option));

@@ -7,7 +7,7 @@ import 'dart:async' as _i11;
 import 'dart:ui' as _i17;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart'
+import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i14;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
     as _i13;
@@ -467,7 +467,7 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
 
   @override
   _i11.Future<void> cancelForm({
-    required _i14.JustificativeEntity? justificative,
+    required _i14.JustificationEntity? justification,
     required String? formId,
   }) =>
       (super.noSuchMethod(
@@ -475,7 +475,7 @@ class MockFormsProvider extends _i1.Mock implements _i9.FormsProvider {
           #cancelForm,
           [],
           {
-            #justificative: justificative,
+            #justification: justification,
             #formId: formId,
           },
         ),

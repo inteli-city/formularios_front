@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/entities/template_entity.dart';
 
@@ -10,7 +10,7 @@ void main() {
     late bool canVinculate;
     late String template;
     late String system;
-    late JustificativeEntity justificative;
+    late JustificationEntity justification;
     late List<SectionEntity> sections;
 
     setUp(() {
@@ -18,9 +18,9 @@ void main() {
       canVinculate = true;
       template = 'TemplateID123';
       system = 'SystemX';
-      justificative = JustificativeEntity(
+      justification = JustificationEntity(
         options: [
-          JustificativeOptionEntity(
+          JustificationOptionEntity(
               option: 'option', requiredImage: true, requiredText: true)
         ],
         selectedOption: 'selectedOption',
@@ -42,7 +42,7 @@ void main() {
           canVinculate: canVinculate,
           template: template,
           system: system,
-          justificative: justificative,
+          justification: justification,
           sections: sections,
         ),
         returnsNormally,
@@ -56,7 +56,7 @@ void main() {
           canVinculate: canVinculate,
           template: template,
           system: system,
-          justificative: justificative,
+          justification: justification,
           sections: [],
         ),
         throwsException,

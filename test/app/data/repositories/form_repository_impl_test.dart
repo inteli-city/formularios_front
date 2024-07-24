@@ -8,7 +8,7 @@ import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/data/adapters/form_adapter.dart';
 import 'package:formularios_front/app/data/datasources/form_datasource.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
-import 'package:formularios_front/app/domain/entities/justificative_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
@@ -57,9 +57,9 @@ void main() {
     status: FormStatusEnum.CANCELED,
     expirationDate: 0,
     creationDate: 0,
-    justification: JustificativeEntity(
+    justification: JustificationEntity(
       options: [
-        JustificativeOptionEntity(
+        JustificationOptionEntity(
             option: 'Option 1', requiredImage: true, requiredText: false),
       ],
       selectedOption: 'Option 1',

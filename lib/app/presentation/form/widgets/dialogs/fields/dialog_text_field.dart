@@ -20,7 +20,7 @@ class DialogTextField extends StatelessWidget with ValidationMixin {
     return Stack(
       children: [
         TextFormField(
-          onChanged: (value) => controller.setjustification(value),
+          onChanged: (value) => controller.setJustificationText(value),
           enabled: isEnabled,
           maxLines: null,
           validator: (value) {

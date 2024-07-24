@@ -1,23 +1,19 @@
 import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 
 class CancelFormController {
-  List<String>? selectedImages;
+  String? selectedImage;
   String? justificationText;
   JustificationOptionEntity? selectedOption;
 
-  CancelFormController({this.selectedImages, this.justificationText}) {
-    selectedImages = [];
+  CancelFormController({this.selectedImage, this.justificationText});
+
+  void setSelectedOption(JustificationOptionEntity? option) {
+    selectedOption = option;
   }
 
-  List<String>? get images => selectedImages;
+  void setImage(String value) => selectedImage = value;
 
-  void setImage(List<String> value) => selectedImages = value;
-
-  String? get justification => justificationText;
-
-  void setjustification(String? value) => justificationText = value;
-
-  JustificationOptionEntity? get option => selectedOption;
+  void setJustificationText(String? value) => justificationText = value;
 
   void setOption(JustificationOptionEntity? value) => selectedOption = value;
 }

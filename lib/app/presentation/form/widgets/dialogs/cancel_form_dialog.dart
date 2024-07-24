@@ -25,8 +25,6 @@ class _CancelFormDialogState extends State<CancelFormDialog>
     with ValidationMixin {
   CancelFormController cancelFormController =
       Modular.get<CancelFormController>();
-  JustificationOptionEntity? selectedOption;
-
   @override
   Widget build(BuildContext context) {
     var formKey = GlobalKey<FormState>();
@@ -66,7 +64,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     DropdownButtonFormField2<JustificationOptionEntity>(
-                      value: selectedOption,
+                      value: cancelFormController.selectedOption,
                       isExpanded: true,
                       validator: (value) {
                         return combine(
@@ -124,12 +122,11 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                         ),
                       ),
                       onChanged: (JustificationOptionEntity? option) {
-                        setState(() {
-                          selectedOption = option;
-                        });
+                        cancelFormController.setSelectedOption(option);
+                        setState(() {});
                       },
                     ),
-                    selectedOption != null
+                    cancelFormController.selectedOption != null
                         ? Container(
                             padding: const EdgeInsets.symmetric(
                               vertical: AppDimensions.paddingMedium,
@@ -137,17 +134,18 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                selectedOption!.requiredImage
+                                cancelFormController
+                                        .selectedOption!.requiredImage
                                     ? DialogFileField(
                                         cancelFormController:
                                             cancelFormController,
-                                        maxQuantity: 1,
                                       )
                                     : const SizedBox(),
                                 const SizedBox(
                                   height: AppDimensions.verticalSpaceExtraLarge,
                                 ),
-                                selectedOption!.requiredText
+                                cancelFormController
+                                        .selectedOption!.requiredText
                                     ? DialogTextField(
                                         label:
                                             'Inserir texto de jusitificação',
@@ -172,11 +170,12 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                           await Modular.get<FormsProvider>().cancelForm(
                             justification: JustificationEntity(
                               options: form.justification.options,
-                              selectedOption: selectedOption!.option,
+                              selectedOption:
+                                  cancelFormController.selectedOption!.option,
                               justificationText:
                                   cancelFormController.justificationText,
                               justificationImage:
-                                  cancelFormController.images![0],
+                                  cancelFormController.selectedImage,
                             ),
                             formId: form.formId,
                           );

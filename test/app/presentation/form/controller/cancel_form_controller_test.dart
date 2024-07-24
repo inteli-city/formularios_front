@@ -4,27 +4,22 @@ import 'package:formularios_front/app/presentation/form/controller/cancel_form_c
 
 void main() {
   group('CancelFormController', () {
-    test('should initialize with empty selectedImages', () {
-      final controller = CancelFormController();
-      expect(controller.images, isEmpty);
-    });
-
     test('should set and get images', () {
       final controller = CancelFormController();
-      final images = ['image1.png', 'image2.png'];
+      const images = 'image1.png';
 
       controller.setImage(images);
 
-      expect(controller.images, equals(images));
+      expect(controller.selectedImage, equals(images));
     });
 
     test('should set and get justification', () {
       final controller = CancelFormController();
       const justification = 'This is a justification text';
 
-      controller.setjustification(justification);
+      controller.setJustificationText(justification);
 
-      expect(controller.justification, equals(justification));
+      expect(controller.justificationText, equals(justification));
     });
 
     test('should set and get option', () {
@@ -34,7 +29,7 @@ void main() {
       controller.setOption(JustificationOptionEntity(
           option: option, requiredImage: true, requiredText: true));
 
-      expect(controller.option!.option, equals(option));
+      expect(controller.selectedOption!.option, equals(option));
     });
   });
 }

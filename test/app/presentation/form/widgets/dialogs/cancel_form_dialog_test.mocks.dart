@@ -588,10 +588,10 @@ class MockCancelFormController extends _i1.Mock
   }
 
   @override
-  set selectedImages(List<String>? _selectedImages) => super.noSuchMethod(
+  set selectedImage(String? _selectedImage) => super.noSuchMethod(
         Invocation.setter(
-          #selectedImages,
-          _selectedImages,
+          #selectedImage,
+          _selectedImage,
         ),
         returnValueForMissingStub: null,
       );
@@ -616,7 +616,17 @@ class MockCancelFormController extends _i1.Mock
       );
 
   @override
-  void setImage(List<String>? value) => super.noSuchMethod(
+  void setSelectedOption(_i8.JustificationOptionEntity? option) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #setSelectedOption,
+          [option],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setImage(String? value) => super.noSuchMethod(
         Invocation.method(
           #setImage,
           [value],
@@ -625,9 +635,9 @@ class MockCancelFormController extends _i1.Mock
       );
 
   @override
-  void setjustification(String? value) => super.noSuchMethod(
+  void setJustificationText(String? value) => super.noSuchMethod(
         Invocation.method(
-          #setjustification,
+          #setJustificationText,
           [value],
         ),
         returnValueForMissingStub: null,

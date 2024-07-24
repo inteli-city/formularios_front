@@ -59,9 +59,9 @@ class _FakeFormEntity_1 extends _i1.SmartFake implements _i3.FormEntity {
         );
 }
 
-class _FakejustificationEntity_2 extends _i1.SmartFake
+class _FakeJustificationEntity_2 extends _i1.SmartFake
     implements _i4.JustificationEntity {
-  _FakejustificationEntity_2(
+  _FakeJustificationEntity_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -526,7 +526,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   _i4.JustificationEntity get justification => (super.noSuchMethod(
         Invocation.getter(#justification),
-        returnValue: _FakejustificationEntity_2(
+        returnValue: _FakeJustificationEntity_2(
           this,
           Invocation.getter(#justification),
         ),

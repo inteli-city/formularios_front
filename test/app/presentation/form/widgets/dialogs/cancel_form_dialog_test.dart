@@ -62,7 +62,8 @@ void main() {
 
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-    when(cancelFormController.option).thenReturn(justification.options.first);
+    when(cancelFormController.selectedOption)
+        .thenReturn(justification.options.first);
 
     when(mockSingleFormProvider.form).thenReturn(FormEntity(
       formId: '123',
@@ -133,7 +134,8 @@ void main() {
 
     await S.load(const Locale.fromSubtags(languageCode: 'en'));
 
-    when(cancelFormController.option).thenReturn(justification.options.first);
+    when(cancelFormController.selectedOption)
+        .thenReturn(justification.options.first);
 
     when(mockSingleFormProvider.form).thenReturn(
       FormEntity(
@@ -199,7 +201,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(cancelFormController.option,
+    expect(cancelFormController.selectedOption,
         mockSingleFormProvider.form.justification.options.first);
   });
 }

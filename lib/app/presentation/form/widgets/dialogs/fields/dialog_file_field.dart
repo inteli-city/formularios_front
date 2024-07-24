@@ -1,21 +1,20 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/presentation/form/controller/cancel_form_controller.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DialogFileField extends StatefulWidget {
-  final int maxQuantity;
   final CancelFormController cancelFormController;
 
   const DialogFileField({
     super.key,
     required this.cancelFormController,
-    required this.maxQuantity,
   });
 
   @override
@@ -24,43 +23,23 @@ class DialogFileField extends StatefulWidget {
 
 class _DialogFileFieldState extends State<DialogFileField>
     with ValidationMixin {
-  final List<String> _selectedFiles = [];
+  String? _selectedFile;
 
   Future<void> _pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'png']);
-    if (result != null && result.files.isNotEmpty) {
-      if (widget.maxQuantity > 1) {
-        List<String> files = result.files.map((file) {
-          if (kIsWeb) {
-            return file.bytes != null
-                ? 'data:image/${file.extension};base64,${base64Encode(file.bytes!)}'
-                : file.name;
-          } else {
-            return file.path!;
-          }
-        }).toList();
-        setState(
-          () {
-            _selectedFiles.addAll(files);
-            widget.cancelFormController.selectedImages = files;
-          },
-        );
-      } else {
-        String file = kIsWeb
-            ? (result.files.single.bytes != null
-                ? 'data:image/${result.files.single.extension};base64,${base64Encode(result.files.single.bytes!)}'
-                : result.files.single.name)
-            : result.files.single.path!;
-        setState(
-          () {
-            _selectedFiles.add(file);
-            widget.cancelFormController.selectedImages = [file];
-          },
-        );
-      }
+    String base64Image;
+
+    XFile? image = await ImagePicker().pickImage(
+      imageQuality: 50,
+      source: ImageSource.gallery,
+    );
+
+    if (image != null) {
+      base64Image = base64Encode(await image.readAsBytes());
+      setState(() {
+        _selectedFile = image.path;
+        widget.cancelFormController.setImage(base64Image);
+        print(base64Image);
+      });
     }
   }
 
@@ -70,8 +49,6 @@ class _DialogFileFieldState extends State<DialogFileField>
       validator: (value) {
         return combine([
           () => isRequired(value.toString(), true, true),
-          () => minQuantity(_selectedFiles.length, 1),
-          () => maxQuantity(_selectedFiles.length, 1),
         ]);
       },
       builder: (state) {
@@ -132,72 +109,60 @@ class _DialogFileFieldState extends State<DialogFileField>
               ),
             ),
             const SizedBox(height: AppDimensions.paddingSmall),
-            Center(
-              child: Stack(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: AppDimensions.paddingSmall),
-                    child: Column(
-                      children: [
-                        if (_selectedFiles.isNotEmpty)
-                          ..._selectedFiles.map(
-                            (file) {
-                              return Center(
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: AppDimensions.paddingSmall),
-                                      child: kIsWeb
-                                          ? Image.network(
-                                              file,
-                                              width: 150,
-                                              height: 50,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Image.file(
-                                              File(file),
-                                              width: 150,
-                                              height: 50,
-                                              fit: BoxFit.cover,
-                                            ),
-                                    ),
-                                    Positioned(
-                                      top: 0,
-                                      right: 0,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            _selectedFiles.remove(file);
-                                          });
-                                        },
-                                        child: Container(
-                                          width: 24,
-                                          height: 24,
-                                          decoration: const BoxDecoration(
-                                            color: Colors.red,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: const Icon(
-                                            Icons.close,
-                                            size: 16,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+            if (_selectedFile != null)
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: AppDimensions.paddingSmall),
+                      child: Center(
+                        child: Stack(
+                          children: [
+                            kIsWeb
+                                ? Image.network(
+                                    _selectedFile!,
+                                    width: ScreenHelper.width(context) / 2,
+                                    height: ScreenHelper.width(context) / 2,
+                                    fit: BoxFit.fill,
+                                  )
+                                : Image.file(
+                                    File(_selectedFile!),
+                                    width: ScreenHelper.width(context) / 2,
+                                    height: ScreenHelper.width(context) / 2,
+                                    fit: BoxFit.fill,
+                                  ),
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedFile = null;
+                                  });
+                                },
+                                child: Container(
+                                  width: 24,
+                                  height: 24,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.close,
+                                    size: 16,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              );
-                            },
-                          ),
-                      ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
             state.hasError
                 ? Padding(
                     padding: const EdgeInsets.only(left: 8.0),

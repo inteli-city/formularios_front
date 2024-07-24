@@ -323,13 +323,11 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           Expanded(
             child: buildCustomElevatedButton(
               onPressed: () async {
-                // await controller.updateFormStatus(
-                //   status: FormStatusEnum.CANCELED,
-                // );
-
-                await showDialog(context: context, builder: (context) {
-                  return const CancelFormDialog();
-                });
+                await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const CancelFormDialog();
+                    });
               },
               text: S.current.cancel,
               backgroundColor: AppColors.red,

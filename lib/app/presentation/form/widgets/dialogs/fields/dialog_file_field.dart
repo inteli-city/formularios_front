@@ -38,7 +38,6 @@ class _DialogFileFieldState extends State<DialogFileField>
       setState(() {
         _selectedFile = image.path;
         widget.cancelFormController.setImage(base64Image);
-        print(base64Image);
       });
     }
   }

@@ -195,9 +195,10 @@ void main() {
 
     await tester
         .tap(find.byType(DropdownButtonFormField2<JustificationOptionEntity>));
+    
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Option 1'));
+    await tester.tap(find.text('Option 1').first);
 
     await tester.pumpAndSettle();
 

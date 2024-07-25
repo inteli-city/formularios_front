@@ -3,28 +3,29 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
-import 'dart:ui' as _i14;
+import 'dart:async' as _i8;
+import 'dart:io' as _i5;
+import 'dart:ui' as _i15;
 
 import 'package:formularios_front/app/domain/entities/form_entity.dart' as _i3;
 import 'package:formularios_front/app/domain/entities/justification_entity.dart'
     as _i4;
 import 'package:formularios_front/app/domain/entities/section_entity.dart'
-    as _i11;
-import 'package:formularios_front/app/domain/entities/template_entity.dart'
     as _i12;
-import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i8;
-import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i10;
-import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i13;
+import 'package:formularios_front/app/domain/entities/template_entity.dart'
+    as _i13;
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart' as _i9;
+import 'package:formularios_front/app/domain/enum/order_enum.dart' as _i11;
+import 'package:formularios_front/app/domain/enum/priority_enum.dart' as _i14;
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart'
-    as _i15;
+    as _i16;
 import 'package:formularios_front/app/presentation/home/states/form_user_state.dart'
     as _i2;
 import 'package:formularios_front/app/presentation/home/stores/forms_provider.dart'
-    as _i5;
-import 'package:google_maps_flutter/google_maps_flutter.dart' as _i6;
+    as _i6;
+import 'package:google_maps_flutter/google_maps_flutter.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:mockito/src/dummies.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -70,10 +71,31 @@ class _FakeJustificationEntity_2 extends _i1.SmartFake
         );
 }
 
+class _FakeDuration_3 extends _i1.SmartFake implements Duration {
+  _FakeDuration_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeHttpClientRequest_4 extends _i1.SmartFake
+    implements _i5.HttpClientRequest {
+  _FakeHttpClientRequest_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [FormsProvider].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
+class MockFormsProvider extends _i1.Mock implements _i6.FormsProvider {
   MockFormsProvider() {
     _i1.throwOnMissingStub(this);
   }
@@ -127,10 +149,10 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       ) as List<String>);
 
   @override
-  List<(_i3.FormEntity, _i6.LatLng)> get locations => (super.noSuchMethod(
+  List<(_i3.FormEntity, _i7.LatLng)> get locations => (super.noSuchMethod(
         Invocation.getter(#locations),
-        returnValue: <(_i3.FormEntity, _i6.LatLng)>[],
-      ) as List<(_i3.FormEntity, _i6.LatLng)>);
+        returnValue: <(_i3.FormEntity, _i7.LatLng)>[],
+      ) as List<(_i3.FormEntity, _i7.LatLng)>);
 
   @override
   bool get hasListeners => (super.noSuchMethod(
@@ -163,33 +185,33 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       );
 
   @override
-  _i7.Future<void> fetchFormsLocally() => (super.noSuchMethod(
+  _i8.Future<void> fetchFormsLocally() => (super.noSuchMethod(
         Invocation.method(
           #fetchFormsLocally,
           [],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i7.Future<void> syncForms() => (super.noSuchMethod(
+  _i8.Future<void> syncForms() => (super.noSuchMethod(
         Invocation.method(
           #syncForms,
           [],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  String getFormsCountByStatus(_i8.FormStatusEnum? status) =>
+  String getFormsCountByStatus(_i9.FormStatusEnum? status) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFormsCountByStatus,
           [status],
         ),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.method(
             #getFormsCountByStatus,
@@ -204,7 +226,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
     required String? street,
     required String? city,
     required String? system,
-    required _i8.FormStatusEnum? enumStatus,
+    required _i9.FormStatusEnum? enumStatus,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -222,7 +244,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       );
 
   @override
-  void orderForms(_i10.OrderEnum? orderEnum) => super.noSuchMethod(
+  void orderForms(_i11.OrderEnum? orderEnum) => super.noSuchMethod(
         Invocation.method(
           #orderForms,
           [orderEnum],
@@ -231,9 +253,9 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       );
 
   @override
-  _i7.Future<_i3.FormEntity?> updateFormStatus({
+  _i8.Future<_i3.FormEntity?> updateFormStatus({
     required String? formId,
-    required _i8.FormStatusEnum? status,
+    required _i9.FormStatusEnum? status,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -244,13 +266,13 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
             #status: status,
           },
         ),
-        returnValue: _i7.Future<_i3.FormEntity?>.value(),
-      ) as _i7.Future<_i3.FormEntity?>);
+        returnValue: _i8.Future<_i3.FormEntity?>.value(),
+      ) as _i8.Future<_i3.FormEntity?>);
 
   @override
-  _i7.Future<void> sendForm({
+  _i8.Future<void> sendForm({
     required String? formId,
-    required List<_i11.SectionEntity>? sections,
+    required List<_i12.SectionEntity>? sections,
     String? vinculationFormId,
   }) =>
       (super.noSuchMethod(
@@ -263,24 +285,24 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
             #vinculationFormId: vinculationFormId,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i7.Future<void> saveForm({required _i3.FormEntity? form}) =>
+  _i8.Future<void> saveForm({required _i3.FormEntity? form}) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveForm,
           [],
           {#form: form},
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i7.Future<void> cancelForm({
+  _i8.Future<void> cancelForm({
     required _i4.JustificationEntity? justification,
     required String? formId,
   }) =>
@@ -293,13 +315,13 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
             #formId: formId,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i7.Future<void> createForm({
-    required _i12.TemplateEntity? template,
+  _i8.Future<void> createForm({
+    required _i13.TemplateEntity? template,
     required String? area,
     required String? city,
     required String? street,
@@ -307,7 +329,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
     required double? latitude,
     required double? longitude,
     required String? region,
-    required _i13.PriorityEnum? priority,
+    required _i14.PriorityEnum? priority,
     required String? description,
   }) =>
       (super.noSuchMethod(
@@ -327,12 +349,12 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
             #description: description,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  void addListener(_i14.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i15.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -341,7 +363,7 @@ class MockFormsProvider extends _i1.Mock implements _i5.FormsProvider {
       );
 
   @override
-  void removeListener(_i14.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i15.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -379,7 +401,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get formTitle => (super.noSuchMethod(
         Invocation.getter(#formTitle),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#formTitle),
         ),
@@ -388,7 +410,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get formId => (super.noSuchMethod(
         Invocation.getter(#formId),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#formId),
         ),
@@ -397,7 +419,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get creatorUserId => (super.noSuchMethod(
         Invocation.getter(#creatorUserId),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#creatorUserId),
         ),
@@ -406,7 +428,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get userId => (super.noSuchMethod(
         Invocation.getter(#userId),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#userId),
         ),
@@ -421,7 +443,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get template => (super.noSuchMethod(
         Invocation.getter(#template),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#template),
         ),
@@ -430,7 +452,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get area => (super.noSuchMethod(
         Invocation.getter(#area),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#area),
         ),
@@ -439,7 +461,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get system => (super.noSuchMethod(
         Invocation.getter(#system),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#system),
         ),
@@ -448,7 +470,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get street => (super.noSuchMethod(
         Invocation.getter(#street),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#street),
         ),
@@ -457,7 +479,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get city => (super.noSuchMethod(
         Invocation.getter(#city),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#city),
         ),
@@ -484,26 +506,26 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
   @override
   String get region => (super.noSuchMethod(
         Invocation.getter(#region),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#region),
         ),
       ) as String);
 
   @override
-  _i13.PriorityEnum get priority => (super.noSuchMethod(
+  _i14.PriorityEnum get priority => (super.noSuchMethod(
         Invocation.getter(#priority),
-        returnValue: _i13.PriorityEnum.LOW,
-      ) as _i13.PriorityEnum);
+        returnValue: _i14.PriorityEnum.LOW,
+      ) as _i14.PriorityEnum);
 
   @override
-  _i8.FormStatusEnum get status => (super.noSuchMethod(
+  _i9.FormStatusEnum get status => (super.noSuchMethod(
         Invocation.getter(#status),
-        returnValue: _i8.FormStatusEnum.NOT_STARTED,
-      ) as _i8.FormStatusEnum);
+        returnValue: _i9.FormStatusEnum.NOT_STARTED,
+      ) as _i9.FormStatusEnum);
 
   @override
-  set status(_i8.FormStatusEnum? _status) => super.noSuchMethod(
+  set status(_i9.FormStatusEnum? _status) => super.noSuchMethod(
         Invocation.setter(
           #status,
           _status,
@@ -533,13 +555,13 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
       ) as _i4.JustificationEntity);
 
   @override
-  List<_i11.SectionEntity> get sections => (super.noSuchMethod(
+  List<_i12.SectionEntity> get sections => (super.noSuchMethod(
         Invocation.getter(#sections),
-        returnValue: <_i11.SectionEntity>[],
-      ) as List<_i11.SectionEntity>);
+        returnValue: <_i12.SectionEntity>[],
+      ) as List<_i12.SectionEntity>);
 
   @override
-  set sections(List<_i11.SectionEntity>? _sections) => super.noSuchMethod(
+  set sections(List<_i12.SectionEntity>? _sections) => super.noSuchMethod(
         Invocation.setter(
           #sections,
           _sections,
@@ -552,7 +574,7 @@ class MockFormEntity extends _i1.Mock implements _i3.FormEntity {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSingleFormProvider extends _i1.Mock
-    implements _i15.SingleFormProvider {
+    implements _i16.SingleFormProvider {
   MockSingleFormProvider() {
     _i1.throwOnMissingStub(this);
   }
@@ -599,7 +621,7 @@ class MockSingleFormProvider extends _i1.Mock
   @override
   String get creationDate => (super.noSuchMethod(
         Invocation.getter(#creationDate),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#creationDate),
         ),
@@ -608,7 +630,7 @@ class MockSingleFormProvider extends _i1.Mock
   @override
   String get expirationDate => (super.noSuchMethod(
         Invocation.getter(#expirationDate),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i10.dummyValue<String>(
           this,
           Invocation.getter(#expirationDate),
         ),
@@ -630,7 +652,7 @@ class MockSingleFormProvider extends _i1.Mock
       );
 
   @override
-  void setFormStatus(_i8.FormStatusEnum? status) => super.noSuchMethod(
+  void setFormStatus(_i9.FormStatusEnum? status) => super.noSuchMethod(
         Invocation.method(
           #setFormStatus,
           [status],
@@ -639,7 +661,7 @@ class MockSingleFormProvider extends _i1.Mock
       );
 
   @override
-  _i7.Future<void> cancelForm({
+  _i8.Future<void> cancelForm({
     required _i4.JustificationEntity? justification,
     required String? formId,
   }) =>
@@ -652,41 +674,41 @@ class MockSingleFormProvider extends _i1.Mock
             #formId: formId,
           },
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i7.Future<void> saveForm() => (super.noSuchMethod(
+  _i8.Future<void> saveForm() => (super.noSuchMethod(
         Invocation.method(
           #saveForm,
           [],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i7.Future<void> sendForm() => (super.noSuchMethod(
+  _i8.Future<void> sendForm() => (super.noSuchMethod(
         Invocation.method(
           #sendForm,
           [],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
-  _i7.Future<void> updateFormStatus({required _i8.FormStatusEnum? status}) =>
+  _i8.Future<void> updateFormStatus({required _i9.FormStatusEnum? status}) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateFormStatus,
           [],
           {#status: status},
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 
   @override
   void setIsSendingForm(bool? value) => super.noSuchMethod(
@@ -729,7 +751,7 @@ class MockSingleFormProvider extends _i1.Mock
       ));
 
   @override
-  void addListener(_i14.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i15.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -738,7 +760,7 @@ class MockSingleFormProvider extends _i1.Mock
       );
 
   @override
-  void removeListener(_i14.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i15.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -760,6 +782,530 @@ class MockSingleFormProvider extends _i1.Mock
         Invocation.method(
           #notifyListeners,
           [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [HttpClient].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockHttpClient extends _i1.Mock implements _i5.HttpClient {
+  MockHttpClient() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  Duration get idleTimeout => (super.noSuchMethod(
+        Invocation.getter(#idleTimeout),
+        returnValue: _FakeDuration_3(
+          this,
+          Invocation.getter(#idleTimeout),
+        ),
+      ) as Duration);
+
+  @override
+  set idleTimeout(Duration? _idleTimeout) => super.noSuchMethod(
+        Invocation.setter(
+          #idleTimeout,
+          _idleTimeout,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set connectionTimeout(Duration? _connectionTimeout) => super.noSuchMethod(
+        Invocation.setter(
+          #connectionTimeout,
+          _connectionTimeout,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set maxConnectionsPerHost(int? _maxConnectionsPerHost) => super.noSuchMethod(
+        Invocation.setter(
+          #maxConnectionsPerHost,
+          _maxConnectionsPerHost,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  bool get autoUncompress => (super.noSuchMethod(
+        Invocation.getter(#autoUncompress),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  set autoUncompress(bool? _autoUncompress) => super.noSuchMethod(
+        Invocation.setter(
+          #autoUncompress,
+          _autoUncompress,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set userAgent(String? _userAgent) => super.noSuchMethod(
+        Invocation.setter(
+          #userAgent,
+          _userAgent,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set authenticate(
+          _i8.Future<bool> Function(
+            Uri,
+            String,
+            String?,
+          )? f) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #authenticate,
+          f,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set connectionFactory(
+          _i8.Future<_i5.ConnectionTask<_i5.Socket>> Function(
+            Uri,
+            String?,
+            int?,
+          )? f) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #connectionFactory,
+          f,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set findProxy(String Function(Uri)? f) => super.noSuchMethod(
+        Invocation.setter(
+          #findProxy,
+          f,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set authenticateProxy(
+          _i8.Future<bool> Function(
+            String,
+            int,
+            String,
+            String?,
+          )? f) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #authenticateProxy,
+          f,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set badCertificateCallback(
+          bool Function(
+            _i5.X509Certificate,
+            String,
+            int,
+          )? callback) =>
+      super.noSuchMethod(
+        Invocation.setter(
+          #badCertificateCallback,
+          callback,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  set keyLog(dynamic Function(String)? callback) => super.noSuchMethod(
+        Invocation.setter(
+          #keyLog,
+          callback,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> open(
+    String? method,
+    String? host,
+    int? port,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #open,
+          [
+            method,
+            host,
+            port,
+            path,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #open,
+            [
+              method,
+              host,
+              port,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> openUrl(
+    String? method,
+    Uri? url,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #openUrl,
+          [
+            method,
+            url,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #openUrl,
+            [
+              method,
+              url,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> get(
+    String? host,
+    int? port,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #get,
+          [
+            host,
+            port,
+            path,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #get,
+            [
+              host,
+              port,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> getUrl(Uri? url) => (super.noSuchMethod(
+        Invocation.method(
+          #getUrl,
+          [url],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #getUrl,
+            [url],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> post(
+    String? host,
+    int? port,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #post,
+          [
+            host,
+            port,
+            path,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #post,
+            [
+              host,
+              port,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> postUrl(Uri? url) => (super.noSuchMethod(
+        Invocation.method(
+          #postUrl,
+          [url],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #postUrl,
+            [url],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> put(
+    String? host,
+    int? port,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #put,
+          [
+            host,
+            port,
+            path,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #put,
+            [
+              host,
+              port,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> putUrl(Uri? url) => (super.noSuchMethod(
+        Invocation.method(
+          #putUrl,
+          [url],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #putUrl,
+            [url],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> delete(
+    String? host,
+    int? port,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [
+            host,
+            port,
+            path,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #delete,
+            [
+              host,
+              port,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> deleteUrl(Uri? url) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteUrl,
+          [url],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #deleteUrl,
+            [url],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> patch(
+    String? host,
+    int? port,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #patch,
+          [
+            host,
+            port,
+            path,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #patch,
+            [
+              host,
+              port,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> patchUrl(Uri? url) => (super.noSuchMethod(
+        Invocation.method(
+          #patchUrl,
+          [url],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #patchUrl,
+            [url],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> head(
+    String? host,
+    int? port,
+    String? path,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #head,
+          [
+            host,
+            port,
+            path,
+          ],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #head,
+            [
+              host,
+              port,
+              path,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  _i8.Future<_i5.HttpClientRequest> headUrl(Uri? url) => (super.noSuchMethod(
+        Invocation.method(
+          #headUrl,
+          [url],
+        ),
+        returnValue:
+            _i8.Future<_i5.HttpClientRequest>.value(_FakeHttpClientRequest_4(
+          this,
+          Invocation.method(
+            #headUrl,
+            [url],
+          ),
+        )),
+      ) as _i8.Future<_i5.HttpClientRequest>);
+
+  @override
+  void addCredentials(
+    Uri? url,
+    String? realm,
+    _i5.HttpClientCredentials? credentials,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addCredentials,
+          [
+            url,
+            realm,
+            credentials,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addProxyCredentials(
+    String? host,
+    int? port,
+    String? realm,
+    _i5.HttpClientCredentials? credentials,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addProxyCredentials,
+          [
+            host,
+            port,
+            realm,
+            credentials,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void close({bool? force = false}) => super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+          {#force: force},
         ),
         returnValueForMissingStub: null,
       );

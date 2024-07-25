@@ -50,9 +50,12 @@ class FormMockRepository extends IFormRepository {
       startDate: 1,
       conclusionDate: 1,
       informationFields: [
+        ImageInformationFieldEntity(
+            filePath:
+                'https://images.pexels.com/photos/462118/pexels-photo-462118.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
         TextInformationFieldEntity(
           value:
-              'Lorem.',
+              'Lorem ipsum dolor sit amet, consectetur adipiscing  elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.',
         ),
         MapInformationFieldEntity(
           latitude: -23.610366,

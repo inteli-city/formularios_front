@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+import 'package:formularios_front/app/domain/enum/information_field_type.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/dialogs/cancel_form_dialog.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class FormDetailsPage extends StatefulWidget {
@@ -18,6 +22,7 @@ class FormDetailsPage extends StatefulWidget {
 
 class FormDetailsPageState extends State<FormDetailsPage> {
   SingleFormProvider controller = Modular.get<SingleFormProvider>();
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -173,6 +178,13 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             S.current.description,
             form.description,
           ),
+          Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                
+              ]),
         ],
       ),
     );
@@ -337,5 +349,86 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         ],
       ),
     );
+  }
+
+  List<Widget> _buildInformationFieldsSection() {
+    if (controller.form.informationFields == null ||
+        controller.form.informationFields!.isEmpty) {
+      return const [SizedBox()];
+    }
+
+    return controller.form.informationFields!.map(
+      (field) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: _buildInformationField(field),
+          ),
+        );
+      },
+    ).toList();
+  }
+
+  List<Widget> _buildInformationField(InformationFieldEntity informationField) {
+    switch (informationField.informationFieldType) {
+      case InformationFieldTypeEnum.IMAGE_INFORMATION_FIELD:
+        return [
+          Text(
+            'Imagem de informação:',
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white,
+                ),
+          ),
+          const SizedBox(width: 8),
+          Image.network(
+            (informationField as ImageInformationFieldEntity).filePath,
+          ),
+        ];
+
+      case InformationFieldTypeEnum.MAP_INFORMATION_FIELD:
+        return [
+          Text(
+            'Mapa:',
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white,
+                ),
+          ),
+          GoogleMap(
+            mapType: MapType.normal,
+            zoomControlsEnabled: false,
+            markers: {
+              Marker(
+                markerId: MarkerId((informationField).toString()),
+                position: LatLng(
+                    (informationField as MapInformationFieldEntity).latitude,
+                    (informationField).longitude),
+              )
+            },
+            initialCameraPosition: const CameraPosition(
+              target: LatLng(-23.6114, -46.694),
+              zoom: 12,
+            ),
+          ),
+        ];
+      case InformationFieldTypeEnum.TEXT_INFORMATION_FIELD:
+        return [
+          Text(
+            'Texto:',
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white,
+                  overflow: TextOverflow.clip,
+                ),
+          ),
+          Text(
+            (informationField as TextInformationFieldEntity).value,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white,
+                ),
+          ),
+        ];
+      default:
+        return const [SizedBox()];
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
@@ -48,6 +49,16 @@ class FormMockRepository extends IFormRepository {
       creationDate: 1704561963000,
       startDate: 1,
       conclusionDate: 1,
+      informationFields: [
+        TextInformationFieldEntity(
+          value:
+              'Lorem.',
+        ),
+        MapInformationFieldEntity(
+          latitude: -23.610366,
+          longitude: -46.694891,
+        ),
+      ],
       justification: JustificationEntity(
         options: [
           JustificationOptionEntity(

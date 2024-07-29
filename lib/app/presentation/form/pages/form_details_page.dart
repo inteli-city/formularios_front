@@ -221,7 +221,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           ),
           Text(
             value ?? '',
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.justify,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: AppColors.white,
                 ),
@@ -476,7 +476,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           ),
           Text(
             (informationField as TextInformationFieldEntity).value,
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.justify,
             style: Theme.of(context)
                 .textTheme
                 .bodyLarge!

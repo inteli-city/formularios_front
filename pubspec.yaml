@@ -1,6 +1,6 @@
 name: formularios_front
-description: "A Flutter Clean Architecture project for Intelicity demands."
-publish_to: 'none'
+description: A Flutter Clean Architecture project for Intelicity demands.
+publish_to: none
 version: 1.0.0+7
 
 environment:
@@ -45,6 +45,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
+
 flutter_intl:
   enabled: true

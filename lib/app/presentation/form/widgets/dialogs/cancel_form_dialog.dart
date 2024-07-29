@@ -128,8 +128,13 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                     ),
                     cancelFormController.selectedOption != null
                         ? Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: AppDimensions.paddingMedium,
+                            padding: EdgeInsets.symmetric(
+                              vertical: cancelFormController
+                                          .selectedOption!.requiredImage &&
+                                      cancelFormController
+                                          .selectedOption!.requiredText
+                                  ? AppDimensions.paddingMedium
+                                  : 0,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

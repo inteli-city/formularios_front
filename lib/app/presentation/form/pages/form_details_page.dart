@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
+import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
+import 'package:formularios_front/app/domain/enum/information_field_type.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/dialogs/cancel_form_dialog.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 class FormDetailsPage extends StatefulWidget {
@@ -18,6 +21,7 @@ class FormDetailsPage extends StatefulWidget {
 
 class FormDetailsPageState extends State<FormDetailsPage> {
   SingleFormProvider controller = Modular.get<SingleFormProvider>();
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -173,6 +177,15 @@ class FormDetailsPageState extends State<FormDetailsPage> {
             S.current.description,
             form.description,
           ),
+          Container(
+            padding: const EdgeInsets.symmetric(
+                vertical: AppDimensions.paddingMedium),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: _buildInformationFieldsSection(),
+            ),
+          ),
         ],
       ),
     );
@@ -208,7 +221,7 @@ class FormDetailsPageState extends State<FormDetailsPage> {
           ),
           Text(
             value ?? '',
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.justify,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: AppColors.white,
                 ),
@@ -337,5 +350,141 @@ class FormDetailsPageState extends State<FormDetailsPage> {
         ],
       ),
     );
+  }
+
+  List<Widget> _buildInformationFieldsSection() {
+    if (controller.form.informationFields == null ||
+        controller.form.informationFields!.isEmpty) {
+      return const [SizedBox()];
+    }
+
+    var informationFieldsRows = controller.form.informationFields!.map(
+      (field) {
+        return Padding(
+          padding:
+              const EdgeInsets.symmetric(vertical: AppDimensions.paddingMedium),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: _buildInformationField(field),
+          ),
+        );
+      },
+    ).toList();
+
+    informationFieldsRows.insert(
+      0,
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Informações adicionais:',
+              style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                    color: AppColors.white,
+                  ),
+            ),
+          ],
+        ),
+      ),
+    );
+    return informationFieldsRows;
+  }
+
+  List<Widget> _buildInformationField(InformationFieldEntity informationField) {
+    switch (informationField.informationFieldType) {
+      case InformationFieldTypeEnum.IMAGE_INFORMATION_FIELD:
+        return [
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+            child: Text(
+              'Imagem Auxiliar:',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Image.network(
+            (informationField as ImageInformationFieldEntity).filePath,
+            fit: BoxFit.fill,
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(
+                Icons.error,
+                color: AppColors.red,
+              );
+            },
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+          ),
+        ];
+
+      case InformationFieldTypeEnum.MAP_INFORMATION_FIELD:
+        return [
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+            child: Text(
+              'Localização:',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(
+            height: 200,
+            child: GoogleMap(
+              indoorViewEnabled: false,
+              mapType: MapType.normal,
+              zoomControlsEnabled: false,
+              markers: {
+                Marker(
+                  infoWindow: InfoWindow.noText,
+                  markerId: MarkerId((informationField).toString()),
+                  position: LatLng(
+                      (informationField as MapInformationFieldEntity).latitude,
+                      (informationField).longitude),
+                )
+              },
+              compassEnabled: false,
+              mapToolbarEnabled: false,
+              initialCameraPosition: CameraPosition(
+                target: LatLng(
+                    (informationField).latitude, (informationField).longitude),
+                zoom: 12,
+              ),
+            ),
+          ),
+        ];
+      case InformationFieldTypeEnum.TEXT_INFORMATION_FIELD:
+        return [
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
+            child: Text(
+              'Texto Auxiliar:',
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: AppColors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Text(
+            (informationField as TextInformationFieldEntity).value,
+            textAlign: TextAlign.justify,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: AppColors.white, overflow: TextOverflow.clip),
+          ),
+        ];
+      default:
+        return const [SizedBox()];
+    }
   }
 }

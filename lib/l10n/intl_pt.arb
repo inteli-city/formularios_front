@@ -33,6 +33,7 @@
     "start" : "Iniciar",
     "fillForm" : "Preencher",
     "linkForm": "Vincular Formulário",
+    "viewForm":"Visualizar Formulário Preenchido",
     "stepBack" : "Retroceder",
 
     "createForm": "Criar Formulário",

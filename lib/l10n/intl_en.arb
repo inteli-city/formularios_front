@@ -33,6 +33,7 @@
     "start" : "Start",
     "fillForm" : "Fill Form",
     "linkForm": "Link Form",
+    "viewForm": "View Filled Form",
     "stepBack": "Step Back",
 
     "createForm": "Create Form",

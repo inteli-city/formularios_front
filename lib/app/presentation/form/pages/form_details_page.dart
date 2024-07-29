@@ -436,6 +436,25 @@ class FormDetailsActions extends StatelessWidget {
             context: context,
           ),
         );
+      case FormStatusEnum.CONCLUDED:
+        return Row(
+          children: [
+            Expanded(
+              child: buildCustomElevatedButton(
+                onPressed: () {
+                  Modular.to.pushNamed(
+                    '/home/${controller.form.formId}/fill',
+                    arguments: controller.form,
+                  );
+                },
+                text: S.current.viewForm,
+                backgroundColor: AppColors.primaryBlue,
+                textColor: AppColors.white,
+                context: context,
+              ),
+            ),
+          ],
+        );
       case FormStatusEnum.IN_PROGRESS:
         return Row(
           children: [
@@ -470,25 +489,7 @@ class FormDetailsActions extends StatelessWidget {
             ),
           ],
         );
-      case FormStatusEnum.CONCLUDED:
-        return Row(
-          children: [
-            Expanded(
-              child: buildCustomElevatedButton(
-                onPressed: () {
-                  Modular.to.pushNamed(
-                    '/home/${controller.form.formId}/fill',
-                    arguments: controller.form,
-                  );
-                },
-                text: S.current.fillForm,
-                backgroundColor: AppColors.primaryBlue,
-                textColor: AppColors.white,
-                context: context,
-              ),
-            ),
-          ],
-        );
+
       case FormStatusEnum.CANCELED:
         return const SizedBox.shrink();
       default:

@@ -291,6 +291,16 @@ class S {
     );
   }
 
+  /// `View Filled Form`
+  String get viewForm {
+    return Intl.message(
+      'View Filled Form',
+      name: 'viewForm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Step Back`
   String get stepBack {
     return Intl.message(

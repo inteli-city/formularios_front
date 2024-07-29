@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_group_field.dart';
@@ -57,7 +58,9 @@ class SectionForm extends StatelessWidget {
                 ),
               ),
             ),
-            buildSectionButtons(context)
+            singleFormProvider.form.status == FormStatusEnum.CONCLUDED
+                ? const SizedBox()
+                : buildSectionButtons(context)
           ],
         ),
       ),
@@ -128,9 +131,11 @@ class SectionForm extends StatelessWidget {
   }
 
   Widget buildField(FieldEntity field) {
+    FormStatusEnum status = singleFormProvider.form.status;
+    Widget fieldWidget;
     switch (field.fieldType) {
       case FieldTypeEnum.TEXT_FIELD:
-        return CustomTextFormField(
+        fieldWidget = CustomTextFormField(
           field: field as TextFieldEntity,
           singleFormProvider: singleFormProvider,
           onChanged: (value) {
@@ -141,7 +146,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.NUMBER_FIELD:
-        return CustomNumberFormField(
+        fieldWidget = CustomNumberFormField(
           field: field as NumberFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -152,7 +157,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.DROPDOWN_FIELD:
-        return CustomDropDownFormField(
+        fieldWidget = CustomDropDownFormField(
           field: field as DropDownFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -163,7 +168,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.CHECKBOX_GROUP_FIELD:
-        return CustomCheckBoxGroupFormField(
+        fieldWidget = CustomCheckBoxGroupFormField(
           field: field as CheckBoxGroupFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -175,7 +180,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:
-        return CustomCheckBoxFormField(
+        fieldWidget = CustomCheckBoxFormField(
           field: field as CheckBoxFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -187,7 +192,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.TYPEAHEAD_FIELD:
-        return CustomTypeAheadFormField(
+        fieldWidget = CustomTypeAheadFormField(
           field: field as TypeAheadFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -198,7 +203,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.RADIO_GROUP_FIELD:
-        return CustomRadioGroupFormField(
+        fieldWidget = CustomRadioGroupFormField(
           field: field as RadioGroupFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -210,7 +215,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.DATE_FIELD:
-        return CustomDateFormField(
+        fieldWidget = CustomDateFormField(
           field: field as DateFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -221,7 +226,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.SWITCH_BUTTON_FIELD:
-        return CustomSwitchButtonField(
+        fieldWidget = CustomSwitchButtonField(
           field: field as SwitchButtonFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -233,7 +238,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.FILE_FIELD:
-        return CustomFilePickerFormField(
+        fieldWidget = CustomFilePickerFormField(
           field: field as FileFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -248,5 +253,14 @@ class SectionForm extends StatelessWidget {
       default:
         throw UnimplementedError();
     }
+
+    if (status == FormStatusEnum.CONCLUDED) {
+      fieldWidget = AbsorbPointer(
+        absorbing: true,
+        child: fieldWidget,
+      );
+    }
+
+    return fieldWidget;
   }
 }

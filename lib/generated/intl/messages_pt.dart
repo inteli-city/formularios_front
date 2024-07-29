@@ -127,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Este campo deve ser maior que: "),
         "unknownError": MessageLookupByLibrary.simpleMessage(
             "Erro desconhecido, por favor, tente novamente"),
+        "viewForm": MessageLookupByLibrary.simpleMessage(
+            "Visualizar Formulário Preenchido"),
         "vinculationId":
             MessageLookupByLibrary.simpleMessage("ID de Vinculação")
       };

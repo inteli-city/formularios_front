@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
@@ -54,6 +55,18 @@ void main() {
       ImageInformationFieldEntity(filePath: 'filePath'),
       MapInformationFieldEntity(latitude: 0, longitude: 0),
     ]);
+
+    when(form.justification).thenReturn(
+      JustificationEntity(
+        options: [
+          JustificationOptionEntity(
+              option: 'option', requiredImage: false, requiredText: false),
+        ],
+        selectedOption: 'selectedOption',
+        justificationText: 'justificationText',
+        justificationImage: null,
+      ),
+    );
 
     when(formUserProvider.getFormByExternId(form.formId)).thenReturn(form);
     when(singleFormProvider.form).thenReturn(form);

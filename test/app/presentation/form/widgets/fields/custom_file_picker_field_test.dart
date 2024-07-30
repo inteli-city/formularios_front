@@ -35,7 +35,9 @@ void main() {
   );
 
   testWidgets('CustomFilePickerFormField Test', (WidgetTester tester) async {
+    await tester.binding.setSurfaceSize(const Size(2000, 2000));
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+
     final field = FileFieldEntity(
       key: 'filePickerField',
       placeholder: 'Selecione um arquivo',

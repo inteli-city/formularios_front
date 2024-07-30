@@ -11,6 +11,7 @@ import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart'
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 
 class CustomFilePickerFormField extends StatefulWidget {
   final FileFieldEntity field;
@@ -44,7 +45,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
   }
 
   Future<void> _pickFiles() async {
-    FilePickerResult? result =  await widget.filePicker.pickFiles(
+    FilePickerResult? result = await widget.filePicker.pickFiles(
       allowMultiple: widget.field.maxQuantity > 1,
       type: FileType.custom,
       allowedExtensions: widget.field.fileType == FileTypeEnum.IMAGE
@@ -170,55 +171,59 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
             const SizedBox(height: AppDimensions.paddingSmall),
             ..._selectedFiles.map(
               (file) {
-                return Center(
-                  child: Stack(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: AppDimensions.paddingSmall),
-                        child: kIsWeb
-                            ? Image.network(
-                                file,
-                                width: 150,
-                                height: 50,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.file(
-                                File(file),
-                                width: 150,
-                                height: 50,
-                                fit: BoxFit.cover,
+                return GestureDetector(
+                  onTap: () => _showImagePopup(context, file),
+                  child: Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: ScreenHelper.width(context),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: AppDimensions.paddingSmall),
+                          child: kIsWeb
+                              ? Image.network(
+                                  file,
+                                  width: ScreenHelper.width(context) / 2,
+                                  height: ScreenHelper.width(context) / 2,
+                                  fit: BoxFit.fill,
+                                )
+                              : Image.file(
+                                  File(file),
+                                  width: ScreenHelper.width(context) / 2,
+                                  height: ScreenHelper.width(context) / 2,
+                                  fit: BoxFit.fill,
+                                ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedFiles.remove(file);
+                                widget.singleFormProvider.setFieldValue(
+                                    widget.section.sectionId,
+                                    widget.field.key,
+                                    _selectedFiles);
+                              });
+                            },
+                            child: Container(
+                              width: 24,
+                              height: 24,
+                              decoration: const BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
                               ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedFiles.remove(file);
-                              widget.singleFormProvider.setFieldValue(
-                                  widget.section.sectionId,
-                                  widget.field.key,
-                                  _selectedFiles);
-                            });
-                          },
-                          child: Container(
-                            width: 24,
-                            height: 24,
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.close,
-                              size: 16,
-                              color: Colors.white,
+                              child: const Icon(
+                                Icons.close,
+                                size: 16,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
@@ -229,6 +234,83 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
           ],
+        );
+      },
+    );
+  }
+
+  void _showImagePopup(BuildContext context, String? selectedFile) {
+    if (selectedFile == null) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Stack(
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  kIsWeb
+                      ? Image.network(
+                          selectedFile,
+                          fit: BoxFit.contain,
+                          filterQuality: FilterQuality.high,
+                        )
+                      : Image.file(
+                          File(selectedFile),
+                          fit: BoxFit.contain,
+                          filterQuality: FilterQuality.high,
+                        ),
+                ],
+              ),
+              Positioned(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    IconButton(
+                      style: const ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.white),
+                          shape:
+                              WidgetStatePropertyAll(RoundedRectangleBorder())),
+                      color: AppColors.white,
+                      icon: Icon(
+                        Icons.arrow_back_rounded,
+                        size: AppDimensions.iconLarge,
+                        color: AppColors.primaryBlue,
+                        weight: 900,
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    IconButton(
+                      style: const ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.white),
+                          shape:
+                              WidgetStatePropertyAll(RoundedRectangleBorder())),
+                      icon: Icon(
+                        Icons.close,
+                        size: AppDimensions.iconLarge,
+                        color: AppColors.red,
+                        weight: 900,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _selectedFiles.remove(selectedFile);
+                          widget.singleFormProvider.setFieldValue(
+                              widget.section.sectionId,
+                              widget.field.key,
+                              _selectedFiles);
+                        });
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         );
       },
     );

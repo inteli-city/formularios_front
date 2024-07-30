@@ -92,7 +92,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                               ))
                           .toList(),
                       decoration: InputDecoration(
-                        labelText: 'Selecione uma justificação',
+                        labelText: 'Selecione uma justificativa',
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: AppColors.primaryBlue,

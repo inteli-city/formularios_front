@@ -95,4 +95,68 @@ void main() {
       ['file.png', 'file2.png', 'file3.png', '/path/to/file.png'],
     )).called(1);
   });
+
+  testWidgets('expands the image when clicked', (WidgetTester tester) async {
+    await tester.binding.setSurfaceSize(const Size(2000, 2000));
+    await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+
+    final field = FileFieldEntity(
+      key: 'filePickerField',
+      placeholder: 'Selecione um arquivo',
+      value: ['file.png', 'file2.png', 'file3.png'],
+      fileType: FileTypeEnum.IMAGE,
+      isRequired: true,
+      minQuantity: 1,
+      maxQuantity: 1,
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: CustomFilePickerFormField(
+            field: field,
+            onChanged: (DateTime? value) {},
+            singleFormProvider: mockSingleFormProvider,
+            section: section,
+            filePicker: mockFilePicker,
+          ),
+        ),
+      ),
+    );
+
+    when(
+      mockFilePicker.pickFiles(
+        allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+      ),
+    ).thenAnswer((_) async {
+      return FilePickerResult([
+        PlatformFile(
+          name: 'file.png',
+          path: '/path/to/file.png',
+          bytes: null,
+          size: 1024,
+        )
+      ]);
+    });
+
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byType(ElevatedButton));
+
+    await tester.pumpAndSettle();
+
+    verify(mockSingleFormProvider.setFieldValue(
+      'section',
+      'filePickerField',
+      ['file.png', 'file2.png', 'file3.png', '/path/to/file.png'],
+    )).called(1);
+
+    await tester.tap(find.byType(Image).first);
+
+    await tester.pumpAndSettle();
+
+    expect(find.byType(Dialog), findsOneWidget);
+  });
 }

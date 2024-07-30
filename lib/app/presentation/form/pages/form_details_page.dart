@@ -333,7 +333,7 @@ class JustificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     var justification = controller.form.justification;
 
-    if (justification.justificationImage == null ||
+    if (justification.justificationImage == null &&
         justification.justificationText == null) {
       return const SizedBox.shrink();
     }
@@ -351,69 +351,78 @@ class JustificationView extends StatelessWidget {
                   ),
               textAlign: TextAlign.justify,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: AppDimensions.paddingSmall),
-              child: Column(
-                children: [
-                  Text(
-                    'Texto Justificado:',
-                    textAlign: TextAlign.justify,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                    overflow: TextOverflow.clip,
-                  ),
-                  Padding(
+            justification.justificationText != null
+                ? Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: AppDimensions.paddingSmall),
-                    child: Text(
-                      justification.justificationText!,
-                      textAlign: TextAlign.justify,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            color: AppColors.white,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Texto Justificado:',
+                          textAlign: TextAlign.justify,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                          overflow: TextOverflow.clip,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppDimensions.paddingSmall),
+                          child: Text(
+                            justification.justificationText!,
+                            textAlign: TextAlign.justify,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: AppColors.white,
+                                    ),
+                            overflow: TextOverflow.clip,
                           ),
-                      overflow: TextOverflow.clip,
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: AppDimensions.paddingSmall),
-              child: Column(
-                children: [
-                  Text(
-                    'Imagem Justificada:',
-                    textAlign: TextAlign.justify,
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: AppColors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                    overflow: TextOverflow.clip,
-                  ),
-                  Padding(
+                  )
+                : const SizedBox.shrink(),
+            justification.justificationImage != null
+                ? Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: AppDimensions.paddingSmall),
-                    child: isValidBase64(justification.justificationImage!)
-                        ? Image.memory(
-                            base64Decode(justification.justificationImage!),
-                            width: ScreenHelper.width(context),
-                            height: ScreenHelper.width(context) / 2,
-                            fit: BoxFit.fill,
-                          )
-                        : Image.network(
-                            justification.justificationImage!,
-                            width: ScreenHelper.width(context),
-                            height: ScreenHelper.width(context) / 2,
-                            fit: BoxFit.fill,
-                          ),
-                  ),
-                ],
-              ),
-            )
+                    child: Column(
+                      children: [
+                        Text(
+                          'Imagem Justificada:',
+                          textAlign: TextAlign.justify,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                          overflow: TextOverflow.clip,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppDimensions.paddingSmall),
+                          child:
+                              isValidBase64(justification.justificationImage!)
+                                  ? Image.memory(
+                                      base64Decode(
+                                          justification.justificationImage!),
+                                      width: ScreenHelper.width(context),
+                                      height: ScreenHelper.width(context) / 2,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.network(
+                                      justification.justificationImage!,
+                                      width: ScreenHelper.width(context),
+                                      height: ScreenHelper.width(context) / 2,
+                                      fit: BoxFit.fill,
+                                    ),
+                        ),
+                      ],
+                    ),
+                  )
+                : const SizedBox.shrink()
           ],
         ),
       ),

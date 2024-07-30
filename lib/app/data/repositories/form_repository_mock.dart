@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:formularios_front/app/data/adapters/form_adapter.dart';
+import 'package:formularios_front/app/data/adapters/justification_adapter.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
@@ -917,8 +919,13 @@ class FormMockRepository extends IFormRepository {
       required String formId}) async {
     for (var form in formList) {
       if (form.formId == formId) {
+        var jsonForm = FormAdapter.toJson(form);
+        jsonForm['justification'] = JustificationAdapter.toJson(justification);
+
+        await updateFormLocally(form: FormAdapter.fromJson(jsonForm));
         await updateFormStatus(status: FormStatusEnum.CANCELED, formId: formId);
-        return right(form);
+
+        return right(FormAdapter.fromJson(jsonForm));
       }
     }
 

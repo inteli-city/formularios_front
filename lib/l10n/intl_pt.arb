@@ -34,6 +34,7 @@
     "fillForm" : "Preencher",
     "linkForm": "Vincular Formulário",
     "viewForm":"Visualizar Formulário Preenchido",
+    "viewFilledForm": "Visualizar Formulário Preenchido",
     "stepBack" : "Retroceder",
 
     "createForm": "Criar Formulário",

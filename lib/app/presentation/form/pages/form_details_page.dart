@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
@@ -9,21 +11,17 @@ import 'package:formularios_front/app/presentation/form/widgets/dialogs/cancel_f
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-class FormDetailsPage extends StatefulWidget {
+class FormDetailsPage extends StatelessWidget {
   const FormDetailsPage({super.key});
 
   @override
-  State<FormDetailsPage> createState() => _FormDetailsPageState();
-}
-
-class _FormDetailsPageState extends State<FormDetailsPage> {
-  final SingleFormProvider controller = Modular.get<SingleFormProvider>();
-
-  @override
   Widget build(BuildContext context) {
+    final SingleFormProvider controller = Modular.get<SingleFormProvider>();
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SingleFormProvider>(
@@ -101,54 +99,33 @@ class FormDetails extends StatelessWidget {
           const SizedBox(
             height: AppDimensions.verticalSpaceMedium,
           ),
-          _buildDetaislRow(
-            details: [
-              [S.current.externId, form.formId],
-              [S.current.vinculationId, form.vinculationFormId ?? ''],
-            ],
-            context: context,
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.creatorUserId, form.creatorUserId]
-            ],
-            context: context,
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.priority, form.priority.enumString],
-              ['Status', form.status.enumString],
-            ],
-            context: context,
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.creationDate, controller.creationDate],
-              [S.current.expirationDate, controller.expirationDate],
-            ],
-            context: context,
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.street, form.street],
-              [S.current.number, form.number.toString()],
-            ],
-            context: context,
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.latitude, form.latitude.toString()],
-              [S.current.longitude, form.longitude.toString()],
-            ],
-            context: context,
-          ),
-          _buildDetaislRow(
-            details: [
-              [S.current.startDate, S.current.startDate],
-              [S.current.conclusionDate, S.current.conclusionDate],
-            ],
-            context: context,
-          ),
+          _buildDetaislRow(details: [
+            [S.current.externId, form.formId],
+            [S.current.vinculationId, form.vinculationFormId ?? ''],
+          ], context: context),
+          _buildDetaislRow(details: [
+            [S.current.creatorUserId, form.creatorUserId]
+          ], context: context),
+          _buildDetaislRow(details: [
+            [S.current.priority, form.priority.enumString],
+            ['Status', form.status.enumString],
+          ], context: context),
+          _buildDetaislRow(details: [
+            [S.current.creationDate, controller.creationDate],
+            [S.current.expirationDate, controller.expirationDate],
+          ], context: context),
+          _buildDetaislRow(details: [
+            [S.current.street, form.street],
+            [S.current.number, form.number.toString()],
+          ], context: context),
+          _buildDetaislRow(details: [
+            [S.current.latitude, form.latitude.toString()],
+            [S.current.longitude, form.longitude.toString()],
+          ], context: context),
+          _buildDetaislRow(details: [
+            [S.current.startDate, S.current.startDate],
+            [S.current.conclusionDate, S.current.conclusionDate],
+          ], context: context),
           _buildFormDetail(S.current.description, form.description, context),
           Container(
             padding: const EdgeInsets.symmetric(
@@ -159,6 +136,7 @@ class FormDetails extends StatelessWidget {
               children: _buildInformationFieldsSection(context),
             ),
           ),
+          JustificationView(controller: controller),
         ],
       ),
     );
@@ -254,7 +232,9 @@ class FormDetails extends StatelessWidget {
             child: Text(
               'Imagem Auxiliar:',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: AppColors.white, fontWeight: FontWeight.bold),
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
           Image.network(
@@ -289,15 +269,15 @@ class FormDetails extends StatelessWidget {
             child: Text(
               'Localização:',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: AppColors.white, fontWeight: FontWeight.bold),
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
           SizedBox(
             height: 200,
             child: GoogleMap(
-              indoorViewEnabled: false,
               mapType: MapType.normal,
-              zoomControlsEnabled: false,
               markers: {
                 Marker(
                   infoWindow: InfoWindow.noText,
@@ -324,7 +304,9 @@ class FormDetails extends StatelessWidget {
             child: Text(
               'Texto Auxiliar:',
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: AppColors.white, fontWeight: FontWeight.bold),
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
           Text(
@@ -342,6 +324,112 @@ class FormDetails extends StatelessWidget {
   }
 }
 
+class JustificationView extends StatelessWidget {
+  final SingleFormProvider controller;
+
+  const JustificationView({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    var justification = controller.form.justification;
+
+    if (justification.justificationImage == null ||
+        justification.justificationText == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Column(
+          children: [
+            Text(
+              'Justificativa Apresentada:',
+              style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                    color: AppColors.white,
+                  ),
+              textAlign: TextAlign.justify,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: AppDimensions.paddingSmall),
+              child: Column(
+                children: [
+                  Text(
+                    'Texto Justificado:',
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                    overflow: TextOverflow.clip,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppDimensions.paddingSmall),
+                    child: Text(
+                      justification.justificationText!,
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: AppColors.white,
+                          ),
+                      overflow: TextOverflow.clip,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: AppDimensions.paddingSmall),
+              child: Column(
+                children: [
+                  Text(
+                    'Imagem Justificada:',
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                    overflow: TextOverflow.clip,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppDimensions.paddingSmall),
+                    child: isValidBase64(justification.justificationImage!)
+                        ? Image.memory(
+                            base64Decode(justification.justificationImage!),
+                            width: ScreenHelper.width(context),
+                            height: ScreenHelper.width(context) / 2,
+                            fit: BoxFit.fill,
+                          )
+                        : Image.network(
+                            justification.justificationImage!,
+                            width: ScreenHelper.width(context),
+                            height: ScreenHelper.width(context) / 2,
+                            fit: BoxFit.fill,
+                          ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  bool isValidBase64(String base64String) {
+    try {
+      base64Decode(base64String);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
 class FormDetailsActions extends StatelessWidget {
   final SingleFormProvider controller;
 
@@ -352,10 +440,10 @@ class FormDetailsActions extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        statusBuilder(controller.form.status, context),
+        _buildButtonsByStatus(controller.form.status, context),
         [FormStatusEnum.CANCELED, FormStatusEnum.CONCLUDED]
                 .contains(controller.form.status)
-            ? const SizedBox()
+            ? const SizedBox.shrink()
             : Padding(
                 padding:
                     const EdgeInsets.only(top: AppDimensions.paddingMedium),
@@ -378,10 +466,82 @@ class FormDetailsActions extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-        const SizedBox(height: AppDimensions.verticalSpaceMedium),
+              )
       ],
     );
+  }
+
+  Widget _buildButtonsByStatus(FormStatusEnum status, BuildContext context) {
+    switch (status) {
+      case FormStatusEnum.NOT_STARTED:
+        return SizedBox(
+          width: double.infinity,
+          child: buildCustomElevatedButton(
+              onPressed: () async {
+                await controller.updateFormStatus(
+                  status: FormStatusEnum.IN_PROGRESS,
+                );
+              },
+              text: S.current.start,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              textColor: AppColors.white,
+              context: context),
+        );
+      case FormStatusEnum.IN_PROGRESS:
+        return Row(
+          children: [
+            Expanded(
+              child: buildCustomElevatedButton(
+                onPressed: () {
+                  Modular.to.pushNamed(
+                    '/home/${controller.form.formId}/fill',
+                    arguments: controller.form,
+                  );
+                },
+                text: S.current.fillForm,
+                backgroundColor: AppColors.primaryBlue,
+                textColor: AppColors.white,
+                context: context,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: buildCustomElevatedButton(
+                  onPressed: () async {
+                    await controller.updateFormStatus(
+                      status: FormStatusEnum.NOT_STARTED,
+                    );
+                  },
+                  text: S.current.stepBack,
+                  textColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: AppColors.white,
+                  hasBorder: true,
+                  context: context),
+            ),
+          ],
+        );
+      case FormStatusEnum.CONCLUDED:
+        return Row(
+          children: [
+            Expanded(
+              child: buildCustomElevatedButton(
+                onPressed: () {
+                  Modular.to.pushNamed(
+                    '/home/${controller.form.formId}/fill',
+                    arguments: controller.form,
+                  );
+                },
+                text: S.current.viewFilledForm,
+                backgroundColor: AppColors.primaryBlue,
+                textColor: AppColors.white,
+                context: context,
+              ),
+            ),
+          ],
+        );
+      case FormStatusEnum.CANCELED:
+        return const SizedBox.shrink();
+    }
   }
 
   Widget buildCustomElevatedButton({
@@ -417,83 +577,5 @@ class FormDetailsActions extends StatelessWidget {
             ),
       ),
     );
-  }
-
-  Widget statusBuilder(FormStatusEnum status, BuildContext context) {
-    switch (status) {
-      case FormStatusEnum.NOT_STARTED:
-        return SizedBox(
-          width: double.infinity,
-          child: buildCustomElevatedButton(
-            onPressed: () async {
-              await controller.updateFormStatus(
-                status: FormStatusEnum.IN_PROGRESS,
-              );
-            },
-            text: S.current.start,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            textColor: AppColors.white,
-            context: context,
-          ),
-        );
-      case FormStatusEnum.CONCLUDED:
-        return Row(
-          children: [
-            Expanded(
-              child: buildCustomElevatedButton(
-                onPressed: () {
-                  Modular.to.pushNamed(
-                    '/home/${controller.form.formId}/fill',
-                    arguments: controller.form,
-                  );
-                },
-                text: S.current.viewForm,
-                backgroundColor: AppColors.primaryBlue,
-                textColor: AppColors.white,
-                context: context,
-              ),
-            ),
-          ],
-        );
-      case FormStatusEnum.IN_PROGRESS:
-        return Row(
-          children: [
-            Expanded(
-              child: buildCustomElevatedButton(
-                onPressed: () {
-                  Modular.to.pushNamed(
-                    '/home/${controller.form.formId}/fill',
-                    arguments: controller.form,
-                  );
-                },
-                text: S.current.fillForm,
-                backgroundColor: AppColors.primaryBlue,
-                textColor: AppColors.white,
-                context: context,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: buildCustomElevatedButton(
-                onPressed: () async {
-                  await controller.updateFormStatus(
-                    status: FormStatusEnum.NOT_STARTED,
-                  );
-                },
-                text: S.current.stepBack,
-                textColor: Theme.of(context).colorScheme.primary,
-                backgroundColor: AppColors.white,
-                hasBorder: true,
-                context: context,
-              ),
-            ),
-          ],
-        );
-
-      case FormStatusEnum.CANCELED:
-        return const SizedBox.shrink();
-      default:
-        return const SizedBox();
-    }
   }
 }

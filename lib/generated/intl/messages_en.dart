@@ -122,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "This field should have more than: "),
         "unknownError": MessageLookupByLibrary.simpleMessage(
             "Unknown error, please try again"),
+        "viewFilledForm":
+            MessageLookupByLibrary.simpleMessage("View Filled Form"),
         "viewForm": MessageLookupByLibrary.simpleMessage("View Filled Form"),
         "vinculationId": MessageLookupByLibrary.simpleMessage("Vinculation ID")
       };

@@ -195,7 +195,7 @@ void main() {
 
     await tester
         .tap(find.byType(DropdownButtonFormField2<JustificationOptionEntity>));
-    
+
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('Option 1').first);
@@ -204,5 +204,13 @@ void main() {
 
     expect(cancelFormController.selectedOption,
         mockSingleFormProvider.form.justification.options.first);
+  });
+
+  testWidgets('should display justification image',
+      (WidgetTester tester) async {
+    await tester.binding.setSurfaceSize(const Size(2000, 2000));
+    await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+
+    
   });
 }

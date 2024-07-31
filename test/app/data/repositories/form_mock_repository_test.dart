@@ -239,4 +239,37 @@ void main() {
       expect(result.isRight(), true);
     });
   });
+
+  group('cancel form - ', () {
+    JustificationEntity justificationEntity = JustificationEntity(
+      options: [
+        JustificationOptionEntity(
+            option: 'option', requiredImage: true, requiredText: true),
+      ],
+      selectedOption: null,
+      justificationText: 'text',
+      justificationImage: '',
+    );
+
+    test('should cancel a form', () async {
+      var result = await repository.cancelForm(
+        justification: justificationEntity,
+        formId: repository.formList[0].formId,
+      );
+
+      expect(result.isRight(), true);
+    });
+
+    test('should return failure when form not found', () async {
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      Modular.bindModule(AppModule());
+      
+      var result = await repository.cancelForm(
+        justification: justificationEntity,
+        formId: nonExistingFormLocally.formId,
+      );
+
+      expect(result.isLeft(), true);
+    });
+  });
 }

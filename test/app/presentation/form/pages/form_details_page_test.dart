@@ -176,7 +176,7 @@ void main() {
     });
 
     testWidgets(
-        'Form Details Page displays details correctly when status is CONCLUDED or CANCELED',
+        'Form Details Page displays details correctly when status is CONCLUDED',
         (WidgetTester tester) async {
       TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -184,7 +184,31 @@ void main() {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting('pt_BR', null);
 
-      when(form.status).thenReturn(FormStatusEnum.IN_PROGRESS);
+      when(form.status).thenReturn(FormStatusEnum.CONCLUDED);
+
+      HttpOverrides.runZoned(
+        () async {
+          await tester.pumpWidget(ModularApp(
+              module: AppModule(),
+              child: const MaterialApp(
+                home: FormDetailsPage(),
+              )));
+          expect(find.text(S.current.viewFilledForm), findsOne);
+        },
+        createHttpClient: (securityContext) => httpClient,
+      );
+    });
+
+    testWidgets(
+        'Form Details Page displays details correctly when status is CANCELED',
+        (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
+
+      when(form.status).thenReturn(FormStatusEnum.CANCELED);
 
       HttpOverrides.runZoned(
         () async {
@@ -247,8 +271,12 @@ void main() {
                 home: FormDetailsPage(),
               )));
           expect(find.byElementType(ElevatedButton), findsNothing);
-          
-          expect(find.text((form.informationFields![0] as TextInformationFieldEntity).value), findsOneWidget);
+
+          expect(
+              find.text(
+                  (form.informationFields![0] as TextInformationFieldEntity)
+                      .value),
+              findsOneWidget);
           expect(find.byType(GoogleMap), findsOneWidget);
           expect(find.byType(Image), findsOneWidget);
         },

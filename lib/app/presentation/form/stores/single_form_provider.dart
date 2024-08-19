@@ -35,6 +35,8 @@ class SingleFormProvider extends ChangeNotifier {
     setIsFormStateLoading(true);
     await _formsProvider.cancelForm(
         justification: justification, formId: formId);
+    await Future.delayed(const Duration(milliseconds: 300));
+
     setIsFormStateLoading(false);
   }
 

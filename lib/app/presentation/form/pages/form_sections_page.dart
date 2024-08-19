@@ -3,8 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_progress.dart';
+import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
-import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 import 'package:provider/provider.dart';
 
@@ -32,9 +32,25 @@ class FormSectionsPageState extends State<FormSectionsPage> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text(
-              S.current.fillForm,
-              style: Theme.of(context).textTheme.displayLarge,
+            backgroundColor: AppColors.primaryBlue,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: AppColors.white,
+                size: AppDimensions.iconLarge,
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: Column(
+              children: [
+                Text(
+                  singleFormProvider.form.formTitle,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayLarge!
+                      .copyWith(color: AppColors.white),
+                ),
+              ],
             ),
           ),
           body: Column(
@@ -42,18 +58,18 @@ class FormSectionsPageState extends State<FormSectionsPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              StepperProgress(
-                totalSteps: singleFormProvider.form.sections.length,
-                pageController: _pageController,
-              ),
               Padding(
-                padding: const EdgeInsets.all(
-                  AppDimensions.paddingMedium,
-                ),
-                child: Text(
-                  '${singleFormProvider.form.system} - ${singleFormProvider.form.template}',
-                  style: Theme.of(context).textTheme.displayLarge,
-                  textAlign: TextAlign.center,
+                padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    StepperProgress(
+                      totalSteps: singleFormProvider.form.sections.length,
+                      pageController: _pageController,
+                      sections: singleFormProvider.form.sections,
+                    ),
+                  ],
                 ),
               ),
               Expanded(

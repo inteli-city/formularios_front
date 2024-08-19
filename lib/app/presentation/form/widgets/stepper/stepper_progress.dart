@@ -19,6 +19,7 @@ class StepperProgress extends StatefulWidget {
 
 class _StepperProgressState extends State<StepperProgress> {
   int currentSectionIndex = 0;
+  int lastAccessedIndex = 0;
 
   @override
   void dispose() {
@@ -30,37 +31,67 @@ class _StepperProgressState extends State<StepperProgress> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 50,
-          width: calculateStepWidth()! * widget.totalSteps,
-          child: ListView.builder(
-            physics: const ClampingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.totalSteps,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                width: calculateStepWidth(),
-                child: StepperComponent(
-                  currentIndex: currentSectionIndex,
-                  index: index,
-                  isLast: index == widget.totalSteps - 1,
-                  isFirst: index == 0,
-                  onTap: () {
-                    setState(() {
-                      currentSectionIndex = index;
-                    });
-                    widget.pageController.animateToPage(
-                      index,
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.fastEaseInToSlowEaseOut,
-                    );
-                  },
-                ),
-              );
-            },
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  if (currentSectionIndex == 0) return;
+                  currentSectionIndex = currentSectionIndex - 1;
+                });
+              },
+              icon: const Icon(Icons.arrow_left_rounded),
+            ),
+            SizedBox(
+              height: 50,
+              width: 50,
+              child: ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.totalSteps,
+                controller: ,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      SizedBox(
+                        width: calculateStepWidth(),
+                        child: StepperComponent(
+                          currentIndex: currentSectionIndex,
+                          index: index,
+                          isLast: index == widget.totalSteps - 1,
+                          isFirst: index == 0,
+                          onTap: () {
+                            setState(() {
+                              currentSectionIndex = index;
+                            });
+                            widget.pageController.animateToPage(
+                              index,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.fastEaseInToSlowEaseOut,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  if (widget.totalSteps == currentSectionIndex) return;
+                  currentSectionIndex = currentSectionIndex + 1;
+                });
+              },
+              icon: const Icon(Icons.arrow_right_rounded),
+            ),
+          ],
         ),
         Text(
           widget.sections[currentSectionIndex].sectionId,

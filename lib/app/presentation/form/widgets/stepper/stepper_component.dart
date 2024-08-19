@@ -115,8 +115,8 @@ class StepWidget extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            width: 30,
-            height: 30,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               color: color,
@@ -128,7 +128,7 @@ class StepWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.secondary,
-                      height: 2,
+                      height: 2.5,
                     ),
               ),
             ),

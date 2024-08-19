@@ -58,18 +58,21 @@ class FormSectionsPageState extends State<FormSectionsPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(AppDimensions.paddingSmall),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    StepperProgress(
-                      totalSteps: singleFormProvider.form.sections.length,
-                      pageController: _pageController,
-                      sections: singleFormProvider.form.sections,
-                    ),
-                  ],
+              SizedBox(
+                width: 300,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical:AppDimensions.paddingSmall),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      StepperProgress(
+                        totalSteps: singleFormProvider.form.sections.length,
+                        pageController: _pageController,
+                        sections: singleFormProvider.form.sections,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(

@@ -20,12 +20,14 @@ class StepperComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return isLast
         ? Row(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Container(
-                    height: 2, color: Theme.of(context).colorScheme.primary),
+                  height: 3,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
               StepWidget(
                 color: index == currentIndex
@@ -34,13 +36,24 @@ class StepperComponent extends StatelessWidget {
                 onTap: onTap,
                 title: index.toString(),
               ),
+              Expanded(
+                child: Container(
+                  height: 3,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
             ],
           )
         : isFirst
             ? Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  Expanded(
+                    child: Container(
+                      height: 3,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                   StepWidget(
                     color: index == currentIndex
                         ? Theme.of(context).colorScheme.primary
@@ -50,7 +63,7 @@ class StepperComponent extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      height: 2,
+                      height: 3,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
@@ -62,7 +75,7 @@ class StepperComponent extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      height: 2,
+                      height: 3,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
@@ -75,8 +88,9 @@ class StepperComponent extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                        height: 2,
-                        color: Theme.of(context).colorScheme.primary),
+                      height: 3,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ],
               );
@@ -101,8 +115,8 @@ class StepWidget extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            width: 40,
-            height: 40,
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               color: color,
@@ -120,13 +134,6 @@ class StepWidget extends StatelessWidget {
             ),
           ),
         ),
-        // Text(
-        //   'FORMID',
-        //   textAlign: TextAlign.center,
-        //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        // ),
       ],
     );
   }

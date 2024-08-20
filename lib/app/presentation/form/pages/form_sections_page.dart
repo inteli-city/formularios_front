@@ -61,7 +61,8 @@ class FormSectionsPageState extends State<FormSectionsPage> {
               SizedBox(
                 width: 300,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical:AppDimensions.paddingSmall),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: AppDimensions.paddingSmall),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

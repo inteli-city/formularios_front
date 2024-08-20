@@ -34,6 +34,7 @@ class StepperComponent extends StatelessWidget {
                     ? Theme.of(context).colorScheme.primary
                     : Colors.grey,
                 onTap: onTap,
+                isActive: index == currentIndex,
                 title: index.toString(),
               ),
               Expanded(
@@ -59,6 +60,7 @@ class StepperComponent extends StatelessWidget {
                         ? Theme.of(context).colorScheme.primary
                         : Colors.grey,
                     onTap: onTap,
+                    isActive: index == currentIndex,
                     title: index.toString(),
                   ),
                   Expanded(
@@ -84,6 +86,7 @@ class StepperComponent extends StatelessWidget {
                         ? Theme.of(context).colorScheme.primary
                         : Colors.grey,
                     onTap: onTap,
+                    isActive: index == currentIndex,
                     title: index.toString(),
                   ),
                   Expanded(
@@ -99,13 +102,16 @@ class StepperComponent extends StatelessWidget {
 
 class StepWidget extends StatelessWidget {
   final Color color;
+  final bool isActive;
   final Function() onTap;
   final String title;
-  const StepWidget(
-      {super.key,
-      required this.color,
-      required this.onTap,
-      required this.title});
+  const StepWidget({
+    super.key,
+    required this.color,
+    required this.onTap,
+    required this.isActive,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -115,8 +121,8 @@ class StepWidget extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            width: 40,
-            height: 40,
+            width: isActive ? 40 : 30,
+            height: isActive ? 40 : 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               color: color,

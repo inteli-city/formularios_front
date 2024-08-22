@@ -139,7 +139,7 @@ class FormMockRepository extends IFormRepository {
           ],
         ),
         SectionEntity(
-          sectionId: 'section-01',
+          sectionId: 'SeçãoSeçãoSeçãoSeçãoSeçãoSeção',
           fields: [
             CheckBoxGroupFieldEntity(
               options: ['option 01', 'option 02', 'option 03'],

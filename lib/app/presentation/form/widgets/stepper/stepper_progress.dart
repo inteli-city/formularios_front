@@ -38,8 +38,6 @@ class _StepperProgressState extends State<StepperProgress> {
           child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.marginLarge),
               itemCount: widget.totalSteps,
               itemBuilder: (context, index) {
                 return SizedBox(
@@ -65,7 +63,9 @@ class _StepperProgressState extends State<StepperProgress> {
         ),
         Text(
           widget.sections[currentSectionIndex].sectionId,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ],
     );

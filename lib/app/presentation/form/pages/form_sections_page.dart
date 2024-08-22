@@ -59,15 +59,17 @@ class FormSectionsPageState extends State<FormSectionsPage> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.paddingSmall),
+                padding: const EdgeInsets.only(
+                  bottom: AppDimensions.paddingMedium,
+                ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     StepperProgress(
                       totalSteps: singleFormProvider.form.sections.length,
                       pageController: _pageController,
+                      sections: singleFormProvider.form.sections,
                     ),
                   ],
                 ),

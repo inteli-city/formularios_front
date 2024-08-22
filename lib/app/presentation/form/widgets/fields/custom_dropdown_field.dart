@@ -20,74 +20,49 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.centerLeft,
-      children: [
-        DropdownButtonFormField2<String>(
-          isExpanded: true,
-          isDense: true,
-          value: field.value,
-          decoration: InputDecoration(
-            labelText: field.placeholder,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
+    return DropdownButtonFormField2<String>(
+      isExpanded: true,
+      isDense: true,
+      value: field.value,
+      hint: const Text(
+        'Selecionar valor',
+        textAlign: TextAlign.center,
+      ),
+      
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.only(bottom: 8),
+        hintText: 'Selecionar valor',
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary, width: 1)),
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.primary, width: 1)),
+      ),
+      items: field.options.map(
+        (option) {
+          return DropdownMenuItem(
+            value: option,
+            child: Text(
+              option,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-          ),
-          items: field.options.map(
-            (option) {
-              return DropdownMenuItem(
-                value: option,
-                child: Text(
-                  option,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium,
+          );
+        },
+      ).toList(),
+      onChanged: onChanged,
+      validator: (value) {
+        return combine(
+          [
+            () => isRequired(
+                  value,
+                  field.isRequired,
+                  singleFormProvider.isSendingForm,
                 ),
-              );
-            },
-          ).toList(),
-          onChanged: onChanged,
-          validator: (value) {
-            return combine(
-              [
-                () => isRequired(
-                      value,
-                      field.isRequired,
-                      singleFormProvider.isSendingForm,
-                    ),
-              ],
-            );
-          },
-        ),
-        field.isRequired
-            ? Positioned(
-                top: 10.0,
-                right: 10.0,
-                child: Text(
-                  '*',
-                  style: TextStyle(
-                    color: AppColors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
-            : const SizedBox(),
-      ],
+          ],
+        );
+      },
     );
   }
 }

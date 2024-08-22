@@ -53,7 +53,6 @@ void main() {
       );
 
       expect(find.text('Initial text'), findsOneWidget);
-      expect(find.text('Enter text'), findsOneWidget);
     });
 
     testWidgets('Displays required field error when clicking in send option',

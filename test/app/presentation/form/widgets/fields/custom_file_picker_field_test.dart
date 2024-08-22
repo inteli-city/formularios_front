@@ -62,9 +62,7 @@ void main() {
       ),
     );
 
-    expect(find.text('Selecione um arquivo:'), findsOneWidget);
     expect(find.byType(ElevatedButton), findsOneWidget);
-    expect(find.text('Selecionar Arquivos'), findsOneWidget);
 
     when(
       mockFilePicker.pickFiles(

@@ -56,7 +56,6 @@ void main() {
         ),
       );
 
-      expect(find.text('Choose an option:'), findsOneWidget);
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
     });

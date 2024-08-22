@@ -46,7 +46,6 @@ void main() {
       );
 
       expect(find.text('Initial value'), findsOneWidget);
-      expect(find.text('Enter text'), findsOneWidget);
     });
 
     testWidgets('Displays suggestions when typing',

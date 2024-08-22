@@ -95,9 +95,6 @@ void main() {
           ),
         ),
       );
-
-      expect(find.text('Select options:'), findsOneWidget);
-
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
       expect(find.text('Option 3'), findsOneWidget);

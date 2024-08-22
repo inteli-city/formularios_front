@@ -97,63 +97,63 @@ class SectionForm extends StatelessWidget {
                         ),
                   ),
           ),
-          lastSection
-              ? Consumer<SingleFormProvider>(
-                  builder: (_, provider, child) {
-                    return provider.isSendingForm
-                        ? ElevatedButton(
-                            onPressed: null,
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color?>(
-                                AppColors.gray.withOpacity(0.7),
-                              ),
-                              elevation: const WidgetStatePropertyAll(4),
-                            ),
-                            child: Text(
-                              'Enviando',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(
-                                    color: AppColors.white,
-                                    height: 1.2,
-                                    fontSize: AppDimensions.fontMedium,
-                                  ),
-                            ),
-                          )
-                        : ElevatedButton(
-                            onPressed: () async {
-                              singleFormProvider.setIsSendingForm(true);
-                              if (!formKey.currentState!.validate()) {
-                                GlobalSnackBar.error(
-                                  S.current.allFieldsShouldBeSaved,
-                                );
-                              } else {
-                                await singleFormProvider.sendForm();
-                                Modular.to.navigate('/home/forms');
-                              }
-                              singleFormProvider.setIsSendingForm(false);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: lastSection
-                                  ? Theme.of(context).colorScheme.primary
-                                  : AppColors.gray,
-                            ),
-                            child: Text(
-                              S.current.sendForm,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(
-                                    color: AppColors.white,
-                                    height: 1.2,
-                                    fontSize: AppDimensions.fontMedium,
-                                  ),
-                            ),
-                          );
-                  },
-                )
-              : Container(),
+          // lastSection
+          //     ? Consumer<SingleFormProvider>(
+          //         builder: (_, provider, child) {
+          //           return provider.isSendingForm
+          //               ? ElevatedButton(
+          //                   onPressed: null,
+          //                   style: ButtonStyle(
+          //                     backgroundColor: WidgetStatePropertyAll<Color?>(
+          //                       AppColors.gray.withOpacity(0.7),
+          //                     ),
+          //                     elevation: const WidgetStatePropertyAll(4),
+          //                   ),
+          //                   child: Text(
+          //                     'Enviando',
+          //                     style: Theme.of(context)
+          //                         .textTheme
+          //                         .titleMedium!
+          //                         .copyWith(
+          //                           color: AppColors.white,
+          //                           height: 1.2,
+          //                           fontSize: AppDimensions.fontMedium,
+          //                         ),
+          //                   ),
+          //                 )
+          //               : ElevatedButton(
+          //                   onPressed: () async {
+          //                     singleFormProvider.setIsSendingForm(true);
+          //                     if (!formKey.currentState!.validate()) {
+          //                       GlobalSnackBar.error(
+          //                         S.current.allFieldsShouldBeSaved,
+          //                       );
+          //                     } else {
+          //                       await singleFormProvider.sendForm();
+          //                       Modular.to.navigate('/home/forms');
+          //                     }
+          //                     singleFormProvider.setIsSendingForm(false);
+          //                   },
+          //                   style: ElevatedButton.styleFrom(
+          //                     backgroundColor: lastSection
+          //                         ? Theme.of(context).colorScheme.primary
+          //                         : AppColors.gray,
+          //                   ),
+          //                   child: Text(
+          //                     S.current.sendForm,
+          //                     style: Theme.of(context)
+          //                         .textTheme
+          //                         .titleMedium!
+          //                         .copyWith(
+          //                           color: AppColors.white,
+          //                           height: 1.2,
+          //                           fontSize: AppDimensions.fontMedium,
+          //                         ),
+          //                   ),
+          //                 );
+          //         },
+          //       )
+          //     : Container(),
         ],
       ),
     );

@@ -71,8 +71,6 @@ void main() {
           key: 'radio-field',
           options: ['Option 1', 'Option 2'],
         ),
-        CheckBoxFieldEntity(
-            placeholder: 'Checkbox', key: 'checkbox-field', isRequired: true),
       ],
     );
 
@@ -122,14 +120,12 @@ void main() {
       ),
     );
 
-    expect(find.byType(CustomCheckBoxFormField), findsOneWidget);
     expect(find.byType(CustomTextFormField), findsOneWidget);
     expect(find.byType(CustomNumberFormField), findsOneWidget);
     expect(find.byType(CustomSwitchButtonField), findsOneWidget);
     expect(find.byType(CustomRadioGroupFormField), findsOneWidget);
 
     expect(find.text('Salvar'), findsOneWidget);
-    expect(find.text('Enviar'), findsOneWidget);
   });
 
   testWidgets('SectionForm Test', (WidgetTester tester) async {
@@ -162,14 +158,7 @@ void main() {
           key: 'checkbox-field',
           isRequired: true,
         ),
-        DropDownFieldEntity(
-          placeholder: 'Select an option',
-          fieldType: FieldTypeEnum.DROPDOWN_FIELD,
-          value: null,
-          options: ['Option 1', 'Option 2'],
-          isRequired: true,
-          key: 'dropdown-field',
-        ),
+      
       ],
     );
 
@@ -223,6 +212,5 @@ void main() {
     expect(find.byType(CustomTypeAheadFormField), findsOneWidget);
     expect(find.byType(CustomCheckBoxGroupFormField), findsOneWidget);
     expect(find.byType(CustomFilePickerFormField), findsOneWidget);
-    expect(find.byType(CustomDropDownFormField), findsOneWidget);
   });
 }

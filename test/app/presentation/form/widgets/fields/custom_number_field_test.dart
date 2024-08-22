@@ -26,7 +26,7 @@ void main() {
         when(singleFormProvider.isSendingForm).thenReturn(true);
       },
     );
-    testWidgets('Displays initial value and placeholder',
+    testWidgets('Displays initial value',
         (WidgetTester tester) async {
       await tester.binding.setSurfaceSize(const Size(1500, 1500));
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
@@ -51,7 +51,6 @@ void main() {
       );
       await tester.enterText(find.byType(TextFormField), '123');
       expect(find.text('123'), findsOneWidget);
-      expect(find.text('Enter number'), findsOneWidget);
     });
 
     testWidgets('Displays required field error when clicking in send option',

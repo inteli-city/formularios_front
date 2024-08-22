@@ -20,7 +20,7 @@ class StepperProgress extends StatefulWidget {
 
 class _StepperProgressState extends State<StepperProgress> {
   int currentSectionIndex = 0;
-
+  ScrollController scrollController = ScrollController();
   @override
   void dispose() {
     widget.pageController.dispose();
@@ -36,9 +36,9 @@ class _StepperProgressState extends State<StepperProgress> {
           height: 100,
           width: calculateStepWidth()! * widget.totalSteps,
           child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: widget.totalSteps,
+              controller: scrollController,
               itemBuilder: (context, index) {
                 return SizedBox(
                   width: calculateStepWidth(),

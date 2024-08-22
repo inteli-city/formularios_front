@@ -300,13 +300,14 @@ class SectionForm extends StatelessWidget {
       shape: RoundedRectangleBorder(
         side: BorderSide(color: AppColors.gray, width: 1),
         borderRadius: BorderRadius.circular(
-          AppDimensions.radiusMedium,
+          AppDimensions.radiusSmall,
         ),
       ),
       elevation: 8,
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSmall),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.paddingMedium,
+            vertical: AppDimensions.paddingSmall),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,

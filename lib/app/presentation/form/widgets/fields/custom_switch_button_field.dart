@@ -30,10 +30,6 @@ class _CustomSwitchButtonFieldState extends State<CustomSwitchButtonField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '${widget.field.placeholder}:',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
         Switch(
           activeColor: Theme.of(context).colorScheme.secondary,
           activeTrackColor: Theme.of(context).colorScheme.primary,

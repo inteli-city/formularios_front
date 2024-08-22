@@ -20,34 +20,31 @@ class StepperComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return isLast
         ? Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Container(
-                  height: 3,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                    height: 3, color: Theme.of(context).colorScheme.primary),
               ),
               StepWidget(
                 color: index == currentIndex
                     ? Theme.of(context).colorScheme.primary
                     : Colors.grey,
                 onTap: onTap,
-                isActive: index == currentIndex,
                 title: index.toString(),
+                isActive: index == currentIndex,
               ),
               Expanded(
                 child: Container(
-                  height: 3,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                    height: 3, color: Theme.of(context).colorScheme.primary),
               ),
             ],
           )
         : isFirst
             ? Row(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Container(
@@ -60,8 +57,8 @@ class StepperComponent extends StatelessWidget {
                         ? Theme.of(context).colorScheme.primary
                         : Colors.grey,
                     onTap: onTap,
-                    isActive: index == currentIndex,
                     title: index.toString(),
+                    isActive: index == currentIndex,
                   ),
                   Expanded(
                     child: Container(
@@ -86,14 +83,13 @@ class StepperComponent extends StatelessWidget {
                         ? Theme.of(context).colorScheme.primary
                         : Colors.grey,
                     onTap: onTap,
-                    isActive: index == currentIndex,
                     title: index.toString(),
+                    isActive: index == currentIndex,
                   ),
                   Expanded(
                     child: Container(
-                      height: 3,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                        height: 3,
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                 ],
               );
@@ -105,13 +101,12 @@ class StepWidget extends StatelessWidget {
   final bool isActive;
   final Function() onTap;
   final String title;
-  const StepWidget({
-    super.key,
-    required this.color,
-    required this.onTap,
-    required this.isActive,
-    required this.title,
-  });
+  const StepWidget(
+      {super.key,
+      required this.color,
+      required this.onTap,
+      required this.title,
+      required this.isActive});
 
   @override
   Widget build(BuildContext context) {

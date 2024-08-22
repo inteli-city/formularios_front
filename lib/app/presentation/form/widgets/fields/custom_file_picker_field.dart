@@ -10,7 +10,6 @@ import 'package:formularios_front/app/presentation/form/stores/single_form_provi
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
-import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 
 class CustomFilePickerFormField extends StatefulWidget {
@@ -92,8 +91,6 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
 
   @override
   Widget build(BuildContext context) {
-    String requiredAsterisk = widget.field.isRequired ? '*' : '';
-
     return FormField<List<String?>>(
       initialValue: widget.field.value,
       validator: (value) {
@@ -108,28 +105,6 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(children: [
-              Padding(
-                padding:
-                    const EdgeInsets.only(right: AppDimensions.paddingSmall),
-                child: Text(
-                  '${widget.field.placeholder}:',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Text(
-                  requiredAsterisk,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              )
-            ]),
-            const SizedBox(height: AppDimensions.paddingSmall),
             ElevatedButton(
               onPressed: _pickFiles,
               style: ElevatedButton.styleFrom(
@@ -143,27 +118,20 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
                   ),
                   side: BorderSide(
                     color: Theme.of(context).colorScheme.primary,
-                    width: 1.5,
+                    width: 1,
                   ),
                 ),
                 backgroundColor: Theme.of(context).colorScheme.secondary,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  const Icon(
-                    Icons.attach_file,
-                    size: AppDimensions.iconMedium,
-                  ),
-                  const SizedBox(
-                    width: AppDimensions.paddingSmall,
-                  ),
-                  Text(
-                    S.current.selectFiles,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium,
+                  Icon(
+                    Icons.image_search_rounded,
+                    fill: 1,
+                    size: AppDimensions.iconLarge,
                   ),
                 ],
               ),

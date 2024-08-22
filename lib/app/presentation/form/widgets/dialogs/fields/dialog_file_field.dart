@@ -183,58 +183,58 @@ class _DialogFileFieldState extends State<DialogFileField>
             ),
             const SizedBox(height: AppDimensions.paddingSmall),
             if (_selectedFile != null)
-            GestureDetector(
-              onTap: () => _showImagePopup(context),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: AppDimensions.paddingSmall),
-                      child: Center(
-                        child: kIsWeb
-                            ? Image.network(
-                                _selectedFile!,
-                                width: ScreenHelper.width(context) / 2,
-                                height: ScreenHelper.width(context) / 2,
-                                fit: BoxFit.fill,
-                              )
-                            : Image.file(
-                                File(_selectedFile!),
-                                width: ScreenHelper.width(context) / 2,
-                                height: ScreenHelper.width(context) / 2,
-                                fit: BoxFit.fill,
-                              ),
+              GestureDetector(
+                onTap: () => _showImagePopup(context),
+                child: Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: AppDimensions.paddingSmall),
+                        child: Center(
+                          child: kIsWeb
+                              ? Image.network(
+                                  _selectedFile!,
+                                  width: ScreenHelper.width(context) / 2,
+                                  height: ScreenHelper.width(context) / 2,
+                                  fit: BoxFit.fill,
+                                )
+                              : Image.file(
+                                  File(_selectedFile!),
+                                  width: ScreenHelper.width(context) / 2,
+                                  height: ScreenHelper.width(context) / 2,
+                                  fit: BoxFit.fill,
+                                ),
+                        ),
                       ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _selectedFile = null;
-                          });
-                        },
-                        child: Container(
-                          width: 24,
-                          height: 24,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.close,
-                            size: 16,
-                            color: Colors.white,
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedFile = null;
+                            });
+                          },
+                          child: Container(
+                            width: 24,
+                            height: 24,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              size: 16,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
             state.hasError
                 ? Padding(
                     padding: const EdgeInsets.only(left: 8.0),

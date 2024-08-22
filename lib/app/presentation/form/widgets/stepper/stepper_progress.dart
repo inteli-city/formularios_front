@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/presentation/form/widgets/stepper/stepper_component.dart';
-import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 
 class StepperProgress extends StatefulWidget {

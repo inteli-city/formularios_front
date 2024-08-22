@@ -1,6 +1,5 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
@@ -19,8 +18,6 @@ import 'package:formularios_front/app/presentation/form/widgets/fields/type_ahea
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
-import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
-import 'package:provider/provider.dart';
 
 class SectionForm extends StatelessWidget {
   final SectionEntity section;

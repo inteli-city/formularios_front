@@ -45,7 +45,6 @@ class _CustomCheckBoxGroupFormFieldState
 
   @override
   Widget build(BuildContext context) {
-    String requiredAsterisk = widget.field.isRequired ? '*' : '';
     return FormField<List<String?>>(
       initialValue: selectedOptions,
       validator: (value) {

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
-import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 class CustomNumberFormField extends StatelessWidget with ValidationMixin {
   final NumberFieldEntity field;
@@ -26,7 +25,16 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
           initialValue: field.value == null ? '' : field.value.toString(),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
-            labelText: field.placeholder,
+            hintText: 'Insira o valor',
+            isDense: true,
+        isCollapsed: true,
+            contentPadding: const EdgeInsets.only(bottom: 8),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.primary, width: 1)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.primary, width: 1)),
           ),
           keyboardType: TextInputType.numberWithOptions(
             decimal: field.decimal,
@@ -52,20 +60,6 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
             );
           },
         ),
-        field.isRequired
-            ? Positioned(
-                top: 10.0,
-                right: 10.0,
-                child: Text(
-                  '*',
-                  style: TextStyle(
-                    color: AppColors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
-            : const SizedBox(),
       ],
     );
   }

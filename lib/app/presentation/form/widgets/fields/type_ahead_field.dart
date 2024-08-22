@@ -4,7 +4,6 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
-import 'package:formularios_front/app/shared/themes/app_colors.dart';
 
 class CustomTypeAheadFormField extends StatefulWidget {
   final TypeAheadFieldEntity field;
@@ -53,7 +52,20 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
               maxLines: null,
               controller: controller,
               focusNode: focusNode,
-              decoration: InputDecoration(labelText: widget.field.placeholder),
+              decoration: InputDecoration(
+                isDense: true,
+                isCollapsed: true,
+                contentPadding: const EdgeInsets.only(bottom: 8),
+                hintText: 'Insira o texto',
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 1)),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 1)),
+              ),
               onChanged: (value) => widget.onChanged(value),
               validator: (value) => combine(
                 [
@@ -92,20 +104,6 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
             widget.onChanged(suggestion);
           },
         ),
-        widget.field.isRequired
-            ? Positioned(
-                top: 10.0,
-                right: 10.0,
-                child: Text(
-                  '*',
-                  style: TextStyle(
-                    color: AppColors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
-            : const SizedBox(),
       ],
     );
   }

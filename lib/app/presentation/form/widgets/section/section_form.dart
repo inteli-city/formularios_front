@@ -20,6 +20,7 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
+import 'package:provider/provider.dart';
 
 class SectionForm extends StatelessWidget {
   final SectionEntity section;
@@ -51,8 +52,8 @@ class SectionForm extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 itemCount: section.fields.length,
                 itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.paddingSmall,
+                  padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingSmall * 0.5,
                   ),
                   child: buildField(section.fields[index]),
                 ),
@@ -161,6 +162,12 @@ class SectionForm extends StatelessWidget {
   Widget buildField(FieldEntity field) {
     FormStatusEnum status = singleFormProvider.form.status;
     Widget fieldWidget;
+    List<FieldTypeEnum> specialFields = [
+      FieldTypeEnum.CHECKBOX_GROUP_FIELD,
+      FieldTypeEnum.RADIO_GROUP_FIELD,
+      FieldTypeEnum.SWITCH_BUTTON_FIELD
+    ];
+
     switch (field.fieldType) {
       case FieldTypeEnum.TEXT_FIELD:
         fieldWidget = CustomTextFormField(
@@ -289,6 +296,56 @@ class SectionForm extends StatelessWidget {
       );
     }
 
-    return fieldWidget;
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: AppColors.gray, width: 1),
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusMedium,
+        ),
+      ),
+      elevation: 8,
+      child: Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: AppDimensions.paddingSmall),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    field.placeholder,
+                    style: TextStyle(
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimensions.fontMedium),
+                  ),
+                  Text(
+                    '*',
+                    style: TextStyle(
+                      color: AppColors.red,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+            Padding(
+              padding: specialFields.contains(field.fieldType)
+                  ? field.fieldType != FieldTypeEnum.SWITCH_BUTTON_FIELD
+                      ? const EdgeInsets.all(0)
+                      : const EdgeInsets.symmetric(
+                          vertical: AppDimensions.paddingSmall,
+                        )
+                  : const EdgeInsets.symmetric(
+                      horizontal: AppDimensions.paddingLarge,
+                      vertical: AppDimensions.paddingMedium),
+              child: fieldWidget,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

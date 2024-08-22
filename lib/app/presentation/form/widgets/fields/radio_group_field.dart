@@ -29,7 +29,6 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
     with ValidationMixin {
   @override
   Widget build(BuildContext context) {
-    String requiredAsterisk = widget.field.isRequired ? '*' : '';
     return FormField<String>(
       initialValue: widget.field.value,
       validator: (value) {
@@ -47,27 +46,7 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(children: [
-              Padding(
-                padding:
-                    const EdgeInsets.only(right: AppDimensions.paddingSmall),
-                child: Text(
-                  '${widget.field.placeholder}:',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Text(
-                  requiredAsterisk,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              )
-            ]),
+            
             ...widget.field.options.map(
               (option) {
                 return RadioListTile<String>(
@@ -96,7 +75,7 @@ class _CustomRadioGroupFormFieldState extends State<CustomRadioGroupFormField>
                     .textTheme
                     .bodyLarge
                     ?.copyWith(color: AppColors.red),
-              ),
+              )
           ],
         );
       },

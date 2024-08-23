@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                         form: filteredForms[index],
                       ),
                       separatorBuilder: (context, index) => const SizedBox(
-                        height: 5,
+                        height: 4,
                       ),
                     ),
                   ),

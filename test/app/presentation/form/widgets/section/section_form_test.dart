@@ -23,6 +23,7 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
+import 'package:provider/provider.dart';
 
 import 'section_form_test.mocks.dart';
 
@@ -105,18 +106,16 @@ void main() {
 
     when(mocksingleFormProvider.form).thenReturn(form);
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SectionForm(
-            singleFormProvider: mocksingleFormProvider,
-            section: section,
-            lastSection: true,
-            formKey: GlobalKey<FormState>(),
-          ),
-        ),
+    await tester.pumpWidget(MaterialApp(
+        home: ChangeNotifierProvider<SingleFormProvider>(
+      create: (_) => mocksingleFormProvider,
+      child: SectionForm(
+        singleFormProvider: mocksingleFormProvider,
+        section: section,
+        lastSection: true,
+        formKey: GlobalKey<FormState>(),
       ),
-    );
+    )));
 
     expect(find.byType(CustomTextFormField), findsOneWidget);
     expect(find.byType(CustomNumberFormField), findsOneWidget);
@@ -156,7 +155,6 @@ void main() {
           key: 'checkbox-field',
           isRequired: true,
         ),
-      
       ],
     );
 
@@ -193,18 +191,16 @@ void main() {
 
     when(mocksingleFormProvider.form).thenReturn(form);
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SectionForm(
-            singleFormProvider: mocksingleFormProvider,
-            section: section,
-            lastSection: true,
-            formKey: GlobalKey<FormState>(),
-          ),
-        ),
+    await tester.pumpWidget(MaterialApp(
+        home: ChangeNotifierProvider<SingleFormProvider>(
+      create: (_) => mocksingleFormProvider,
+      child: SectionForm(
+        singleFormProvider: mocksingleFormProvider,
+        section: section,
+        lastSection: true,
+        formKey: GlobalKey<FormState>(),
       ),
-    );
+    )));
 
     expect(find.byType(CustomFilePickerFormField), findsOneWidget);
     expect(find.byType(CustomTypeAheadFormField), findsOneWidget);

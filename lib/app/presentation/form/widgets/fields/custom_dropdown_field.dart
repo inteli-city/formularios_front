@@ -26,7 +26,6 @@ class CustomDropDownFormField extends StatelessWidget with ValidationMixin {
         'Selecionar valor',
         textAlign: TextAlign.center,
       ),
-      
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.only(bottom: 8),
         hintText: 'Selecionar valor',

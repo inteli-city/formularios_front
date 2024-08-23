@@ -157,75 +157,83 @@ class _FilterOrderDialogState extends State<FilterOrderDialog> {
         .toList();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingSmall),
-      child: DropdownButtonFormField2<String?>(
-        value: selectedValue,
-        isExpanded: true,
-        items: dropdownItems,
-        onChanged: onChanged,
-        hint: Text(
-          hintText,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        buttonStyleData:
-            const ButtonStyleData(height: 20, padding: EdgeInsets.zero),
-        decoration: InputDecoration(
-          isDense: true,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.primaryBlue,
-              width: AppDimensions.borderMedium,
-            ),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.primaryBlue,
-              width: AppDimensions.borderMedium,
-            ),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: AppColors.gray, width: 1),
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusSmall,
           ),
         ),
-        dropdownSearchData: DropdownSearchData(
-          searchController: textEditingController,
-          searchInnerWidgetHeight: 80,
-          searchInnerWidget: Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.all(AppDimensions.paddingSmall),
-            padding: const EdgeInsets.all(AppDimensions.paddingSmall),
-            child: TextFormField(
-              maxLines: 1,
-              controller: textEditingController,
-              decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: AppDimensions.iconMedium,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                isDense: true,
-                contentPadding:
-                    const EdgeInsets.all(AppDimensions.paddingMedium),
-                hintText: 'Buscar por $hintText',
-                hintStyle: Theme.of(context).textTheme.bodyLarge,
-                border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(AppDimensions.radiusSmall),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.paddingMedium,
+              vertical: AppDimensions.paddingSmall),
+          child: DropdownButtonFormField2<String?>(
+            value: selectedValue,
+            isExpanded: true,
+            isDense: true,
+            items: dropdownItems,
+            onChanged: onChanged,
+            hint: Text(
+              hintText,
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
+            buttonStyleData:
+                const ButtonStyleData(height: 20, padding: EdgeInsets.zero),
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(bottom: 8),
+              hintText: 'Selecionar valor',
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary, width: 1)),
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary, width: 1)),
+            ),
+            dropdownSearchData: DropdownSearchData(
+              searchController: textEditingController,
+              searchInnerWidgetHeight: 80,
+              searchInnerWidget: Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.all(AppDimensions.paddingSmall),
+                padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+                child: TextFormField(
+                  maxLines: 1,
+                  controller: textEditingController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: AppDimensions.iconMedium,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    isDense: true,
+                    contentPadding:
+                        const EdgeInsets.all(AppDimensions.paddingMedium),
+                    hintText: 'Buscar por $hintText',
+                    hintStyle: Theme.of(context).textTheme.bodyLarge,
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(AppDimensions.radiusSmall),
+                    ),
+                  ),
                 ),
               ),
+              searchMatchFn: (item, searchValue) {
+                return item.value
+                    .toString()
+                    .toLowerCase()
+                    .contains(searchValue.toLowerCase());
+              },
             ),
+            onMenuStateChange: (isOpen) {
+              if (!isOpen) {
+                textEditingController.clear();
+              }
+            },
           ),
-          searchMatchFn: (item, searchValue) {
-            return item.value
-                .toString()
-                .toLowerCase()
-                .contains(searchValue.toLowerCase());
-          },
         ),
-        onMenuStateChange: (isOpen) {
-          if (!isOpen) {
-            textEditingController.clear();
-          }
-        },
       ),
     );
   }

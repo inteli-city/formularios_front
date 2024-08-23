@@ -54,17 +54,6 @@ class _FormCardState extends State<FormCard>
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: Card(
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppDimensions.radiusLarge,
-            ),
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.primary,
-              style: BorderStyle.solid,
-              width: AppDimensions.borderMedium,
-            ),
-          ),
           child: Container(
             padding: const EdgeInsets.symmetric(
                 vertical: AppDimensions.paddingSmall,

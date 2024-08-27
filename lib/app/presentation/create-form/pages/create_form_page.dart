@@ -147,19 +147,9 @@ class _CreateFormPageState extends State<CreateFormPage> {
                               'Selecionar valor',
                               textAlign: TextAlign.center,
                             ),
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.only(bottom: 8),
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.only(bottom: 8),
                               hintText: 'Selecionar valor',
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 1)),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 1)),
                             ),
                             items: templates.map(
                               (template) {
@@ -186,7 +176,6 @@ class _CreateFormPageState extends State<CreateFormPage> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Card(
-                   
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: AppDimensions.paddingMedium,
@@ -227,19 +216,9 @@ class _CreateFormPageState extends State<CreateFormPage> {
                               'Selecionar valor',
                               textAlign: TextAlign.center,
                             ),
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.only(bottom: 8),
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.only(bottom: 8),
                               hintText: 'Selecionar valor',
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 1)),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 1)),
                             ),
                             items: PriorityEnum.values.map(
                               (priority) {

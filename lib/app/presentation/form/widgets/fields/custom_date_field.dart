@@ -58,12 +58,6 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
         isCollapsed: true,
         contentPadding: const EdgeInsets.only(bottom: 8, left: 8),
         hintText: 'Selecione uma data',
-        focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary, width: 1)),
-        enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary, width: 1)),
       ),
       readOnly: true,
       onTap: () async {
@@ -107,7 +101,7 @@ class _CustomDateFormFieldState extends State<CustomDateFormField>
             () => isRequired(
                   value,
                   widget.field.isRequired,
-                  widget.singleFormProvider.isSendingForm,
+                  widget.singleFormProvider.isFormStateLoading,
                 ),
             () => minDate(value, widget.field.minDate),
             () => maxDate(value, widget.field.maxDate),

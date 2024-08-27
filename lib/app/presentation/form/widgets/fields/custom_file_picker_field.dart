@@ -96,7 +96,7 @@ class _CustomFilePickerFormFieldState extends State<CustomFilePickerFormField>
       validator: (value) {
         return combine([
           () => isRequired(value.toString(), widget.field.isRequired,
-              widget.singleFormProvider.isSendingForm),
+              widget.singleFormProvider.isFormStateLoading),
           () => minQuantity(value?.length, widget.field.minQuantity),
           () => maxQuantity(value?.length, widget.field.maxQuantity),
         ]);

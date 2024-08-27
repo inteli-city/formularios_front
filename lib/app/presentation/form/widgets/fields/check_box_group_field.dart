@@ -53,7 +53,7 @@ class _CustomCheckBoxGroupFormFieldState
             () => isRequired(
                   value.toString(),
                   widget.field.isRequired,
-                  widget.singleFormProvider.isSendingForm,
+                  widget.singleFormProvider.isFormStateLoading,
                 ),
             () => checkLimit(value, widget.field.checkLimit),
           ],

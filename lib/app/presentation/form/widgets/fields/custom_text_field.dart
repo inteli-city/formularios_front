@@ -21,17 +21,11 @@ class CustomTextFormField extends StatelessWidget with ValidationMixin {
     return TextFormField(
       inputFormatters: [LengthLimitingTextInputFormatter(field.maxLength)],
       initialValue: field.value,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         isDense: true,
         isCollapsed: true,
-        contentPadding: const EdgeInsets.only(bottom: 8),
+        contentPadding: EdgeInsets.only(bottom: 8),
         hintText: 'Insira o texto',
-        focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary, width: 1)),
-        enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.primary, width: 1)),
       ),
       maxLines: null,
       onChanged: onChanged,
@@ -42,7 +36,7 @@ class CustomTextFormField extends StatelessWidget with ValidationMixin {
             () => isRequired(
                   value,
                   field.isRequired,
-                  singleFormProvider.isSendingForm,
+                  singleFormProvider.isFormStateLoading,
                 ),
             () => maxLength(value, field.maxLength),
             () => regex(value, field.regex),

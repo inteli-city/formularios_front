@@ -24,17 +24,11 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
         TextFormField(
           initialValue: field.value == null ? '' : field.value.toString(),
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Insira o valor',
             isDense: true,
-        isCollapsed: true,
-            contentPadding: const EdgeInsets.only(bottom: 8),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary, width: 1)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary, width: 1)),
+            isCollapsed: true,
+            contentPadding: EdgeInsets.only(bottom: 8),
           ),
           keyboardType: TextInputType.numberWithOptions(
             decimal: field.decimal,
@@ -52,7 +46,7 @@ class CustomNumberFormField extends StatelessWidget with ValidationMixin {
                 () => isRequired(
                       value,
                       field.isRequired,
-                      singleFormProvider.isSendingForm,
+                      singleFormProvider.isFormStateLoading,
                     ),
                 () => maxValue(value, field.maxValue),
                 () => minValue(value, field.minValue),

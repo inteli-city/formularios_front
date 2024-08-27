@@ -45,7 +45,6 @@ class _CustomCheckBoxGroupFormFieldState
 
   @override
   Widget build(BuildContext context) {
-    String requiredAsterisk = widget.field.isRequired ? '*' : '';
     return FormField<List<String?>>(
       initialValue: selectedOptions,
       validator: (value) {
@@ -64,29 +63,6 @@ class _CustomCheckBoxGroupFormFieldState
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: AppDimensions.paddingSmall),
-                  child: Text(
-                    '${widget.field.placeholder}:',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Text(
-                    requiredAsterisk,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppColors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                )
-              ],
-            ),
             ...widget.field.options.map(
               (option) {
                 return CheckboxListTile(

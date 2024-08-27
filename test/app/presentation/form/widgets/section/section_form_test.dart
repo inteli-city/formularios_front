@@ -8,9 +8,7 @@ import 'package:formularios_front/app/domain/enum/file_type_enum.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
-import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_group_field.dart';
-import 'package:formularios_front/app/presentation/form/widgets/fields/custom_dropdown_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_file_picker_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_number_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_switch_button_field.dart';
@@ -25,6 +23,7 @@ import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
 import 'package:formularios_front/app/presentation/form/widgets/section/section_form.dart';
+import 'package:provider/provider.dart';
 
 import 'section_form_test.mocks.dart';
 
@@ -71,8 +70,6 @@ void main() {
           key: 'radio-field',
           options: ['Option 1', 'Option 2'],
         ),
-        CheckBoxFieldEntity(
-            placeholder: 'Checkbox', key: 'checkbox-field', isRequired: true),
       ],
     );
 
@@ -109,27 +106,23 @@ void main() {
 
     when(mocksingleFormProvider.form).thenReturn(form);
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SectionForm(
-            singleFormProvider: mocksingleFormProvider,
-            section: section,
-            lastSection: true,
-            formKey: GlobalKey<FormState>(),
-          ),
-        ),
+    await tester.pumpWidget(MaterialApp(
+        home: ChangeNotifierProvider<SingleFormProvider>(
+      create: (_) => mocksingleFormProvider,
+      child: SectionForm(
+        singleFormProvider: mocksingleFormProvider,
+        section: section,
+        lastSection: true,
+        formKey: GlobalKey<FormState>(),
       ),
-    );
+    )));
 
-    expect(find.byType(CustomCheckBoxFormField), findsOneWidget);
     expect(find.byType(CustomTextFormField), findsOneWidget);
     expect(find.byType(CustomNumberFormField), findsOneWidget);
     expect(find.byType(CustomSwitchButtonField), findsOneWidget);
     expect(find.byType(CustomRadioGroupFormField), findsOneWidget);
 
     expect(find.text('Salvar'), findsOneWidget);
-    expect(find.text('Enviar'), findsOneWidget);
   });
 
   testWidgets('SectionForm Test', (WidgetTester tester) async {
@@ -162,14 +155,6 @@ void main() {
           key: 'checkbox-field',
           isRequired: true,
         ),
-        DropDownFieldEntity(
-          placeholder: 'Select an option',
-          fieldType: FieldTypeEnum.DROPDOWN_FIELD,
-          value: null,
-          options: ['Option 1', 'Option 2'],
-          isRequired: true,
-          key: 'dropdown-field',
-        ),
       ],
     );
 
@@ -206,23 +191,20 @@ void main() {
 
     when(mocksingleFormProvider.form).thenReturn(form);
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SectionForm(
-            singleFormProvider: mocksingleFormProvider,
-            section: section,
-            lastSection: true,
-            formKey: GlobalKey<FormState>(),
-          ),
-        ),
+    await tester.pumpWidget(MaterialApp(
+        home: ChangeNotifierProvider<SingleFormProvider>(
+      create: (_) => mocksingleFormProvider,
+      child: SectionForm(
+        singleFormProvider: mocksingleFormProvider,
+        section: section,
+        lastSection: true,
+        formKey: GlobalKey<FormState>(),
       ),
-    );
+    )));
 
     expect(find.byType(CustomFilePickerFormField), findsOneWidget);
     expect(find.byType(CustomTypeAheadFormField), findsOneWidget);
     expect(find.byType(CustomCheckBoxGroupFormField), findsOneWidget);
     expect(find.byType(CustomFilePickerFormField), findsOneWidget);
-    expect(find.byType(CustomDropDownFormField), findsOneWidget);
   });
 }

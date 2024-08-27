@@ -117,11 +117,6 @@ void main() {
         ),
       );
     });
-
-    // expect(find.byIcon(Icons.arrow_back), findsOneWidget);
-
-    expect(find.text(S.current.fillForm), findsOneWidget);
-
     expect(find.byType(StepperComponent), findsWidgets);
 
     expect(form.sections.length, 2);

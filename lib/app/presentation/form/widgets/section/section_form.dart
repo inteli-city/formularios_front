@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/section_entity.dart';
 import 'package:formularios_front/app/domain/enum/field_type_enum.dart';
+import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_field.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/check_box_group_field.dart';
@@ -19,6 +20,7 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/functions/global_snackbar.dart';
+import 'package:provider/provider.dart';
 
 class SectionForm extends StatelessWidget {
   final SectionEntity section;
@@ -50,14 +52,16 @@ class SectionForm extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 itemCount: section.fields.length,
                 itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.paddingSmall,
+                  padding: const EdgeInsets.only(
+                    bottom: AppDimensions.paddingSmall * 0.5,
                   ),
                   child: buildField(section.fields[index]),
                 ),
               ),
             ),
-            buildSectionButtons(context)
+            singleFormProvider.form.status == FormStatusEnum.CONCLUDED
+                ? const SizedBox()
+                : buildSectionButtons(context)
           ],
         ),
       ),
@@ -94,32 +98,60 @@ class SectionForm extends StatelessWidget {
                   ),
           ),
           lastSection
-              ? ElevatedButton(
-                  onPressed: () async {
-                    singleFormProvider.setIsSendingForm(true);
-                    if (!formKey.currentState!.validate()) {
-                      GlobalSnackBar.error(
-                        S.current.allFieldsShouldBeSaved,
-                      );
-                    } else {
-                      await singleFormProvider.sendForm();
-                      Modular.to.navigate('/home/forms');
-                    }
-                    singleFormProvider.setIsSendingForm(false);
+              ? Consumer<SingleFormProvider>(
+                  builder: (_, provider, child) {
+                    return provider.isSendingForm
+                        ? ElevatedButton(
+                            onPressed: null,
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color?>(
+                                AppColors.gray.withOpacity(0.7),
+                              ),
+                              elevation: const WidgetStatePropertyAll(4),
+                            ),
+                            child: Text(
+                              'Enviando',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color: AppColors.white,
+                                    height: 1.2,
+                                    fontSize: AppDimensions.fontMedium,
+                                  ),
+                            ),
+                          )
+                        : ElevatedButton(
+                            onPressed: () async {
+                              singleFormProvider.setIsSendingForm(true);
+                              if (!formKey.currentState!.validate()) {
+                                GlobalSnackBar.error(
+                                  S.current.allFieldsShouldBeSaved,
+                                );
+                              } else {
+                                await singleFormProvider.sendForm();
+                                Modular.to.navigate('/home/forms');
+                              }
+                              singleFormProvider.setIsSendingForm(false);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: lastSection
+                                  ? Theme.of(context).colorScheme.primary
+                                  : AppColors.gray,
+                            ),
+                            child: Text(
+                              S.current.sendForm,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color: AppColors.white,
+                                    height: 1.2,
+                                    fontSize: AppDimensions.fontMedium,
+                                  ),
+                            ),
+                          );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: lastSection
-                        ? Theme.of(context).colorScheme.primary
-                        : AppColors.gray,
-                  ),
-                  child: Text(
-                    S.current.sendForm,
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: AppColors.white,
-                          height: 1.2,
-                          fontSize: AppDimensions.fontMedium,
-                        ),
-                  ),
                 )
               : Container(),
         ],
@@ -128,9 +160,17 @@ class SectionForm extends StatelessWidget {
   }
 
   Widget buildField(FieldEntity field) {
+    FormStatusEnum status = singleFormProvider.form.status;
+    Widget fieldWidget;
+    List<FieldTypeEnum> specialFields = [
+      FieldTypeEnum.CHECKBOX_GROUP_FIELD,
+      FieldTypeEnum.RADIO_GROUP_FIELD,
+      FieldTypeEnum.SWITCH_BUTTON_FIELD
+    ];
+
     switch (field.fieldType) {
       case FieldTypeEnum.TEXT_FIELD:
-        return CustomTextFormField(
+        fieldWidget = CustomTextFormField(
           field: field as TextFieldEntity,
           singleFormProvider: singleFormProvider,
           onChanged: (value) {
@@ -141,7 +181,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.NUMBER_FIELD:
-        return CustomNumberFormField(
+        fieldWidget = CustomNumberFormField(
           field: field as NumberFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -152,7 +192,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.DROPDOWN_FIELD:
-        return CustomDropDownFormField(
+        fieldWidget = CustomDropDownFormField(
           field: field as DropDownFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -163,7 +203,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.CHECKBOX_GROUP_FIELD:
-        return CustomCheckBoxGroupFormField(
+        fieldWidget = CustomCheckBoxGroupFormField(
           field: field as CheckBoxGroupFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -175,7 +215,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.CHECKBOX_FIELD:
-        return CustomCheckBoxFormField(
+        fieldWidget = CustomCheckBoxFormField(
           field: field as CheckBoxFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -187,7 +227,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.TYPEAHEAD_FIELD:
-        return CustomTypeAheadFormField(
+        fieldWidget = CustomTypeAheadFormField(
           field: field as TypeAheadFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -198,7 +238,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.RADIO_GROUP_FIELD:
-        return CustomRadioGroupFormField(
+        fieldWidget = CustomRadioGroupFormField(
           field: field as RadioGroupFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -210,7 +250,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.DATE_FIELD:
-        return CustomDateFormField(
+        fieldWidget = CustomDateFormField(
           field: field as DateFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -221,7 +261,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.SWITCH_BUTTON_FIELD:
-        return CustomSwitchButtonField(
+        fieldWidget = CustomSwitchButtonField(
           field: field as SwitchButtonFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -233,7 +273,7 @@ class SectionForm extends StatelessWidget {
         );
 
       case FieldTypeEnum.FILE_FIELD:
-        return CustomFilePickerFormField(
+        fieldWidget = CustomFilePickerFormField(
           field: field as FileFieldEntity,
           onChanged: (value) {
             singleFormProvider.setFieldValue(
@@ -248,5 +288,65 @@ class SectionForm extends StatelessWidget {
       default:
         throw UnimplementedError();
     }
+
+    if (status == FormStatusEnum.CONCLUDED) {
+      fieldWidget = AbsorbPointer(
+        absorbing: true,
+        child: fieldWidget,
+      );
+    }
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: AppColors.gray, width: 1),
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusSmall,
+        ),
+      ),
+      elevation: 8,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.paddingMedium,
+            vertical: AppDimensions.paddingSmall),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    field.placeholder,
+                    style: TextStyle(
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimensions.fontMedium),
+                  ),
+                  Text(
+                    '*',
+                    style: TextStyle(
+                      color: AppColors.red,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+            Padding(
+              padding: specialFields.contains(field.fieldType)
+                  ? field.fieldType != FieldTypeEnum.SWITCH_BUTTON_FIELD
+                      ? const EdgeInsets.all(0)
+                      : const EdgeInsets.symmetric(
+                          vertical: AppDimensions.paddingSmall,
+                        )
+                  : const EdgeInsets.symmetric(
+                      horizontal: AppDimensions.paddingLarge,
+                      vertical: AppDimensions.paddingMedium),
+              child: fieldWidget,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

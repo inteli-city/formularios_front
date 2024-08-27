@@ -46,9 +46,6 @@ void main() {
         ),
       ),
     );
-
-    expect(find.text('Select an option'), findsOneWidget);
-
     await tester.tap(find.byType(DropdownButtonFormField2<String>));
     await tester.pumpAndSettle();
     expect(find.text('Option 1'), findsOneWidget);

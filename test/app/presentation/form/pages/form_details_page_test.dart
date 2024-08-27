@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
+import 'package:formularios_front/app/domain/entities/justification_entity.dart';
 import 'package:formularios_front/app/domain/enum/form_status_enum.dart';
 import 'package:formularios_front/app/domain/enum/priority_enum.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
@@ -22,8 +23,9 @@ import 'form_details_page_test.mocks.dart';
 @GenerateMocks([FormsProvider, FormEntity, SingleFormProvider, HttpClient])
 void main() {
   MockFormEntity form = MockFormEntity();
-  late FormsProvider formUserProvider = MockFormsProvider();
-  late SingleFormProvider singleFormProvider = MockSingleFormProvider();
+  FormsProvider formUserProvider = MockFormsProvider();
+  SingleFormProvider singleFormProvider = MockSingleFormProvider();
+  HttpClient httpClient = MockHttpClient();
 
   setUp(() {
     HttpOverrides.global = HttpOverrides.current;
@@ -54,6 +56,18 @@ void main() {
       ImageInformationFieldEntity(filePath: 'filePath'),
       MapInformationFieldEntity(latitude: 0, longitude: 0),
     ]);
+
+    when(form.justification).thenReturn(
+      JustificationEntity(
+        options: [
+          JustificationOptionEntity(
+              option: 'option', requiredImage: false, requiredText: false),
+        ],
+        selectedOption: 'selectedOption',
+        justificationText: 'justificationText',
+        justificationImage: null,
+      ),
+    );
 
     when(formUserProvider.getFormByExternId(form.formId)).thenReturn(form);
     when(singleFormProvider.form).thenReturn(form);
@@ -131,7 +145,7 @@ void main() {
           expect(find.text('Iniciar'), findsOneWidget);
           expect(find.text('Cancelar'), findsOneWidget);
         },
-        createHttpClient: (securityContext) => MockHttpClient(),
+        createHttpClient: (securityContext) => httpClient,
       );
     });
 
@@ -157,12 +171,12 @@ void main() {
           expect(find.text('Retroceder'), findsOneWidget);
           expect(find.text('Cancelar'), findsOneWidget);
         },
-        createHttpClient: (securityContext) => MockHttpClient(),
+        createHttpClient: (securityContext) => httpClient,
       );
     });
 
     testWidgets(
-        'Form Details Page displays details correctly when status is CONCLUDED or CANCELED',
+        'Form Details Page displays details correctly when status is CONCLUDED',
         (WidgetTester tester) async {
       TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -170,7 +184,31 @@ void main() {
       await S.load(const Locale.fromSubtags(languageCode: 'pt'));
       initializeDateFormatting('pt_BR', null);
 
-      when(form.status).thenReturn(FormStatusEnum.IN_PROGRESS);
+      when(form.status).thenReturn(FormStatusEnum.CONCLUDED);
+
+      HttpOverrides.runZoned(
+        () async {
+          await tester.pumpWidget(ModularApp(
+              module: AppModule(),
+              child: const MaterialApp(
+                home: FormDetailsPage(),
+              )));
+          expect(find.text(S.current.viewFilledForm), findsOne);
+        },
+        createHttpClient: (securityContext) => httpClient,
+      );
+    });
+
+    testWidgets(
+        'Form Details Page displays details correctly when status is CANCELED',
+        (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
+
+      when(form.status).thenReturn(FormStatusEnum.CANCELED);
 
       HttpOverrides.runZoned(
         () async {
@@ -181,7 +219,68 @@ void main() {
               )));
           expect(find.byElementType(ElevatedButton), findsNothing);
         },
-        createHttpClient: (securityContext) => MockHttpClient(),
+        createHttpClient: (securityContext) => httpClient,
+      );
+    });
+
+    testWidgets('display justification info correctly',
+        (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
+
+      when(form.status).thenReturn(FormStatusEnum.CANCELED);
+
+      HttpOverrides.runZoned(
+        () async {
+          await tester.pumpWidget(ModularApp(
+              module: AppModule(),
+              child: const MaterialApp(
+                home: FormDetailsPage(),
+              )));
+          expect(find.byElementType(ElevatedButton), findsNothing);
+          expect(
+              find.text(form.justification.justificationText!), findsOneWidget);
+          expect(find.byType(Image), findsOneWidget);
+        },
+        createHttpClient: (securityContext) => httpClient,
+      );
+    });
+
+    testWidgets('display information correctly', (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+
+      await tester.binding.setSurfaceSize(const Size(1500, 1500));
+      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      initializeDateFormatting('pt_BR', null);
+
+      when(form.status).thenReturn(FormStatusEnum.NOT_STARTED);
+      when(form.informationFields).thenReturn([
+        TextInformationFieldEntity(value: 'value'),
+        ImageInformationFieldEntity(filePath: 'value'),
+        MapInformationFieldEntity(latitude: 0, longitude: 0),
+      ]);
+
+      HttpOverrides.runZoned(
+        () async {
+          await tester.pumpWidget(ModularApp(
+              module: AppModule(),
+              child: const MaterialApp(
+                home: FormDetailsPage(),
+              )));
+          expect(find.byElementType(ElevatedButton), findsNothing);
+
+          expect(
+              find.text(
+                  (form.informationFields![0] as TextInformationFieldEntity)
+                      .value),
+              findsOneWidget);
+          expect(find.byType(GoogleMap), findsOneWidget);
+          expect(find.byType(Image), findsOneWidget);
+        },
+        createHttpClient: (securityContext) => httpClient,
       );
     });
   });

@@ -94,161 +94,175 @@ class _CreateFormPageState extends State<CreateFormPage> {
           child: SingleChildScrollView(
             child: Column(
               key: const Key('success-build'),
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Crie um formulário',
-                  style: Theme.of(context).textTheme.displayLarge,
+                Center(
+                  child: Text(
+                    'Crie um formulário',
+                    style: Theme.of(context).textTheme.displayLarge,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 const SizedBox(height: AppDimensions.paddingLarge),
-                Stack(
-                  children: [
-                    DropdownButtonFormField2<TemplateEntity>(
-                      isExpanded: true,
-                      isDense: true,
-                      value: selectedTemplate,
-                      validator: (value) {
-                        if (value == null) {
-                          return '';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        errorStyle: const TextStyle(height: 0),
-                        labelText: 'Selecione um template',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.primaryBlue,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.red,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.primaryBlue,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                      ),
-                      items: templates.map(
-                        (template) {
-                          return DropdownMenuItem(
-                            value: template,
-                            child: Text(
-                              template.formTitle,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppDimensions.paddingSmall),
+                      child: Column(
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Selecionar valor',
+                                  style: TextStyle(
+                                      color: AppColors.primaryBlue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions.fontMedium),
+                                ),
+                                Text(
+                                  '*',
+                                  style: TextStyle(
+                                    color: AppColors.red,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ]),
+                          DropdownButtonFormField2<TemplateEntity>(
+                            isExpanded: true,
+                            isDense: true,
+                            value: selectedTemplate,
+                            validator: (value) {
+                              if (value == null) {
+                                return '';
+                              }
+                              return null;
+                            },
+                            hint: const Text(
+                              'Selecionar valor',
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.titleMedium,
                             ),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (TemplateEntity? template) {
-                        selectedTemplate = template;
-                      },
-                    ),
-                    Positioned(
-                      top: 10.0,
-                      right: 10.0,
-                      child: Text(
-                        '*',
-                        style: TextStyle(
-                          color: AppColors.red,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(bottom: 8),
+                              hintText: 'Selecionar valor',
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      width: 1)),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      width: 1)),
+                            ),
+                            items: templates.map(
+                              (template) {
+                                return DropdownMenuItem(
+                                  value: template,
+                                  child: Text(
+                                    template.formTitle,
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                );
+                              },
+                            ).toList(),
+                            onChanged: (TemplateEntity? template) {
+                              selectedTemplate = template;
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-                const SizedBox(height: AppDimensions.paddingMedium),
-                Stack(
-                  children: [
-                    DropdownButtonFormField2<PriorityEnum>(
-                      isExpanded: true,
-                      isDense: true,
-                      value: selectedPriority,
-                      validator: (value) {
-                        if (value == null) {
-                          return '';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        errorStyle: const TextStyle(height: 0),
-                        labelText: 'Prioridade',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.primaryBlue,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.red,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.primaryBlue,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                      ),
-                      items: PriorityEnum.values.map(
-                        (priority) {
-                          return DropdownMenuItem(
-                            value: priority,
-                            child: Text(
-                              priority.enumString,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Card(
+                   
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: AppDimensions.paddingMedium,
+                          vertical: AppDimensions.paddingSmall),
+                      child: Column(
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Selecionar valor',
+                                  style: TextStyle(
+                                      color: AppColors.primaryBlue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions.fontMedium),
+                                ),
+                                Text(
+                                  '*',
+                                  style: TextStyle(
+                                    color: AppColors.red,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ]),
+                          DropdownButtonFormField2<PriorityEnum>(
+                            isExpanded: true,
+                            isDense: true,
+                            value: selectedPriority,
+                            validator: (value) {
+                              if (value == null) {
+                                return '';
+                              }
+                              return null;
+                            },
+                            hint: const Text(
+                              'Selecionar valor',
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.titleMedium,
                             ),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (PriorityEnum? priority) {
-                        selectedPriority = priority;
-                      },
-                    ),
-                    Positioned(
-                      top: 10.0,
-                      right: 10.0,
-                      child: Text(
-                        '*',
-                        style: TextStyle(
-                          color: AppColors.red,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(bottom: 8),
+                              hintText: 'Selecionar valor',
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      width: 1)),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      width: 1)),
+                            ),
+                            items: PriorityEnum.values.map(
+                              (priority) {
+                                return DropdownMenuItem(
+                                  value: priority,
+                                  child: Text(
+                                    priority.enumString,
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                );
+                              },
+                            ).toList(),
+                            onChanged: (PriorityEnum? priority) {
+                              selectedPriority = priority;
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-                const SizedBox(height: AppDimensions.paddingMedium),
                 Row(
                   children: [
                     Expanded(
@@ -268,13 +282,14 @@ class _CreateFormPageState extends State<CreateFormPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppDimensions.paddingMedium),
                 TextFieldWidget(
                   label: 'Descrição',
                   isRequired: false,
                   controller: descriptionController,
                 ),
-                const SizedBox(height: AppDimensions.paddingMedium),
+                const SizedBox(
+                  height: 8,
+                ),
                 SizedBox(
                   height: 300,
                   width: double.infinity,
@@ -313,7 +328,9 @@ class _CreateFormPageState extends State<CreateFormPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: AppDimensions.paddingMedium),
+                const SizedBox(
+                  height: 8,
+                ),
                 Consumer<CreateFormController>(builder: (_, provider, child) {
                   return TextFieldWidget(
                     label: 'Cidade',
@@ -321,23 +338,22 @@ class _CreateFormPageState extends State<CreateFormPage> {
                     isEnabled: false,
                   );
                 }),
-                const SizedBox(height: AppDimensions.paddingMedium),
                 Consumer<CreateFormController>(builder: (_, provider, child) {
                   return TextFieldWidget(
                     label: 'Rua',
                     controller: streetController,
                   );
                 }),
-                const SizedBox(height: AppDimensions.paddingMedium),
                 Consumer<CreateFormController>(builder: (_, provider, child) {
                   return TextFieldWidget(
                     label: 'Número',
                     controller: numberController,
                   );
                 }),
-                const SizedBox(height: AppDimensions.paddingMedium),
                 Consumer<CreateFormController>(builder: (_, provider, child) {
                   return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: TextFieldWidget(
@@ -346,7 +362,6 @@ class _CreateFormPageState extends State<CreateFormPage> {
                           isEnabled: false,
                         ),
                       ),
-                      const SizedBox(width: 8),
                       Expanded(
                         child: TextFieldWidget(
                           label: 'Longitude',
@@ -357,7 +372,6 @@ class _CreateFormPageState extends State<CreateFormPage> {
                     ],
                   );
                 }),
-                const SizedBox(height: AppDimensions.paddingMedium),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

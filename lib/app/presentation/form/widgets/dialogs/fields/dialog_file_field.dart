@@ -11,10 +11,12 @@ import 'package:image_picker/image_picker.dart';
 
 class DialogFileField extends StatefulWidget {
   final CancelFormController cancelFormController;
+  final ImagePicker imagePicker;
 
   const DialogFileField({
     super.key,
     required this.cancelFormController,
+    required this.imagePicker,
   });
 
   @override
@@ -27,8 +29,7 @@ class _DialogFileFieldState extends State<DialogFileField>
 
   Future<void> _pickFiles() async {
     String base64Image;
-
-    XFile? image = await ImagePicker().pickImage(
+    XFile? image = await widget.imagePicker.pickImage(
       imageQuality: 50,
       source: ImageSource.gallery,
     );
@@ -40,6 +41,79 @@ class _DialogFileFieldState extends State<DialogFileField>
         widget.cancelFormController.setImage(base64Image);
       });
     }
+  }
+
+  void _showImagePopup(BuildContext context) {
+    if (_selectedFile == null) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Stack(
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  kIsWeb
+                      ? Image.network(
+                          _selectedFile!,
+                          fit: BoxFit.contain,
+                          filterQuality: FilterQuality.high,
+                        )
+                      : Image.file(
+                          File(_selectedFile!),
+                          fit: BoxFit.contain,
+                          filterQuality: FilterQuality.high,
+                        ),
+                ],
+              ),
+              Positioned(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    IconButton(
+                      style: const ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.white),
+                          shape:
+                              WidgetStatePropertyAll(RoundedRectangleBorder())),
+                      color: AppColors.white,
+                      icon: Icon(
+                        Icons.arrow_back_rounded,
+                        size: AppDimensions.iconLarge,
+                        color: AppColors.primaryBlue,
+                        weight: 900,
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    IconButton(
+                      style: const ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.white),
+                          shape:
+                              WidgetStatePropertyAll(RoundedRectangleBorder())),
+                      icon: Icon(
+                        Icons.close,
+                        size: AppDimensions.iconLarge,
+                        color: AppColors.red,
+                        weight: 900,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _selectedFile = null;
+                        });
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -109,57 +183,56 @@ class _DialogFileFieldState extends State<DialogFileField>
             ),
             const SizedBox(height: AppDimensions.paddingSmall),
             if (_selectedFile != null)
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: AppDimensions.paddingSmall),
-                      child: Center(
-                        child: Stack(
-                          children: [
-                            kIsWeb
-                                ? Image.network(
-                                    _selectedFile!,
-                                    width: ScreenHelper.width(context) / 2,
-                                    height: ScreenHelper.width(context) / 2,
-                                    fit: BoxFit.fill,
-                                  )
-                                : Image.file(
-                                    File(_selectedFile!),
-                                    width: ScreenHelper.width(context) / 2,
-                                    height: ScreenHelper.width(context) / 2,
-                                    fit: BoxFit.fill,
-                                  ),
-                            Positioned(
-                              top: 0,
-                              right: 0,
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _selectedFile = null;
-                                  });
-                                },
-                                child: Container(
-                                  width: 24,
-                                  height: 24,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.red,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Icon(
-                                    Icons.close,
-                                    size: 16,
-                                    color: Colors.white,
-                                  ),
+              GestureDetector(
+                onTap: () => _showImagePopup(context),
+                child: Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: AppDimensions.paddingSmall),
+                        child: Center(
+                          child: kIsWeb
+                              ? Image.network(
+                                  _selectedFile!,
+                                  width: ScreenHelper.width(context) / 2,
+                                  height: ScreenHelper.width(context) / 2,
+                                  fit: BoxFit.fill,
+                                )
+                              : Image.file(
+                                  File(_selectedFile!),
+                                  width: ScreenHelper.width(context) / 2,
+                                  height: ScreenHelper.width(context) / 2,
+                                  fit: BoxFit.fill,
                                 ),
-                              ),
-                            ),
-                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedFile = null;
+                            });
+                          },
+                          child: Container(
+                            width: 24,
+                            height: 24,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              size: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             state.hasError

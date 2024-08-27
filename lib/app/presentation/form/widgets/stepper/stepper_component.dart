@@ -25,7 +25,7 @@ class StepperComponent extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                    height: 2, color: Theme.of(context).colorScheme.primary),
+                    height: 3, color: Theme.of(context).colorScheme.primary),
               ),
               StepWidget(
                 color: index == currentIndex
@@ -33,6 +33,11 @@ class StepperComponent extends StatelessWidget {
                     : Colors.grey,
                 onTap: onTap,
                 title: index.toString(),
+                isActive: index == currentIndex,
+              ),
+              Expanded(
+                child: Container(
+                    height: 3, color: Theme.of(context).colorScheme.primary),
               ),
             ],
           )
@@ -41,16 +46,23 @@ class StepperComponent extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Expanded(
+                    child: Container(
+                      height: 3,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                   StepWidget(
                     color: index == currentIndex
                         ? Theme.of(context).colorScheme.primary
                         : Colors.grey,
                     onTap: onTap,
                     title: index.toString(),
+                    isActive: index == currentIndex,
                   ),
                   Expanded(
                     child: Container(
-                      height: 2,
+                      height: 3,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
@@ -62,7 +74,7 @@ class StepperComponent extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      height: 2,
+                      height: 3,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
@@ -72,10 +84,11 @@ class StepperComponent extends StatelessWidget {
                         : Colors.grey,
                     onTap: onTap,
                     title: index.toString(),
+                    isActive: index == currentIndex,
                   ),
                   Expanded(
                     child: Container(
-                        height: 2,
+                        height: 3,
                         color: Theme.of(context).colorScheme.primary),
                   ),
                 ],
@@ -85,13 +98,15 @@ class StepperComponent extends StatelessWidget {
 
 class StepWidget extends StatelessWidget {
   final Color color;
+  final bool isActive;
   final Function() onTap;
   final String title;
   const StepWidget(
       {super.key,
       required this.color,
       required this.onTap,
-      required this.title});
+      required this.title,
+      required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +116,8 @@ class StepWidget extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            width: 40,
-            height: 40,
+            width: isActive ? 40 : 30,
+            height: isActive ? 40 : 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
               color: color,
@@ -114,19 +129,12 @@ class StepWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.secondary,
-                      height: 2,
+                      height: 2.5,
                     ),
               ),
             ),
           ),
         ),
-        // Text(
-        //   'FORMID',
-        //   textAlign: TextAlign.center,
-        //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        // ),
       ],
     );
   }

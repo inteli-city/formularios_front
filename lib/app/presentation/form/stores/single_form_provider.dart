@@ -52,6 +52,8 @@ class SingleFormProvider extends ChangeNotifier {
       formId: form.formId,
       sections: form.sections,
     );
+    await Future.delayed(const Duration(milliseconds: 300));
+
     setIsFormStateLoading(false);
   }
 

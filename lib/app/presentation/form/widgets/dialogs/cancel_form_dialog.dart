@@ -13,6 +13,7 @@ import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/app/shared/themes/app_text_styles.dart';
 import 'package:formularios_front/generated/l10n.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CancelFormDialog extends StatefulWidget {
   const CancelFormDialog({super.key});
@@ -92,7 +93,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                               ))
                           .toList(),
                       decoration: InputDecoration(
-                        labelText: 'Selecione uma justificação',
+                        labelText: 'Selecione uma justificativa',
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: AppColors.primaryBlue,
@@ -143,7 +144,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                                         .selectedOption!.requiredImage
                                     ? DialogFileField(
                                         cancelFormController:
-                                            cancelFormController,
+                                            cancelFormController, imagePicker: ImagePicker(),
                                       )
                                     : const SizedBox(),
                                 const SizedBox(

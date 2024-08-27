@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:formularios_front/app/data/adapters/form_adapter.dart';
+import 'package:formularios_front/app/data/adapters/justification_adapter.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
 import 'package:formularios_front/app/domain/entities/form_entity.dart';
 import 'package:formularios_front/app/domain/entities/information_field_entity.dart';
@@ -81,6 +83,116 @@ class FormMockRepository extends IFormRepository {
       ),
       comments: 'comments',
       sections: [
+        SectionEntity(
+          sectionId: 'section-01',
+          fields: [
+            CheckBoxGroupFieldEntity(
+              options: ['option 01', 'option 02', 'option 03'],
+              placeholder: 'Selecione as opções',
+              key: 'checkbox-group',
+              checkLimit: 1,
+              isRequired: true,
+            ),
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              maxLength: 10,
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              maxValue: 10,
+              minValue: 1,
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              minDate: DateTime.now(),
+              maxDate: DateTime(2024, 12, 31),
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              maxLength: 10,
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
+        SectionEntity(
+          sectionId: 'SeçãoSeçãoSeçãoSeçãoSeçãoSeção',
+          fields: [
+            CheckBoxGroupFieldEntity(
+              options: ['option 01', 'option 02', 'option 03'],
+              placeholder: 'Selecione as opções',
+              key: 'checkbox-group',
+              checkLimit: 1,
+              isRequired: true,
+            ),
+            DropDownFieldEntity(
+              options: ['option 01', 'option 02'],
+              placeholder: 'DropDownField',
+              key: 'key-section-01-0',
+              isRequired: true,
+            ),
+            TextFieldEntity(
+              fieldType: FieldTypeEnum.TEXT_FIELD,
+              placeholder: 'TextField 01',
+              maxLength: 10,
+              isRequired: true,
+              key: 'key-section-01-1',
+            ),
+            NumberFieldEntity(
+              fieldType: FieldTypeEnum.NUMBER_FIELD,
+              placeholder: 'NumberField 01',
+              isRequired: true,
+              key: 'key-section-01-3',
+              maxValue: 10,
+              minValue: 1,
+              decimal: false,
+            ),
+            DateFieldEntity(
+              fieldType: FieldTypeEnum.DATE_FIELD,
+              placeholder: 'DateField',
+              isRequired: true,
+              minDate: DateTime.now(),
+              maxDate: DateTime(2024, 12, 31),
+              key: 'key-section-01-4',
+            ),
+            RadioGroupFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'Radio Group',
+              key: 'key-section-01-5',
+              isRequired: true,
+            ),
+            TypeAheadFieldEntity(
+              options: ['option1', 'option2'],
+              placeholder: 'TypeAhead',
+              maxLength: 10,
+              key: 'key-section-01-6',
+              isRequired: true,
+            ),
+          ],
+        ),
         SectionEntity(
           sectionId: 'section-01',
           fields: [
@@ -917,8 +1029,13 @@ class FormMockRepository extends IFormRepository {
       required String formId}) async {
     for (var form in formList) {
       if (form.formId == formId) {
+        var jsonForm = FormAdapter.toJson(form);
+        jsonForm['justification'] = JustificationAdapter.toJson(justification);
+
+        await updateFormLocally(form: FormAdapter.fromJson(jsonForm));
         await updateFormStatus(status: FormStatusEnum.CANCELED, formId: formId);
-        return right(form);
+
+        return right(FormAdapter.fromJson(jsonForm));
       }
     }
 

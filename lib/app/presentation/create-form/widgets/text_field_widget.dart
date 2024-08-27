@@ -17,73 +17,73 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        TextFormField(
-          controller: controller,
-          enabled: isEnabled,
-          validator: (value) {
-            if (isRequired && value!.isEmpty) {
-              return '';
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-            errorStyle: const TextStyle(height: 0),
-            labelText: label,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.red,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-          ),
-        ),
-        isRequired
-            ? Positioned(
-                top: 10.0,
-                right: 10.0,
-                child: Text(
-                  '*',
-                  style: TextStyle(
-                    color: AppColors.red,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppDimensions.paddingMedium,
+              vertical: AppDimensions.paddingSmall),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      label,
+                      style: TextStyle(
+                          color: AppColors.primaryBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppDimensions.fontMedium),
+                    ),
+                    isRequired
+                        ? Text(
+                            '*',
+                            style: TextStyle(
+                              color: AppColors.red,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Container(),
+                  ]),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimensions.paddingMedium,
+                  vertical: AppDimensions.paddingMedium,
+                ),
+                child: TextFormField(
+                  controller: controller,
+                  enabled: isEnabled,
+                  validator: (value) {
+                    if (isRequired && value!.isEmpty) {
+                      return '';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    isDense: true,
+                    isCollapsed: true,
+                    contentPadding: const EdgeInsets.only(bottom: 8),
+                    hintText: 'Insira o texto',
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1)),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).colorScheme.primary,
+                            width: 1)),
                   ),
                 ),
-              )
-            : const SizedBox()
-      ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

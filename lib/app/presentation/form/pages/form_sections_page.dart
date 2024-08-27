@@ -32,11 +32,9 @@ class FormSectionsPageState extends State<FormSectionsPage> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: AppColors.primaryBlue,
             leading: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
-                color: AppColors.white,
                 size: AppDimensions.iconLarge,
               ),
               onPressed: () => Navigator.pop(context),
@@ -48,7 +46,7 @@ class FormSectionsPageState extends State<FormSectionsPage> {
                   style: Theme.of(context)
                       .textTheme
                       .displayLarge!
-                      .copyWith(color: AppColors.white),
+                      .copyWith(color: AppColors.primaryBlue),
                 ),
               ],
             ),

@@ -31,12 +31,19 @@ class FormDetailsPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              S.current.details,
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-          ),
+              centerTitle: true,
+              title: Text(
+                S.current.details,
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryBlue,
+                  size: AppDimensions.iconLarge,
+                ),
+                onPressed: () => Navigator.pop(context),
+              )),
           body: ListView(
             padding: const EdgeInsets.all(AppDimensions.paddingMedium),
             children: [
@@ -564,26 +571,14 @@ class FormDetailsActions extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingMedium * 1.2,
-        ),
-        shape: StadiumBorder(
-          side: hasBorder
-              ? BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 1.5,
-                )
-              : BorderSide.none,
-        ),
         backgroundColor:
             backgroundColor ?? Theme.of(context).colorScheme.primary,
       ),
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: textColor ?? AppColors.white,
-            ),
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+            color: textColor ?? AppColors.white, fontWeight: FontWeight.bold),
       ),
     );
   }

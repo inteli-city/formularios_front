@@ -43,7 +43,7 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Preencher Justificativa',
+                    S.current.fillJustification,
                     style: AppTextStyles.display.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                     ),

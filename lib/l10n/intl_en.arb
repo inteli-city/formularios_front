@@ -88,5 +88,27 @@
 
     "maxFilesQuantity": "Max files quantity: ",
     
-    "minFilesQuantity": "Min files quantity: "
+    "minFilesQuantity": "Min files quantity: ",
+
+    "selectValue": "Select Value",
+
+    "additionalInformation": "Additional Information",
+
+    "helpImage": "Help Image",
+
+    "location": "Location",
+
+    "helpText": "Help Text",
+
+    "giveJustification": "Give Justification",  
+
+    "justificationText": "Justification Text",
+
+    "justificationImage": "Justification Image",
+
+    "fillJustification": "Fill Justification",
+
+    "selectImage": "Select Image",
+
+    "logout": "Logout"
 }

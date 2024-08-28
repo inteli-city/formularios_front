@@ -23,7 +23,7 @@ void main() {
         singleFormProvider = MockSingleFormProvider();
         Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
 
-        when(singleFormProvider.isSendingForm).thenReturn(true);
+        when(singleFormProvider.isFormStateLoading).thenReturn(true);
       },
     );
     testWidgets('Displays initial value',
@@ -80,7 +80,7 @@ void main() {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      singleFormProvider.setIsSendingForm(true);
+                      singleFormProvider.setIsFormStateLoading(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -127,7 +127,7 @@ void main() {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      singleFormProvider.setIsSendingForm(true);
+                      singleFormProvider.setIsFormStateLoading(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -174,7 +174,7 @@ void main() {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      singleFormProvider.setIsSendingForm(true);
+                      singleFormProvider.setIsFormStateLoading(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -220,7 +220,7 @@ void main() {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      singleFormProvider.setIsSendingForm(true);
+                      singleFormProvider.setIsFormStateLoading(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

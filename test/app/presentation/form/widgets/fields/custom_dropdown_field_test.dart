@@ -16,7 +16,7 @@ void main() {
   late SingleFormProvider singleFormProvider;
   setUp(() {
     singleFormProvider = MockSingleFormProvider();
-    when(singleFormProvider.isSendingForm).thenReturn(false);
+    when(singleFormProvider.isFormStateLoading).thenReturn(false);
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
     Modular.replaceInstance<SingleFormProvider>(singleFormProvider);

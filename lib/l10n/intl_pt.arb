@@ -88,5 +88,28 @@
 
     "maxFilesQuantity": "Quantidade maxima de arquivos: ",
     
-    "minFilesQuantity": "Quantidade minima de arquivos: "
+    "minFilesQuantity": "Quantidade minima de arquivos: ",
+     
+    "selectValue": "Selecione o Valor",
+
+    "additionalInformation": "Informação Adicional",
+
+    "helpImage": "Imagem de Ajuda",
+
+    "location": "Localização",
+
+    "helpText": "Texto de Ajuda",
+
+    "giveJustification": "Justificativa Concedida",  
+
+    "justificationText": "Justificativa Texto",
+
+    "justificationImage": "Justificativa Imagem",
+
+    "fillJustification": "Preencher Justificativa",
+
+    "selectImage": "Selecionar Imagem",
+
+    "logout": "Sair"
+    
 }

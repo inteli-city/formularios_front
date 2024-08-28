@@ -6,6 +6,7 @@ import 'package:formularios_front/app/presentation/form/controller/cancel_form_c
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -133,7 +134,7 @@ class _DialogFileFieldState extends State<DialogFileField>
                 padding:
                     const EdgeInsets.only(right: AppDimensions.paddingSmall),
                 child: Text(
-                  'Selecionar imagem:',
+                  S.current.selectImage,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),

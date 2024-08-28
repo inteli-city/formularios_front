@@ -604,21 +604,6 @@ class MockSingleFormProvider extends _i1.Mock
       );
 
   @override
-  bool get isSendingForm => (super.noSuchMethod(
-        Invocation.getter(#isSendingForm),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  set isSendingForm(bool? _isSendingForm) => super.noSuchMethod(
-        Invocation.setter(
-          #isSendingForm,
-          _isSendingForm,
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   String get creationDate => (super.noSuchMethod(
         Invocation.getter(#creationDate),
         returnValue: _i10.dummyValue<String>(
@@ -709,15 +694,6 @@ class MockSingleFormProvider extends _i1.Mock
         returnValue: _i8.Future<void>.value(),
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
-
-  @override
-  void setIsSendingForm(bool? value) => super.noSuchMethod(
-        Invocation.method(
-          #setIsSendingForm,
-          [value],
-        ),
-        returnValueForMissingStub: null,
-      );
 
   @override
   void setFieldValue(

@@ -77,53 +77,40 @@ class SectionForm extends StatelessWidget {
             : MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          ElevatedButton(
-            onPressed: () async {
-              if (formKey.currentState!.validate()) {
-                await singleFormProvider.saveForm();
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-            ),
-            child: singleFormProvider.isSendingForm
-                ? const CircularProgressIndicator()
-                : Text(
-                    S.current.saveForm,
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: AppColors.white,
-                          height: 1.2,
-                          fontSize: AppDimensions.fontMedium,
-                        ),
+          Consumer<SingleFormProvider>(
+            builder: (context, provider, child) => provider.isFormStateLoading
+                ? CircularProgressIndicator(
+                    color: AppColors.primaryBlue,
+                    strokeWidth: 5,
+                  )
+                : ElevatedButton(
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        await singleFormProvider.saveForm();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                    ),
+                    child: Text(S.current.saveForm,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge!
+                            .copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.white)),
                   ),
           ),
           lastSection
               ? Consumer<SingleFormProvider>(
                   builder: (_, provider, child) {
-                    return provider.isSendingForm
-                        ? ElevatedButton(
-                            onPressed: null,
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color?>(
-                                AppColors.gray.withOpacity(0.7),
-                              ),
-                              elevation: const WidgetStatePropertyAll(4),
-                            ),
-                            child: Text(
-                              'Enviando',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(
-                                    color: AppColors.white,
-                                    height: 1.2,
-                                    fontSize: AppDimensions.fontMedium,
-                                  ),
-                            ),
+                    return provider.isFormStateLoading
+                        ? CircularProgressIndicator(
+                            color: AppColors.primaryBlue,
+                            strokeWidth: 5,
                           )
                         : ElevatedButton(
                             onPressed: () async {
-                              singleFormProvider.setIsSendingForm(true);
                               if (!formKey.currentState!.validate()) {
                                 GlobalSnackBar.error(
                                   S.current.allFieldsShouldBeSaved,
@@ -132,24 +119,18 @@ class SectionForm extends StatelessWidget {
                                 await singleFormProvider.sendForm();
                                 Modular.to.navigate('/home/forms');
                               }
-                              singleFormProvider.setIsSendingForm(false);
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: lastSection
-                                  ? Theme.of(context).colorScheme.primary
-                                  : AppColors.gray,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
                             ),
-                            child: Text(
-                              S.current.sendForm,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(
-                                    color: AppColors.white,
-                                    height: 1.2,
-                                    fontSize: AppDimensions.fontMedium,
-                                  ),
-                            ),
+                            child: Text(S.current.sendForm,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge!
+                                    .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.white)),
                           );
                   },
                 )

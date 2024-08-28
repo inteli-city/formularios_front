@@ -100,7 +100,7 @@ class _CreateFormPageState extends State<CreateFormPage> {
               children: [
                 Center(
                   child: Text(
-                    'Crie um formulário',
+                    S.current.createForm,
                     style: Theme.of(context).textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
@@ -118,7 +118,7 @@ class _CreateFormPageState extends State<CreateFormPage> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  'Selecionar valor',
+                                  S.current.createForm,
                                   style: TextStyle(
                                       color: AppColors.primaryBlue,
                                       fontWeight: FontWeight.bold,
@@ -143,13 +143,13 @@ class _CreateFormPageState extends State<CreateFormPage> {
                               }
                               return null;
                             },
-                            hint: const Text(
-                              'Selecionar valor',
+                            hint: Text(
+                              S.current.selectValue,
                               textAlign: TextAlign.center,
                             ),
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 8),
-                              hintText: 'Selecionar valor',
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(bottom: 8),
+                              hintText: S.current.selectValue,
                             ),
                             items: templates.map(
                               (template) {
@@ -187,7 +187,7 @@ class _CreateFormPageState extends State<CreateFormPage> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  'Selecionar valor',
+                                  S.current.selectValue,
                                   style: TextStyle(
                                       color: AppColors.primaryBlue,
                                       fontWeight: FontWeight.bold,
@@ -212,13 +212,13 @@ class _CreateFormPageState extends State<CreateFormPage> {
                               }
                               return null;
                             },
-                            hint: const Text(
-                              'Selecionar valor',
+                            hint: Text(
+                              S.current.selectValue,
                               textAlign: TextAlign.center,
                             ),
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: 8),
-                              hintText: 'Selecionar valor',
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(bottom: 8),
+                              hintText: S.current.selectValue,
                             ),
                             items: PriorityEnum.values.map(
                               (priority) {

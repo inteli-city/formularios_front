@@ -217,7 +217,7 @@ class FormDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Informações adicionais:',
+              S.current.additionalInformation,
               style: Theme.of(context).textTheme.displayLarge!.copyWith(
                     color: AppColors.white,
                   ),
@@ -237,7 +237,7 @@ class FormDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
             child: Text(
-              'Imagem Auxiliar:',
+              S.current.helpImage,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -274,7 +274,7 @@ class FormDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
             child: Text(
-              'Localização:',
+              S.current.location,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -309,7 +309,7 @@ class FormDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
             child: Text(
-              'Texto Auxiliar:',
+              S.current.helpText,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -352,7 +352,7 @@ class JustificationView extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Justificativa Apresentada:',
+              S.current.giveJustification,
               style: Theme.of(context).textTheme.displayLarge!.copyWith(
                     color: AppColors.white,
                   ),
@@ -365,7 +365,7 @@ class JustificationView extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Texto Justificado:',
+                          S.current.justificationText,
                           textAlign: TextAlign.justify,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -398,7 +398,7 @@ class JustificationView extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Imagem Justificada:',
+                          S.current.justificationImage,
                           textAlign: TextAlign.justify,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(

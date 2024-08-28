@@ -141,7 +141,7 @@ void main() {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      singleFormProvider.setIsSendingForm(true);
+                      singleFormProvider.setIsFormStateLoading(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

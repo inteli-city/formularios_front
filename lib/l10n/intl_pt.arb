@@ -110,6 +110,8 @@
 
     "selectImage": "Selecionar Imagem",
 
-    "logout": "Sair"
+    "logout": "Sair",
+
+    "selectJustification": "Selecione Justificativa"
     
 }

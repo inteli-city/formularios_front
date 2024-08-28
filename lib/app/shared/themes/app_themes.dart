@@ -56,14 +56,16 @@ class AppThemes {
       bodyMedium: AppTextStyles.bodyText2,
     ),
     cardTheme: CardTheme(
+      margin: const EdgeInsets.only(bottom: 8),
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppColors.primaryBlue, width: 1.2),
+        side: BorderSide(
+            color: AppColors.primaryBlue.withOpacity(0.8), width: 1.2),
         borderRadius: BorderRadius.circular(
-          AppDimensions.radiusSmall,
+          AppDimensions.radiusSmall * 0.5,
         ),
       ),
       color: AppColors.white,
-      elevation: 8,
+      elevation: 6,
       shadowColor: AppColors.primaryBlue,
       surfaceTintColor: AppColors.white,
     ),

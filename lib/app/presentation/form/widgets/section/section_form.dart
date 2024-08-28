@@ -278,12 +278,6 @@ class SectionForm extends StatelessWidget {
     }
 
     return Card(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppColors.gray, width: 1),
-        borderRadius: BorderRadius.circular(
-          AppDimensions.radiusSmall,
-        ),
-      ),
       elevation: 8,
       child: Padding(
         padding: const EdgeInsets.symmetric(

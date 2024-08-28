@@ -32,7 +32,7 @@ void main() {
 
       when(mockXFile.readAsBytes()).thenAnswer((_) async => mockBytes);
       when(mockXFile.path).thenReturn('path/to/image.png');
-      await S.load(const Locale.fromSubtags(languageCode: 'pt'));
+      await S.load(const Locale.fromSubtags(languageCode: 'en'));
     });
 
     testWidgets('should display the initial state correctly',
@@ -48,7 +48,7 @@ void main() {
         ),
       );
 
-      expect(find.text('Selecionar imagem:'), findsOneWidget);
+      expect(find.text('Select Image'), findsOneWidget);
     });
 
     testWidgets('should open the image picker and set the image',

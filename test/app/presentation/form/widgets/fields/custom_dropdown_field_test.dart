@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:formularios_front/app/app_module.dart';
 import 'package:formularios_front/app/presentation/form/stores/single_form_provider.dart';
 import 'package:formularios_front/app/presentation/form/widgets/fields/custom_dropdown_field.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:formularios_front/app/domain/entities/field_entity.dart';
@@ -14,12 +15,14 @@ import 'custom_dropdown_field_test.mocks.dart';
 @GenerateMocks([SingleFormProvider])
 void main() {
   late SingleFormProvider singleFormProvider;
-  setUp(() {
+  setUp(() async {
     singleFormProvider = MockSingleFormProvider();
     when(singleFormProvider.isFormStateLoading).thenReturn(false);
     Modular.bindModule(AppModule());
     Modular.bindModule(HomeModule());
     Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
+
+    await S.load(const Locale.fromSubtags(languageCode: 'pt'));
   });
 
   tearDown(() {

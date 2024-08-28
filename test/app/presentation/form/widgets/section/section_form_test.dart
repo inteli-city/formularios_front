@@ -38,7 +38,7 @@ void main() {
   testWidgets('SectionForm Test', (WidgetTester tester) async {
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     initializeDateFormatting();
-    when(mocksingleFormProvider.isSendingForm).thenReturn(false);
+    when(mocksingleFormProvider.isFormStateLoading).thenReturn(false);
     when(mocksingleFormProvider.getFieldValue(any, any)).thenReturn(null);
 
     final section = SectionEntity(
@@ -128,7 +128,7 @@ void main() {
   testWidgets('SectionForm Test', (WidgetTester tester) async {
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     initializeDateFormatting();
-    when(mocksingleFormProvider.isSendingForm).thenReturn(false);
+    when(mocksingleFormProvider.isFormStateLoading).thenReturn(false);
     when(mocksingleFormProvider.getFieldValue(any, any)).thenReturn(null);
 
     final section = SectionEntity(

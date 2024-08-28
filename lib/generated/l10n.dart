@@ -721,6 +721,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Select Justification`
+  String get selectJustification {
+    return Intl.message(
+      'Select Justification',
+      name: 'selectJustification',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

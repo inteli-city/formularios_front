@@ -119,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Selecionar Arquivos"),
         "selectImage":
             MessageLookupByLibrary.simpleMessage("Selecionar Imagem"),
+        "selectJustification":
+            MessageLookupByLibrary.simpleMessage("Selecione Justificativa"),
         "selectValue":
             MessageLookupByLibrary.simpleMessage("Selecione o Valor"),
         "sendForm": MessageLookupByLibrary.simpleMessage("Enviar"),

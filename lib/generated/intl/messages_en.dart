@@ -113,6 +113,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveForm": MessageLookupByLibrary.simpleMessage("Save Form"),
         "selectFiles": MessageLookupByLibrary.simpleMessage("Select Files"),
         "selectImage": MessageLookupByLibrary.simpleMessage("Select Image"),
+        "selectJustification":
+            MessageLookupByLibrary.simpleMessage("Select Justification"),
         "selectValue": MessageLookupByLibrary.simpleMessage("Select Value"),
         "sendForm": MessageLookupByLibrary.simpleMessage("Send Form"),
         "sort": MessageLookupByLibrary.simpleMessage("Sort"),

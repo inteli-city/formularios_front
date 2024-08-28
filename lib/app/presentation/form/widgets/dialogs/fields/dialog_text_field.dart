@@ -17,76 +17,66 @@ class DialogTextField extends StatelessWidget with ValidationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        TextFormField(
-          onChanged: (value) => controller.setJustificationText(value),
-          enabled: isEnabled,
-          maxLines: null,
-          validator: (value) {
-            return combine(
-              [
-                () => isRequired(
-                      value,
-                      true,
-                      true,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.paddingMedium,
+            vertical: AppDimensions.paddingSmall),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    label,
+                    style: TextStyle(
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimensions.fontMedium),
+                  ),
+                  Text(
+                    '*',
+                    style: TextStyle(
+                      color: AppColors.red,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
-              ],
-            );
-          },
-          decoration: InputDecoration(
-            labelText: label,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.red,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
+                  ),
+                ]),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimensions.paddingLarge,
+                  vertical: AppDimensions.paddingMedium),
+              child: TextFormField(
+                onChanged: (value) =>
+                    controller.setJustificationText(value),
+                enabled: isEnabled,
+                decoration: const InputDecoration(
+                  isDense: true,
+                  isCollapsed: true,
+                  contentPadding: EdgeInsets.only(bottom: 8),
+                  hintText: 'Insira o texto',
+                ),
+                maxLines: null,
+                validator: (value) {
+                  return combine(
+                    [
+                      () => isRequired(
+                            value,
+                            true,
+                            true,
+                          ),
+                    ],
+                  );
+                },
               ),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primaryBlue,
-                width: AppDimensions.borderMedium,
-              ),
-              borderRadius: BorderRadius.circular(
-                AppDimensions.radiusMedium,
-              ),
-            ),
-          ),
+          ],
         ),
-        Positioned(
-          top: 10.0,
-          right: 10.0,
-          child: Text(
-            '*',
-            style: TextStyle(
-              color: AppColors.red,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        )
-      ],
+      ),
     );
   }
 }

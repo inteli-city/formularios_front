@@ -64,68 +64,60 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    DropdownButtonFormField2<JustificationOptionEntity>(
-                      value: cancelFormController.selectedOption,
-                      isExpanded: true,
-                      validator: (value) {
-                        return combine(
-                          [
-                            () => isRequired(
-                                  value?.option,
-                                  true,
-                                  true,
-                                ),
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppDimensions.paddingMedium,
+                            vertical: AppDimensions.paddingSmall),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            DropdownButtonFormField2<JustificationOptionEntity>(
+                              value: cancelFormController.selectedOption,
+                              isExpanded: true,
+                              isDense: true,
+                              hint: Text(
+                                S.current.selectValue,
+                                textAlign: TextAlign.center,
+                              ),
+                              validator: (value) {
+                                return combine(
+                                  [
+                                    () => isRequired(
+                                          value?.option,
+                                          true,
+                                          true,
+                                        ),
+                                  ],
+                                );
+                              },
+                              items: context
+                                  .read<SingleFormProvider>()
+                                  .form
+                                  .justification
+                                  .options
+                                  .map((option) => DropdownMenuItem(
+                                        value: option,
+                                        child: Text(
+                                          option.option,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        ),
+                                      ))
+                                  .toList(),
+                              decoration: const InputDecoration(
+                                contentPadding: EdgeInsets.only(bottom: 8),
+                              ),
+                              onChanged: (JustificationOptionEntity? option) {
+                                cancelFormController.setSelectedOption(option);
+                                setState(() {});
+                              },
+                            ),
                           ],
-                        );
-                      },
-                      isDense: true,
-                      items: context
-                          .read<SingleFormProvider>()
-                          .form
-                          .justification
-                          .options
-                          .map((option) => DropdownMenuItem(
-                                value: option,
-                                child: Text(
-                                  option.option,
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ))
-                          .toList(),
-                      decoration: InputDecoration(
-                        labelText: 'Selecione uma justificativa',
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.primaryBlue,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.red,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppColors.primaryBlue,
-                            width: AppDimensions.borderMedium,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            AppDimensions.radiusMedium,
-                          ),
                         ),
                       ),
-                      onChanged: (JustificationOptionEntity? option) {
-                        cancelFormController.setSelectedOption(option);
-                        setState(() {});
-                      },
                     ),
                     cancelFormController.selectedOption != null
                         ? Container(
@@ -144,7 +136,8 @@ class _CancelFormDialogState extends State<CancelFormDialog>
                                         .selectedOption!.requiredImage
                                     ? DialogFileField(
                                         cancelFormController:
-                                            cancelFormController, imagePicker: ImagePicker(),
+                                            cancelFormController,
+                                        imagePicker: ImagePicker(),
                                       )
                                     : const SizedBox(),
                                 const SizedBox(

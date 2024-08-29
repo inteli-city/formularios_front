@@ -251,7 +251,7 @@ class _CreateFormPageState extends State<CreateFormPage> {
                       ),
                     ),
                     const SizedBox(
-                      width: 8,
+                      width: 5,
                     ),
                     Expanded(
                       child: TextFieldWidget(
@@ -340,6 +340,9 @@ class _CreateFormPageState extends State<CreateFormPage> {
                           controller: latitudeController,
                           isEnabled: false,
                         ),
+                      ),
+                      const SizedBox(
+                        width: 5,
                       ),
                       Expanded(
                         child: TextFieldWidget(

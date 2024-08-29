@@ -4,7 +4,6 @@ import 'package:formularios_front/app/presentation/user/stores/user_provider.dar
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
 import 'package:formularios_front/generated/l10n.dart';
-import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,98 +17,123 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.paddingMedium,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.paddingLarge,
-                  vertical: AppDimensions.paddingExtraLarge * 2,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const Icon(
-                          Icons.person,
-                          size: 32,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(AppDimensions.paddingLarge),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppDimensions.paddingSmall,
+                            vertical: AppDimensions.paddingExtraLarge),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          color: AppColors.primaryBlue,
                         ),
-                        Text(
-                          user.name,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        const Icon(
-                          Icons.email,
-                          size: 32,
-                        ),
-                        Text(
-                          user.email,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            const Icon(
-                              Icons.group,
-                              size: 32,
+                            Icon(
+                              Icons.person,
+                              size: 26,
+                              color: AppColors.white,
                             ),
-                            Text(
-                              user.groups.length.toString(),
-                              style: Theme.of(context).textTheme.titleMedium,
+                            const SizedBox(
+                              height: 10,
                             ),
+                            Icon(
+                              Icons.email,
+                              size: 26,
+                              color: AppColors.white,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Icon(
+                              Icons.groups_2,
+                              size: 26,
+                              color: AppColors.white,
+                            )
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: AppDimensions.paddingMedium),
-                          child: SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: ListView.separated(
-                              separatorBuilder: (context, index) => Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: AppDimensions.paddingMedium),
-                                  child: Container(
-                                    width: 2,
-                                    color: AppColors.primaryBlue,
-                                  ),
-                                ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: AppDimensions.paddingMedium),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(user.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(user.email,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge!
+                                    .copyWith(fontWeight: FontWeight.bold)),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(user.groups.length.toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge!
+                                    .copyWith(fontWeight: FontWeight.bold))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: AppDimensions.paddingSmall),
+                        child: SizedBox(
+                          height: 250,
+                          width: double.infinity,
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                const Expanded(
+                              child: SizedBox(
+                                height: AppDimensions.verticalSpaceSmall,
                               ),
-                              itemCount: user.groups.length,
-                              itemBuilder: (context, index) => Expanded(
+                            ),
+                            itemCount: user.groups.length,
+                            itemBuilder: (context, index) => Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: AppDimensions.verticalSpaceLarge),
                                 child: Card(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: AppDimensions.paddingSmall),
+                                  child: SizedBox(
+                                    height: 50,
                                     child: Center(
                                       child: Text(
                                         user.groups[index],
                                         textAlign: TextAlign.center,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleMedium,
+                                            .titleMedium!
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
@@ -118,7 +142,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
@@ -139,14 +166,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

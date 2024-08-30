@@ -112,29 +112,25 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: double.infinity,
                           child: ListView.separated(
                             separatorBuilder: (context, index) =>
-                                const Expanded(
-                              child: SizedBox(
-                                height: AppDimensions.verticalSpaceSmall,
-                              ),
+                                const SizedBox(
+                              height: AppDimensions.verticalSpaceSmall,
                             ),
                             itemCount: user.groups.length,
-                            itemBuilder: (context, index) => Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: AppDimensions.verticalSpaceLarge),
-                                child: Card(
-                                  child: SizedBox(
-                                    height: 50,
-                                    child: Center(
-                                      child: Text(
-                                        user.groups[index],
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium!
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold),
-                                      ),
+                            itemBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: AppDimensions.verticalSpaceLarge),
+                              child: Card(
+                                child: SizedBox(
+                                  height: 50,
+                                  child: Center(
+                                    child: Text(
+                                      user.groups[index],
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),

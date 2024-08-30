@@ -6,6 +6,7 @@ import 'package:formularios_front/app/domain/entities/user_entity.dart';
 import 'package:formularios_front/app/domain/enum/role_enum.dart';
 import 'package:formularios_front/app/presentation/profile/pages/profile_page.dart';
 import 'package:formularios_front/app/presentation/user/stores/user_provider.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -15,7 +16,7 @@ import 'profile_page_test.mocks.dart';
 void main() {
   late MockUserProvider mockUserProvider;
 
-  setUp(() {
+  setUp(() async{
     mockUserProvider = MockUserProvider();
     when(mockUserProvider.user).thenReturn(UserEntity(
       enabled: false,
@@ -27,6 +28,8 @@ void main() {
     ));
     Modular.bindModule(AppModule());
     Modular.replaceInstance<UserProvider>(mockUserProvider);
+
+    await S.load(const Locale.fromSubtags(languageCode: 'en'));
   });
 
   testWidgets('ProfilePage displays user information and groups',
@@ -44,7 +47,7 @@ void main() {
 
     final Text emailText = tester.widget(emailFinder);
     expect(emailText.style,
-        Theme.of(tester.element(emailFinder)).textTheme.headlineLarge);
+        Theme.of(tester.element(emailFinder)).textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold));
     
     expect(find.text('John Doe'), findsOneWidget);
     expect(find.text('john.doe@example.com'), findsOneWidget);
@@ -62,7 +65,7 @@ void main() {
       ),
     );
 
-    final logoutButton = find.text('Sair');
+    final logoutButton = find.text('Logout');
     expect(logoutButton, findsOneWidget);
 
     await tester.tap(logoutButton);

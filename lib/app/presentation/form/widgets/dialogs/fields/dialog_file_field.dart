@@ -6,6 +6,7 @@ import 'package:formularios_front/app/presentation/form/controller/cancel_form_c
 import 'package:formularios_front/app/presentation/mixins/validation_mixin.dart';
 import 'package:formularios_front/app/shared/themes/app_colors.dart';
 import 'package:formularios_front/app/shared/themes/app_dimensions.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:gates_microapp_flutter/shared/helpers/utils/screen_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -118,138 +119,147 @@ class _DialogFileFieldState extends State<DialogFileField>
 
   @override
   Widget build(BuildContext context) {
-    return FormField<String?>(
-      validator: (value) {
-        return combine([
-          () => isRequired(value.toString(), true, true),
-        ]);
-      },
-      builder: (state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.paddingMedium,
+            vertical: AppDimensions.paddingSmall),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Stack(children: [
-              Padding(
-                padding:
-                    const EdgeInsets.only(right: AppDimensions.paddingSmall),
-                child: Text(
-                  'Selecionar imagem:',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Text(
-                  '*',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              )
-            ]),
-            const SizedBox(height: AppDimensions.paddingSmall),
-            ElevatedButton(
-              onPressed: _pickFiles,
-              style: ElevatedButton.styleFrom(
-                elevation: 4,
-                padding: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.paddingMedium,
-                    horizontal: AppDimensions.paddingLarge),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    AppDimensions.radiusMedium,
-                  ),
-                  side: BorderSide(
-                    color: AppColors.primaryBlue,
-                    width: AppDimensions.borderMedium,
-                  ),
-                ),
-                backgroundColor: Theme.of(context).colorScheme.secondary,
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Icon(
-                    Icons.image_search_rounded,
-                    fill: 1,
-                    size: AppDimensions.iconLarge,
+                  Text(
+                    S.current.selectImage,
+                    style: TextStyle(
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimensions.fontMedium),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: AppDimensions.paddingSmall),
-            if (_selectedFile != null)
-              GestureDetector(
-                onTap: () => _showImagePopup(context),
-                child: Center(
-                  child: Stack(
+                  Text(
+                    '*',
+                    style: TextStyle(
+                      color: AppColors.red,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimensions.paddingLarge,
+                  vertical: AppDimensions.paddingMedium),
+              child: FormField<String?>(
+                validator: (value) {
+                  return combine([
+                    () => isRequired(value.toString(), true, true),
+                  ]);
+                },
+                builder: (state) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: AppDimensions.paddingSmall),
-                        child: Center(
-                          child: kIsWeb
-                              ? Image.network(
-                                  _selectedFile!,
-                                  width: ScreenHelper.width(context) / 2,
-                                  height: ScreenHelper.width(context) / 2,
-                                  fit: BoxFit.fill,
-                                )
-                              : Image.file(
-                                  File(_selectedFile!),
-                                  width: ScreenHelper.width(context) / 2,
-                                  height: ScreenHelper.width(context) / 2,
-                                  fit: BoxFit.fill,
-                                ),
+                      ElevatedButton(
+                        onPressed: _pickFiles,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: AppDimensions.paddingMedium,
+                              horizontal: AppDimensions.paddingLarge),
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Icon(
+                              Icons.image_search_rounded,
+                              fill: 1,
+                              size: AppDimensions.iconLarge,
+                            ),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedFile = null;
-                            });
-                          },
-                          child: Container(
-                            width: 24,
-                            height: 24,
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.close,
-                              size: 16,
-                              color: Colors.white,
+                      const SizedBox(height: AppDimensions.paddingSmall),
+                      if (_selectedFile != null)
+                        GestureDetector(
+                          onTap: () => _showImagePopup(context),
+                          child: Center(
+                            child: Stack(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: AppDimensions.paddingSmall),
+                                  child: Center(
+                                    child: kIsWeb
+                                        ? Image.network(
+                                            _selectedFile!,
+                                            width:
+                                                ScreenHelper.width(context) / 2,
+                                            height:
+                                                ScreenHelper.width(context) / 2,
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Image.file(
+                                            File(_selectedFile!),
+                                            width:
+                                                ScreenHelper.width(context) / 2,
+                                            height:
+                                                ScreenHelper.width(context) / 2,
+                                            fit: BoxFit.fill,
+                                          ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _selectedFile = null;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.close,
+                                        size: 16,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ),
+                      state.hasError
+                          ? Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                state.errorText ?? '',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(color: AppColors.red),
+                              ),
+                            )
+                          : const SizedBox(),
                     ],
-                  ),
-                ),
+                  );
+                },
               ),
-            state.hasError
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      state.errorText ?? '',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: AppColors.red),
-                    ),
-                  )
-                : const SizedBox(),
+            ),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 }

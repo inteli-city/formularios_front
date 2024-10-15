@@ -103,7 +103,7 @@ void main() {
     Modular.replaceInstance<SingleFormProvider>(singleFormProvider);
 
     when(singleFormProvider.form).thenReturn(form);
-    when(singleFormProvider.isSendingForm).thenReturn(false);
+    when(singleFormProvider.isFormStateLoading).thenReturn(false);
 
     when(singleFormProvider.form).thenReturn(form);
   });

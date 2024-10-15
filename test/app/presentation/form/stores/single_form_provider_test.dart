@@ -70,8 +70,8 @@ void main() {
     });
 
     test('Should set sending form', () {
-      singleFormProvider.setIsSendingForm(true);
-      expect(singleFormProvider.isSendingForm, true);
+      singleFormProvider.setIsFormStateLoading(true);
+      expect(singleFormProvider.isFormStateLoading, true);
     });
 
     test('Should set field value', () {
@@ -93,7 +93,7 @@ void main() {
 
       await singleFormProvider.sendForm();
 
-      expect(singleFormProvider.isSendingForm, false);
+      expect(singleFormProvider.isFormStateLoading, false);
     });
 
     test('Should save form', () async {
@@ -103,7 +103,7 @@ void main() {
 
       await singleFormProvider.saveForm();
 
-      expect(singleFormProvider.isSendingForm, false);
+      expect(singleFormProvider.isFormStateLoading, false);
     });
 
     test('Should update form status', () async {

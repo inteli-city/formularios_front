@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formularios_front/app/presentation/form/controller/cancel_form_controller.dart';
 import 'package:formularios_front/app/presentation/form/widgets/dialogs/fields/dialog_file_field.dart';
+import 'package:formularios_front/generated/l10n.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -17,7 +18,7 @@ void main() {
     late ImagePicker mockImagePicker;
     late MockXFile mockXFile;
 
-    setUp(() {
+    setUp(() async {
       controller = CancelFormController();
       mockImagePicker = MockImagePicker();
       mockXFile = MockXFile();
@@ -31,6 +32,7 @@ void main() {
 
       when(mockXFile.readAsBytes()).thenAnswer((_) async => mockBytes);
       when(mockXFile.path).thenReturn('path/to/image.png');
+      await S.load(const Locale.fromSubtags(languageCode: 'en'));
     });
 
     testWidgets('should display the initial state correctly',
@@ -46,7 +48,7 @@ void main() {
         ),
       );
 
-      expect(find.text('Selecionar imagem:'), findsOneWidget);
+      expect(find.text('Select Image'), findsOneWidget);
     });
 
     testWidgets('should open the image picker and set the image',

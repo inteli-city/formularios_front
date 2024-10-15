@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "additionalInformation":
+            MessageLookupByLibrary.simpleMessage("Informação Adicional"),
         "allFieldsShouldBeSaved": MessageLookupByLibrary.simpleMessage(
             "Todas os campos devem ser salvos antes de enviar o formulário"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
@@ -68,17 +70,29 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Data de Expiração"),
         "externId": MessageLookupByLibrary.simpleMessage("ID Externo"),
         "fillForm": MessageLookupByLibrary.simpleMessage("Preencher"),
+        "fillJustification":
+            MessageLookupByLibrary.simpleMessage("Preencher Justificativa"),
         "filters": MessageLookupByLibrary.simpleMessage("Filtros"),
         "formStatusEnumSchema": m0,
+        "giveJustification":
+            MessageLookupByLibrary.simpleMessage("Justificativa Concedida"),
+        "helpImage": MessageLookupByLibrary.simpleMessage("Imagem de Ajuda"),
+        "helpText": MessageLookupByLibrary.simpleMessage("Texto de Ajuda"),
         "inQueueNoInternetConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Sem conexão porém a cada 5 minutos tentaremos enviar novamente"),
         "internId": MessageLookupByLibrary.simpleMessage("ID Interno"),
         "invalidFormat":
             MessageLookupByLibrary.simpleMessage("Formato inválido"),
+        "justificationImage":
+            MessageLookupByLibrary.simpleMessage("Justificativa Imagem"),
+        "justificationText":
+            MessageLookupByLibrary.simpleMessage("Justificativa Texto"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
         "linkForm": MessageLookupByLibrary.simpleMessage("Vincular Formulário"),
         "localStorageErrorMessage": m1,
+        "location": MessageLookupByLibrary.simpleMessage("Localização"),
+        "logout": MessageLookupByLibrary.simpleMessage("Sair"),
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "maxCheckLimit":
             MessageLookupByLibrary.simpleMessage("Ultrapassou o limite de: "),
@@ -103,6 +117,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveForm": MessageLookupByLibrary.simpleMessage("Salvar"),
         "selectFiles":
             MessageLookupByLibrary.simpleMessage("Selecionar Arquivos"),
+        "selectImage":
+            MessageLookupByLibrary.simpleMessage("Selecionar Imagem"),
+        "selectJustification":
+            MessageLookupByLibrary.simpleMessage("Selecione Justificativa"),
+        "selectValue":
+            MessageLookupByLibrary.simpleMessage("Selecione o Valor"),
         "sendForm": MessageLookupByLibrary.simpleMessage("Enviar"),
         "sort": MessageLookupByLibrary.simpleMessage("Ordenar"),
         "start": MessageLookupByLibrary.simpleMessage("Iniciar"),

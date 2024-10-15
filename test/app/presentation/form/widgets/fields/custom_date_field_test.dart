@@ -20,7 +20,7 @@ void main() {
     await S.load(const Locale.fromSubtags(languageCode: 'pt'));
     initializeDateFormatting();
     final mocksingleFormProvider = MockSingleFormProvider();
-    when(mocksingleFormProvider.isSendingForm).thenReturn(false);
+    when(mocksingleFormProvider.isFormStateLoading).thenReturn(false);
 
     Modular.bindModule(HomeModule());
     Modular.replaceInstance<SingleFormProvider>(mocksingleFormProvider);

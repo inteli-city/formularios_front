@@ -21,7 +21,7 @@ void main() {
 
   group('CustomTypeAheadFormField Tests', () {
     setUp(() {
-      when(singleFormProvider.isSendingForm).thenReturn(true);
+      when(singleFormProvider.isFormStateLoading).thenReturn(true);
     });
     testWidgets('Displays initial value and placeholder',
         (WidgetTester tester) async {
@@ -135,7 +135,7 @@ void main() {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      singleFormProvider.setIsSendingForm(true);
+                      singleFormProvider.setIsFormStateLoading(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),
@@ -178,7 +178,7 @@ void main() {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      singleFormProvider.setIsSendingForm(true);
+                      singleFormProvider.setIsFormStateLoading(true);
                       formKey.currentState!.validate();
                     },
                     child: const Text('Enviar'),

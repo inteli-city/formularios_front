@@ -31,12 +31,19 @@ class FormDetailsPage extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              S.current.details,
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-          ),
+              centerTitle: true,
+              title: Text(
+                S.current.details,
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryBlue,
+                  size: AppDimensions.iconLarge,
+                ),
+                onPressed: () => Navigator.pop(context),
+              )),
           body: ListView(
             padding: const EdgeInsets.all(AppDimensions.paddingMedium),
             children: [
@@ -210,7 +217,7 @@ class FormDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Informações adicionais:',
+              S.current.additionalInformation,
               style: Theme.of(context).textTheme.displayLarge!.copyWith(
                     color: AppColors.white,
                   ),
@@ -230,7 +237,7 @@ class FormDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
             child: Text(
-              'Imagem Auxiliar:',
+              S.current.helpImage,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -267,7 +274,7 @@ class FormDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
             child: Text(
-              'Localização:',
+              S.current.location,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -277,6 +284,7 @@ class FormDetails extends StatelessWidget {
           SizedBox(
             height: 200,
             child: GoogleMap(
+              
               mapType: MapType.normal,
               markers: {
                 Marker(
@@ -302,7 +310,7 @@ class FormDetails extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: AppDimensions.paddingSmall),
             child: Text(
-              'Texto Auxiliar:',
+              S.current.helpText,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
@@ -345,7 +353,7 @@ class JustificationView extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Justificativa Apresentada:',
+              S.current.giveJustification,
               style: Theme.of(context).textTheme.displayLarge!.copyWith(
                     color: AppColors.white,
                   ),
@@ -358,7 +366,7 @@ class JustificationView extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Texto Justificado:',
+                          S.current.justificationText,
                           textAlign: TextAlign.justify,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -391,7 +399,7 @@ class JustificationView extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Imagem Justificada:',
+                          S.current.justificationImage,
                           textAlign: TextAlign.justify,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -564,26 +572,14 @@ class FormDetailsActions extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingMedium * 1.2,
-        ),
-        shape: StadiumBorder(
-          side: hasBorder
-              ? BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: 1.5,
-                )
-              : BorderSide.none,
-        ),
         backgroundColor:
             backgroundColor ?? Theme.of(context).colorScheme.primary,
       ),
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: textColor ?? AppColors.white,
-            ),
+        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+            color: textColor ?? AppColors.white, fontWeight: FontWeight.bold),
       ),
     );
   }

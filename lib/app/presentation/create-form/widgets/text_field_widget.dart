@@ -64,19 +64,11 @@ class TextFieldWidget extends StatelessWidget {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     isDense: true,
                     isCollapsed: true,
-                    contentPadding: const EdgeInsets.only(bottom: 8),
+                    contentPadding: EdgeInsets.only(bottom: 8),
                     hintText: 'Insira o texto',
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 1)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 1)),
                   ),
                 ),
               ),

@@ -48,7 +48,7 @@ void main() {
     Modular.navigatorDelegate = navigator;
   });
 
-  testWidgets('CancelFormDialog shows title and close button',
+testWidgets('CancelFormDialog shows title and close button',
       (WidgetTester tester) async {
     JustificationEntity justification = JustificationEntity(
       options: [
@@ -116,7 +116,7 @@ void main() {
       ),
     );
 
-    expect(find.text('Preencher Justificativa'), findsOneWidget);
+    expect(find.text('Fill Justification'), findsOneWidget);
     expect(find.byIcon(Icons.close), findsOneWidget);
   });
 

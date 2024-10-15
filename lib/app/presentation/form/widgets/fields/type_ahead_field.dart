@@ -52,19 +52,11 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
               maxLines: null,
               controller: controller,
               focusNode: focusNode,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 isDense: true,
                 isCollapsed: true,
-                contentPadding: const EdgeInsets.only(bottom: 8),
+                contentPadding: EdgeInsets.only(bottom: 8),
                 hintText: 'Insira o texto',
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 1)),
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 1)),
               ),
               onChanged: (value) => widget.onChanged(value),
               validator: (value) => combine(
@@ -73,7 +65,7 @@ class _TypeAheadFormFieldState extends State<CustomTypeAheadFormField>
                   () => isRequired(
                         value,
                         widget.field.isRequired,
-                        widget.singleFormProvider.isSendingForm,
+                        widget.singleFormProvider.isFormStateLoading,
                       )
                 ],
               ),

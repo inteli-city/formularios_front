@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "additionalInformation":
+            MessageLookupByLibrary.simpleMessage("Additional Information"),
         "allFieldsShouldBeSaved":
             MessageLookupByLibrary.simpleMessage("All fields should be saved"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -67,16 +69,28 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Expiration Date"),
         "externId": MessageLookupByLibrary.simpleMessage("External ID"),
         "fillForm": MessageLookupByLibrary.simpleMessage("Fill Form"),
+        "fillJustification":
+            MessageLookupByLibrary.simpleMessage("Fill Justification"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
         "formStatusEnumSchema": m0,
+        "giveJustification":
+            MessageLookupByLibrary.simpleMessage("Give Justification"),
+        "helpImage": MessageLookupByLibrary.simpleMessage("Help Image"),
+        "helpText": MessageLookupByLibrary.simpleMessage("Help Text"),
         "inQueueNoInternetConnectionErrorMessage":
             MessageLookupByLibrary.simpleMessage(
                 "No internet connection but we will try to send again every 5 minutes"),
         "internId": MessageLookupByLibrary.simpleMessage("Internal ID"),
         "invalidFormat": MessageLookupByLibrary.simpleMessage("Invalid format"),
+        "justificationImage":
+            MessageLookupByLibrary.simpleMessage("Justification Image"),
+        "justificationText":
+            MessageLookupByLibrary.simpleMessage("Justification Text"),
         "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
         "linkForm": MessageLookupByLibrary.simpleMessage("Link Form"),
         "localStorageErrorMessage": m1,
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
         "maxCheckLimit": MessageLookupByLibrary.simpleMessage(
             "Exceeded max check limit of: "),
@@ -98,6 +112,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Priority Colors:\nRed (Emergency)\nYellow (In progress)\nGreen (Completed)"),
         "saveForm": MessageLookupByLibrary.simpleMessage("Save Form"),
         "selectFiles": MessageLookupByLibrary.simpleMessage("Select Files"),
+        "selectImage": MessageLookupByLibrary.simpleMessage("Select Image"),
+        "selectJustification":
+            MessageLookupByLibrary.simpleMessage("Select Justification"),
+        "selectValue": MessageLookupByLibrary.simpleMessage("Select Value"),
         "sendForm": MessageLookupByLibrary.simpleMessage("Send Form"),
         "sort": MessageLookupByLibrary.simpleMessage("Sort"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),

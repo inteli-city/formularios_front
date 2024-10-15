@@ -240,15 +240,15 @@ class _ChipsWidgetState extends State<ChipsWidget> {
             horizontal: AppDimensions.paddingSmall,
             vertical: AppDimensions.paddingMedium,
           ),
-          elevation: 5,
+          elevation: 6,
           pressElevation: 5,
           shadowColor: Theme.of(context).colorScheme.secondary,
           shape: RoundedRectangleBorder(
-            side: BorderSide(
-              width: 2,
-              color: Theme.of(context).colorScheme.primary,
+            side:
+                BorderSide(color: AppColors.gray.withOpacity(0.8), width: 1.7),
+            borderRadius: BorderRadius.circular(
+              AppDimensions.radiusSmall * 0.5,
             ),
-            borderRadius: BorderRadius.circular(AppDimensions.radiusExtraLarge),
           ),
         ),
       ),

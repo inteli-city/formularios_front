@@ -17,13 +17,15 @@ class AppThemes {
       indent: 5,
       endIndent: 5,
     ),
-    elevatedButtonTheme: const ElevatedButtonThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-      elevation: WidgetStatePropertyAll(8),
-      shape: WidgetStatePropertyAll(StadiumBorder()),
-      padding: WidgetStatePropertyAll(
+      textStyle: WidgetStatePropertyAll(
+          AppTextStyles.headline.copyWith(fontWeight: FontWeight.bold)),
+      elevation: const WidgetStatePropertyAll(8),
+      shape: const WidgetStatePropertyAll(StadiumBorder()),
+      padding: const WidgetStatePropertyAll(
         EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingLarge,
+          vertical: AppDimensions.paddingMedium,
           horizontal: AppDimensions.paddingExtraLarge,
         ),
       ),
@@ -54,14 +56,15 @@ class AppThemes {
       bodyMedium: AppTextStyles.bodyText2,
     ),
     cardTheme: CardTheme(
+      margin: const EdgeInsets.only(bottom: 8),
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppColors.primaryBlue, width: 1.2),
+        side: BorderSide(color: AppColors.gray.withOpacity(0.8), width: 1.7),
         borderRadius: BorderRadius.circular(
-          AppDimensions.radiusSmall,
+          AppDimensions.radiusSmall * 0.5,
         ),
       ),
       color: AppColors.white,
-      elevation: 8,
+      elevation: 6,
       shadowColor: AppColors.primaryBlue,
       surfaceTintColor: AppColors.white,
     ),
@@ -73,22 +76,22 @@ class AppThemes {
         right: AppDimensions.paddingMedium,
         top: AppDimensions.paddingExtraLarge,
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-        gapPadding: AppDimensions.paddingSmall,
+      focusedErrorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-            color: AppColors.primaryBlue,
-            width: AppDimensions.borderThin * 1.5,
-            style: BorderStyle.solid),
+          color: AppColors.red,
+          width: 1,
+        ),
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-        gapPadding: AppDimensions.paddingSmall,
+      errorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-            color: AppColors.primaryBlue,
-            width: AppDimensions.borderThin * 1.5,
-            style: BorderStyle.solid),
+          color: AppColors.red,
+          width: 1,
+        ),
       ),
+      enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primaryBlue, width: 1)),
+      focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primaryBlue, width: 1)),
       floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),

@@ -43,6 +43,8 @@ class SingleFormProvider extends ChangeNotifier {
     await _formsProvider.saveForm(
       form: form,
     );
+    await Future.delayed(const Duration(milliseconds: 300));
+
     setIsFormStateLoading(false);
   }
 
@@ -67,13 +69,6 @@ class SingleFormProvider extends ChangeNotifier {
       setFormStatus(status);
     }
     setIsFormStateLoading(false);
-  }
-
-  bool isSendingForm = false;
-
-  void setIsSendingForm(bool value) {
-    isSendingForm = value;
-    notifyListeners();
   }
 
   void setFieldValue(String sectionId, String key, dynamic value) {

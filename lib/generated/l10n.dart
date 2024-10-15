@@ -611,6 +611,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Select Value`
+  String get selectValue {
+    return Intl.message(
+      'Select Value',
+      name: 'selectValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Additional Information`
+  String get additionalInformation {
+    return Intl.message(
+      'Additional Information',
+      name: 'additionalInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help Image`
+  String get helpImage {
+    return Intl.message(
+      'Help Image',
+      name: 'helpImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help Text`
+  String get helpText {
+    return Intl.message(
+      'Help Text',
+      name: 'helpText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Give Justification`
+  String get giveJustification {
+    return Intl.message(
+      'Give Justification',
+      name: 'giveJustification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Justification Text`
+  String get justificationText {
+    return Intl.message(
+      'Justification Text',
+      name: 'justificationText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Justification Image`
+  String get justificationImage {
+    return Intl.message(
+      'Justification Image',
+      name: 'justificationImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fill Justification`
+  String get fillJustification {
+    return Intl.message(
+      'Fill Justification',
+      name: 'fillJustification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Image`
+  String get selectImage {
+    return Intl.message(
+      'Select Image',
+      name: 'selectImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Justification`
+  String get selectJustification {
+    return Intl.message(
+      'Select Justification',
+      name: 'selectJustification',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -284,6 +284,7 @@ class FormDetails extends StatelessWidget {
           SizedBox(
             height: 200,
             child: GoogleMap(
+              
               mapType: MapType.normal,
               markers: {
                 Marker(
